@@ -4,7 +4,7 @@
     xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "app.masterhub.cliente"
     versionCode = "12"
-    version   = "2.1">
+    version   = "2.0">
     <name>Master Hub</name>
     <description>
         Aplicativo - Módulo Clientes para interação com o sistema Master Hub, Um MUNDO na palma da sua mão!
