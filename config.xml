@@ -3,8 +3,8 @@
     xmlns:gap = "http://phonegap.com/ns/1.0"
     xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "app.masterhub.cliente"
-    versionCode="25"
-    version="2.1.0" >
+    versionCode="12"
+    version="2.0" >
     <name>Master Hub</name>
     <description>
         Aplicativo - Módulo Clientes para interação com o sistema Master Hub, Um MUNDO na palma da sua mão!
