@@ -1239,7 +1239,8 @@ function callAjax(action,params)
 				setStorage("merchant_logo",data.details.logo);
 				dump(data.details.restaurant_name);
 				setStorage("merchant_name",data.details.restaurant_name);
-				
+				setStorage("cat_unica",data.details.cat_unica);
+				dump(data.details.cat_unica);	
 				setStorage("enabled_table_booking",data.details.enabled_table_booking);
 				
 				setStorage("merchant_latitude",data.details.coordinates.latitude);
@@ -2912,7 +2913,7 @@ function displayRestaurantResults(data , target_id)
 {	
 	//dump(data);
 	var htm='';	
-       
+    var cat_unica=getStorage("cat_unica");   
 	var abertas = new Array();
 	var fechadas = new Array();
 
@@ -2926,8 +2927,10 @@ function displayRestaurantResults(data , target_id)
     $.each( data, function( key, val ) {     
     	
     	// dump(val);
-    	 
-    	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
+    	 				
+	if(cat_unica>0){			
+
+    	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadmenu('+cat_unica+','+val.merchant_id+');" >';
     	 htm+='<ons-row class="row">';    	 
     	     htm+='<ons-col class="col-image border" width="30%">';
     	          htm+='<div class="logo-wrap2" >';
@@ -2937,7 +2940,20 @@ function displayRestaurantResults(data , target_id)
     	            
     	          htm+='</div>';
     	          
-    	          
+	} else {
+		
+    	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
+    	 htm+='<ons-row class="row">';    	 
+    	     htm+='<ons-col class="col-image border" width="30%">';
+    	          htm+='<div class="logo-wrap2" >';
+    	            htm+='<div class="img_loaded" style="border-radius: 40px; overflow:hidden;">';
+    	             htm+='<img src="'+val.logo+'" />';
+    	            htm+='</div>';
+    	            
+    	          htm+='</div>';
+
+		
+	}
     	              	          
     	          //htm+='<p class="center">'+val.payment_options.cod+'</p>';
     	         /* if(!empty(val.payment_available)){ 
@@ -6674,7 +6690,7 @@ function isDebug()
 {	
 	//on/off
 	//return true;
-	return false;
+	return true;
 }
 
 var rzr_successCallback = function(payment_id) {
