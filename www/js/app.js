@@ -2927,8 +2927,6 @@ function displayRestaurantResults(data , target_id)
     $.each( data, function( key, val ) {     
     	
     	// dump(val);
-    	 				
-	if(cat_unica>0){			
 
     	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadmenu('+cat_unica+','+val.merchant_id+');" >';
     	 htm+='<ons-row class="row">';    	 
@@ -2939,21 +2937,6 @@ function displayRestaurantResults(data , target_id)
     	            htm+='</div>';
     	            
     	          htm+='</div>';
-    	          
-	} else {
-		
-    	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
-    	 htm+='<ons-row class="row">';    	 
-    	     htm+='<ons-col class="col-image border" width="30%">';
-    	          htm+='<div class="logo-wrap2" >';
-    	            htm+='<div class="img_loaded" style="border-radius: 40px; overflow:hidden;">';
-    	             htm+='<img src="'+val.logo+'" />';
-    	            htm+='</div>';
-    	            
-    	          htm+='</div>';
-
-		
-	}
     	              	          
     	          //htm+='<p class="center">'+val.payment_options.cod+'</p>';
     	         /* if(!empty(val.payment_available)){ 
