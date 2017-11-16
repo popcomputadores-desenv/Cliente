@@ -2927,8 +2927,8 @@ function displayRestaurantResults(data , target_id)
     $.each( data, function( key, val ) {     
     	
     	// dump(val);
-
-    	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadmenu('+cat_unica+','+val.merchant_id+');" >';
+	
+    	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
     	 htm+='<ons-row class="row">';    	 
     	     htm+='<ons-col class="col-image border" width="30%">';
     	          htm+='<div class="logo-wrap2" >';
@@ -2937,7 +2937,7 @@ function displayRestaurantResults(data , target_id)
     	            htm+='</div>';
     	            
     	          htm+='</div>';
-    	              	          
+
     	          //htm+='<p class="center">'+val.payment_options.cod+'</p>';
     	         /* if(!empty(val.payment_available)){ 
     	          	 if(val.payment_available.length>0){
