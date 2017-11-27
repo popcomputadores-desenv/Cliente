@@ -3,9 +3,9 @@
     xmlns:gap = "http://phonegap.com/ns/1.0"
     xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "app.masterhub.cliente"
-    version="2.1" 
-	android-versionCode="12"
-  	ios-CFBundleVersion="1.0.0"	
+    version="2.2" 
+	android-versionCode="13"
+  	ios-CFBundleVersion="13"	
 >
     <name>Master Hub</name>
     <description>
@@ -19,13 +19,11 @@
                
 	<preference name="orientation" value="portrait" />
 	<preference name="android-build-tool" value="gradle" />		
-	<preference name="windows-appx-target" value="8.1-phone" />
+	<preference name="windows-appx-target" value="8.1-phone"/>
 	<preference name="WindowsToastCapable" value="true" />   	
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 	
-    <gap:plugin name="phonegap-plugin-push" source="npm" spec="1.10.5"  >
-		<param name="SENDER_ID" value="700766185398" />		
-    </gap:plugin>
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="1.10.5" />
     
 	<gap:plugin name="onesignal-cordova-plugin" spec="2.1.2" source="npm" />
     <gap:plugin name="cordova-plugin-device" source="npm" />		
@@ -39,7 +37,7 @@
 	<gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.6.0" />	
 	
 	<gap:plugin name="cordova-plugin-media" source="npm" spec="3.0.0" />	
-	<gap:plugin name="cordova.plugins.diagnostic" source="npm" spec="3.4.2" />	
+	<gap:plugin name="cordova.plugins.diagnostic" source="npm" spec="3.7.1" />	
 		
 	<gap:plugin name="cordova-plugin-googlemaps-plus" source="npm" >
 	   <param name="API_KEY_FOR_ANDROID" value="AIzaSyCjgZJOBT5K3Ms5ns20Q3lbopscSoGt3aI" />
@@ -81,13 +79,36 @@
     </gap:config-file> 
 	            
     <preference name="phonegap-version" value="cli-7.0.1" />     
-    <gap:plugin name="cordova-plugin-camera" source="npm" spec="2.4.0" />
+    <gap:plugin name="cordova-plugin-camera" source="npm" spec="2.4.1" />
     <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.6.2" /> 
     <gap:plugin spec="https://github.com/danwilson/google-analytics-plugin.git" source="git" />       
-    
-    <gap:config-file platform="ios" parent="NSPhotoLibraryUsageDescription" overwrite="true"> 
-      <string>O Master Hub gostaria de acessar sua foto</string> 
-    </gap:config-file>    
+	
+    <platform name="ios">   
+		
+	<config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+	        <string>O Master Hub quer usar sempre a sua localização</string>
+	</config-file>
+	<config-file platform="ios" target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+	        <string>O Master Hub quer usar a sua localização</string>
+	</config-file>
+		
+	</platform>   
+	
+	<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+    <string>preciso de acesso à câmera para tirar fotos</string>
+	</edit-config>
+	
+	<edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+	    <string>preciso de acesso à biblioteca de fotos para obter fotos a partir daí</string>
+	</edit-config>
+	
+	<edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+	    <string>precisa de acesso à localização para encontrar coisas próximas</string>
+	</edit-config>
+	
+	<edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="merge">
+	    <string>precisa acessar a biblioteca de fotos para salvar imagens lá</string>
+	</edit-config>
     
 	<platform name="android">
 		

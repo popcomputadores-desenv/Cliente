@@ -443,7 +443,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	<!--MODIFICADO-->
 	<ons-list-item onclick="menu.setMainPage('favoritos.html', {closeMenu: true})" class="bottom-menu-item">
       <ons-icon icon="ion-android-favorite"></ons-icon> 
-      <span class="trn" data-trn-key="Favortios">Favoritos</span>
+      <span class="trn" data-trn-key="Favoritos">Favoritos</span>
     </ons-list-item>
     <!--FIM-->
     <ons-list-item onclick="showOrders();" class="bottom-menu-item">
@@ -548,7 +548,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	   </div>
 	   
 	<div class="botao-busca wrapper center">   
-      <button class="button button--large" style="border-radius: 8px; border: 0px solid #000; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); background: #841011; box-shadow: 1px -1px 10px 2px rgba(0,0,0,0.6);" onclick="searchMerchant();">
+      <button class="button button--large" style="border-radius: 8px; border: 0px solid #000; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); background: #841011; box-shadow: 1px -1px 10px 2px rgba(0,0,0,0.6);" onclick="carregarCategorias();">
         <ons-icon icon="fa-find"></ons-icon> <span class="trn" data-trn-key="search_restaurant">Procurar Estabelecimentos</span>
       </button>                   
    </div> 
@@ -600,7 +600,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 		   </br>
        
 	<div class="botao-busca wrapper center">   
-      <button class="button button--large" style="border-radius: 8px; border: 0px solid #000; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); background: #841011; box-shadow: 1px -1px 10px 2px rgba(0,0,0,0.6);" onclick="searchMerchant();">
+      <button class="button button--large" style="border-radius: 8px; border: 0px solid #000; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); background: #841011; box-shadow: 1px -1px 10px 2px rgba(0,0,0,0.6);" onclick="carregarCategorias();">
         <ons-icon icon="fa-find"></ons-icon> <span class="trn" data-trn-key="search_restaurant">Procurar Estabelecimentos</span>
       </button>                   
    </div> 
@@ -803,7 +803,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <div style="position:relative;">
    
     <ons-list class="restaurant-list" id="lazy-parent" >
-       <ons-list-item ons-lazy-repeat="lazyLoadSearch" modifier="tappable" class="list-item-container lazy-list">      
+       <ons-list-item ons-lazy-repeat="lazyLoadSearch" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
        </ons-list-item>
     </ons-list>
    
@@ -847,7 +847,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <div class="results-header arrow_box" style="border-bottom: 0px inset #333; display:none;"><span class="result-msg"></span></div>
           
 <ons-list class="restaurant-list" id="lazy-parent" >
-       <ons-list-item ons-lazy-repeat="lazyLoadSearch" modifier="tappable" class="list-item-container lazy-list">      
+       <ons-list-item ons-lazy-repeat="lazyLoadSearch" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
        </ons-list-item>
     </ons-list>
   
@@ -892,7 +892,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <div class="results-header arrow_box" style="border-bottom: 0px inset #333; display:none;"><span class="result-msg"></span></div>
           
 <ons-list class="restaurant-list" id="lazy-parent" >
-       <ons-list-item ons-lazy-repeat="lazyLoadSearchCategorias" modifier="tappable" class="list-item-container lazy-list">      
+       <ons-list-item ons-lazy-repeat="lazyLoadSearchCategorias" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
        </ons-list-item>
     </ons-list>
   
@@ -983,10 +983,6 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
            <ons-icon icon="fa-shopping-cart" class="cart">
          </ons-toolbar-button>
          
-         <ons-toolbar-button onclick="showMenu(this);">
-           <ons-icon icon="ion-android-more-vertical" size="30px"></ons-icon>
-        </ons-toolbar-button>     
-         
      </div>
            
    </ons-toolbar>
@@ -1020,10 +1016,10 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <div class="wrapper3 center">
 		<ons-row>
 			<ons-col>
-				<div onclick="loadPageMerchantInfo();" style="color: #fff; font-size: 13px;"><ons-icon icon="ion-ios-list-outline" style="margin-right: 6px; line-height: 2px; color: #ec1414;"></ons-icon>Informações</div>
+				<div onclick="loadPageMerchantInfo();" style="color: #fff; font-size: 13px;"><ons-icon icon="ion-ios-list-outline" style="margin-right: 6px; line-height: 2px; color: #ffda44;"></ons-icon>Informações</div>
 			</ons-col>
 			<ons-col>
-				<div onclick="loadMoreReviews();" style="color: #fff; font-size: 13px;border-left: 1px dotted #ddd; border-right: 1px dotted #ddd;"><ons-icon icon="ion-ios-star-outline" style="margin-right: 6px; line-height: 2px; color: #ec1414;"></ons-icon>Avaliações</div>
+				<div onclick="loadMoreReviews();" style="color: #fff; font-size: 13px;border-left: 1px dotted #ddd; border-right: 1px dotted #ddd;"><ons-icon icon="ion-ios-star-outline" style="margin-right: 6px; line-height: 2px; color: #ffda44;"></ons-icon>Avaliações</div>
 			</ons-col>
 		</ons-row>
         </div>
@@ -1031,7 +1027,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	<div class="wrapper" style="margin-top: 10px; padding:10px; color: #ddd; font-weight: bold;"><span style="border-bottom: 1px dotted #ddd; padding-bottom: 5px;">Categorias</span></div>
    <ons-scroller id="category-list"> 
       <ons-list id="lazy-parent" >
-	      <ons-list-item ons-lazy-repeat="lazyFoodCategory" modifier="tappable" class="list-item-container lazy-list">      
+	      <ons-list-item ons-lazy-repeat="lazyFoodCategory" style="padding:0;" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
 	      </ons-list-item>
 	  </ons-list>
    </ons-scroller>  
@@ -1074,7 +1070,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <ons-scroller id="menu-list">      
         <ons-list id="lazy-parent" >
-	      <ons-list-item ons-lazy-repeat="lazyItem" modifier="tappable" class="list-item-container lazy-list restaurant-list">      
+	      <ons-list-item ons-lazy-repeat="lazyItem" style="padding:0;" modifier="tappable" class="list-item-container lazy-list restaurant-list">      
 	      </ons-list-item>
 	    </ons-list>     
    </ons-scroller>
@@ -1086,37 +1082,58 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 <ons-page id="page-menubycategoryitem" >
    <ons-toolbar>        
      <div class="left"><ons-back-button id="menuitem-back-button"></ons-back-button></div>     
-     <div class="center white"><span>Sair</span></div>           
+     <div class="center white"><span>Categorias</span></div>           
           
      
      <div class="right">       
         <ons-toolbar-button>
         <span class="notification cart-num" onclick="showCart();" style="margin-left: 10px; top:3px;">0</span>
-        <ons-icon icon="ion-clipboard" onclick="showCart();" class="cart"></ons-toolbar-button>
-        
-        <ons-toolbar-button onclick="showEasyCategory(this);">
-           <ons-icon icon="ion-ios-list" size="30px"></ons-icon>
-        </ons-toolbar-button>
+        <ons-icon icon="fa-shopping-cart" onclick="showCart();" class="cart"></ons-toolbar-button>
         
      </div>
      
    </ons-toolbar>
-      
-   <div class="orange-header">
+
+   <input type="hidden" name="selected_restaurant_name" id="selected_restaurant_name" class="selected_restaurant_name" >
+   <input type="hidden" name="selected_restaurant_ratings" id="selected_restaurant_ratings" class="selected_restaurant_ratings" >
+   
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+   <div class="orange-header wrapper">
       <ons-row align="center">
         <ons-col width="40%">
            <div class="logo-wrap logo-non-auto" >           
            </div>
         </ons-col>
         <ons-col class="text-right">
+           <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
            <div class="rating-stars" data-score=""></div>           
+           </a>
            <p class="restauran-title concat-text white"></p>           
         </ons-col>
       </ons-row>
    </div> 
-   
-   <ons-scroller id="menu-list">           
+      
+   <div class="wrapper3 center">
+		<ons-row>
+			<ons-col>
+				<div onclick="loadPageMerchantInfo();" style="color: #fff; font-size: 13px;"><ons-icon icon="ion-ios-list-outline" style="margin-right: 6px; line-height: 2px; color: #ffda44;"></ons-icon>Informações</div>
+			</ons-col>
+			<ons-col>
+				<div onclick="loadMoreReviews();" style="color: #fff; font-size: 13px;border-left: 1px dotted #ddd; border-right: 1px dotted #ddd;"><ons-icon icon="ion-ios-star-outline" style="margin-right: 6px; line-height: 2px; color: #ffda44;"></ons-icon>Avaliações</div>
+			</ons-col>
+		</ons-row>
+        </div> 
+   <div class="wrapper" style="margin-top: 10px; padding:10px; color: #ddd; font-weight: bold;"><span style="border-bottom: 1px dotted #ddd; padding-bottom: 5px;">Produtos</span></div>
+   <ons-scroller id="menu-list">      
+        <ons-list id="lazy-parent" >
+	      <ons-list-item ons-lazy-repeat="lazyItem" style="padding:0;" modifier="tappable" class="list-item-container lazy-list restaurant-list">      
+	      </ons-list-item>
+	    </ons-list>     
    </ons-scroller>
+   
   
 </ons-page>
 </script>
@@ -1163,21 +1180,29 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      </div>
    </ons-toolbar>
    
-   <div class="orange-header">
-      <ons-row >
+<div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+   <div class="orange-header wrapper">
+      <ons-row align="center">
         <ons-col width="40%">
            <div class="logo-wrap logo-non-auto" >           
            </div>
         </ons-col>
-        <ons-col class="text-right">           
-           <p class="restauran-title concat-text white trn" data-trn-key="total">Total</p>  
-           <p class="text-big white total-amount"></p>         
+        <ons-col class="text-right">
+           <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
+           <div class="rating-stars" data-score=""></div>           
+           </a>
+           <p class="restauran-title concat-text white"></p> 
+		   <p class="restauran-title concat-text white trn" data-trn-key="total">Total</p>  
+           <p class="text-big white total-amount"></p>
         </ons-col>
       </ons-row>
    </div> 
-   
-   <div class="wrapper">
-       <ons-row class="row" align="center">
+      
+   <div class="wrapper3 center">
+   		<ons-row class="row" align="center" style="margin-top: -12px; background-color: rgba(0,0,0,0.52);">
            <ons-col class="text-big concat-text trn" width="30%" data-trn-key="your_order" style="color: #ddd; font-size: 15px;">Your Order</ons-col>
            <ons-col >           
              <button onclick="clearCart();" class="clear-cart button button--quiet green trn" data-trn-key="clear_cart">Clear Cart</button>
@@ -1187,8 +1212,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
               <button class="order-apply-changes button button--quiet green trn" data-trn-key="apply_changes" style="font-size: 14px;">
               Apply Changes</button>
            </ons-col>
-       </ons-row>
-   </div>  
+       </ons-row>        
+	</div>    
    
    <form id="frm-cart" class="frm-cart" method="post">
    <ons-list id="cart-item">
@@ -1204,7 +1229,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <div class="field-wrapper">
    <input type="text" name="delivery_time" class="delivery_time text-input text-input--underbar" 
-   placeholder="Horário da Entrega" value="">
+   placeholder="Horário da Entrega" value="" style="box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;">
    </div>
    
    
@@ -1264,7 +1289,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
         </ons-col>
         <ons-col class="text-right">           
            <p class="restauran-title concat-text white trn" data-trn-key="total">Total</p>  
-           <p class="text-big white total-amount"></p>         
+           <p class="text-big white total-amount"></p> 
         </ons-col>
       </ons-row>
    </div> 
@@ -1365,7 +1390,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
         </ons-col>
         <ons-col class="text-right">           
            <p class="restauran-title concat-text white trn" data-trn-key="total">Total</p>  
-           <p class="text-big white total-amount"></p>         
+           <p class="text-big white total-amount"></p>
         </ons-col>
       </ons-row>
    </div> 
@@ -1467,19 +1492,38 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      </div>
    </ons-toolbar>
    
-   <div class="orange-header">
-      <ons-row >
+   <input type="hidden" name="selected_restaurant_name" id="selected_restaurant_name" class="selected_restaurant_name" >
+   <input type="hidden" name="selected_restaurant_ratings" id="selected_restaurant_ratings" class="selected_restaurant_ratings" >
+   
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+   <div class="orange-header wrapper">
+      <ons-row align="center">
         <ons-col width="40%">
-           <div class="logo-wrap logo-non-auto" >           
+           <div class="logo-wrap logo-non-auto" style="width: 70px; margin: auto; display: block; max-height: 100px;">           
            </div>
         </ons-col>
-        <ons-col class="text-right">           
-           <p class="restauran-title concat-text white trn" data-trn-key="total">Total</p>  
-           <p class="text-big white total-amount"></p>         
+        <ons-col class="text-right">
+           <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
+           <div class="rating-stars" data-score=""></div>           
+           </a>
+           <p class="restauran-title concat-text white"></p>           
         </ons-col>
       </ons-row>
    </div> 
-   
+      
+   <div class="wrapper3 center">
+		<ons-row>
+			<ons-col>
+				<div onclick="loadPageMerchantInfo();" style="color: #fff; font-size: 13px;"><ons-icon icon="ion-ios-list-outline" style="margin-right: 6px; line-height: 2px; color: #ffda44;"></ons-icon>Informações</div>
+			</ons-col>
+			<ons-col>
+				<div onclick="loadMoreReviews();" style="color: #fff; font-size: 13px;border-left: 1px dotted #ddd; border-right: 1px dotted #ddd;"><ons-icon icon="ion-ios-star-outline" style="margin-right: 6px; line-height: 2px; color: #ffda44;"></ons-icon>Avaliações</div>
+			</ons-col>
+		</ons-row>
+        </div>    
    
    
    <form id="frm-paymentoption" class="frm-paymentoption" method="post">
@@ -1503,45 +1547,15 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <div class="checkout_information_dinein" id="checkout_information_dinein"></div>
    <div class="checkout_information_contact" id="checkout_information_contact"></div>
-   
-   <div class="wrapper">
-       <ons-row class="row">
-           <ons-col class="text-big trn" data-trn-key="how_you_like_pay" >How would you like to pay?</ons-col>           
-       </ons-row>
-   </div>  
-   
-   <div class="wrapper">
-      <ons-list id="payment-list">
-      </ons-list>
-   </div>  
-   
-   <div class="wrapper order-change-wrapper">
-      <div class="field-wrapper">
-      <input type="number" name="order_change"  class="numeric_only order_change text-input text-input--underbar" 
-      placeholder="change? For how much?" value="" min="0" inputmode="numeric" pattern="[0-9]*"  >
-      </div>      
-   </div>
-   
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="cpf_nota"  class="cpf_nota text-input text-input--underbar" 
-      placeholder="CPF na Nota" value="" >
-      </div>      
-   </div>
-   
-   <div class="wrapper payon-delivery-wrapper">
-      <ons-list id="payon-deliver-list">
-      </ons-list>
-   </div>
-   
+ 
    <div class="wrapper voucher-wrap">
    
       <ons-list id="voucher-wrap">
        <ons-list-header class="center voucher-header trn" data-trn-key="voucher">Voucher</ons-list-header>
        
         <ons-list-item class="center apply-voucher">                 
-        <input type="text" name="voucher_code"  class="voucher_code text-input text-input--underbar" 
-         placeholder="Enter Voucher here" value=""  >                
+        <input type="text" name="voucher_code"  class="center voucher_code text-input text-input--underbar" 
+         placeholder="Enter Voucher here" value=""  style="margin-top: 7px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;">                
         </ons-list-item>
         
         <ons-list-item class="center apply-voucher">
@@ -1550,7 +1564,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
         </button>  
         </ons-list-item>
         
-        <ons-list-item class="center remove-voucher">
+        <ons-list-item class="center remove-voucher" style="
+    display: none;>
         <button class="button button--quiet green" onclick="removeVoucher();" >
          <span class="trn" data-trn-key="remove_voucher">Remove Voucher</span>          
         </button>  
@@ -1568,7 +1583,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
        
        <ons-list-item class="center pts_pts">                 
         <input type="number" name="redeem_points"  class="redeem_points center numeric_only text-input text-input--underbar" 
-         value=""  >                
+         value=""  style="margin-top: 7px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;">                
        </ons-list-item>
        
        <ons-list-item class="center pts_pts">
@@ -1579,7 +1594,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
         
         <p class="center pts_pts_cancel pts_points_label small-font-dim"></p>
         
-        <ons-list-item class="center pts_pts_cancel">
+        <ons-list-item class="center pts_pts_cancel" style="
+    display: none;>
         <button class="button button--quiet green" onclick="cancelRedeem();" >
          <span class="trn" data-trn-key="cancel">Cancel</span>          
         </button>  
@@ -1588,15 +1604,100 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      </ons-list>
    </div>
    
+ 
+    <div class="wrapper">
+       <ons-row class="row">
+           <ons-col class="text-big trn" data-trn-key="" style="padding-bottom: 5px;">Conferência dos Valores</ons-col>           
+       </ons-row>
+   </div> 
+   
+  <div class="wrapper conferirvalor" style="padding-left: 10px;">
+       <div class="field-wrapper titulo-subtotal" style="width: 60%; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-subtotal" style="width: 20%; float: right; display: none;">
+	   </div>	
+       <div class="field-wrapper titulo-cupom" style="width: 60%; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper voucher_amount" style="width: 20%; float: right; display: none;">
+	   </div>	
+       <div class="field-wrapper titulo-pontos" style="width: 60%; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-pontos" style="width: 20%; float: right; display: none;">
+	   </div>	
+       <div class="field-wrapper titulo-subtotal_new" style="width: 60%; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper subtotal_new" style="width: 20%; float: right; display: none;">
+	   </div>	
+	   <div class="field-wrapper titulo-entrega" style="width: 60%; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-entrega" style="width: 20%; float: right; display: none;">
+	   </div>		 
+       <div class="field-wrapper titulo-comodidade" style="width: 60%; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-comodidade" style="width: 20%; float: right; display: none;">
+	   </div>	
+       <div class="field-wrapper titulo-embalagem" style="width: 60%; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-embalagem" style="width: 20%; float: right; display: none;">
+	   </div>	  
+       <div class="field-wrapper titulo-desconto" style="width: 60%; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-desconto" style="width: 20%; float: right; display: none;">
+	   </div>
+	   <div class="field-wrapper titulo-gorjeta" style="width: 60%; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-gorjeta" style="width: 20%; float: right; display: none;">
+	   </div>		           
+
+       <b> <div class="field-wrapper titulo-total" style="width: 60%; float: left;">
+	   </div>
+	   <div class="field-wrapper total-amount" style="width: 20%; float: right;">
+	   </div></b>	
+   </div>
+   
+   <div class="wrapper">
+       <ons-row class="row" style="padding-top: 5px;padding-bottom: 5px;">
+           <ons-col class="text-big trn" data-trn-key="how_you_like_pay">How would you like to pay?</ons-col>           
+       </ons-row>
+   </div>  
+   
+   <div class="wrapper">
+      <ons-list id="payment-list">
+      </ons-list>
+   </div>   
+   
+   <div class="wrapper order-change-wrapper">
+      <div class="field-wrapper">
+      <input type="number" name="order_change"  class="numeric_only order_change text-input text-input--underbar" 
+      placeholder="change? For how much?" value="" min="0" inputmode="numeric" pattern="[0-9]*"  >
+      </div>      
+   </div>
+   
+   <div class="wrapper payon-delivery-wrapper">
+      <ons-list id="payon-deliver-list">
+      </ons-list>
+   </div>
+   
+   <div class="wrapper">
+       <ons-row class="row" style="padding-top: 5px;padding-bottom: 5px;">
+           <ons-col class="text-big trn" data-trn-key="">CPF na Nota?</ons-col>           
+       </ons-row>
+   </div> 
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="cpf_nota"  class="cpf_nota text-input text-input--underbar" 
+      placeholder="Digite seu CPF" value="" >
+      </div>      
+   </div>
    <button class="button masterhub-btn button--large trn" onclick="InitPlaceOrder();" data-trn-key="place_order">
-	Place Order
+	Finalizar o pedido
 	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
    </button>
    </form>
 
 </ons-page>
-</script>   
-
+</script>  
 
 <script type="text/ons-template" id="receipt.html"> 
 <ons-page id="page-receipt" class="onsen-display" on-device-backbutton="deviceBackReceipt()" style="background: url('background-1.jpg');">
@@ -1612,20 +1713,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      <div class="right">        
      </div>
    </ons-toolbar>
-   
-   <div class="orange-header">
-      <ons-row >
-        <ons-col width="40%">
-           <div class="logo-wrap logo-non-auto" >           
-           </div>
-        </ons-col>
-        <ons-col class="text-right">           
-           <p class="restauran-title concat-text white">Total Paid</p>  
-           <p class="text-big white total-amount"></p>         
-        </ons-col>
-      </ons-row>
-   </div> 
-   
+   <br><br><br><br>
    <div class="wrapper center">
        <h2 class="trn" style="color: #00B279;" data-trn-key="thank_you">Thank You</h2>
        <p class="receipt-msg button button--quiet gray"></p>
@@ -1661,21 +1749,21 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    </div> 
    
    <div class="wrapper center">
-       <h3 style="position: relative; margin-top: -210px;"></h3>   
-       <h5></h5>
+       <h3 style="color: #fff; position: relative; margin-top: -210px;"></h3>   
+       <h5 style="color: #fff;"></h5>
        <div class="rating-stars" style="position: relative; margin-top: 149px;" data-score=""></div> 
        <p class="total-reviews"></p>
        <address></address>
    </div> 
    
    <ons-list class="list-dim-text">
-       <ons-list-header class="center trn" data-trn-key="opening_hours">Opening Hours</ons-list-header>
+       <ons-list-header class="center h3 trn" data-trn-key="opening_hours">Opening Hours</ons-list-header>
        <ons-list-item class="center opening-hours"> 
        </ons-list-item>
    </ons-list>
    
    <ons-list id="book-table" class="list-dim-text">
-     <ons-list-header class="center trn" data-trn-key="book_a_table">Book a table</ons-list-header>
+     <ons-list-header class="center h3 trn" data-trn-key="book_a_table">Book a table</ons-list-header>
      <ons-list-item class="center">       
        <button class="button button--quiet green bold trn" onclick="loadBookingForm();" data-trn-key="book_here">
           Book Here
@@ -1805,18 +1893,34 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
          <ons-toolbar-button onclick="showReviewForm();" ><ons-icon icon="ion-plus-round"></ons-toolbar-button>
      </div>
    </ons-toolbar>      
-
-    <div class="orange-header">
+   
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+   <div class="orange-header wrapper">
       <ons-row align="center">
         <ons-col width="40%">
            <div class="logo-wrap logo-non-auto" >           
            </div>
         </ons-col>
-        <ons-col class="text-right">           
-           <p class="restauran-title concat-text white"></p>                  
+        <ons-col class="text-right">
+           <p class="restauran-title concat-text white"></p>           
         </ons-col>
       </ons-row>
    </div> 
+      
+   <div class="wrapper3 center">
+		<ons-row>
+			<ons-col>
+				<div onclick="loadPageMerchantInfo();" style="color: #fff; font-size: 13px;"><ons-icon icon="ion-ios-list-outline" style="margin-right: 6px; line-height: 2px; color: #ffda44;"></ons-icon>Informações</div>
+			</ons-col>
+			<ons-col>
+				<div onclick="loadMoreReviews();" style="color: #fff; font-size: 13px;border-left: 1px dotted #ddd; border-right: 1px dotted #ddd;"><ons-icon icon="ion-ios-star-outline" style="margin-right: 6px; line-height: 2px; color: #ffda44;"></ons-icon>Avaliações</div>
+			</ons-col>
+		</ons-row>
+        </div> 
+   <div class="wrapper" style="margin-top: 10px; padding:10px;"></div>
    
    <ons-scroller id="review-list-scroller">    
    </ons-scroller>
@@ -1832,17 +1936,33 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      <div class="center white"><span id="search-text" class="trn" data-trn-key="add_review">Add Reviews</span></div>                 
    </ons-toolbar>      
 
-    <div class="orange-header">
-      <ons-row >
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+   <div class="orange-header wrapper">
+      <ons-row align="center">
         <ons-col width="40%">
            <div class="logo-wrap logo-non-auto" >           
            </div>
         </ons-col>
-        <ons-col class="text-right">           
-           <p class="restauran-title concat-text white"></p>                  
+        <ons-col class="text-right">
+           <p class="restauran-title concat-text white"></p>           
         </ons-col>
       </ons-row>
    </div> 
+      
+   <div class="wrapper3 center">
+		<ons-row>
+			<ons-col>
+				<div onclick="loadPageMerchantInfo();" style="color: #fff; font-size: 13px;"><ons-icon icon="ion-ios-list-outline" style="margin-right: 6px; line-height: 2px; color: #ffda44;"></ons-icon>Informações</div>
+			</ons-col>
+			<ons-col>
+				<div onclick="loadMoreReviews();" style="color: #fff; font-size: 13px;border-left: 1px dotted #ddd; border-right: 1px dotted #ddd;"><ons-icon icon="ion-ios-star-outline" style="margin-right: 6px; line-height: 2px; color: #ffda44;"></ons-icon>Avaliações</div>
+			</ons-col>
+		</ons-row>
+        </div> 
+   <div class="wrapper" style="margin-top: 10px; padding:10px;"></div> 
 
    <form id="frm-addreview" class="frm-addreview" method="post">   
    <div class="wrapper">
@@ -1897,7 +2017,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <div class="results-header arrow_box"><span class="result-msg trn" data-trn-key="processing">processing</span></div>
       
     <ons-list class="restaurant-list" id="lazy-parent" >
-       <ons-list-item ons-lazy-repeat="lazyBrowseMerchant" modifier="tappable" class="list-item-container lazy-list">      
+       <ons-list-item ons-lazy-repeat="lazyBrowseMerchant" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
        </ons-list-item>
     </ons-list>      
       

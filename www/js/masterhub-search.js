@@ -1,7 +1,7 @@
 var lazyLoadSearch = {
   createItemContent: function(index, oldContent) {      	
   	
-  	search_total = getStorage("search_total");
+  	search_total = getStorage("search_total_raw");
   	if(!empty(search_total)){
   		$(".result-msg").text(search_total+" "+getTrans("Restaurant found",'restaurant_found') );
   	}  	  	
@@ -72,7 +72,7 @@ function getSearchMerchant(index)
 		type: 'post',                  
 		async: false,
 		dataType: 'jsonp',
-		timeout: 6000,
+		timeout: 8000,
 		crossDomain: true,
 	 beforeSend: function() {			 	
 	},

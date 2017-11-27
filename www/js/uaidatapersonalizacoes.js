@@ -80,6 +80,7 @@ function displayFavoritosResults(data , target_id)
 	var htm='';	
        
     $.each( data, function( key, val ) {     
+    	 dump(val);
     	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
     	htm+='<ons-row class="row">';    	 
     	     htm+='<ons-col class="col-image border" width="35%">';
@@ -99,7 +100,7 @@ function displayFavoritosResults(data , target_id)
     	     htm+='<ons-col class="col-description border" width="65%">';
     	           htm+='<div>';
 	    	           htm+='<div class="rating-stars" data-score="'+val.ratings.ratings+'"></div>';
-	    	           htm+='<p class="restauran-title concat-text">'+val.restaurant_name+'</p>';
+	    	           htm+='<p class="restauran-title concat-text">'+getStorage('restaurant_name')+'</p>';
 	    	           htm+='<p class="concat-text">'+val.cuisine+'</p>';
 
 					   dump(val.service);
