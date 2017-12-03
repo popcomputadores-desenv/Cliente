@@ -418,7 +418,7 @@ document.addEventListener("pageinit", function(e) {
 		 
 		 /*MODIFICADO*/
 		  case "page-favoritos":
-		  callAjax('browseFavoritos',"client_token="+getStorage("client_token"));
+		  callAjax("browseFavoritos","client_token="+getStorage("client_token"));
 		  break;
 		 /*FIM*/
 			
@@ -831,7 +831,7 @@ document.addEventListener("pageinit", function(e) {
 		case "page-settings":  
 		
 		  if (isDebug()){
-		    	$(".software_version").html( "2.1 - Debug" );
+		    	$(".software_version").html( "2.2 - Debug" );
 		  } else {
 		    	$(".software_version").html( getStorage("versao")+" - ("+getStorage("versaoCode")+")");
 		  }
@@ -1099,7 +1099,7 @@ function onsenAlert(message,dialog_title)
 	}
 	
 	if(empty(message)){
-		message='undefined error';
+		//message='undefined error';
 	}
 	
 	ons.notification.alert({
@@ -1125,6 +1125,25 @@ function onsenDialogCheckout(){
 	  }
 	});		
 }
+
+function onsenDialogSugestao(){
+
+	ons.notification.confirm({
+	  message: getTrans('Sua sugestao foi enviada com sucesso!','Sua sugestão foi enviada com sucesso! Obrigado') ,	  
+	  title: dialog_title_default,
+	  buttonLabels: ['OK'],
+	  animation: 'default', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	  	dump(index);
+	    if ( index==1){
+	    	$root.ons.findParentComponentUntil('ons-navigator', $event).popPage({cancelIfRunning: true});       
+	    }
+	  }
+	});		
+}
+
 
 function hideAllModal()
 {
@@ -1258,7 +1277,7 @@ function callAjax(action,params)
 				case "browseFavoritos":
 				   displayFavoritosResults( data.details.data ,'browse-favoritos');
 				   //$(".result-msg").text(data.details.total+" Restaurant found");
-				   $(".result-msg").text(data.details.total+" "+ getTrans("Favorito(s) Encontrado(s)",'restaurant_found')  );
+				   $(".result-msg").text(data.details.total+" "+ getTrans("Favorito(s) Encontrado(s)",'restaurant_favorito_found')  );
 				 break;
 				/*FIM*/
 				case "MenuCategory":			
@@ -1312,8 +1331,8 @@ function callAjax(action,params)
 					
 				case "Suggestion":
 				sugestoes_Resultado(data.details);
-									
-				break;					
+				break;
+					
 				case "Pagina":
 				paginaResultado(data.details);
 				break;
@@ -3017,7 +3036,7 @@ function callAjax(action,params)
 		if ( action=="registerMobile"){
 		} else {			
 			//onsenAlert( getTrans("Network error has occurred please try again!",'network_error') );		
-			toastMsg( getTrans("Network error has occurred please try again!",'network_error') );		
+			//toastMsg( getTrans("Network error has occurred please try again!",'network_error') );		
 		}	
 	}
    }); 
@@ -3073,7 +3092,7 @@ function displayRestaurantResults(data , target_id)
 	}
 	data = abertas.concat(fechadas);
 	
-		htm+='<ons-list class="restaurant-list">';
+
 
 	
     $.each( data, function( key, val ) {     
@@ -3197,7 +3216,7 @@ function displayRestaurantResults(data , target_id)
     	 htm+='</ons-list-item>';
     });
 	
-	    htm+='</ons-list>';
+
 
       
     createElement(target_id,htm);
@@ -9090,6 +9109,7 @@ function clearAllStorage()
   removeStorage('cart_packaging_final');
   removeStorage('cart_tip_final');
   removeStorage('cart_tax_final');
+  removeStorage("cart_discount_final"),
   removeStorage('map_address_result_formatted_address');
   removeStorage("customer_contact_number");
   
@@ -9560,9 +9580,12 @@ function getCategory(index)
 	},
 		error: function (request,error) {	        
 		hideAllModal();				
-		$("#foodcategory-results-"+index).html( getTrans("Network error has occurred please try again!",'network_error') );		
+		//$("#foodcategory-results-"+index).html( getTrans("Network error has occurred please try again!",'network_error') );		
 	}
-   });       	
+   });
+	
+	/*Chamo o metodo verificaFavorito (APP MENU BAR)*/
+		 verificaFavorito();
 }
 
 
