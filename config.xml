@@ -52,7 +52,7 @@
      <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-4vsdvvhcah9k4q1485d88sm77p6o703g" />
     </gap:plugin>
 		
-    <platform name="android" />    
+    <platform name="android" /> 
     <platform name="ios" /> 
 		
     <gap:config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
