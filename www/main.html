@@ -630,7 +630,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 
 <script type="text/ons-template" id="Pagina-Personalizada.html"> 
 <ons-navigator title="Navigator" var="sNavigator"> 
-<ons-page id="carregarPagina-page" on-device-backbutton="backtoHome()"  style="background: url('background-1.jpg');">
+<ons-page id="carregarPagina-page" style="background: url('background-1.jpg');">
   
 		  <div id="pagina-personalizada"></div>
 
@@ -741,7 +741,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       </div>
    </ons-toolbar>
 	</br>
-     <div class="center white trn" data-trn-key="os_estabelecimentos">Os estabelecimentos abaixo não fazem parte do nosso catálogo. Clique em 'Votar' para incentivá-los a entrarem.</div>
+     <div id="mensagem_nao" class="center white trn"  data-trn-key="os_estabelecimentos">Os estabelecimentos abaixo não fazem parte do nosso catálogo. Clique em 'Votar' para incentivá-los a entrarem.</div>
 	</br>
 	
 	<div class="center" id="lista-sugestoes"></div>
@@ -751,25 +751,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <form id="frm-addsuggestion" class="frm-addsuggestion" method="post">   
    <div class="wrapper">
    
-      <div class="field-wrapper">
-      <input type="text" name="nome_empresa"  class="review text-input text-input--underbar has_validation" 
-      placeholder="Nome da Empresa" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
-      </div>
-	  
-      <div class="field-wrapper">
-      <input type="text" name="cidade"  class="review text-input text-input--underbar has_validation" 
-      placeholder="Cidade" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
-      </div>
-
-      <div class="field-wrapper">
-      <input type="text" name="contato"  class="review text-input text-input--underbar" 
-      placeholder="Contato na Empresa" value="">
-      </div>
-
-      <div class="field-wrapper">
-      <input type="text" name="telefone"  class="review text-input text-input--underbar" 
-      placeholder="Telefone da Empresa" value="">
-      </div>
+      <div class="center" id="campos-sugestoes"></div>
 </br>
    <button class="button masterhub-btn button--large trn" onclick="addSuggestion();" data-trn-key="publish_suggestion">
 	Enviar minha Sugestão

@@ -24,8 +24,10 @@ alert("Você deve estar logado para adicionar um favorito");
 
 	    if(icone == "1"){
 		$("#imgfavorito").attr("src","images/icons/favorito.png");
+			toastMsg( getTrans("Voce adicionou este estabelecimento aos seus favoritos!",'favoritado') );
 		} else {
 		$("#imgfavorito").attr("src","images/icons/favoritar.png");
+			toastMsg( getTrans("Voce removeu este estabelecimento dos seus favoritos!",'favoritar') );
 		}
     },
 

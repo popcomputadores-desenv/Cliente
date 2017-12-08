@@ -1,6 +1,6 @@
 /**
 KMRS MOBILE 
-Version 2.2
+Version 2.3
 */
 
 /**
@@ -36,6 +36,10 @@ var browse_params;
 var push;
 
 var timer = null;
+var ajax_lazy;
+var ajax_lazy_item;
+
+var app_version = 2.3;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -1216,6 +1220,8 @@ function callAjax(action,params)
 		params+="&api_key="+krms_config.APIHasKey;
 	}
 	
+	params+="&app_version="+ app_version;
+	
 	dump(ajax_url+"/"+action+"?"+params);
 	
     ajax_request = $.ajax({
@@ -1252,6 +1258,7 @@ function callAjax(action,params)
 			    case "getLanguageSettings":			    
 			       loaderLang.show();
 			       break;
+			
 				default:
 				   loader.show();
 				   break;
@@ -1260,7 +1267,7 @@ function callAjax(action,params)
 	},
 	complete: function(data) {					
 		ajax_request=null;   	     				
-		hideAllModal();		
+		hideAllModal();	
 	},
 	success: function (data) {	  
 		dump(data); 		
@@ -1331,6 +1338,7 @@ function callAjax(action,params)
 					
 				case "Suggestion":
 				sugestoes_Resultado(data.details);
+				sugestoes_Campo(data.details);	
 				break;
 					
 				case "Pagina":
@@ -2917,10 +2925,17 @@ function callAjax(action,params)
 		} else {
 			/*failed condition*/
 			
+			
 			dump('failed condition');
 			switch(action)
-			{					
-											
+			{	
+					
+				case "Suggestion":
+				$("#mensagem_nao").hide();	
+				sugestoes_Campo(data.details);
+				toastMsg(data.msg);
+				break;	
+					
 				case "search":
 				  //$(".result-msg").text("No Restaurant found");
 				  $(".result-msg").text(data.msg);				  
@@ -3036,7 +3051,7 @@ function callAjax(action,params)
 		if ( action=="registerMobile"){
 		} else {			
 			//onsenAlert( getTrans("Network error has occurred please try again!",'network_error') );		
-			//toastMsg( getTrans("Network error has occurred please try again!",'network_error') );		
+			toastMsg( getTrans("Network error has occurred please try again!",'network_error') );		
 		}	
 	}
    }); 
@@ -3573,7 +3588,7 @@ function displayMerchantLogo3(logo,total,subtotal,entrega,comodidade,embalagem,d
 
 }*/
 
-function displayItemByCategory(data)
+function displayItemByCategory(data , index)
 {			
 	
 	/*dump( "mobile_menu=>"+data.mobile_menu );	
@@ -3703,7 +3718,7 @@ actions='"loadItemDetails('+ "'"+val.item_id+"'," +  "'"+data.merchant_id+"'," +
     html+='</ons-list>';    
     
     //createElement('menu-list',html);
-    createElement( 'item-results-'+ data.index , html);
+    createElement( 'item-results-'+ index , html);
     
     imageLoaded('.img_loaded');
 }
@@ -7074,7 +7089,7 @@ function isDebug()
 {	
 	//on/off
 	//return false; 
-	return false;
+	return true;
 }
 
 var rzr_successCallback = function(payment_id) {
@@ -9369,7 +9384,7 @@ var lazyBrowseMerchant = {
     return $element[0];    
   },
   calculateItemHeight: function(index) {  	
-    return 25;
+    return 1200;
   },
   countItems: function() {  	
     return getStorage("browse_total");
@@ -9395,7 +9410,8 @@ function getBrowseMerchant(index)
 		params+="&api_key="+krms_config.APIHasKey;
 	}
 		
-	dump("getBrowseMerchant=>"+ ajax_url+"/"+action+"?"+params);	
+	params+="&app_version=" + app_version;
+	dump(ajax_url+"/"+action+"?"+params);	
 	
 	 ajax_lazy = $.ajax({
 		url: ajax_url+"/"+action, 
@@ -9410,8 +9426,14 @@ function getBrowseMerchant(index)
 	complete: function(data) {							
 	},
 	success: function (data) {	  	   
-	   if (data.code=1){	   		   	      	  
-	   	   displayRestaurantResults(data.details.data ,'browse-results-'+index);	   	   
+	   if (data.code=1){	   		   
+	   	  if ( $('#browse-results-'+index).exists() ){
+	   	      displayRestaurantResults(data.details.data ,'browse-results-'+index);
+	   	   } else {
+	   	   	  dump('element not exist');
+	   	   	  ajax_lazy.abort();
+              ajax_lazy = null;
+	   	   } 	  	   	   
 	   } else {	   	  
 	   	  $("#browse-results-"+index).html(data.msg);
 	   }
@@ -9510,7 +9532,7 @@ var lazyFoodCategory = {
     return $element[0];    
   },
   calculateItemHeight: function(index) {  	
-    return 25;
+    return 50;
   },
   countItems: function() {  	
     return getStorage("category_count");
@@ -9534,6 +9556,8 @@ function getCategory(index)
 		params+="&api_key="+krms_config.APIHasKey;
 	}
 		
+	params+="&app_version=" + app_version;
+	
 	dump(ajax_url+"/"+action+"?"+params);		
     ajax_lazy = $.ajax({
 		url: ajax_url+"/"+action, 
@@ -9549,6 +9573,9 @@ function getCategory(index)
 	},
 	success: function (data) {		   
 	   if (data.code=1){	   	
+	   	
+	   	   if ( $('#foodcategory-results-'+index).exists() ){
+	   	
 	   	   html='';
 	   	   html+='<ons-list>';	   	      	  
 	   	   $.each( data.details, function( key, val ) {
@@ -9574,13 +9601,19 @@ function getCategory(index)
 	   	   });
 	   	   html+='</ons-list>';
 	   	   createElement( 'foodcategory-results-'+index, html);
+	   	   
+	   	   } else {
+			  dump('element not exist');
+			  ajax_lazy.abort();
+			  ajax_lazy = null;
+			} 	  	   	   
 	   } else {	   	  
 	   	  $("#foodcategory-results-"+index).html(data.msg);
 	   }
 	},
 		error: function (request,error) {	        
 		hideAllModal();				
-		//$("#foodcategory-results-"+index).html( getTrans("Network error has occurred please try again!",'network_error') );		
+		$("#foodcategory-results-"+index).html( getTrans("Network error has occurred please try again!",'network_error') );		
 	}
    });
 	
@@ -9597,7 +9630,7 @@ var lazyItem = {
     return $element[0];    
   },
   calculateItemHeight: function(index) {  	
-    return 25;
+    return 50;
   },
   countItems: function() {  	
     return getStorage("item_count");
@@ -9622,9 +9655,11 @@ function getItem(index)
 		params+="&api_key="+krms_config.APIHasKey;
 	}
 		
+	params+="&app_version=" + app_version;
+	
 	dump(ajax_url+"/"+action+"?"+params);
 	
-	ajax_lazy = $.ajax({
+	ajax_lazy_item = $.ajax({
 		url: ajax_url+"/"+action, 
 		data: params,
 		type: 'post',                  
@@ -9637,8 +9672,15 @@ function getItem(index)
 	complete: function(data) {							
 	},
 	success: function (data) {	  	   
-	   if (data.code=1){	   		   	      	  
-	   	   displayItemByCategory(data.details);
+	   if (data.code=1){	   		  
+	   	   if ( $('#item-results-'+index).exists() ){	      	  
+	   	   	  dump('element  exist' + index);
+	   	      displayItemByCategory(data.details, index);
+	   	   } else {
+			  dump('element not exist');
+			  ajax_lazy_item.abort();
+			  ajax_lazy_item = null;
+			} 	  	   	   
 	   } else {	   	  
 	   	  $("#item-results-"+index).html(data.msg);
 	   }

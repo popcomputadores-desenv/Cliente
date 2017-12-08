@@ -10,7 +10,7 @@ var lazyLoadSearch = {
     return $element[0];    
   },
   calculateItemHeight: function(index) {  	
-    return 25;
+    return 1100;
   },
   countItems: function() {  	
     return getStorage("search_total");
@@ -63,7 +63,9 @@ function getSearchMerchant(index)
 	if(!empty(krms_config.APIHasKey)){
 		params+="&api_key="+krms_config.APIHasKey;
 	}
-		
+
+	params+="&app_version=" + app_version;
+	
 	dump(ajax_url+"/"+action+"?"+params);
 	
 	 ajax_lazy = $.ajax({
@@ -80,7 +82,13 @@ function getSearchMerchant(index)
 	},
 	success: function (data) {	  	   
 	   if (data.code=1){	   		   	      	  
-	   	   displayRestaurantResults(data.details.data ,'results-'+index);	   	   
+	   	   if ( $('#results-'+index).exists() ){
+	   	      displayRestaurantResults(data.details.data ,'results-'+index);	   	   
+	   	   } else {
+	   	   	  dump('element not exist');
+	   	   	  ajax_lazy.abort();
+              ajax_lazy = null;
+	   	   }
 	   } else {	   	  
 	   	  $("#results-"+index).html(data.msg);
 	   }

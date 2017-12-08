@@ -96,7 +96,9 @@ function addSuggestion()
 	      params+="&client_token="+ getStorage("client_token");
 			
 	      callAjax("addSuggestion",params);
+			sNavigator.popPage({cancelIfRunning: true});
 			return;
+			
 			
 	    }  
 	});
@@ -107,7 +109,7 @@ function addSuggestion()
 	
 }
 
-function sugestoes_Resultado_lista(data)
+function sugestoes_Resultado(data)
 {		
 		var htm='';
 	
@@ -120,24 +122,43 @@ function sugestoes_Resultado_lista(data)
 		var upload_url = krms_config.UploadUrl;
 	    dump("upload_url=>"+upload_url);
 
+				verificaVoto(data.details, val.sug_id);	
+		
 		totaldevotos=parseFloat(val.votos) + parseFloat(val.votostotal);
+		
+		
+		htm+='<input type="hidden" id="voto-'+val.sug_id+'" value="'+totaldevotos+'" />';
+		htm+='<input type="hidden" id="voto-'+val.sug_id+'-2" value="" />';
+
 		//htm+='<div style="padding: 8px; margin: 5px; box-sizing: border-box; border: 1.5px dashed #ddd; width: 190px; display: inline-block; border-radius: 15px;" onclick="">';
 		
 		//htm+='<img src="'+upload_url+'estabelecimentos/'+val.sug_id+'.png" style="width:60px;">';
-		htm+='<div style="display: block; text-align: -webkit-left; margin-top: 5px; color: #ddd; font-size: 15px;">Voto(s): ';
 		
 		
+		
+		htm+='<div style="display: block; text-align: -webkit-left; position: absolute;">';
+		
+		htm+='<img src="'+upload_url+'estabelecimentos/'+val.sug_id+'.png" style="width:47px;">';
+		htm+='</div>';
+		htm+='<div style="display: block; text-align: -webkit-left; margin-top: 5px; margin-left: 60px; color: #ddd; font-size: 15px;">';
+		htm+='Voto(s):';
 		htm+='<i style="text-align: -webkit-left; margin-left: 15px; margin-top: 5px; color: #ddd; font-size: 15px;">'+val.nome_empresa;
 		htm+='</i>';
+		
+		htm+='<div style="margin-top: -20px; margin-left: 70px;"><img src="images/icons/semvoto.png" style="margin-left: 3px; margin-bottom: -30px; margin-top: inherit;" id="imgvoto-'+val.sug_id+'" class="ons-icon" width="24px" height="24px"></div>';
 
-		htm+='<div style="text-align: -webkit-right; float: right; margin-top: auto; color: #ddd; font-size: 15px;">Votar';
-		htm+='</div>';
+		//htm+='<div style="text-align: -webkit-right; float: right; margin-top: -12px; color: #ddd; font-size: 24px;" onclick="addVoto('+val.sug_id+');">Votar';
+		
+		htm+='<button class="button masterhub-btn-voto" style="text-align: -webkit-right; float: right; margin-top: -12px; color: #ddd;" onclick="addVoto('+val.sug_id+');">Votar</button>';
+   
+		//htm+='</div>';
 		htm+='</div>';
 		
-		htm+='<div style="display: block; text-align: -webkit-left; margin-left: 15px; margin-top: 3px; color: #ddd; margin-left: 15px; font-size: 22px;">'+totaldevotos;
-		htm+='<div style="display: block; float: right; text-align: -webkit-right; margin-top: 3px; color: #000; font-size: 12px;">Indicado por: ';
+		htm+='<div style="display: block; text-align: -webkit-left; margin-left: 15px; margin-top: 3px; color: #ddd; margin-left: 71px; font-size: 22px;">';
+		htm+='<span id="resultado_voto-'+val.sug_id+'">'+totaldevotos+'</span>';
+		htm+='<span style="display: block; float: right; text-align: -webkit-right; margin-right: -57px; margin-top: 15px; color: #000; font-size: 12px;">Indicado por: ';
 		htm+=''+val.indicacao_de;
-		htm+='</div>';
+		htm+='</span>';
 		htm+='</div>';		
 		htm+='<hr>';
 		
@@ -145,7 +166,7 @@ function sugestoes_Resultado_lista(data)
 	
 	htm+='</div>';
 
-	createElement('lista-sugestoes-lista',htm);	
+	createElement('lista-sugestoes',htm);	
 }
 
 function addVoto(sug_id) {
@@ -173,9 +194,11 @@ alert("Você deve estar logado para Votar");
 	    if(icone==="1"){
 		$("#imgvoto-"+sug_id).attr("src","images/icons/voto.png");
 		$("#voto-"+sug_id+"-2").val(1);	
+			toastMsg( getTrans("Obrigado por votar neste estabelecimento!",'voto_obrigado') );
 		} else {
 		$("#imgvoto-"+sug_id).attr("src","images/icons/semvoto.png");
 		$("#voto-"+sug_id+"-2").val(0);	
+			toastMsg( getTrans("Sinta-se a vontade por retirar seu voto! Obrigado pelo feedback",'voto_obrigado2') );
 		}
 		
 		
@@ -221,6 +244,8 @@ alert("Você deve estar logado para Votar");
 		var icone = icone.replace("}","");
 		var icone = icone.replace(/[\\"]/g, '');
 		
+		
+		
 	    if(icone==="1"){
 		$("#imgvoto-"+sug_id).attr("src","images/icons/voto.png");
 		$("#voto-"+sug_id+"-2").val(1);	
@@ -247,7 +272,7 @@ alert("Você deve estar logado para Votar");
  
 }
 
-function sugestoes_Resultado(data)
+function sugestoes_Resultado_lista(data)
 {		
 		var htm='';
 	
@@ -291,9 +316,35 @@ function sugestoes_Resultado(data)
 	createElement('lista-sugestoes',htm);	
 }
 
+function sugestoes_Campo(data)
+{		
+		var htm2='';
+	
+	htm2+='<input type="hidden" name="cidade"  class="review text-input text-input--underbar has_validation" placeholder="Cidade" value="'+ global_city_id +'" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >';
+
+	
+	htm2+='<div class="field-wrapper">';
+	htm2+='<input type="text" name="nome_empresa"  class="review text-input text-input--underbar has_validation" placeholder="Nome da Empresa" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >';
+	htm2+='</div>';
+	htm2+='<div class="field-wrapper" style="font-size: 35px;">';
+	htm2+=''+global_city_name+'';
+	htm2+='</div>';
+	htm2+='<div class="field-wrapper">';
+	htm2+='<input type="text" name="contato"  class="review text-input text-input--underbar" placeholder="Contato na Empresa" value="">';
+	htm2+='</div>';
+	htm2+='<div class="field-wrapper">';
+	htm2+='<input type="text" name="telefone"  class="review text-input text-input--underbar" placeholder="Telefone da Empresa" value="">';
+	htm2+='</div>';
+	htm2+='';
+	htm2+='';
+
+	createElement('campos-sugestoes',htm2);	
+}
+
 function carregandoSugestoes()
 {
+	sparams="city_id="+ global_city_id;
 	
-callAjax('Suggestion','');
+callAjax('Suggestion',sparams);
 	
 }
