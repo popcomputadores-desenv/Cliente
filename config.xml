@@ -48,7 +48,7 @@
     <gap:plugin name="cordova-plugin-buildinfo" source="npm" spec="1.1.0"  />
     <gap:plugin spec="https://github.com/xmartlabs/cordova-plugin-market" source="git" />
     <gap:plugin name="cordova-plugin-googleplus" source="npm">
-     <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-4vsdvvhcah9k4q1485d88sm77p6o703g" />
+     <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
     </gap:plugin>
 		
     <platform name="android" />    
