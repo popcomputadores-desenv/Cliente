@@ -842,7 +842,14 @@ document.addEventListener("pageinit", function(e) {
 	       }
 		}
 		
-		
+		var link_google = getStorage('link_google_play');
+		link_google_play = getStorage("link_google_play");
+	    dump("link_google_play=>"+link_google_play);
+	
+		var link_apple = getStorage('link_apple_store');
+		link_apple_store = getStorage("link_apple_store");
+	    dump("link_apple_store=>"+link_apple_store);
+			
 		htm+='<p style="text-align: center;" class="trn" data-trn-key="sua_versao_instalada"> Versão Instalada no seu aparelho </p>';
 		htm+='<h4 style="text-align: center">';
 		htm+=versao+' - ('+versaoCode+')';
