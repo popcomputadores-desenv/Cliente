@@ -854,7 +854,10 @@ document.addEventListener("pageinit", function(e) {
 		htm+='<h4 style="text-align: center">';
 		htm+=ver_aplicativo+' - ('+ver_aplicativo_code+')';
 		htm+='</h4>';
-		
+		htm+='<h4 style="text-align: center">';
+		htm+='('+link_apple+''+link_google+')';	
+		htm+='</h4>';
+			
 	       if(typeof versao_aplicativo===getStorage("versao") || versao_aplicativo_code===getStorage("versaoCode")){
 		
 		htm+='<button class="btnz whats" onClick="setHome();" >';
