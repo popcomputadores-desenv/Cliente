@@ -842,14 +842,7 @@ document.addEventListener("pageinit", function(e) {
 	       }
 		}
 		
-		var link_google = getStorage('link_google_play');
-		link_google_play = getStorage("link_google_play");
-	    dump("link_google_play=>"+link_google_play);
-	
-		var link_apple = getStorage('link_apple_store');
-		link_apple_store = getStorage("link_apple_store");
-	    dump("link_apple_store=>"+link_apple_store);
-			
+		
 		htm+='<p style="text-align: center;" class="trn" data-trn-key="sua_versao_instalada"> Versão Instalada no seu aparelho </p>';
 		htm+='<h4 style="text-align: center">';
 		htm+=versao+' - ('+versaoCode+')';
@@ -861,10 +854,7 @@ document.addEventListener("pageinit", function(e) {
 		htm+='<h4 style="text-align: center">';
 		htm+=ver_aplicativo+' - ('+ver_aplicativo_code+')';
 		htm+='</h4>';
-		htm+='<h4 style="text-align: center">';
-		htm+='('+link_apple+''+link_google+')';	
-		htm+='</h4>';
-			
+		
 	       if(typeof versao_aplicativo===getStorage("versao") || versao_aplicativo_code===getStorage("versaoCode")){
 		
 		htm+='<button class="btnz whats" onClick="setHome();" >';
