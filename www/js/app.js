@@ -2421,15 +2421,16 @@ function callAjax(action,params)
  								}
 					
 					if(data.details.voucher_type == 'percentage'){
-					   	 valor_voucher=carrinho/data.details.amount;
+					   	 valor_voucher=carrinho*data.details.amount/100;
 					} else {
 					     valor_voucher=data.details.amount;
 					}
 					
-					subtotal_new=carrinho - valor_voucher;
+					subtotal_new=getStorage("cart_sub_total") - valor_voucher;
 					subtotal_new2=parseFloat(embalagem) + parseFloat(entrega) + parseFloat(subtotal_new);
 					percent_comod=getStorage("cart_tax");
 					taxa_comodidade=subtotal_new2/percent_comod;
+					gorjeta_new=getStorage("tips_percentage")*subtotal_new/100;
 					
 		$("#page-paymentoption .titulo-cupom").html('Desconto do Cupom: ');
 		$("#page-paymentoption .voucher_amount").html('('+prettyPrice(valor_voucher)+')');
@@ -2437,6 +2438,8 @@ function callAjax(action,params)
 		$("#page-paymentoption .titulo-comodidade").html('Taxa de Comodidade: ');
 		$("#page-paymentoption .total-comodidade").html(prettyPrice(taxa_comodidade));
 		$("#page-paymentoption .subtotal_new").html(prettyPrice(subtotal_new));
+		$("#page-paymentoption .titulo-gorjeta").html('Gorjeta: ');
+		$("#page-paymentoption .total-gorjeta").html(prettyPrice(gorjeta_new));			
 					if ( transaction_type=="delivery"){	
 		$("#page-paymentoption .titulo-entrega").css({"display":"block"});
 		$("#page-paymentoption .total-entrega").css({"display":"block"});
@@ -2447,7 +2450,7 @@ function callAjax(action,params)
 		$("#page-paymentoption .voucher_amount").css({"display":"block"});
 		$("#page-paymentoption .titulo-cupom").css({"display":"block"});
 		$("#page-paymentoption .subtotal_new").css({"display":"block"});
-		$("#page-paymentoption .titulo-subtotal_new").css({"display":"block"});	
+		$("#page-paymentoption .titulo-subtotal_new").css({"display":"block"});
 					
 			       $(".apply-voucher").hide();
 			       $(".remove-voucher").css({
@@ -2457,7 +2460,8 @@ function callAjax(action,params)
 			       $(".voucher-header").html(data.details.less);
 			       
 			       var new_total= data.details.new_total;
-			       $(".total-amount").html( prettyPrice(new_total) );
+					
+			       $(".total-amount").html( prettyPrice(new_total));
 			       
 			       break;
 			       
@@ -2556,13 +2560,15 @@ function callAjax(action,params)
 					subtotal_new2=parseFloat(embalagem) + parseFloat(taxa_entrega) + parseFloat(subtotal_new);
 					percent_comod=getStorage("cart_tax");
 					taxa_comodidade=subtotal_new2/percent_comod;
-					
+					gorjeta_new=subtotal_new*getStorage("tips_percentage")/100;
 				  $("#page-paymentoption .total-pontos").html('('+data.details.pts_amount+')');
 				  $("#page-paymentoption .titulo-pontos").html('Menos '+data.details.pts_points_raw+' Pontos: ');
 		$("#page-paymentoption .titulo-comodidade").html('Taxa de Comodidade: ');
 		$("#page-paymentoption .total-comodidade").html(prettyPrice(taxa_comodidade));
 		$("#page-paymentoption .titulo-subtotal_new").html('Sub Total (- Pontos): ');
 		$("#page-paymentoption .subtotal_new").html(prettyPrice(subtotal_new));
+		$("#page-paymentoption .titulo-gorjeta").html('Gorjeta: ');
+		$("#page-paymentoption .total-gorjeta").html(prettyPrice(gorjeta_new));			
 		$("#page-paymentoption .total-pontos").css({"display":"block"});
 		$("#page-paymentoption .titulo-pontos").css({"display":"block"});
 		$("#page-paymentoption .subtotal_new").css({"display":"block"});
@@ -3204,18 +3210,6 @@ function displayRestaurantResults(data , target_id)
     $.each( data, function( key, val ) {     
     	
     	// dump(val);
-	if(!empty(val.ativa_categoria)){
-    	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadmenu('+categoria_unica+','+val.merchant_id+');" >';
-    	 htm+='<ons-row class="row">';    	 
-    	     htm+='<ons-col class="col-image border" width="30%">';
-    	          htm+='<div class="logo-wrap2" >';
-    	            htm+='<div class="img_loaded" style="border-radius: 40px; overflow:hidden;">';
-    	             htm+='<img src="'+val.logo+'" />';
-    	            htm+='</div>';
-    	            
-    	          htm+='</div>';
-
-		} else {
     	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
     	 htm+='<ons-row class="row">';    	 
     	     htm+='<ons-col class="col-image border" width="30%">';
@@ -3225,7 +3219,7 @@ function displayRestaurantResults(data , target_id)
     	            htm+='</div>';
     	            
     	          htm+='</div>';
-			}
+			
     	          //htm+='<p class="center">'+val.payment_options.cod+'</p>';
     	         /* if(!empty(val.payment_available)){ 
     	          	 if(val.payment_available.length>0){
@@ -3242,10 +3236,20 @@ function displayRestaurantResults(data , target_id)
     	     htm+='<ons-col class="col-description border" width="70%">';
     	           htm+='<div>';
 	    	           htm+='<div><span class="rating-stars" data-score="'+val.ratings.ratings+'">';
-					   htm+='</span></div>  ';
+					   htm+='</span>';
+					   htm+='<span class="p-small" style="margin-left: 40px; position: absolute;">';
+			// Dinheiro
+						if(!empty(val.tag_dinheiro)){
+		  				htm+='<i class="green-color '+val.tag_dinheiro+'" style="font-size: 23px;"></i>   ';
+			};
+			//Fim Dinheiro
+			// Cartão
+						if(!empty(val.tag_cartao)){
+		  				htm+='  <i class="green-color '+val.tag_cartao+'" style="font-size: 23px;"></i>';
+			};
+			//Fim Cartão
+					   htm+='</span></div>';
 	    	           htm+='<p class="restauran-title concat-text">'+val.restaurant_name+'</p>';
-	    	         
-	    	           
 	    	           
 					   dump(val.service);
     	          
@@ -3261,17 +3265,14 @@ function displayRestaurantResults(data , target_id)
 	    	       htm+='<span class="p-small trn"><i class="green-color ion-android-time" style="font-size: 15px;"></i> <b>'+val.delivery_estimation+'</b></span>';	
 	    	           	   }
 	    	           }
-	    	           
     	           htm+='</div>';
     	           
-    	           
     	              htm+='<ons-col width="90%">';
-						/* Cupom
-						if(!empty(val.tag_cupom)){
-		  				htm+='<span class="p-small trn"><i class="green-color ion-social-usd"></i> '+val.tag_cupom+'</span><br> ';
-			};
-			Fim Cupom */
-						
+			// Cupom
+						//if(!empty(val.tag_cupom)){
+		  				//htm+='<span class="p-small trn"><i class="green-color ion-social-usd"></i> '+val.tag_cupom+'</span><br> ';
+			//};
+			//Fim Cupom
 					   /*Fim Estimativa de entrega*/
 					   /*Taxa de entrega*/
     	                 //if(val.service!=3){
@@ -6694,6 +6695,8 @@ function removeVoucher()
 	$("#page-paymentoption .titulo-subtotal_new").css({"display":"none"});
 	$("#page-paymentoption .subtotal_new").css({"display":"none"});
 	$("#page-paymentoption .total-comodidade").html( getStorage("cart_tax_final"));
+	$("#page-paymentoption .total-gorjeta").html( getStorage("cart_tip_final"));			
+	
    
     $(".apply-voucher").show();
     $(".remove-voucher").hide();
@@ -7068,6 +7071,8 @@ function cancelRedeem()
 	$("#page-paymentoption .titulo-pontos").css({"display":"none"});
 	$("#page-paymentoption .titulo-subtotal_new").css({"display":"none"});
 	$("#page-paymentoption .subtotal_new").css({"display":"none"});
+	$("#page-paymentoption .titulo-gorjeta").html('Gorjeta: ');
+	$("#page-paymentoption .total-gorjeta").html(getStorage("cart_tip_final"));			
 	$("#page-paymentoption .total-comodidade").html( getStorage("cart_tax_final"));   $(".total-amount").html( prettyPrice(getStorage("order_total_raw")) );
 }
 
