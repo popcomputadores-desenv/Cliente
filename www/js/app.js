@@ -7190,7 +7190,7 @@ function isDebug()
 {	
 	//on/off
 	//return false; 
-	return true;
+	return false;
 }
 
 var rzr_successCallback = function(payment_id) {
@@ -10036,11 +10036,8 @@ function uploadPhoto(imageURI)
 function mercapagoSuccess(payment)
 {
 	 if (payment != null){        
-	 	//alert(JSON.stringify(payment));     
+	 	alert(JSON.stringify(payment));     
         toastMsg(JSON.parse(payment).status);
-		
-		
-    
 	 } else {
         toastMsg("The user did not make the payment");
     }
