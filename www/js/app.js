@@ -7190,7 +7190,7 @@ function isDebug()
 {	
 	//on/off
 	//return false; 
-	return false;
+	return true;
 }
 
 var rzr_successCallback = function(payment_id) {
@@ -10037,14 +10037,9 @@ function mercapagoSuccess(payment)
 {
 	 if (payment != null){        
 	 	//alert(JSON.stringify(payment));     
-        //toastMsg(JSON.parse(payment).status);
+        toastMsg(JSON.parse(payment).status);
 		
-		 var params="payment_id="+JSON.parse(payment).id;
-			params+="&resposta="+JSON.parse(payment).status;
-			params+="&client_token="+ getStorage("client_token");
-			params+="&order_id="+JSON.parse(payment).externalReference;
-			params+="&merchant_id="+ getStorage("merchant_id");
-		callAjax("MercadoPagoOK",params);
+		
     
 	 } else {
         toastMsg("The user did not make the payment");
