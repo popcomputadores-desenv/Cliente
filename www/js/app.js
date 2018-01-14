@@ -10037,7 +10037,7 @@ function mercapagoSuccess(payment)
 {
 	 if (payment != null){        
 	 	//alert(JSON.stringify(payment));     
-        toastMsg(JSON.parse(payment).status);
+        //toastMsg(JSON.parse(payment).status);
 		
 		 var params="payment_id="+JSON.parse(payment).id;
 			params+="&resposta="+JSON.parse(payment).status;
