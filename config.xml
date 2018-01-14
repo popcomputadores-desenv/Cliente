@@ -23,6 +23,7 @@
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 	
     <gap:plugin name="phonegap-plugin-push" source="npm" spec="1.10.5" />
+	<gap:plugin name="mercadopago-plugin-2" source="npm"/>
     
 	<gap:plugin name="onesignal-cordova-plugin" spec="2.1.2" source="npm" />
     <gap:plugin name="cordova-plugin-device" source="npm" />		

@@ -523,7 +523,7 @@ document.addEventListener("pageinit", function(e) {
 	    
 	    $(".street").attr("placeholder",  getTrans("Street",'street') );
 	    $(".numero").attr("placeholder",  getTrans("Numero",'numero') );
-	    $(".bairro").attr("placeholder",  getTrans("Bairro",'bairro') );
+	    $(".area_name").attr("placeholder",  getTrans("Bairro",'bairro') );
 	    $(".city").attr("placeholder",  getTrans("City",'city') );
 	    $(".state").attr("placeholder",  getTrans("State",'state') );
 	    $(".zipcode").attr("placeholder",  getTrans("Postal code/Zip Code",'zipcode') );
@@ -559,7 +559,7 @@ document.addEventListener("pageinit", function(e) {
 	   
 	      $(".street").attr("placeholder", getTrans('Street','street') );
 	      $(".numero").attr("placeholder", getTrans("Numero",'numero') );
-	      $(".bairro").attr("placeholder", getTrans("Bairro",'bairro') );
+	      $(".area_name").attr("placeholder", getTrans("Bairro",'bairro') );
 	      $(".city").attr("placeholder", getTrans('City','city') );
 	      $(".state").attr("placeholder", getTrans('State','state') );
 	      $(".zipcode").attr("placeholder", getTrans('Postal code/Zip Code','zipcode') );
@@ -1007,7 +1007,7 @@ document.addEventListener("pageinit", function(e) {
 		   translateValidationForm();
 		   $(".stree_1").attr("placeholder",  getTrans("Street",'street') );
 	       $(".numero_1").attr("placeholder",  getTrans("Numero",'numero') );
-	       $(".bairro_1").attr("placeholder",  getTrans("Bairro",'bairro') );
+	       $(".area_name_1").attr("placeholder",  getTrans("Bairro",'bairro') );
 	       $(".city_1").attr("placeholder",  getTrans("City",'city') );
 	       $(".state_1").attr("placeholder",  getTrans("State",'state') );
 	       $(".zipcode_1").attr("placeholder",  getTrans("Postal code/Zip Code",'zipcode') );	      		
@@ -1523,8 +1523,8 @@ function callAjax(action,params)
 						      	  if ( !empty( getStorage("map_address_result_formatted_address") )){
 						      	  	    $(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );
 									    $(".street").val( getStorage("map_address_result_address") );
-							  		    $(".numero").val( getStorage("map_address_result_address") );
-							  		    $(".bairro").val( getStorage("map_address_result_address") );
+							  		    $(".numero").val( getStorage("map_address_result_numero") );
+							  		    $(".area_name").val( getStorage("map_address_result_area_name") );
 									    $(".city").val( getStorage("map_address_result_city") );
 									    $(".state").val( getStorage("map_address_result_state") );
 									    $(".zipcode").val( getStorage("map_address_result_zip") );	
@@ -1539,7 +1539,7 @@ function callAjax(action,params)
 						      	  	  if(!empty(data.msg.address_book)){
 						      	  	  	  $(".street").val( data.msg.address_book.street );
 									  $(".numero").val( data.msg.address_book.numero );
-									  $(".bairro").val( data.msg.address_book.bairro );
+									  $(".area_name").val( data.msg.address_book.area_name );
 										  $(".city").val( data.msg.address_book.city );
 										  $(".state").val( data.msg.address_book.state );
 										  $(".zipcode").val( data.msg.address_book.zipcode );
@@ -1548,7 +1548,7 @@ function callAjax(action,params)
 										  
 										  var complete_address = data.msg.address_book.street;
 									  complete_address+=" "+ data.msg.address_book.numero;
-									  complete_address+=" "+ data.msg.address_book.bairro;
+									  complete_address+=" "+ data.msg.address_book.area_name;
 										  complete_address+=" "+ data.msg.address_book.city;
 										  complete_address+=" "+ data.msg.address_book.state;
 										  complete_address+=" "+ data.msg.address_book.zipcode;
@@ -2109,7 +2109,7 @@ function callAjax(action,params)
 						      	  	     $(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );
 						      	  	     $(".street").val( getStorage("map_address_result_address") );
 									 $(".numero").val( getStorage("map_address_result_numero") );
-									 $(".bairro").val( getStorage("map_address_result_bairro") );
+									 $(".area_name").val( getStorage("map_address_result_area_name") );
 										 $(".city").val( getStorage("map_address_result_city") );
 										 $(".state").val( getStorage("map_address_result_state") );
 										 $(".zipcode").val( getStorage("map_address_result_zip") );	
@@ -2124,7 +2124,7 @@ function callAjax(action,params)
 							      	  	       $(".delivery-address-text").html( data.details.default_address.address );
 							      	  	       $(".street").val (  data.details.default_address.street  );
 					      	  	       $(".numero").val (  data.details.default_address.numero  );
-					      	  	       $(".bairro").val (  data.details.default_address.bairro  );
+					      	  	       $(".area_name").val (  data.details.default_address.area_name  );
 											   $(".city").val( data.details.default_address.city  );
 											   $(".state").val( data.details.default_address.state );
 											   $(".zipcode").val(  data.details.default_address.zipcode );	
@@ -2231,7 +2231,9 @@ function callAjax(action,params)
 			    break;
 			    
 			    case "reverseGeoCoding":
-			       $("#s").val( data.details );
+			       $("#s").val(data.details.formatted_address);
+					$("#street").val(data.details.address);
+					$("#numero").val(data.details.numero);
 			       break;
 			          
 			    
@@ -4198,7 +4200,7 @@ jQuery(document).ready(function() {
 		if ( address_split.length>0){
 			$(".street").val( address_split[0] );
 			$(".numero").val( address_split[1] );
-			$(".bairro").val( address_split[2] );
+			$(".area_name").val( address_split[2] );
 			$(".city").val( address_split[3] );
 			$(".state").val( address_split[4] );
 			$(".zipcode").val( address_split[5] );
@@ -5847,7 +5849,7 @@ function fillAddressBook(data)
 	$(".id").val( data.id );
 	$(".street").val( data.street );
 	$(".numero").val( data.numero );
-	$(".bairro").val( data.bairro );
+	$(".area_name").val( data.area_name );
 	$(".city").val( data.city );
 	$(".state").val( data.state );
 	$(".zipcode").val( data.zipcode );
@@ -5933,7 +5935,7 @@ function displayAddressBookPopup(data)
 	   $.each( data, function( key, val ) {   		
 	   	 var complete_address=val.street+"|";
 	   	 complete_address+=val.numero+"|";
-	   	 complete_address+=val.bairro+"|";
+	   	 complete_address+=val.area_name+"|";
 	   	 complete_address+=val.city+"|";
 	   	 complete_address+=val.state+"|";
 	   	 complete_address+=val.zipcode+"|";
@@ -6447,7 +6449,7 @@ function itemNotAvailable(options)
 	switch (options)
 	{
 		case 1:
-		toastMsg( getTrans("item not available",'item_not_available') );
+		toastMsg( getTrans("item não disponível",'item_not_available') );
 		break;
 		
 		case 2:
@@ -7185,7 +7187,7 @@ function isDebug()
 {	
 	//on/off
 	//return false; 
-	return false;
+	return true;
 }
 
 var rzr_successCallback = function(payment_id) {
@@ -7745,14 +7747,14 @@ function setManualAddress()
 	    onSuccess : function() {     	      
 	       $(".street").val( $(".stree_1").val()  );	
 	       $(".numero").val( $(".numero_1").val()  );	
-	       $(".bairro").val( $(".bairro_1").val()  );	
+	       $(".area_name").val( $(".area_name_1").val()  );	
 	       $(".city").val( $(".city_1").val()  );	
 	       $(".state").val( $(".state_1").val()  );	
 	       $(".zipcode").val( $(".zipcode_1").val()  );		
 	       
 	       var complete_address = $(".stree_1").val();
 	       complete_address+=" "+ $(".numero_1").val();
-	       complete_address+=" "+ $(".bairro_1").val();
+	       complete_address+=" "+ $(".area_name_1").val();
 	       complete_address+=" "+ $(".city_1").val();
 	       complete_address+=" "+ $(".state_1").val();
 	       complete_address+=" "+ $(".zipcode_1").val();	       
@@ -7814,7 +7816,7 @@ function checkGPS_AddressMap()
 	    	 
 	    	 $('.map_search_field_wrap').css('height',"auto");
 	    	 
-	    	 var address = "", numero="", bairro="", city="", state="" ;			 			 
+	    	 var address = "", numero="", area_name="", city="", state="" ;			 			 
 			 var zip = "", formatted_address="", s_lat='', s_lng=''; 
 
 			 formatted_address=result.formatted_address;
@@ -7837,15 +7839,22 @@ function checkGPS_AddressMap()
 	                    numero = this.short_name;
 	                    break;                  
 	                case "sublocality":
-	                    bairro = this.short_name;
-	                    break;                  
+	                    area_name = this.short_name;
+	                    break; 
+					case "sublocality_level_1":
+	                    area_name = this.short_name;
+	                    break;
+					case "neighborhood":
+	                    area_name = this.short_name;
+	                    break;
+						
 	            }
 	        });
 	        
 	        dump("formatted_address=>"+formatted_address);
 	        dump("address=>"+address);
 	        dump("numero=>"+numero);
-	        dump("bairro=>"+bairro);
+	        dump("area_name=>"+area_name);
 	        dump("city=>"+city);
 	        dump("state=>"+state);
 	        dump("zip=>"+zip);
@@ -7872,7 +7881,7 @@ function checkGPS_AddressMap()
 	         	         
 	         setStorage("map_address_result_address", address );
 			 setStorage("map_address_result_numero", numero );
-			 setStorage("map_address_result_bairro", bairro );
+			 setStorage("map_address_result_area_name", area_name );
 			 setStorage("map_address_result_city", city );
 			 setStorage("map_address_result_state",state);
 			 setStorage("map_address_result_zip",zip);				
@@ -8123,7 +8132,7 @@ function useThisLocation()
 		    if(isDebug()){
 		    	$(".street").val( "Rua 9 JA" );
 				$(".numero").val( "501" );
-				$(".bairro").val( "Jardim América" );
+				$(".area_name").val( "Jardim América" );
 				$(".city").val( "Rio Claro" );
 				$(".state").val( "SP" );
 				$(".zipcode").val( "13506033" );	
@@ -8145,7 +8154,7 @@ function useThisLocation()
 		
 		    $(".street").val( getStorage("map_address_result_address") );
 			$(".numero").val( getStorage("map_address_result_numero") );
-			$(".bairro").val( getStorage("map_address_result_bairro") );
+			$(".area_name").val( getStorage("map_address_result_area_name") );
 			$(".city").val( getStorage("map_address_result_city") );
 			$(".state").val( getStorage("map_address_result_state") );
 			$(".zipcode").val( getStorage("map_address_result_zip") );	
@@ -8907,7 +8916,7 @@ function fillShippingAddress()
   	     $(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );
   	     $(".street").val( getStorage("map_address_result_address") );
 		 $(".numero").val( getStorage("map_address_result_numero") );
-		 $(".bairro").val( getStorage("map_address_result_bairro") );
+		 $(".area_name").val( getStorage("map_address_result_area_name") );
 		 $(".city").val( getStorage("map_address_result_city") );
 		 $(".state").val( getStorage("map_address_result_state") );
 		 $(".zipcode").val( getStorage("map_address_result_zip") );	
@@ -9327,6 +9336,7 @@ function showShippingLocation(data)
       	  }
       	  if(!empty(data.msg.address_book)){
       	  	 $(".street").val( data.msg.address_book.street );
+      	  	 $(".numero").val( data.msg.address_book.numero );
       	  	 $(".location_name").val( data.msg.address_book.location_name );
       	  }
       	  if(!empty(data.msg.state_info)){

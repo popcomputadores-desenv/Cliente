@@ -1215,16 +1215,6 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    </div>
    
    
-   <ons-list-item modifier="tappable" class="delivery_asap_wrap">
-       <label class="checkbox">
-		  <input type="checkbox" name="delivery_asap" value="1" class="delivery_asap">
-		  <div class="checkbox__checkmark"></div>
-		  <span class="ons-checkbox-inner small-font-dim trn" data-trn-key="deliver_asap">
-		  Deliver Asap
-		  </span>
-		</label>
-	</ons-list-item>
-   
    <div class="wrapper">
      <p class="p-normal pts_earn_label"></p>
    </div>
@@ -1234,10 +1224,6 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
        <ons-list-item modifier="chevron" onclick="showTip();" class="tip_amount_wrap" > 
        <span class="trn tip_amount" style="color: white;" data-trn-key="tip_amount">Tip Amount</span>       
-       </ons-list-item>    
-       
-       <ons-list-item modifier="chevron" onclick="showChangeAddressPage();" class="change_address_wrap" > 
-       <span class="trn" data-trn-key="change_your_address">Change your address here</span>       
        </ons-list-item>    
        
    </ons-list>       
@@ -1399,7 +1385,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <input type="hidden" name="street" class="street">
    <input type="hidden" name="numero" class="numero">
-   <input type="hidden" name="bairro" class="bairro">
+   <input type="hidden" name="area_name" class="area_name">
    <input type="hidden" name="city" class="city">
    <input type="hidden" name="state" class="state">   
    <input type="hidden" name="zipcode" class="zipcode">  
@@ -1408,26 +1394,64 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <input type="hidden" name="google_lat" class="google_lat">  
    <input type="hidden" name="google_lng" class="google_lng">  
    
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
-      placeholder="Telefone de Contato" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
-      </div>      
-   </div>
-   
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
-      placeholder="Apartment suite, unit number, or company name"  >
-      </div>      
-   </div>
-   
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
-      placeholder="Delivery instructions" value="" >
-      </div>      
-   </div>
+   <div class="wrapper-address">
+    <div class="field-wrapper" style="width: 80%; float: left;">
+      <input type="text" name="street"  class="street text-input text-input--underbar has_validation" 
+      placeholder="street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+    </div>      
+
+    <div class="field-wrapper" style="width: 20%; float: right;">
+      <input type="text" name="numero"  class="numero text-input text-input--underbar has_validation" 
+      placeholder="Nº" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+    </div>      
+  </div>      
+
+  <div class="wrapper-address">
+    <div class="field-wrapper">
+      <input type="text" name="area_name"  class="area_name text-input text-input--underbar has_validation" 
+      placeholder="Bairro" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+    </div>      
+  </div>      
+
+  <div class="wrapper-address">
+    <div class="field-wrapper" style="width: 48%; float: left;">
+     <input type="text" name="city"  class="city text-input text-input--underbar has_validation" 
+     placeholder="City" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+   </div>      
+
+   <div class="field-wrapper"  style="width: 48%; float: right;" >
+    <input type="text" name="state"  class="state text-input text-input--underbar has_validation" 
+    placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+  </div>      
+</div>
+
+<div class="wrapper-address">
+  <div class="field-wrapper">
+	<input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar" 
+	placeholder="Postal code/Zip Code" value="" onblur="pesquisacep(this.value);" >
+  </div>      
+</div>
+
+<div class="wrapper-address">
+  <div class="field-wrapper">
+    <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+    placeholder="Complemento"  >
+  </div>      
+</div>
+
+<div class="wrapper-address">
+  <div class="field-wrapper">
+    <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+    placeholder="Delivery instructions" value="" >
+  </div>      
+</div>
+
+<div class="wrapper-address">
+  <div class="field-wrapper ">
+    <input type="number" name="contact_phone"  class="contact_phone text-input text-input--underbar has_validation" 
+    placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+  </div>      
+</div>
    
    <div class="wrapper">
 	   <div class="field-wrapper">	     
@@ -2436,7 +2460,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
       <div class="field-wrapper">
       <input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
-      placeholder="Zipcode" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" onblur="pesquisacep(this.value);" >
+      placeholder="Zipcode" value="" onblur="pesquisacep(this.value);" >
       </div>
    
       <div class="field-wrapper">
@@ -2450,7 +2474,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       </div>
 
 	  <div class="field-wrapper">
-      <input type="text" id="bairro" name="bairro"  class="bairro text-input text-input--underbar has_validation" 
+      <input type="text" id="area_name" name="area_name"  class="area_name text-input text-input--underbar has_validation" 
       placeholder="Bairro" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
 
@@ -3131,7 +3155,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	   </div>   
         <div class="wrapper">
 	      <div class="field-wrapper">
-	      <input type="text" id="bairro" name="bairro_1"  class="bairro_1 text-input text-input--underbar has_validation" 
+	      <input type="text" id="area_name" name="area_name_1"  class="area_name_1 text-input text-input--underbar has_validation" 
 	      placeholder="Bairro" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!">
 	      </div>      
 	   </div>   
@@ -3803,6 +3827,49 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <input type="hidden" name="zipcode" class="zipcode">  
    <input type="hidden" name="area_name" class="area_name">  
    
+   
+      <div class="home-page wrapper center">       
+              
+       <button class="button button--quiet green" onclick="getCurrentLocation();">
+       <ons-icon icon="fa-location-arrow"></ons-icon>
+         <span class="trn">Informa a minha localização atual</span>
+       </button>       
+
+   <p class="trn textopequeno center" style="margin-top: 3px; margin-bottom: 5px;">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
+   
+    </div>   
+   <p> </p>
+   
+   <p class="trn menuapp" style="margin-top: 3px; margin-bottom: 5px;">Preencha ou confira o endereço de entrega</p>    
+   
+    <div class="wrapper">
+      <div class="field-wrapper">
+      <input id="street" type="text" name="street"  class="street text-input text-input--underbar has_validation" 
+      placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+   
+    <div class="wrapper">
+      <div class="field-wrapper">
+      <input id="numero" type="text" name="numero"  class="numero text-input text-input--underbar has_validation" 
+      placeholder="Número" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+      
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+      placeholder="Apartment suite, unit number, or company name"  >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+      placeholder="Delivery instructions" value="" >
+      </div>      
+   </div>
+   
    <ons-list>
    
    <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
@@ -3820,41 +3887,6 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    </ons-list>
    
     <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="street"  class="street text-input text-input--underbar has_validation" 
-      placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>      
-   </div>
-   
-    <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="numero"  class="numero text-input text-input--underbar has_validation" 
-      placeholder="Número" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>      
-   </div>
-   
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
-      placeholder="Telefone de Contato" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>      
-   </div>
-   
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
-      placeholder="Apartment suite, unit number, or company name"  >
-      </div>      
-   </div>
-   
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
-      placeholder="Delivery instructions" value="" >
-      </div>      
-   </div>
-   
-    <div class="wrapper">
 	   <div class="field-wrapper">	     
 	     <label class="switch">
 			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
@@ -3865,6 +3897,16 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 		  </span>
 	    </div> 
     </div> 
+
+   <br>
+   <p class="trn menuapp" style="margin-top: 3px; margin-bottom: 3px;">Telefone de contato</p>    
+
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
+      placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
    
     <button class="button masterhub-btn button--large trn" onclick="clientShipping(); reloadCart();" data-trn-key="select_payment_method">
 	Select Payment Method
