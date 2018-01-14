@@ -7187,7 +7187,7 @@ function isDebug()
 {	
 	//on/off
 	//return false; 
-	return true;
+	return false;
 }
 
 var rzr_successCallback = function(payment_id) {
