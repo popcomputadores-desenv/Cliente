@@ -1969,6 +1969,8 @@ function callAjax(action,params)
 				  	        toastMsg(data.details.mercapago.payment_ref);
 				  	   
 				  	        MercadoPago.startCheckout( data.details.mercapago.mercado_key , data.details.mercapago.payment_ref, null, false, mercapagoSuccess, mercapagoFailed );
+						  
+						  
 				  	        
 				  	   break;
 				  	   
@@ -1999,6 +2001,7 @@ function callAjax(action,params)
 				case "iPay88Successfull":
 				case "monerisPay":
 				case "hubtelPaymentInit":
+				case "MercadoPagoOK":	
 				     
 				       var amount_to_pay=data.details.amount_to_pay;
 				       if(amount_to_pay==0){
@@ -10033,16 +10036,24 @@ function uploadPhoto(imageURI)
 function mercapagoSuccess(payment)
 {
 	 if (payment != null){        
-	 	alert(JSON.stringify(payment));     
-        alert(JSON.parse(payment).id);
-    } else {
+	 	//alert(JSON.stringify(payment));     
+        toastMsg(JSON.parse(payment).status);
+		
+		 var params="payment_id="+JSON.parse(payment).id;
+			params+="&resposta="+JSON.parse(payment).status;
+			params+="&client_token="+ getStorage("client_token");
+			params+="&order_id="+JSON.parse(payment).externalReference;
+			params+="&merchant_id="+ getStorage("merchant_id");
+		callAjax("MercadoPagoOK",params);
+    
+	 } else {
         toastMsg("The user did not make the payment");
     }
 }
 
 function mercapagoFailed(error)
 {
-	toastMsg("Error MercadoPagoPlugin : " + error);
+	toastMsg("Erro do Plugin do Mercado Pago: " + error);
 }
 
 function setTrackView(pagename , campaign_details )
