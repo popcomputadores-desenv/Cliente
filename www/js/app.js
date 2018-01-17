@@ -1971,8 +1971,8 @@ function callAjax(action,params)
 						  
 				var color = "#841011"; 
 			/* Você pode definir a cor do background do checkout aqui */
-				var blackFont = false;  	   
-				MercadoPago.startCheckout( data.details.mercapago.mercado_key , data.details.mercapago.payment_ref, null, false, mercapagoSuccess, mercapagoFailed );
+				var blackFont = true;  	   
+				MercadoPago.startCheckout( data.details.mercapago.mercado_key , data.details.mercapago.payment_ref, color, blackFont, mercapagoSuccess, mercapagoFailed );
 				  	        
 				  	   break;
 				  	   
