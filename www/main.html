@@ -27,7 +27,7 @@
 <script src="lib/jquery.form-validator.min.js"></script>
 
 <script src="lib/mobiscroll/js/mobiscroll.core.js"></script>
-<script src="lib/mobiscroll/js/i18n/mobiscroll.i18n.pt-BR.js"></script>
+<script src="lib/mobiscroll/js/i18n/mobiscroll.i18n.pt-BR.js" type="text/javascript"></script>
 <script src="lib/mobiscroll/js/mobiscroll.frame.js"></script>
 <script src="lib/mobiscroll/js/mobiscroll.scroller.js"></script>
 <script src="lib/mobiscroll/js/mobiscroll.util.datetime.js"></script>
@@ -35,11 +35,15 @@
 <script src="lib/mobiscroll/js/mobiscroll.datetime.js"></script>
 <script src="lib/mobiscroll/js/mobiscroll.frame.android-holo.js"></script>
 
-<script type="text/javascript" src="lib/paypal-mobile-js-helper.js"></script>
+
 <script src="lib/jquery.translate.js"></script>
 <script src="lib/jquery.mask.min.js"></script>
 
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.geocomplete.min.js"></script>
 
+<script type="text/javascript" src="lib/imagesloaded.pkgd.min.js"></script>
     <!-- Facebook Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -964,7 +968,11 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
            <div class="notification cart-num" >0</div>
            <ons-icon icon="fa-shopping-cart" class="cart">
          </ons-toolbar-button>
-         
+
+         <ons-toolbar-button onclick="showMenu(this);">
+           <ons-icon icon="ion-android-more-vertical" size="30px"></ons-icon>
+        </ons-toolbar-button>
+
      </div>
            
    </ons-toolbar>
@@ -1071,6 +1079,11 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
         <ons-toolbar-button>
         <span class="notification cart-num" onclick="showCart();" style="margin-left: 10px; top:3px;">0</span>
         <ons-icon icon="fa-shopping-cart" onclick="showCart();" class="cart"></ons-toolbar-button>
+
+		<ons-toolbar-button onclick="showEasyCategory(this);">
+           <ons-icon icon="ion-ios-list" size="30px"></ons-icon>
+        </ons-toolbar-button>
+
         
      </div>
      
@@ -1287,7 +1300,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       </div>
       
       <div class="field-wrapper">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
+					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
       placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
@@ -1448,7 +1461,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 
 <div class="wrapper-address">
   <div class="field-wrapper ">
-    <input type="number" name="contact_phone"  class="contact_phone text-input text-input--underbar has_validation" 
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
     placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
   </div>      
 </div>
@@ -2099,12 +2112,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       </div>           
       
       <div class="field-wrapper">
-      <input type="text" name="email_address"  class="email_address text-input text-input--underbar has_validation" 
+      <input type="email" name="email_address"  class="email_address text-input text-input--underbar has_validation"
       placeholder="Email address" value="" disabled data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>       
       
       <div class="field-wrapper">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
       placeholder="Telefone de Contato" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
       </div>       
       
@@ -2310,7 +2323,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       </div>
       
       <div class="field-wrapper">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
       placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
@@ -3374,7 +3387,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <form id="frm-enter-contact" class="frm-enter-contact" method="post">   
     <div class="field-wrapper">    
     
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
       placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >  
     
     </div>   

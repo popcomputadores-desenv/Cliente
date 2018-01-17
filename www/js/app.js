@@ -44,6 +44,7 @@ var app_version = 2.3;
 document.addEventListener("deviceready", onDeviceReady, false);
 
 $('.mask-phone').mask("(00) 0 0000-0000");
+
 function onDeviceReady() {    
 
 var notificationOpenedCallback = function(jsonData) {
@@ -1542,7 +1543,7 @@ function callAjax(action,params)
 						      	  } else $(".select-addressbook").hide();*/
 						      	  
 						      	  if(!empty(data.msg.profile)){
-						      	  	  $(".contact_phone").val( data.msg.profile.contact_phone ) ;
+						      	  	  $(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
 						      	  	  $(".location_name").val( data.msg.profile.location_name ) ;
 						      	  }
 						      	  
@@ -9890,6 +9891,7 @@ function getCategory(index)
 	   	
 	   	   html='';
 	   	   html+='<ons-list>';	   	      	  
+			fillPopOverCategoryList(data.details);
 	   	   $.each( data.details, function( key, val ) {
 			   	   	
 	html+='<ons-list-item onclick="loadmenu('+val.cat_id+','+val.merchant_id+');">';
