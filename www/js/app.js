@@ -1085,36 +1085,12 @@ document.addEventListener("pageinit", function(e) {
 		   	   $(".state").val( global_area_name );
 		   	   $(".area_id").val( global_area_id );
 		   }
-
-		   	switch (search_type)
-			{
-				case "1":
-				case 1:
-				$(".location_state").hide();
-				$(".location_postal").hide();
-				break;
-
-				case "2":
-				case 2:
-
-				if ( !empty(global_state_id)){
-					$(".state_id").val( global_state_id );
-					$(".location_state").html( global_state_name );
-				}
-
-				$(".location_state").show();
-				$(".location_area").show();
-				$(".location_postal").hide();
-				break;
-
-				case "3":
-				case 3:
-				$(".location_state").hide();
-				$(".location_city").hide();
-				$(".location_area").hide();
-				$(".location_postal").show();
-				break;
-			}
+		   
+		   if ( !empty(global_state_id)){
+		   	   $(".location_state").html( global_state_name );		   	   		   	   
+		   	   $(".state_id").val( global_state_id );
+		   	   $(".state").val( global_state_name );
+		   }
 
            translateValidationForm();
            //*initIntelInputs();
@@ -6041,7 +6017,7 @@ function displayAddressBookPopup(data)
 	   	 complete_address+=val.area_name+"|";
 	   	 complete_address+=val.city+"|";
 	   	 complete_address+=val.state+"|";
-	   	 complete_address+=val.zipcode+"|";
+			 complete_address+=val.state_id+"|";
 	   	 complete_address+=val.location_name+"|";
 	   	 complete_address+=val.contact_phone+"|";
 	   	 
