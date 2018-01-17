@@ -43,6 +43,7 @@ var app_version = 2.3;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
+$('.mask-phone').mask("(00) 0 0000-0000");
 function onDeviceReady() {    
 
 var notificationOpenedCallback = function(jsonData) {
@@ -494,7 +495,7 @@ document.addEventListener("pageinit", function(e) {
 		case "page-booking":  
 		  translatePage();
 		  $(".number_guest").attr("placeholder", getTrans("Number Of Guests","number_of_guest") );		  
-		  initIntelInputs();
+		  //*initIntelInputs();
 		  
 		  setTrackView("book table: " + $(".selected_restaurant_name").val()  );
 		  break;
@@ -572,11 +573,11 @@ document.addEventListener("pageinit", function(e) {
 	      	      
 	      //$('.zipcode').mask("00000-000", {placeholder: "_____-___"});
 	      
-	      initIntelInputs();
+	      //*initIntelInputs();
 	      
 	      var customer_contact_number=getStorage("customer_contact_number");
 	      if(!empty(customer_contact_number)){
-	      	  $(".contact_phone").val( customer_contact_number );
+	      	  $(".contact_phone").val($(".contact_phone").masked( customer_contact_number.replace("+55","") ));
 	      }
 	      
 	      break;
@@ -624,7 +625,7 @@ document.addEventListener("pageinit", function(e) {
 		
 		search_mode = getSearchMode();
 		if ( search_mode=="postcode"){
-			$("#search-text").html( '' );
+			$("#search-text").html(global_area_name + ", " + global_city_name);
 		} else {
 			$("#search-text").html( getStorage("search_address") );
 		}
@@ -1083,19 +1084,43 @@ document.addEventListener("pageinit", function(e) {
 		   	   $(".state").val( global_area_name );
 		   	   $(".area_id").val( global_area_id );
 		   }
-		   
-		   if ( !empty(global_state_id)){
-		   	   $(".location_state").html( global_state_name );		   	   		   	   
-		   	   $(".state_id").val( global_state_id );
-		   	   $(".state").val( global_state_name );
-		   }
-		   		   
+
+		   	switch (search_type)
+			{
+				case "1":
+				case 1:
+				$(".location_state").hide();
+				$(".location_postal").hide();
+				break;
+
+				case "2":
+				case 2:
+
+				if ( !empty(global_state_id)){
+					$(".state_id").val( global_state_id );
+					$(".location_state").html( global_state_name );
+				}
+
+				$(".location_state").show();
+				$(".location_area").show();
+				$(".location_postal").hide();
+				break;
+
+				case "3":
+				case 3:
+				$(".location_state").hide();
+				$(".location_city").hide();
+				$(".location_area").hide();
+				$(".location_postal").show();
+				break;
+			}
+
            translateValidationForm();
-           initIntelInputs();
+           //*initIntelInputs();
 
            var customer_contact_number=getStorage("customer_contact_number");
 	       if(!empty(customer_contact_number)){
-	      	  $(".contact_phone").val( customer_contact_number );
+	      	  $(".contact_phone").val($(".contact_phone").masked( customer_contact_number.replace("+55","") ));
 	       } 
 	      
 	       
@@ -1194,7 +1219,7 @@ function onsenAlert(message,dialog_title)
 	}
 	
 	if(empty(message)){
-		//message='undefined error';
+		message='undefined error';
 	}
 	
 	ons.notification.alert({
@@ -1321,7 +1346,7 @@ function callAjax(action,params)
 		type: 'post',                  
 		async: false,
 		dataType: 'jsonp',
-		timeout: 10000,
+		timeout: 8000,
 		crossDomain: true,
 	 beforeSend: function() {
 		if(ajax_request != null) {			 	
@@ -1381,6 +1406,7 @@ function callAjax(action,params)
 				case "MenuCategory":			
 				/*save merchant logo*/								
 				setStorage("merchant_logo",data.details.logo);
+				setStorage("merchant_bg",data.details.merchant_bg);
 				dump(data.details.restaurant_name);
 				setStorage("merchant_name",data.details.restaurant_name);
 				setStorage("enabled_table_booking",data.details.enabled_table_booking);
@@ -1601,7 +1627,7 @@ function callAjax(action,params)
 				    	var options = {
 					      animation: 'slide',
 					      onTransitionEnd: function() { 	
-					      	  initIntelInputs();					      	  					      	  
+					      	  //*initIntelInputs();
 					      } 
 					    };   
 					    sNavigator.pushPage("enterContact.html", options);		
@@ -1619,7 +1645,7 @@ function callAjax(action,params)
 								  'page-checkoutsignup');
 					      	     
 					      	  callAjax("getCustomFields",'');     
-					      	  initIntelInputs();      
+					      	  //*initIntelInputs();
 					      } 
 					    };     
 					    sNavigator.pushPage("checkoutSignup.html", options);				
@@ -1776,7 +1802,7 @@ function callAjax(action,params)
 			    	if(data.details.show_mobile_number){
 			    	  	 new_fields=ContactNumberFields();					    		
 			    		 createElement("checkout_information_contact",new_fields);
-			    		 initIntelInputs();
+			    		 //*initIntelInputs();
 			       }			 
 			        translateValidationForm();
 			   	   	reloadCart();		   	   
@@ -1965,9 +1991,10 @@ function callAjax(action,params)
 				  	   
 				  	   
 				  	   case "mcd_init":
+						  
 				var color = "#841011"; 
 			/* Você pode definir a cor do background do checkout aqui */
-				var blackFont = true;  	   
+				var blackFont = false;  	   
 				MercadoPago.startCheckout( data.details.mercapago.mercado_key , data.details.mercapago.payment_ref, null, false, mercapagoSuccess, mercapagoFailed );
 				  	        
 				  	   break;
@@ -2055,7 +2082,8 @@ function callAjax(action,params)
 				  $(".first_name").val( data.details.first_name );
 				  $(".last_name").val( data.details.last_name );
 				  $(".email_address").val( data.details.email_address );
-				  $(".contact_phone").val( data.details.contact_phone );
+				  if(!empty(data.details.contact_phone)){
+				  $(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") )); }
 				  
 				  $(".avatar").attr("src", data.details.avatar );
 				  
@@ -2064,7 +2092,7 @@ function callAjax(action,params)
 				  
 				  imageLoaded('.img_loaded');
 				  
-				  initIntelInputs();
+				  //*initIntelInputs();
 				  
 				  break;   
 				  
@@ -2100,7 +2128,7 @@ function callAjax(action,params)
 								  'page-shipping');					      	    
 							      	  
 	                                 if(!empty(data.details.contact_phone)){
-						      	  	     $(".contact_phone").val( data.details.contact_phone ) ;
+						      	  	     $(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
 						      	     }
 						      	     if(!empty(data.details.location_name)){
 						      	  	     $(".location_name").val( data.details.location_name ) ;
@@ -3434,9 +3462,9 @@ function cuisineResults(data)
 	$.each( data.cuisine, function( key, val ) {        		  		  
 		htm+='<ons-list-item modifier="tappable">';
 		 htm+='<label class="checkbox checkbox--list-item">';
-			htm+='<input type="checkbox" name="cuisine_type" class="cuisine_type" value="'+key+'">';
+			htm+='<input type="checkbox" name="cuisine_type" class="cuisine_type" value="'+val[0]+'">';
 			htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
-			htm+=' '+val;
+			htm+=' '+val[1];
 		  htm+='</label>'; 
 		htm+='</ons-list-item>';
 	});	
@@ -3482,6 +3510,32 @@ function menuCategoryResult(data)
 	} else {
 		toastMsg(  getTrans("This restaurant has not published their menu yet.",'this_restaurant_no_menu') );
 	}	
+}
+
+function loadMenuFromShortcut(cat_id,mtid)
+{
+
+	/*if ( $("#close_store").val()==2 || $("#merchant_open").val()==1 ){
+		onsenAlert( getTrans("This Restaurant Is Closed Now.  Please Check The Opening Times",'restaurant_close') );
+		return;
+	}*/
+
+	/*var options = {
+      animation: 'none',
+      onTransitionEnd: function() {
+      	  callAjax("getItemByCategory", "cat_id="+cat_id+"&merchant_id="+mtid);
+      	  showCartNosOrder();
+      }
+   };
+   sNavigator.pushPage("menuItem.html", options);*/
+
+	removeStorage("item_count");
+	setStorage("selected_cat_id" , cat_id);
+	callAjax("getItemCount", "cat_id="+cat_id+"&merchant_id="+mtid );
+	sNavigator.popPage();
+	myPopover.hide();
+	// showEasyCategory(this);
+
 }
 
 function loadmenu(cat_id,mtid)
@@ -4087,6 +4141,7 @@ jQuery(document).ready(function() {
 		if ( $(this).val() == "cod"){
 			if ( $(".cod_change_required").val()==2 ){
 			   $(".order_change").attr("data-validation","required");
+			   $(".order_change").attr("data-validation-error-msg","Preencha o valor antes de continuar");
 			} else {
 				$(".order_change").removeAttr("data-validation");
 			}
@@ -4577,6 +4632,27 @@ function showCartNosOrder()
 	}
 }
 
+function showDialogChangeAddressAlerta (deliveryPrice) {
+	if (typeof dialogBrowseResto === "undefined" || dialogBrowseResto==null || dialogBrowseResto=="" ) {
+		ons.createDialog('filterBrowseResto.html').then(function(dialog) {
+			$(".restaurant_name").val('');
+	        dialog.show();
+
+	        translatePage();
+	        translateValidationForm();
+	        $(".restaurant_name").attr("placeholder", getTrans('Enter Restaurant name','enter_resto_name')  );
+
+	    });
+	} else {
+		$(".restaurant_name").val('');
+		dialogBrowseResto.show();
+
+		/*translatePage();
+	    translateValidationForm();
+	    $(".restaurant_name").attr("placeholder", getTrans('Enter Restaurant name','enter_resto_name')  );*/
+	}
+}
+
 function displayCart(data)
 {	
 	// display merchant logo
@@ -4599,6 +4675,10 @@ function displayCart(data)
     /*for pts computation refference*/
     setStorage("cart_sub_total", data.cart.sub_total.amount );
     if(!empty(data.cart.delivery_charges)){
+			if (sNavigator.getCurrentPage().name == "paymentOption.html" && getStorage("cart_delivery_charges") != data.cart.delivery_charges.amount) {
+				var message = "A taxa de entrega para a localização selecionada é " + data.cart.delivery_charges.amount_pretty;
+				toastMsg(message);
+			}
        setStorage("cart_delivery_charges", data.cart.delivery_charges.amount);
     }
     if(!empty(data.cart.packaging)){
@@ -4694,7 +4774,7 @@ function displayCart(data)
 			 
 			 if (!empty(val.ingredients)){
 			 	//htm+='<ons-list-header class="subitem-row'+xx+'">Ingredients</ons-list-header>';			 	
-			 	htm+='<ons-list-header class="subitem-row'+xx+'">'+getTrans('Ingredients','ingredients')+'</ons-list-header>';
+			 	htm+='<ons-list-item class="subitem-row'+xx+'">'+getTrans('Ingredients','ingredients')+'</ons-list-item>';
 			 	$.each( val.ingredients, function( key_ing, val_ing ) { 			 	
 			 		 htm+=tplCartRowHiddenFields( val_ing , val_ing ,'ingredients', xx ,'row-no-border' );
 			 	});	
@@ -4724,7 +4804,7 @@ function displayCart(data)
 			 	var x=0;
 			 	$.each( val.sub_item , function( key_sub, val_sub ) {			 		 
 				 	 //htm+='<ons-list-header class="subitem-row'+xx+'">'+key_sub+'</ons-list-header>';
-				 	 htm+='<ons-list-header class="subitem-row'+xx+'">'+val_sub[0]['category_name']+'</ons-list-header>';
+				 	 htm+='<ons-list-item class="subitem-row'+xx+' adicional-linha">'+val_sub[0]['category_name']+'</ons-list-item>';
 				 	 $.each( val_sub  , function( key_sub2, val_sub2 ) {			 		 
 				 	      dump(val_sub2);	
 				 	      if ( val_sub2.qty =="itemqty"){
@@ -4908,6 +4988,9 @@ function editOrderInit()
 	$(".edit-order").hide();
 	$(".qty-label").hide();
 	$(".row-del-wrap").show();
+	$(".row-del-wrap").css('display', 'flex');
+	$(".esconde-ao-editar").hide();
+	$(".mostra-ao-editar").show();
 	
 	var x=1;
 	$.each( $(".item-qty") , function( key, val ) {
@@ -4928,6 +5011,8 @@ function applyCartChanges()
 	$(".qty-label").show();
 	$(".subitem-qty").hide();
 	$(".row-del-wrap").hide();
+	$(".esconde-ao-editar").show();
+	$(".mostra-ao-editar").hide();
 	
 	dump( "qty L=>"+ $(".item-qty").length );
 	if (!empty( $(".item-qty") )){
@@ -5111,9 +5196,16 @@ function clientRegistration()
 	      }
 	      
 	      // save mobile number
-	      setStorage("customer_contact_number",  $(".contact_phone").val()  );	     
-	    	     
-	      var params = $( "#frm-checkoutsignup").serialize();	      
+	     // setStorage("customer_contact_number", $(".contact_phone").val().replace(/[^0-9\.]+/g, ''));
+
+				var form = $( "#frm-checkoutsignup").serializeArray();
+	      var params = "";
+
+				jQuery.each( form, function(i, field) {
+					if (field.name == "contact_phone")
+						field.value = "%2B55"+field.value.replace(/[^0-9\.]+/g, '');
+					params += field.name+"="+field.value+"&";
+				});
 	      params+="&transaction_type=" +  getStorage("transaction_type") ;
 	      params+="&device_id="+ getStorage("device_id");
 	      
@@ -5168,6 +5260,8 @@ function clientShipping()
 		      	  params+="&city="+$(".city").val();
 		      	  params+="&state="+$(".state").val();
 		      	  params+="&zipcode="+$(".zipcode").val();
+			  params+="&city_id="+$(".city_id").val();
+			  params+="&area_id="+$(".area_id").val();
 		      	  params+="&location_name="+$(".location_name").val();
 		      	  params+="&save_address="+$('.save_address:checked').val();
 		      	  params+="&transaction_type=" +  getStorage("transaction_type") ;
@@ -5654,7 +5748,7 @@ function showSignupForm()
       animation: 'slide',
       onTransitionEnd: function() {          	  
       	  callAjax("getCustomFields",'');   
-      	  initIntelInputs();	  
+      	  //*initIntelInputs();
       } 
     };   
     sNavigator.pushPage("signup.html", options);		 	
@@ -5676,10 +5770,17 @@ function signup()
 		      	 return;
 		      }
 	      }
-	     	    
-	      var params = $( "#frm-signup").serialize();	      
-	      params+="&device_id="+ getStorage("device_id");
-	      
+
+				var form = $( "#frm-signup").serializeArray();
+				var params = "";
+
+			  jQuery.each( form, function(i, field) {
+					if (field.name == "contact_phone")
+						field.value = "%2B55"+field.value.replace(/[^0-9\.]+/g, '');
+					params += field.name+"="+field.value+"&";
+			  });
+				params += "device_id="+ getStorage("device_id");
+
 	      if (isDebug()){
 	      	  params+="&device_platform=Android";
 	      } else {
@@ -6669,9 +6770,9 @@ function applyVoucher()
 		transaction_type=getStorage("transaction_type");		
 		params+="&transaction_type=" + getStorage("transaction_type");
 		
-		if ( transaction_type=="delivery"){
-		params+="&cart_delivery_charges="+ getStorage("cart_delivery_charges");
-		}
+		/*if ( transaction_type=="delivery"){
+		   params+="&cart_delivery_charges="+ getStorage("cart_delivery_charges");
+		}*/
 		
 		params+="&cart_packaging="+ getStorage("cart_packaging");
 		params+="&cart_tax="+ getStorage("cart_tax");
@@ -7045,9 +7146,7 @@ function applyRedeem()
 		
 		params+="&cart_sub_total="+ getStorage("cart_sub_total");
 		
-		if ( transaction_type=="delivery"){
 		   params+="&cart_delivery_charges="+ getStorage("cart_delivery_charges");
-		}
 		
 		params+="&cart_packaging="+ getStorage("cart_packaging");
 		//params+="&cart_tax_amount="+ getStorage("cart_tax_amount");
@@ -7118,18 +7217,18 @@ function imageLoaded(div_id)
 {	
 	$(div_id).imagesLoaded()
 	  .always( function( instance ) {
-	    //console.log('all images loaded');
+	    console.log('all images loaded');
 	  })
 	  .done( function( instance ) {
 	    //console.log('all images successfully loaded');
 	  })
 	  .fail( function() {
-	    console.log('all images loaded, at least one is broken');
+	    //console.log('all images loaded, at least one is broken');
 	  })
 	  .progress( function( instance, image ) {
 	    var result = image.isLoaded ? 'loaded' : 'broken';	    	   
 	    image.img.parentNode.className = image.isLoaded ? '' : 'is-broken';
-	    //console.log( 'image is ' + result + ' for ' + image.img.src );	    
+	    console.log( 'image is ' + result + ' for ' + image.img.src );
 	});
 }
 
@@ -7231,8 +7330,8 @@ function fillPopOverCategoryList(data)
 	html+='<ons-list>';
 	if( data.length>0){
 	   $.each( data, function( key, val ) {     
-	   	  html+='<ons-list-item modifier="tappable" onclick="loadmenu('+
-             val.category_id+','+val.merchant_id+');"  >'+val.category_name+'</ons-list-item>';
+	   	  html+='<ons-list-item modifier="tappable" class="row" onclick="loadMenuFromShortcut('+
+             val.cat_id+','+val.merchant_id+');"  >'+val.category_name+'</ons-list-item>';
 	   });	
 	}	
 	html+='</ons-list>';
@@ -7671,7 +7770,7 @@ function initIntelInputs()
 		    autoPlaceholder: false,		      
 		    defaultCountry: mobile_country_code,  
 		    autoHideDialCode:true,    
-		    nationalMode:true,
+		    nationalMode:false,
 		    autoFormat:false,
 		    utilsScript: "lib/intel/lib/libphonenumber/build/utils.js"
 		 });
@@ -7679,7 +7778,7 @@ function initIntelInputs()
 		 $(".mobile_inputs").intlTelInput({      
 		    autoPlaceholder: false,		        
 		    autoHideDialCode:true,    
-		    nationalMode:true,
+		    nationalMode:false,
 		    autoFormat:false,
 		    utilsScript: "lib/intel/lib/libphonenumber/build/utils.js"
 		 });
@@ -9109,6 +9208,7 @@ function showCity()
 	        //translatePage();
 	    });	
 	} else {
+		$(".search_city").val("");
 		loadAjaxLocationCity();
 		locationCity.show();
 	}	
@@ -9122,9 +9222,11 @@ function searchCity()
 function loadAjaxLocationCity(s)
 {
 	search_type = getSearchType();	
+	/* Tira o estado selecionado, deixa todas as cidades sempre visíveis na lista de cidades
 	if(empty(global_state_id)){
 		global_state_id='';
-	}
+	} Linha abaixo tira o estado */
+	global_state_id='';
 	
 	params="state_id="+ global_state_id ;
 	if(!empty(s)){
@@ -9183,6 +9285,7 @@ function showArea()
 	    });	
 		} else {
 			callAjax('getLocationArea', "city_id=" + $(".city_id").val() );
+			$(".search_area").val("");
 			locationArea.show();
 		}	
 	} else {
@@ -9235,8 +9338,6 @@ function clearAllStorage()
   removeStorage("customer_contact_number");
   
   removeStorage("category_count");
-  removeStorage("item_count"); 
-  removeStorage("cat_unica"); 
   removeStorage("item_count"); 
 }
 
@@ -9332,7 +9433,7 @@ function showShippingLocation(data)
       animation: 'slide',
       onTransitionEnd: function() { 		
       	  if(!empty(data.msg.profile)){
-      	  	$(".contact_phone").val( data.msg.profile.contact_phone ) ;
+      	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
       	  	$(".location_name").val( data.msg.profile.location_name ) ;
       	  }
       	  if(!empty(data.msg.address_book)){
@@ -9350,7 +9451,7 @@ function showShippingLocation(data)
       	  	 $(".state").val( data.msg.state_info.state_name );
       	  }
       	  if(!empty(data.details.contact_phone)){
-      	  	$(".contact_phone").val( data.details.contact_phone ) ; 
+      	  	$(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
       	  }
       	  if(!empty(global_area_name)){
       	  	 $(".area_name").val( global_area_name );
@@ -9485,7 +9586,7 @@ var lazyLoadSearch = {
     return $element[0];    
   },
   calculateItemHeight: function(index) {  	
-    return 1100;
+    return 25;
   },
   countItems: function() {  	
     return getStorage("search_total");
@@ -9595,7 +9696,7 @@ var lazyBrowseMerchant = {
     return $element[0];    
   },
   calculateItemHeight: function(index) {  	
-    return 1200;
+    return 25;
   },
   countItems: function() {  	
     return getStorage("browse_total");
@@ -9743,7 +9844,7 @@ var lazyFoodCategory = {
     return $element[0];    
   },
   calculateItemHeight: function(index) {  	
-    return 50;
+    return 25;
   },
   countItems: function() {  	
     return getStorage("category_count");
@@ -9841,7 +9942,7 @@ var lazyItem = {
     return $element[0];    
   },
   calculateItemHeight: function(index) {  	
-    return 50;
+    return 25;
   },
   countItems: function() {  	
     return getStorage("item_count");
