@@ -4231,38 +4231,34 @@ jQuery(document).ready(function() {
 		var address_split=address.split("|");
 		dump(address_split);
 		if ( address_split.length>0){
-			$(".street").val( address_split[0] );
-			$(".numero").val( address_split[1] );
-			$(".area_name").val( address_split[2] );
-			$(".city").val( address_split[3] );
-			$(".state").val( address_split[4] );
-			$(".zipcode").val( address_split[5] );
-			$(".location_name").val( address_split[6] );			
-			
+			var address = address_split[0];
+			numero = address.split(',')[address.split(',').length-1];
+			address = address.replace(','+numero, "");
+			numero = numero.replace(" ", "");
+
+			$(".street").val( address );
+			$(".numero").val( numero );
+
+			$(".city", "#frm-shipping").val(address_split[1]);
+			$(".city_id", "#frm-shipping").val(address_split[2]);
+			$(".location_city", "#frm-shipping").html(address_split[1]);
+			global_city_name = address_split[1];
+			global_city_id = address_split[2];
+
+			$(".area_name", "#frm-shipping").val(address_split[3]);
+			$(".area_id", "#frm-shipping").val(address_split[4]);
+			$(".location_area", "#frm-shipping").html(address_split[3]);
+			global_area_name = address_split[3];
+			global_area_id = address_split[4];
+
+			$(".location_name").val( address_split[7] );
+
 			var number='';
-			if (!empty(address_split[7])){
-				number=address_split[7];								
-				//number=number.replace("+","");				
+			if (!empty(address_split[8])){
+				number=address_split[8];
 			}
-			
 			$(".contact_phone").val( number );
-			
-			var complete_address = address_split[0];
-			complete_address+=" "+ address_split[1];
-			complete_address+=" "+ address_split[2];
-			complete_address+=" "+ address_split[3];
-			complete_address+=" "+ address_split[4];
-			complete_address+=" "+ address_split[5];
-			
-			$(".delivery-address-text").html( complete_address ); 
-			$(".google_lat").val( '' );	
-			$(".google_lng").val( '' );	
-			$(".formatted_address").val( '' );			
-			
 			dialogAddressBook.hide();
-			
-			sNavigator.popPage({cancelIfRunning: true}); //back button
-			
 		} else {
 			onsenAlert(  getTrans("Error: cannot set address book",'cannot_set_address')  );
 			dialogAddressBook.hide();
@@ -5924,15 +5920,28 @@ function fillAddressBook(data)
 {
 	$(".action").val('edit');
 	$(".delete-addressbook").show();
-	
+
+
+	var address = data.street;
+	numero = address.split(',')[address.split(',').length-1];
+	address = address.replace(','+numero, "");
+	numero = numero.replace(" ", "");
+
+	$(".city", "#frm-addressbook").val(data.city);
+	$(".city_id", "#frm-addressbook").val(data.city_id);
+	$(".location_city", "#frm-addressbook").html(data.city);
+	$(".area_name", "#frm-addressbook").val(data.area);
+	$(".area_id", "#frm-addressbook").val(data.area_id);
+	$(".location_area", "#frm-addressbook").html(data.area);
+
+
 	$(".id").val( data.id );
-	$(".street").val( data.street );
-	$(".numero").val( data.numero );
-	$(".area_name").val( data.area_name );
-	$(".city").val( data.city );
-	$(".state").val( data.state );
-	$(".zipcode").val( data.zipcode );
-	$(".location_name").val( data.location_name );	
+	$(".street").val( address );
+	$(".numero").val( numero );
+	$(".location_name").val( data.location_name );
+	// $(".city").val( data.city );
+	// $(".state").val( data.state );
+	// $(".zipcode").val( data.zipcode );
 	$(".country_code").val( data.country_code );		
 	if (data.as_default==2){
 		$(".as_default").attr("checked","checked");
@@ -9413,9 +9422,13 @@ function showShippingLocation(data)
       	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
       	  	$(".location_name").val( data.msg.profile.location_name ) ;
       	  }
-      	  if(!empty(data.msg.address_book)){
-      	  	 $(".street").val( data.msg.address_book.street );
-      	  	 $(".numero").val( data.msg.address_book.numero );
+      	  if(!empty(data.msg.address_book) && global_area_id == data.msg.address_book.area_id){
+						var address = data.msg.address_book.street;
+						numero = address.split(',')[address.split(',').length-1];
+						address = address.replace(','+numero, "");
+						numero = numero.replace(" ", "");
+      	  	 $(".street").val( address );
+						 $(".numero").val( numero );
       	  	 $(".location_name").val( data.msg.address_book.location_name );
       	  }
       	  if(!empty(data.msg.state_info)){
