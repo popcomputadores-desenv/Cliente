@@ -952,6 +952,96 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
   </ons-dialog> 
 </script>
 
+
+<script type="text/ons-template" id="shippingLocationArea.html"> 
+<ons-page id="page-shipping-location-area" class="onsen-display">
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     
+   </ons-toolbar>
+		<button class="button button--quiet button--large laranja_padrao" onclick="popUpAddressBook();">Selecione da sua lista de endereços</button>
+		<p class="small-font-dim center">ou insira o endereço atual abaixo</p>
+   
+   <form id="frm-shipping" class="frm-shipping" method="post">
+   
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+   <input type="hidden" name="city" class="city">
+   <input type="hidden" name="state" class="state">   
+   <input type="hidden" name="zipcode" class="zipcode">  
+   <input type="hidden" name="area_name" class="area_name">  
+       <button class="button button--quiet green" onclick="getCurrentLocation();">
+       <ons-icon icon="fa-location-arrow"></ons-icon>
+         <span class="trn">Informa a minha localização atual</span>
+       </button>       
+
+   <p class="trn textopequeno center" style="margin-top: 3px; margin-bottom: 5px;">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
+   <p> </p>
+   <p class="trn menuapp" style="margin-top: 3px; margin-bottom: 5px;">Preencha ou confira o endereço de entrega</p>    
+   
+   
+   <ons-list>
+   <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
+    State
+    </ons-list-item>
+	<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >        
+	City
+	</ons-list-item>
+	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+	District / Area
+	</ons-list-item>
+   </ons-list>
+   
+    <div class="wrapper">
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+							<input type="text" id="street" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+							<input type="text" id="numero" name="numero" class="numero text-input text-input--underbar" placeholder="N°" value="" data-validation="required" data-validation-error-msg="Obrigatório">
+						</ons-col>
+					</ons-row>
+				</div>
+
+				<div class="field-wrapper">
+					<input type="text" name="location_name"  class="location_name text-input text-input--underbar"
+					placeholder="Apartment suite, unit number, or company name" data-validation="required" data-validation-error-msg="Este campo é obrigatório!"  >
+				</div>
+
+				<div class="field-wrapper">
+					<input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar"
+					placeholder="Delivery instructions" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+				</div>
+
+				<div class="field-wrapper">
+					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
+					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+				</div>
+
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 8px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+
+    <button class="button masterhub-btn button--large trn" onclick="clientShipping(); reloadCart();" data-trn-key="select_payment_method">
+	Select Payment Method
+	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
+   </button>
+			</div>
+   </form>
+
+</ons-page>
+</script>     
+
 <script type="text/ons-template" id="menucategory.html">    
 <ons-page id="menucategory-page" style="background: url('background-1.jpg');">
    <ons-toolbar modifier="transparent">        
@@ -3821,115 +3911,6 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
 </ons-page>
 </script>   
-
-<script type="text/ons-template" id="shippingLocationArea.html"> 
-<ons-page id="page-shipping-location-area" class="onsen-display">
-   <ons-toolbar>        
-     <div class="left"><ons-back-button></ons-back-button></div>     
-     <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     
-   </ons-toolbar>
-   
-   <form id="frm-shipping" class="frm-shipping" method="post">
-   
-   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
-   <input type="hidden" name="city_id" id="city_id" class="city_id" >
-   <input type="hidden" name="area_id" id="area_id" class="area_id" >
-   
-   <input type="hidden" name="city" class="city">
-   <input type="hidden" name="state" class="state">   
-   <input type="hidden" name="zipcode" class="zipcode">  
-   <input type="hidden" name="area_name" class="area_name">  
-   
-   
-      <div class="home-page wrapper center">       
-              
-       <button class="button button--quiet green" onclick="getCurrentLocation();">
-       <ons-icon icon="fa-location-arrow"></ons-icon>
-         <span class="trn">Informa a minha localização atual</span>
-       </button>       
-
-   <p class="trn textopequeno center" style="margin-top: 3px; margin-bottom: 5px;">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
-   
-    </div>   
-   <p> </p>
-   
-   <p class="trn menuapp" style="margin-top: 3px; margin-bottom: 5px;">Preencha ou confira o endereço de entrega</p>    
-   
-    <div class="wrapper">
-      <div class="field-wrapper">
-      <input id="street" type="text" name="street"  class="street text-input text-input--underbar has_validation" 
-      placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>      
-   </div>
-   
-    <div class="wrapper">
-      <div class="field-wrapper">
-      <input id="numero" type="text" name="numero"  class="numero text-input text-input--underbar has_validation" 
-      placeholder="Número" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>      
-   </div>
-      
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
-      placeholder="Apartment suite, unit number, or company name"  >
-      </div>      
-   </div>
-   
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
-      placeholder="Delivery instructions" value="" >
-      </div>      
-   </div>
-   
-   <ons-list>
-   
-   <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
-    State
-    </ons-list-item>
-   
-	<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >        
-	City
-	</ons-list-item>
-	
-	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
-	District / Area
-	</ons-list-item>
-	
-   </ons-list>
-   
-    <div class="wrapper">
-	   <div class="field-wrapper">	     
-	     <label class="switch">
-			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
-			  <div class="switch__toggle"></div>
-		  </label>  		  
-		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 8px; display: inline-block">
-		    Save to my address book
-		  </span>
-	    </div> 
-    </div> 
-
-   <br>
-   <p class="trn menuapp" style="margin-top: 3px; margin-bottom: 3px;">Telefone de contato</p>    
-
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
-      placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>      
-   </div>
-   
-    <button class="button masterhub-btn button--large trn" onclick="clientShipping(); reloadCart();" data-trn-key="select_payment_method">
-	Select Payment Method
-	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
-   </button>
-   </form>
-
-</ons-page>
-</script>     
-
 <script type="text/ons-template" id="locationState.html">    
   <ons-dialog var="locationState" style="width:90%;height:350px;" cancelable  >
 
