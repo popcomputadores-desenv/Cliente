@@ -9790,7 +9790,7 @@ function googleLogin()
 	    	// SUCCESS
 	    	var params = "email=" + encodeURIComponent(obj.email);
 			params+="&userid=" + encodeURIComponent(obj.userId);
-			params+="&fullname="+ encodeURIComponent(obj.displayName);
+			params+="&fullname="+ encodeURIComponent(obj.givenName);
 			params+="&lastname="+ encodeURIComponent(obj.familyName);
 			params+="&imageurl="+ encodeURIComponent(obj.imageUrl);			
 			params+="&device_id="+ encodeURIComponent(getStorage("device_id"));
