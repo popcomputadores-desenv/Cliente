@@ -1175,6 +1175,8 @@ function mudarendereco()
 	$(".search_by_location_btn").hide();
 	removeStorage("global_area_id");
 	removeStorage("global_city_id");
+	removeStorage("area_id_usuario");
+	removeStorage("city_id_usuario");
 }
 
 function showFilterOptions()
@@ -3189,11 +3191,6 @@ function callAjax(action,params)
 			    case "getSettings":      
 			       var device_id=getStorage("device_id");
 			       $(".device_id_val").html( device_id );
-					
-				$(".search_by_location").hide();
-				$(".search_by_address").hide();
-				$(".search_by_location_btn").show();
-					
 			    break;   
 			       
 			    
@@ -6519,8 +6516,11 @@ if ($(".area_id").val() != area_id_usuario || $(".city_id").val() != city_id_usu
 	params+="&area_id="+ global_area_id;
 	callAjax("salvaEndereco",params);
 	}, 700);
-		
-	}
+	
+	$(".search_by_location").hide();
+	$(".search_by_location_btn").show();
+		}
+	
 }
 
 function showLocationPopUp()
