@@ -1173,8 +1173,7 @@ function mudarendereco()
 {
 	$(".search_by_location").show();
 	$(".search_by_location_btn").hide();
-	removeStorage("global_area_id");
-	removeStorage("global_city_id");
+
 	removeStorage("area_id_usuario");
 	removeStorage("city_id_usuario");
 }
@@ -6504,6 +6503,11 @@ function salvaEndereco()
 			dump("city_id_usuario=>"+city_id_usuario);
 			dump("area_id_usuario=>"+area_id_usuario);
 	
+	setTimeout(function(){ 
+		$("#page-home .search_by_location").hide();
+		$("#page-home .search_by_location_btn").show();
+	}, 3700);
+		
 if ($(".area_id").val() != area_id_usuario || $(".city_id").val() != city_id_usuario){
 	
 		setTimeout(function(){ 
