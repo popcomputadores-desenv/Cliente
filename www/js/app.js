@@ -6516,10 +6516,8 @@ if ($(".area_id").val() != area_id_usuario || $(".city_id").val() != city_id_usu
 	params+="&area_id="+ global_area_id;
 	callAjax("salvaEndereco",params);
 	}, 700);
-	
-	$(".search_by_location").hide();
-	$(".search_by_location_btn").show();
-		}
+		
+	}
 	
 }
 
