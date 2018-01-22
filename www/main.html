@@ -18,7 +18,6 @@
 <link href="lib/mobiscroll/css/mobiscroll.android-holo-light.css" rel="stylesheet" type="text/css" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>	
-<script src="lib/angular/angular.js"></script>
 <script src="lib/onsen/js/onsenui.js"></script>
 <script src="lib/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
@@ -515,6 +514,10 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <div class="left">
         <ons-toolbar-button ng-click="fechar_prop(); menu.toggleMenu()"><ons-icon icon="ion-android-funnel" style="font-size: 18px;"></ons-icon></ons-toolbar-button>        
       </div>
+	  <div class="center search_by_location_btn">
+		<ons-toolbar-button  onclick="mudarendereco();">MUDAR ENTEREÇO DA PESQUISA</ons-toolbar-button>
+	  </div>
+	  
 	  <div class="right">
 		<ons-toolbar-button  onclick="carregarPagina('10,11,12,13,14,15,16,17,18,19');"><ons-icon icon="ion-ios-help-outline" style="font-size: 18px;"></ons-icon></ons-toolbar-button>
 	  </div>
@@ -2410,9 +2413,11 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 <ons-page id="page-addressbook-details" style="background: url('background-1.jpg');">
    <ons-toolbar>        
      <div class="left"><ons-back-button></ons-back-button></div>                      
-     <div class="center white"><span id="search-text" class="trn" data-trn-key="address_book_details">
-     Address Book Details</span></div>                  
-     
+			<div class="center white">
+				<span id="search-text" class="trn" data-trn-key="address_book_details">
+					Address Book Details
+				</span>
+			</div>
      <div class="right">
      <ons-toolbar-button onclick="deleteAddressBook();" class="delete-addressbook">
         <ons-icon icon="ion-close-round"></ons-icon>
@@ -2429,10 +2434,10 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <input type="hidden" name="state_id" id="state_id" class="state_id" >
    <input type="hidden" name="city_id" id="city_id" class="city_id" >
    <input type="hidden" name="area_id" id="area_id" class="area_id" >
-
-   <input type="hidden" id="cidade" name="city" class="city">
-   <input type="hidden" id="uf" name="state" class="state">
-   <input type="hidden" id="area_name" name="area_name" class="area_name">
+   
+			<input type="hidden" name="state" class="state">
+			<input type="hidden" name="city" class="city">
+			<input type="hidden" name="area_name" class="area_name">
 
    <div class="wrapper">
    
@@ -2443,28 +2448,31 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	  
    <ons-list>
    
-   <ons-list-item name="state_id" id="state_id" modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
-State
-    </ons-list-item>
+				<ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
+					State
+				</ons-list-item>
 	
-   <ons-list-item name="city_id" id="city_id" modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >
-City
-   </ons-list-item>
-   
-   <ons-list-item name="area_id" id="area_id" modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >
-District / Area
-   </ons-list-item>
+				<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >
+					City
+				</ons-list-item>
+				<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >
+					District / Area
+				</ons-list-item>
    
    </ons-list>      
    
    	  <div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
       <input type="text" id="rua" name="street"  class="street text-input text-input--underbar has_validation" 
       placeholder="Street" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
-      </div>
-      
-	  <div class="field-wrapper">
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
       <input type="text" name="numero"  class="numero text-input text-input--underbar has_validation" 
       placeholder="Numero" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+						</ons-col>
+					</ons-row>
       </div>
       
       <div class="field-wrapper">
@@ -2486,6 +2494,7 @@ District / Area
 	Save
 	<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
    </button>
+			</div>
    </form>   
    
        
@@ -2582,6 +2591,7 @@ District / Area
         </ons-list-item>
       </ons-list>
       
+	<div style="display:none;">
        <div class="settings-header trn" data-trn-key="others">Others</div>
              
       
@@ -2596,7 +2606,7 @@ District / Area
           Select your language
         </ons-list-item>        
       </ons-list>
-            
+	</div>
    
    <button class="button masterhub-btn button--large trn" onclick="saveSettings();" data-trn-key="save">
 	Save
