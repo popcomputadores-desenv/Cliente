@@ -821,10 +821,7 @@ document.addEventListener("pageinit", function(e) {
 			// Menu Rodapé vindo do Admin
 	var codigo_menu_rodape = getStorage("codigo_menu_rodape");
 	createElement('codigo-menu-rodape',codigo_menu_rodape);	
-		  
-			callAjax("getSettings",
-		  "device_id="+getStorage("device_id")
-		  ); 
+ 
 			setTimeout('carregandoCategorias()', 1300);
 			setTimeout('carregandoSeguimentos()', 2800);
 
