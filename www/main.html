@@ -563,7 +563,55 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
     
        </div> 
 		</div>
-    
+	
+<form id="frm-settings" class="frm-settings" method="post">   
+   <input type="hidden" name="country_code_set" id="country_code_set" class="country_code_set">   
+<div style="display:none;">
+<div class="wrapper">
+   
+   <div class="settings-header trn" data-trn-key="software_version">Software version</div>
+     <ons-list modifier="inset" class="settings-list">        
+        <ons-list-item >
+          <span class="software_version concat-text"></span>          
+        </ons-list-item>
+      </ons-list>
+   
+     <div class="settings-header trn" data-trn-key="device_id">Device ID</div>
+     <ons-list modifier="inset" class="settings-list">        
+        <ons-list-item >
+          <span class="device_id_val concat-text"></span>          
+        </ons-list-item>
+      </ons-list>
+   
+     <div class="settings-header trn" data-trn-key="notifications">Notifications</div>
+     <ons-list modifier="inset" class="settings-list">        
+        <ons-list-item >
+          <span class="trn" data-trn-key="enabled_push_notification">Enabled Push Notification</span>
+          <ons-switch modifier="list-item" var="enabled_push" name="enabled_push" id="enabled_push"  >
+          </ons-switch>
+        </ons-list-item>
+      </ons-list>
+      
+	
+       <div class="settings-header trn" data-trn-key="others">Others</div>
+             
+      
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" onclick="showLocationPopUp();" class="trn" data-trn-key="change_location">
+          Change your location
+        </ons-list-item>        
+      </ons-list>
+      
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" onclick="showLanguageList();" class="trn" data-trn-key="select_your_language">
+          Select your language
+        </ons-list-item>        
+      </ons-list>
+	</div>
+   
+   </div>
+   </form>      	
+	
     <div class="search_by_location">
        
        <div class="home-page center">       
@@ -814,7 +862,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      </ons-toolbar-button>        
     </div> 
      
-     <div class="center white"><span id="search-text2"></span></div>
+     <div class="center white"><span id="search-text"></span></div>
      
       <div class="right">         
 		 <ons-toolbar-button onclick="carregarPagina('10,11,12,13,14,15,16,17,18,19');" ><ons-icon icon="ion-ios-help-outline"></ons-toolbar-button>
@@ -859,7 +907,9 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      </ons-toolbar-button>        
     </div> 
      
-     <div class="center white"><span id="search-text2"></span></div>
+     <div class="center">
+		<div id="codigo-cabecalho-endereco"></div>
+	  </div>
      
       <div class="right">         
 		 <ons-toolbar-button onclick="carregarPagina('10,11,12,13,14,15,16,17,18,19');" ><ons-icon icon="ion-ios-help-outline"></ons-toolbar-button>

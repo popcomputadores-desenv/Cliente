@@ -257,7 +257,7 @@ if(!isDebug()){
 				
 	//getLanguageSettings();
 	if(isDebug()){
- 	   setTimeout('getLanguageSettings()', 1700);
+ 	   setTimeout('getLanguageSettings()', 1100);
 	}
 	
 	$( document ).on( "click", "#s", function() {    	     	    	   
@@ -634,14 +634,16 @@ document.addEventListener("pageinit", function(e) {
 		
 		var city_id_usuario=getStorage("city_id_usuario");
 		var area_id_usuario=getStorage("area_id_usuario");
-			    	
-		    if ( !empty(area_id_usuario) || !empty(city_id_usuario)){			    	
-		    	$(".search_by_location").hide();
-				$(".search_by_location_btn").show();
+	       dump("city_id_usuario=>"+city_id_usuario);
+	       dump("area_id_usuario=>"+area_id_usuario);
+		    if (area_id_usuario!='0' || city_id_usuario!='0'){			    	
+		    	$("#page-home .search_by_location").hide();
+			$("#page-home .search_by_location_btn").show();
 			} else {
-				$(".search_by_location").show();
-				$(".search_by_location_btn").hide();
+			$("#page-home .search_by_location").show();
+			$("#page-home .search_by_location_btn").hide();
 			}
+			
 			
 		break;
 		/* Modificação Pagina Personalizada */
@@ -671,16 +673,20 @@ document.addEventListener("pageinit", function(e) {
 		
 		var city_id_usuario=getStorage("city_id_usuario");
 		var area_id_usuario=getStorage("area_id_usuario");
-			    	
-		    if ( !empty(area_id_usuario) || !empty(city_id_usuario)){			    	
-		    	$(".search_by_location").hide();
-				$(".search_by_location_btn").show();
+	       dump("city_id_usuario=>"+city_id_usuario);
+	       dump("area_id_usuario=>"+area_id_usuario);
+		    if (area_id_usuario!='0' || city_id_usuario!='0'){			    	
+		    	$("#page-home .search_by_location").hide();
+			$("#page-home .search_by_location_btn").show();
 			} else {
-				$(".search_by_location").show();
-				$(".search_by_location_btn").hide();
+			$("#page-home .search_by_location").show();
+			$("#page-home .search_by_location_btn").hide();
 			}
-
-								
+					
+			var endereco='<ons-toolbar-button  onclick="">'+global_city_name+' - '+global_area_name+'</ons-toolbar-button>';
+		  	createElement('codigo-cabecalho-endereco', endereco);
+						
+			
 		break;			
 		case "carregarcategorias-page":	
 		
@@ -690,6 +696,9 @@ document.addEventListener("pageinit", function(e) {
 		$("#search-text2").html( getStorage("search_address") );
 		callAjax("search","address="+ getStorage("search_address")+"&cuisine_type="+seguimento+
 		"&restaurant_name="+ restaurant_name);
+			
+		var endereco='<ons-toolbar-button  onclick="mudarendereco();">ENTEREÇO DA PESQUISA AQUI!</ons-toolbar-button>';
+		createElement('codigo-cabecalho-endereco', endereco);
 		
 		// Destaques da semana vindo do Admin
 		var codigo_destaque = getStorage("codigo_destaque");
@@ -701,15 +710,15 @@ document.addEventListener("pageinit", function(e) {
 		
 		var city_id_usuario=getStorage("city_id_usuario");
 		var area_id_usuario=getStorage("area_id_usuario");
-			    	
-		    if ( !empty(area_id_usuario) || !empty(city_id_usuario)){			    	
-		    	$(".search_by_location").hide();
-				$(".search_by_location_btn").show();
+	       dump("city_id_usuario=>"+city_id_usuario);
+	       dump("area_id_usuario=>"+area_id_usuario);
+		    if (area_id_usuario!='0' || city_id_usuario!='0'){			    	
+		    	$("#page-home .search_by_location").hide();
+			$("#page-home .search_by_location_btn").show();
 			} else {
-				$(".search_by_location").show();
-				$(".search_by_location_btn").hide();
+			$("#page-home .search_by_location").show();
+			$("#page-home .search_by_location_btn").hide();
 			}
-
 			
 		break;
 		
@@ -727,12 +736,8 @@ document.addEventListener("pageinit", function(e) {
 				dump(global_area_id);
 				dump(global_city_name);
 				dump(global_area_name);
-				
 		var city_id_usuario=getStorage("city_id_usuario");
 		var area_id_usuario=getStorage("area_id_usuario");
-				
-				global_city_id=city_id_usuario;
-				global_area_id=area_id_usuario;
 				
 				if ( !empty(global_city_id)){
 					$(".city_id").val( global_city_id );
@@ -792,15 +797,19 @@ document.addEventListener("pageinit", function(e) {
 		    
 		    setTrackView('homepage');
 			
-		    if ( !empty(area_id_usuario) || !empty(city_id_usuario)){			    	
-		    	$(".search_by_location").hide();
-				$(".search_by_address").hide();
-				$(".search_by_location_btn").show();
+		var city_id_usuario=getStorage("city_id_usuario");
+		var area_id_usuario=getStorage("area_id_usuario");
+	       dump("city_id_usuario=>"+city_id_usuario);
+	       dump("area_id_usuario=>"+area_id_usuario);
+		    if (area_id_usuario!='0' || city_id_usuario!='0'){			    	
+		    	$("#page-home .search_by_location").hide();
+			$("#page-home .search_by_location_btn").show();
 			} else {
-				$(".search_by_location").show();
-				$(".search_by_location_btn").hide();
-				$(".search_by_address").hide();	
+			$("#page-home .search_by_location").show();
+			$("#page-home .search_by_location_btn").hide();
 			}
+			
+			
 			
 			// Banner Frente vindo do Admin
 	var codigo_do_banner = getStorage("codigo_do_banner");
@@ -820,7 +829,13 @@ document.addEventListener("pageinit", function(e) {
 
 			// Menu Rodapé vindo do Admin
 	var codigo_menu_rodape = getStorage("codigo_menu_rodape");
-	createElement('codigo-menu-rodape',codigo_menu_rodape);	
+	createElement('codigo-menu-rodape',codigo_menu_rodape);
+			
+			//setTrackView("app settings");
+		   
+		  callAjax("getSettings",
+		  "device_id="+getStorage("device_id")
+		  ); 
  
 			setTimeout('carregandoCategorias()', 1300);
 			setTimeout('carregandoSeguimentos()', 2800);
@@ -1592,7 +1607,6 @@ function callAjax(action,params)
 									    $(".zipcode").val( getStorage("map_address_result_zip") );	
 									    $(".formatted_address").val( getStorage("map_address_result_formatted_address") );	
 								  
-								  	setStorage("search_address", getStorage("map_address_result_formatted_address") );		   
 										reloadCart();
 									 
 									    $(".google_lat").val( getStorage("google_lat") );	
@@ -1615,8 +1629,6 @@ function callAjax(action,params)
 										  complete_address+=" "+ data.msg.address_book.state;
 										  complete_address+=" "+ data.msg.address_book.zipcode;
 										
-										setStorage("search_address", complete_address ); 
-			
 											reloadCart();
 									  
 										  $(".delivery-address-text").html( complete_address ); 
@@ -2314,9 +2326,7 @@ function callAjax(action,params)
 					 /*city_id*/
 				setStorage("city_id_usuario",data.details.city_id);
 				setStorage("area_id_usuario",data.details.area_id);
-			    	
-		    	$(".search_by_location").hide();
-				$(".search_by_location_btn").show();
+			
 			       break;
 			       
 			    case "mobileCountryList":   
@@ -3175,6 +3185,18 @@ function callAjax(action,params)
 			           menu.setMainPage('prelogin.html', {closeMenu: true}); 
 			       } else {
 			       	   toastMsg(data.msg);
+		var city_id_usuario=getStorage("city_id_usuario");
+		var area_id_usuario=getStorage("area_id_usuario");
+	       dump("city_id_usuario=>"+city_id_usuario);
+	       dump("area_id_usuario=>"+area_id_usuario);
+		    if (area_id_usuario!='0' || city_id_usuario!='0'){			    	
+		    	$("#page-home .search_by_location").hide();
+			$("#page-home .search_by_location_btn").show();
+			} else {
+			$("#page-home .search_by_location").show();
+			$("#page-home .search_by_location_btn").hide();
+			}
+			
 			       }
 			       break;  			      			    
 			    case "registerMobile":  			    
@@ -3635,7 +3657,7 @@ function displayMerchantLogo(data,page_id)
 function displayMerchantLogo2(logo,total,entrega,page_id)
 {
 	if(!empty(logo)){
-	    $("#"+ page_id +" .logotipo-wrap").html('<img src="'+logo+'" />')		
+	    $("#"+ page_id +" .logo-wrap").html('<img src="'+logo+'" />')		
 	}
 	if (!empty(total)){
 		$("#"+ page_id +" .total-amount").html(total);
@@ -4221,7 +4243,7 @@ jQuery(document).ready(function() {
 			  if (paypal_card_fee>0){
 				  var total_order_plus_fee=parseFloat(getStorage("order_total_raw")) + parseFloat(paypal_card_fee);
 				  total_order_plus_fee= number_format(total_order_plus_fee,2);
-				  $(".total-amount").html( getStorage("cart_currency_symbol")+"   "+total_order_plus_fee);
+				  $(".total-amount").html( getStorage("cart_currency_symbol")+" "+total_order_plus_fee);
 			  }
 			  
 			  $(".order-change-wrapper").hide();
@@ -4356,7 +4378,7 @@ jQuery(document).ready(function() {
 			dialogAddressBook.hide();
 		}
 	});
-
+	
 }); /*end ready*/
 
 function setCartValue()
@@ -4740,10 +4762,9 @@ function displayCart(data)
     /*for pts computation refference*/
     setStorage("cart_sub_total", data.cart.sub_total.amount );
     if(!empty(data.cart.delivery_charges)){
-			if (sNavigator.getCurrentPage().name == "paymentOption.html" && getStorage("cart_delivery_charges") != data.cart.delivery_charges.amount) {
-				var message = "A taxa de entrega para a localização selecionada é " + data.cart.delivery_charges.amount_pretty;
-				toastMsg(message);
-				
+    if (sNavigator.getCurrentPage().name == "paymentOption.html" && getStorage("cart_delivery_charges") != data.cart.delivery_charges.amount) {
+    var message = "A taxa de entrega para a localização selecionada é " + data.cart.delivery_charges.amount_pretty;
+    	toastMsg(message);
 			}
        setStorage("cart_delivery_charges", data.cart.delivery_charges.amount);
     }
@@ -5503,7 +5524,7 @@ function loadBookingForm()
       	  displayMerchantLogo2( 
       	     getStorage("merchant_logo") ,
       	     '' ,
-			 '' ,
+      	     '' ,
       	     'page-booking'
       	  );      	  
       	  
@@ -6502,11 +6523,6 @@ function salvaEndereco()
 		var area_id_usuario=getStorage("area_id_usuario");
 			dump("city_id_usuario=>"+city_id_usuario);
 			dump("area_id_usuario=>"+area_id_usuario);
-	
-	setTimeout(function(){ 
-		$("#page-home .search_by_location").hide();
-		$("#page-home .search_by_location_btn").show();
-	}, 3700);
 		
 if ($(".area_id").val() != area_id_usuario || $(".city_id").val() != city_id_usuario){
 	
@@ -7456,7 +7472,7 @@ function loadmenu2(cat_id,mtid)
 
 function showMenu(element)
 {
-	if (typeof merhantPopOverMenu === "undefined" || merhantPopOverMenu==null || merhantPopOverMenu=="" ) { 	    		
+	/* if (typeof merhantPopOverMenu === "undefined" || merhantPopOverMenu==null || merhantPopOverMenu=="" ) { 	    		
 		ons.createPopover('merchantmenu.html').then(function(popover) {	
 		   popover.show(element,{
 		   	 animation:"none"
@@ -7481,7 +7497,7 @@ function showMenu(element)
 		});				
 		
 		translatePage();
-	}
+	}*/
 }
 
 function loadPageMerchantInfo()
@@ -7492,32 +7508,32 @@ function loadPageMerchantInfo()
       	  displayMerchantLogo2( 
 	      	     getStorage("merchant_logo") ,
 	      	     '' ,
-			     '' ,
+	      	     '' ,
 	      	     'page-merchantinfo'
 	      );	  		      
 	      callAjax("getMerchantInfo","merchant_id="+ getStorage('merchant_id'));  		      
       } 
     };  
     sNavigator.pushPage("merchantInfo.html", options);	   
-    merhantPopOverMenu.hide(); 
+    //merhantPopOverMenu.hide(); 
 }
 
 function loadBookingForm1()
 {
-	merhantPopOverMenu.hide(); 
+	//merhantPopOverMenu.hide(); 
 	loadBookingForm();
 }
 
 function loadMoreReviews1()
 {
-	merhantPopOverMenu.hide(); 
+	//merhantPopOverMenu.hide(); 
 	loadMoreReviews();
 }
 
 function loadMap()
 {
 	
-	merhantPopOverMenu.hide(); 
+	//merhantPopOverMenu.hide(); 
 	//alert( getStorage('merchant_id') );	
 	
 	var options = {
@@ -7570,7 +7586,7 @@ function checkGPS()
 	*/ 	
  	
  	if ( device.platform =="iOS"){		
- 		
+ 		 		
  		cordova.plugins.diagnostic.isLocationAuthorized(function(authorized){		
  			 
  			if(authorized){
@@ -7687,7 +7703,7 @@ function viewTaskMapInit()
 	      'zoom': 17
 	     }
 	    });
-        map.setBackgroundColor('white');
+        map.setBackgroundColor('white');        
         
         map.on(plugin.google.maps.event.MAP_READY, onMapInit); 
         
@@ -7709,7 +7725,7 @@ function onMapInit()
 	map.setZoom(17);
 					
     map.addMarker({
-	  'position': new plugin.google.maps.LatLng( merchant_latitude , merchant_longtitude ),
+	  'position': new plugin.google.maps.LatLng( merchant_latitude , merchant_longtitude ),	  
 	  'title': delivery_address ,
 	  'snippet': getTrans( "Destination" ,'destination'),
 	  'icon': {
@@ -7718,20 +7734,18 @@ function onMapInit()
      }, function(marker) {
      	
      	marker.showInfoWindow();
-
+     	     	
      	navigator.geolocation.getCurrentPosition( function(position) {	    
-	    	
-     		 
+	    	     		
 	    	 var your_location = new plugin.google.maps.LatLng(position.coords.latitude , position.coords.longitude); 	
 	    	 	    	 
 	    	 var destination = new plugin.google.maps.LatLng( merchant_latitude , merchant_longtitude );
-	    	 
+	    	 	    	 
 	    	 if ( iOSeleven() ){	    	 	
-			   	
-			   	  map.animateCamera({
-					  'target': your_location,
-					  'zoom': 17,
-					  'tilt': 30
+	    	 	 map.animateCamera({
+				  'target': your_location,
+				  'zoom': 17,
+				  'tilt': 30
 					}, function() {
 						
 					   var data = [      
@@ -7970,11 +7984,7 @@ function setManualAddress()
 		   $(".formatted_address").val( '' );			
 	       
 	       $(".delivery-address-text").html( complete_address );       
-			
-			setStorage("search_address", complete_address );		   
-			
 					reloadCart();	       
-			
 	       sNavigator.popPage({cancelIfRunning: true});    
 	       return false;
 	    }  
@@ -8349,10 +8359,7 @@ function useThisLocation()
 				
 				$(".delivery-address-text").html( "Rua 9 JA, 501 - Jardim America, Rio Claro - SP" );  
 				
-				setStorage("search_address", getStorage("map_address_result_formatted_address") );		   
-			
 					reloadCart();
-				
 				sNavigator.popPage({cancelIfRunning: true}); //back button
 		        sNavigator.popPage({cancelIfRunning: true}); //back button    
 		    	return;
@@ -8370,9 +8377,6 @@ function useThisLocation()
 			$(".formatted_address").val( getStorage("map_address_result_formatted_address") );	
 			
 			$(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );  
-			
-			setStorage("search_address", getStorage("map_address_result_formatted_address") );		   
-			
 				reloadCart();		
 			
 		    sNavigator.popPage({cancelIfRunning: true}); //back button
@@ -8548,7 +8552,8 @@ function MapInit_Track()
 		    ];
 		    		    		    
 		    addMarkers(data, function(markers) {    
-		    			    	if ( iOSeleven() ){		    		
+		    	
+		    	if ( iOSeleven() ){		    		
 		    		map.animateCamera({
 						  'target': dropoff_location,
 						  'zoom': 17,
@@ -8569,51 +8574,50 @@ function MapInit_Track()
 					}); /*end animate*/
 		    		
 		    	} else {		    	
-
-		    	map.addPolyline({
-				points: [
-				  driver_location,
-				  dropoff_location
-				],
-				'color' : '#AA00FF',
-				'width': 10,
-				'geodesic': true
-				}, function(polyline) {
-				   
-					map.animateCamera({
-					  'target': dropoff_location,
-					  'zoom': 17,
-					  'tilt': 30
-					}, function() {
+			    	map.addPolyline({
+					points: [
+					  driver_location,
+					  dropoff_location
+					],
+					'color' : '#AA00FF',
+					'width': 10,
+					'geodesic': true
+					}, function(polyline) {
+					   
+						map.animateCamera({
+						  'target': dropoff_location,
+						  'zoom': 17,
+						  'tilt': 30
+						}, function() {
+							
+			                map.addPolyline({
+							points: [
+							  dropoff_location,
+							  destination
+							],
+							'color' : '#AA00FF',
+							'width': 10,
+							'geodesic': true
+							}, function(polyline) {
+							   						
+								map.animateCamera({
+								  'target': destination,
+								  'zoom': 17,
+								  'tilt': 30
+								}, function() {			
+									
+									stopTrackMapInterval();
+	      	                        track_order_map_interval = setInterval(function(){runTrackMap()}, 10000);
+														
+								}); /*end animate*/
+									
+							});  /*end polyline*/
+							
+						}); /*end animate*/
 						
-		                map.addPolyline({
-						points: [
-						  dropoff_location,
-						  destination
-						],
-						'color' : '#AA00FF',
-						'width': 10,
-						'geodesic': true
-						}, function(polyline) {
-						   						
-							map.animateCamera({
-							  'target': destination,
-							  'zoom': 17,
-							  'tilt': 30
-							}, function() {			
-								
-								stopTrackMapInterval();
-      	                        track_order_map_interval = setInterval(function(){runTrackMap()}, 10000);
-													
-							}); /*end animate*/
-								
-						});  /*end polyline*/
-						
-					}); /*end animate*/
+					});  /*end polyline*/
 					
-				});  /*end polyline*/
-					
-				}
+		    	}
 		    	  								    		
 	        });/* end marker*/
 		 	
@@ -8913,34 +8917,34 @@ function reInitTrackMap(data)
 	    
 	    addMarkers(data, function(markers) {       
 	    	
-			if ( iOSeleven() ){
+	    	if ( iOSeleven() ){
 	    		// do nothing
 	    	} else {
-
-	    	map.addPolyline({
-			points: [
-			  driver_location,
-			  dropoff_location
-			],
-			'color' : '#AA00FF',
-			'width': 10,
-			'geodesic': true
-			}, function(polyline) {
-			   
-				map.addPolyline({
+		    	map.addPolyline({
 				points: [
-				  dropoff_location,
-				  destination
+				  driver_location,
+				  dropoff_location
 				],
 				'color' : '#AA00FF',
 				'width': 10,
 				'geodesic': true
 				}, function(polyline) {
 				   
-				}); /*end polyline*/
-				
-			}); /*end polyline*/
-		}
+					map.addPolyline({
+					points: [
+					  dropoff_location,
+					  destination
+					],
+					'color' : '#AA00FF',
+					'width': 10,
+					'geodesic': true
+					}, function(polyline) {
+					   
+					}); /*end polyline*/
+					
+				}); /*end polyline*/			
+	    	}
+	    	
 	    });
 	   
 	    stopTrackMapInterval();
@@ -9205,9 +9209,9 @@ function initSlideMenu()
 		   var address_book_on=getStorage("address_book_on");
 		   dump("address_book_on=>"+address_book_on);
 		    if(address_book_on!="yes"){
-	       	  $(".menu-adress").hide();
+	       	  $("#page-shipping-location-area .menu-adress").hide();
 	        } else {
-	          $(".menu-adress").css({"display":"block"});
+	          $("#page-shipping-location-area .menu-adress").css({"display":"block"});
 	        }
 
        	   $(".logout-menu").css({"display":"block"});
@@ -9832,6 +9836,7 @@ function getBrowseMerchant(index)
 	}
 		
 	params+="&app_version=" + app_version;
+	
 	dump(ajax_url+"/"+action+"?"+params);	
 	
 	 ajax_lazy = $.ajax({
