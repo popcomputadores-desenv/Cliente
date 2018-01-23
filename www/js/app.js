@@ -420,6 +420,10 @@ function searchMerchant()
 document.addEventListener("pageinit", function(e) {
 	dump("pageinit");	
 	dump("pagname => "+e.target.id);
+	
+	callAjax("getSettings",
+		  "device_id="+getStorage("device_id")
+		  ); 
 
 	/*Atualização Master Hub (Oculta Categorias e Mostra um Botão)*/
 		   var busca_categoria = getStorage("busca_categoria");
@@ -434,6 +438,13 @@ document.addEventListener("pageinit", function(e) {
 	       	  
 	       }
 	/*Fim da Atualização*/
+	
+		var city_id_usuario=getStorage("city_id_usuario");
+		var area_id_usuario=getStorage("area_id_usuario");
+	       dump("city_id_usuario=>"+city_id_usuario);
+	       dump("area_id_usuario=>"+area_id_usuario);
+				global_city_id=city_id_usuario;
+				global_area_id=area_id_usuario;
 			
 	switch (e.target.id)
 	{		
@@ -738,7 +749,7 @@ document.addEventListener("pageinit", function(e) {
 				dump(global_area_name);
 		var city_id_usuario=getStorage("city_id_usuario");
 		var area_id_usuario=getStorage("area_id_usuario");
-				
+
 				if ( !empty(global_city_id)){
 					$(".city_id").val( global_city_id );
 					$(".location_city").html( global_city_name );
@@ -832,10 +843,6 @@ document.addEventListener("pageinit", function(e) {
 	createElement('codigo-menu-rodape',codigo_menu_rodape);
 			
 			//setTrackView("app settings");
-		   
-		  callAjax("getSettings",
-		  "device_id="+getStorage("device_id")
-		  ); 
  
 			setTimeout('carregandoCategorias()', 1300);
 			setTimeout('carregandoSeguimentos()', 2800);
