@@ -547,19 +547,23 @@ function seguimentos_Resultado(data)
     
 function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
-            document.getElementById('rua').value=("");
+            document.getElementById('street').value=("");
             document.getElementById('area_name').value=("");
-            document.getElementById('cidade').value=("");
-            document.getElementById('uf').value=("");
+            document.getElementById('city').value=("");
+            document.getElementById('state').value=("");
+			document.getElementById('numero').value=("");
+
     }
 
     function meu_callback(conteudo) {
         if (!("erro" in conteudo)) {
             //Atualiza os campos com os valores.
-            document.getElementById('rua').value=(conteudo.logradouro);
+            document.getElementById('street').value=(conteudo.logradouro);
             document.getElementById('area_name').value=(conteudo.bairro);
-            document.getElementById('cidade').value=(conteudo.localidade);
-            document.getElementById('uf').value=(conteudo.uf);
+            document.getElementById('city').value=(conteudo.localidade);
+            document.getElementById('state').value=(conteudo.uf);
+			document.getElementById('numero').value=("");
+
         } //end if.
         else {
             //CEP não Encontrado.
@@ -583,10 +587,11 @@ function limpa_formulário_cep() {
             if(validacep.test(cep)) {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('rua').value="...";
+                document.getElementById('street').value="...";
                 document.getElementById('area_name').value="...";
-                document.getElementById('cidade').value="...";
-                document.getElementById('uf').value="...";
+                document.getElementById('city').value="...";
+                document.getElementById('state').value="...";
+				document.getElementById('numero').value="...";
 
                 //Cria um elemento javascript.
                 var script = document.createElement('script');
@@ -606,7 +611,7 @@ function limpa_formulário_cep() {
         } //end if.
         else {
             //cep sem valor, limpa formulário.
-            limpa_formulário_cep();
+            //limpa_formulário_cep();
         }
     }
 

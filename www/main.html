@@ -564,54 +564,6 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
        </div> 
 		</div>
 	
-<form id="frm-settings" class="frm-settings" method="post">   
-   <input type="hidden" name="country_code_set" id="country_code_set" class="country_code_set">   
-<div style="display:none;">
-<div class="wrapper">
-   
-   <div class="settings-header trn" data-trn-key="software_version">Software version</div>
-     <ons-list modifier="inset" class="settings-list">        
-        <ons-list-item >
-          <span class="software_version concat-text"></span>          
-        </ons-list-item>
-      </ons-list>
-   
-     <div class="settings-header trn" data-trn-key="device_id">Device ID</div>
-     <ons-list modifier="inset" class="settings-list">        
-        <ons-list-item >
-          <span class="device_id_val concat-text"></span>          
-        </ons-list-item>
-      </ons-list>
-   
-     <div class="settings-header trn" data-trn-key="notifications">Notifications</div>
-     <ons-list modifier="inset" class="settings-list">        
-        <ons-list-item >
-          <span class="trn" data-trn-key="enabled_push_notification">Enabled Push Notification</span>
-          <ons-switch modifier="list-item" var="enabled_push" name="enabled_push" id="enabled_push"  >
-          </ons-switch>
-        </ons-list-item>
-      </ons-list>
-      
-	
-       <div class="settings-header trn" data-trn-key="others">Others</div>
-             
-      
-      <ons-list modifier="inset" class="settings-list">
-        <ons-list-item modifier="chevron" onclick="showLocationPopUp();" class="trn" data-trn-key="change_location">
-          Change your location
-        </ons-list-item>        
-      </ons-list>
-      
-      <ons-list modifier="inset" class="settings-list">
-        <ons-list-item modifier="chevron" onclick="showLanguageList();" class="trn" data-trn-key="select_your_language">
-          Select your language
-        </ons-list-item>        
-      </ons-list>
-	</div>
-   
-   </div>
-   </form>      	
-	
     <div class="search_by_location">
        
        <div class="home-page center">       
@@ -681,6 +633,55 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 
 </ons-page>
 </ons-navigator>
+
+<form id="frm-settings" class="frm-settings" method="post">   
+   <input type="hidden" name="country_code_set" id="country_code_set" class="country_code_set">   
+<div style="display:none;">
+<div class="wrapper">
+   
+   <div class="settings-header trn" data-trn-key="software_version">Software version</div>
+     <ons-list modifier="inset" class="settings-list">        
+        <ons-list-item >
+          <span class="software_version concat-text"></span>          
+        </ons-list-item>
+      </ons-list>
+   
+     <div class="settings-header trn" data-trn-key="device_id">Device ID</div>
+     <ons-list modifier="inset" class="settings-list">        
+        <ons-list-item >
+          <span class="device_id_val concat-text"></span>          
+        </ons-list-item>
+      </ons-list>
+   
+     <div class="settings-header trn" data-trn-key="notifications">Notifications</div>
+     <ons-list modifier="inset" class="settings-list">        
+        <ons-list-item >
+          <span class="trn" data-trn-key="enabled_push_notification">Enabled Push Notification</span>
+          <ons-switch modifier="list-item" var="enabled_push" name="enabled_push" id="enabled_push"  >
+          </ons-switch>
+        </ons-list-item>
+      </ons-list>
+      
+	
+       <div class="settings-header trn" data-trn-key="others">Others</div>
+             
+      
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" onclick="showLocationPopUp();" class="trn" data-trn-key="change_location">
+          Change your location
+        </ons-list-item>        
+      </ons-list>
+      
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" onclick="showLanguageList();" class="trn" data-trn-key="select_your_language">
+          Select your language
+        </ons-list-item>        
+      </ons-list>
+	</div>
+   
+   </div>
+   </form>      	   
+
 </script>
 
 <script type="text/ons-template" id="Pagina-Indicacao.html"> 
@@ -896,6 +897,109 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 </ons-navigator> 
 </script>
 
+<script type="text/ons-template" id="shippingLocationArea.html"> 
+<ons-page id="page-shipping-location-area" class="onsen-display">
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     
+   </ons-toolbar>
+		<button id="menu-adress" class="button button--quiet button--large green" onclick="popUpAddressBook();">Selecione da sua lista de endereços</button>
+		<p id="menu-adress" class="small-font-dim center">ou escolha uma das opções abaixo</p>
+   
+   <form id="frm-shipping" class="frm-shipping" method="post">
+   
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+			<input type="hidden" name="city" class="city">
+			<input type="hidden" name="state" class="state">
+			<input type="hidden" name="zipcode" class="zipcode">
+			<input type="hidden" name="area_name" class="area_name">
+   
+      <div class="home-page wrapper center">       
+              
+       <button class="button button--quiet green" onclick="getCurrentLocation();">
+       <ons-icon icon="fa-location-arrow"></ons-icon>
+         <span class="trn">Informa a minha localização atual</span>
+       </button>       
+
+
+   <p class="trn textopequeno center" style="margin-top: 3px; margin-bottom: 5px;">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
+    </div>   
+   <p> 
+	<div class="wrapper center"><span id="bairro" class="bairro wrapper center" style="color: white; font-size: 16px;"> </span><span class="wrapper center" style="color: white; font-size: 16px;"> / </span> <span id="cidade" class="cidade wrapper center" style="color: white; font-size: 16px;"> </span></div>
+	
+	</p>
+   <p class="trn menuapp" style="margin-top: 3px; margin-bottom: 5px;">Preencha ou confira o endereço de entrega</p>    
+   
+   <ons-list>
+   
+   <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
+    State
+    </ons-list-item>
+   
+	<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >        
+	City
+	</ons-list-item>
+	
+	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+	District / Area
+	</ons-list-item>
+	
+   </ons-list>
+   
+    <div class="wrapper">
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+							<input type="text" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+							<input type="text" name="numero" class="numero text-input text-input--underbar" placeholder="N°" value="" data-validation="required" data-validation-error-msg="Obrigatório">
+						</ons-col>
+					</ons-row>
+				</div>
+
+				<div class="field-wrapper">
+      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+					placeholder="Apartment suite, unit number, or company name" data-validation="required" data-validation-error-msg="Este campo é obrigatório!"  >
+      </div>      
+
+   
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+					placeholder="Delivery instructions" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+      </div>      
+
+				<div class="field-wrapper">
+					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
+					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+   </div>
+   
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 8px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+
+   
+    <button class="button masterhub-btn button--large trn" onclick="clientShipping();" data-trn-key="select_payment_method">
+	Select Payment Method
+	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
+   </button>
+			</div>
+   </form>
+
+</ons-page>
+</script>     
+
+
 <script type="text/ons-template" id="searchCategorias.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 
 <ons-page id="searchcategorias-page" on-device-backbutton="backtoHome()"  style="background: url('background-1.jpg');">
@@ -916,7 +1020,56 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       </div>
    </ons-toolbar>
    
+   
    <div id="codigo-cabecalho-buscas"></div>
+   
+<form id="frm-settings" class="frm-settings" method="post">   
+   <input type="hidden" name="country_code_set" id="country_code_set" class="country_code_set">   
+<div style="display:none;">
+<div class="wrapper">
+   
+   <div class="settings-header trn" data-trn-key="software_version">Software version</div>
+     <ons-list modifier="inset" class="settings-list">        
+        <ons-list-item >
+          <span class="software_version concat-text"></span>          
+        </ons-list-item>
+      </ons-list>
+   
+     <div class="settings-header trn" data-trn-key="device_id">Device ID</div>
+     <ons-list modifier="inset" class="settings-list">        
+        <ons-list-item >
+          <span class="device_id_val concat-text"></span>          
+        </ons-list-item>
+      </ons-list>
+   
+     <div class="settings-header trn" data-trn-key="notifications">Notifications</div>
+     <ons-list modifier="inset" class="settings-list">        
+        <ons-list-item >
+          <span class="trn" data-trn-key="enabled_push_notification">Enabled Push Notification</span>
+          <ons-switch modifier="list-item" var="enabled_push" name="enabled_push" id="enabled_push"  >
+          </ons-switch>
+        </ons-list-item>
+      </ons-list>
+      
+	
+       <div class="settings-header trn" data-trn-key="others">Others</div>
+             
+      
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" onclick="showLocationPopUp();" class="trn" data-trn-key="change_location">
+          Change your location
+        </ons-list-item>        
+      </ons-list>
+      
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" onclick="showLanguageList();" class="trn" data-trn-key="select_your_language">
+          Select your language
+        </ons-list-item>        
+      </ons-list>
+	</div>
+   
+   </div>
+   </form>      	   
    
    <div id="codigo-destaque"></div>
    
@@ -2485,9 +2638,9 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <input type="hidden" name="city_id" id="city_id" class="city_id" >
    <input type="hidden" name="area_id" id="area_id" class="area_id" >
    
-			<input type="hidden" name="state" class="state">
-			<input type="hidden" name="city" class="city">
-			<input type="hidden" name="area_name" class="area_name">
+   <input type="hidden" name="state" id="state" class="state">
+   <input type="hidden" name="city" id="city" class="city">
+   <input type="hidden" name="area_name" id="area_name" class="area_name">
 
    <div class="wrapper">
    
@@ -2495,6 +2648,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
       placeholder="Zipcode" value="" onblur="pesquisacep(this.value);" >
       </div>
+	  Nota: Ao usar a caixa acima CEP, irá preencher somente o nome da rua, é necessário selecionar na lista o Estado, Cidade e Bairro. 
 	  
    <ons-list>
    
@@ -2514,12 +2668,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    	  <div class="field-wrapper">
 					<ons-row>
 						<ons-col width="75%">
-      <input type="text" id="rua" name="street"  class="street text-input text-input--underbar has_validation" 
+      <input type="text" id="street" name="street"  class="street text-input text-input--underbar has_validation" 
       placeholder="Street" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 						</ons-col>
 						<ons-col width="5%"></ons-col>
 						<ons-col width="20%">
-      <input type="text" name="numero"  class="numero text-input text-input--underbar has_validation" 
+      <input type="text" name="numero" id="numero"  class="numero text-input text-input--underbar has_validation" 
       placeholder="Numero" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 						</ons-col>
 					</ons-row>
@@ -2972,8 +3126,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    </p>
    
    <div class="field-wrapper">
-      <input type="text" name="code"  class="code text-input text-input--underbar has_validation" 
-       value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="11" >
+      <input type="number" name="code"  class="code text-input text-input--underbar has_validation"
+       value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="11" >
    </div>
    
    <button class="trn button masterhub-btn button--large" onclick="validateCLient();" data-trn-key="submit">
@@ -3746,10 +3900,11 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 
   <ons-page id="page-location-city" >  
 	  <ons-toolbar> 
-	       	      	      	      
+			<div class="center white"><span>Selecione a sua Cidade</span></div>
 	      <div class="right">         
             <ons-toolbar-button onclick="locationCity.hide();" >
-            <ons-icon icon="ion-ios-close-empty"></ons-toolbar-button>
+						<ons-icon icon="ion-ios-close-empty"></ons-icon>
+					</ons-toolbar-button>
           </div>
       
           
@@ -3758,16 +3913,16 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	   <ons-list>
 	     <ons-list-header style="border-radius: 12px; color: white; margin: 5px; background-color: rgba(44, 44, 44, 0.64);">
 	       <ons-row >
-             <ons-col width="70%">
+						<ons-col width="80%">
              
              <input type="text" name="search_city"  style="color: white;" class="search_city text-input text-input--transparent" 
       placeholder="Type City here" value=""  >
              
              </ons-col>
-             <ons-col >
+						<ons-col width="20%">
              
              <button class="button masterhub-btn button--large" onclick="searchCity();">
-		      <span class="trn search_title" data-trn-key="search">Search</span>    	      		      
+								<ons-icon icon="fa-search" class="ons-icon fa-search fa fa-lg"></ons-icon>
 		   </button>
              
              </ons-col>
@@ -3788,10 +3943,11 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 
   <ons-page id="page-location-area" >  
 	  <ons-toolbar> 
-	       	      	      	      
+				<div class="center white"><span>Selecione o seu Bairro</span></div>
 	      <div class="right">         
             <ons-toolbar-button onclick="locationArea.hide();" >
-            <ons-icon icon="ion-ios-close-empty"></ons-toolbar-button>
+						<ons-icon icon="ion-ios-close-empty"></ons-icon>
+					</ons-toolbar-button>
           </div>
       
 	  </ons-toolbar>
@@ -3799,16 +3955,16 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	    <ons-list>
 	     <ons-list-header style="border-radius: 12px; margin: 5px; background-color: rgba(44, 44, 44, 0.64);">
 	       <ons-row >
-             <ons-col width="70%">
+						 <ons-col width="80%">
              
              <input type="text" name="search_area" style="color: white;" class="search_area text-input text-input--transparent" 
       placeholder="Type Area here" value=""  >
              
              </ons-col>
-             <ons-col >
+						 <ons-col width="20%">
              
              <button class="button masterhub-btn button--large" onclick="searchArea();">
-		      <span class="trn search_title" data-trn-key="search">Search</span>    	      		      
+								<ons-icon icon="fa-search" class="ons-icon fa-search fa fa-lg"></ons-icon>
 		   </button>
              
              </ons-col>
@@ -3852,110 +4008,13 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
 </ons-page>
 </script>   
-<script type="text/ons-template" id="shippingLocationArea.html"> 
-<ons-page id="page-shipping-location-area" class="onsen-display">
-   <ons-toolbar>        
-     <div class="left"><ons-back-button></ons-back-button></div>     
-     <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     
-   </ons-toolbar>
-		<button id="menu-adress" class="button button--quiet button--large green" onclick="popUpAddressBook();">Selecione da sua lista de endereços</button>
-		<p id="menu-adress" class="small-font-dim center">ou escolha uma das opções abaixo</p>
-   
-   <form id="frm-shipping" class="frm-shipping" method="post">
-   
-   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
-   <input type="hidden" name="city_id" id="city_id" class="city_id" >
-   <input type="hidden" name="area_id" id="area_id" class="area_id" >
-   
-   <input type="hidden" name="city" class="city">
-   <input type="hidden" name="state" class="state">   
-   <input type="hidden" name="zipcode" class="zipcode">  
-   <input type="hidden" name="area_name" class="area_name">  
-   
-      <div class="home-page wrapper center">       
-              
-       <button class="button button--quiet green" onclick="getCurrentLocation();">
-       <ons-icon icon="fa-location-arrow"></ons-icon>
-         <span class="trn">Informa a minha localização atual</span>
-       </button>       
-
-   <p class="trn textopequeno center" style="margin-top: 3px; margin-bottom: 5px;">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
-    </div>   
-   <p> </p>
-   <p class="trn menuapp" style="margin-top: 3px; margin-bottom: 5px;">Preencha ou confira o endereço de entrega</p>    
-   
-   <ons-list>
-   
-   <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
-    State
-    </ons-list-item>
-   
-	<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >        
-	City
-	</ons-list-item>
-	
-	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
-	District / Area
-	</ons-list-item>
-	
-   </ons-list>
-   
-    <div class="wrapper">
-				<div class="field-wrapper">
-					<ons-row>
-						<ons-col width="75%">
-							<input type="text" id="street" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
-						</ons-col>
-						<ons-col width="5%"></ons-col>
-						<ons-col width="20%">
-							<input type="text" id="numero" name="numero" class="numero text-input text-input--underbar" placeholder="N°" value="" data-validation="required" data-validation-error-msg="Obrigatório">
-						</ons-col>
-					</ons-row>
-				</div>
-
-				<div class="field-wrapper">
-      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
-      placeholder="Apartment suite, unit number, or company name"  >
-      </div>      
-
-   
-      <div class="field-wrapper">
-      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
-      placeholder="Delivery instructions" value="" >
-      </div>      
-
-				<div class="field-wrapper">
-					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
-					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
-   </div>
-   
-	   <div class="field-wrapper">	     
-	     <label class="switch">
-			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
-			  <div class="switch__toggle"></div>
-		  </label>  		  
-		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 8px; display: inline-block">
-		    Save to my address book
-		  </span>
-	    </div> 
-<br>
-   
-    <button class="button masterhub-btn button--large trn" onclick="clientShipping();" data-trn-key="select_payment_method">
-	Select Payment Method
-	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
-   </button>
-			</div>
-   </form>
-
-</ons-page>
-</script>     
 
 <script type="text/ons-template" id="locationState.html">    
   <ons-dialog var="locationState" style="width:90%;height:350px;" cancelable  >
 
   <ons-page id="page-location-state" >  
 	  <ons-toolbar> 
-	       	      	      	      
+	      <div class="center white"><span>Selecione a seu Estado</span></div> 	      	      	      
 	      <div class="right">         
             <ons-toolbar-button onclick="locationState.hide();" >
             <ons-icon icon="ion-android-close"></ons-toolbar-button>
