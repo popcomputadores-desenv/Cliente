@@ -709,8 +709,6 @@ document.addEventListener("pageinit", function(e) {
 				$(".search_by_location_btn").show();
 				$(".search_by_address").hide();
 				setTimeout('carregaEndereco();', 3000);
-				
-				
 			} 
 				$(".search_by_location").show();
 				$(".search_by_location_btn").hide();
@@ -1508,7 +1506,7 @@ function callAjax(action,params)
 				 break;
 					
 				case "CarregaEndereco":
-					hideAllModal();
+					
 				if (data.details.has_addressbook==2){
 			      if(!empty(data.details.default_address)){
 					  
