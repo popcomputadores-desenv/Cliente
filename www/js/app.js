@@ -703,14 +703,12 @@ document.addEventListener("pageinit", function(e) {
 		    	
 		    	search_type = getSearchType();
 		    	dump("search_type=>"+search_type);
-				var token_do_cliente = getStorage("client_token");
-				
 				
 			if (isLogin()){
 				$(".search_by_location").hide();
 				$(".search_by_location_btn").show();
 				$(".search_by_address").hide();
-				setTimeout('carregaEndereco();', 2200);
+				setTimeout('carregaEndereco();', 3000);
 				
 				
 			} 
@@ -1176,9 +1174,6 @@ function mudarendereco()
 	removeStorage("global_city_name");
 	removeStorage("global_area_id");
 	removeStorage("global_city_id");
-
-	removeStorage("area_id_usuario");
-	removeStorage("city_id_usuario");
 }
 
 function salvaEndereco()
@@ -1513,14 +1508,22 @@ function callAjax(action,params)
 				 break;
 					
 				case "CarregaEndereco":
+					hideAllModal();
 				if (data.details.has_addressbook==2){
 			      if(!empty(data.details.default_address)){
 					  
 			$(".area_id").val(data.details.default_address.area_id);
 			$(".city_id").val(data.details.default_address.city_id);
 			$(".state_id").val(data.details.default_address.state_id);	  
-			$(".location_area").html(data.details.default_address.area_name);	
-					
+			$(".location_area").html(data.details.default_address.area_name);
+					  
+			setStorage("global_area_name", data.details.default_address.area_name);
+			setStorage("global_city_name", data.details.default_address.city);
+			setStorage("global_state_name", data.details.default_address.state);	  
+			setStorage("global_area_id", data.details.default_address.area_id);
+			setStorage("global_city_id", data.details.default_address.city_id);
+			setStorage("global_state_id", data.details.default_address.state_id);
+
 			$(".location_city").html(data.details.default_address.city);
 			$(".search_by_location").hide();
 			$(".search_by_location_btn").show();
