@@ -714,7 +714,7 @@ document.addEventListener("pageinit", function(e) {
 				
 				
 			} 
-				$(".search_by_location").show();
+				$(".search_by_location").hide();
 				$(".search_by_location_btn").hide();
 				$(".search_by_address").hide();
 
@@ -1301,7 +1301,7 @@ function onsenDialogCheckout(){
 	  message: getTrans('Deseja finalizar o pedido?','Deseja continuar comprando?') ,	  
 	  title: dialog_title_default,
 	  buttonLabels: ['Sim', 'Ainda não'],
-	  animation: 'default', // or 'none'
+	  animation: 'fade', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
 	  callback: function(index) {
@@ -1316,10 +1316,10 @@ function onsenDialogCheckout(){
 function onsenDialogAddresBook(){
 
 	ons.notification.confirm({
-	  message: getTrans('Deseja cadastrar um endereço?','Deseja cadastrar um endereço?') ,	  
-	  title: getTrans('Endereco não encontrado!','Endereco não encontrado!'),
+	  messageHTML: getTrans('Deseja cadastrar seu endereço agora? <br> Não esqueça de selecioná-lo como padrão!','Deseja cadastrar seu endereço agora? <br> Não esqueça de selecioná-lo como padrão!') ,	  
+	  title: getTrans('Não há endereço cadastrado!','Não há endereço cadastrado!'),
 	  buttonLabels: ['Sim', 'Não'],
-	  animation: 'default', // or 'none'
+	  animation: 'fade', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
 	  callback: function(index) {
@@ -1337,10 +1337,10 @@ function onsenDialogAddresBook(){
 function onsenDialogAddresBookDefault(){
 
 	ons.notification.confirm({
-	  message: getTrans('Corrigir agora?','Corrigir agora?') ,	  
-	  title: getTrans('Endereco não encontrado!','Endereco não encontrado!'),
+	  messageHTML: getTrans('Você tem endereço cadastrado, porém nenhum está como padrão!<br>Deseja escolher o endereço padrão agora?','Você tem endereço cadastrado, porém nenhum está como padrão!<br>Deseja escolher o endereço padrão agora?') ,	  
+	  title: getTrans('Não há endereço padrão!','Não há endereço padrão!'),
 	  buttonLabels: ['Sim', 'Não'],
-	  animation: 'default', // or 'none'
+	  animation: 'fade', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
 	  callback: function(index) {
@@ -1526,9 +1526,9 @@ function callAjax(action,params)
 			$(".search_by_location_btn").show();
 			$(".search_by_address").hide();
 											    
-				  					} else onsenDialogAddresBook();
+				  					} else onsenDialogAddresBookDefault();
 						      	  	    	
-						   } else onsenDialogAddresBookDefault();				      	  	 
+						   } else onsenDialogAddresBook();				      	  	 
 				break;	
 					
 				case "SalvaEndereco":
