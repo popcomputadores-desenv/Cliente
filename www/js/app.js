@@ -714,7 +714,7 @@ document.addEventListener("pageinit", function(e) {
 				
 				
 			} 
-				$(".search_by_location").hide();
+				$(".search_by_location").show();
 				$(".search_by_location_btn").hide();
 				$(".search_by_address").hide();
 
@@ -811,6 +811,25 @@ document.addEventListener("pageinit", function(e) {
 			
 		  break;
 		/* FIM da Modificação Pagina Personalizada */
+			
+		case "CarregaEndereco":
+				if (data.details.has_addressbook==2){
+			      if(!empty(data.details.default_address)){
+					  
+			$(".area_id").val(data.details.default_address.area_id);
+			$(".city_id").val(data.details.default_address.city_id);
+			$(".state_id").val(data.details.default_address.state_id);	  
+			$(".location_area").html(data.details.default_address.area_name);	
+					
+			$(".location_city").html(data.details.default_address.city);
+			$(".search_by_location").hide();
+			$(".search_by_location_btn").show();
+			$(".search_by_address").hide();
+											    
+				  					} else onsenDialogAddresBookDefault();
+						      	  	    	
+						   } else onsenDialogAddresBook();				      	  	 
+				break;	
 		
 		case "page-addsuggestions":
 			carregandoSugestoes();
@@ -1511,29 +1530,6 @@ function callAjax(action,params)
 				   //$(".result-msg").text(data.details.total+" Restaurant found");
 				   $(".result-msg").text(data.details.total+" "+ getTrans("Favorito(s) Encontrado(s)",'restaurant_favorito_found')  );
 				 break;
-					
-				case "CarregaEndereco":
-				if (data.details.has_addressbook==2){
-			      if(!empty(data.details.default_address)){
-					  
-			$(".area_id").val(data.details.default_address.area_id);
-			$(".city_id").val(data.details.default_address.city_id);
-			$(".state_id").val(data.details.default_address.state_id);	  
-			$(".location_area").html(data.details.default_address.area_name);	
-					
-			$(".location_city").html(data.details.default_address.city);
-			$(".search_by_location").hide();
-			$(".search_by_location_btn").show();
-			$(".search_by_address").hide();
-											    
-				  					} else onsenDialogAddresBookDefault();
-						      	  	    	
-						   } else onsenDialogAddresBook();				      	  	 
-				break;	
-					
-				case "SalvaEndereco":
-				
-				break;	
 					/*FIM*/
 				case "MenuCategory":			
 				/*save merchant logo*/								
