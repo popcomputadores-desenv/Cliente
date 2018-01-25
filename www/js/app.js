@@ -731,7 +731,7 @@ document.addEventListener("pageinit", function(e) {
 				$(".search_by_location").hide();
 				$(".search_by_location_btn").show();
 				$(".search_by_address").hide();
-				setTimeout('carregaEndereco();', 3000);
+				setTimeout('carregaEndereco();', 2000);
 			} 
 				$(".search_by_location").show();
 				$(".search_by_location_btn").hide();
@@ -1193,34 +1193,10 @@ function mudarendereco()
 	$(".search_by_location").show();
 	$(".search_by_location_btn").hide();
 	
-	removeStorage("global_area_name");
-	removeStorage("global_city_name");
-	removeStorage("global_area_id");
-	removeStorage("global_city_id");
-}
-
-function salvaEndereco()
-{	
-		/* var city_id_usuario=getStorage("city_id_usuario");
-		var area_id_usuario=getStorage("area_id_usuario");
-		dump("city_id_usuario=>"+city_id_usuario);
-		dump("area_id_usuario=>"+area_id_usuario);
-		
-if ($(".area_id").val() != area_id_usuario || $(".city_id").val() != city_id_usuario){
-	
-		setTimeout(function(){ 
-	var params = "country_code_set=BR";
-	params+="&enabled_push=1";
-	params+="&client_token="+getStorage("client_token");	
-	params+="&device_id="+getStorage("device_id");
-	params+="state_id="+ global_state_id;		
-	params+="&city_id="+ global_city_id;
-	params+="&area_id="+ global_area_id;
-	callAjax("salvaEndereco",params);
-	}, 700);
-		
-	} */
-	
+	//removeStorage("global_area_name");
+	//removeStorage("global_city_name");
+	//removeStorage("global_area_id");
+	//removeStorage("global_city_id");
 }
 
 function searchResultCallBack(address)
@@ -1557,9 +1533,9 @@ function callAjax(action,params)
 				case "CarregaEndereco":
 				if (data.details.has_addressbook==2){
 			      if(!empty(data.details.default_address)){
-					if (data.details.default_address.area_id==0 || data.details.default_address.city_id==0){
+if (data.details.default_address.area_id==0 || data.details.default_address.city_id==0){
 						onsenDialogAddresBookOld(); 
-					} else
+					}
 					  
 			$(".area_id").val(data.details.default_address.area_id);
 			$(".city_id").val(data.details.default_address.city_id);
@@ -1568,8 +1544,10 @@ function callAjax(action,params)
 					  
 			setStorage("global_area_name", data.details.default_address.area_name);
 			setStorage("global_city_name", data.details.default_address.city);
+			setStorage("global_state_name", data.details.default_address.state);	  
 			setStorage("global_area_id", data.details.default_address.area_id);
 			setStorage("global_city_id", data.details.default_address.city_id);
+			setStorage("global_state_id", data.details.default_address.state_id);
 
 			$(".location_city").html(data.details.default_address.city);
 			$(".search_by_location").hide();
@@ -4497,14 +4475,14 @@ jQuery(document).ready(function() {
 			$(".street").val( address_split[0] );
 			$(".numero").val( address_split[1] );
 			
-			$(".bairro").html("");
+			$(".bairro").html(address_split[2]);
 			$(".area_name").val( address_split[2] );
 			$(".area_id", "#frm-shipping").val(address_split[8]);
 			$(".location_area", "#frm-shipping").html(address_split[2]);
 			global_area_name = address_split[2];
 			global_area_id = address_split[8];
 			
-			$(".cidade").html("");
+			$(".cidade").html(address_split[3]);
 			$(".city").val( address_split[3]);
 			$(".city_id", "#frm-shipping").val(address_split[9]);
 			$(".location_city", "#frm-shipping").html(address_split[3]);
@@ -8747,7 +8725,28 @@ function MapInit_Track()
 		    ];
 		    		    		    
 		    addMarkers(data, function(markers) {    
-
+		    	
+		    	if ( iOSeleven() ){		    		
+		    		map.animateCamera({
+						  'target': dropoff_location,
+						  'zoom': 17,
+						  'tilt': 30
+					}, function() {			
+									
+						map.animateCamera({
+						  'target': destination,
+						  'zoom': 17,
+						  'tilt': 30
+						}, function() {			
+							
+							stopTrackMapInterval();
+  	                        track_order_map_interval = setInterval(function(){runTrackMap()}, 10000);
+												
+						}); /*end animate*/		
+									
+					}); /*end animate*/
+		    		
+		    	} else {		    	
 			    	map.addPolyline({
 					points: [
 					  driver_location,
@@ -8790,7 +8789,9 @@ function MapInit_Track()
 						}); /*end animate*/
 						
 					});  /*end polyline*/
-
+					
+		    	}
+		    	  								    		
 	        });/* end marker*/
 		 	
 		 });/* even listner*/
@@ -9492,7 +9493,6 @@ function showCity()
 	        //translatePage();
 	    });	
 	} else {
-		$(".search_city").val("");
 		loadAjaxLocationCity();
 		locationCity.show();
 	}	
@@ -9569,7 +9569,6 @@ function showArea()
 	    });	
 		} else {
 			callAjax('getLocationArea', "city_id=" + $(".city_id").val() );
-			$(".search_area").val("");
 			locationArea.show();
 		}	
 	} else {
@@ -9923,6 +9922,7 @@ function getSearchMerchant(index)
 	if(!empty(krms_config.APIHasKey)){
 		params+="&api_key="+krms_config.APIHasKey;
 	}
+	
 
 	params+="&app_version=" + app_version;
 	

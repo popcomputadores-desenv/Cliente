@@ -463,7 +463,7 @@ function categorias_Resultado(data)
 	    dump("upload_url=>"+upload_url);
 
 		
-		htm+='<div style="padding: 8px; margin: 5px; box-sizing: border-box; border: 2px dashed #ddd; width: 180px; display: inline-block; border-radius: 15px;" onclick="carregarCategorias('+val.cuisine+'); salvaEndereco();">';
+		htm+='<div style="padding: 8px; margin: 5px; box-sizing: border-box; border: 2px dashed #ddd; width: 180px; display: inline-block; border-radius: 15px;" onclick="carregarCategorias('+val.cuisine+');">';
 		if (val.photo!=""){
 		htm+='<img src="'+upload_url+''+val.photo+'" style="width:60px;">';
 		} else {
