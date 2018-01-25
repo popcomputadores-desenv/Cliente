@@ -457,6 +457,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
     </ons-list-item>    
     
     <div id="custom_pages"></div>
+	
+	<div id="splash-pagina-menu"></div>
     
     <ons-list-item onclick="menu.setMainPage('settings.html', {closeMenu: true})" class="bottom-menu-item">
       <ons-icon icon="ion-gear-a"></ons-icon> 
@@ -627,6 +629,16 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 
 <script type="text/ons-template" id="Pagina-Personalizada.html"> 
 <ons-navigator title="Navigator" var="sNavigator"> 
+<ons-page id="carregarPagina-page" on-device-backbutton="backtoHome()" style="background: url('background-1.jpg');">
+  
+		  <div id="pagina-personalizada"></div>
+
+</ons-page>
+</ons-navigator>
+</script>
+	
+<script type="text/ons-template" id="Pagina2-Personalizada.html"> 
+<ons-navigator title="Navigator" var="sNavigator"> 
 <ons-page id="carregarPagina-page" on-device-backbutton="backtoSearch()" style="background: url('background-1.jpg');">
   
 		  <div id="pagina-personalizada"></div>
@@ -635,6 +647,16 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 </ons-navigator>
 </script>
 	
+<script type="text/ons-template" id="Slide-Personalizado.html"> 
+<ons-navigator title="Navigator" var="sNavigator"> 
+<ons-page id="carregarSlide-page" on-device-backbutton="backtoHome()" style="background: url('background-1.jpg');">
+  
+		  <div id="pagina-personalizada"></div>
+
+</ons-page>
+</ons-navigator>
+</script>
+
 <script type="text/ons-template" id="Pagina-Indicacao.html"> 
 <ons-navigator id="indicacao-page" title="Navigator" var="sNavigator"> 
 <ons-page id="page-indicacao" ng-controller="TabbarController">
@@ -855,7 +877,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     
    </ons-toolbar>
 		<button id="menu-adress" class="button button--quiet button--large green" onclick="popUpAddressBook();">Selecione da sua lista de endereços</button>
-		<p id="menu-adress" class="small-font-dim center">ou escolha uma das opções abaixo</p>
+		<p id="menu-adress" class="small-font-dim center trn" data-trn-key="ou escolha uma das opções abaixo">ou escolha uma das opções abaixo</p>
    
    <form id="frm-shipping" class="frm-shipping" method="post">
    
@@ -868,18 +890,18 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 			<input type="hidden" name="zipcode" class="zipcode">
 			<input type="hidden" name="area_name" class="area_name">
    
-      <div class="home-page wrapper center">       
+      <div class="home-page wrapper center" style="margin-top: -15px; margin-bottom: -20px;">       
               
        <button class="button button--quiet green" onclick="getCurrentLocation();">
        <ons-icon icon="fa-location-arrow"></ons-icon>
-         <span class="trn">Informa a minha localização atual</span>
+         <span class="trn" data-trn-key="Informa a minha localização atual">Informa a minha localização atual</span>
        </button>       
 
 
-   <p class="trn textopequeno center" style="margin-top: 3px; margin-bottom: 5px;">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
+   <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
     </div>   
    <p> 
-	<div class="wrapper center"><span id="bairro" class="bairro wrapper center" style="color: white; font-size: 16px;"> </span><span class="wrapper center" style="color: white; font-size: 16px;"> / </span> <span id="cidade" class="cidade wrapper center" style="color: white; font-size: 16px;"> </span></div>
+	<div class="wrapper center"><span id="cidade" class="cidade wrapper center" style="color: white; font-size: 16px;"> </span><span class="wrapper center" style="color: white; font-size: 16px;"> | </span> <span id="bairro" class="bairro wrapper center" style="color: white; font-size: 16px;"> </span></div>
 	
 	</p>
    <p class="trn menuapp" style="margin-top: 3px; margin-bottom: 5px;">Preencha ou confira o endereço de entrega</p>    
@@ -938,7 +960,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 		    Save to my address book
 		  </span>
 	    </div> 
-
+<br>
    
     <button class="button masterhub-btn button--large trn" onclick="clientShipping();" data-trn-key="select_payment_method">
 	Select Payment Method

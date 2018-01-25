@@ -651,6 +651,15 @@ document.addEventListener("pageinit", function(e) {
 			
 			break;
 		/* FIM da Modificação Pagina Personalizada */
+			
+		/* Modificação Slide Personalizado */
+		case "carregarSlide-page":	
+		var slide=getStorage("slide");
+		callAjax("Pagina","id="+slide);
+			
+			break;
+		/* FIM da Modificação Slide Personalizado */
+
 		case "searchcategorias-page":	
 
 		// Destaques da semana vindo do Admin
@@ -700,13 +709,13 @@ document.addEventListener("pageinit", function(e) {
 			
 				/*Fim da Atualização*/
 	var splash_screen = getStorage("splash_screen");
-	var splash_paginas=getStorage("splash_paginas");
-	dump("splash_paginas=>"+splash_paginas);
+	var slide=getStorage("slide");
+	dump("slide=>"+slide);
 		
 	
 	if (empty(splash_screen))
 	{
-		carregarPagina(splash_paginas);
+		carregarPagina(slide);
 		
 		setStorage("splash_screen", 2);
 		return;
@@ -816,11 +825,15 @@ document.addEventListener("pageinit", function(e) {
 		setTimeout('carregandoSeguimentos()', 2800);
 
 		break;
-		/* Modificação Pagina Personalizada */
+		/* Modificação Pagina e Slide Personalizada */
 		case "carregarPagina-page":
 			
 		  break;
-		/* FIM da Modificação Pagina Personalizada */
+			
+		case "carregarSlide-page":
+			
+		  break;		
+		/* FIM da Modificação Pagina e Slide Personalizada */
 		case "page-addsuggestions":
 			carregandoSugestoes();
 		  break;
@@ -1377,8 +1390,8 @@ function onsenDialogAddresBookOld(){
 			$(".search_by_location").show();
 			$(".search_by_location_btn").hide();
 			$(".search_by_address").hide();
-		    $(".location_area").html("Bairro");
-			$(".location_city").html("Cidade");
+		    $(".location_area").html(getTrans("District / Area","destrict_area"));
+			$(".location_city").html(getTrans("City", "city"));
 	  }
 	});		
 }
@@ -2385,8 +2398,8 @@ function callAjax(action,params)
 			      fillAddressBook(data.details);
 
 					if (data.details.area_id==0 || data.details.city_id==0){
-	$("#frm-addressbook .location_area").html("");
-	$("#frm-addressbook .location_city").html("");
+	$("#frm-addressbook .location_area").html(getTrans("District / Area","destrict_area"));
+	$("#frm-addressbook .location_city").html(getTrans("City", "city"));
 	$("#frm-addressbook .area_id").val("");
 	$("#frm-addressbook .city_id").val("");
 	$("#frm-addressbook .state_id").val("");		
@@ -2433,12 +2446,13 @@ function callAjax(action,params)
 			    
 			    case "reverseGeoCoding":
 			       $("#s").html(data.details.formatted_address);
-					$("#street").val(data.details.address);
-					$("#numero").val(data.details.numero);
+					$(".street").val(data.details.address);
+					$(".numero").val(data.details.numero);
 					$(".cidade").html(data.details.city);
 					$(".bairro").html(data.details.area_name);
-					$(".location_area", "#frm-shipping").html('');
-					$(".location_city", "#frm-shipping").html('');
+					$(".location_area", "#frm-shipping").html(getTrans("District / Area","destrict_area"));
+					$(".location_name", "#frm-shipping").val('');
+					$(".location_city", "#frm-shipping").html(getTrans("City", "city"));
 					$(".city_id", "#frm-shipping").val('');
 					$(".area_id", "#frm-shipping").val('');
 					$(".city", "#frm-shipping").val('');
@@ -2574,8 +2588,8 @@ function callAjax(action,params)
 				   /*menu lista de enderecos - ativa-desativa */
 				   setStorage("address_book_on",data.details.settings.address_book_on);
 					
-					/*splash_paginas*/
-				   setStorage("splash_paginas",data.details.settings.splash_paginas);
+					/*splash_paginas slide*/
+				   setStorage("slide",data.details.settings.splash_paginas);
 				   
 			/*Fim da atualização*/
 			
@@ -6331,7 +6345,7 @@ function displayAddressBookPopup(data)
 		 complete_address+=val.city_id+"|";
 		 complete_address+=val.state_id+"|";
 		   
-	if (val.area_id==0 || data.city_id==0){
+	if (val.area_id==0 || val.city_id==0){
 	 toastMsg( getTrans('O endereço "'+val.street+' nº '+val.numero+', '+val.area_name+'" está desatualizado no catálogo de endereços, atualize-o antes de selecioná-lo!','O endereço '+val.street+' nº '+val.numero+' - '+val.area_name+' está desatualizado no catálogo de endereços, atualize-o antes de selecioná-lo!')); 
 		return;
 		}
@@ -7590,7 +7604,7 @@ function isDebug()
 {	
 	//on/off
 	//return true;
-	return false;
+	return true;
 }
 
 var rzr_successCallback = function(payment_id) {
@@ -9384,6 +9398,8 @@ function initSlideMenu()
        }
        
        initCustomPages();
+	   
+	   Splash_Pagina_menu();
        
        translatePage();    
           
@@ -10315,6 +10331,27 @@ function getPage(page_id)
 		closeMenu: true,
 		callback: function(index){				
 			callAjax('getPages', "page_id=" + page_id );
+	    }
+	});	
+}
+
+function Splash_Pagina_menu()
+{
+	var slide=getStorage("slide");
+	var html='';
+	html+='<ons-list-item onclick="getSlide('+slide+');" class="bottom-menu-item">';
+	html+='<ons-icon icon="ion-university"></ons-icon> ';
+	html+='<span class="trn" data-trn-key="apresentacao">Apresentação Inicial</span>';
+	html+='</ons-list-item>';
+		
+			createElement("splash-pagina-menu",html);
+}
+
+function getSlide(slide)
+{	
+	menu.setMainPage('Slide-Personalizado.html', {
+		closeMenu: true,
+		callback: function(index){				
 	    }
 	});	
 }
