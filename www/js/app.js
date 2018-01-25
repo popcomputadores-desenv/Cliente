@@ -206,7 +206,6 @@ ons.bootstrap()
 
 ons.ready(function() {
 	dump('ready');
-	
 		/*Atualização Master Hub (Atualiza Versão do Android)*/
 if(!isDebug()){
 			var versao = getStorage('versao');
@@ -234,6 +233,8 @@ if(!isDebug()){
 	}
 		   
 }
+	
+
 	/*Fim da Atualização*/
 		
 	if(isDebug()){
@@ -428,7 +429,7 @@ function searchMerchant()
 document.addEventListener("pageinit", function(e) {
 	dump("pageinit");	
 	dump("pagname => "+e.target.id);
-
+	
 	/*Atualização Master Hub (Oculta Categorias e Mostra um Botão)*/
 		   var busca_categoria = getStorage("busca_categoria");
 	       dump("busca_categoria=>"+busca_categoria);
@@ -440,7 +441,6 @@ document.addEventListener("pageinit", function(e) {
 	       } else {
 			  $(".botao-busca").hide();
 	       }
-	/*Fim da Atualização*/
 			
 	switch (e.target.id)
 	{		
@@ -650,7 +650,7 @@ document.addEventListener("pageinit", function(e) {
 		callAjax("Pagina","id="+pagina);
 			
 			break;
-		/* FIM da Modificação Pagina Personalizada */	
+		/* FIM da Modificação Pagina Personalizada */
 		case "searchcategorias-page":	
 
 		// Destaques da semana vindo do Admin
@@ -697,6 +697,20 @@ document.addEventListener("pageinit", function(e) {
 		case "page-home":		    
 		    
 		    translatePage();
+			
+				/*Fim da Atualização*/
+	var splash_screen = getStorage("splash_screen");
+	var splash_paginas=getStorage("splash_paginas");
+	dump("splash_paginas=>"+splash_paginas);
+		
+	
+	if (empty(splash_screen))
+	{
+		carregarPagina(splash_paginas);
+		
+		setStorage("splash_screen", 2);
+		return;
+	}
 		
 		    search_mode = getSearchMode();
 		    if ( search_mode=="postcode"){		
@@ -740,8 +754,8 @@ document.addEventListener("pageinit", function(e) {
 					case 2:
 					
 					if ( !empty(global_state_id)){
-						$(".state_id").val( global_state_id );
-						$(".location_state").html( global_state_name );
+					$(".state_id").val( global_state_id );
+					$(".location_state").html( global_state_name );
 					}	
 					
 					$(".location_state").show();
@@ -803,11 +817,10 @@ document.addEventListener("pageinit", function(e) {
 
 		break;
 		/* Modificação Pagina Personalizada */
-		case "page-Pagina":
+		case "carregarPagina-page":
 			
 		  break;
 		/* FIM da Modificação Pagina Personalizada */
-		
 		case "page-addsuggestions":
 			carregandoSugestoes();
 		  break;
@@ -1098,7 +1111,6 @@ document.addEventListener("pageinit", function(e) {
 		   
 		   if ( !empty(global_city_id)){
 		   	   $(".location_city").html( global_city_name );
-		   	   
 		   	   $(".city").val( global_city_name );
 		   	   $(".city_id").val( global_city_id );
 		   }
@@ -1347,6 +1359,30 @@ function onsenDialogAddresBookDefault(){
 	  }
 	});		
 }
+
+function onsenDialogAddresBookOld(){
+
+	ons.notification.confirm({
+	  messageHTML: getTrans('Você tem endereço cadastrado, porém está desatualizado!<br>Deseja atualizar seus endereços agora?','Você tem endereço cadastrado, porém está desatualizado!<br>Deseja atualizar seus endereços agora?') ,	  
+	  title: getTrans('Endereço desatualizado!','Endereço desatualizado!'),
+	  buttonLabels: ['Sim', 'Não'],
+	  animation: 'fade', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	  	dump(index);
+	    if ( index==0){
+	    	setEnderecoNovo();
+	    } else 
+			$(".search_by_location").show();
+			$(".search_by_location_btn").hide();
+			$(".search_by_address").hide();
+		    $(".location_area").html("Bairro");
+			$(".location_city").html("Cidade");
+	  }
+	});		
+}
+
 function onsenDialogSugestao(){
 
 	ons.notification.confirm({
@@ -1506,9 +1542,11 @@ function callAjax(action,params)
 				 break;
 					
 				case "CarregaEndereco":
-					
 				if (data.details.has_addressbook==2){
 			      if(!empty(data.details.default_address)){
+					if (data.details.default_address.area_id==0 || data.details.default_address.city_id==0 || data.details.default_address.state_id==0){
+						onsenDialogAddresBookOld(); 
+					} else
 					  
 			$(".area_id").val(data.details.default_address.area_id);
 			$(".city_id").val(data.details.default_address.city_id);
@@ -1517,10 +1555,8 @@ function callAjax(action,params)
 					  
 			setStorage("global_area_name", data.details.default_address.area_name);
 			setStorage("global_city_name", data.details.default_address.city);
-			setStorage("global_state_name", data.details.default_address.state);	  
 			setStorage("global_area_id", data.details.default_address.area_id);
 			setStorage("global_city_id", data.details.default_address.city_id);
-			setStorage("global_state_id", data.details.default_address.state_id);
 
 			$(".location_city").html(data.details.default_address.city);
 			$(".search_by_location").hide();
@@ -1796,8 +1832,8 @@ function callAjax(action,params)
 								 getStorage("cart_tax_final"), 
 								 getStorage("cart_packaging_final"),
 								 getStorage("cart_discount_final"),
-								 getStorage("cart_tip_final"),							  		'page-shipping');
-					      	     
+								 getStorage("cart_tip_final"),							  
+					      	     'page-shipping');
 					      	     fillShippingAddress();
 					      } 
 					    };     
@@ -2337,10 +2373,24 @@ function callAjax(action,params)
 				   
 				case "getAddressBook":  
 				  displayAddressBook(data.details);
+					
+					if (data.details.address.length>0){
+				if (empty(data.details.default_address)){
+					$(".endereco_padrao").show();
+					} else $(".endereco_padrao").hide();
+				} else $(".endereco_padrao").hide();
 				  break;  
 				  
 			    case "getAddressBookDetails":
 			      fillAddressBook(data.details);
+
+					if (data.details.area_id==0 || data.details.city_id==0){
+	$("#frm-addressbook .location_area").html("");
+	$("#frm-addressbook .location_city").html("");
+	$("#frm-addressbook .area_id").val("");
+	$("#frm-addressbook .city_id").val("");
+	$("#frm-addressbook .state_id").val("");		
+		}
 			      break;  
 			      
 			    case "saveAddressBook":  
@@ -2406,10 +2456,6 @@ function callAjax(action,params)
 			       
 			       var device_id=getStorage("device_id");
 			       $(".device_id_val").html( device_id );
-					 /*city_id*/
-				setStorage("city_id_usuario",data.details.city_id);
-				setStorage("area_id_usuario",data.details.area_id);
-			
 			       break;
 			       
 			    case "mobileCountryList":   
@@ -2527,6 +2573,9 @@ function callAjax(action,params)
 				   				
 				   /*menu lista de enderecos - ativa-desativa */
 				   setStorage("address_book_on",data.details.settings.address_book_on);
+					
+					/*splash_paginas*/
+				   setStorage("splash_paginas",data.details.settings.splash_paginas);
 				   
 			/*Fim da atualização*/
 			
@@ -3277,13 +3326,6 @@ function callAjax(action,params)
 			       }
 			       break;  
 					
-				case "salvaEndereco":  
-			      /* if (data.code==3){
-			           menu.setMainPage('prelogin.html', {closeMenu: true}); 
-			       } else {
-			       	   toastMsg(data.msg);
-			       } */
-			       break;  			      			    
 			    case "registerMobile":  			    
 			    //case "getLanguageSettings":  
 			      /*silent */
@@ -6125,9 +6167,28 @@ function reOrder(order_id)
 function displayAddressBook(data)
 {
 	var htm='<ons-list>';
-	if ( data.length>0){		
-	   $.each( data, function( key, val ) {   		
+	if ( data.address.length>0){		
+	   $.each( data.address, function( key, val ) {  
+		   
+		   if (val.area_id==0 || val.city_id==0){
+		   
 	     htm+='<ons-list-item modifier="tappable" onclick="modifyAddressBook('+val.id+');" >';
+	         htm+='<ons-row class="row">';
+	            htm+='<ons-col class="" width="70%">';
+	            htm+='<p class="small-font-dim"style="color: #670707;">'+val.address+'</p>';
+	            htm+='</ons-col>';
+	            htm+='<ons-col class="text-right" >';
+	              if (val.as_default==2){
+	                 htm+='<ons-icon icon="ion-ios-location-outline"></ons-icon>';
+	              }
+	            htm+='</ons-col>';
+			   htm+='<i class="white text-center" style="margin-top: -20px; margin-bottom: -7px; font-size: 12px;">Este endereço está desatualizado!</i>';			   
+	         htm+='<ons-row>';
+	     htm+='</ons-list-item>';
+			   
+		   } else {
+		   
+		  htm+='<ons-list-item modifier="tappable" onclick="modifyAddressBook('+val.id+');" >';
 	         htm+='<ons-row class="row">';
 	            htm+='<ons-col class="" width="70%">';
 	            htm+='<p class="small-font-dim">'+val.address+'</p>';
@@ -6139,6 +6200,7 @@ function displayAddressBook(data)
 	            htm+='</ons-col>';
 	         htm+='<ons-row>';
 	     htm+='</ons-list-item>';
+		   }
 	   });
    }  
    htm+='</ons-list>';
@@ -6163,7 +6225,6 @@ function fillAddressBook(data)
 {
 	$(".action").val('edit');
 	$(".delete-addressbook").show();
-	
 	
 	$(".id").val( data.id );
 	$(".street").val( data.street );
@@ -6256,8 +6317,8 @@ function popUpAddressBook()
 function displayAddressBookPopup(data)
 {		
 	var htm='<ons-list>';
-	if ( data.length>0){		
-	   $.each( data, function( key, val ) {   		
+	if ( data.address.length>0){		
+	   $.each( data.address, function( key, val ) {   		
 	   	 var complete_address=val.street+"|";
 	   	 complete_address+=val.numero+"|";
 	   	 complete_address+=val.area_name+"|";
@@ -6269,6 +6330,11 @@ function displayAddressBookPopup(data)
 		 complete_address+=val.area_id+"|";
 		 complete_address+=val.city_id+"|";
 		 complete_address+=val.state_id+"|";
+		   
+	if (val.area_id==0 || data.city_id==0){
+	 toastMsg( getTrans('O endereço "'+val.street+' nº '+val.numero+', '+val.area_name+'" está desatualizado no catálogo de endereços, atualize-o antes de selecioná-lo!','O endereço '+val.street+' nº '+val.numero+' - '+val.area_name+' está desatualizado no catálogo de endereços, atualize-o antes de selecioná-lo!')); 
+		return;
+		}
 	   	 
 	     htm+='<ons-list-item modifier="tappable" class="setAddress" data-address="'+complete_address+'" >';
 	         htm+='<ons-row class="row">';
@@ -7527,7 +7593,7 @@ function isDebug()
 	return false;
 }
 
-	rzr_successCallback = function(payment_id) {
+var rzr_successCallback = function(payment_id) {
   //alert('payment_id: ' + payment_id)
     var params="payment_id="+payment_id;
 	params+="&order_id="+ getStorage("order_id");
@@ -8667,28 +8733,7 @@ function MapInit_Track()
 		    ];
 		    		    		    
 		    addMarkers(data, function(markers) {    
-		    	
-		    	if ( iOSeleven() ){		    		
-		    		map.animateCamera({
-						  'target': dropoff_location,
-						  'zoom': 17,
-						  'tilt': 30
-					}, function() {			
-									
-						map.animateCamera({
-						  'target': destination,
-						  'zoom': 17,
-						  'tilt': 30
-						}, function() {			
-							
-							stopTrackMapInterval();
-  	                        track_order_map_interval = setInterval(function(){runTrackMap()}, 10000);
-												
-						}); /*end animate*/		
-									
-					}); /*end animate*/
-		    		
-		    	} else {		    	
+
 			    	map.addPolyline({
 					points: [
 					  driver_location,
@@ -8731,9 +8776,7 @@ function MapInit_Track()
 						}); /*end animate*/
 						
 					});  /*end polyline*/
-					
-		    	}
-		    	  								    		
+
 	        });/* end marker*/
 		 	
 		 });/* even listner*/
@@ -9447,10 +9490,12 @@ function searchCity()
 function loadAjaxLocationCity(s)
 {
 	search_type = getSearchType();	
-	if(empty(global_state_id)){
+	/* Tira o estado selecionado, deixa todas as cidades sempre visíveis na lista de cidades
+		if(empty(global_state_id)){
 		global_state_id='';
-	}
-	
+	} Linha abaixo tira o estado */
+	global_state_id='';
+
 	params="state_id="+ global_state_id ;
 	if(!empty(s)){
 		params+="&s="+ s ;
@@ -9721,7 +9766,6 @@ function showState()
         dialog.show();        
     });	
 	} else {
-		$(".search_state").val("");
 		callAjax('locationState', '' );
 		locationState.show();
 	}	

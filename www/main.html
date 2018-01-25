@@ -633,57 +633,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 
 </ons-page>
 </ons-navigator>
-
-<form id="frm-settings" class="frm-settings" method="post">   
-   <input type="hidden" name="country_code_set" id="country_code_set" class="country_code_set">   
-<div style="display:none;">
-<div class="wrapper">
-   
-   <div class="settings-header trn" data-trn-key="software_version">Software version</div>
-     <ons-list modifier="inset" class="settings-list">        
-        <ons-list-item >
-          <span class="software_version concat-text"></span>          
-        </ons-list-item>
-      </ons-list>
-   
-     <div class="settings-header trn" data-trn-key="device_id">Device ID</div>
-     <ons-list modifier="inset" class="settings-list">        
-        <ons-list-item >
-          <span class="device_id_val concat-text"></span>          
-        </ons-list-item>
-      </ons-list>
-   
-     <div class="settings-header trn" data-trn-key="notifications">Notifications</div>
-     <ons-list modifier="inset" class="settings-list">        
-        <ons-list-item >
-          <span class="trn" data-trn-key="enabled_push_notification">Enabled Push Notification</span>
-          <ons-switch modifier="list-item" var="enabled_push" name="enabled_push" id="enabled_push"  >
-          </ons-switch>
-        </ons-list-item>
-      </ons-list>
-      
-	
-       <div class="settings-header trn" data-trn-key="others">Others</div>
-             
-      
-      <ons-list modifier="inset" class="settings-list">
-        <ons-list-item modifier="chevron" onclick="showLocationPopUp();" class="trn" data-trn-key="change_location">
-          Change your location
-        </ons-list-item>        
-      </ons-list>
-      
-      <ons-list modifier="inset" class="settings-list">
-        <ons-list-item modifier="chevron" onclick="showLanguageList();" class="trn" data-trn-key="select_your_language">
-          Select your language
-        </ons-list-item>        
-      </ons-list>
-	</div>
-   
-   </div>
-   </form>      	   
-
 </script>
-
+	
 <script type="text/ons-template" id="Pagina-Indicacao.html"> 
 <ons-navigator id="indicacao-page" title="Navigator" var="sNavigator"> 
 <ons-page id="page-indicacao" ng-controller="TabbarController">
@@ -935,7 +886,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <ons-list>
    
-   <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
+   <ons-list-item modifier="chevron" style="display: none;" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
     State
     </ons-list-item>
    
@@ -964,13 +915,13 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 
 				<div class="field-wrapper">
       <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
-					placeholder="Apartment suite, unit number, or company name" data-validation="required" data-validation-error-msg="Este campo é obrigatório!"  >
+					placeholder="Apartment suite, unit number, or company name" >
       </div>      
 
    
       <div class="field-wrapper">
       <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
-					placeholder="Delivery instructions" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+					placeholder="Delivery instructions" value="" >
       </div>      
 
 				<div class="field-wrapper">
@@ -2607,6 +2558,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <ons-scroller id="address-book-list">    
    </ons-scroller> 
+   <div class="center wrapper endereco_padrao" style="font-size: 18px; display:none;"><ons-icon icon="ion-ios-location-outline"></ons-icon> <span class="trn" data-trn-key="Não há nenhum endereço seu marcado como padrão!">Não há nenhum endereço seu marcado como padrão!</span></div>
        
 </ons-page>
 </ons-navigator> 
@@ -2648,11 +2600,11 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
       placeholder="Zipcode" value="" onblur="pesquisacep(this.value);" >
       </div>
-	  Nota: Ao usar a caixa acima CEP, irá preencher somente o nome da rua, é necessário selecionar na lista o Estado, Cidade e Bairro. 
+	  Nota: Ao usar a caixa acima CEP, irá preencher somente o nome da rua, é necessário selecionar na lista a Cidade e o Bairro. 
 	  
    <ons-list>
    
-				<ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
+				<ons-list-item modifier="chevron" style="display: none;" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
 					State
 				</ons-list-item>
 	

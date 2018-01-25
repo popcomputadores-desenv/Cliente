@@ -449,7 +449,6 @@ pagina_personalizada+='</ons-carousel-cover>';
 
 /* FIM da Modificação Pagina Personalizada */
 
-
 function categorias_Resultado(data)
 {		
 		var htm='';
