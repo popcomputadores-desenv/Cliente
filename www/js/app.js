@@ -1557,7 +1557,7 @@ function callAjax(action,params)
 				case "CarregaEndereco":
 				if (data.details.has_addressbook==2){
 			      if(!empty(data.details.default_address)){
-					if (data.details.default_address.area_id==0 || data.details.default_address.city_id==0 || data.details.default_address.state_id==0){
+					if (data.details.default_address.area_id==0 || data.details.default_address.city_id==0){
 						onsenDialogAddresBookOld(); 
 					} else
 					  
