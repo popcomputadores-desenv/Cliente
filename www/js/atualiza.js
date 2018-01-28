@@ -16,3 +16,38 @@ function AtualizarApp(){
   }
 
 }
+
+function atualizarAppInicio()
+{
+	
+		if(!isDebug()){
+				var versao = getStorage('versao');
+				var versaoCode = getStorage('versaoCode');
+				var ver_aplicativo = getStorage('versao_aplicativo');
+				var ver_aplicativo_code = getStorage('versao_aplicativo_code');
+				versao_aplicativo = getStorage("versao_aplicativo");
+				dump("versao_aplicativo=>"+versao_aplicativo);
+				versao_aplicativo_code = getStorage("versao_aplicativo_code");
+				dump("versao_aplicativo_code=>"+versao_aplicativo_code);
+		if(typeof versao_aplicativo===getStorage("versao") || versao_aplicativo_code===getStorage("versaoCode")){
+			   } else {
+			var forcar_atualizar = getStorage("forcar_atualizar");
+			dump("forcar_atualizar=>"+forcar_atualizar);
+			if(forcar_atualizar==='yes'){
+				  ons.createAlertDialog('alerta-atualizacao-forcada.html').then(function(alertDialog) {
+					alertDialog.show();
+					  removeStorage("splash_screen");
+					});
+			   } else {
+				  ons.createAlertDialog('alerta-atualizacao.html').then(function(alertDialog) {
+					alertDialog.show();
+					  removeStorage("splash_screen");
+					});
+			}
+
+		}
+
+	}
+	
+}
+
