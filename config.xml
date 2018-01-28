@@ -26,6 +26,7 @@
 	<gap:plugin name="mercadopago-plugin-2" source="npm"/>
     
 	<gap:plugin name="onesignal-cordova-plugin" spec="2.1.2" source="npm" />
+	<gap:plugin name="cordova-universal-links-plugin" spec="1.2.1" source="npm" />
     <gap:plugin name="cordova-plugin-device" source="npm" />		
 	<gap:plugin name="cordova-plugin-inappbrowser" source="npm" />		
 	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />	
