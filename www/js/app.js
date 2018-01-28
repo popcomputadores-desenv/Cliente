@@ -725,38 +725,6 @@ document.addEventListener("pageinit", function(e) {
 		return;
 	}
 			
-		/*Atualização Master Hub (Atualiza Versão do Android)*/
-	
-if(!isDebug()){
-			var versao = getStorage('versao');
-			var versaoCode = getStorage('versaoCode');
-			var ver_aplicativo = getStorage('versao_aplicativo');
-			var ver_aplicativo_code = getStorage('versao_aplicativo_code');
-		   	versao_aplicativo = getStorage("versao_aplicativo");
-	       	dump("versao_aplicativo=>"+versao_aplicativo);
-		   	versao_aplicativo_code = getStorage("versao_aplicativo_code");
-		   	dump("versao_aplicativo_code=>"+versao_aplicativo_code);
-	if(typeof versao_aplicativo===getStorage("versao") || versao_aplicativo_code===getStorage("versaoCode")){
-	       } else {
-		var forcar_atualizar = getStorage("forcar_atualizar");
-	    dump("forcar_atualizar=>"+forcar_atualizar);
-		if(forcar_atualizar==='yes'){
-	       	  ons.createAlertDialog('alerta-atualizacao-forcada.html').then(function(alertDialog) {
-    			alertDialog.show();
-				  removeStorage("splash_screen");
-  				});
-		   } else {
-	       	  ons.createAlertDialog('alerta-atualizacao.html').then(function(alertDialog) {
-    			alertDialog.show();
-				  removeStorage("splash_screen");
-  				});
-		}
-		   
-	}
-		   
-}
-	/*Fim da Atualização*/
-		
 		    search_mode = getSearchMode();
 		    if ( search_mode=="postcode"){		
 		    	
@@ -3372,6 +3340,39 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			      
 			    case "getLanguageSettings":   
 			      toastMsg(data.msg);
+					
+							/*Atualização Master Hub (Atualiza Versão do Android)*/
+	
+if(!isDebug()){
+			var versao = getStorage('versao');
+			var versaoCode = getStorage('versaoCode');
+			var ver_aplicativo = getStorage('versao_aplicativo');
+			var ver_aplicativo_code = getStorage('versao_aplicativo_code');
+		   	versao_aplicativo = getStorage("versao_aplicativo");
+	       	dump("versao_aplicativo=>"+versao_aplicativo);
+		   	versao_aplicativo_code = getStorage("versao_aplicativo_code");
+		   	dump("versao_aplicativo_code=>"+versao_aplicativo_code);
+	if(typeof versao_aplicativo===getStorage("versao") || versao_aplicativo_code===getStorage("versaoCode")){
+	       } else {
+		var forcar_atualizar = getStorage("forcar_atualizar");
+	    dump("forcar_atualizar=>"+forcar_atualizar);
+		if(forcar_atualizar==='yes'){
+	       	  ons.createAlertDialog('alerta-atualizacao-forcada.html').then(function(alertDialog) {
+    			alertDialog.show();
+				  removeStorage("splash_screen");
+  				});
+		   } else {
+	       	  ons.createAlertDialog('alerta-atualizacao.html').then(function(alertDialog) {
+    			alertDialog.show();
+				  removeStorage("splash_screen");
+  				});
+		}
+		   
+	}
+		   
+}
+	/*Fim da Atualização*/
+
 			      break;   
 			      
 
