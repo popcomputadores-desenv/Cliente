@@ -206,36 +206,6 @@ ons.bootstrap()
 
 ons.ready(function() {
 	dump('ready');
-		/*Atualização Master Hub (Atualiza Versão do Android)*/
-if(!isDebug()){
-			var versao = getStorage('versao');
-			var versaoCode = getStorage('versaoCode');
-			var ver_aplicativo = getStorage('versao_aplicativo');
-			var ver_aplicativo_code = getStorage('versao_aplicativo_code');
-		   	versao_aplicativo = getStorage("versao_aplicativo");
-	       	dump("versao_aplicativo=>"+versao_aplicativo);
-		   	versao_aplicativo_code = getStorage("versao_aplicativo_code");
-		   	dump("versao_aplicativo_code=>"+versao_aplicativo_code);
-	if(typeof versao_aplicativo===getStorage("versao") || versao_aplicativo_code===getStorage("versaoCode")){
-	       } else {
-		var forcar_atualizar = getStorage("forcar_atualizar");
-	    dump("forcar_atualizar=>"+forcar_atualizar);
-		if(forcar_atualizar==='yes'){
-	       	  ons.createAlertDialog('alerta-atualizacao-forcada.html').then(function(alertDialog) {
-    			alertDialog.show();
-  				});
-		   } else {
-	       	  ons.createAlertDialog('alerta-atualizacao.html').then(function(alertDialog) {
-    			alertDialog.show();
-  				});
-		}
-		   
-	}
-		   
-}
-	
-
-	/*Fim da Atualização*/
 		
 	if(isDebug()){
 		removeStorage("default_lang");
@@ -669,18 +639,34 @@ document.addEventListener("pageinit", function(e) {
 		// Cabeçalho das Buscas vindo do Admin
 		var codigo_cabecalho_buscas = getStorage("codigo_cabecalho_buscas");
 		createElement('codigo-cabecalho-buscas',codigo_cabecalho_buscas);
-		
+			
 		search_mode = getSearchMode();
 		if ( search_mode=="postcode"){
 			$("#search-text").html( '' );
+			switch (search_type)
+			{
+				case "1":				
+			var endereco='<ons-toolbar-button  onclick="">'+global_city_name+' - '+global_area_name+'</ons-toolbar-button>';
+				createElement('codigo-cabecalho-endereco', endereco);					
+				break;
+				
+				case "2":
+			var endereco='<ons-toolbar-button  onclick="">'+global_city_name+' -  '+global_state_name+'</ons-toolbar-button>';
+				createElement('codigo-cabecalho-endereco', endereco);		
+				break;
+				
+				case "3":
+				break;
+				
+				default:
+				break;
+			}			
 		} else {
 			$("#search-text").html( getStorage("search_address") );
 		}
-		
-		var endereco='<ons-toolbar-button  onclick="">'+global_city_name+' - '+global_area_name+'</ons-toolbar-button>';
-		createElement('codigo-cabecalho-endereco', endereco);
 						
-		break;			
+		break;	
+			
 		case "carregarcategorias-page":	
 		
 		var restaurant_name='';
@@ -690,8 +676,26 @@ document.addEventListener("pageinit", function(e) {
 		callAjax("search","address="+ getStorage("search_address")+"&cuisine_type="+seguimento+
 		"&restaurant_name="+ restaurant_name);
 			
-		var endereco='<ons-toolbar-button  onclick="">'+global_city_name+' - '+global_area_name+'</ons-toolbar-button>';
-		createElement('codigo-cabecalho-endereco', endereco);
+		switch (search_type)
+			{
+				case "1":				
+			var endereco='<ons-toolbar-button  onclick="">'+global_city_name+' - '+global_area_name+'</ons-toolbar-button>';
+				createElement('codigo-cabecalho-endereco', endereco);
+					
+				break;
+				
+				case "2":
+			var endereco='<ons-toolbar-button  onclick="">'+global_city_name+' -  '+global_state_name+'</ons-toolbar-button>';
+				createElement('codigo-cabecalho-endereco', endereco);		
+				break;
+				
+				case "3":
+				break;
+				
+				default:
+				break;
+			}			
+
 			
 		// Destaques da semana vindo do Admin
 		var codigo_destaque = getStorage("codigo_destaque");
@@ -720,12 +724,68 @@ document.addEventListener("pageinit", function(e) {
 		setStorage("splash_screen", 2);
 		return;
 	}
+			
+		/*Atualização Master Hub (Atualiza Versão do Android)*/
+	
+if(!isDebug()){
+			var versao = getStorage('versao');
+			var versaoCode = getStorage('versaoCode');
+			var ver_aplicativo = getStorage('versao_aplicativo');
+			var ver_aplicativo_code = getStorage('versao_aplicativo_code');
+		   	versao_aplicativo = getStorage("versao_aplicativo");
+	       	dump("versao_aplicativo=>"+versao_aplicativo);
+		   	versao_aplicativo_code = getStorage("versao_aplicativo_code");
+		   	dump("versao_aplicativo_code=>"+versao_aplicativo_code);
+	if(typeof versao_aplicativo===getStorage("versao") || versao_aplicativo_code===getStorage("versaoCode")){
+	       } else {
+		var forcar_atualizar = getStorage("forcar_atualizar");
+	    dump("forcar_atualizar=>"+forcar_atualizar);
+		if(forcar_atualizar==='yes'){
+	       	  ons.createAlertDialog('alerta-atualizacao-forcada.html').then(function(alertDialog) {
+    			alertDialog.show();
+				  removeStorage("splash_screen");
+  				});
+		   } else {
+	       	  ons.createAlertDialog('alerta-atualizacao.html').then(function(alertDialog) {
+    			alertDialog.show();
+				  removeStorage("splash_screen");
+  				});
+		}
+		   
+	}
+		   
+}
+	/*Fim da Atualização*/
 		
 		    search_mode = getSearchMode();
 		    if ( search_mode=="postcode"){		
 		    	
 		    	search_type = getSearchType();
 		    	dump("search_type=>"+search_type);
+					switch (search_type)
+				{
+					case "1":
+					case 1:
+					$(".location_state").hide();
+					$(".location_postal").hide();
+					break;
+					
+					case "2":
+					case 2:
+					$(".selecione_cidade_bairro_estado").html(getTrans("Selecione o Estado e a Cidade da Entrega","selecione_cidade_bairro_estado_entrega"));		
+					$(".location_state").show();
+					$(".location_area").hide();
+					$(".location_postal").hide();
+					break;
+					
+					case "3":
+					case 3:
+					$(".location_state").hide();
+					$(".location_city").hide();
+					$(".location_area").hide();
+					$(".location_postal").show();
+					break;
+				}
 				
 			if (isLogin()){
 				$(".search_by_location").hide();
@@ -739,46 +799,25 @@ document.addEventListener("pageinit", function(e) {
 
 				dump(global_city_id);
 				dump(global_area_id);
+				dump(global_state_id); 
 				dump(global_city_name);
 				dump(global_area_name);
+				dump(global_state_name);
 				
 				if ( !empty(global_city_id)){
 					$(".city_id").val( global_city_id );
+					$(".city").val( global_city_name );
 					$(".location_city").html( global_city_name );
 				}
 				if ( !empty(global_area_id)){
 					$(".area_id").val( global_area_id );
+					$(".area_name").val( global_area_name );
 					$(".location_area").html( global_area_name );
-				}	
-				
-				switch (search_type)
-				{
-					case "1":
-					case 1:
-					$(".location_state").hide();
-					$(".location_postal").hide();
-					break;
-					
-					case "2":
-					case 2:
-					
-					if ( !empty(global_state_id)){
+				}
+				if ( !empty(global_state_id)){
 					$(".state_id").val( global_state_id );
+					$(".state").val( global_state_name );
 					$(".location_state").html( global_state_name );
-					}	
-					
-					$(".location_state").show();
-					$(".location_area").hide();
-					$(".location_postal").hide();
-					break;
-					
-					case "3":
-					case 3:
-					$(".location_state").hide();
-					$(".location_city").hide();
-					$(".location_area").hide();
-					$(".location_postal").show();
-					break;
 				}
 							
 		    } else {
@@ -1147,8 +1186,9 @@ document.addEventListener("pageinit", function(e) {
 				case 2:
 
 				if ( !empty(global_state_id)){
-				$(".state_id").val( global_state_id );
 				$(".location_state").html( global_state_name );
+				$(".state_id").val( global_state_id );
+		   	   	$(".state").val( global_state_name );
 				}
 
 				$(".location_state").show();
@@ -1535,12 +1575,13 @@ function callAjax(action,params)
 			      if(!empty(data.details.default_address)){
 if (data.details.default_address.area_id==0 || data.details.default_address.city_id==0){
 						onsenDialogAddresBookOld(); 
-					}
+					} else 
 					  
 			$(".area_id").val(data.details.default_address.area_id);
 			$(".city_id").val(data.details.default_address.city_id);
 			$(".state_id").val(data.details.default_address.state_id);	  
 			$(".location_area").html(data.details.default_address.area_name);
+			$(".area_name").html(data.details.default_address.area_name);		  
 					  
 			setStorage("global_area_name", data.details.default_address.area_name);
 			setStorage("global_city_name", data.details.default_address.city);
@@ -1550,6 +1591,9 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			setStorage("global_state_id", data.details.default_address.state_id);
 
 			$(".location_city").html(data.details.default_address.city);
+			$(".location_state").html(data.details.default_address.state);
+			$(".city").html(data.details.default_address.city);
+			$(".state").html(data.details.default_address.state);		  
 			$(".search_by_location").hide();
 			$(".search_by_location_btn").show();
 			$(".search_by_address").hide();
@@ -2431,8 +2475,11 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					$(".location_area", "#frm-shipping").html(getTrans("District / Area","destrict_area"));
 					$(".location_name", "#frm-shipping").val('');
 					$(".location_city", "#frm-shipping").html(getTrans("City", "city"));
+					$(".location_state", "#frm-shipping").html(getTrans("State", "state"));
+					$(".state_id", "#frm-shipping").val('');
 					$(".city_id", "#frm-shipping").val('');
 					$(".area_id", "#frm-shipping").val('');
+					$(".state", "#frm-shipping").val('');
 					$(".city", "#frm-shipping").val('');
 					$(".area_name", "#frm-shipping").val('');
 			       break;
@@ -7582,7 +7629,7 @@ function isDebug()
 {	
 	//on/off
 	//return true;
-	return false;
+	return true;
 }
 
 var rzr_successCallback = function(payment_id) {
@@ -9510,7 +9557,7 @@ function loadAjaxLocationCity(s)
 		if(empty(global_state_id)){
 		global_state_id='';
 	} Linha abaixo tira o estado */
-	global_state_id='';
+	//global_state_id='';
 
 	params="state_id="+ global_state_id ;
 	if(!empty(s)){

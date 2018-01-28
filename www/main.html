@@ -570,12 +570,16 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
        
        <div class="home-page center">       
 
-	<h4 class="trn" data-trn-key="order_food_online" style="display: block; margin-top: 0px; margin-bottom: 18px; color: #ccc; font-size: 16px; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">Order food online from 1000+ restaurants!</h4>   
+	<h4 class="trn selecione_cidade_bairro_estado" data-trn-key="order_food_online" style="display: block; margin-top: 0px; margin-bottom: 18px; color: #ccc; font-size: 16px; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">Order food online from 1000+ restaurants!</h4>   
 		   
        
        <input type="hidden" name="state_id" id="state_id" class="state_id" >
        <input type="hidden" name="city_id" id="city_id" class="city_id" >
        <input type="hidden" name="area_id" id="area_id" class="area_id" >
+	   <input type="hidden" name="state" id="state" class="state" >
+       <input type="hidden" name="city" id="city" class="city" >
+       <input type="hidden" name="area_name" id="area_name" class="area_name" >
+
        
        <ons-list style="border-radius: 8px;" modifier="inset">
 		   
@@ -599,15 +603,15 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	
        </ons-list>
 		   </br>
+		   </div>
        
+    </div> 		   
 	<div class="botao-busca wrapper center">   
       <button class="button button--large" style="border-radius: 8px; border: 0px solid #000; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); background: #841011; box-shadow: 1px -1px 10px 2px rgba(0,0,0,0.6);" onclick="carregarCategorias();">
         <ons-icon icon="fa-find"></ons-icon> <span class="trn" data-trn-key="search_restaurant">Procurar Estabelecimentos</span>
       </button>                   
    </div> 
-		   </div>
-       
-       </div>              
+	
         
 		<div class="center" id="lista-categorias"></div>
 		
@@ -995,54 +999,6 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    
    <div id="codigo-cabecalho-buscas"></div>
-   
-<form id="frm-settings" class="frm-settings" method="post">   
-   <input type="hidden" name="country_code_set" id="country_code_set" class="country_code_set">   
-<div style="display:none;">
-<div class="wrapper">
-   
-   <div class="settings-header trn" data-trn-key="software_version">Software version</div>
-     <ons-list modifier="inset" class="settings-list">        
-        <ons-list-item >
-          <span class="software_version concat-text"></span>          
-        </ons-list-item>
-      </ons-list>
-   
-     <div class="settings-header trn" data-trn-key="device_id">Device ID</div>
-     <ons-list modifier="inset" class="settings-list">        
-        <ons-list-item >
-          <span class="device_id_val concat-text"></span>          
-        </ons-list-item>
-      </ons-list>
-   
-     <div class="settings-header trn" data-trn-key="notifications">Notifications</div>
-     <ons-list modifier="inset" class="settings-list">        
-        <ons-list-item >
-          <span class="trn" data-trn-key="enabled_push_notification">Enabled Push Notification</span>
-          <ons-switch modifier="list-item" var="enabled_push" name="enabled_push" id="enabled_push"  >
-          </ons-switch>
-        </ons-list-item>
-      </ons-list>
-      
-	
-       <div class="settings-header trn" data-trn-key="others">Others</div>
-             
-      
-      <ons-list modifier="inset" class="settings-list">
-        <ons-list-item modifier="chevron" onclick="showLocationPopUp();" class="trn" data-trn-key="change_location">
-          Change your location
-        </ons-list-item>        
-      </ons-list>
-      
-      <ons-list modifier="inset" class="settings-list">
-        <ons-list-item modifier="chevron" onclick="showLanguageList();" class="trn" data-trn-key="select_your_language">
-          Select your language
-        </ons-list-item>        
-      </ons-list>
-	</div>
-   
-   </div>
-   </form>      	   
    
    <div id="codigo-destaque"></div>
    
@@ -2626,7 +2582,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	  
    <ons-list>
    
-				<ons-list-item modifier="chevron" style="display: none;" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
+				<ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
 					State
 				</ons-list-item>
 	

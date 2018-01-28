@@ -160,6 +160,8 @@ function carregarCategorias(id)
   	   	  case 1:
 	  	   	  global_city_id = $(".city_id").val();
 	  	   	  global_area_id = $(".area_id").val();
+			  global_city_name = $(".location_city").html();
+	  	   	  global_area_name = $(".location_area").html();
 	  	   	    	   	  
 			  if ( empty(global_city_id) ){
 				  onsenAlert( getTrans('Please select City first','please_select_city') );
@@ -172,8 +174,13 @@ function carregarCategorias(id)
   	   	  break;
   	   	  
   	   	  case "2":
-  	   	  case 2:  	   	    	   	    	   	  
-	  	   	  if(empty(global_state_id)){
+  	   	  case 2:  
+			  global_state_id = $(".state_id").val();
+	  	   	  global_city_id = $(".city_id").val();
+			  global_state_name = $(".location_state").html();
+	  	   	  global_city_name = $(".location_city").html();
+			   
+			   if(empty(global_state_id)){
 				  onsenAlert( getTrans('Please select State first','please_select_state') );
 				  return;
 		      }
@@ -184,7 +191,8 @@ function carregarCategorias(id)
   	   	  break;
   	   	  
   	   	  case "3":
-  	   	  case 3:  	   	    	   	      
+  	   	  case 3:  	 
+			   global_postal_code = $(".postal_code").val();
 	  	   	  if (empty(global_postal_code)){
 				  onsenAlert( getTrans('Please select Postal code','please_postal_code') );
 				  return;
