@@ -32,6 +32,7 @@ function atualizarAppInicio()
 			   } else {
 			var forcar_atualizar = getStorage("forcar_atualizar");
 			dump("forcar_atualizar=>"+forcar_atualizar);
+				   removeStorage("splash_screen");
 			if(forcar_atualizar==='yes'){
 				  ons.createAlertDialog('alerta-atualizacao-forcada.html').then(function(alertDialog) {
 					alertDialog.show();
