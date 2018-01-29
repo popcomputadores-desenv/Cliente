@@ -624,7 +624,6 @@ document.addEventListener("pageinit", function(e) {
 		case "carregarPagina-page":	
 		var pagina=getStorage("pagina");
 		callAjax("Pagina","id="+pagina);
-			
 			break;
 		/* FIM da Modificação Pagina Personalizada */
 			
@@ -632,7 +631,6 @@ document.addEventListener("pageinit", function(e) {
 		case "carregarSlide-page":	
 		var slide=getStorage("slide");
 		callAjax("Pagina","id="+slide);
-			
 			break;
 		/* FIM da Modificação Slide Personalizado */
 
@@ -839,11 +837,9 @@ document.addEventListener("pageinit", function(e) {
 		break;
 		/* Modificação Pagina e Slide Personalizada */
 		case "carregarPagina-page":
-			
 		  break;
 			
 		case "carregarSlide-page":
-			
 		  break;		
 		/* FIM da Modificação Pagina e Slide Personalizada */
 		case "page-addsuggestions":
@@ -1633,6 +1629,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					
 				case "Pagina":
 				paginaResultado(data.details);
+					translatePage();
 				break;
 
 				case "getItemByCategory":			

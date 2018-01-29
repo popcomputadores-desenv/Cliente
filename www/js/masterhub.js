@@ -430,7 +430,7 @@ function carregarPagina(pagina)
 	}
 	
    menu.setMainPage('Pagina-Personalizada.html');
-	
+	translatePage();
 }
 
 
@@ -441,9 +441,9 @@ function paginaResultado(data)
 	var pagina_personalizada='';
 	
 	pagina_personalizada+='<ons-carousel swipeable overscrollable auto-scroll fullscreen var="carousel">';
-	
+	translatePage();
 	$.each( data.custom_page, function( key, val ) { 
-
+		
 	pagina_personalizada+='<ons-carousel-item class="fundo">';	
 	pagina_personalizada+='<div align="left" style="width: auto; margin-right: 25px; margin-top: 15px; margin-left: 10px; position: absolute;">'+val.page_name+'</div>';
 		var nome_pagina=val.page_name;
