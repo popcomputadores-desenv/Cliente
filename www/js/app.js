@@ -411,10 +411,8 @@ document.addEventListener("pageinit", function(e) {
 	       } else {
 			  $(".botao-busca").hide();
 	       }
-	if (!empty(splash_screen))
-	{	
+
 	atualizarAppInicio();
-	}
 	
 	switch (e.target.id)
 	{		
@@ -7600,7 +7598,7 @@ function isDebug()
 {	
 	//on/off
 	//return true;
-	return true;
+	return false;
 }
 
 var rzr_successCallback = function(payment_id) {
