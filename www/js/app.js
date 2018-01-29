@@ -215,6 +215,12 @@ ons.ready(function() {
 
 	}
 	
+	if(!isDebug()){
+		setTimeout('atualizarAppInicio();', 3000);
+		
+	}
+	
+	
 	var address_book_on=getStorage("address_book_on");
 	dump("address_book_on=>"+address_book_on);
 	if(address_book_on!="yes"){
@@ -412,8 +418,6 @@ document.addEventListener("pageinit", function(e) {
 			  $(".botao-busca").hide();
 	       }
 
-	atualizarAppInicio();
-	
 	switch (e.target.id)
 	{		
 		
