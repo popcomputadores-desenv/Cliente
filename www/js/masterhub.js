@@ -52,6 +52,14 @@ var lazyLoadSearchCategorias = {
   }
 }
 
+function SairdoSlide(){
+	if (isLogin()){		
+		menu.setMainPage('home.html', {closeMenu: true});
+	} else {
+		menu.setMainPage('prelogin.html', {closeMenu: true});
+	}
+}
+
 function getcarregarCategorias(index)
 {
 	var params='';
