@@ -446,8 +446,8 @@ function paginaResultado(data)
 
 	pagina_personalizada+='<ons-carousel-item class="fundo">';	
 	pagina_personalizada+='<div align="left" style="width: auto; margin-right: 25px; margin-top: 15px; margin-left: 10px; position: absolute;">'+val.page_name+'</div>';
-		
-		if (val.page_name.contains("...")){
+		var nome_pagina=val.page_name;
+		if (nome_pagina.indexOf("...") != -1){
 	pagina_personalizada+='<div class="box" align="right" style="right:20px;top:10px">';
 	pagina_personalizada+='<img src="css/images/bot_fecha.png" width="30px" height="40px" onclick="fechar_prop();" ></div>';	
 		}
