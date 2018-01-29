@@ -723,9 +723,7 @@ document.addEventListener("pageinit", function(e) {
 	
 	if (empty(splash_screen))
 	{
-		atualizarAppInicio();
-		
-		setTimeout('carregarPagina(slide);', 2000);
+		carregarPagina(slide);
 		
 		setStorage("splash_screen", 2);
 		return;
@@ -7602,7 +7600,7 @@ function isDebug()
 {	
 	//on/off
 	//return true;
-	return false;
+	return true;
 }
 
 var rzr_successCallback = function(payment_id) {
