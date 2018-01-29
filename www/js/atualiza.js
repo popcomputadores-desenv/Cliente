@@ -19,7 +19,6 @@ function AtualizarApp(){
 
 function atualizarAppInicio()
 {
-	
 		if(!isDebug()){
 				var versao = getStorage('versao');
 				var versaoCode = getStorage('versaoCode');
