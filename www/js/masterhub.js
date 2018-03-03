@@ -633,6 +633,87 @@ function limpa_formulário_cep() {
         }
     }
 
+    // Adicionando Busca por CEP no Catálogo
+    
+function limpa_formulário_cep_catalogo() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('street').value=("");
+			$(".cidade").html("");
+			$(".bairro").html("");
+            document.getElementById('state').value=("");
+			document.getElementById('numero').value=("");
+			document.getElementById('city').value=("");
+			document.getElementById('state').value=("");
+			document.getElementById('area_name').value=("");
+			$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
+			$(".location_city").html(getTrans("Select City", "select_city"));
+			$(".location_state").html(getTrans("Select State", "select_state"));    }
+
+    function meu_callback_catalogo(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('street').value=(conteudo.logradouro);
+			$(".cidade").html(conteudo.localidade);
+			$(".bairro").html(conteudo.bairro);
+            document.getElementById('state').value=("");
+			document.getElementById('numero').value=("");
+			document.getElementById('city').value=("");
+			document.getElementById('state').value=("");
+			document.getElementById('area_name').value=("");
+			$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
+			$(".location_city").html(getTrans("Select City", "select_city"));
+			$(".location_state").html(getTrans("Select State", "select_state"));
+
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep_catalogo();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep_catalogo(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('street').value="...";
+				$(".cidade").html("...");
+				$(".bairro").html("...");
+                document.getElementById('state').value="...";
+				document.getElementById('numero').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback_catalogo';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep_catalogo();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            //limpa_formulário_cep();
+        }
+    }
 
 function fechar_prop()
   {

@@ -1595,7 +1595,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 <ons-page id="page-paymentoption" class="onsen-display" style="background: url('background-1.jpg');">
    <ons-toolbar>        
      <div class="left"><ons-back-button></ons-back-button></div>     
-     <div class="center white"><span id="search-text" class="trn" data-trn-key="cart">Cart</span></div>                         
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="delivery_address">Endereço de Entrega</span></div>                         
      <div class="right">        
      </div>
    </ons-toolbar>
@@ -1712,6 +1712,23 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      </ons-list>
    </div>
    
+   <div class="wrapper">
+       <ons-row class="row">
+           <ons-col class="text-big trn" data-trn-key="" style="padding-bottom: 5px;">Endereço da Entrega</ons-col>           
+       </ons-row>
+   </div>
+   
+   <div class="wrapper conferirendereco" style="padding-left: 10px;">
+   <b><i>
+   <span class="endereco_de_entrega_street"></span> nº
+   <span class="endereco_de_entrega_numero"></span> -
+   <span class="endereco_de_entrega_area_name"></span></br>
+   <span class="endereco_de_entrega_city"></span> / <span class="endereco_de_entrega_state"></span> 
+   <span class="endereco_de_entrega_zipcode"></span></br>
+   <span class="endereco_de_entrega_location_name"></span></br>
+   <span class="endereco_de_entrega_delivery_instruction"></span>
+   </i></b>
+   </div>
  
     <div class="wrapper">
        <ons-row class="row">
@@ -1776,8 +1793,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <div class="wrapper order-change-wrapper">
       <div class="field-wrapper">
-      <input type="number" name="order_change"  class="numeric_only order_change text-input text-input--underbar" 
-      placeholder="change? For how much?" value="" min="0" inputmode="numeric" pattern="[0-9]*"  >
+      <input type="decimal" name="order_change"  class="order_change text-input text-input--underbar" 
+      placeholder="change? For how much?" value="" min="0">
       </div>      
    </div>
    
@@ -2573,28 +2590,39 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <input type="hidden" name="area_name" id="area_name" class="area_name">
 
    <div class="wrapper">
+   <div class="home-page wrapper center" style="margin-top: -15px; margin-bottom: -20px;">       
+              
+       <button class="button button--quiet green" onclick="getCurrentLocation();">
+       <ons-icon icon="fa-location-arrow"></ons-icon>
+         <span class="trn" data-trn-key="Informa a minha localização via GPS">Informa a minha localização via GPS</span>
+       </button>       
+
+
+   <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
+    </div>   
+<br>
+   <div class="separate_or">
+        <ons-row >
+          <ons-col width="45%" class="text-right">
+           <hr class="hr_index">
+         </ons-col>
+          <ons-col width="10%" class="text-center">OU</ons-col>
+         <ons-col width="45%" class="text-left">
+          <hr class="hr_index">
+         </ons-col>
+       </ons-row>
+     </div>
    
       <div class="field-wrapper">
       <input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
-      placeholder="Zipcode" value="" onblur="pesquisacep(this.value);" >
+      placeholder="Zipcode" value="" onblur="pesquisacep_catalogo(this.value);" >
       </div>
-	  Nota: Ao usar a caixa acima CEP, irá preencher somente o nome da rua, é necessário selecionar na lista a Cidade e o Bairro. 
+	  	  
+	  <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="Nota: Ao usar a caixa acima CEP ou a Localização via GPS, irá preencher somente o nome da rua, é necessário selecionar na lista o Estado, Cidade e o Bairro.">Nota: Ao usar a caixa acima CEP ou a Localização via GPS, irá preencher somente o nome da rua, é necessário selecionar na lista o Estado, Cidade e o Bairro. </p> 
 	  
-   <ons-list>
-   
-				<ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
-					State
-				</ons-list-item>
-	
-				<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >
-					City
-				</ons-list-item>
-				<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >
-					District / Area
-				</ons-list-item>
-   
-   </ons-list>      
-   
+	  <div class="wrapper center"><span id="cidade" class="cidade wrapper center" style="color: white; font-size: 16px;"> </span><span class="wrapper center" style="color: white; font-size: 16px;"> | </span> <span id="bairro" class="bairro wrapper center" style="color: white; font-size: 16px;"> </span></div>
+ 
+   <div class="wrapper">   
    	  <div class="field-wrapper">
 					<ons-row>
 						<ons-col width="75%">
@@ -2608,13 +2636,33 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 						</ons-col>
 					</ons-row>
       </div>
-      
+	  
+	  
+      <ons-list>
+   
+				<ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
+					State
+				</ons-list-item>
+	
+				<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >
+					City
+				</ons-list-item>
+				<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >
+					District / Area
+				</ons-list-item>
+   
+   </ons-list>  
       <div class="field-wrapper">
       <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
       placeholder="Location name" value="" >
       </div>
-            
+	  
       <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+      placeholder="Delivery instructions" value="" >
+      </div>      
+
+	  <div class="field-wrapper">
          <span class="small-font-dim trn" data-trn-key="defaul_address">Default address</span>
          <label class="switch">
 			  <input type="checkbox" value="2" class="switch__input as_default" name="as_default" >

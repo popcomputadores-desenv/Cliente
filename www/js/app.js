@@ -494,6 +494,7 @@ document.addEventListener("pageinit", function(e) {
 	$("#page-paymentoption .estabelecimento-header2").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-paymentoption .estabelecimento-header").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	/* Fim da Atualização */
+	$(".subtotal_new").html(prettyPrice(subtotal_new));	 	
 			
 		 break;
 		 
@@ -518,6 +519,7 @@ document.addEventListener("pageinit", function(e) {
 	    $(".state").attr("placeholder",  getTrans("State",'state') );
 	    $(".zipcode").attr("placeholder",  getTrans("Postal code/Zip Code",'zipcode') );
 	    $(".location_name").attr("placeholder",  getTrans("Location name",'location_name') );
+	    $(".delivery_instruction").attr("placeholder",  getTrans("Delivery instructions",'delivery_instruction') );
 	    
 	    break;
 	    
@@ -1714,6 +1716,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 						      	  if(!empty(data.msg.profile)){
 						      	  	  $(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
 						      	  	  $(".location_name").val( data.msg.profile.location_name ) ;
+									  $(".delivery_instruction").val( data.msg.profile.delivery_instruction ) ;
 						      	  }
 						      	  
 						      	  if ( !empty( getStorage("map_address_result_formatted_address") )){
@@ -1738,7 +1741,8 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 										  $(".city").val( data.msg.address_book.city );
 										  $(".state").val( data.msg.address_book.state );
 										  $(".zipcode").val( data.msg.address_book.zipcode );
-										  $(".location_name").val( data.msg.address_book.location_name );	
+										  $(".location_name").val( data.msg.address_book.location_name );
+										  $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
 										  
 										  
 										  var complete_address = data.msg.address_book.street;
@@ -1908,7 +1912,16 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				break;
 				
 				case "getPaymentOptions":				
-				   $(".frm-paymentoption").show();				   
+				   $(".frm-paymentoption").show();	
+					
+				$(".endereco_de_entrega_street").html(data.details.endereco_de_entrega.street);
+				$(".endereco_de_entrega_numero").html(data.details.endereco_de_entrega.numero);
+				$(".endereco_de_entrega_city").html(data.details.endereco_de_entrega.city);
+				$(".endereco_de_entrega_state").html(data.details.endereco_de_entrega.state);
+				$(".endereco_de_entrega_area_name").html(data.details.endereco_de_entrega.area_name);
+				$(".endereco_de_entrega_zipcode").html(data.details.endereco_de_entrega.zipcode);
+				$(".endereco_de_entrega_location_name").html(data.details.endereco_de_entrega.location_name);
+				$(".endereco_de_entrega_delivery_instruction").html(data.details.endereco_de_entrega.delivery_instruction);	
 				   
 				   /*$(".client_id_sandbox").val( data.details.paypal_credentials.client_id_sandbox );
 			   	   $(".client_id_live").val( data.details.paypal_credentials.client_id_live );*/
@@ -2295,8 +2308,13 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 	                                 if(!empty(data.details.contact_phone)){
 						      	  	     $(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
 						      	     }
-						      	     if(!empty(data.details.location_name)){
+						      	     
+								     if(!empty(data.details.location_name)){
 						      	  	     $(".location_name").val( data.details.location_name ) ;
+						      	     }
+								  	 
+						      	     if(!empty(data.details.delivery_instruction)){
+						      	  	     $(".delivery_instruction").val( data.details.delivery_instruction ) ;
 						      	     }
 							      	  					      	     					      	     
 							      	 if ( !empty( getStorage("map_address_result_formatted_address") )){
@@ -2390,11 +2408,11 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			      fillAddressBook(data.details);
 
 					if (data.details.area_id==0 || data.details.city_id==0){
-	$("#frm-addressbook .location_area").html(getTrans("District / Area","destrict_area"));
-	$("#frm-addressbook .location_city").html(getTrans("City", "city"));
-	$("#frm-addressbook .area_id").val("");
-	$("#frm-addressbook .city_id").val("");
-	$("#frm-addressbook .state_id").val("");		
+			$("#frm-addressbook .location_area").html(getTrans("District / Area","destrict_area"));
+			$("#frm-addressbook .location_city").html(getTrans("City", "city"));
+			$("#frm-addressbook .area_id").val("");
+			$("#frm-addressbook .city_id").val("");
+			$("#frm-addressbook .state_id").val("");		
 		}
 			      break;  
 			      
@@ -2442,16 +2460,18 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					$(".numero").val(data.details.numero);
 					$(".cidade").html(data.details.city);
 					$(".bairro").html(data.details.area_name);
-					$(".location_area", "#frm-shipping").html(getTrans("District / Area","destrict_area"));
-					$(".location_name", "#frm-shipping").val('');
-					$(".location_city", "#frm-shipping").html(getTrans("City", "city"));
-					$(".location_state", "#frm-shipping").html(getTrans("State", "state"));
-					$(".state_id", "#frm-shipping").val('');
-					$(".city_id", "#frm-shipping").val('');
-					$(".area_id", "#frm-shipping").val('');
-					$(".state", "#frm-shipping").val('');
-					$(".city", "#frm-shipping").val('');
-					$(".area_name", "#frm-shipping").val('');
+					$("#cep").val(data.details.zip);
+					$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
+					$(".location_name").val('');
+					$(".delivery_instruction").val('');
+					$(".location_city").html(getTrans("Select City", "select_city"));
+					$(".location_state").html(getTrans("Select State", "select_state"));
+					$(".state_id").val('');
+					$(".city_id").val('');
+					$(".area_id").val('');
+					$(".state").val('');
+					$(".city").val('');
+					$(".area_name").val('');
 			       break;
 			          
 			    
@@ -4513,7 +4533,8 @@ jQuery(document).ready(function() {
 			global_state_id = address_split[10];
 			
 			$(".zipcode").val( address_split[5] );
-			$(".location_name").val( address_split[6] );			
+			$(".location_name").val( address_split[6] );
+			$(".delivery_instruction").val( address_split[11] );
 			
 			var number='';
 			if (!empty(address_split[7])){
@@ -5517,6 +5538,7 @@ function clientShipping()
 				  params+="&state_id="+$(".state_id").val();
 			  	  params+="&city_id="+$(".city_id").val();
 			  	  params+="&area_id="+$(".area_id").val();
+				  params+="&delivery_instruction="+$(".delivery_instruction").val();
 		      	  params+="&location_name="+$(".location_name").val();
 		      	  params+="&save_address="+$('.save_address:checked').val();
 		      	  params+="&transaction_type=" +  getStorage("transaction_type") ;
@@ -6249,6 +6271,7 @@ function fillAddressBook(data)
 	$(".state_id", "#frm-addressbook").val( data.state_id );
 	$(".zipcode").val( data.zipcode );
 	$(".location_name", "#frm-addressbook").val( data.location_name );	
+	$(".delivery_instruction", "#frm-addressbook").val( data.delivery_instruction );	
 	$(".country_code").val( data.country_code );		
 	if (data.as_default==2){
 		$(".as_default").attr("checked","checked");
@@ -6256,7 +6279,8 @@ function fillAddressBook(data)
 }
 
 function saveAddressBook()
-{
+{ 
+if ($(".city").val()!="" && $(".state").val()!="" && $(".area_name").val()!=""){
 	$.validate({ 	
 	    form : '#frm-addressbook',    
 	    borderColorOnError:"#FF0000",
@@ -6269,6 +6293,10 @@ function saveAddressBook()
 	      return false;
 	    }  
 	});
+} else {
+	toastMsg( getTrans('Você precisa preencher o seu endereço corretamente!','Você precisa preencher o seu endereço corretamente!')); 
+		return;
+	}	
 }
 
 function newAddressBook()
@@ -6339,6 +6367,7 @@ function displayAddressBookPopup(data)
 		 complete_address+=val.area_id+"|";
 		 complete_address+=val.city_id+"|";
 		 complete_address+=val.state_id+"|";
+	   	 complete_address+=val.delivery_instruction+"|";
 		   
 	if (val.area_id==0 || val.city_id==0){
 	 toastMsg( getTrans('O endereço "'+val.street+' nº '+val.numero+', '+val.area_name+'" está desatualizado no catálogo de endereços, atualize-o antes de selecioná-lo!','O endereço '+val.street+' nº '+val.numero+' - '+val.area_name+' está desatualizado no catálogo de endereços, atualize-o antes de selecioná-lo!')); 
@@ -7599,7 +7628,7 @@ function isDebug()
 {	
 	//on/off
 	//return true;
-	return false;
+	return true;
 }
 
 var rzr_successCallback = function(payment_id) {
@@ -9735,11 +9764,13 @@ function showShippingLocation(data)
       	  if(!empty(data.msg.profile)){
       	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
       	  	$(".location_name").val( data.msg.profile.location_name ) ;
+      	  	$(".delivery_instruction").val( data.msg.profile.delivery_instruction ) ;
       	  }
       	  if(!empty(data.msg.address_book)){
       	  	 $(".street").val( data.msg.address_book.street );
       	  	 $(".numero").val( data.msg.address_book.numero );
       	  	 $(".location_name").val( data.msg.address_book.location_name );
+      	  	 $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
       	  }
       	  if(!empty(data.msg.state_info)){
       	  	 global_state_id  = data.msg.state_info.state_id;
