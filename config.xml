@@ -4,8 +4,8 @@
     xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "app.masterhub.cliente"
     version="2.3" 
-	android-versionCode="16"
-  	ios-CFBundleVersion="16">
+	android-versionCode="17"
+  	ios-CFBundleVersion="17">
     <name>Master Hub</name>
     <description>
         Aplicativo - Módulo Clientes para interação com o sistema Master Hub, Um MUNDO na palma da sua mão!

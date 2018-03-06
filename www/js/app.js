@@ -494,7 +494,7 @@ document.addEventListener("pageinit", function(e) {
 	$("#page-paymentoption .estabelecimento-header2").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-paymentoption .estabelecimento-header").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	/* Fim da Atualização */
-	$(".subtotal_new").html(prettyPrice(subtotal_new));	 	
+	//$(".subtotal_new").html(prettyPrice(subtotal_new));	 	
 			
 		 break;
 		 
@@ -2660,10 +2660,24 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				   carrinho=getStorage("cart_sub_total");
 				   embalagem=getStorage("cart_packaging");
 				   entrega=getStorage("cart_delivery_charges");
-					if (entrega!=0){
-							  	taxa_entrega = entrega;
+				   percent_comod=getStorage("cart_tax");
+					
+					if (typeof entrega === "undefined" || entrega==null || entrega=="" || entrega==0 ){
+							  	taxa_entrega=0;
  								}else{
- 								taxa_entrega = 0;
+ 								taxa_entrega = entrega;
+ 								}
+					
+					if (typeof embalagem === "undefined" || embalagem==null || embalagem=="" || embalagem==0 ){
+							  	taxa_embalagem=0;
+ 								}else{
+ 								taxa_embalagem = embalagem;
+ 								}
+					
+					if (typeof percent_comod === "undefined" || percent_comod==null || percent_comod=="" || percent_comod==0 ){
+							  	taxa_percent_comod=0;
+ 								}else{
+ 								taxa_percent_comod = percent_comod;
  								}
 					
 					if(data.details.voucher_type == 'percentage'){
@@ -2673,20 +2687,28 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					}
 					
 					subtotal_new=getStorage("cart_sub_total") - valor_voucher;
-					subtotal_new2=parseFloat(embalagem) + parseFloat(entrega) + parseFloat(subtotal_new);
+					
 					percent_comod=getStorage("cart_tax");
-					taxa_comodidade=subtotal_new2/percent_comod;
+					
+					subtotal_new2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(subtotal_new);
+					
+					taxa_comodidade=subtotal_new2/taxa_percent_comod;
 					gorjeta_new=getStorage("tips_percentage")*subtotal_new/100;
 					
 		$("#page-paymentoption .titulo-cupom").html('Desconto do Cupom: ');
 		$("#page-paymentoption .voucher_amount").html('('+prettyPrice(valor_voucher)+')');
 		$("#page-paymentoption .titulo-subtotal_new").html('Sub Total (- Cupom): ');
+					if (percent_comod!=0){
 		$("#page-paymentoption .titulo-comodidade").html('Taxa de Comodidade: ');
 		$("#page-paymentoption .total-comodidade").html(prettyPrice(taxa_comodidade));
+					}else{
+		$("#page-paymentoption .titulo-comodidade").css({"display":"none"});
+		$("#page-paymentoption .total-comodidade").css({"display":"none"});
+					}
 		$("#page-paymentoption .subtotal_new").html(prettyPrice(subtotal_new));
 		$("#page-paymentoption .titulo-gorjeta").html('Gorjeta: ');
 		$("#page-paymentoption .total-gorjeta").html(prettyPrice(gorjeta_new));			
-					if ( transaction_type=="delivery"){	
+					if (transaction_type=="delivery"){	
 		$("#page-paymentoption .titulo-entrega").css({"display":"block"});
 		$("#page-paymentoption .total-entrega").css({"display":"block"});
 					}else{
@@ -2705,6 +2727,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			       
 			       $(".voucher-header").html(data.details.less);
 			       
+					
 			       var new_total= data.details.new_total;
 					
 			       $(".total-amount").html( prettyPrice(new_total));
@@ -7084,11 +7107,6 @@ function setLanguage(lang_id)
 
 function applyVoucher()
 {
-	
-	if ( checkIfhasOfferDiscount() ){
-		return false;
-	}
-	
 	voucher_code = $(".voucher_code").val();
 	if ( voucher_code!="" ){
 		var params="voucher_code="+ voucher_code;        
