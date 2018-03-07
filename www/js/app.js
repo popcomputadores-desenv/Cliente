@@ -2729,8 +2729,9 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			       
 					
 			       var new_total= data.details.new_total;
+				new_total2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(subtotal_new)+parseFloat(taxa_comodidade);
 					
-			       $(".total-amount").html( prettyPrice(new_total));
+			       $(".total-amount").html( prettyPrice(new_total2));
 			       
 			       break;
 			       
@@ -2817,18 +2818,31 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					carrinho=getStorage("cart_sub_total");
 				    embalagem=getStorage("cart_packaging");
 					entrega=getStorage("cart_delivery_charges");
-					if (entrega!=0){
-							  	taxa_entrega = entrega;
+					percent_comod=getStorage("cart_tax");
+					
+					if (typeof entrega === "undefined" || entrega==null || entrega=="" || entrega==0 ){
+							  	taxa_entrega=0;
  								}else{
- 								taxa_entrega = 0;
+ 								taxa_entrega = entrega;
+ 								}
+					
+					if (typeof embalagem === "undefined" || embalagem==null || embalagem=="" || embalagem==0 ){
+							  	taxa_embalagem=0;
+ 								}else{
+ 								taxa_embalagem = embalagem;
+ 								}
+					
+					if (typeof percent_comod === "undefined" || percent_comod==null || percent_comod=="" || percent_comod==0 ){
+							  	taxa_percent_comod=0;
+ 								}else{
+ 								taxa_percent_comod = percent_comod;
  								}
 					
 					valor_pontos=data.details.pts_amount_raw;
 					
 					subtotal_new=carrinho - valor_pontos;
-					subtotal_new2=parseFloat(embalagem) + parseFloat(taxa_entrega) + parseFloat(subtotal_new);
-					percent_comod=getStorage("cart_tax");
-					taxa_comodidade=subtotal_new2/percent_comod;
+					subtotal_new2=parseFloat(taxa_embalagem) + parseFloat(taxa_entrega) + parseFloat(subtotal_new);
+					taxa_comodidade=subtotal_new2/taxa_percent_comod;
 					gorjeta_new=subtotal_new*getStorage("tips_percentage")/100;
 				  $("#page-paymentoption .total-pontos").html('('+data.details.pts_amount+')');
 				  $("#page-paymentoption .titulo-pontos").html('Menos '+data.details.pts_points_raw+' Pontos: ');
@@ -2847,8 +2861,8 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			      
 			      var new_total= data.details.new_total;
 			      dump('compute new total for pts');
-			      
-			      $(".total-amount").html( prettyPrice(new_total) );
+			new_total2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(subtotal_new)+parseFloat(taxa_comodidade);      
+			      $(".total-amount").html( prettyPrice(new_total2) );
 			      
 			    break;
 			    
