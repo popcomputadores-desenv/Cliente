@@ -3519,7 +3519,7 @@ function displayRestaurantResults(data , target_id)
     $.each( data, function( key, val ) {     
     	
     	// dump(val);
-    	 htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
+    	 htm+='<ons-list-item modifier="tappable" class="list-item-container '+val.tag_raw+'" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
     	 htm+='<ons-row class="row">';    	 
     	     htm+='<ons-col class="col-image border" width="30%">';
     	          htm+='<div class="logo-wrap2" >';
@@ -3539,12 +3539,12 @@ function displayRestaurantResults(data , target_id)
     	          }*/
     	          
     	          
-    	     htm+='<div align="center"><span class="notification '+val.tag_raw+' ">'+val.is_open+'</span></div>';
+    	     htm+='<div align="center"><span class="notification '+val.tag_raw+'">'+val.is_open+'</span></div>';
     	     htm+='</ons-col>';
     	     
     	     htm+='<ons-col class="col-description border" width="70%">';
     	           htm+='<div>';
-	    	           htm+='<div><span class="rating-stars" data-score="'+val.ratings.ratings+'">';
+	    	           htm+='<div><span class="rating-stars " data-score="'+val.ratings.ratings+'">';
 					   htm+='</span>';
 					   htm+='<span class="p-small" style="margin-left: 40px; position: absolute;">';
 			// Dinheiro
@@ -3562,16 +3562,16 @@ function displayRestaurantResults(data , target_id)
 	    	           
 					   dump(val.service);
     	          
-    	          if(!empty(val.services)){
+    	          /* if(!empty(val.services)){
     	          	  $.each( val.services, function( key_service, val_services ) { 
     	           	   	  htm+='<class="center" style="font-size: 12px; color: #fff;"><i class="green-color ion-android-checkmark-circle"></i> '+val_services+'   ';
     	           	   });
-    	          }
+    	          }*/
 					  					  /*Estimativa de entrega*/
 	    	           //if(val.service!=3){
 	    	           if(val.service==1 || val.service==2 || val.service==4 || val.service==5 ){
 	    	           	   if(!empty(val.delivery_estimation)){
-	    	       htm+='<span class="p-small trn"><i class="green-color ion-android-time" style="font-size: 15px;"></i> <b>'+val.delivery_estimation+'</b></span>';	
+	    	       htm+='<span class="p-small trn"><i class="green-color ion-android-time" style="font-size: 15px;"></i> <b style="font-size: 14px;">'+val.delivery_estimation+'</b></span>';	
 	    	           	   }
 	    	           }
     	           htm+='</div>';

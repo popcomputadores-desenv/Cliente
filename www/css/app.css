@@ -12,6 +12,11 @@ vertical-align: middle;
 margin-right: 5px;
 }
 
+.close{
+/*background:#F7F7F7;*/
+opacity: 0.3!important;
+}
+
 .gear { 
   position: absolute;
   z-index: -10;
