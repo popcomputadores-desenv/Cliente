@@ -4,8 +4,9 @@
     xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "app.masterhub.cliente"
     version="2.3" 
-	android-versionCode="18"
-  	ios-CFBundleVersion="18">
+	android-versionCode="19"
+  	ios-CFBundleVersion="19">
+    <!--Karenderia Mobile App 2.3 -->
     <name>Master Hub</name>
     <description>
         Aplicativo - Módulo Clientes para interação com o sistema Master Hub, Um MUNDO na palma da sua mão!
@@ -18,20 +19,17 @@
                
 	<preference name="orientation" value="portrait" />
 	<preference name="android-build-tool" value="gradle" />		
-	<preference name="windows-appx-target" value="8.1-phone"/>
-	<preference name="WindowsToastCapable" value="true" />   	
+		
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
-	
-    <gap:plugin name="phonegap-plugin-push" source="npm" spec="1.10.5" />
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="1.10.5"  /> 
 	<gap:plugin name="mercadopago-plugin-2" source="npm"/>
-    
-	<gap:plugin name="onesignal-cordova-plugin" spec="2.1.2" source="npm" />
 	<gap:plugin name="cordova-universal-links-plugin" spec="1.2.1" source="npm" />
     <gap:plugin name="cordova-plugin-device" source="npm" />		
 	<gap:plugin name="cordova-plugin-inappbrowser" source="npm" />		
 	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />	
 	<gap:plugin name="cordova-plugin-geolocation" source="npm" spec="1.0.1" />
 	<gap:plugin name="cordova-plugin-network-information" source="npm" />
+	<gap:plugin name="onesignal-cordova-plugin" source="npm" spec="2.1.2" />
 	<gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
 		
 	<gap:plugin name="cordova-plugin-request-location-accuracy" source="npm"  spec="2.2.0" />	
@@ -39,6 +37,7 @@
 	
 	<gap:plugin name="cordova-plugin-media" source="npm" spec="3.0.0" />	
 	<gap:plugin name="cordova.plugins.diagnostic" source="npm" spec="3.7.1" />	
+	<gap:plugin name="cordova-plugin-statusbar" source="npm" />	
 		
 	<gap:plugin name="cordova-plugin-googlemaps-plus" source="npm" >
 	   <param name="API_KEY_FOR_ANDROID" value="AIzaSyCjgZJOBT5K3Ms5ns20Q3lbopscSoGt3aI" />
@@ -49,27 +48,21 @@
     
     <gap:plugin name="cordova-plugin-buildinfo" source="npm" spec="1.1.0"  />
     <gap:plugin spec="https://github.com/xmartlabs/cordova-plugin-market" source="git" />
-    <gap:plugin name="cordova-plugin-googleplus" source="npm">
+    <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="5.1.1">
      <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
     </gap:plugin>
 		
     <platform name="android" />    
     <platform name="ios" /> 
-		
-    <gap:config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-        <string>O Master Hub quer usar sempre a sua localização</string>
-    </gap:config-file>
-        
-    <gap:config-file platform="ios" target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-        <string>O Master Hub quer usar a sua localização</string>
-    </gap:config-file>	
-			
+    		    
 	<preference name="AutoHideSplashScreen" value="false" />  	
     <preference name="SplashScreenDelay" value="10000" />    
     <preference name="fullscreen" value="false" />
     <preference name="android-minSdkVersion" value="16" />     
-    <preference name="ShowSplashScreenSpinner" value="false" />	   
-    
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="StatusBarBackgroundColor" value="#dd6600" /> <!-- Change status bar color here -->
+    	   		   
     <access origin="*" />
     <access origin="tel:*" launch-external="yes" />
        
@@ -82,17 +75,18 @@
     <preference name="phonegap-version" value="cli-7.0.1" />     
     <gap:plugin name="cordova-plugin-camera" source="npm" spec="2.4.1" />
     <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.6.2" /> 
-    <gap:plugin spec="https://github.com/danwilson/google-analytics-plugin.git" source="git" />       
-	
-    <platform name="ios">   
-		
-	<config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-	        <string>O Master Hub quer usar sempre a sua localização</string>
-	</config-file>
-	<config-file platform="ios" target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-	        <string>O Master Hub quer usar a sua localização</string>
-	</config-file>
-		
+    <gap:plugin spec="https://github.com/danwilson/google-analytics-plugin.git" source="git" />     
+
+    <platform name="ios">    
+	    <config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+        <string>O Master Hub quer usar sempre a sua localização</string>
+	    </config-file>
+	    <config-file platform="ios" target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+        <string>O Master Hub quer usar a sua localização</string>
+	    </config-file>
+	    <config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
+        <string>O Master Hub quer usar a sua localização</string>
+	    </config-file>
 	</platform>   
 	
 	<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
@@ -104,11 +98,15 @@
 	</edit-config>
 	
 	<edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-	    <string>precisa de acesso à localização para encontrar coisas próximas</string>
+	    <string>preciso de acesso à localização para encontrar coisas próximas</string>
 	</edit-config>
 	
 	<edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="merge">
-	    <string>precisa acessar a biblioteca de fotos para salvar imagens lá</string>
+	    <string>preciso acessar a biblioteca de fotos para salvar imagens lá</string>
+	</edit-config>
+
+	<edit-config target="NSLocationAlwaysAndWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+	    <string>preciso de acesso à localização para encontrar comércios por perto</string>
 	</edit-config>
     
 	<platform name="android">

@@ -1,4 +1,5 @@
-<!doctype html><head>
+<!doctype html>
+<head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
 <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
@@ -16,8 +17,11 @@
 <link href="lib/mobiscroll/css/mobiscroll.scroller.ios-classic.css" rel="stylesheet" type="text/css" />
 <link href="lib/mobiscroll/css/mobiscroll.scroller.ios.css" rel="stylesheet" type="text/css" />
 <link href="lib/mobiscroll/css/mobiscroll.android-holo-light.css" rel="stylesheet" type="text/css" />
+<!-- Atualização Master Hub (Personalizações) -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet"> 
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>	
+<script src="lib/angular/angular.js"></script>
+<!-- Fim da atualização -->
 <script src="lib/onsen/js/onsenui.js"></script>
 <script src="lib/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
@@ -26,7 +30,9 @@
 <script src="lib/jquery.form-validator.min.js"></script>
 
 <script src="lib/mobiscroll/js/mobiscroll.core.js"></script>
+<!-- Atualização Master Hub (Tradução Data) -->
 <script src="lib/mobiscroll/js/i18n/mobiscroll.i18n.pt-BR.js" type="text/javascript"></script>
+<!-- Fim da atualização -->
 <script src="lib/mobiscroll/js/mobiscroll.frame.js"></script>
 <script src="lib/mobiscroll/js/mobiscroll.scroller.js"></script>
 <script src="lib/mobiscroll/js/mobiscroll.util.datetime.js"></script>
@@ -61,8 +67,10 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 
 <link href="lib/intel/build/css/intlTelInput.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="lib/intel/build/js/intlTelInput.js"></script>
-<script type="text/javascript" src="js/favoritos.js"></script><!--MODIFICADO-->
-<script type="text/javascript" src="js/sugestoes.js"></script><!--MODIFICADO-->	
+<!-- Atualização Master Hub (Personalizações) -->
+<script type="text/javascript" src="js/favoritos.js"></script>
+<script type="text/javascript" src="js/sugestoes.js"></script>	
+<!-- Fim da atualização -->
 <script src="js/config.js?ver=1.0"></script>
 <script src="js/old-openfb.js?ver=1.0"></script>
 <script src="js/googlemap.js?ver=1.0"></script>
@@ -70,8 +78,10 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 <script src="js/countries.js?ver=1.0"></script>
 <script src="js/app.js?ver=1.0"></script>
 <script src="js/share.js"></script>
+<!-- Atualização Master Hub (Personalizações) -->
 <script src="js/atualiza.js"></script>
 <script src="js/masterhub.js"></script>
+<!-- Fim da atualização -->
 </head>
 <body>
 
@@ -106,7 +116,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
   
   </ons-page>
 </script>
-
+<!-- Atualização Master Hub (Sistema de Atualização) -->
 <script type="text/ons-template" id="atualizar.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 
 <ons-page id="page-atualizar" style="
@@ -296,8 +306,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 </ons-page>
 </ons-navigator> 
 </script>
-
-
+<!-- Fim da atualização -->
+<!-- Atualização Master Hub (Sistema de Compartilhamento) -->
 <script type="text/ons-template" id="sharetheapp.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 
 <ons-page id="page-sharetheapp" style="
@@ -400,7 +410,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 </ons-page>
 </ons-navigator> 
 </script>
-
+<!-- Fim da atualização -->
 <script type="text/ons-template" id="slidingMenu.html">
 <ons-page  id="page-slidingMenu" modifier="page-slidingmenu" >
 	<ons-sliding-menu main-page="home.html" menu-page="menu.html" side="left" var="menu" close-on-tap type="push" >
@@ -409,8 +419,9 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 </script>
 
 <script type="text/ons-template" id="menu.html">
+<!-- Atualização Master Hub (Imagem de Fundo) -->
   <ons-page modifier="menu-page" style="background:url('background-1.jpg'); border-right: 2px dashed #ddd; box-sizing: border-box;">
-  
+<!-- Fim da atualização -->
   <div class="profile-pic-wrap">
     <div class="avatar-wrap avatar-wrap-menu">
       <div class="img_loaded">
@@ -425,22 +436,22 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
     <ons-list-item onclick="setHome();" class="bottom-menu-item" >
       <ons-icon icon="ion-ios-home-outline"></ons-icon> <span class="trn" data-trn-key="home">Home</span>
     </ons-list-item>
-    <!--MODIFICADO-->
+<!-- Atualização Master Hub (Retirada do Menu a opção Ver todas as Empresas) -->
     <!--ons-list-item onclick="initBrowseMerchant();" class="bottom-menu-item">
       <ons-icon icon="ion-android-menu"></ons-icon> 
       <span class="trn" data-trn-key="browse_resto">Browse Restaurant</span>
     </ons-list-item-->
-    <!--FIM-->
+<!-- Fim da atualização -->
     <ons-list-item onclick="showProfile();" class="bottom-menu-item">
       <ons-icon icon="ion-android-contact"></ons-icon> 
       <span class="trn" data-trn-key="profile">Profile</span>
     </ons-list-item>    
-	<!--MODIFICADO-->
+<!-- Atualização Master Hub (Inclusão no Menu a opção Favoritos) -->
 	<ons-list-item onclick="menu.setMainPage('favoritos.html', {closeMenu: true})" class="bottom-menu-item">
       <ons-icon icon="ion-android-favorite"></ons-icon> 
       <span class="trn" data-trn-key="Favoritos">Favoritos</span>
     </ons-list-item>
-    <!--FIM-->
+<!-- Fim da atualização -->
     <ons-list-item onclick="showOrders();" class="bottom-menu-item">
       <ons-icon icon="ion-clipboard"></ons-icon> 
       <span class="trn" data-trn-key="orders">Orders</span>
@@ -457,24 +468,24 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
     </ons-list-item>    
     
     <div id="custom_pages"></div>
-	
+<!-- Atualização Master Hub (Inclusão no Menu a opção Apresentação Inicial) -->
 	<div id="splash-pagina-menu"></div>
-    
+<!-- Fim da atualização -->
     <ons-list-item onclick="menu.setMainPage('settings.html', {closeMenu: true})" class="bottom-menu-item">
       <ons-icon icon="ion-gear-a"></ons-icon> 
       <span class="trn" data-trn-key="settings">Settings</span>
     </ons-list-item>    
-    
-       <ons-list-item onclick="menu.setMainPage('sharetheapp.html', {closeMenu: true})" class="bottom-menu-item">
+<!-- Atualização Master Hub (Inclusão no Menu a opção Compartilhar) -->
+	<ons-list-item onclick="menu.setMainPage('sharetheapp.html', {closeMenu: true})" class="bottom-menu-item">
       <ons-icon icon="ion-android-share-alt"></ons-icon> 
       <span class="trn" data-trn-key="share-the-app">Share the app</span>
     </ons-list-item>   
-
-       <ons-list-item onclick="menu.setMainPage('atualizar.html', {closeMenu: true})" class="bottom-menu-item">
+<!-- Atualização Master Hub (Inclusão no Menu a opção Atualizar) -->
+	<ons-list-item onclick="menu.setMainPage('atualizar.html', {closeMenu: true})" class="bottom-menu-item">
       <ons-icon icon="fa-download"></ons-icon> 
       <span class="trn" data-trn-key="atualizar-app">Atualizar Aplicativo</span>
     </ons-list-item>    
-	
+<!-- Fim da atualização -->
     <ons-list-item onclick="logout();" class="bottom-menu-item logout-menu">
       <ons-icon icon="ion-log-out"></ons-icon> 
       <span class="trn" data-trn-key="logout">Logout</span>
@@ -484,7 +495,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
   </div>
   </ons-page> 
 </script>
-
+<!-- Atualização Master Hub (Sistema de Atualização) -->
   <ons-template id="alerta-atualizacao.html">
   <ons-alert-dialog var="alertDialog" on-device-backbutton="exitKApp()">
     <div class="alert-dialog-title" style="align:center;" ><strong class="trn" style="color: #ff3333" data-trn-key="atualizacao_titulo"> Atualização Necessária! </strong></div>
@@ -508,7 +519,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
     </div>
   </ons-alert-dialog>
 </ons-template>
-
+<!-- Fim da atualização -->
+<!-- Atualização Master Hub (Página Inicial Modificada Totalmente) -->
 <script type="text/ons-template" id="home.html">
 <ons-navigator title="Navigator" var="sNavigator">
   <ons-page id="page-home" on-device-backbutton="exitKApp()" sliding-menu-ignore="true" onload="" style="background: url('background-1.jpg'); color: #9d585b;"> 
@@ -660,7 +672,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 </ons-page>
 </ons-navigator>
 </script>
-
+<!-- Atualização Master Hub (Sistema de Indicações / Sugestões) -->
 <script type="text/ons-template" id="Pagina-Indicacao.html"> 
 <ons-navigator id="indicacao-page" title="Navigator" var="sNavigator"> 
 <ons-page id="page-indicacao" ng-controller="TabbarController">
@@ -786,7 +798,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
 </ons-page>
 </script>  
-
+<!-- Fim da atualização -->
 <script type="text/ons-template" id="searchResults.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 
 <ons-page id="searchresult-page" on-device-backbutton="backtoHome()"  >
@@ -828,7 +840,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 </ons-page>
 </ons-navigator> 
 </script>
-
+<!-- Atualização Master Hub (Página da nova Função carregarCategorias) -->
 <script type="text/ons-template" id="carregarCategorias.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 
 <ons-page id="carregarcategorias-page" on-device-backbutton="backtoHome()"  style="background: url('background-1.jpg');">
@@ -873,108 +885,6 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 </ons-page>
 </ons-navigator> 
 </script>
-
-<script type="text/ons-template" id="shippingLocationArea.html"> 
-<ons-page id="page-shipping-location-area" class="onsen-display">
-   <ons-toolbar>        
-     <div class="left"><ons-back-button></ons-back-button></div>     
-     <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     
-   </ons-toolbar>
-		<button id="menu-adress" class="button button--quiet button--large green" onclick="popUpAddressBook();">Selecione da sua lista de endereços</button>
-		<p id="menu-adress" class="small-font-dim center trn" data-trn-key="ou escolha uma das opções abaixo">ou escolha uma das opções abaixo</p>
-   
-   <form id="frm-shipping" class="frm-shipping" method="post">
-   
-   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
-   <input type="hidden" name="city_id" id="city_id" class="city_id" >
-   <input type="hidden" name="area_id" id="area_id" class="area_id" >
-   
-			<input type="hidden" name="city" class="city">
-			<input type="hidden" name="state" class="state">
-			<input type="hidden" name="zipcode" class="zipcode">
-			<input type="hidden" name="area_name" class="area_name">
-   
-      <div class="home-page wrapper center" style="margin-top: -15px; margin-bottom: -20px;">       
-              
-       <button class="button button--quiet green" onclick="getCurrentLocation();">
-       <ons-icon icon="fa-location-arrow"></ons-icon>
-         <span class="trn" data-trn-key="Informa a minha localização atual">Informa a minha localização atual</span>
-       </button>       
-
-
-   <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
-    </div>   
-   <p> 
-	<div class="wrapper center"><span id="cidade" class="cidade wrapper center" style="color: white; font-size: 16px;"> </span><span class="wrapper center" style="color: white; font-size: 16px;"> | </span> <span id="bairro" class="bairro wrapper center" style="color: white; font-size: 16px;"> </span></div>
-	
-	</p>
-   <p class="trn menuapp" style="margin-top: 3px; margin-bottom: 5px;">Preencha ou confira o endereço de entrega</p>    
-   
-   <ons-list>
-   
-   <ons-list-item modifier="chevron" style="display: none;" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
-    State
-    </ons-list-item>
-   
-	<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >        
-	City
-	</ons-list-item>
-	
-	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
-	District / Area
-	</ons-list-item>
-	
-   </ons-list>
-   
-    <div class="wrapper">
-				<div class="field-wrapper">
-					<ons-row>
-						<ons-col width="75%">
-							<input type="text" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
-						</ons-col>
-						<ons-col width="5%"></ons-col>
-						<ons-col width="20%">
-							<input type="text" name="numero" class="numero text-input text-input--underbar" placeholder="N°" value="" data-validation="required" data-validation-error-msg="Obrigatório">
-						</ons-col>
-					</ons-row>
-				</div>
-
-				<div class="field-wrapper">
-      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
-					placeholder="Apartment suite, unit number, or company name" >
-      </div>      
-
-   
-      <div class="field-wrapper">
-      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
-					placeholder="Delivery instructions" value="" >
-      </div>      
-
-				<div class="field-wrapper">
-					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
-					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
-   </div>
-   
-	   <div class="field-wrapper">	     
-	     <label class="switch">
-			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
-			  <div class="switch__toggle"></div>
-		  </label>  		  
-		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 8px; display: inline-block">
-		    Save to my address book
-		  </span>
-	    </div> 
-<br>
-   
-    <button class="button masterhub-btn button--large trn" onclick="clientShipping();" data-trn-key="select_payment_method">
-	Select Payment Method
-	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
-   </button>
-			</div>
-   </form>
-
-</ons-page>
-</script>     
 
 
 <script type="text/ons-template" id="searchCategorias.html">   
@@ -1024,7 +934,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 </ons-page>
 </ons-navigator> 
 </script>
-	
+<!-- Fim da atualização -->
 <script type="text/ons-template" id="filterOptons.html">    
   <ons-dialog var="navDialog" style="width:90%;height:350px;" cancelable  >
 
@@ -1051,7 +961,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
   </ons-page>
   </ons-dialog> 
 </script>
-
+<!-- Atualização Master Hub (Personalização filtrar seguimentos) -->
 <script type="text/ons-template" id="filterSeguimentos.html">    
   <ons-dialog var="navDialog" style="width:90%;height:350px;" cancelable  >
 
@@ -1078,7 +988,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
   </ons-page>
   </ons-dialog> 
 </script>
-
+<!-- Fim da atualização -->
 <script type="text/ons-template" id="menucategory.html">    
 <ons-page id="menucategory-page" style="background: url('background-1.jpg');">
    <ons-toolbar modifier="transparent">        
@@ -1086,11 +996,11 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      <div class="center white"><span id="search-text" class="trn" data-trn-key="menu" >Menu</span></div>           
      
      <div class="right">     
-	     
+<!-- Atualização Master Hub (Sistema de Favoritos - Botão) -->
 		 <ons-toolbar-button>
            <img src="images/icons/favoritar.png" id="imgfavorito" onclick='addFavorito()' class="cart ng-scope ons-icon fa-shopping-cart fa fa-lg" width="24px" height="24px">
         </ons-toolbar-button>
-	     
+<!-- Fim da atualização -->
          <ons-toolbar-button onclick="showCart();" >         
            <div class="notification cart-num" >0</div>
            <ons-icon icon="fa-shopping-cart" class="cart">
@@ -1194,7 +1104,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
   
 </ons-page>
 </script>
-
+<!-- Atualização Master Hub (Menu Itens) -->
 <script type="text/ons-template" id="menuItemEmpresa.html">    
 <ons-page id="page-menubycategoryitem" >
    <ons-toolbar>        
@@ -1259,7 +1169,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
   
 </ons-page>
 </script>
-
+<!-- Fim da atualização -->
 <script type="text/ons-template" id="itemDisplay.html"> 
 <ons-page id="page-itemdisplay">
    <ons-toolbar>        
@@ -1312,13 +1222,13 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
            <div class="logo-wrap logo-non-auto" >           
            </div>
         </ons-col>
-        <ons-col class="text-right">
+        <ons-col class="text-right">           
            <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
            <div class="rating-stars" data-score=""></div>           
            </a>
            <p class="restauran-title concat-text white"></p> 
-		   <p class="restauran-title concat-text white trn" data-trn-key="total">Total</p>  
-           <p class="text-big white total-amount"></p>
+           <p class="restauran-title concat-text white trn" data-trn-key="total">Total</p>  
+           <p class="text-big white total-amount"></p>         
         </ons-col>
       </ons-row>
    </div> 
@@ -1354,7 +1264,17 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    placeholder="Horário da Entrega" value="" style="box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;">
    </div>
    
-   
+<!-- Atualização Master Hub (Retirada da opção entrega imediata (ASAP) -->
+   <!-- <ons-list-item modifier="tappable" class="delivery_asap_wrap">
+       <label class="checkbox">
+		  <input type="checkbox" name="delivery_asap" value="1" class="delivery_asap">
+		  <div class="checkbox__checkmark"></div>
+		  <span class="ons-checkbox-inner small-font-dim trn" data-trn-key="deliver_asap">
+		  Deliver Asap
+		  </span>
+		</label>
+	</ons-list-item> -->
+<!-- Fim da atualização -->
    <div class="wrapper">
      <p class="p-normal pts_earn_label"></p>
    </div>
@@ -1417,6 +1337,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <input type="hidden" name="next_step" value="shipping_address">
    <div class="wrapper">
       <div class="field-wrapper">
+<!-- Atualização Master Hub (Tradução e Máscara do Telefone) -->
       <input type="text" name="first_name"  class="first_name text-input text-input--underbar has_validation" 
       placeholder="First Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
@@ -1445,7 +1366,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="password" name="cpassword"  class="cpassword text-input text-input--underbar has_validation" 
       placeholder="Confirm Password" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
-      
+<!-- Fim da atualização -->
       <div class="custom-fields-wrap" id="custom-fields-wrap">
       </div>
       
@@ -1524,8 +1445,10 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <input type="hidden" name="next_step" value="payment_option">
    
    <input type="hidden" name="street" class="street">
+<!-- Atualização Master Hub (Número e Bairro) -->
    <input type="hidden" name="numero" class="numero">
    <input type="hidden" name="area_name" class="area_name">
+<!-- Fim da atualização -->
    <input type="hidden" name="city" class="city">
    <input type="hidden" name="state" class="state">   
    <input type="hidden" name="zipcode" class="zipcode">  
@@ -1536,8 +1459,10 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <div class="wrapper">
       <div class="field-wrapper">
+<!-- Atualização Master Hub (Tradução e Máscara do Telefone) -->
       <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
       placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+<!-- Fim da atualização -->
       </div>      
    </div>
    
@@ -1672,8 +1597,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
         </button>  
         </ons-list-item>
         
-        <ons-list-item class="center remove-voucher" style="
-    display: none;>
+        <ons-list-item class="center remove-voucher" style="display: none;">
         <button class="button button--quiet green" onclick="removeVoucher();" >
          <span class="trn" data-trn-key="remove_voucher">Remove Voucher</span>          
         </button>  
@@ -1702,8 +1626,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
         
         <p class="center pts_pts_cancel pts_points_label small-font-dim"></p>
         
-        <ons-list-item class="center pts_pts_cancel" style="
-    display: none;>
+        <ons-list-item class="center pts_pts_cancel" style="display: none;">
         <button class="button button--quiet green" onclick="cancelRedeem();" >
          <span class="trn" data-trn-key="cancel">Cancel</span>          
         </button>  
@@ -1711,8 +1634,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
        
      </ons-list>
    </div>
-   
-   <div class="wrapper">
+<!-- Atualização Master Hub (Resumo de conferência da finalização do pedido) -->
+   <div class="wrapper conferirendereco">
        <ons-row class="row">
            <ons-col class="text-big trn" data-trn-key="" style="padding-bottom: 5px;">Endereço da Entrega</ons-col>           
        </ons-row>
@@ -1802,7 +1725,8 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <ons-list id="payon-deliver-list">
       </ons-list>
    </div>
-   
+<!-- Fim da atualização -->
+<!-- Atualização Master Hub (CPF na Nota) -->
    <div class="wrapper">
        <ons-row class="row" style="padding-top: 5px;padding-bottom: 5px;">
            <ons-col class="text-big trn" data-trn-key="">CPF na Nota?</ons-col>           
@@ -1815,6 +1739,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       placeholder="Digite seu CPF" value="" >
       </div>      
    </div>
+<!-- Fim da atualização -->
    <button class="button masterhub-btn button--large trn" onclick="InitPlaceOrder();" data-trn-key="place_order">
 	Finalizar o pedido
 	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
@@ -1838,20 +1763,47 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
      <div class="right">        
      </div>
    </ons-toolbar>
-   <br><br><br><br>
+<!-- Atualização Master Hub (Tela Final do Pedido Personalizada (Obrigado por comprar)) -->
+   <br>
    <div class="wrapper center">
-       <h2 class="trn" style="color: #00B279;" data-trn-key="thank_you">Thank You</h2>
-       <p class="receipt-msg button button--quiet gray"></p>
        <ons-icon icon="fa-check-circle" class="myfa-check">
-       <br/>
-       <button class="button button--quiet green" onclick="menu.setMainPage('home.html', {closeMenu: true})" >
-       <span class="trn" data-trn-key="back_to_home">back to home</span>
-        <ons-icon icon="fa-long-arrow-right"></ons-icon>
-        </button><br>	   
-	   	<ons-list-item onclick="showOrders();" style="border-radius: 15px; background-color: darkorange;" class="button button--quiet gray">
-      	<span class="trn" data-trn-key="recent_orders">Veja seus Pedidos recentes!</span>
-    	</ons-list-item>      
+       <h2 class="trn" style="color: #00B279;" data-trn-key="thank_you">Thank You</h2>
+       <p class="receipt-msg button button--quiet gray" style="margin-top: -20px;"></p>
+   <div class="cod-recibo wrapper center" style="    margin: auto; margin-top: -20px;">
        
+       <div class="recibo-wrapper" style="width:96%">
+     </div>
+       
+        <ons-row center style="display:block">
+            <p class="text-big total-amount" style="margin-top: -20px;"></p> 
+        </ons-row>
+      
+       <div class="cod-rec-entrega" style="background: rgba(232, 232, 232, 0.42);border-radius: 12px;">
+        <div class="cod-end-entrega" width="70%" style="padding-top: 10px;padding-bottom: 10px;">           
+           <p class="t_entrega"></p>
+           <p class="t_enderecoentrega"></p>
+        </div>
+		
+		   <p class="cod-end-entrega" style="font-size: 14px;color: #a50707; margin-bottom: 15px;">A entrega é de total responsabilidade do estabelecimento.</p>		
+		
+    </div>
+       <ons-row >
+        <ons-col width="50%" align="center">
+          
+            <button class="button green-btn button--cta trn" onclick="menu.setMainPage('home.html', {closeMenu: true})" >
+            <ons-icon icon="fa-long-arrow-left"></ons-icon>
+                <span class="trn">Tela Inicial</span>
+                
+            </button> 
+        </ons-col>
+        <ons-col class="text-right">           
+            <button class="button blue-btn2 button--cta trn" onclick="menu.setMainPage('orders.html', {closeMenu: true})" style="border-radius:  12px;">
+                <span class="trn">Meus Pedidos</span>
+                <ons-icon icon="fa-long-arrow-right"></ons-icon>
+            </button> 
+        </ons-col>
+      </ons-row>
+<!-- Fim da atualização -->
    </div> 
 
 </ons-page>
@@ -1934,7 +1886,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="number" name="number_guest"  class="validation number_guest numeric_only text-input text-input--underbar has_validation" 
       placeholder="Number Of Guests" value="" data-validation="number"  data-validation-allowing="range[1;1000]" data-validation-error-msg="The input value was not a correct number" >
       </div>         
-   
+<!-- Atualização Master Hub (Tradução e Correção de tipo de campo) -->
    <div class="field-wrapper">
       <input type="text" name="date_booking"  class="date_booking text-input text-input--underbar has_validation" 
       placeholder="Date Of Booking" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
@@ -1959,7 +1911,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="text" name="mobile"  class="mobile_inputs mobile text-input text-input--underbar has_validation" 
       placeholder="Mobile Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
    </div>
-   
+<!-- Fim da atualização -->
    <div class="field-wrapper">
       <input type="text" name="booking_notes"  class="booking_notes text-input text-input--underbar" 
       placeholder="Your Instructions" value="" >
@@ -2102,12 +2054,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="text" name="rating"  class="numeric_only rating text-input text-input--underbar has_validation" 
       placeholder="Your Rating 1 to 5" value="" data-validation="number" data-validation-allowing="range[1;5]"  data-validation-error-msg="please put 1 to 5 rating" >
       </div>
-      
+<!-- Atualização Master Hub (Tradução) -->
       <div class="field-wrapper">
       <input type="text" name="review"  class="review text-input text-input--underbar has_validation" 
       placeholder="Your reviews" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
-   
+<!-- Fim da atualização -->
    
    <button class="button masterhub-btn button--large trn" onclick="addReview();" data-trn-key="published_review">
 	Publish Review
@@ -2209,6 +2161,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <form id="frm-profile" class="frm-profile" method="post">   
    <div class="wrapper">
+<!-- Atualização Master Hub (Tradução e Máscara do Telefone) -->
       <div class="field-wrapper">
       <input type="text" name="first_name"  class="first_name text-input text-input--underbar has_validation" 
       placeholder="First Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
@@ -2228,7 +2181,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
       placeholder="Telefone de Contato" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
       </div>       
-      
+<!-- Fim da atualização -->
       <div class="field-wrapper">
       <input type="password" name="password"  class="password text-input text-input--underbar" 
       placeholder="Password" value="" >
@@ -2340,7 +2293,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <input type="hidden" name="next_steps" class="next_steps">
       
       
-   
+<!-- Atualização Master Hub (Correção do tipo de campo e Tradução) -->
    <div class="wrapper">
       <div class="field-wrapper">
       <input type="email" name="email_address"  class="email_address text-input text-input--underbar has_validation"
@@ -2352,7 +2305,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       placeholder="Password" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
       </div>                                     
    </div>
-   
+<!-- Fim da atualização -->
    <button class="button masterhub-btn button--large trn" onclick="login();" data-trn-key="login">
 	Login
 	<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
@@ -2390,13 +2343,13 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       Enter your email address you registered<br/>with and we will send you
       instruction <br/>on how to reset your password
       </p>
-      
+<!-- Atualização Master Hub (Correção do tipo de campo e Tradução) -->
           <div class="field-wrapper">
           <input type="email" name="email_address"  class="email_address text-input text-input--underbar has_validation"
            placeholder="Email address" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
           </div>
       </div>      
-      
+<!-- Fim da atualização -->
       <div class="wrapper center">
       <button class="trn button masterhub-btn" onclick="forgotPassword();" data-trn-key="reset_password">
 	  Reset Password	  
@@ -2420,6 +2373,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <form id="frm-signup" class="frm-signup" method="post">   
    <input type="hidden" name="next_step" value="return_home">
    <div class="wrapper">
+<!-- Atualização Master Hub (Tradução e Máscara de Telefone) -->
       <div class="field-wrapper">
       <input type="text" name="first_name"  class="first_name text-input text-input--underbar has_validation" 
       placeholder="First Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
@@ -2449,7 +2403,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="password" name="cpassword"  class="cpassword text-input text-input--underbar has_validation" 
       placeholder="Confirm Password" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
-      
+<!-- Fim da atualização -->
       
       <div class="custom-fields-wrap" id="custom-fields-wrap">
       </div>
@@ -2539,6 +2493,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
     <div class="left">
      <ons-toolbar-button onclick="setHome();">
+<!-- Atualização Master Hub (Personalização e Organização do Código) -->
         <ons-icon icon="ion-ios-arrow-thin-left" style="font-size: 24px; line-height: 14px;"></ons-icon>
      </ons-toolbar-button>        
     </div> 
@@ -2568,6 +2523,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 					Address Book Details
 				</span>
 			</div>
+<!-- Fim da atualização -->
      <div class="right">
      <ons-toolbar-button onclick="deleteAddressBook();" class="delete-addressbook">
         <ons-icon icon="ion-close-round"></ons-icon>
@@ -2580,7 +2536,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <form id="frm-addressbook" class="frm-addressbook" method="post">   
    <input type="hidden" id="id" name="id" class="id" value=""> 
    <input type="hidden" id="action" name="action" class="action" value="edit"> 
-   
+<!-- Atualização Master Hub (Personalização Cátalogo de Endereço) -->
    <input type="hidden" name="state_id" id="state_id" class="state_id" >
    <input type="hidden" name="city_id" id="city_id" class="city_id" >
    <input type="hidden" name="area_id" id="area_id" class="area_id" >
@@ -2594,7 +2550,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
               
        <button class="button button--quiet green" onclick="getCurrentLocation();">
        <ons-icon icon="fa-location-arrow"></ons-icon>
-         <span class="trn" data-trn-key="Informa a minha localização via GPS">Informa a minha localização via GPS</span>
+         <span class="trn" data-trn-key="Informa a minha localização via GPS">Informar a minha localização via GPS</span>
        </button>       
 
 
@@ -2678,11 +2634,11 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    </button>
 			</div>
    </form>   
-   
+<!-- Fim da atualização -->
        
 </ons-page>
 </script>
-
+<!-- Atualização Master Hub (Tradução e Correção no Tamanho da Janela do Push) -->
 <script type="text/ons-template" id="pushNotification.html">    
   <ons-dialog var="pushDialog" style="width:90%;height:80%;"  >
 
@@ -2701,7 +2657,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
         </p>
 	  
 	  </div>  
-	  	  	   
+<!-- Fim da atualização -->
   </ons-page>
   </ons-dialog> 
 </script>
@@ -2772,7 +2728,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
           </ons-switch>
         </ons-list-item>
       </ons-list>
-      
+<!-- Atualização Master Hub (Retirada das caonfigurações o campo que seleciona a tradução) -->
 	<div style="display:none;">
        <div class="settings-header trn" data-trn-key="others">Others</div>
              
@@ -2822,7 +2778,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
   </ons-page>
   </ons-dialog> 
 </script>
-
+<!-- Atualização Master Hub (Tradução e Personalização) -->
 <script type="text/ons-template" id="addressPopup.html">    
   <ons-dialog var="addressDialog" style="width:90%;height:200px;" cancelable  >
 
@@ -2845,7 +2801,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	  </button>
 	  </div>
 	  </form>
-	  	  	   
+<!-- Fim da atualização -->
   </ons-page>
   </ons-dialog> 
 </script>
@@ -2889,12 +2845,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <input type="hidden" id="x_country" name="x_country" class="x_country" value="">
    
    <div class="wrapper">
-   
+<!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
       <input type="text" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16" data-maxl="16" >
       </div>
-      
+<!-- Fim da atualização -->
      <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" onclick="showExpirationMonth();" class="trn expiration_month_label" data-trn-key="expiration_month">
          Expiration Month
@@ -2906,7 +2862,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
          Expiration Year
         </ons-list-item>        
       </ons-list>
-     
+<!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
       <input type="text" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="CVV" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="4" data-maxl="16" >
@@ -2941,7 +2897,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="text" name="x_zip"  class="x_zip text-input text-input--underbar has_validation" 
       placeholder="Zip Code" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
     </div>   
-    
+<!-- Fim da atualização -->
     
      <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" onclick="showCountry();" class="trn country_label" data-trn-key="country">
@@ -3042,12 +2998,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <input type="hidden" id="stripe_token" name="stripe_token" class="stripe_token" value=""> 
    
    <div class="wrapper">
-   
+<!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
       <input type="text" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16"  data-maxl="16" >
       </div>
-      
+<!-- Fim da atualização -->
      <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" onclick="showExpirationMonth();" class="trn expiration_month_label" data-trn-key="expiration_month">
          Expiration Month
@@ -3059,12 +3015,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
          Expiration Year
         </ons-list-item>        
       </ons-list>
-     
+<!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
       <input type="text" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="CVV" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="4" data-maxl="4" >
       </div>
-
+<!-- Fim da atualização -->
    <button class="trn button masterhub-btn button--large" onclick="stripePayNow();" data-trn-key="pay_now">
 	Pay Now
 	<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
@@ -3102,12 +3058,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    <p class="trn center p-dim" data-trn-key="enter_your_verification_code">
    Please enter you verification code
    </p>
-   
+<!-- Atualização Master Hub (Correção de tipo de campo) -->
    <div class="field-wrapper">
       <input type="number" name="code"  class="code text-input text-input--underbar has_validation"
        value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="11" >
    </div>
-   
+<!-- Fim da atualização -->
    <button class="trn button masterhub-btn button--large" onclick="validateCLient();" data-trn-key="submit">
 	Submit
    </button>
@@ -3257,7 +3213,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <form id="frm-verify-account" class="frm-verify-account" method="post">   
     <div class="wrapper top20">
-
+<!-- Atualização Master Hub (Tradução) -->
       <div class="field-wrapper">
       <input type="email" name="email_address"  class="email_address text-input text-input--underbar has_validation" 
       placeholder="Email address" value="" data-validation="email" data-validation-error-msg="este campo precisa ser preenchido!" >
@@ -3267,7 +3223,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="text" name="code"  class="code text-input text-input--underbar has_validation" 
        placeholder="Code" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="11" >
       </div>
-      
+<!-- Fim da atualização -->
       <button class="trn button masterhub-btn button--large" onclick="verifyAccount();" data-trn-key="submit">
 	  Submit
       </button>
@@ -3304,7 +3260,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <div class="manual-address-input">
         <form id="frm-manual-address" class="frm-manual-address" method="post">
-		
+<!-- Atualização Master Hub (Tradução, Catálogo de Endereços e Número e Bairro) -->
 	   <div class="wrapper">
 	      <div class="field-wrapper">
 	      <input type="text" id="cep" name="zipcode_1"  class="zipcode_1 text-input text-input--underbar" 
@@ -3342,7 +3298,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	      placeholder="State" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 	      </div>      
 	   </div>
-
+<!-- Fim da atualização -->
 	   <div class="wrapper">
 	   <button class="button masterhub-btn button--large trn" onclick="setManualAddress();" data-trn-key="submit">
 		Submit		
@@ -3549,10 +3505,10 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    <form id="frm-enter-contact" class="frm-enter-contact" method="post">   
     <div class="field-wrapper">    
-    
+<!-- Atualização Master Hub (Tradução e Máscara de Telefone) -->
       <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
       placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >  
-    
+<!-- Fim da atualização -->
     </div>   
     
     <button class="button masterhub-btn button--large trn" onclick="submitContactForm();" data-trn-key="submit" style="margin-top:10px;" >
@@ -3591,11 +3547,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 	    </ons-list-item>
 	    
 	    <ons-list-item  >	     
-	     	     
+<!-- Atualização Master Hub (Correção de tipo de campo) -->
 	     <ons-row>
            <ons-col width="70%">
                <input type="number" name="cash_tip" id="cash_tip" style="width:89%;"
 	           class="cash_tip text-input text-input--underbar" placeholder="Cash Tip">
+<!-- Fim da atualização -->
            </ons-col>           
            <ons-col width="30%">
              <button class="trn button masterhub-btn" onclick="applyCashTip();" data-trn-key="apply">
@@ -3666,7 +3623,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="hidden" name="expiration_month" class="expiration_month" id="expiration_month">
       <input type="hidden" name="expiration_yr" class="expiration_yr" id="expiration_yr">
       <input type="hidden" name="cc_id" class="cc_id" id="cc_id">
-      
+<!-- Atualização Master Hub (Tradução) -->
       <div class="field-wrapper">
       <input type="text" name="card_name"  class="card_name text-input text-input--underbar has_validation" 
       placeholder="Card name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
@@ -3676,7 +3633,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="text" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16"  data-maxl="16" >
       </div>
-      
+<!-- Fim da atualização -->
      <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" onclick="showExpirationMonth();" class="trn expiration_month_label" data-trn-key="expiration_month">
          Expiration Month
@@ -3688,7 +3645,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
          Expiration Year
         </ons-list-item>        
       </ons-list>
-     
+<!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
       <input type="text" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="CVV" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="4" data-maxl="4" >
@@ -3698,7 +3655,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="text" name="billing_address"  class="billing_address text-input text-input--underbar has_validation" 
       placeholder="Billing Address" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div> 
-      
+<!-- Fim da atualização -->
      <button class="trn button masterhub-btn button--large" onclick="saveCC();" data-trn-key="save">
 		Save
 		<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
@@ -3717,7 +3674,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
 </ons-page>
 </script>   
-
+<!-- Atualização Master Hub (Sistema Favoritos) -->
 <script type="text/ons-template" id="favoritos.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 
 <ons-page id="page-favoritos" on-device-backbutton="backtoHome()" >
@@ -3747,7 +3704,7 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
 </ons-page>
 </ons-navigator> 
 </script>
-
+<!-- Fim da atualização -->
 <script type="text/ons-template" id="monerisForm.html">   
 <ons-page id="page-moneris-form">
    <ons-toolbar>        
@@ -3767,12 +3724,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
    
    <div class="wrapper">
-   
+<!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
       <input type="text" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16"  data-maxl="16" >
       </div>
-      
+<!-- Fim da atualização -->
      <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" onclick="showExpirationMonth();" class="trn expiration_month_label" data-trn-key="expiration_month">
          Expiration Month
@@ -3784,12 +3741,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
          Expiration Year
         </ons-list-item>        
       </ons-list>
-      
+<!-- Atualização Master Hub (Tradução) -->
     <div class="field-wrapper">
       <input type="text" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="CVV" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16"  data-maxl="16" >
       </div>  
-      
+<!-- Fim da atualização -->
      
    <button class="trn button masterhub-btn button--large" onclick="monerisPay();" data-trn-key="pay_now">
 	Pay Now
@@ -3830,12 +3787,12 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
       <input type="text" name="customer_mobileno"  class="customer_mobileno limit_char  text-input text-input--underbar has_validation" 
       placeholder="Mobile numbers" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"  >
     </div> 
-    
+<!-- Atualização Master Hub (Correção de tipo de campo) -->
    <div class="field-wrapper">
       <input type="email" name="customer_email"  class="customer_email limit_char  text-input text-input--underbar has_validation"
       placeholder="Email" value=""  >
     </div> 
-    
+<!-- Fim da atualização -->
      
     
    
@@ -3986,6 +3943,108 @@ src="https://www.facebook.com/tr?id=142431656325667&ev=PageView&noscript=1"
    
 </ons-page>
 </script>   
+<!-- Atualização Master Hub (Catálogo de Endereços, Máscara de Telefone) -->
+<script type="text/ons-template" id="shippingLocationArea.html"> 
+<ons-page id="page-shipping-location-area" class="onsen-display">
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     
+   </ons-toolbar>
+		<button id="menu-adress" class="button button--quiet button--large green" onclick="popUpAddressBook();">Selecione da sua lista de endereços</button>
+		<p id="menu-adress" class="small-font-dim center trn" data-trn-key="ou escolha uma das opções abaixo">ou escolha uma das opções abaixo</p>
+   
+   <form id="frm-shipping" class="frm-shipping" method="post">
+   
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+   <input type="hidden" name="city" class="city">
+   <input type="hidden" name="state" class="state">   
+   <input type="hidden" name="zipcode" class="zipcode">  
+   <input type="hidden" name="area_name" class="area_name">  
+   
+      <div class="home-page wrapper center" style="margin-top: -15px; margin-bottom: -20px;">       
+              
+       <button class="button button--quiet green" onclick="getCurrentLocation();">
+       <ons-icon icon="fa-location-arrow"></ons-icon>
+         <span class="trn" data-trn-key="Informa a minha localização atual">Informa a minha localização atual</span>
+       </button>       
+
+
+   <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
+    </div>   
+   <p> 
+	<div class="wrapper center"><span id="cidade" class="cidade wrapper center" style="color: white; font-size: 16px;"> </span><span class="wrapper center" style="color: white; font-size: 16px;"> | </span> <span id="bairro" class="bairro wrapper center" style="color: white; font-size: 16px;"> </span></div>
+	
+	</p>
+   <p class="trn menuapp" style="margin-top: 3px; margin-bottom: 5px;">Preencha ou confira o endereço de entrega</p>    
+   
+   <ons-list>
+   
+   <ons-list-item modifier="chevron" style="display: none;" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
+    State
+    </ons-list-item>
+   
+	<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >        
+	City
+	</ons-list-item>
+	
+	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+	District / Area
+	</ons-list-item>
+	
+   </ons-list>
+   
+    <div class="wrapper">
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+							<input type="text" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+							<input type="text" name="numero" class="numero text-input text-input--underbar" placeholder="Nº" value="" data-validation="required" data-validation-error-msg="Obrigatório">
+						</ons-col>
+					</ons-row>
+				</div>
+
+				<div class="field-wrapper">
+      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+					placeholder="Apartment suite, unit number, or company name" >
+      </div>      
+
+   
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+					placeholder="Delivery instructions" value="" >
+      </div>      
+
+				<div class="field-wrapper">
+					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
+					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+   </div>
+   
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 8px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+<br>
+   
+    <button class="button masterhub-btn button--large trn" onclick="clientShipping();" data-trn-key="select_payment_method">
+	Select Payment Method
+	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
+   </button>
+			</div>
+   </form>
+<!-- Fim da atualização -->
+</ons-page>
+</script>     
 
 <script type="text/ons-template" id="locationState.html">    
   <ons-dialog var="locationState" style="width:90%;height:350px;" cancelable  >

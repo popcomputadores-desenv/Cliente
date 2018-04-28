@@ -11,7 +11,118 @@ height: 32px;
 vertical-align: middle;
 margin-right: 5px;
 }
+.cod-recibo .row{
+   
+    
+}
+.cod-recibo .col{
+    text-align: center;
+    font-size: 30px;
+    vertical-align: middle;
+    color: darkgray;
+}
 
+.cod-recibo .total-amount{
+    position: relative!important;
+    font-size: 30px!important;
+    text-align: center;
+    display: block;
+    vertical-align: middle;
+    padding: 24px;
+    font-weight: 600;
+    top: auto !important;
+    left: auto!important;
+}
+
+.cod-thanks{
+        color: #6d6c6c;
+        margin-top: 0px;
+        position: relative!imporant;
+}
+
+.cod-end-entrega{
+    /*float: left; */
+    /* margin-top: 30px; */
+    /* margin-bottom: 30px; */
+    margin: auto;
+        width: 70%;
+    vertical-align: middle;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.receipt-pedido{
+    font-weight: 600;
+    }
+.t_pgtoico{
+    max-width: 30%;
+    -webkit-box-flex: 0;
+    /* flex: 0 0 40%; */
+    /* max-width: 10%; */
+    float: left;
+}
+.t_entregaico{
+       /* margin-left: 20px; */
+    width: 24%;
+    font-size: 40px;
+    vertical-align: middle;
+    float: left;
+    line-height: 80px;
+}
+.t_pgtotrans{
+        color: #5a5a5a;
+}
+.t_pgtodesc{
+    color:#7b7878;
+    padding: 2px;
+}
+.t_pgto{
+    font-size: 14px!important;
+    text-align: center;
+    width: 70%;
+    display: inline-block;
+    /* vertical-align: middle; */
+    padding: 4px!important;
+}
+.cod-rec-tempo{
+    border: 1px solid #ddd;
+    width: 98%;
+    margin: auto;
+    padding-bottom: 10px!important;
+    padding-top: 10px!important;
+        display: inline-block;
+    font-size: 24px;
+color:#666;
+}
+.cod-rec-entrega{
+    font-size: 20px;
+    color: darkgray;
+    display: block;
+    text-align: center;
+        width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #ddee;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+	margin-top: 0px;
+    /* margin-left: 8px; */
+    /* margin-right: 8px; */
+    /* padding-left: 8px; */
+    /* width: 100%; */
+    /* text-align: center; */
+    
+}
+.t_entrega{
+    
+    font-weight: bold;
+    
+}
+
+.t_tempoentrega{
+        vertical-align: middle;
+}
 .close{
 /*background:#F7F7F7;*/
 opacity: 0.3!important;
@@ -822,7 +933,7 @@ background:#101317;
 
 .loading-screen .inner{
 color: #FFFFFF;
-font-family: arial;
+font-family: 'Roboto', sans-serif;
 margin-top: 25%;
 position: relative;
 text-align: center;
@@ -1546,7 +1657,7 @@ font-size:30px;
     vertical-align: top;
     outline: none;
     line-height: 1;
-    font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
@@ -1604,7 +1715,7 @@ font-size:30px;
 }
 
 .page {
-    font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;

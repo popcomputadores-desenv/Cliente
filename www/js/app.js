@@ -42,12 +42,12 @@ var ajax_lazy_item;
 var app_version = 2.3;
 
 document.addEventListener("deviceready", onDeviceReady, false);
-
+/*Atualização Master Hub (Máscaras de Campos)*/
 $('.mask-phone').mask("(00) 0 0000-0000");
 $('.mask-cpf').mask("000.000.000-00");
-
+/*Fim da atualização*/
 function onDeviceReady() {    
-
+/*Atualização Master Hub (Sistema Onesignal)*/
 var notificationOpenedCallback = function(jsonData) {
     console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
   };
@@ -59,7 +59,7 @@ var notificationOpenedCallback = function(jsonData) {
 	//301a946a-a73a-4709-ac33-20df7c193e5a - Empresas
     .handleNotificationOpened(notificationOpenedCallback)
     .endInit();
-	    					
+/*Fim da atualização*/
 	navigator.splashscreen.hide();
 	
 	if(!isDebug()){
@@ -75,8 +75,12 @@ var notificationOpenedCallback = function(jsonData) {
 	push = PushNotification.init({
        "android": {
            "senderID": krms_config.pushNotificationSenderid,
-           "clearBadge":true
+/*Atualização Luciano (Correção Ícones Push)*/
+           "clearBadge":true,
+		   "iconColor": "#931a14",
+		   "icon":"icon_push"		   
        },
+/*Fim da atualização*/
        "ios": {
          "sound": true,
          "alert": true,
@@ -121,19 +125,6 @@ var notificationOpenedCallback = function(jsonData) {
    
    /*END PUSH*/
 }
-
-/*document.addEventListener("offline", onOffline, false);
-function onOffline() {    	
-    $(".home-page").hide();
-    $(".no-connection").show();		
-}
-
-document.addEventListener("online", onOnline, false);
-function onOnline()
-{
-	$(".home-page").show();
-    $(".no-connection").hide();		
-}*/
 
 function onPause() {
    //toastMsg('pause');
@@ -196,31 +187,24 @@ $( document ).on( "keyup", ".numeric_only", function() {
   this.value = this.value.replace(/[^0-9\.]/g,'');
 });	 
 
-ons.bootstrap()
-.controller('TabbarController', function($scope) {
-    $scope.title = 'Volte para a Página Inicial';
-    $scope.updateTitle = function($event) {
-      $scope.title = angular.element($event.tabItem).attr('label');
-    };
-  });  
-
+ons.bootstrap();  
 ons.ready(function() {
 	dump('ready');
 		
 	if(isDebug()){
 		removeStorage("default_lang");
-		removeStorage("search_address");	
-		
+		removeStorage("search_address");
+/*Atualização Master Hub (Tradução)*/
 		setStorage("search_address","Cidade Jardim, Rio Claro, SP, Brasil");		
-
+		// setStorage("search_address","none");		
 	}
-	
+/*Fim da atualização*/
+/*Atualização Master Hub (Sistema de Atualização)*/
 	if(!isDebug()){
 		setTimeout('atualizarAppInicio();', 3000);
-		
 	}
-	
-	
+/*Fim da atualização*/
+/*Atualização Master Hub (Ativa e desativa Catálogo de Endereços na finalização do pedido)*/
 	var address_book_on=getStorage("address_book_on");
 	dump("address_book_on=>"+address_book_on);
 	if(address_book_on!="yes"){
@@ -228,7 +212,7 @@ ons.ready(function() {
 	        } else {
 	          $("#page-shipping-location-area .menu-adress").css({"display":"block"});
 	        }
-	
+/*Fim da atualização*/
 	//navigator.splashscreen.hide()	
 	$("#s").val( getStorage("search_address") );
 		
@@ -237,9 +221,10 @@ ons.ready(function() {
 	//removeStorage("client_token");
 	
 	if(isDebug()){
+/*Atualização Master Hub (Nome do dispositivo quando está em modo Debug)*/
 	   setStorage("device_id","device_web_masterhub");
 	}
-				
+/*Fim da atualização*/
 	//getLanguageSettings();
 	if(isDebug()){
  	   setTimeout('getLanguageSettings()', 1100);
@@ -406,7 +391,7 @@ document.addEventListener("pageinit", function(e) {
 	dump("pageinit");	
 	dump("pagname => "+e.target.id);
 	
-	/*Atualização Master Hub (Oculta Categorias e Mostra um Botão)*/
+/*Atualização Master Hub (Oculta Categorias e Mostra um Botão)*/
 		   var busca_categoria = getStorage("busca_categoria");
 	       dump("busca_categoria=>"+busca_categoria);
 	       if(busca_categoria!='yes'){
@@ -417,16 +402,16 @@ document.addEventListener("pageinit", function(e) {
 	       } else {
 			  $(".botao-busca").hide();
 	       }
-
+/* Fim da Atualização */
 	switch (e.target.id)
 	{		
 		
 		case "page-menubycategoryitem":	
 
-	/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
 	$("#page-menubycategoryitem .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-menubycategoryitem .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	/* Fim da Atualização */
+/* Fim da Atualização */
 				
 			
 		
@@ -480,25 +465,27 @@ document.addEventListener("pageinit", function(e) {
 		case "page-booking":  
 		  translatePage();
 		  $(".number_guest").attr("placeholder", getTrans("Number Of Guests","number_of_guest") );		  
+/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
 		  //*initIntelInputs();
-		  
+/*Fim da atualização*/
 		  setTrackView("book table: " + $(".selected_restaurant_name").val()  );
 		  break;
 		  
 	   case "page-paymentoption":
 	     translatePage();
 	     $(".order_change").attr("placeholder", getTrans('change? For how much?','order_change') );	     
+/*Atualização Master Hub (Campo CPF na Nota)*/
 	     $(".cpf_nota").attr("placeholder", getTrans('CPF na Nota','cpf_nota') );
 			
-	/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
 	$("#page-paymentoption .estabelecimento-header2").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-paymentoption .estabelecimento-header").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	/* Fim da Atualização */
+/* Fim da Atualização */
 	//$(".subtotal_new").html(prettyPrice(subtotal_new));	 	
 			
 		 break;
 		 
-		 /*MODIFICADO*/
+/*Atualização Master Hub (Sistema Favoritos)*/
 		  case "page-favoritos":
 		if (!isLogin()){		
 		menu.setMainPage('prelogin.html', {closeMenu: true});
@@ -506,21 +493,24 @@ document.addEventListener("pageinit", function(e) {
  	callAjax("browseFavoritos","client_token="+getStorage("client_token"));
 		}		  
 		  break;
-		 /*FIM*/
+/* Fim da Atualização */
 			
 	  case "page-addressbook-details":
 	    translatePage();
 	    translateValidationForm();
 	    
 	    $(".street").attr("placeholder",  getTrans("Street",'street') );
+/*Atualização Master Hub (Número e Bairro)*/
 	    $(".numero").attr("placeholder",  getTrans("Numero",'numero') );
 	    $(".area_name").attr("placeholder",  getTrans("Bairro",'bairro') );
+/*Fim da atualização*/
 	    $(".city").attr("placeholder",  getTrans("City",'city') );
 	    $(".state").attr("placeholder",  getTrans("State",'state') );
 	    $(".zipcode").attr("placeholder",  getTrans("Postal code/Zip Code",'zipcode') );
 	    $(".location_name").attr("placeholder",  getTrans("Location name",'location_name') );
+/*Atualização Master Hub (Campo Complemento no Catálogo de Endereços)*/
 	    $(".delivery_instruction").attr("placeholder",  getTrans("Delivery instructions",'delivery_instruction') );
-	    
+/*Fim da atualização*/
 	    break;
 	    
 	   case "page-signup":		 
@@ -550,8 +540,10 @@ document.addEventListener("pageinit", function(e) {
 	   case "page-shipping":	  
 	   
 	      $(".street").attr("placeholder", getTrans('Street','street') );
+/*Atualização Master Hub (Número e Bairro)*/
 	      $(".numero").attr("placeholder", getTrans("Numero",'numero') );
 	      $(".area_name").attr("placeholder", getTrans("Bairro",'bairro') );
+/*Fim da atualização*/
 	      $(".city").attr("placeholder", getTrans('City','city') );
 	      $(".state").attr("placeholder", getTrans('State','state') );
 	      $(".zipcode").attr("placeholder", getTrans('Postal code/Zip Code','zipcode') );
@@ -564,13 +556,16 @@ document.addEventListener("pageinit", function(e) {
 	      	      
 	      //$('.zipcode').mask("00000-000", {placeholder: "_____-___"});
 	      
-	      //*initIntelInputs();
+/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
+		  //*initIntelInputs();
+/*Fim da atualização*/
 	      
 	      var customer_contact_number=getStorage("customer_contact_number");
 	      if(!empty(customer_contact_number)){
+/*Atualização Master Hub (Máscara do Telefone)*/
 	      	  $(".contact_phone").val($(".contact_phone").masked( customer_contact_number.replace("+55","") ));
 	      }
-	      
+/*Fim da atualização*/
 	      break;
 		
 		case "searchresult-page":	
@@ -605,14 +600,13 @@ document.addEventListener("pageinit", function(e) {
 		    callAjax("search","address="+ getStorage("search_address") + "&search_mode=" + search_mode );		
 		}*/
 		
-		// Destaques da semana vindo do Admin
+/*Atualização Master Hub (Destaques da semana vindo do Admin)*/
 		var codigo_destaque = getStorage("codigo_destaque");
 		createElement('codigo-destaque',codigo_destaque);
-			
-		// Cabeçalho das Buscas vindo do Admin
+/*Atualização Master Hub (Cabeçalho das Buscas vindo do Admin)*/
 		var codigo_cabecalho_buscas = getStorage("codigo_cabecalho_buscas");
 		createElement('codigo-cabecalho-buscas',codigo_cabecalho_buscas);
-		
+/*Fim da atualização*/
 		search_mode = getSearchMode();
 		if ( search_mode=="postcode"){
 			$("#search-text").html( '' );
@@ -622,19 +616,19 @@ document.addEventListener("pageinit", function(e) {
 		
 			
 		break;
-		/* Modificação Pagina Personalizada */
+/*Atualização Master Hub (Modificação Pagina Personalizada)*/
 		case "carregarPagina-page":	
 		var pagina=getStorage("pagina");
 		callAjax("Pagina","id="+pagina);
 			break;
-		/* FIM da Modificação Pagina Personalizada */
+/* Fim da atualização */
 			
-		/* Modificação Slide Personalizado */
+/*Atualização Master Hub (Modificação Slide Personalizado)*/
 		case "carregarSlide-page":	
 		var slide=getStorage("slide");
 		callAjax("Pagina","id="+slide);
 			break;
-		/* FIM da Modificação Slide Personalizado */
+/* Fim da atualização */
 
 		case "searchcategorias-page":	
 
@@ -864,11 +858,7 @@ document.addEventListener("pageinit", function(e) {
 		  translatePage();
 		  break;
 		  
-		  case "page-sharetheapp":
-		
-		  break;
-		  
-		  /*Atualização Master Hub (Atualização do aplicativo e Página Personalizada)*/
+/*Atualização Master Hub (Atualização do aplicativo e Página Personalizada)*/
 		  case "page-atualizar":
 		  
 		var versao = getStorage('versao');
@@ -933,8 +923,7 @@ document.addEventListener("pageinit", function(e) {
 		translatePage();
 		
 		  break;
-		  
-		   /*Fim da atualização*/
+/*Fim da atualização*/
 		   
 		case "page-profile":
 		  callAjax('getProfile',
@@ -959,7 +948,11 @@ document.addEventListener("pageinit", function(e) {
 		  );
 		  translatePage();
 		  break;
-		  
+		
+		case "page-sharetheapp":
+		translatePage();  
+		   break;
+
 		case "page-addressbook": 
 		  callAjax('getAddressBook',
 		  "client_token="+getStorage("client_token")
@@ -989,9 +982,13 @@ document.addEventListener("pageinit", function(e) {
 		case "page-settings":  
 		
 		  if (isDebug()){
-		    	$(".software_version").html( "2.4 - Debug" );
+/*Atualização Master Hub (Versão do Sistema em modo Debug)*/
+		    	$(".software_version").html( "2.3 - Debug" );
+/*Fim da atualização*/
 		  } else {
+/*Atualização Master Hub (Versão do Sistema e Código da Versão)*/
 		    	$(".software_version").html( getStorage("versao")+" - ("+getStorage("versaoCode")+")");
+/*Fim da atualização*/
 		  }
 		  
 		  setTrackView("app settings");
@@ -1069,8 +1066,10 @@ document.addEventListener("pageinit", function(e) {
            translatePage();
 		   translateValidationForm();
 		   $(".stree_1").attr("placeholder",  getTrans("Street",'street') );
+/*Atualização Master Hub (Número e Bairro)*/
 	       $(".numero_1").attr("placeholder",  getTrans("Numero",'numero') );
 	       $(".area_name_1").attr("placeholder",  getTrans("Bairro",'bairro') );
+/*Fim da atualização*/
 	       $(".city_1").attr("placeholder",  getTrans("City",'city') );
 	       $(".state_1").attr("placeholder",  getTrans("State",'state') );
 	       $(".zipcode_1").attr("placeholder",  getTrans("Postal code/Zip Code",'zipcode') );	      		
@@ -1144,7 +1143,7 @@ document.addEventListener("pageinit", function(e) {
 		   	   $(".state").val( global_area_name );
 		   	   $(".area_id").val( global_area_id );
 		   }
-
+/*Atualização Master Hub (Catálogo de Endereços)*/
 		   	switch (search_type)
 			{
 				case "1":
@@ -1175,16 +1174,17 @@ document.addEventListener("pageinit", function(e) {
 				$(".location_postal").show();
 				break;
 			}
-		   		   
+/*Fim da atualização*/
            translateValidationForm();
+/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
            //*initIntelInputs();
-
+/*Fim da atualização*/
            var customer_contact_number=getStorage("customer_contact_number");
 	       if(!empty(customer_contact_number)){
+/*Atualização Master Hub (Máscara do Telefone)*/
 	      	  $(".contact_phone").val($(".contact_phone").masked( customer_contact_number.replace("+55","") ));
 	       } 
-	      
-	       
+/*Fim da atualização*/
 		   break;
 
 		 case "page-location-postal":   
@@ -1198,7 +1198,7 @@ document.addEventListener("pageinit", function(e) {
 	}
     
 }, false);
-
+/*Atualização Master Hub (Pegando dados do Catálogo de Endereços)*/
 function mudarendereco()
 {
 	$(".search_by_location").show();
@@ -1209,7 +1209,7 @@ function mudarendereco()
 	//removeStorage("global_area_id");
 	//removeStorage("global_city_id");
 }
-
+/*Fim da atualização*/
 function searchResultCallBack(address)
 {
 	search_address=address;	
@@ -1302,10 +1302,11 @@ function onsenAlert(message,dialog_title)
 
 function onsenDialogCheckout(){
 
+/*Atualização Master Hub (Tradução e Catálogo de Endereços)*/
 	ons.notification.confirm({
 	  message: getTrans('Deseja finalizar o pedido?','Deseja continuar comprando?') ,	  
 	  title: dialog_title_default,
-	  buttonLabels: ['Sim', 'Ainda não'],
+	  buttonLabels: ['Sim', 'Ainda Não'],
 	  animation: 'fade', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
@@ -1317,7 +1318,9 @@ function onsenDialogCheckout(){
 	  }
 	});		
 }
-	
+/*Fim da atualização*/
+
+/*Atualização Master Hub (Verificação de Endereços e Catálogo de Endereços)*/
 function onsenDialogAddresBook(){
 
 	ons.notification.confirm({
@@ -1382,7 +1385,8 @@ function onsenDialogAddresBookOld(){
 	  }
 	});		
 }
-
+/*Fim da atualização*/
+/*Atualização Master Hub (Sistema de Sugestões)*/
 function onsenDialogSugestao(){
 
 	ons.notification.confirm({
@@ -1400,7 +1404,7 @@ function onsenDialogSugestao(){
 	  }
 	});		
 }
-
+/*Fim da atualização*/
 
 function hideAllModal()
 {
@@ -1418,7 +1422,7 @@ function callAjax(action,params)
 		{
 			case "registerMobile":			
 			break;
-				
+			
 			case "getLanguageSettings":
 			  $(".retry-language").show();
 			break;
@@ -1483,7 +1487,7 @@ function callAjax(action,params)
 		type: 'post',                  
 		async: false,
 		dataType: 'jsonp',
-		timeout: 8000,
+		timeout: 10000,
 		crossDomain: true,
 	 beforeSend: function() {
 		if(ajax_request != null) {			 	
@@ -1534,13 +1538,14 @@ function callAjax(action,params)
 				$(".result-msg").text(data.details.total == 1 ? +"1 empresa entrega no seu bairro" : data.details.total+" "+getTrans("Restaurant found",'restaurant_found') );
 								
 				break;
-				/*MODIFICADO*/	
+/*Atualização Master Hub (Busca todos os comércios Favoritos)*/
 				case "browseFavoritos":
 				   displayFavoritosResults( data.details.data ,'browse-favoritos');
 				   //$(".result-msg").text(data.details.total+" Restaurant found");
 				   $(".result-msg").text(data.details.total+" "+ getTrans("Favorito(s) Encontrado(s)",'restaurant_favorito_found')  );
 				 break;
-					
+/*Fim da atualização*/
+/*Atualização Master Hub (Verificação de Endereços e Catálogo de Endereços)*/
 				case "CarregaEndereco":
 				if (data.details.has_addressbook==2){
 			      if(!empty(data.details.default_address)){
@@ -1573,13 +1578,15 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 						      	  	    	
 						   } else onsenDialogAddresBook();				      	  	 
 				break;	
-					/*FIM*/
+/*Fim da atualização*/
+/*Atualização Master Hub (Personalização Sugestões, Página Personalizada e Abertos e Fechados)*/
 				case "MenuCategory":			
 				/*save merchant logo*/								
 				setStorage("merchant_logo",data.details.logo);
 				setStorage("merchant_bg",data.details.merchant_bg);
 				dump(data.details.restaurant_name);
 				setStorage("merchant_name",data.details.restaurant_name);
+				
 				setStorage("enabled_table_booking",data.details.enabled_table_booking);
 				
 				setStorage("merchant_latitude",data.details.coordinates.latitude);
@@ -1633,7 +1640,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				paginaResultado(data.details);
 					translatePage();
 				break;
-
+/*Fim da atualização*/
 				case "getItemByCategory":			
 				easy_category_list='';						
 				displayItemByCategory(data.details);
@@ -1712,7 +1719,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 						      	  /*if (data.msg.length>0){
 						      	  	  $(".select-addressbook").css({"display":"block"});
 						      	  } else $(".select-addressbook").hide();*/
-						      	  
+/*Atualização Master Hub (Máscara de Telefones, Número e Bairro e Catálogo de Endereços)*/
 						      	  if(!empty(data.msg.profile)){
 						      	  	  $(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
 						      	  	  $(".location_name").val( data.msg.profile.location_name ) ;
@@ -1746,14 +1753,14 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 										  
 										  
 										  var complete_address = data.msg.address_book.street;
-									  complete_address+=" "+ data.msg.address_book.numero;
-									  complete_address+=" "+ data.msg.address_book.area_name;
+								  		  complete_address+=" "+ data.msg.address_book.numero;
+									  	  complete_address+=" "+ data.msg.address_book.area_name;
 										  complete_address+=" "+ data.msg.address_book.city;
 										  complete_address+=" "+ data.msg.address_book.state;
 										  complete_address+=" "+ data.msg.address_book.zipcode;
 										
 											reloadCart();
-									  
+/*Fim da atualização*/
 										  $(".delivery-address-text").html( complete_address ); 
 										  $(".formatted_address").val( complete_address );	
 						      	  	  }
@@ -1798,7 +1805,9 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				    	var options = {
 					      animation: 'slide',
 					      onTransitionEnd: function() { 	
+/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
 					      	  //*initIntelInputs();
+/*Fim da atualização*/
 					      } 
 					    };   
 					    sNavigator.pushPage("enterContact.html", options);		
@@ -1816,7 +1825,9 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 								  'page-checkoutsignup');
 					      	     
 					      	  callAjax("getCustomFields",'');     
+/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
 					      	  //*initIntelInputs();
+/*Fim da atualização*/
 					      } 
 					    };     
 					    sNavigator.pushPage("checkoutSignup.html", options);				
@@ -1911,9 +1922,16 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					}
 				break;
 				
-				case "getPaymentOptions":				
-				   $(".frm-paymentoption").show();	
+				case "getPaymentOptions":
 					
+				   $(".frm-paymentoption").show();
+					
+					if (transaction_type=="delivery"){
+					$(".conferirendereco").show();
+					}else{
+					$(".conferirendereco").hide();	
+					}
+/*Atualização Master Hub (Resumo de Endereço na finalização do pedido)*/
 				$(".endereco_de_entrega_street").html(data.details.endereco_de_entrega.street);
 				$(".endereco_de_entrega_numero").html(data.details.endereco_de_entrega.numero);
 				$(".endereco_de_entrega_city").html(data.details.endereco_de_entrega.city);
@@ -1922,7 +1940,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				$(".endereco_de_entrega_zipcode").html(data.details.endereco_de_entrega.zipcode);
 				$(".endereco_de_entrega_location_name").html(data.details.endereco_de_entrega.location_name);
 				$(".endereco_de_entrega_delivery_instruction").html(data.details.endereco_de_entrega.delivery_instruction);	
-				   
+/*Fim da atualização*/
 				   /*$(".client_id_sandbox").val( data.details.paypal_credentials.client_id_sandbox );
 			   	   $(".client_id_live").val( data.details.paypal_credentials.client_id_live );*/
 				   
@@ -1980,12 +1998,16 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			    	if(data.details.show_mobile_number){
 			    	  	 new_fields=ContactNumberFields();					    		
 			    		 createElement("checkout_information_contact",new_fields);
+/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
 			    		 //*initIntelInputs();
+/*Fim da atualização*/
 			       }			 
+			       
 			        translateValidationForm();
-			   	   	reloadCart();		   	   
+/*Atualização Master Hub (Recarrega carrinho para atualização de valores)*/
+			   	   	reloadCart();	
+/*Fim da atualização*/
 			   	   displayPaymentOptions(data);
-					
 			   	   
 			   	   $(".cod_change_required").val( data.details.cod_change_required);
 			   	   
@@ -1996,8 +2018,9 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				case "placeOrder":																  
 				
 				  setStorage("order_id",data.details.order_id);
+/*Atualização Master Hub (Recarrega carrinho para atualização de valores)*/
 				  reloadCart();
-					
+/*Fim da atualização*/
 				  switch (data.details.next_step){
 				  	
 				  	   case "paypal_init":
@@ -2169,12 +2192,13 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				  	   
 				  	   
 				  	   case "mcd_init":
+/*Atualização Master Hub (Mercado Pago)*/
 						  
 				var color = "#841011"; 
 			/* Você pode definir a cor do background do checkout aqui */
 				var blackFont = true;  	   
 				MercadoPago.startCheckout( data.details.mercapago.mercado_key , data.details.mercapago.payment_ref, color, blackFont, mercapagoSuccess, mercapagoFailed );
-				  	        
+/*Fim da atualização*/
 				  	   break;
 				  	   
 				  	   case "mcd_error":
@@ -2188,7 +2212,71 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					      	  /*displayMerchantLogo2( getStorage("merchant_logo") ,
 					      	                      getStorage("order_total") ,
 					      	                      'page-receipt');*/
-					      	  $(".receipt-msg").html(data.msg); 
+/*Atualização Master Hub (Resumo do Endereço de entrega e Valores)*/
+					      	  //$(".receipt-msg").html(data.msg); 
+                               //by delivery recibo
+                              var totalp = 'Total: '+data.details.payment_details.total_w_tax_pretty;
+                              $(".cod-thanks").html(getStorage("merchant_name"));
+                              $(".total-amount").html('Total: '+ data.details.payment_details.total_w_tax_pretty);
+                              //$(".receipt-pedido").html(pedidostr); 
+					      	  $(".receipt-msg").html(data.msg);
+                              $htmlicoentrega='';
+                              $htmltentrega='';
+                              $htmendentrega='';
+                               $enderecoico ="";
+                                $enderecodesc="";
+                              dump(data);
+                              if(getStorage("transaction_type")=='delivery'){ //se for entrega
+                                 $htmlicoentrega+='<div class="myfa-moto fa-motorcycle fa"></div>';
+                                 
+                                 $htmlentrega="Endereço da Entrega";
+                                 $htmlendentrega="";
+                                  
+                                  $enderecoentregaw=JSON.parse('{"' + decodeURI(getStorage('shipping_address').replace(/%2C/g,"").replace(/\+/g, " ").replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}');
+                                  dump($enderecoentregaw);
+                                  $enderecoentrega=$enderecoentregaw.street +" "+ $enderecoentregaw.numero + " - "+$enderecoentregaw.area_name +" - "+ $enderecoentregaw.city;
+                                  
+                                  $enderecoico='<div class="myfa-home fa-home fa"></div>'
+                                 
+                                 }else{//se for busca
+                                $enderecoico='<div icon="fa-institution" class="myfa-inst fa-intitution fa"></div>'     
+                                $enderecoentrega =getStorage('merchant_address');
+                                 $htmlicoentrega+='<div class="myfa-male fa-male fa"></div>';
+                                 $htmlentrega="Buscar no Restaurante";
+                                 $htmlendentra="";
+                                 }
+                                 
+                                 $(".t_entregaico").html($htmlicoentrega);
+                                 $(".t_entrega").html($htmlentrega);
+                               
+                                $(".t_enderecoico").html($enderecoico);
+                              $(".t_enderecoentrega").html($enderecoentrega);
+                              $(".t_tempoentrega").html(getStorage("delivery_estimation"));
+                                 
+
+                           $transtr="";
+                            $paym=data.details.payment_type;
+                           if(data.details.payment_type=='cod'){
+                               dump("pegou dinheiro ".$paym);
+                                $pgtoico='<ons-icon icon="fa-usd" class="myfa-usd fa-usd fa fa-lg "></ons-icon>';
+                                $pgtotrans="Pagar em Dinheiro";
+                                $transtr+='Troco: ';
+                                $transtr+=prettyPrice($('.order_change').val());
+                                
+                            }else{
+                                dump("pegou cartao ".$paym);
+                                $pgtoico='<ons-icon icon="fa-credit-card" class="myfa-creditcard fa-credit-card fa fa-lg"></ons-icon>';
+                                $pgtotrans="Pagar com Cartão";
+                                $transtr+=data.details.payment_details.payment_provider_name;
+                                
+            
+                            }
+                           
+                           $(".t_pgtoico").html($pgtoico);
+                           $(".t_pgtotrans").html($pgtotrans);
+                           $(".t_pgtodesc").html($transtr);
+                          
+/*Fim da atualização*/
 					      } 
 					    };     
 					    sNavigator.pushPage("receipt.html", options);
@@ -2204,8 +2292,9 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				case "iPay88Successfull":
 				case "monerisPay":
 				case "hubtelPaymentInit":
+/*Atualização Master Hub (Mercado Pago)*/
 				case "MercadoPagoOK":	
-				     
+/*Fim da atualização*/
 				       var amount_to_pay=data.details.amount_to_pay;
 				       if(amount_to_pay==0){
 				       	  amount_to_pay=getStorage("order_total");
@@ -2260,18 +2349,19 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				  $(".first_name").val( data.details.first_name );
 				  $(".last_name").val( data.details.last_name );
 				  $(".email_address").val( data.details.email_address );
+/*Atualização Master Hub (Máscara do Telefone)*/
 				  if(!empty(data.details.contact_phone)){
 				  $(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") )); }
-				  
+/*Fim da atualização*/
 				  $(".avatar").attr("src", data.details.avatar );
 				  
 				  dump('set avatar');
 				  setStorage("avatar",data.details.avatar);
 				  
 				  imageLoaded('.img_loaded');
-				  
+/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
 				  //*initIntelInputs();
-				  
+/*Fim da atualização*/
 				  break;   
 				  
 				case "registerUsingFb":  
@@ -2306,13 +2396,14 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 								  'page-shipping');					      	    
 							      	  
 	                                 if(!empty(data.details.contact_phone)){
+/*Atualização Master Hub (Máscara do Telefone)*/
 						      	  	     $(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
 						      	     }
-						      	     
-								     if(!empty(data.details.location_name)){
+/*Fim da atualização*/
+						      	     if(!empty(data.details.location_name)){
 						      	  	     $(".location_name").val( data.details.location_name ) ;
 						      	     }
-								  	 
+/*Atualização Master Hub (Gravar Campo Complemento no Catálogo de Endereços e Número e Bairro)*/
 						      	     if(!empty(data.details.delivery_instruction)){
 						      	  	     $(".delivery_instruction").val( data.details.delivery_instruction ) ;
 						      	     }
@@ -2333,10 +2424,11 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 						      	  	    if (data.details.has_addressbook==2){
 						      	  	    	
 						      	  	       if(!empty(data.details.default_address)){
-							      	  $(".delivery-address-text").html( data.details.default_address.address );
-							      	  $(".street").val (  data.details.default_address.street  );
+							      $(".delivery-address-text").html( data.details.default_address.address );
+							      $(".street").val (  data.details.default_address.street  );
 					      	  	      $(".numero").val (  data.details.default_address.numero  );
 					      	  	      $(".area_name").val (  data.details.default_address.area_name  );
+/*Fim da atualização*/
 										$(".city").val( data.details.default_address.city  );
 										$(".state").val( data.details.default_address.state );
 										$(".zipcode").val(  data.details.default_address.zipcode );	
@@ -2396,17 +2488,17 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				   
 				case "getAddressBook":  
 				  displayAddressBook(data.details);
-					
+/*Atualização Master Hub (Catálogo de Endereços)*/
 					if (data.details.address.length>0){
 				if (empty(data.details.default_address)){
 					$(".endereco_padrao").show();
 					} else $(".endereco_padrao").hide();
 				} else $(".endereco_padrao").hide();
 				  break;  
-				  
+/*Fim da atualização*/
 			    case "getAddressBookDetails":
 			      fillAddressBook(data.details);
-
+/*Atualização Master Hub (Catálogo de Endereços)*/
 					if (data.details.area_id==0 || data.details.city_id==0){
 			$("#frm-addressbook .location_area").html(getTrans("District / Area","destrict_area"));
 			$("#frm-addressbook .location_city").html(getTrans("City", "city"));
@@ -2415,8 +2507,9 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			$("#frm-addressbook .state_id").val("");		
 		}
 			      break;  
-			      
+/*Fim da atualização*/
 			    case "saveAddressBook":  
+/*Atualização Master Hub (Catálogo de Endereços)*/
 						sNavigator.popPage({cancelIfRunning: true});
 						callAjax('getAddressBook', "client_token="+getStorage("client_token"));
 
@@ -2426,7 +2519,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 							onsenAlert("Endereço atualizado");
 			      }
 			      break;  
-			      
+/*Fim da atualização*/
 			    case "deleteAddressBook":  
 			         sNavigator.popPage({cancelIfRunning: true});			         
 			         callAjax('getAddressBook',
@@ -2454,6 +2547,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			    /*silent */
 			    break;
 			    
+/*Atualização Master Hub (Preenchimento dos dados no Catálogo de Endereços adquiridos pelo GPS)*/
 			    case "reverseGeoCoding":
 			       $("#s").html(data.details.formatted_address);
 					$(".street").val(data.details.address);
@@ -2473,7 +2567,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					$(".city").val('');
 					$(".area_name").val('');
 			       break;
-			          
+/*Fim da atualização*/
 			    
 			    case "getSettings":      			       
 			       if ( data.details.enabled_push==1){		
@@ -2535,7 +2629,8 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			       /*pts*/
 			       setStorage("pts",data.details.settings.pts);
 			       
-			/*Atualização Master Hub*/
+/*Atualização Master Hub (Personalizações)*/
+
 				   /*banner_topo*/
 				   setStorage("banner_topo",data.details.settings.banner_topo);
 				   
@@ -2603,10 +2698,13 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				   /*menu lista de enderecos - ativa-desativa */
 				   setStorage("address_book_on",data.details.settings.address_book_on);
 					
+				   /*login/registro - ativa-desativa */
+				   setStorage("login_force_on",data.details.settings.login_force_on);
+					
 					/*splash_paginas slide*/
 				   setStorage("slide",data.details.settings.splash_paginas);
 				   
-			/*Fim da atualização*/
+/*Fim da atualização*/
 			
 			       /*facebook_flag*/
 			       setStorage("facebook_flag",data.details.settings.facebook_flag);
@@ -2656,7 +2754,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					
 			       $(".voucher_amount").val( data.details.amount );
 			       $(".voucher_type").val( data.details.voucher_type );
-			       
+/*Atualização Master Hub (Ao aplicar o cupom atualiza o resumo)*/
 				   carrinho=getStorage("cart_sub_total");
 				   embalagem=getStorage("cart_packaging");
 				   entrega=getStorage("cart_delivery_charges");
@@ -2676,8 +2774,10 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					
 					if (typeof percent_comod === "undefined" || percent_comod==null || percent_comod=="" || percent_comod==0 ){
 							  	taxa_percent_comod=0;
+								taxa_comodidade_ok=0;
  								}else{
- 								taxa_percent_comod = percent_comod;
+ 								taxa_percent_comod = percent_comod;	
+									
  								}
 					
 					if(data.details.voucher_type == 'percentage'){
@@ -2695,30 +2795,29 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					taxa_comodidade=subtotal_new2/taxa_percent_comod;
 					gorjeta_new=getStorage("tips_percentage")*subtotal_new/100;
 					
-		$("#page-paymentoption .titulo-cupom").html('Desconto do Cupom: ');
-		$("#page-paymentoption .voucher_amount").html('('+prettyPrice(valor_voucher)+')');
-		$("#page-paymentoption .titulo-subtotal_new").html('Sub Total (- Cupom): ');
-					if (percent_comod!=0){
-		$("#page-paymentoption .titulo-comodidade").html('Taxa de Comodidade: ');
-		$("#page-paymentoption .total-comodidade").html(prettyPrice(taxa_comodidade));
-					}else{
-		$("#page-paymentoption .titulo-comodidade").css({"display":"none"});
-		$("#page-paymentoption .total-comodidade").css({"display":"none"});
-					}
-		$("#page-paymentoption .subtotal_new").html(prettyPrice(subtotal_new));
-		$("#page-paymentoption .titulo-gorjeta").html('Gorjeta: ');
-		$("#page-paymentoption .total-gorjeta").html(prettyPrice(gorjeta_new));			
-					if (transaction_type=="delivery"){	
-		$("#page-paymentoption .titulo-entrega").css({"display":"block"});
-		$("#page-paymentoption .total-entrega").css({"display":"block"});
-					}else{
-		$("#page-paymentoption .titulo-entrega").css({"display":"none"});
-		$("#page-paymentoption .total-entrega").css({"display":"none"});
-					}
-		$("#page-paymentoption .voucher_amount").css({"display":"block"});
-		$("#page-paymentoption .titulo-cupom").css({"display":"block"});
-		$("#page-paymentoption .subtotal_new").css({"display":"block"});
-		$("#page-paymentoption .titulo-subtotal_new").css({"display":"block"});
+				$("#page-paymentoption .titulo-cupom").html('Desconto do Cupom: ');
+				$("#page-paymentoption .voucher_amount").html('('+prettyPrice(valor_voucher)+')');
+				$("#page-paymentoption .titulo-subtotal_new").html('Sub Total (- Cupom): ');
+				$("#page-paymentoption .titulo-comodidade").html('Taxa de Comodidade: ');
+				$("#page-paymentoption .total-comodidade").html(prettyPrice(taxa_comodidade));
+				$("#page-paymentoption .subtotal_new").html(prettyPrice(subtotal_new));
+				$("#page-paymentoption .titulo-gorjeta").html('Gorjeta: ');
+				$("#page-paymentoption .total-gorjeta").html(prettyPrice(gorjeta_new));			
+							if (transaction_type=="delivery"){	
+				$("#page-paymentoption .titulo-entrega").css({"display":"block"});
+				$("#page-paymentoption .total-entrega").css({"display":"block"});
+							}else{
+				$("#page-paymentoption .titulo-entrega").css({"display":"none"});
+				$("#page-paymentoption .total-entrega").css({"display":"none"});
+							}
+							if (taxa_entrega==0){	
+				$("#page-paymentoption .titulo-entrega").css({"display":"none"});
+				$("#page-paymentoption .total-entrega").css({"display":"none"});
+							}		
+				$("#page-paymentoption .voucher_amount").css({"display":"block"});
+				$("#page-paymentoption .titulo-cupom").css({"display":"block"});
+				$("#page-paymentoption .subtotal_new").css({"display":"block"});
+				$("#page-paymentoption .titulo-subtotal_new").css({"display":"block"});
 					
 			       $(".apply-voucher").hide();
 			       $(".remove-voucher").css({
@@ -2726,13 +2825,25 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			       });
 			       
 			       $(".voucher-header").html(data.details.less);
-			       
+					
+					if (typeof taxa_comodidade_ok!=0){
+						taxa_comodidade_ok=taxa_comodidade;
+					}
 					
 			       var new_total= data.details.new_total;
-				new_total2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(subtotal_new)+parseFloat(taxa_comodidade);
+				
+					if (transaction_type=="delivery"){	
+		new_total2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(subtotal_new)+parseFloat(taxa_comodidade_ok);
+					}else{
+		new_total2=parseFloat(taxa_embalagem)+parseFloat(subtotal_new)+parseFloat(taxa_comodidade_ok);		
+					}
 					
-			       $(".total-amount").html( prettyPrice(new_total2));
-			       
+					if (typeof taxa_comodidade === "undefined" || taxa_comodidade==null || taxa_comodidade=="" || taxa_comodidade==0 ){
+				$(".total-amount").html( prettyPrice(new_total));
+ 								}else{
+ 				$(".total-amount").html( prettyPrice(new_total2));
+ 								}
+/*Fim da atualização*/
 			       break;
 			       
 			       
@@ -2814,7 +2925,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			      $(".pts_points_label").html( data.details.pts_points +" ("+ data.details.pts_amount+")" );
 			      $(".pts_pts").hide();
 			      $(".pts_pts_cancel").css({"display":"block"});
-					
+/*Atualização Master Hub (Ao aplicar o pontos atualiza o resumo)*/
 					carrinho=getStorage("cart_sub_total");
 				    embalagem=getStorage("cart_packaging");
 					entrega=getStorage("cart_delivery_charges");
@@ -2834,6 +2945,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					
 					if (typeof percent_comod === "undefined" || percent_comod==null || percent_comod=="" || percent_comod==0 ){
 							  	taxa_percent_comod=0;
+								taxa_comodidade_ok=0;
  								}else{
  								taxa_percent_comod = percent_comod;
  								}
@@ -2844,11 +2956,22 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 					subtotal_new2=parseFloat(taxa_embalagem) + parseFloat(taxa_entrega) + parseFloat(subtotal_new);
 					taxa_comodidade=subtotal_new2/taxa_percent_comod;
 					gorjeta_new=subtotal_new*getStorage("tips_percentage")/100;
-				  $("#page-paymentoption .total-pontos").html('('+data.details.pts_amount+')');
-				  $("#page-paymentoption .titulo-pontos").html('Menos '+data.details.pts_points_raw+' Pontos: ');
+		$("#page-paymentoption .total-pontos").html('('+data.details.pts_amount+')');
+		$("#page-paymentoption .titulo-pontos").html('Menos '+data.details.pts_points_raw+' Pontos: ');
 		$("#page-paymentoption .titulo-comodidade").html('Taxa de Comodidade: ');
 		$("#page-paymentoption .total-comodidade").html(prettyPrice(taxa_comodidade));
 		$("#page-paymentoption .titulo-subtotal_new").html('Sub Total (- Pontos): ');
+					if (transaction_type=="delivery"){	
+		$("#page-paymentoption .titulo-entrega").css({"display":"block"});
+		$("#page-paymentoption .total-entrega").css({"display":"block"});
+					}else{
+		$("#page-paymentoption .titulo-entrega").css({"display":"none"});
+		$("#page-paymentoption .total-entrega").css({"display":"none"});
+					}
+					if (taxa_entrega==0){	
+		$("#page-paymentoption .titulo-entrega").css({"display":"none"});
+		$("#page-paymentoption .total-entrega").css({"display":"none"});
+					}					
 		$("#page-paymentoption .subtotal_new").html(prettyPrice(subtotal_new));
 		$("#page-paymentoption .titulo-gorjeta").html('Gorjeta: ');
 		$("#page-paymentoption .total-gorjeta").html(prettyPrice(gorjeta_new));			
@@ -2861,9 +2984,23 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			      
 			      var new_total= data.details.new_total;
 			      dump('compute new total for pts');
-			new_total2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(subtotal_new)+parseFloat(taxa_comodidade);      
-			      $(".total-amount").html( prettyPrice(new_total2) );
-			      
+					
+					if (typeof taxa_comodidade_ok!=0){
+						taxa_comodidade_ok=taxa_comodidade;
+					}
+					
+				if (transaction_type=="delivery"){	
+		new_total2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(subtotal_new)+parseFloat(taxa_comodidade_ok);
+					}else{
+		new_total2=parseFloat(taxa_embalagem)+parseFloat(subtotal_new)+parseFloat(taxa_comodidade_ok);		
+					}
+					
+					if (typeof taxa_comodidade === "undefined" || taxa_comodidade==null || taxa_comodidade=="" || taxa_comodidade==0 ){
+				$(".total-amount").html( prettyPrice(new_total));
+ 								}else{
+ 				$(".total-amount").html( prettyPrice(new_total2));
+ 								}
+/*Fim da atualização*/
 			    break;
 			    
 			    case "addToCart":
@@ -3193,11 +3330,15 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			    break;
 			    
 			    case "initSearch":
-		if (!isLogin()){		
+					
+				var login_force_on=getStorage("login_force_on");
+				dump("login_force_on=>"+login_force_on);
+				
+			if(login_force_on==="yes"){	
+		
+			if (!isLogin()){
 		menu.setMainPage('prelogin.html', {closeMenu: true});
 		} else {
- 
-		
 			       setTrackView("restaurant results");
 			    
 			       // set the total search results
@@ -3213,12 +3354,36 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				   };	   	   	 				   
 				   menu.setMainPage('searchResults.html',options);
 		}
-			    break;
+			} else {
+				
+			       setTrackView("restaurant results");
+			    
+			       // set the total search results
+			       setStorage("search_total", data.details.total);
+			       setStorage("search_total_raw", data.details.total_raw);
+					
+			       var options = {     
+				  	  //address:s,	  	 	  	  
+				  	  closeMenu:true,
+				      animation: 'slide',
+				      callback: function(index) {	      	
+				      }
+				   };	   	   	 				   
+				   menu.setMainPage('searchResults.html',options);
+		}			    
+					break;
 					
 			    case "initSearchCategorias":
-			    		if (!isLogin()){		
+					
+				var login_force_on=getStorage("login_force_on");
+				dump("login_force_on=>"+login_force_on);
+				
+			if(login_force_on==="yes"){	
+		
+			if (!isLogin()){
 		menu.setMainPage('prelogin.html', {closeMenu: true});
 		} else {
+			
 			       setTrackView("restaurant results");
 			    
 			       // set the total search results
@@ -3232,23 +3397,59 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				      }
 				   };	   	   	 				   
 				   menu.setMainPage('searchCategorias.html',options);
-		}
+		} 
+			} else {
+					
+					setTrackView("restaurant results");
+			    
+			       // set the total search results
+			       setStorage("search_total", data.details.total);
+			    
+			       var options = {     
+				  	  //address:s,	  	 	  	  
+				  	  closeMenu:true,
+				      animation: 'slide',
+				      callback: function(index) {	      	
+				      }
+				   };	   	   	 				   
+				   menu.setMainPage('searchCategorias.html',options);				
+			}
+				
 			    break;
 			    
 			    case "initBrowseMerchant":
-							if (!isLogin()){		
+					
+				var login_force_on=getStorage("login_force_on");
+				dump("login_force_on=>"+login_force_on);
+				
+			if(login_force_on==="yes"){	
+		
+			if (!isLogin()){
 		menu.setMainPage('prelogin.html', {closeMenu: true});
 		} else {
 			       setStorage("browse_total", data.details.total);	
 			       setStorage("search_total_raw", data.details.total_raw);
 			       menu.setMainPage('browseRestaurant.html', {closeMenu: true});
 		}
+				} else {
+			       
+				   setStorage("browse_total", data.details.total);	
+			       setStorage("search_total_raw", data.details.total_raw);
+			       menu.setMainPage('browseRestaurant.html', {closeMenu: true});
+		}
 			    break;
 			    
 			    case "getCategoryCount":
-			if (!isLogin()){		
+					
+				var login_force_on=getStorage("login_force_on");
+				dump("login_force_on=>"+login_force_on);
+				
+			if(login_force_on==="yes"){	
+		
+			if (!isLogin()){
 		menu.setMainPage('prelogin.html', {closeMenu: true});
 		} else {
+			
 		       setTrackView("restaurant menu - " + data.details.restaurant_name );
 			    
 			       setStorage("category_count", data.details.total);
@@ -3262,16 +3463,42 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 							 
 	//$(".menu-header").css("background","url("+data.details.merchant_photo_bg+") no-repeat center center / cover");
 							 
-	/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
 	$("#menucategory-page .estabelecimento-header2").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#menucategory-page .estabelecimento-header").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	/* Fim da Atualização */
+/* Fim da Atualização */
 							 
 				      	 }
 				      } 
 				   };
 				   sNavigator.pushPage("menucategory.html", options);
 }
+				} else {
+		       setTrackView("restaurant menu - " + data.details.restaurant_name );
+			    
+			       setStorage("category_count", data.details.total);
+			       var options = {
+				      animation: 'slide',
+				      onTransitionEnd: function() { 	
+				      	 if(data.details.total<=0){
+				      	    toastMsg(data.msg);	
+				      	 }
+				      	 if(!empty(data.details.merchant_photo_bg)){
+							 
+	//$(".menu-header").css("background","url("+data.details.merchant_photo_bg+") no-repeat center center / cover");
+							 
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+	$("#menucategory-page .estabelecimento-header2").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#menucategory-page .estabelecimento-header").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+/* Fim da Atualização */
+							 
+				      	 }
+				      } 
+				   };
+				   sNavigator.pushPage("menucategory.html", options);
+}					
+					
+					
 			    break;
 			    
 			    case "getItemCount":
@@ -3323,19 +3550,13 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 			dump('failed condition');
 			switch(action)
 			{	
-					
+/*Atualização Master Hub (Sistema de Sugestões)*/
 				case "Suggestion":
 				$("#mensagem_nao").hide();	
 				sugestoes_Campo(data.details);
 				toastMsg(data.msg);
 				break;	
-					
-				case "search":
-				  //$(".result-msg").text("No Restaurant found");
-				  $(".result-msg").text(data.msg);				  
-				  toastMsg(data.msg);
-				  createElement('restaurant-results','');
-				  break;
+/*Fim da atualização*/
 								
 				case "getItemByCategory":				
 				  onsenAlert(data.msg);	
@@ -3365,6 +3586,13 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
 				  }
 				  break;
 				
+				case "search":
+				  //$(".result-msg").text("No Restaurant found");
+				  $(".result-msg").text(data.msg);				  
+				  toastMsg(data.msg);
+				  createElement('restaurant-results','');
+				  break;
+								
 				case "browseRestaurant":
 				   toastMsg(data.msg);
 				  /*$(".result-msg").text(data.msg);
@@ -3457,7 +3685,7 @@ if (data.details.default_address.area_id==0 || data.details.default_address.city
    });
 }
 
-
+/*Atualização Master Hub (Catálogo de Endereços)*/
 function setEnderecoNovo()
 {
 	dump("setEnderecoNovo");
@@ -3468,7 +3696,7 @@ function setEnderecoNovo()
 	   };	   	   	   
 	menu.setMainPage('addressBook.html', options); 	
 }
-	
+/*Fim da atualização*/
 function setHome()
 {
 	dump("setHome");
@@ -3499,6 +3727,7 @@ function setHomeCallback()
 
 function displayRestaurantResults(data , target_id)
 {	
+/*Atualização Master Hub (Empresas abertas e fechadas)*/
 	//dump(data);
 	var htm='';	
 	
@@ -3512,10 +3741,8 @@ function displayRestaurantResults(data , target_id)
 			abertas.push(data[i]);
 	}
 	data = abertas.concat(fechadas);
-	
-
-
-	
+/*Fim da atualização*/
+/*Atualização Master Hub (Personalização da tela de busca de Empresas)*/
     $.each( data, function( key, val ) {     
     	
     	// dump(val);
@@ -3622,8 +3849,6 @@ function displayRestaurantResults(data , target_id)
 	    	           }
     	              htm+='</ons-col>';
 					  /*Fim Pedido minímo*/
-
-					  
     	              htm+='</ons-col>'; 
     	           
     	     htm+='</ons-col>';
@@ -3631,9 +3856,7 @@ function displayRestaurantResults(data , target_id)
     	 htm+='</ons-row>';
     	 htm+='</ons-list-item>';
     });
-	
-
-
+/*Fim da atualização*/
       
     createElement(target_id,htm);
         
@@ -3655,10 +3878,12 @@ function initRating()
 }
 
 function loadRestaurantCategory(mtid)
-{	
+{
+/*Atualização Master Hub (Analytics do Facebook)*/
   fbq('trackCustom', 'VerEmpresa', {
 	  IDEmpresa: mtid,
   });	
+/*Fim da atualização*/
   cart = [] ; /*clear cart variable*/
   removeStorage("tips_percentage");  
   removeStorage("cc_id");  
@@ -3757,11 +3982,13 @@ function cuisineResults(data)
 
 function menuCategoryResult(data)
 {
+/*Atualização Master Hub (Sistema OneSignal)*/
 	if(!isDebug()){
    		//Tag OneSignal para cada estabelecimento visitado.
 		var keyOneSignal = getStorage('merchant_id');
 		window.plugins.OneSignal.sendTag(""+keyOneSignal+"", "visita");
 	}
+/*Fim da atualização*/
 	$("#menucategory-page .restauran-title").text(data.restaurant_name);
 	
 	$("#menucategory-page .rating-stars").attr("data-score",data.ratings.ratings);
@@ -3789,7 +4016,7 @@ function menuCategoryResult(data)
 		toastMsg(  getTrans("This restaurant has not published their menu yet.",'this_restaurant_no_menu') );
 	}	
 }
-
+/*Atualização Master Hub (Menu Categorias suspenso)*/
 function loadMenuFromShortcut(cat_id,mtid)
 {
 
@@ -3815,7 +4042,7 @@ function loadMenuFromShortcut(cat_id,mtid)
 	// showEasyCategory(this);
 
 }
-
+/*Fim da atualização*/
 function loadmenu(cat_id,mtid)
 {			       
 	
@@ -4163,11 +4390,13 @@ function loadItemDetails(item_id,mtid,cat_id)
 		
     if ( $("#close_store").val()==2 || $("#merchant_open").val()==1 ){
 		onsenAlert( getTrans("This Restaurant Is Closed Now.  Please Check The Opening Times",'restaurant_close') );
+/*Atualização Master Hub (Sistema OneSignal)*/
 		if(!isDebug()){
 		//Tag OneSignal para cada estabelecimento visitado estando fechado.
 		var keyOneSignal = mtid;
 		window.plugins.OneSignal.sendTag(""+keyOneSignal+"", "fechado");
 		}
+/*Fim da atualização*/
 		return;
 	}
 	
@@ -4274,7 +4503,9 @@ function displayItem(data)
 	                                 'sub_item', 
 	                                 val2.sub_item_id+"|"+val2.price +"|"+val2.sub_item_name,
 	                                 val2.sub_item_name,
+/*Atualização Master Hub (Correção de valor zerado)*/
 	                                 val2.price>0?val2.pretty_price:'',
+/*Fim da atualização*/
 	                                 val.multi_option_val,
 	                                 val2.item_description
 	                                 );	
@@ -4285,8 +4516,9 @@ function displayItem(data)
 					  	            'sub_item', 
 	                                 val2.sub_item_id+"|"+val2.price +"|"+val2.sub_item_name,
 	                                 val2.sub_item_name,
+/*Atualização Master Hub (Correção de valor zerado)*/
 	                                 val2.price>0?val2.pretty_price:'');	
-	                                 
+/*Fim da atualização*/
 	                     
 	                     if(show_addon_description==1){
 		                     if(!empty(val2.item_description)){
@@ -4301,7 +4533,9 @@ function displayItem(data)
                                    //val2.sub_item_id+"|"+val2.price + "|"+val2.sub_item_name  , 
                                    val2.sub_item_id+"|"+val2.price + "|"+val2.sub_item_name + "|" + val.two_flavor_position  , 
                                    val2.sub_item_name,
+/*Atualização Master Hub (Correção de valor zerado)*/
                                    val2.price>0?val2.pretty_price:'',
+/*Fim da atualização*/
                                    false,
                                    val2.item_description
                                    );                                                           
@@ -4433,7 +4667,9 @@ jQuery(document).ready(function() {
 		if ( $(this).val() == "cod"){
 			if ( $(".cod_change_required").val()==2 ){
 			   $(".order_change").attr("data-validation","required");
+/*Atualização Master Hub (Correção de Troco obrigatório)*/
 			   $(".order_change").attr("data-validation-error-msg","Preencha o valor antes de continuar");
+/*Fim da atualização*/
 			} else {
 				$(".order_change").removeAttr("data-validation");
 			}
@@ -4547,6 +4783,7 @@ jQuery(document).ready(function() {
 		dump(address_split);
 		if ( address_split.length>0){
 			$(".street").val( address_split[0] );
+/*Atualização Master Hub (Catálogo de Endereços)*/
 			$(".numero").val( address_split[1] );
 			
 			$(".bairro").html(address_split[2]);
@@ -4595,6 +4832,7 @@ jQuery(document).ready(function() {
 			
 			dialogAddressBook.hide();
 			
+/*Fim da atualização*/
 			
 		} else {
 			onsenAlert(  getTrans("Error: cannot set address book",'cannot_set_address')  );
@@ -4688,7 +4926,9 @@ function addToCart()
 {		
 	var proceed=true;
 	/*check if sub item has required*/
+/*Atualização Master Hub (Sistema Analytics do Facebook)*/
 	fbq('trackCustom', 'AddCarrinho');
+/*Fim da atualização*/
 	if ( $(".require_addon").exists()){
 		$(".small-texto-verde").remove();	
 		$('.require_addon').each(function () {
@@ -4847,10 +5087,11 @@ function addToCart()
 		   sNavigator.popPage({cancelIfRunning: true}); //back button
 		} else {
 			sNavigator.popPage({cancelIfRunning: true}); //back button
+/*Atualização Master Hub (Remoção da mensagem de ítem adicionado e Correção da tela de exibição)*/
 			//toastMsg(  getTrans("Item added to cart",'item_added_to_cart') );
 			onsenDialogCheckout();
 		}
-		
+/*Fim da atualização*/
 		showCartNosOrder();
 	}
 }
@@ -4916,10 +5157,10 @@ function showCart()
       	  params+="&tips_percentage=" + tips_percentage;
       	  params+="&remove_tips=" + remove_tips;
 		  
-	/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
 	$("#page-cart .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-cart .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	/* Fim da Atualização */
+/* Fim da Atualização */
 		  
 		  
       	        	 
@@ -4985,10 +5226,12 @@ function displayCart(data)
     /*for pts computation refference*/
     setStorage("cart_sub_total", data.cart.sub_total.amount );
     if(!empty(data.cart.delivery_charges)){
+/*Atualização Master Hub (Mensagem de mudança na taxa de entrega)*/
     if (sNavigator.getCurrentPage().name == "paymentOption.html" && getStorage("cart_delivery_charges") != data.cart.delivery_charges.amount) {
     var message = "A taxa de entrega para a localização selecionada é " + data.cart.delivery_charges.amount_pretty;
     	toastMsg(message);
 			}
+/*Fim da atualização*/
        setStorage("cart_delivery_charges", data.cart.delivery_charges.amount);
     }
     if(!empty(data.cart.packaging)){
@@ -5002,8 +5245,7 @@ function displayCart(data)
 	if (!empty(data.delivery_date)){
 	    $(".delivery_date").val( data.delivery_date);
 	}
-	/*resumo carrinho finalização*/
-	
+/*Atualização Master Hub (Resumo carrinho finalização)*/
     if(!empty(data.cart.delivery_charges)){
 		setStorage("cart_delivery_charges_final", data.cart.delivery_charges.amount_pretty);
 		$(".total-entrega").html(data.cart.delivery_charges.amount_pretty);
@@ -5029,7 +5271,7 @@ function displayCart(data)
 	if (!empty(data.cart.tips)){			
      setStorage("cart_tip_final", data.cart.tips.tips_pretty);
 		} 
-	
+/*Fim da atualização*/
 	
 	if (!empty(data.cart)){
 		
@@ -5300,10 +5542,11 @@ function editOrderInit()
 	$(".edit-order").hide();
 	$(".qty-label").hide();
 	$(".row-del-wrap").show();
+/*Atualização Master Hub (Reorganização dos botões de editar do carrinho)*/
 	$(".row-del-wrap").css('display', 'flex');
 	$(".esconde-ao-editar").hide();
 	$(".mostra-ao-editar").show();
-
+/*Fim da atualização*/
 	var x=1;
 	$.each( $(".item-qty") , function( key, val ) {
 		$.each( $(".subitem-qty"+x) , function( key2, val2 ) {
@@ -5323,9 +5566,10 @@ function applyCartChanges()
 	$(".qty-label").show();
 	$(".subitem-qty").hide();
 	$(".row-del-wrap").hide();
+/*Atualização Master Hub (Reorganização dos botões de editar do carrinho)*/
 	$(".esconde-ao-editar").show();
 	$(".mostra-ao-editar").hide();
-
+/*Fim da atualização*/
 	dump( "qty L=>"+ $(".item-qty").length );
 	if (!empty( $(".item-qty") )){
 		cart=[];		
@@ -5419,7 +5663,9 @@ function applyCartChanges()
 
 function checkOut()
 {	
+/*Atualização Master Hub (Sistema Analytics Facebook))*/
 	fbq('trackCustom', 'FinalizandoCompra');
+/*Fim da atualização*/
 	var validation_msg=$(".validation_msg").val();
 	dump(validation_msg);
 	dump(cart);
@@ -5508,6 +5754,7 @@ function clientRegistration()
 	      }
 	      
 	      // save mobile number
+/*Atualização Master Hub (Máscara do Telefone)*/
 	     // setStorage("customer_contact_number", $(".contact_phone").val().replace(/[^0-9\.]+/g, ''));
 
 				var form = $( "#frm-checkoutsignup").serializeArray();
@@ -5518,6 +5765,7 @@ function clientRegistration()
 						field.value = "%2B55"+field.value.replace(/[^0-9\.]+/g, '');
 					params += field.name+"="+field.value+"&";
 				});
+/*Fim da atualização*/
 	      params+="&transaction_type=" +  getStorage("transaction_type") ;
 	      params+="&device_id="+ getStorage("device_id");
 	      
@@ -5567,6 +5815,7 @@ function clientShipping()
 		      	  );
 		      	  var params="merchant_id="+ getStorage("merchant_id");
 		      	  params+="&street="+$(".street").val();
+/*Atualização Master Hub (Catálogo de Endereços e Número e Bairro)*/
 		      	  params+="&numero="+$(".numero").val();
 		      	  params+="&area_name="+$(".area_name").val();
 		      	  params+="&city="+$(".city").val();
@@ -5576,6 +5825,7 @@ function clientShipping()
 			  	  params+="&city_id="+$(".city_id").val();
 			  	  params+="&area_id="+$(".area_id").val();
 				  params+="&delivery_instruction="+$(".delivery_instruction").val();
+/*Fim da atualização*/
 		      	  params+="&location_name="+$(".location_name").val();
 		      	  params+="&save_address="+$('.save_address:checked').val();
 		      	  params+="&transaction_type=" +  getStorage("transaction_type") ;
@@ -5611,7 +5861,9 @@ function displayPaymentOptions(data)
 
 function placeOrder()
 {	
+/*Atualização Master Hub (Sistema Analytics Facebook))*/
 	fbq('trackCustom', 'CompraFinalizada');
+/*Fim da atualização*/
 	if ( $('.payment_list:checked').length > 0){
 		
 		var selected_payment=$('.payment_list:checked').val();
@@ -5689,15 +5941,15 @@ function placeOrder()
 function showMerchantInfo(data)
 {
 	dump(data);
-	/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
 	$("#page-merchantinfo .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.merchant_info.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-merchantinfo .estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.merchant_info.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	/* Fim da Atualização */
+/* Fim da Atualização */
 	$("#page-merchantinfo h3").html(data.merchant_info.restaurant_name);
 	$("#page-merchantinfo h5").html(data.merchant_info.cuisine);
-	/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
 	$("#page-merchantinfo address").html(data.merchant_info.merchant_information);
-	/* Fim da Atualização */
+/* Fim da Atualização */
 	$("#page-merchantinfo .rating-stars").attr("data-score",data.merchant_info.ratings.ratings);	
 	if (!empty(data.reviews)){
 	   $(".total-reviews").html(data.reviews.total_review + " "+ getTrans("reviews",'reviews') );
@@ -5809,10 +6061,10 @@ function loadMoreReviews()
       	     'page-reviews'
       	  ); 
 
-	/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
 	$("#page-reviews .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-reviews .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	/* Fim da Atualização */
+/* Fim da Atualização */
 		  
       	  var params="merchant_id=" +  getStorage("merchant_id") ;
 	      callAjax("merchantReviews",params);	             	       
@@ -5843,10 +6095,10 @@ function showReviewForm()
       	     'page-addreviews'
       	  );  
 		  
-	/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
 	$("#page-addreviews .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-addreviews .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	/* Fim da Atualização */
+/* Fim da Atualização */
 		  
       	  translatePage();
       	  $(".rating").attr("placeholder", getTrans('Your Rating 1 to 5','your_rating') );
@@ -5972,7 +6224,7 @@ function login()
 	    }  
 	});	
 }
-
+/*Atualização Master Hub (Verificação de Endereços e Catálogo de Endereços)*/
 function carregaEndereco()
 {
 	var params = "client_token="+ getStorage("client_token");
@@ -5984,7 +6236,7 @@ function carregaEndereco()
 	      }	
    callAjax("CarregaEndereco",params);	       
 }
-
+/*Fim da atualização*/
 function logout()
 {
 	/*LOGOUT TO GOOGLE */
@@ -6074,7 +6326,9 @@ function showSignupForm()
       animation: 'slide',
       onTransitionEnd: function() {          	  
       	  callAjax("getCustomFields",'');   
-      	  //*initIntelInputs();
+/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
+      	  /*initIntelInputs();*/
+/*Fim da atualização*/
       } 
     };   
     sNavigator.pushPage("signup.html", options);		 	
@@ -6096,7 +6350,7 @@ function signup()
 		      	 return;
 		      }
 	      }
-
+/*Atualização Master Hub (Máscara do Telefone)*/
 				var form = $( "#frm-signup").serializeArray();
 				var params = "";
 
@@ -6106,7 +6360,7 @@ function signup()
 					params += field.name+"="+field.value+"&";
 			  });
 				params += "device_id="+ getStorage("device_id");
-
+/*Fim da atualização*/
 	      if (isDebug()){
 	      	  params+="&device_platform=Android";
 	      } else {
@@ -6234,6 +6488,7 @@ function reOrder(order_id)
 
 function displayAddressBook(data)
 {
+/*Atualização Master Hub (Verificação de Endereços e Catálogo de Endereços)*/
 	var htm='<ons-list>';
 	if ( data.address.length>0){		
 	   $.each( data.address, function( key, val ) {  
@@ -6275,6 +6530,7 @@ function displayAddressBook(data)
    
    createElement('address-book-list', htm );
 }
+/*Fim da atualização*/
 
 function modifyAddressBook(id)
 {
@@ -6296,6 +6552,7 @@ function fillAddressBook(data)
 	
 	$(".id").val( data.id );
 	$(".street").val( data.street );
+/*Atualização Master Hub (Número e Bairro e Catálogo de Endereços)*/
 	$(".numero").val( data.numero );
 	$(".location_area", "#frm-addressbook").html(data.area_name);
 	$(".area_name", "#frm-addressbook").val(data.area_name);
@@ -6314,9 +6571,11 @@ function fillAddressBook(data)
 		$(".as_default").attr("checked","checked");
 	} else $(".as_default").removeAttr("checked");
 }
+/*Fim da atualização*/
 
 function saveAddressBook()
-{ 
+{
+/*Atualização Master Hub (Verificação de Endereços e Catálogo de Endereços)*/
 if ($(".city").val()!="" && $(".state").val()!="" && $(".area_name").val()!=""){
 	$.validate({ 	
 	    form : '#frm-addressbook',    
@@ -6335,6 +6594,7 @@ if ($(".city").val()!="" && $(".state").val()!="" && $(".area_name").val()!=""){
 		return;
 	}	
 }
+/*Fim da atualização*/
 
 function newAddressBook()
 {
@@ -6354,7 +6614,9 @@ function deleteAddressBook()
 	ons.notification.confirm({
 	  message: getTrans('Delete this records?','delete_this_records') ,	  
 	  title: dialog_title_default,
+/*Atualização Master Hub (Tradução)*/
 	  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
+/*Fim da atualização*/
 	  animation: 'default', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
@@ -6391,6 +6653,7 @@ function popUpAddressBook()
 function displayAddressBookPopup(data)
 {		
 	var htm='<ons-list>';
+/*Atualização Master Hub (Verificação de Endereços e Catálogos de Endereços)*/
 	if ( data.address.length>0){		
 	   $.each( data.address, function( key, val ) {   		
 	   	 var complete_address=val.street+"|";
@@ -6410,7 +6673,7 @@ function displayAddressBookPopup(data)
 	 toastMsg( getTrans('O endereço "'+val.street+' nº '+val.numero+', '+val.area_name+'" está desatualizado no catálogo de endereços, atualize-o antes de selecioná-lo!','O endereço '+val.street+' nº '+val.numero+' - '+val.area_name+' está desatualizado no catálogo de endereços, atualize-o antes de selecioná-lo!')); 
 		return;
 		}
-	   	 
+/*Fim da atualização*/
 	     htm+='<ons-list-item modifier="tappable" class="setAddress" data-address="'+complete_address+'" >';
 	         htm+='<ons-row class="row">';
 	            htm+='<ons-col class="" width="80%">';
@@ -6630,13 +6893,13 @@ function getCurrentLocation()
 				            return;
 				            break;
 				        case cordova.plugins.diagnostic.permissionStatus.GRANTED:
-				            toastMsg("Permission granted always");
+				            //toastMsg("Permission granted always");		 		            
 				            cordova.plugins.locationAccuracy.request(
 			                onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
 				                       
 				            break;
 				        case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
-				            toastMsg("Permission granted only when in use");
+				            //toastMsg("Permission granted only when in use");
 				            cordova.plugins.locationAccuracy.request(
 			                onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
 			                
@@ -7091,7 +7354,9 @@ function setLanguage(lang_id)
        ons.notification.confirm({
 		  message: 'Language file has not been loaded, would you like to reload?',		  
 		  title: dialog_title_default ,
+/*Atualização Master Hub (Tradução)*/
 		  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
+/*Fim da atualização*/
 		  animation: 'none',
 		  primaryButtonIndex: 1,
 		  cancelable: true,
@@ -7156,13 +7421,14 @@ function removeVoucher()
 	$(".voucher_amount").val( '' );
     $(".voucher_type").val( '' );
     $(".voucher_code").val('');
+/*Atualização Master Hub (Aplica personalizações quando Remover cupom))*/
 	$("#page-paymentoption .voucher_amount").css({"display":"none"});
 	$("#page-paymentoption .titulo-cupom").css({"display":"none"});	
 	$("#page-paymentoption .titulo-subtotal_new").css({"display":"none"});
 	$("#page-paymentoption .subtotal_new").css({"display":"none"});
 	$("#page-paymentoption .total-comodidade").html( getStorage("cart_tax_final"));
 	$("#page-paymentoption .total-gorjeta").html( getStorage("cart_tip_final"));			
-	
+/*Fim da atualização*/
    
     $(".apply-voucher").show();
     $(".remove-voucher").hide();
@@ -7507,11 +7773,11 @@ function applyRedeem()
 		params+="&subtotal_order="+ getStorage("cart_sub_total");
 		
 		params+="&cart_sub_total="+ getStorage("cart_sub_total");
-		
+/*Atualização Master Hub (Verificação se é para Entrega)*/
 		if ( transaction_type=="delivery"){
 		   params+="&cart_delivery_charges="+ getStorage("cart_delivery_charges");
 		}
-		
+/*Fim da atualização*/
 		params+="&cart_packaging="+ getStorage("cart_packaging");
 		//params+="&cart_tax_amount="+ getStorage("cart_tax_amount");
 		params+="&cart_tax="+ getStorage("cart_tax");
@@ -7628,17 +7894,6 @@ function toastMsg( message )
 		onsenAlert( message );
 		return ;
 	}
-	 
-   /* window.plugins.toast.showWithOptions(
-    {
-      message: message ,
-      duration: "long",
-      position: "bottom",
-      addPixelsY: -40 
-    },
-      toastOnSuccess, 
-      toastOnError  
-    );*/
    
     window.plugins.toast.showWithOptions(
       {
@@ -7660,7 +7915,7 @@ function isDebug()
 {	
 	//on/off
 	//return true;
-	return false;
+	return true;
 }
 
 var rzr_successCallback = function(payment_id) {
@@ -7698,6 +7953,7 @@ function showEasyCategory(element)
 
 function fillPopOverCategoryList(data)
 {		
+/*Atualização Master Hub (Menu de Categorias)*/
 	var html='<ons-scroller class="category_popup_scroller">';
 	
 	html+='<ons-list>';
@@ -7714,6 +7970,7 @@ function fillPopOverCategoryList(data)
 	dump(html);		
 	easy_category_list=html;
 }
+/*Fim da atualização*/
 
 function loadmenu2(cat_id,mtid)
 {
@@ -8217,6 +8474,7 @@ function setManualAddress()
 	    },	    
 	    onSuccess : function() {     	      
 	       $(".street").val( $(".stree_1").val()  );	
+/*Atualização Master Hub (Recaregando Carrinho e Número e Bairro)*/
 	       $(".numero").val( $(".numero_1").val()  );	
 	       $(".area_name").val( $(".area_name_1").val()  );	
 	       $(".city").val( $(".city_1").val()  );	
@@ -8241,7 +8499,7 @@ function setManualAddress()
 	    }  
 	});
 }
-
+/*Fim da atualização*/
 function showMapAddress(map_address_action)
 {
 	setStorage("map_address_action",map_address_action)
@@ -8283,6 +8541,7 @@ function checkGPS_AddressMap()
 	    	 
 	    	 $('.map_search_field_wrap').css('height',"auto");
 	    	 
+/*Atualização Master Hub (Número e Bairro)*/
 	    	 var address = "", numero="", area_name="", city="", state="" ;			 			 
 			 var zip = "", formatted_address="", s_lat='', s_lng=''; 
 
@@ -8314,14 +8573,16 @@ function checkGPS_AddressMap()
 					case "neighborhood":
 	                    area_name = this.short_name;
 	                    break;
-						
+/*Fim da atualização*/
 	            }
 	        });
 	        
 	        dump("formatted_address=>"+formatted_address);
 	        dump("address=>"+address);
+/*Atualização Master Hub (Número e Bairro)*/
 	        dump("numero=>"+numero);
 	        dump("area_name=>"+area_name);
+/*Fim da atualização*/
 	        dump("city=>"+city);
 	        dump("state=>"+state);
 	        dump("zip=>"+zip);
@@ -8347,8 +8608,10 @@ function checkGPS_AddressMap()
 	         dump(map_address_action);
 	         	         
 	         setStorage("map_address_result_address", address );
+/*Atualização Master Hub (Número e Bairro)*/
 			 setStorage("map_address_result_numero", numero );
 			 setStorage("map_address_result_area_name", area_name );
+/*Fim da atualização*/
 			 setStorage("map_address_result_city", city );
 			 setStorage("map_address_result_state",state);
 			 setStorage("map_address_result_zip",zip);				
@@ -8597,6 +8860,7 @@ function useThisLocation()
 		
 		    //remove this when going live
 		    if(isDebug()){
+/*Atualização Master Hub (Tradução)*/
 		    	$(".street").val( "Rua 9 JA" );
 				$(".numero").val( "501" );
 				$(".area_name").val( "Jardim América" );
@@ -8611,14 +8875,17 @@ function useThisLocation()
 				$(".delivery-address-text").html( "Rua 9 JA, 501 - Jardim America, Rio Claro - SP" );  
 				
 					reloadCart();
+/*Fim da atualização*/
 				sNavigator.popPage({cancelIfRunning: true}); //back button
 		        sNavigator.popPage({cancelIfRunning: true}); //back button    
 		    	return;
 		    }
 		
 		    $(".street").val( getStorage("map_address_result_address") );
+/*Atualização Master Hub (Número e Bairro)*/
 			$(".numero").val( getStorage("map_address_result_numero") );
 			$(".area_name").val( getStorage("map_address_result_area_name") );
+/*Fim da atualização*/
 			$(".city").val( getStorage("map_address_result_city") );
 			$(".state").val( getStorage("map_address_result_state") );
 			$(".zipcode").val( getStorage("map_address_result_zip") );	
@@ -8628,8 +8895,9 @@ function useThisLocation()
 			$(".formatted_address").val( getStorage("map_address_result_formatted_address") );	
 			
 			$(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );  
+/*Atualização Master Hub (Recarregando o carrinho)*/
 				reloadCart();		
-			
+/*Fim da atualização*/
 		    sNavigator.popPage({cancelIfRunning: true}); //back button
 		    sNavigator.popPage({cancelIfRunning: true}); //back button    
 		break;
@@ -9356,7 +9624,9 @@ function deleteCC()
 	ons.notification.confirm({
 	  message: getTrans('Delete this records?','delete_this_records') ,	  
 	  title: dialog_title_default,
+/*Atualização Master Hub (Tradução)*/
 	  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
+/*Fim da atualização*/
 	  animation: 'default', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
@@ -9376,8 +9646,10 @@ function fillShippingAddress()
 	if ( !empty( getStorage("map_address_result_formatted_address") )){
   	     $(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );
   	     $(".street").val( getStorage("map_address_result_address") );
+/*Atualização Master Hub (Número e Bairro)*/
 		 $(".numero").val( getStorage("map_address_result_numero") );
 		 $(".area_name").val( getStorage("map_address_result_area_name") );
+/*Fim da atualização*/
 		 $(".city").val( getStorage("map_address_result_city") );
 		 $(".state").val( getStorage("map_address_result_state") );
 		 $(".zipcode").val( getStorage("map_address_result_zip") );	
@@ -9477,9 +9749,9 @@ function initSlideMenu()
        }
        
        initCustomPages();
-	   
+/*Atualização Master Hub (Página de Introdução)*/
 	   Splash_Pagina_menu();
-       
+/*Fim da atualização*/
        translatePage();    
           
   });  
@@ -9498,14 +9770,14 @@ function InitPlaceOrder()
 	    },	    
 	    onSuccess : function() {     	
 	    	placeOrder();
-		
+/*Atualização Master Hub (Sistema OneSignal)*/
 			if(!isDebug()){
    		//Tag OneSignal para cada estabelecimento quando o cliente compra.
 		var keyOneSignal = getStorage('merchant_id');
 		//var keyOneSignal = getStorage('merchant_name'); //Usa-se o nome da empresa
   		window.plugins.OneSignal.sendTag(""+keyOneSignal+"", "comprou");
 			}
-		
+/*Fim da atualização*/
 	        return false;
 	    }  
 	});   
@@ -9584,7 +9856,7 @@ function searchCity()
 function loadAjaxLocationCity(s)
 {
 	search_type = getSearchType();	
-	/* Tira o estado selecionado, deixa todas as cidades sempre visíveis na lista de cidades
+/* Tira o estado selecionado, deixa todas as cidades sempre visíveis na lista de cidades
 		if(empty(global_state_id)){
 		global_state_id='';
 	} Linha abaixo tira o estado */
@@ -9689,12 +9961,14 @@ function clearAllStorage()
   removeStorage('cart_delivery_charges');
   removeStorage('cart_packaging');
   removeStorage('cart_tax');
+/*Atualização Master Hub (Remove variáveis do resumo de pedido)*/
   removeStorage('cart_sub_total_final');
   removeStorage('cart_delivery_charges_final');
   removeStorage('cart_packaging_final');
   removeStorage('cart_tip_final');
   removeStorage('cart_tax_final');
   removeStorage("cart_discount_final"),
+/*Fim da atualização*/
   removeStorage('map_address_result_formatted_address');
   removeStorage("customer_contact_number");
   
@@ -9794,8 +10068,11 @@ function showShippingLocation(data)
       animation: 'slide',
       onTransitionEnd: function() { 		
       	  if(!empty(data.msg.profile)){
+/*Atualização Master Hub (Máscara de Telefone)*/
       	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
+/*Fim da atualização*/
       	  	$(".location_name").val( data.msg.profile.location_name ) ;
+/*Atualização Master Hub (Complemento de endereço e Número e Bairro)*/
       	  	$(".delivery_instruction").val( data.msg.profile.delivery_instruction ) ;
       	  }
       	  if(!empty(data.msg.address_book)){
@@ -9804,6 +10081,7 @@ function showShippingLocation(data)
       	  	 $(".location_name").val( data.msg.address_book.location_name );
       	  	 $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
       	  }
+/*Fim da atualização*/
       	  if(!empty(data.msg.state_info)){
       	  	 global_state_id  = data.msg.state_info.state_id;
       	  	 global_state_name  = data.msg.state_info.state_name;
@@ -9813,9 +10091,11 @@ function showShippingLocation(data)
       	  	 
       	  	 $(".state").val( data.msg.state_info.state_name );
       	  }
+/*Atualização Master Hub (Máscara de Telefone)*/
       	  if(!empty(data.details.contact_phone)){
       	  	$(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
       	  }
+/*Fim da atualização*/
       	  if(!empty(global_area_name)){
       	  	 $(".area_name").val( global_area_name );
       	  }
@@ -10151,13 +10431,14 @@ function googleLogin()
 {
 	if(isDebug()){
 		
+/*Atualização Master Hub (Tradução)*/
 		var params = "email=masterhub@google.com";
 		params+="&userid=14000000";
 		params+="&fullname=Robson";
 		params+="&lastname=Web";
 		params+="&imageurl=";		
 		params+="&device_id="+ encodeURIComponent(getStorage("device_id"));
-		
+/*Fim da atualização*/
 		if (isDebug()){
       	  params+="&device_platform=Android";
         } else {
@@ -10178,7 +10459,9 @@ function googleLogin()
 	    	// SUCCESS
 	    	var params = "email=" + encodeURIComponent(obj.email);
 			params+="&userid=" + encodeURIComponent(obj.userId);
+/*Atualização Master Hub (Correção)*/
 			params+="&fullname="+ encodeURIComponent(obj.givenName);
+/*Fim da atualização*/
 			params+="&lastname="+ encodeURIComponent(obj.familyName);
 			params+="&imageurl="+ encodeURIComponent(obj.imageUrl);			
 			params+="&device_id="+ encodeURIComponent(getStorage("device_id"));
@@ -10414,7 +10697,7 @@ function getPage(page_id)
 	    }
 	});	
 }
-
+/*Atualização Master Hub (Sistema Página Inicial)*/
 function Splash_Pagina_menu()
 {
 	var slide=getStorage("slide");
@@ -10435,6 +10718,7 @@ function getSlide(slide)
 	    }
 	});	
 }
+/*Fim da atualização*/
 
 function browseCamera()
 {
@@ -10521,6 +10805,7 @@ function uploadPhoto(imageURI)
 
 function mercapagoSuccess(payment)
 {
+/*Atualização Master Hub (Mercado Pago)*/
 	 if (payment != null){         
 	 	//alert(JSON.stringify(payment));     
         //toastMsg(JSON.parse(payment).status);
@@ -10530,7 +10815,7 @@ function mercapagoSuccess(payment)
 			params+="&order_id="+JSON.parse(payment).externalReference;
 			params+="&merchant_id="+ getStorage("merchant_id");
 		callAjax("MercadoPagoOK",params); 
-		 
+/*Fim da atualização*/
 	 } else {
         toastMsg("The user did not make the payment");
     }
@@ -10538,7 +10823,9 @@ function mercapagoSuccess(payment)
 
 function mercapagoFailed(error)
 {
+/*Atualização Master Hub (Tradução)*/
 	toastMsg("Erro do Plugin do Mercado Pago: " + error);
+/*Fim da atualização*/
 }
 
 function setTrackView(pagename , campaign_details )
