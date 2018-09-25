@@ -1,6 +1,6 @@
 /**
 KMRS MOBILE 
-Version 2.5
+Version 2.6
 */
 
 /**
@@ -38,72 +38,34 @@ var timer = null;
 var ajax_lazy;
 var ajax_lazy_item;
 
-var app_version = "2.5";
+var app_version = "2.6";
+var device_platform = 'android';
+
+var send_post_ajax;
+var analytics;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {    
 	    					
-	navigator.splashscreen.hide();
-	
-	if(!isDebug()){
- 	   getLanguageSettings();
-	}				
-	
-	
-	
-	document.addEventListener("pause", onPause, false);
-	document.addEventListener("resume", onResume, false);
+	try {
 			
-	/*INIT PUSH*/	
-	push = PushNotification.init({
-       "android": {
-           "senderID": krms_config.pushNotificationSenderid,
-           "clearBadge":true
-       },
-       "ios": {
-         "sound": true,
-         "alert": true,
-         "badge": true,
-         "clearBadge":true
-       },
-       "windows": {}
-   });
+		navigator.splashscreen.hide();
+		
+		device_platform = device.platform;
+		
+		if(!isDebug()){		
+	 	   getLanguageSettings();
+		}				
+						
+		document.addEventListener("pause", onPause, false);
+		document.addEventListener("resume", onResume, false);
+		
+		initPush(false);
    
-   push.on('registration', function(data) {   	   	   
-   	   setStorage("device_id", data.registrationId );   
-   });
-   
-   push.on('notification', function(data){      	   
-   	   if ( data.additionalData.foreground ){
-   	   	   /*WHEN THE APP IS ACTIVE*/
-   	   	   playNotification();   	   	   
-   	   	   if ( data.additionalData.additionalData.push_type=="order"){
-        	  showNotification( data.title,data.message );
-           } else {
-        	  showNotificationCampaign( data.title,data.message  );
-           }	        
-   	   } else {
-   	   	  /*WHEN THE APP IS NOT ACTIVE*/
-   	   	  if ( data.additionalData.additionalData.push_type=="order"){
-	    	 showNotification( data.title,data.message );
-	      } else {
-	         showNotificationCampaign( data.title,data.message  );
-	      }
-   	   }
-
-   	   push.finish(function() {
-          //console.log('success');          
-       }, function() {
-          //console.log('error');
-       });
-       
-   });
-   
-   push.on('error', function(e) {      
-   });
-   
-   /*END PUSH*/
+   } catch(err) {
+     alert(err.message);
+   } 
 }
 
 /*document.addEventListener("offline", onOffline, false);
@@ -123,13 +85,17 @@ function onPause() {
    //toastMsg('pause');
 }
 
-function onResume() {
-   //toastMsg('onResume');    
-   push.setApplicationIconBadgeNumber(function(){
-      //toastMsg("success")
-   }, function() {
-      //toastMsg("failed")
-   },0);
+function onResume() {   
+   try {
+	   push.setApplicationIconBadgeNumber(function(){
+	      //toastMsg("success")
+	   }, function() {
+	      //toastMsg("failed")
+	   },0);
+	   
+   } catch(err) {
+      toastMsg(err.message);       
+   } 
 }
 
 document.addEventListener("offline", noNetConnection, false);
@@ -184,11 +150,13 @@ ons.bootstrap();
 ons.ready(function() {
 	dump('ready');
 		
+	removeStorage("geo_address_result_formatted_address");
+	
 	if(isDebug()){		
 		removeStorage("default_lang");
 		removeStorage("search_address");
 		//setStorage("search_address","970 N Western Ave, Los Angeles, CA, United States");	
-		//setStorage("search_address","Guadalupe Nuevo, Makati, NCR, Philippines");		
+		setStorage("search_address","Guadalupe Nuevo, Makati, NCR, Philippines");		
 	}
 		
 	//navigator.splashscreen.hide()	
@@ -366,6 +334,7 @@ function searchMerchant()
 
 document.addEventListener("pageinit", function(e) {
 	dump("pageinit");	
+	
 	dump("pagname => "+e.target.id);
 			
 	switch (e.target.id)
@@ -375,10 +344,16 @@ document.addEventListener("pageinit", function(e) {
 		   translatePage();
 		   break;
 		   
-		case "page_search":
+		case "page_search":		   
 		  geoComplete2();
 		  $("#ss").attr("placeholder",  getTrans('Street Address,City,State','home_search_placeholder') );
 		  translatePage();
+		  search_address=getStorage("search_address");
+		  if(!empty(search_address)){		  	 		     
+		     setTimeout('$("#ss").val(search_address)', 100);
+		  }		  
+		  		  		  
+		  initAutoLocation();		  
 		  break;
 		  
 		case "page_search_byname":
@@ -479,15 +454,8 @@ document.addEventListener("pageinit", function(e) {
 		   callAjax("MenuCategory", "merchant_id="+getStorage("merchant_id") );		   
 		break;
 		
-		case "page-merchantinfo":		
-		case "page-reviews":
-		case "page-cart":		
-		//case "page-receipt":				
-		case "page-change-address":		
-		case "page-order-options":
-		case "page-track-order":
-		case "page-map":		
-		case "tracking-page":
+		case "page-merchantinfo":				
+		case "page-change-address":				
 		  translatePage();
 		  break;
 		  
@@ -498,7 +466,9 @@ document.addEventListener("pageinit", function(e) {
 		  
 		case "address-bymap":
 		  translatePage();
-		  $(".search_address_geo").attr("placeholder",  getTrans('Street Address,City,State','home_search_placeholder') );
+		  $(".search_address_geo").attr("placeholder",  getTrans('Street Address,City,State','home_search_placeholder') );		  
+		  $(".map_type").val(  'select_address_from_map' );
+		  checkGPS('select_address_from_map');		  
 		  break;
 		   
 		case "page-enter-contact":  
@@ -529,6 +499,21 @@ document.addEventListener("pageinit", function(e) {
 	    $(".state").attr("placeholder",  getTrans("State",'state') );
 	    $(".zipcode").attr("placeholder",  getTrans("Postal code/Zip Code",'zipcode') );
 	    $(".location_name").attr("placeholder",  getTrans("Location name",'location_name') );
+	    
+	    var page = sNavigator.getCurrentPage();
+		record_id = page.options.id;			
+		search_mode = getSearchMode();	
+		if (typeof record_id === "undefined" || record_id==null || record_id=="" || record_id=="null" ) {			
+			$(".id").val( '' );
+			$(".action").val('add');
+			$(".delete-addressbook").hide();
+		} else {
+			$(".id").val( record_id );
+			$(".action").val('edit');
+			$(".delete-addressbook").show();
+			var params="client_token="+ getStorage("client_token")+"&id="+record_id;
+      	    callAjax("getAddressBookDetails",params);
+		}
 	    
 	    break;
 	    
@@ -623,7 +608,8 @@ document.addEventListener("pageinit", function(e) {
 		break;
 		
 		case "page-home":
-		    
+		    		    
+		    setNotificationDisplay();
 		    translatePage();
 		
 		    search_mode = getSearchMode();
@@ -735,11 +721,14 @@ document.addEventListener("pageinit", function(e) {
 					} else {												
 						setTimeout('$("#s").val(search_address)', 100);
 					}										
-					$("#s").attr("placeholder",  getTrans('Street Address,City,State','home_search_placeholder') );				
+					$("#s").attr("placeholder",  getTrans('Street Address,City,State','home_search_placeholder') );		
+					
+					initAutoLocation();
+							
 		    	}								
 		    }
 		    
-		    setTrackView('homepage');
+		    setTrackView('homepage');		    
 			
 		break;
 		
@@ -794,7 +783,7 @@ document.addEventListener("pageinit", function(e) {
 		  
 		case "page-login":  
 		case "page-prelogin":  
-		  initFacebook();
+		  initSocialLogin();
 		  translatePage();
 		  translateValidationForm();
 
@@ -999,11 +988,200 @@ document.addEventListener("pageinit", function(e) {
 		   callAjax('getDixiCards', "&client_token="+ getStorage("client_token") );
 		   break;
 		 
-		/*end pagname*/
+		 case "page-map":		
+		   translatePage();
+  		   var page = sNavigator.getCurrentPage();	  	
+  		   $(".map_type").val(  page.options.map_type );
+		   checkGPS(page.options.map_type);
+		 break;
 		
+		 /*case "page-cart":
+		   translatePage();
+		   search_address = getStorage("search_address");
+		   if(!empty(search_address)){
+		  	  $(".google_formatted_address").html( search_address );
+		   }
+		 break*/
+		
+		 case "page-track-order":
+		   translatePage();
+		   var params='order_id=' + $(".order_option_order_id").val();
+      	   params+="&client_token="+getStorage("client_token");
+		   callAjax("trackOrderHistory",params);	       	 		  
+		   stopTrackInterval();	
+		 break;
+		 
+		 case "tracking-page":
+		   translatePage();
+		   initTrackingMap();
+		 break;
+		 
+		 case "page-order_details":		    
+		    var page = sNavigator.getCurrentPage();	  			    
+		    $("#page_title").html( getTrans('Order Details','order_details') + " #"+page.options.order_id );
+  		    callAjax("getReceipt","order_id="+ page.options.order_id );	
+		 break;
+		 
+		 case "page-order-options":		 
+		   translatePage();
+		   var page = sNavigator.getCurrentPage();
+		   $(".page_title").html( getTrans("Order Options",'order_option') + " #"+ page.options.order_id );
+		   $(".order_option_order_id").val( page.options.order_id );
 		   
-		default:
-		  break;
+		   show_cancel_order = page.options.show_cancel_order;
+		   if(show_cancel_order==1){
+		   	  $(".cancel_this_order").show();
+		   } else {
+		   	  $(".cancel_this_order").hide();
+		   }
+		   
+		   show_review = page.options.show_review;
+		   if(show_review==1){
+		   	  $(".add_review_order").show();
+		   } else {
+		   	  $(".add_review_order").hide();
+		   }
+		   
+		 break;
+		 
+		 case "page-cart":
+		 
+		   translatePage();
+		   search_address = getStorage("search_address");
+		   //alert(search_address);
+		   if (typeof search_address === "undefined" || search_address==null || search_address=="" || search_address=="null" ) { 	    		   			  	  
+		   	  $(".google_formatted_address").html( '' );
+		   } else {
+		   	  $(".google_formatted_address").html( search_address );
+		   }
+		   
+		  var cart_params=JSON.stringify(cart);       	        	  
+      	  if (saveCartToDb()){
+      	  	  var cart_params='';
+      	  }      	  
+      	  
+      	  if ( empty(getStorage("tips_percentage")) ){
+      	  	   setStorage("tips_percentage",0);
+      	  }
+      	  
+      	  var remove_tips='';
+      	  if(!empty(getStorage("remove_tips"))){
+      	  	  remove_tips=getStorage("remove_tips");
+      	  }
+      	  
+      	  var tips_percentage='';
+      	  if(!empty(getStorage("tips_percentage"))){
+      	  	  tips_percentage=getStorage("tips_percentage");
+      	  }
+      	      	        	        	        	 
+      	  var params="merchant_id="+ getStorage('merchant_id');
+      	  
+      	  
+      	  if(!empty(getStorage("search_address"))){
+      	     params+="&search_address="+encodeURIComponent(getStorage("search_address"));
+      	  } else {
+      	  	if(!empty(getStorage("geo_address_result_formatted_address"))){
+      	  		params+="&search_address="+encodeURIComponent(getStorage("geo_address_result_formatted_address"));
+      	  	}
+      	  }
+      	  
+      	  params+="&cart="+cart_params;
+      	  
+      	  if(empty(getStorage("transaction_type"))){      	  	      	  	
+      	  	switch (getStorage("merchant_services"))
+      	  	{
+      	  		case 3:
+      	  		case 6:
+      	  		case "3":
+      	  		case "6":
+      	  		params+="&transaction_type=pickup";
+      	  		setStorage('transaction_type','pickup');
+      	  		break;
+      	  		      	  		
+      	  		case 7:
+      	  		case "7":
+      	  		params+="&transaction_type=dinein";
+      	  		setStorage('transaction_type','dinein');
+      	  		break;
+      	  		
+      	  		default:
+      	  		params+="&transaction_type=delivery";
+      	  		break;
+      	  	}
+      	  } else {
+      	  	params+="&transaction_type=" + getStorage("transaction_type");
+      	  }      	  
+      	  
+      	  
+      	  params+="&device_id="+ getStorage("device_id");
+      	  params+="&tips_percentage=" + tips_percentage;
+      	  params+="&remove_tips=" + remove_tips;
+      	        	 
+      	  callAjax("loadCart",params);
+      	  
+		 break;
+		 
+		 case "page-popup_options":
+		   loadOptionList();
+		 break;
+		 
+		 case "page-addreviews":
+		   var page = sNavigator.getCurrentPage();
+		   order_id = page.options.order_id;	
+		   $(".order_id").val( order_id );
+		   $('.raty-stars').raty({ 
+			   score:0,
+			   readOnly: false, 		
+			   path: 'lib/raty/images',
+			   click: function (score, evt) {					   	   
+			   	   $(".rating").val( score );
+			   }
+		  }); 		  
+		 break;
+		 
+		 case "page-reviews":
+		   website_review_type = getStorage("website_review_type");		   
+		   if(website_review_type==2){
+		   	  $(".add_review_button").hide();
+		   }
+		   
+		   var params="merchant_id=" +  getStorage("merchant_id") ;
+      	   params+="&client_token="+ getStorage("client_token");
+	       callAjax("merchantReviews",params);
+	       
+		 break;
+		 
+		 case "page_postcode_address":
+		 
+		    $(".street").attr("placeholder", getTrans('Street','street') );		   
+	        $(".location_name").attr("placeholder", getTrans('Apartment suite, unit number, or company name','location_name2') );	       
+	        translateValidationForm();
+	        translatePage();
+	       
+		    var page = sNavigator.getCurrentPage();
+		    record_id = page.options.id;	
+		    if (typeof record_id === "undefined" || record_id==null || record_id=="" || record_id=="null" ) {
+		    	$(".id").val('');
+		    	$(".delete-addressbook-location").hide();
+		    } else {
+		    	$(".id").val(record_id);
+		    	var params="client_token="+ getStorage("client_token")+"&id="+record_id;
+      	        callAjax("getPostCodeAddressBookDetails",params);
+		    }
+		 break;
+		 
+		 case "page_popup_address_location":		         	   
+      	   getAddressBookLocation();
+		 break;
+		 
+		 case "page_notifications":		   		   
+      	   callAjax("getNotificationList",'');
+		 break;
+		 
+		 /*end pagname*/
+		 
+		 default:
+		   break;
 	}
     
 }, false);
@@ -1083,7 +1261,7 @@ function applyFilter()
 }
 
 function onsenAlert(message,dialog_title)
-{
+{		
 	if (typeof dialog_title === "undefined" || dialog_title==null || dialog_title=="" ) { 
 		dialog_title=dialog_title_default;
 	}
@@ -1092,9 +1270,15 @@ function onsenAlert(message,dialog_title)
 		message='undefined error';
 	}
 	
+	label = getTrans('Ok','ok');	
+	if (typeof label === "undefined" || label==null || label=="" ) {
+		label="Ok";
+	}
+		
 	ons.notification.alert({
       message: message,
-      title:dialog_title
+      title:dialog_title,
+      buttonLabel : getTrans('Ok','ok')
     });
 }
 
@@ -1140,7 +1324,7 @@ function callAjax(action,params)
 			  	  params+="&search_mode=" + search_mode;		
 			  	  params+="&search_type=" + getSearchType()			  	  
 			  	  	  
-			  	  if(!empty(global_city_id)){
+			  	  /*if(!empty(global_city_id)){
 			  	     params+="&city_id=" + global_city_id;
 			  	  }
 			  	  if(!empty(global_area_id)){
@@ -1151,7 +1335,7 @@ function callAjax(action,params)
 			  	  }
 			  	  if(!empty(global_postal_code)){
 			  	     params+="&postal_code=" + global_postal_code;
-			  	  }
+			  	  }*/
 			  }
 		break;
 		
@@ -1171,6 +1355,23 @@ function callAjax(action,params)
 	
 	params+="&app_version="+ app_version;
 	
+	var device_id=getStorage("device_id");
+	if(!empty(device_id)){
+		params+="&device_id="+device_id;
+	}
+	
+	if (isDebug()){
+  	  params+="&device_platform=Android";
+    } else {
+  	  params+="&device_platform="+ encodeURIComponent(device.platform);
+    }	 
+	
+    client_token = getStorage("client_token");
+    if(!empty(client_token)){
+       params+="&client_token="+ client_token;
+    }
+    
+	//alert(ajax_url+"/"+action+"?"+params);
 	dump(ajax_url+"/"+action+"?"+params);
 	
     ajax_request = $.ajax({
@@ -1316,8 +1517,13 @@ function callAjax(action,params)
 				setStorage("merchant_longtitude",data.details.coordinates.longtitude);
 				setStorage("merchant_address",data.details.address);
 				
-				removeStorage("transaction_type");				
+				removeStorage("transaction_type");
 				setStorage("merchant_services",data.details.service);
+				
+				removeStorage("two_flavor_option");
+				if(!empty(data.details.two_flavor_option)){
+				   setStorage("two_flavor_option",data.details.two_flavor_option);				   
+				}
 				
 				$("#menucategory-page .restauran-title").text(data.details.restaurant_name);
 				$("#menucategory-page .rating-stars").attr("data-score",data.details.ratings.ratings);
@@ -1334,10 +1540,8 @@ function callAjax(action,params)
 				
 				$(".selected_restaurant_name").val( data.details.restaurant_name );
 				$(".selected_restaurant_ratings").val( data.details.ratings.ratings );
-				
-				//$(".menu_tab_1").hide();
-				
-				//menuCategoryResult(data.details);
+
+							
 				break;
 				
 				case "cuisineList":
@@ -1398,15 +1602,26 @@ function callAjax(action,params)
 				}			
 				
 				/*FILL ESTIMATION TIME*/
-				if ( data.details.transaction_type=="delivery"){
+				/*if ( data.details.transaction_type=="delivery"){
 					if (!empty(data.details.estimation_delivery_time)){					    
 					   $(".delivery_time").val( data.details.estimation_delivery_time );
 					}				
-				}
+				}*/
 				
 				if(!empty(data.details.checkout_button)){
 					$(".btn_checkout").html( data.details.checkout_button );
 				}			
+				
+				if ( data.details.delivery_options){
+					$(".cart_delivery_date").html( data.details.delivery_options.label.date );
+					$(".cart_delivery_time").html( data.details.delivery_options.label.time );
+					
+					$(".delivery_date").val( data.details.delivery_options.default_value_date.date );
+					$(".delivery_time").val( data.details.delivery_options.default_value_time.time );
+					
+					$(".cart_delivery_date_value").html( data.details.delivery_options.default_value_date.date_pretty );
+					$(".cart_delivery_time_value").html( data.details.delivery_options.default_value_time.time_pretty );
+				}
 				
 				break;
 														
@@ -1420,7 +1635,7 @@ function callAjax(action,params)
 				    		showShippingLocation(data);			    		
 				    		
 				    	} else {				    
-				    			    	
+				    			    					    		
 					    	var options = {
 						      animation: 'slide',
 						      onTransitionEnd: function() { 						      	  
@@ -1439,7 +1654,18 @@ function callAjax(action,params)
 						      	  
 						      	  var address_fill = false;
 						      	  
-						      	  if ( !empty( getStorage("map_address_result_formatted_address") )){
+						      	  if(!empty(getStorage("geo_address_result_formatted_address"))){
+						      	  							      	  
+						      	  	   $(".delivery-address-text").html( getStorage("geo_address_result_formatted_address") );
+							  	       $(".street").val( getStorage("geo_address_result_address") );
+									   $(".city").val( getStorage("geo_address_result_city") );
+									   $(".state").val( getStorage("geo_address_result_state") );
+									   $(".zipcode").val( getStorage("geo_address_result_zip") );	
+									   $(".formatted_address").val( getStorage("geo_address_result_formatted_address") );	
+						      	  				
+									   dump('d0');						   
+									   
+						      	  } else if ( !empty( getStorage("map_address_result_formatted_address") )){
 						      	  	    $(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );
 									    $(".street").val( getStorage("map_address_result_address") );
 									    $(".city").val( getStorage("map_address_result_city") );
@@ -1449,8 +1675,9 @@ function callAjax(action,params)
 									 
 									    $(".google_lat").val( getStorage("google_lat") );	
 									    $(".google_lng").val( getStorage("google_lng") );	
-									    
+									    									    
 									    address_fill = true;
+									    dump('d1');
 						      	  } else {
 						      	  	  if(!empty(data.msg.address_book)){
 						      	  	  	  $(".street").val( data.msg.address_book.street );
@@ -1468,12 +1695,13 @@ function callAjax(action,params)
 										  $(".delivery-address-text").html( complete_address ); 
 										  $(".formatted_address").val( complete_address );	
 										  
-										  address_fill = true;
+										  address_fill = true;										  						
+										  dump('d2');			  
 						      	  	  }
 						      	  }
 						      	  
-						      	  if(!address_fill){						      	  
-						      	  	fillShippingAddress();
+						      	  if(!address_fill){						      	  	
+						      	  	//fillShippingAddress();
 						      	  }						      
 						      	  					      	      	  
 						      } /*end transition*/
@@ -2059,13 +2287,22 @@ function callAjax(action,params)
 				    break;
 				
 				case "merchantReviews":
+				   //alert(JSON.stringify(data.details));  
 				   displayReviews(data.details);
 				   break;
 				
 				case "addReview":
-				   onsenAlert(data.msg);
-				   sNavigator.popPage({cancelIfRunning: true}); 
-				   loadMoreReviews();
+				   toastMsg(data.msg);				   
+				   if(data.details.review_type==2){
+				   	  menu.setMainPage('orders.html', {closeMenu: true});
+				   } else  {
+				   	  sNavigator.popPage({cancelIfRunning: true}); 
+				   	  setTimeout(function(){ 	
+					   	 var params="merchant_id=" +  getStorage("merchant_id") ;
+		                 params+="&client_token="+ getStorage("client_token");
+	                     callAjax("merchantReviews",params);	   
+				   	  }, 500);		   	  				   
+				   }			
 				   break;
 				   				   
 				
@@ -2103,6 +2340,8 @@ function callAjax(action,params)
                   if (!empty(data.details.social_strategy)){
                   	  setStorage("social_strategy",data.details.social_strategy);
                   }
+                  
+                  checkDeviceRegister();
 				  
 				  switch (data.details.next_steps)
 				  {
@@ -2200,8 +2439,8 @@ function callAjax(action,params)
 				  dialogForgotPass.hide();
 				  break;   
 				  
-				case "getOrderHistory":  
-				  displayOrderHistory(data.details);
+				case "getOrderHistory":  				   
+				    displayOrders(data.details);
 				  break;   
 				  
 				case "ordersDetails":  
@@ -2370,13 +2609,21 @@ function callAjax(action,params)
 			       setStorage("analytics_id",data.details.settings.analytics_id);
 			       setStorage("analytics_enabled",data.details.settings.analytics_enabled);
 			       
+			       setStorage("website_review_type",data.details.settings.website_review_type);
+			       setStorage("mobile_enabled_fblogin",data.details.settings.mobile_enabled_fblogin);
+			       setStorage("mobile_auto_location",data.details.settings.mobile_auto_location);
+			       
+			       
 			       
 			       /*SET ANALYTICS*/
-			       if (!isDebug()){			       	   
+			       /*if (!isDebug()){			       	   
 			       	   if ( data.details.settings.analytics_enabled == 1 && !empty(data.details.settings.analytics_id)){
 			       	   	   window.ga.startTrackerWithId( data.details.settings.analytics_id , 30);
 			       	   }			      					   					  
-			       }
+			       }*/
+			       
+			       /*SET ANALYTICS*/
+			       setTrackingAccount();
 			       
 			       //translatePage();	  
 			       var options = {
@@ -2386,7 +2633,8 @@ function callAjax(action,params)
 				      	 //getCurrentLocation();
 				      } 
 				   };     
-				   kSettingsNavigator.pushPage("slidingMenu.html", options);	
+				   //kSettingsNavigator.pushPage("slidingMenu.html", options);	
+				   kSettingsNavigator.resetToPage("slidingMenu.html", options);	
 			       
 			       break;
 			       
@@ -2576,6 +2824,7 @@ function callAjax(action,params)
 			    
 			    case "trackOrderHistory":	
 			    
+			       $(".track_driver").show();
 			       $(".track-status-wrap").html(''); 
 			       
 			       $(".time-left").html( data.details.time_left );
@@ -2670,7 +2919,8 @@ function callAjax(action,params)
 			    break;
 			    
 			    case "trackOrderMap":
-			       reInitTrackMap(data.details);
+			       //reInitTrackMap(data.details);
+			       ReInitTrackingMap(data.details);
 			    break;
 			    
 			    case "getMerchantCClist":
@@ -2729,7 +2979,7 @@ function callAjax(action,params)
 					//htm+='<ons-list-header class="list-header trn" >'+ getTrans('City','city') +'</ons-list-header>';
 			       $.each( data.details, function( city_key , city_val ) { 
 			       	
-			       	 htm+='<ons-list-item modifier="tappable" onclick="setLocationCity('+"'"+city_val.id+"',"+"'"+city_val.name+"'"+ ');">';
+			       	 htm+='<ons-list-item modifier="tappable" onclick="setLocationCity('+"'"+city_val.id+"',"+"'"+city_val.name+"',"+  "'" + city_val.state_id + "'" +  ');">';
 					 htm+='<label class="radio-button checkbox--list-item">';
 						htm+='<input type="radio" name="channel_m" class="channel_m" value="'+city_val.id+'"  >';
 						htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
@@ -2983,6 +3233,163 @@ function callAjax(action,params)
 			       createElement('dixicards_list',crd_html);
 			    break;
 			    
+			    case "useThisLocation":
+			       var page = sNavigator.getCurrentPage();
+	               map_address_action = page.options.map_address_action;
+	               dump("map_address_action : "+ map_address_action);
+	               
+	               var location_res = data.details.result;
+	               dump(location_res);
+	               
+	               removeStorage("geo_address_result_formatted_address");
+	               
+	               switch(map_address_action){
+	               	 case "mapaddress":
+	               	 
+	               	 $(".street").val( location_res.address );
+					 $(".city").val( location_res.city );
+					 $(".state").val( location_res.state );
+					 $(".zipcode").val( location_res.zip );	
+					
+					 $(".google_lat").val( data.details.lat );	
+					 $(".google_lng").val( data.details.lng  );	
+					 $(".formatted_address").val( location_res.formatted_address );	
+					
+					 $(".delivery-address-text").html( location_res.formatted_address );  
+	               	 
+					 sNavigator.popPage({cancelIfRunning: true}); //back button
+		             sNavigator.popPage({cancelIfRunning: true}); //back button    
+	               	 break;
+	               	  
+	               	 case "changeaddress":
+	               	 	               	    
+	               	    $(".google_formatted_address").html( location_res.formatted_address );
+		                setStorage("search_address", location_res.formatted_address );	
+		                	
+		                setStorage("geo_address_result_formatted_address", location_res.formatted_address );
+		                setStorage("geo_address_result_address", location_res.address );
+		                setStorage("geo_address_result_city", location_res.city );
+		                setStorage("geo_address_result_state", location_res.state );
+		                setStorage("geo_address_result_zip", location_res.zip );	               
+		                
+		                var cart_params=JSON.stringify(cart);       			     
+					    if (saveCartToDb()){
+					       var cart_params='';
+					    }
+					    						
+					    callAjax("loadCart","merchant_id="+ getStorage('merchant_id')+"&search_address=" + 
+					    encodeURIComponent( getStorage("search_address") ) + "&cart="+cart_params +"&transaction_type=" +
+					    getStorage("transaction_type") + "&device_id="+ getStorage("device_id") );
+					   
+					    sNavigator.popPage({cancelIfRunning: true}); //back button
+					    sNavigator.popPage({cancelIfRunning: true}); //back button		
+					                    
+		                
+	               	 break;
+	               	 
+	               	 default:
+	               	  sNavigator.popPage({cancelIfRunning: true}); //back button
+	               	 break;
+	               }			
+			    break;
+			    
+			    case "getReceipt":
+			      html='';			      
+			      html+='<ons-list>';
+			      $.each( data.details.info, function( key, val ) {     
+			      	 dump(val);
+			      	 html+=wingRow( '', val.label, val.value );
+			      });
+			      html+='</ons-list>';
+			      
+			      html +='<br/>';	
+			      html += data.details.html;
+			      createElement('receipt_wrap', html);
+			    break;
+			    
+			    case "requestCancelOrder":
+			      menu.setMainPage('orders.html', {closeMenu: true});
+			    break;
+			    
+			    case "loadOptionList":
+			      displayOptionsList(data.details);
+			    break;
+			    
+			    case "saveAddressBookLocation":
+			    case "deleteAddressBookLocation":
+				   menu.setMainPage('addressBook.html', {closeMenu: true});
+				 break;
+				 
+				case "getPostCodeAddressBookDetails":
+				    $(".id").val( data.details.data.id );
+				    $(".street").val( data.details.data.street );
+				    $(".location_name").val( data.details.data.location_name );
+				    $(".state_id").val( data.details.data.state_id );
+				    $(".city_id").val( data.details.data.city_id );
+				    $(".area_id").val( data.details.data.area_id );				    
+				    if (data.details.data.as_default==2){
+						$(".as_default").attr("checked","checked");
+					} else $(".as_default").removeAttr("checked");
+					
+					$(".location_state").html( data.details.data.state_name );
+					$(".location_city").html( data.details.data.city_name );
+					$(".location_area").html( data.details.data.area_name );
+					
+				 break;
+				 
+				case "getAddressBookLocation":
+				   var htm='';
+					htm+='<ons-list>';
+					$.each( data.details, function( key, val ) {
+						htm+='<ons-list-item modifier="tappable" onclick="setAddressLocation(' + "'" + val.id + "'" + ');" >';
+						   htm+= '<span class="small-font-dim">'+val.address+'</span>';
+						htm+='</ons-list-item>';
+					});
+					htm+='</ons-list>';	
+					createElement('options_list',htm);
+				break;
+				
+				case "setAddressLocation":
+				   $(".state_id").val( data.details.data.state_id );
+				   $(".city_id").val( data.details.data.city_id );
+				   $(".area_id").val( data.details.data.area_id );
+				   
+				   $(".city").val( data.details.data.city_name );
+				   $(".state").val( data.details.data.state_name );
+				   $(".zipcode").val( data.details.data.postal_code );
+				   $(".area_name").val( data.details.data.area_name );
+				   
+				   $(".location_state").html( data.details.data.state_name );
+				   $(".location_city").html( data.details.data.city_name );
+				   $(".location_area").html( data.details.data.area_name );
+				   
+				   $(".street").val( data.details.data.street );
+				   $(".location_name").val( data.details.data.location_name );
+				   
+				   popup_address_location.hide();	
+				break;
+				
+				case "saveSettings":
+				   toastMsg(data.msg);	
+				   dump( "enabled_push-> "+data.details.enabled_push );
+				   if (data.details.enabled_push==2){				   	   			
+				   	   pushUnregister();				   	   
+				   } else {
+				   	   checkDeviceRegister();
+				   }			
+				   
+				break;
+				
+				case "reRegisterDevice":
+				  onsenAlert(data.msg);	
+				  removeStorage("push_unregister");
+				break;
+				
+				case "getNotificationList":
+				   clearNotificationCount();
+				   displayNotification(data.details);
+				break;
+				 				 
 				default:
 				//onsenAlert("Sorry but something went wrong during processing your request");
 				  onsenAlert(data.msg);	
@@ -2996,12 +3403,34 @@ function callAjax(action,params)
 			dump('failed condition');
 			switch(action)
 			{					
-								
+												
+				case "getPostCodeAddressBookDetails":
+				  toastMsg(data.msg);
+				  menu.setMainPage('addressBook.html', {closeMenu: true});
+				break;
+				
+				case "getLocationCity":
+				  toastMsg(data.msg);
+				  createElement('location-city-list','');
+				break;
+				
+				case "loadOptionList":
+				case "getAddressBookLocation":
+				  $(".options_list").html('');
+				  toastMsg(data.msg);
+			    break;
+			    
+				case "getReceipt":
+				$(".receipt_wrap").html('');
+				  toastMsg(data.msg);
+			    break;
+			    
 				case "loadPhotos":		
 				   toastMsg(data.msg);
 				break;
 				
 				case "merchantReviews":
+				  toastMsg(data.msg);
 				  createElement('review-list-scroller','');
 				break;
 				
@@ -3033,7 +3462,7 @@ function callAjax(action,params)
 				case "getPaymentOptions":
 				  if ( data.details==3){
 				  	  toastMsg(data.msg);				  	  
-				  	  resetLocation();
+				  	  //resetLocation();
 				  	  sNavigator.popPage({cancelIfRunning: true});
 				  } else {
 					  $(".frm-paymentoption").hide();
@@ -3100,9 +3529,14 @@ function callAjax(action,params)
 			       $("#cc-list").html('');
 			    break;
 			    
-			    case "trackOrderHistory":		
+			    //case "trackOrderHistory":		
 			    case "loadCC":	        
-			    sNavigator.popPage({cancelIfRunning: true}); //back button
+			      sNavigator.popPage({cancelIfRunning: true}); //back button			      
+			    break;
+			    
+			    case "trackOrderHistory":		
+			       toastMsg(data.msg);
+			       $(".track_driver").hide();
 			    break;
 			    			    
 			    case "ipayInitiatorRequest":
@@ -3894,7 +4328,7 @@ jQuery(document).ready(function() {
 			if (paypal_card_fee>0){
 				$(".total-amount").html( getStorage("order_total"));
 			}
-			if ( transaction_type =="delivery" ) {
+			if ( transaction_type =="delivery" || transaction_type =="pickup" || transaction_type =="dinein" ) {
 				$(".order-change-wrapper").show();						
 			}
 			$(".payon-delivery-wrapper").hide();
@@ -4212,15 +4646,32 @@ function addToCart()
 				xx++;
 			});	
 			
-			dump(addon_price_array);
-			/*var largest = addon_price_array.reduce(function(x,y){
-			       return (x > y) ? x : y;
-			});*/
-			largest = Math.max.apply(Math,addon_price_array); 
+			dump(addon_price_array);			
+			
+			largest=0;
+			
+			two_flavor_option = getStorage("two_flavor_option");
+			dump("two_flavor_option=>"+two_flavor_option);
+			
+			if(two_flavor_option==2){
+				if($.isArray(addon_price_array)) {
+					var two_flavor_sum = 0;
+					$.each( addon_price_array , function( key_1, val_1 ) {							
+						two_flavor_sum+= parseFloat(val_1);
+					});
+					
+					dump("two_flavor_sum =>" +two_flavor_sum);
+					if(two_flavor_sum>0){
+					  largest = two_flavor_sum/2;
+					}
+				}
+			} else {
+			   largest = Math.max.apply(Math,addon_price_array);
+			}
 			
 			dump("largest price => "+largest);
-			price=largest;
-   	   	   
+			price=largest;	
+			   	   	   
 		} else {
 			$.each( $(".sub_item:checked") , function( key, val ) { 	
 				var parent=$(this).parent().parent().parent();		
@@ -4260,6 +4711,8 @@ function addToCart()
 		  'discount':discount,
 		  'category_id':category_id  //cart category
 		};
+		
+		dump(cart);
 				
 		if( saveCartToDb() ){
 		   callAjax("addToCart", "cart="+ JSON.stringify(cart_value) + "&device_id=" + getStorage("device_id") );
@@ -4278,73 +4731,6 @@ function showCart()
 	dump('showCart');
 	var options = {
       animation: 'none',
-      onTransitionEnd: function() { 
-      	
-      	  var cart_params=JSON.stringify(cart);       	        	  
-      	  if (saveCartToDb()){
-      	  	  var cart_params='';
-      	  }      	  
-      	  
-      	  if ( empty(getStorage("tips_percentage")) ){
-      	  	   setStorage("tips_percentage",0);
-      	  }
-      	  
-      	  var remove_tips='';
-      	  if(!empty(getStorage("remove_tips"))){
-      	  	  remove_tips=getStorage("remove_tips");
-      	  }
-      	  
-      	  var tips_percentage='';
-      	  if(!empty(getStorage("tips_percentage"))){
-      	  	  tips_percentage=getStorage("tips_percentage");
-      	  }
-      	      	        	        	        	 
-      	  var params="merchant_id="+ getStorage('merchant_id');
-      	  
-      	  
-      	  if(!empty(getStorage("search_address"))){
-      	     params+="&search_address="+encodeURIComponent(getStorage("search_address"));
-      	  } else {
-      	  	if(!empty(getStorage("geo_address_result_formatted_address"))){
-      	  		params+="&search_address="+encodeURIComponent(getStorage("geo_address_result_formatted_address"));
-      	  	}
-      	  }
-      	  
-      	  params+="&cart="+cart_params;
-      	  
-      	  if(empty(getStorage("transaction_type"))){      	  	
-      	  	//alert(getStorage("merchant_services")); 
-      	  	switch (getStorage("merchant_services"))
-      	  	{
-      	  		case 3:
-      	  		case 6:
-      	  		case "3":
-      	  		case "6":
-      	  		params+="&transaction_type=pickup";
-      	  		setStorage('transaction_type','pickup');
-      	  		break;
-      	  		      	  		
-      	  		case 7:
-      	  		case "7":
-      	  		params+="&transaction_type=dinein";
-      	  		setStorage('transaction_type','dinein');
-      	  		break;
-      	  		
-      	  		default:
-      	  		params+="&transaction_type=delivery";
-      	  		break;
-      	  	}
-      	  } else {
-      	  	params+="&transaction_type=" + getStorage("transaction_type");
-      	  }      	  
-      	  
-      	  
-      	  params+="&device_id="+ getStorage("device_id");
-      	  params+="&tips_percentage=" + tips_percentage;
-      	  params+="&remove_tips=" + remove_tips;
-      	        	 
-      	  callAjax("loadCart",params);
-      } 
    };     
    sNavigator.pushPage("cart.html", options);
 }
@@ -4394,9 +4780,12 @@ function displayCart(data)
        setStorage("cart_tax", data.cart.tax.tax );
     }
     	
-	if (!empty(data.delivery_date)){
+	/*if (!empty(data.delivery_date)){
 	    $(".delivery_date").val( data.delivery_date);
-	}
+	}		
+	if (!empty(data.estimation_delivery_date)){
+	    $(".delivery_date").val( data.estimation_delivery_date);
+	}*/	
 	
 	if (!empty(data.cart)){
 		
@@ -4404,8 +4793,12 @@ function displayCart(data)
 		   $(".total-amount").html(data.cart.grand_total.amount_pretty);
 		}
 		
+		if(!empty(data.cart.sub_total.amount)){
+		   $(".cart_subtotal").val(data.cart.sub_total.amount  );
+		}
+		
 		var xx=1;
-		$.each( data.cart.cart, function( key, val ) { 
+		$.each( data.cart.cart, function( key, val ) { 			 
 			 if (val.discount>0){
 			 	 htm+=tplCartRowNoBorder(
 					 val.item_id,
@@ -4417,7 +4810,8 @@ function displayCart(data)
 					 val.size,
 					 xx,
 					 val.discounted_price,
-					 val.discount
+					 val.discount,
+					 val.category_id
 					 );
 			 	
 			 } else {
@@ -4431,7 +4825,8 @@ function displayCart(data)
 					 val.size,
 					 xx,
 					 val.price,
-					 val.discount
+					 val.discount,
+					 val.category_id
 					 );
 			 }	 
 			 
@@ -4747,6 +5142,7 @@ function applyCartChanges()
 		    });		    		    			    				
 			cart[cart.length]={
 			   'item_id':$(".item_id"+x).val(),
+			   'category_id':$(".category_id"+x).val(),
 			   'qty': $(this).val(),
 			   'price': $(".price"+x).val(),
 			   "sub_item":sub_item,
@@ -4844,6 +5240,8 @@ function checkOut()
 	extra_params+="&client_token="+getStorage("client_token");
 	//extra_params+="&transaction_type2=" + $(".transaction_type:checked").val();
 	
+	extra_params+="&cart_subtotal"+ $(".cart_subtotal").val();
+	
 	setTrackView("checkout");
 	
     callAjax("checkout","merchant_id="+ getStorage('merchant_id')+"&search_address=" + 
@@ -4891,10 +5289,10 @@ function clientShipping()
 {	
 	
 	//if ( empty( $(".street").val() )){
-	if ( empty( $(".city").val() )){
+	/*if ( empty( $(".city").val() )){
 		toastMsg( getTrans("Delivery address is required",'delivery_address_required') );
 		return;
-	}
+	}*/
 	
 	$.validate({ 	
 	    form : '#frm-shipping',    
@@ -4913,17 +5311,19 @@ function clientShipping()
 		      	     getStorage("order_total") ,
 		      	     'page-paymentoption'
 		      	  );
-		      	  var params="merchant_id="+ getStorage("merchant_id");
-		      	  params+="&street="+$(".street").val();
-		      	  params+="&city="+$(".city").val();
-		      	  params+="&state="+$(".state").val();
-		      	  params+="&zipcode="+$(".zipcode").val();
-		      	  params+="&location_name="+$(".location_name").val();
+		      	  params+="&merchant_id="+ getStorage("merchant_id");
+		      	  params+="&street="+ urlencode($(".street").val());
+		      	  params+="&city="+ urlencode($(".city").val());
+		      	  params+="&state="+ urlencode($(".state").val());
+		      	  params+="&zipcode="+ urlencode($(".zipcode").val());
+		      	  params+="&location_name="+ urlencode($(".location_name").val());
 		      	  params+="&save_address="+$('.save_address:checked').val();
 		      	  params+="&transaction_type=" +  getStorage("transaction_type") ;
 		      	  params+="&client_token="+ getStorage('client_token');
 		      	  params+="&contact_phone="+ $(".contact_phone").val();
 		      	  
+		      	  params+="&cart_subtotal="+ $(".cart_subtotal").val();
+		      	  		      	  
 		      	  callAjax("getPaymentOptions",params);
 		      } 
 		    };   
@@ -4996,12 +5396,13 @@ function placeOrder()
 		}		
 		
 		extra_params+="&delivery_asap="+ $(".delivery_asap:checked").val();		
-		extra_params+="&formatted_address="+ $(".formatted_address").val();	
+		extra_params+="&formatted_address="+ urlencode($(".formatted_address").val());	
 		extra_params+="&google_lat="+ $(".google_lat").val();	
 		extra_params+="&google_lng="+ $(".google_lng").val();
 		
 		//extra_params+="&payment_method="+ $(".payment_list:checked").val();
 		//extra_params+="&order_change="+ $(".order_change").val();
+		//extra_params+="&"+ urlencode(getStorage("shipping_address")) ;
 		extra_params+="&"+getStorage("shipping_address") ;
 		extra_params+="&client_token="+ getStorage('client_token');
 		extra_params+="&search_address="+ urlencode(getStorage('search_address'));
@@ -5203,8 +5604,14 @@ function addReview()
 	    onError : function() {      
 	    },	    
 	    onSuccess : function() {     	      
-	      var params = $( "#frm-addreview").serialize();	      
-	      params+="&merchant_id=" +  getStorage("merchant_id") ;
+	      var params = $( "#frm-addreview").serialize();	  
+	      
+	      merchant_id = getStorage("merchant_id");
+	      if (typeof merchant_id === "undefined" || merchant_id==null || merchant_id=="" || merchant_id=="null" ) {	      	
+	      } else {
+	      	 params+="&merchant_id=" +  merchant_id  ;
+	      }
+	          	      
 	      params+="&client_token="+ getStorage("client_token");
 	      callAjax("addReview",params);	       
 	      return false;
@@ -5302,31 +5709,52 @@ function login()
 }
 
 function logout()
-{
-	/*LOGOUT TO GOOGLE */
-	var social_strategy = getStorage("social_strategy");
-	enabled_googlogin = getStorage("enabled_googlogin");
-	dump(social_strategy); dump(enabled_googlogin);
-	if ( !empty(enabled_googlogin)){
-		if ( enabled_googlogin == "1"){
-			if(!empty(social_strategy)){
-				if ( social_strategy=="google_mobile"){
-					if (!isDebug()){
-						window.plugins.googleplus.logout(
-						    function (msg) {
-						      removeStorage("social_strategy");						      
-						    }
-						);
+{		
+	ons.notification.confirm({
+	  message: 'Are you sure?',	  
+	  title: dialog_title_default ,
+	  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
+	  animation: 'default', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	    if(index<=0){
+	    	
+	    	/*LOGOUT TO GOOGLE */
+			var social_strategy = getStorage("social_strategy");
+			enabled_googlogin = getStorage("enabled_googlogin");
+			dump(social_strategy); 
+			dump(enabled_googlogin);
+			
+			if (!isDebug()){
+				if(!empty(social_strategy)){
+					switch(social_strategy)
+					{
+						case "google_mobile":
+						  window.plugins.googleplus.logout(
+							    function (msg) {
+							      removeStorage("social_strategy");						      
+							    }
+							);
+						break;
+						
+						case "fb_mobile":
+						  if(social_strategy=="fb_mobile"){
+						    fbLogout();
+					      }
+						break;
 					}
 				}
 			}
-		}
-	}
 		
-	removeStorage("client_token");
-	//onsenAlert(  getTrans("You are now logout",'you_are_now_logout') );
-	toastMsg(  getTrans("You are now logout",'you_are_now_logout') );
-	menu.setMainPage('home.html', {closeMenu: true});	
+			pushUnregister();
+			removeStorage("client_token");								
+			toastMsg(  getTrans("You are now logout",'you_are_now_logout') );
+			menu.setMainPage('home.html', {closeMenu: true});	
+	    	
+	    }
+	  }
+	});
 }
 
 function isLogin()
@@ -5449,8 +5877,7 @@ function showAddressBook()
 function displayOrderHistory(data)
 {
 	var htm='<ons-list>';
-	$.each( data, function( key, val ) {   
-	     //htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="showOrderDetails('+val.order_id+');" >';
+	$.each( data, function( key, val ) {   	     
 	     htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="showOrderOptions('+val.order_id+');" >';
            htm+='<ons-row class="row">';
               htm+='<ons-col class="col-orders concat-text">';
@@ -5566,16 +5993,20 @@ function displayAddressBook(data)
 }
 
 function modifyAddressBook(id)
-{
-	dump(id);	
-	var options = {
-      animation: 'slide',
-      onTransitionEnd: function() {        	
-      	var params="client_token="+ getStorage("client_token")+"&id="+id;
-      	callAjax("getAddressBookDetails",params);
-      } 
-    };
-    sNavigator.pushPage("addressBookDetails.html", options);	
+{	
+	search_mode = getSearchMode();
+	dump("search_mode=>"+search_mode);
+	if(search_mode=="postcode"){
+		sNavigator.pushPage("postAddressDetails.html", {
+       	  animation: 'slide',
+       	  id : id
+       });	
+	} else {	
+       sNavigator.pushPage("addressBookDetails.html", {
+       	  animation: 'slide',
+       	  id : id
+       });	
+	}
 }
 
 function fillAddressBook(data)
@@ -5613,15 +6044,23 @@ function saveAddressBook()
 
 function newAddressBook()
 {
-	$(".delete-addressbook").hide();
-	var options = {
-      animation: 'slide',
-      onTransitionEnd: function() {        	
-      	$(".id").val('');
-      	$(".action").val('add');
-      } 
-    };
-    sNavigator.pushPage("addressBookDetails.html", options);
+	search_mode = getSearchMode();
+	if ( search_mode=="postcode"){
+		sNavigator.pushPage("postAddressDetails.html", {
+       	  animation: 'slide',
+       	  id : ''
+       });	
+	} else {
+		$(".delete-addressbook").hide();
+		var options = {
+	      animation: 'slide',
+	      onTransitionEnd: function() {        	
+	      	$(".id").val('');
+	      	$(".action").val('add');
+	      } 
+	    };
+	    sNavigator.pushPage("addressBookDetails.html", options);
+	}
 }
 
 function deleteAddressBook()
@@ -5694,60 +6133,38 @@ function displayAddressBookPopup(data)
    createElement('addressbook-popup', htm );
 }
 
-function initFacebook()
+function initSocialLogin()
 {	
-   dump('initFacebook');  
-   facebook_app_id = getStorage("facebook_app_id"); 
-   if ( empty(facebook_app_id)){   	   
-   	    if(!empty(krms_config.facebookAppId)){
-            facebook_app_id = krms_config.facebookAppId;
-   	    }
-   }
-   dump("facebook_app_id"+ facebook_app_id);
-   if ( !empty(facebook_app_id)){  
-   	   var facebook_flag = getStorage("facebook_flag");
-   	   if (facebook_flag==2){
-	   	   $(".fb-loginbutton").show();
-	       openFB.init({appId: facebook_app_id });       
-   	   } else {
-   	   	   $(".fb-loginbutton").hide();
-   	   }
-   } else {   	   
-   	   $(".fb-loginbutton").hide();
-   }
+   dump('initSocialLogin');    
    
+   enabled_social_login = 0;
+   
+   /*FACEBOOK*/
+   enabled_fblogin = getStorage("mobile_enabled_fblogin");
+   if ( !empty(enabled_fblogin)){
+   	  if ( enabled_fblogin == 1 || enabled_fblogin == "1" ){
+   	  	  $(".fb-login-wrap").show();
+   	  	  enabled_social_login++;
+   	  }
+   }
    
    // GOOGLE LOGIN
    enabled_googlogin = getStorage("enabled_googlogin");
    if ( !empty(enabled_googlogin)){
-   	   if ( enabled_googlogin == "1"){
+   	   if ( enabled_googlogin==1 || enabled_googlogin == "1"){
    	   	   $(".google-login-wrap").show();
-   	   } else {
-   	   	  $(".google-login-wrap").hide();
-   	   }
-   } else {
-   	  $(".google-login-wrap").hide();
+   	   	   enabled_social_login++;
+   	   }    	  
+   }   
+   
+   if(enabled_social_login<=0){
+   	  $(".or_use_email_wrap").hide();
    }
    
 }
 
 function myFacebookLogin()
-{		
-	/*FB.getLoginStatus(function(response) {
-		if (response.status === 'connected') {
-			 dump('already login');
-		 	 getFbInfo();
-		} else {			
-			FB.login(function(response){
-			 	dump(response);
-			 	if ( response.status=="connected"){	 	
-			 	  getFbInfo();
-			 	} else {
-			 		onsenAlert("Login failed.");
-			 	}
-			 }, {scope: 'public_profile,email'});			
-		}
-	});	*/	
+{			
 	openFB.login(
     function(response) {
         if(response.status === 'connected') {        	
@@ -5787,36 +6204,9 @@ function getFbInfo()
 		    
     },
     error: fbErrorHandler});
-    
-	/*FB.api('/me?fields=email,name', function(response) {
-        dump(response);
-        var params="&email="+ response.email;
-        params+="&name="+response.name;
-        params+="&fbid="+response.id;
-        
-        if ( $(".next_steps").exists()){
-           params+="&next_steps="+ $(".next_steps").val();        
-        }
-	    callAjax("registerUsingFb",params);	       
-    });*/
+    	
 }
 
-function fbErrorHandler(error) {
-    alert("ERROR=> "+error.message);
-}
-
-
-function FBlogout()
-{
-	/*FB.logout(function(response) {   
-       dump(response);
-   });*/
-	openFB.logout(
-	function() {
-	   onsenAlert( 'Logout successful' );
-	},
-	fbErrorHandler);
-}
 
 function paypalSuccessfullPayment(response)
 {	
@@ -5985,7 +6375,7 @@ function onRequestSuccess()
 	loader.show();
 	//  {enableHighAccuracy:false,maximumAge:Infinity, timeout:60000}
 	navigator.geolocation.getCurrentPosition(geolocationSuccess,geolocationError, 
-	 { timeout: 10000 , enableHighAccuracy: getLocationAccuracy() } );	
+	 { timeout: 10000 , enableHighAccuracy: getLocationAccuracy() , maximumAge:Infinity } );	
 	 
 	/*navigator.geolocation.getCurrentPosition(geolocationSuccess,geolocationError, 
 	 { timeout:10000 , enableHighAccuracy: false } );	*/
@@ -6109,6 +6499,8 @@ function setCountry(country_code)
 
 function addressPopup()
 {
+	removeStorage("geo_address_result_formatted_address");
+	
 	if (typeof addressDialog === "undefined" || addressDialog==null || addressDialog=="" ) { 	    
 		ons.createDialog('addressPopup.html').then(function(dialog) {
 	        dialog.show({"callback":geoCompleteChangeAddress});
@@ -6135,6 +6527,9 @@ function changeAddress()
 	        sNavigator.popPage({cancelIfRunning: true}); //back button
 	        
 	        setStorage("search_address", $(".new_s").val() );
+	        
+	         $(".google_formatted_address").html( $(".new_s").val() );
+	        
 			var cart_params=JSON.stringify(cart);       	  
 			if (saveCartToDb()){
 			    cart_params='';
@@ -6404,9 +6799,9 @@ function applyVoucher()
 		
 		transaction_type=getStorage("transaction_type");		
 		params+="&transaction_type=" + getStorage("transaction_type");
-		/*if ( transaction_type=="delivery"){
+		if ( transaction_type=="delivery"){
 		   params+="&cart_delivery_charges="+ getStorage("cart_delivery_charges");
-		}*/
+		}
 		
 		params+="&cart_packaging="+ getStorage("cart_packaging");
 		params+="&cart_tax="+ getStorage("cart_tax");
@@ -6489,6 +6884,7 @@ function fillExpirationMonth()
 		if (i<=9){
 			i="0"+i;
 		}
+
 		htm+='<ons-list-item modifier="tappable" onclick="setExpirationMonth('+"'"+i+"'"+');">';
 		 htm+='<label class="radio-button checkbox--list-item">';
 			htm+='<input type="radio" name="expiration_m" class="expiration_m" value="'+i+'"  >';
@@ -6872,7 +7268,7 @@ function limitText(field, maxChar){
 
 function toastMsg( message )
 {		
-	if (isDebug()){
+	if (isDebug()){		
 		onsenAlert( message );
 		return ;
 	}
@@ -6906,8 +7302,10 @@ function toastMsg( message )
 
 function isDebug()
 {	
-	//on/off
-	//return true;
+	var debug = krms_config.debug;
+	if(debug){
+		return true;
+	}
 	return false;
 }
 
@@ -7039,64 +7437,29 @@ function loadMoreReviews1()
 	loadMoreReviews();
 }
 
-function loadMap()
+function loadMap(map_type)
 {
 	
 	if (typeof merhantPopOverMenu === "undefined" || merhantPopOverMenu==null || merhantPopOverMenu=="" ) {	     
 	} else {
 	   merhantPopOverMenu.hide(); 
 	}
-	//alert( getStorage('merchant_id') );	
-	
+		
 	var options = {
       animation: 'none',
-      onTransitionEnd: function() { 	 
-      	  checkGPS();      	        	       
-      } 
+      'map_type': map_type,      
     };  
     sNavigator.pushPage("map.html", options);	   
 }
 
-function checkGPS()
+function checkGPS(map_type)
 {					 
 	 if (isDebug()){
-	 	viewTaskMapInit();
+	 	//viewTaskMapInit();
+	 	initMap(map_type);
 		return ;
 	 }
 	 
-	 /*if ( device.platform =="iOS"){		
-	 	viewTaskMapInit(); 	 
-	 	 return;
-	 }*/
-	 	 
- 	/*var can_request=true;
-	cordova.plugins.locationAccuracy.canRequest(function(canRequest){
-	 	 if(!canRequest){	
-	 	 	can_request=false;
-	 	 	var _message=getTrans('Your device has no access to location Would you like to switch to the Location Settings page and do this manually?','location_off')
-		   	   ons.notification.confirm({
-				  message: _message,		  
-				  title: dialog_title_default ,
-				  buttonLabels: ['Yes', 'No'],
-				  animation: 'none',
-				  primaryButtonIndex: 1,
-				  cancelable: true,
-				  callback: function(index) {
-				     if ( index==0 || index=="0"){
-				     	cordova.plugins.diagnostic.switchToLocationSettings();
-				     } 
-				  }
-			 });			   			 
-	 	 }
-	});
-	
-	if(!can_request){
-		return;
-	}	 
-     cordova.plugins.locationAccuracy.request( onRequestSuccessMap, 
-	 onRequestFailureMap, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
-	*/ 	
- 	
  	if ( device.platform =="iOS"){		
  		 		
  		cordova.plugins.diagnostic.isLocationAuthorized(function(authorized){		
@@ -7173,7 +7536,8 @@ function checkGPS()
 
 function onRequestSuccessMap(success){
     //alert("Successfully requested accuracy: "+success.message);    
-    viewTaskMapInit();
+    //viewTaskMapInit();
+    initMap( $(".map_type").val() );
 }
 
 function onRequestFailureMap(error){
@@ -7504,9 +7868,10 @@ function showMapAddress(map_address_action)
 	
 	var options = {
       animation: 'none',
-      onTransitionEnd: function() {       	 
+      map_address_action: map_address_action
+      /*onTransitionEnd: function() {       	 
       	 checkGPS_AddressMap();
-      } 
+      } */
     };   
     sNavigator.pushPage("address-bymap.html", options);		
 }
@@ -7813,7 +8178,7 @@ function MapInit_addressMap()
     );	   
 }
 
-function useThisLocation()
+function useThisLocationOld()
 {	
 	
 	var data_action=$(".change_cemara_action").val();
@@ -7908,14 +8273,13 @@ function showChangeAddressPage(object)
    }
 }
 
-function showOrderOptions(order_id)
-{
-	dump(order_id);
+function showOrderOptions(order_id, show_cancel_order , show_review)
+{	
 	var options = {
       animation: 'none',
-      onTransitionEnd: function() {     
-      	  $(".order_option_order_id").val( order_id );  	  
-      } 
+      order_id : order_id,
+      show_cancel_order : show_cancel_order,
+      show_review : show_review
    };   
    sNavigator.pushPage("order-options.html", options);
 }
@@ -7934,18 +8298,12 @@ function showTrackPage()
 {	
 	var options = {
       animation: 'slide',
-      onTransitionEnd: function() {     
-      	        	
-      	  //$('.track-status-wrap').css('height', $(window).height() - $('.track-status-wrap').offset().top - 80  );
-      	
+      /*onTransitionEnd: function() {           	        	      	  
       	  var params='order_id=' + $(".order_option_order_id").val();
       	  params+="&client_token="+getStorage("client_token");
-		  callAjax("trackOrderHistory",params);	       	 
-		  
-		  stopTrackInterval();
-		  //track_order_interval = setInterval(function(){runTrackOrder()}, 7000);
-		  		  
-      } 
+		  callAjax("trackOrderHistory",params);	       	 		  
+		  stopTrackInterval();		  		  		  
+      } */
    };   
    sNavigator.pushPage("track-order.html", options);
 }
@@ -7954,17 +8312,12 @@ function showTrackingPage()
 {
 	var options = {
       animation: 'none',
-      onTransitionEnd: function() {        
-      	
+      /*onTransitionEnd: function() {              	
       	  $(".driver_avatar").attr("src", $(".driver_avatar").val() );
       	  $("._driver_name").html( $(".driver_name").val() );
-      	  $(".call_driver").attr("href","tel:"+ $(".driver_phone").val() );
-      	  	  
-      	  MapInit_Track();
-      	  
-      	  /*stopTrackMapInterval();
-      	  track_order_map_interval = setInterval(function(){runTrackMap()}, 7000);*/
-      } 
+      	  $(".call_driver").attr("href","tel:"+ $(".driver_phone").val() );      	  	  
+      	  MapInit_Track();      	        	  
+      } */
    };   
    sNavigator.pushPage("tracking-page.html", options);
 }
@@ -8608,7 +8961,10 @@ function deleteCC()
 
 function fillShippingAddress()
 {	
+	
+	dump('fillShippingAddress');
 	if ( !empty( getStorage("map_address_result_formatted_address") )){
+		 dump('p1');
   	     $(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );
   	     $(".street").val( getStorage("map_address_result_address") );
 		 $(".city").val( getStorage("map_address_result_city") );
@@ -8618,7 +8974,8 @@ function fillShippingAddress()
 		 
 		 $(".google_lat").val( getStorage("google_lat") );	
 		 $(".google_lng").val( getStorage("google_lng") );	
-  	 } else {
+  	 } else {  	 	
+  	 	dump("p2");
   	 	if(!empty(getStorage("geo_address_result_formatted_address"))){
   	 	   $(".delivery-address-text").html( getStorage("geo_address_result_formatted_address") );
   	       $(".street").val( getStorage("geo_address_result_address") );
@@ -8843,10 +9200,15 @@ function loadAjaxLocationCity(s)
     }*/
 }
 
-function setLocationCity(city_id , city_name )
+function setLocationCity(city_id , city_name, state_id )
 {
 	global_city_name = city_name;
 	global_city_id = city_id;
+	
+	if(!empty(state_id)){
+	   global_state_id = state_id;
+	}
+	
 	$(".city_id").val( city_id );
 	$(".location_city").html( city_name );
 
@@ -9055,6 +9417,7 @@ function showShippingLocation(data)
 			var options = {
 		      animation: 'slide',
 		      onTransitionEnd: function() { 		
+
 		      	  if(!empty(data.msg.profile)){
 		      	  	$(".contact_phone").val( data.msg.profile.contact_phone ) ;
 		      	  	$(".location_name").val( data.msg.profile.location_name ) ;
@@ -9415,12 +9778,25 @@ function googleLogin()
 	                
 			if ( $(".next_steps").exists()){
 	            params+="&next_steps="+ encodeURIComponent($(".next_steps").val());        
-	        }	        		
+	        }	        			        
 			callAjax("googleLogin", params );	    	
 	    },
 	    function (msg) {
 	    	// FAILED
-	    	toastMsg('error: ' + msg);
+	    	switch(msg){
+	    	   case "10":	
+	    	   case 10:
+	    	   case "16":	
+	    	   case 16:
+	    	     err_msg = getTrans('error has occured. android keystore not valid','invalid_keystore');
+	    	     err_msg+=". "+ getTrans("error code:",'error_code') + msg;
+	    	     toastMsg( err_msg  );
+	    	   break;
+	    	   	
+	    	   default:
+	    	   toastMsg( getTrans('error has occured. error number','error_has_occured') + ' : ' + msg);
+	    	   break;	
+	    	}	    	
 	    });
 	}
 }
@@ -9598,6 +9974,7 @@ function getItem(index)
 	   	   	  dump('element  exist' + index);
 	   	      displayItemByCategory(data.details, index);
 	   	   } else {
+
 			  dump('element not exist');
 			  ajax_lazy_item.abort();
 			  ajax_lazy_item = null;
@@ -9758,30 +10135,22 @@ function mercapagoFailed(error)
 
 function setTrackView(pagename , campaign_details )
 {
-   var analytics_id; var analytics_enabled;
-   
-   analytics_id = getStorage("analytics_id");
-   analytics_enabled = getStorage("analytics_enabled");
-   
-   if (!isDebug()){	   	   
-   	   if (analytics_enabled==1 && !empty(analytics_id)){   	   	   
-   	   	   if ( !empty(campaign_details)){
-   	   	   	  window.ga.trackView( pagename , campaign_details );
-   	   	   	  //toastMsg(pagename + "->" + campaign_details);
-   	   	   } else {
-   	          window.ga.trackView(pagename);
-   	          //toastMsg(pagename);
-   	   	   }   	   	   
-   	   }
-   } else {
-   	  if (analytics_enabled==1 && !empty(analytics_id)){ 
-	   	  if ( !empty(campaign_details)){
-	   	  	  dump("TRACKVIEW W/ DETAILS :" + pagename + " = " + campaign_details);
-	   	  } else {
-	   	      dump("TRACKVIEW :" + pagename)
-	   	  }
-   	  }
-   }
+	
+   var analytics_id = getStorage("analytics_id");
+   var analytics_enabled = getStorage("analytics_enabled");
+			
+   if ( analytics_enabled == 1 && !empty(analytics_id)){
+	   dump('setTrackView=>'+pagename);
+	   try {   	
+	      analytics.sendAppView(pagename, function(){
+	      	 dump("ok");
+	      }, function(){
+	      	 dump("failed");
+	      });		
+	   } catch(err) {
+	      dump(err.message);       
+	   } 
+   }         
 }
 
 function iOSeleven()
@@ -9930,7 +10299,7 @@ function searchByAddress()
 	search_mode = getSearchMode();	   
 	var ss = $("#ss").val();
 	/*clear all storage*/ 
-    setStorage("search_address",ss);
+    setStorage("search_address", ss );
     clearAllStorage();
     callAjax("initSearch","address="+ urlencode(ss) + "&search_mode=" + search_mode );			   
 }
@@ -10004,3 +10373,881 @@ function searchByFoodName()
 }
 
 /*END CLEAN OF CODE*/
+
+
+
+
+/*4.6 CODE*/
+
+function t(words,words_key){
+	return getTrans(words,words_key);
+}
+
+initPush = function(re_init){
+	
+	try {
+	
+		push = PushNotification.init({
+			android: {
+				sound : "true",
+				clearBadge : "true"
+			},
+		    browser: {
+		        pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+		    },
+			ios: {
+				alert: "true",
+				badge: "true",
+				sound: "true",
+				clearBadge:"true"
+			},
+			windows: {}
+	    });
+	    
+	    push.on('registration', function(data) {   	  	
+	    	/*CHECK IF SAME DEVICE ID*/	    	
+	    	if(re_init){	    		
+		    	old_device_id = getStorage("device_id");
+		    	dump(old_device_id +"=>" + data.registrationId );
+	    		if (old_device_id!=data.registrationId){	    			
+	    			sendPost('reRegisterDevice', "new_device_id="+ data.registrationId);
+	    		}
+	    	} else {	    		
+	    	   setStorage("device_id", data.registrationId ); 	
+	    	}	    	 
+		});
+		
+		 push.on('notification', function(data){     
+	   	   //alert(JSON.stringify(data));   	
+		   if ( data.additionalData.foreground ){
+	    		playSound();
+	       } 
+	                       	  
+	       handleNotification(data);
+	       
+	    });
+	    
+	    PushNotification.createChannel(function(){
+	    	//alert('create channel succces');
+	    }, function(){
+	    	//alert('create channel failed');
+	    },{
+	    	 id: 'kmrs_channel',
+	         description: 'mobile app channel',
+	         importance: 5,
+	         vibration: true,
+	         sound : 'beep'
+	      }
+	    );
+	    
+	    push.on('error', function(e) {      
+	     	 alert(e.message);
+		});
+    
+	} catch(err) {
+       alert(err.message);
+    } 
+};
+
+playSound = function(){		 
+	 try {	 		 	 
+		 url = 'file:///android_asset/www/beep.wav';			 
+		 if(device_platform=="iOS"){
+		 	url = "beep.wav";
+		 }
+		 //alert(url);
+		 my_media = new Media(url,	        
+	        function () {
+	            dump("playAudio():Audio Success");
+	            my_media.stop();
+	            my_media.release();
+	        },	        
+	        function (err) {
+	            dump("playAudio():Audio Error: " + err);
+	        }
+	    );	    
+	    my_media.play({ playAudioWhenScreenIsLocked : true });
+	    my_media.setVolume('1.0');
+    
+    } catch(err) {
+       alert(err.message);
+    } 
+};
+
+handleNotification = function(data){
+	//var push_type = data.additionalData.push_type;	
+	toastMsg(data.title+"\n"+data.message);
+	
+	/*SET THE COUNT FOR NOTIFICATION BADGE*/	
+	setNotificationCount();
+};
+
+fbInit = function(){
+	try {
+		
+		facebookConnectPlugin.getLoginStatus(function(status){
+			//alert(JSON.stringify(status)); 
+			if (status.status=="connected"){			
+				fbRegister( status.authResponse.userID );	
+			} else {
+				fbLogin();
+			}
+		}, function(error){
+		   	onsenAlert( t("an error has occured","an_error_has_occured") + " "+ JSON.stringify(error) );
+		});	
+		
+	} catch(err) {
+       onsenAlert(err.message);
+    } 
+};
+
+fbLogin = function(){	
+	facebookConnectPlugin.login(["public_profile","email"], function(data){
+		//alert(JSON.stringify(data)); 		
+		fbRegister( data.authResponse.userID );		 
+	}, function(error){
+		//cancel = error.errorCode  = 4201;
+		onsenAlert( t("an error has occured","an_error_has_occured") + " "+ JSON.stringify(error) );
+	});
+};
+
+fbRegister = function(userID){	
+	facebookConnectPlugin.api(userID+"/?fields=id,email,first_name,last_name", ["public_profile","email"], 
+	function(data){
+		//alert(JSON.stringify(data)); 		
+		params = "email="+ data.email ;
+		params+= "&first_name="+ data.first_name ;
+		params+= "&last_name="+ data.last_name ;
+		params+= "&fbid="+ data.id ;
+		    
+		if ( $(".next_steps").exists()){
+	       params+="&next_steps="+ encodeURIComponent($(".next_steps").val());  
+	    }	 
+				
+		callAjax('registerUsingFb', params );
+		
+	}, function(error){
+		onsenAlert( t("an error has occured","an_error_has_occured") + " "+ JSON.stringify(error) );
+	});
+};
+
+
+fbLogout = function(){		
+	try{
+		facebookConnectPlugin.getLoginStatus(function(status){
+			//alert(JSON.stringify(status)); 
+			if (status.status=="connected"){			
+				facebookConnectPlugin.logout(function(success){
+					//alert(JSON.stringify(success)); 
+				}, function(error){				
+				});
+			} 
+		}, function(error){	   	
+		});
+			
+	} catch(err) {
+       //alert(err.message);
+    } 
+};
+
+var map_bounds = [];
+var map_style = [ {stylers: [ { "saturation":-100 }, { "lightness": 0 }, { "gamma": 1 } ]}];
+var marker_dragable;
+var marker_track_destination;
+var marker_track_driver;
+var marker_track_dropoff;
+
+getMapIcons = function(){
+	
+	var destination_icon =  getStorage("destination_icon");
+	var from_icon =  getStorage("from_icon");
+	
+	if(empty(destination_icon)){
+		destination_icon = 'http://maps.gstatic.com/mapfiles/markers2/marker.png';
+	}
+	if(empty(from_icon)){
+		from_icon = 'http://maps.gstatic.com/mapfiles/markers2/icon_green.png';
+	}
+	
+	return {
+		'destination_icon':destination_icon,
+		'from_icon':from_icon
+	};
+	
+};
+
+initMap = function(map_type){
+	
+	//toastMsg("map_type =>" + map_type);
+	dump("map_type =>" + map_type);
+	
+	/*var destination_icon =  getStorage("destination_icon");
+	var from_icon =  getStorage("from_icon");
+	
+	if(empty(destination_icon)){
+		destination_icon = 'http://maps.gstatic.com/mapfiles/markers2/marker.png';
+	}
+	if(empty(from_icon)){
+
+		from_icon = 'http://maps.gstatic.com/mapfiles/markers2/icon_green.png';
+	}*/
+
+	icons = getMapIcons();
+	
+	var country_code_set=getStorage("country_code_set");
+    if ( empty(getStorage("country_code_set")) ){
+	    country_code_set='';
+    } 		
+	
+	switch(map_type){
+		case "merchant_map":
+		
+		lat = getStorage("merchant_latitude");
+	    lng = getStorage("merchant_longtitude");
+	    merchant_name = getStorage("merchant_name");
+	    delivery_address = getStorage("merchant_address");
+	    
+	    dump("merchant location =>"+lat + " => "+  lng);
+	    
+	    try {
+	    	
+	       map_bounds = [];
+	       
+	       $(".destination_lat").val( lat );
+	       $(".destination_lng").val( lng );
+	    	
+	       options = {
+			  div: ".map_canvass",
+			  lat: lat,
+			  lng: lng,
+			  disableDefaultUI: true,
+			  styles: map_style ,
+		   };
+			
+	       map = new GMaps(options);
+	       
+	       info_html = '<p><b>'+merchant_name+"<br/></b>";
+	       info_html += delivery_address+'</p>';
+	       
+	       var infoWindow = new google.maps.InfoWindow({
+		    content: info_html
+		   });		
+	       
+	       marker =  map.addMarker({
+			  lat: lat,
+			  lng: lng,
+			  infoWindow: infoWindow,
+			  icon: icons.destination_icon
+		   });
+		   
+		   infoWindow.open(map, marker);
+		   
+		   var latlng = new google.maps.LatLng( lat , lng );
+		   map_bounds.push(latlng);
+		   
+		   /*GET USER LOCATION*/		   
+		   navigator.geolocation.getCurrentPosition( function(position){
+		   	 
+		   	  var your_lat = position.coords.latitude;
+              var your_lng = position.coords.longitude;
+              
+              $(".origin_lat").val( your_lat );
+	          $(".origin_lng").val( your_lng );
+	       
+              dump("your location =>"+your_lat + " => "+  your_lng);
+              
+              var infoWindow = new google.maps.InfoWindow({
+		       content: getTrans('You are here','you_are_here') 
+		      });		
+		   
+              marker2 =  map.addMarker({
+			    lat: your_lat,
+			    lng: your_lng,
+			    infoWindow: infoWindow,			    	 
+			    icon : icons.from_icon
+		      });
+		      infoWindow.open(map, marker2);
+		      
+		      dump("done adding location marker");
+		      
+		      var latlng = new google.maps.LatLng( your_lat , your_lng );
+		      map_bounds.push(latlng);
+		      
+		      setMapCenter();		      
+		      map.cleanRoute();
+		      
+		      map.drawRoute({
+			    origin: [your_lat , your_lng ],
+ 			    destination: [ lat , lng ],
+			    travelMode: 'driving',
+			    strokeColor: '#131540',
+			    strokeOpacity: 0.6,
+			    strokeWeight: 6
+			  });		
+		   	 
+		   },geolocationError, 
+	       { timeout: 60000 , enableHighAccuracy: getLocationAccuracy(), maximumAge:Infinity } );	
+		   
+	    	
+		} catch(err) {		
+	        toastMsg(err.message);
+	    }     
+		break;
+		
+		case "select_address_from_map":
+		
+		   lat = getStorage("merchant_latitude");
+	       lng = getStorage("merchant_longtitude");
+	       
+	       dump("merchant location =>"+lat + " => "+  lng);
+	       
+	       try {
+              	
+			   
+	       	   $(".search_address_geo").geocomplete({
+		          country: country_code_set
+	           }).bind("geocode:result", function(event, result){
+	          	   s_lat = result.geometry.location.lat();
+	               s_lng = result.geometry.location.lng();	
+	               dump("search location =>"+s_lat + " => "+  s_lng);	
+	               
+	               map.removeMarkers(); 				  	  				  	  
+				   marker_dragable =  map.addMarker({
+						  lat: s_lat ,
+						  lng: s_lng,						  
+				   });					   
+
+				   map.setCenter(s_lat,s_lng);
+				         
+	           });	           
+	           
+		       options = {
+				  div: ".map_canvass",
+				  lat: lat,
+				  lng: lng,
+				  disableDefaultUI: true,
+				  styles: map_style ,
+				  dragend: function(event) {
+				  	  var location = map.getCenter(); 
+				  	  map.removeMarkers(); 				  	  				  	  
+				  	   marker_dragable =  map.addMarker({
+						  lat: location.lat() ,
+						  lng: location.lng(),
+						  infoWindow: infoWindow,				  			 
+					  });					  
+				  }
+			   };
+			   
+			   map = new GMaps(options);
+			   
+		 			   	          
+	           /*GET USER LOCATION*/		   
+		       navigator.geolocation.getCurrentPosition( function(position){
+		       	
+		       	  var your_lat = position.coords.latitude;
+                  var your_lng = position.coords.longitude;
+                                              
+                  dump("your location =>"+your_lat + " => "+  your_lng);
+                  
+                  marker_dragable =  map.addMarker({
+					  lat: your_lat,
+					  lng: your_lng	,					  
+				  });
+				  
+				  map.setCenter(your_lat,your_lng);
+		       	
+	           }, function(){
+	           	  // GET LOCATION HAS FAILED
+	           	  //toastMsg("failed getting location");
+	           	  marker_dragable =  map.addMarker({
+					  lat: lat,
+					  lng: lng					  					 
+				  });
+				  
+				  map.setCenter(your_lat,your_lng);
+				  
+	           }, 
+	           { timeout: 60000 , enableHighAccuracy: getLocationAccuracy(), maximumAge:Infinity } );	
+	       	
+	       } catch(err) {		
+	        toastMsg(err.message);
+	       }     
+	    
+		break;
+		
+		default:
+		  toastMsg( getTrans("Undefined map type","undefined_map_type") );
+		break;
+	}	
+	
+};
+
+
+setMapBound = function(lat, lng){
+	var latlng = new google.maps.LatLng( lat , lng );
+    map_bounds.push(latlng);
+};
+
+setMapCenter = function(){			
+	map.fitLatLngBounds(map_bounds);
+};
+
+viewExternalDirection = function(){
+	try {
+		
+		var origin_lat = $(".destination_lat").val();
+	    var origin_lng = $(".destination_lng").val();
+	
+		launchnavigator.isAppAvailable(launchnavigator.APP.GOOGLE_MAPS, function(isAvailable){
+		    var app;
+		    if(isAvailable){
+		        app = launchnavigator.APP.GOOGLE_MAPS;
+		    }else{		        
+		        app = launchnavigator.APP.USER_SELECT;
+		    }
+		    launchnavigator.navigate( [origin_lat, origin_lng] , {
+		        app: app
+		    });
+		});
+		
+	} catch(err) {
+       toastMsg(err.message);
+    } 
+};
+
+useThisLocation = function(){	
+	var lat = marker_dragable.getPosition().lat();
+    var lng = marker_dragable.getPosition().lng();
+    dump("marker location =>"+lat + " => "+  lng);
+    callAjax("useThisLocation","lat=" + lat + "&lng="+ lng );	 
+};
+
+initTrackingMap = function(){
+	
+	
+	$(".driver_avatar").attr("src", $(".driver_avatar").val() );
+    $("._driver_name").html( $(".driver_name").val() );
+    $(".call_driver").attr("href","tel:"+ $(".driver_phone").val() ); 
+	
+	var task_lat=$(".task_lat").val();
+	var task_lng=$(".task_lng").val();
+	
+	icons = getMapIcons();
+	dump(icons);
+	
+	dump("task location =>"+task_lat + " => "+  task_lng);
+	
+	options = {
+	  div: "#map_canvas_track",
+	  lat: task_lat,
+	  lng: task_lng ,
+	  disableDefaultUI: true,
+	  styles: map_style ,
+    };       
+    
+    setMapBound(task_lat,task_lng);
+	
+    map = new GMaps(options);
+    
+    infoWindow =  createInfoWindow( getTrans("Destination",'destination') ) ;
+    
+    marker_track_destination =  map.addMarker({
+	  lat: task_lat,
+	  lng: task_lng,
+	  infoWindow: infoWindow,
+	  icon: icons.destination_icon
+	});
+	
+	infoWindow.open(map, marker_track_destination);
+	
+	/*DRIVER LOCATION*/
+	driver_lat = $(".driver_lat").val();
+	driver_lng = $(".driver_lng").val();
+	
+	if(!empty(driver_lat)){	
+		infoWindow =  createInfoWindow( getTrans("Courier",'courier') );    
+		marker_track_driver =  map.addMarker({
+		  lat: driver_lat,
+		  lng: driver_lng,
+		  infoWindow: infoWindow,
+		  icon: icons.from_icon
+		});		
+		
+		infoWindow.open(map, marker_track_driver);
+		
+		setMapBound(driver_lat,driver_lng);
+	}	
+	
+	/*DROPOFF LOCATION*/
+	dropoff_lat = $(".dropoff_lat").val();
+	dropoff_lng = $(".dropoff_lng").val();
+	
+	if(!empty(dropoff_lat)){	
+		infoWindow =  createInfoWindow( getTrans("Dropoff",'dropoff') );    
+		marker_track_dropoff =  map.addMarker({
+		  lat: dropoff_lat,
+		  lng: dropoff_lng,
+		  infoWindow: infoWindow,		  
+		});				
+		infoWindow.open(map, marker_track_dropoff);		
+		setMapBound(dropoff_lat,dropoff_lng);
+	}	
+	
+	
+	/*DRAW ROUTE*/
+	if(!empty(driver_lat)){
+		if(!empty(dropoff_lat)){
+		  map.drawRoute({
+		    origin: [driver_lat , driver_lng ],
+			destination: [ dropoff_lat , dropoff_lng ],
+		    travelMode: 'driving',
+		    strokeColor: '#131540',
+		    strokeOpacity: 0.6,
+		    strokeWeight: 6
+		  });		
+		  
+		  map.drawRoute({
+		    origin: [dropoff_lat , dropoff_lng ],
+			destination: [ task_lat , task_lng ],
+		    travelMode: 'driving',
+		    strokeColor: '#131540',
+		    strokeOpacity: 0.6,
+		    strokeWeight: 6
+		  });				  		  
+		} else {
+		   map.drawRoute({
+		    origin: [driver_lat , driver_lng ],
+			destination: [ task_lat , task_lng ],
+		    travelMode: 'driving',
+		    strokeColor: '#131540',
+		    strokeOpacity: 0.6,
+		    strokeWeight: 6
+		  });		
+		}
+	}
+		
+	setMapCenter();		
+	track_order_map_interval = setInterval(function(){runTrackMap()}, 10000);
+};
+
+createInfoWindow = function(info_html){
+	return new google.maps.InfoWindow({
+	      content: info_html
+	});	
+};
+
+ReInitTrackingMap = function(data){
+	dump(data);
+	marker_track_driver.setPosition( new google.maps.LatLng( data.driver_lat , data.driver_lng ) );
+	track_order_map_interval = setInterval(function(){runTrackMap()}, 10000);
+};
+
+loadOrderDetails = function(){
+   var options = {
+      animation: 'slide',
+      order_id : $(".order_option_order_id").val(),
+      onTransitionEnd: function() {         	   	 
+      } 
+   };   
+   sNavigator.pushPage("order_details.html", options);
+};
+
+requestCancelOrder = function(){
+	var page = sNavigator.getCurrentPage();	 
+    order_id = page.options.order_id
+    
+    ons.notification.confirm({
+	  message: getTrans("Are you sure","are_you_sure") +"?",	  
+	  title: dialog_title_default ,
+	  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
+	  animation: 'default', 
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	      if(index<=0){
+	      	 callAjax("requestCancelOrder", "order_id=" +  order_id );	
+	      }
+	  }
+	});
+};
+
+showPopUpOptions = function(action_type){	
+	
+	setStorage("popup_options_action" , action_type  );
+	
+	if (typeof dialog_popup_options === "undefined" || dialog_popup_options==null || dialog_popup_options=="" ) { 	    
+		ons.createDialog('popup_options.html').then(function(dialog) {
+	        dialog.show();	        
+	        translatePage();
+	    });		    
+	} else {
+		dump('already init');
+		dialog_popup_options.show();		
+	    loadOptionList();
+	}	
+};
+
+displayOptionsList = function(data){
+	dump(data);
+	var htm='';
+	htm+='<ons-list>';
+	$.each( data.list, function( key, val ) {
+		htm+='<ons-list-item modifier="tappable" onclick="setOptionValue(' + "'" + key + "'," + "'" + val + "'"  + ');" >';
+		   htm+= '<span class="small-font-dim">'+val+'</span>';
+		htm+='</ons-list-item>';
+	});
+	htm+='</ons-list>';	
+	createElement('options_list',htm);	
+	translatePage();
+};
+
+setOptionValue = function(key, value){
+	
+	dump(key+"=>"+value);
+	option_type = getStorage("popup_options_action");
+	dump(option_type);
+	switch(option_type){
+		case "DateList":
+		  $(".delivery_date").val(key);
+		  $(".cart_delivery_date_value").html(value);
+		break;
+		
+		case "TimeList":
+		  $(".delivery_time").val(key); 
+		  $(".cart_delivery_time_value").html(value);
+		break;
+	}
+	dialog_popup_options.hide();
+};
+
+loadOptionList = function(){	
+    $(".options_list").html('');
+	params = "option_type=" + getStorage("popup_options_action");
+	params+= "&merchant_id=" + getStorage('merchant_id');
+	params+= "&delivery_date=" + $(".delivery_date").val();
+	callAjax("loadOptionList", params );				   
+};
+
+showReviewForm = function(){
+	var options = {
+      animation: 'slide',      
+      order_id: $(".order_option_order_id").val()
+   };   
+   sNavigator.pushPage("addReviews.html", options);
+};
+
+saveAddressBookLocation = function(){
+	
+	$.validate({ 	
+	    form : '#frm_addressbook_location',    
+	    borderColorOnError:"#FF0000",
+	    onError : function() {      
+	    },	    
+	    onSuccess : function() {     	      
+	      var params = $( "#frm_addressbook_location").serialize();	      	      
+	      params+="&client_token="+ getStorage("client_token");
+	      callAjax("saveAddressBookLocation",params);	       
+	      return false;
+	    }  
+	});
+	
+};
+
+deleteAddressBookLocation = function(){
+	
+	ons.notification.confirm({
+	  message: getTrans('Delete this records?','delete_this_records') ,	  
+	  title: dialog_title_default,
+	  buttonLabels: ['Yes', 'No'],
+	  animation: 'default', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	  	dump(index);
+	    if ( index==0){
+	    	var id=$(".id").val();		
+	        var params="&client_token="+ getStorage("client_token")+"&id="+id;
+	        callAjax("deleteAddressBookLocation",params);	       
+	    }
+	  }
+	});	
+};
+
+showAddressBookLocation = function(){
+	
+	if (typeof popup_address_location === "undefined" || popup_address_location==null || popup_address_location=="" ) { 	    
+		ons.createDialog('popup_address_location.html').then(function(dialog) {
+	        dialog.show();	        
+	        translatePage();
+	    });		    
+	} else {
+		dump('already init');
+		popup_address_location.show();	    
+		getAddressBookLocation();
+	}	
+	
+};
+
+getAddressBookLocation = function(){
+	var params="client_token="+ getStorage("client_token");
+    callAjax("getAddressBookLocation",params);	
+};
+
+setAddressLocation = function(id){
+	var params="client_token="+ getStorage("client_token") +"&id="+ id;
+    callAjax("setAddressLocation",params);	
+};
+
+
+pushUnregister = function(){
+	dump("pushUnregister");
+	try {	
+		push.unregister(function(){			
+			dump('unregister ok');
+			setStorage("push_unregister",1);
+		},function(error) {   	   	   	   	   
+			dump('unregister error');
+	    });		
+		
+	} catch(err) {
+       alert(err.message);       
+    } 
+};
+
+checkDeviceRegister = function(){	
+	push_unregister = getStorage("push_unregister");
+	dump("push_unregister => "+ push_unregister);
+	if (typeof push_unregister === "undefined" || push_unregister==null || push_unregister=="" || push_unregister=="null" ) {
+		// do nothing
+	} else {
+		if(push_unregister==1){
+			dump("Registered again");
+			initPush(true);
+		}
+	}
+};
+
+
+sendPost = function(action,params){
+		
+	try {
+		
+		params+="&lang_id="+getStorage("default_lang");
+		params+="&lang="+getStorage("default_lang");
+		if(!empty(krms_config.APIHasKey)){
+			params+="&api_key="+krms_config.APIHasKey;
+		}
+		
+		params+="&app_version="+ app_version;
+		
+		var device_id=getStorage("device_id");
+		if(!empty(device_id)){
+			params+="&device_id="+device_id;
+		}
+		
+		if (isDebug()){
+	  	  params+="&device_platform=Android";
+	    } else {
+	  	  params+="&device_platform="+ encodeURIComponent(device.platform);
+	    }	 
+		
+	    client_token = getStorage("client_token");
+	    if(!empty(client_token)){
+	       params+="&client_token="+ client_token;
+	    }
+	    	
+		//alert(ajax_url+"/"+action+"?"+params);
+		
+		var send_post_ajax = $.ajax({
+		  url: ajax_url+"/"+action, 
+		  method: "GET",
+		  data: params,
+		  dataType: "jsonp",
+		  timeout: 20000,
+		  crossDomain: true,
+		  beforeSend: function( xhr ) {       
+	      }
+	    });
+	    
+	    send_post_ajax.done(function( data ) {
+	    	 //alert(JSON.stringify(data));
+	    	 if(data.code==1){
+	    	 	setStorage("device_id", data.details ); 
+	    	 	removeStorage("push_unregister");
+	    	 } else {    	 
+	    	 	// do nothing	
+	    	 }
+	    });
+	    
+	    send_post_ajax.always(function() {        
+	    	send_post_ajax=null;   
+	    });
+	          
+	    /*FAIL*/
+	    send_post_ajax.fail(function( jqXHR, textStatus ) {    	
+	    	send_post_ajax=null;   	    	
+	    });    
+    
+    } catch(err) {
+       alert(err.message);       
+    } 
+};
+
+initAutoLocation = function(){
+	mobile_auto_location = getStorage("mobile_auto_location");
+	if(mobile_auto_location==1){
+	   getCurrentLocation();
+	}
+};
+
+setTrackingAccount = function(){
+	
+	try {
+				
+		var analytics_id = getStorage("analytics_id");
+		var analytics_enabled = getStorage("analytics_enabled");
+				
+		if ( analytics_enabled == 1 && !empty(analytics_id)){		
+			analytics = navigator.analytics;
+			analytics.setTrackingId(analytics_id);
+		}
+		
+	} catch(err) {
+       alert(err.message);       
+    } 	 
+};
+
+showNotificationPage = function(){	
+	menu.setMainPage('notifications.html',{
+		closeMenu:true,
+	    animation: 'slide',
+	});
+};
+
+setNotificationCount = function(){	
+	current_count = getStorage("notification_count");
+	if (typeof current_count === "undefined" || current_count==null || current_count=="" || current_count=="null" ) {
+		current_count =1;
+	} else current_count++;
+		
+	setStorage("notification_count",current_count);	
+	setNotificationDisplay();
+};
+
+clearNotificationCount = function(){
+	removeStorage("notification_count");
+};
+
+setNotificationDisplay = function(){
+	current_count = getStorage("notification_count");	
+	if (typeof current_count === "undefined" || current_count==null || current_count=="" || current_count=="null" ) {		
+		setTimeout(function(){ 
+		    $(".notification_count").html( '' );
+	     }, 100);
+	} else {
+		dump('set number =>' + current_count);		
+		 setTimeout(function(){ 
+		    $(".notification_count").html( current_count );
+	     }, 100);
+	}
+};

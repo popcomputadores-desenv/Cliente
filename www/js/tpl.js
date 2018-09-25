@@ -224,7 +224,7 @@ function cartFooter(currency_code)
     return htm
 }
 
-function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_name,size,x ,price2, discount)
+function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_name,size,x ,price2, discount, category_id)
 {	
    var htm='';
    htm+='<ons-list-item class="row-no-border">';
@@ -238,6 +238,8 @@ function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_
 		  
 		  htm+='<input type="hidden" name="item_id" class="item_id'+x+' " value="'+ item_id +'" >';
 		  htm+='<input type="hidden" name="discount" class="discount'+x+' " value="'+ discount +'" >';
+		  
+		  htm+='<input type="hidden" name="category_id" class="category_id'+x+' " value="'+ category_id +'" >';
 
 		  if (discount>0){
 		  	  //price2='<price class="discount">'+ (parseFloat(price2)+parseFloat(discount)) +'</price> '+price2;
@@ -521,3 +523,58 @@ function wingRow(key, label , value)
    htm+='</ons-list-item>';
    return htm;
 }
+
+displayOrders = function(data){
+	
+	var htm='<ons-list>';
+    $.each( data, function( key, val ) {
+    	
+    	htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="showOrderOptions('+ "'" + val.order_id + "'" + ','+ "'" +  val.show_cancel_order + "'," + "'" + val.show_review + "'" + ');" >';
+    	  
+    	  cancel_html='';
+    	  if(!empty(val.cancel_status)){
+    	  	 //cancel_html = '<br/><p class="small '+val.cancel_class+'">'+val.cancel_status+'</p>';
+    	  	 cancel_html = '<br/><p class="small cancel_status '+val.cancel_class+' ">'+val.cancel_status+'</p>';
+    	  }
+    	  	 
+    	  //htm+="<h3>"+val.title_new+"</h3>";
+    	  
+    	  htm+='<div class="equal_table full_width">';
+    	     htm+='<div class="col col-1-1" style="width:60%;"><h3>'+val.title_new+'</h3></div>';
+    	     if(!empty(val.rating)){
+    	        htm+='<div class="col col-2-2 text_right"><div class="rating-stars" data-score="'+val.rating+'"></div></div>';
+    	     }
+    	  htm+='</div>';
+    	  
+    	  htm+='<div class="line"></div>';
+    	  htm+='<div class="equal_table full_width">';
+    	     htm+='<div class="col col-1-1 small">' + val.merchant_name + '<br/>'  +val.place_on+ '<br/>' + val.payment_type + cancel_html + '</div>';
+    	     htm+='<div class="col col-2-2 text_right"><span class="notification concat-text '+val.status_raw+' ">'+ val.status  +'</span></div>';
+    	  htm+='</div>';
+    	      	  
+    	  htm+='<div class="line"></div>';
+    	  
+    	  htm+='<div class="equal_table full_width">';
+    	     htm+='<div class="col col-1-1 "><h4>'+val.total_words+'</h4></div>';
+    	     htm+='<div class="col col-2-2 text_right"><h4>'+val.total+'</h4></div>';
+    	  htm+='</div>';
+    	  
+    	htm+='</ons-list-item>';
+    });
+	htm+='</ons-list>';
+	createElement('recent-orders',htm);	
+	initRating();
+};
+
+displayNotification = function(data){
+	var htm='<ons-list>';
+	$.each( data.data, function( key, val ) {
+		htm+='<ons-list-item modifier="tappable" class="list-item-container" >';
+		  htm+='<h3>'+val.push_title+'</h3>';
+		  htm+='<div class="line"></div>';
+		  htm+='<p class="small pad">'+ val.date_created + '<br/>' + val.push_message +'</p>';
+		htm+='</ons-list-item>';
+	});
+	htm+='</ons-list>';
+	createElement('notification_list',htm);	
+};

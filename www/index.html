@@ -38,9 +38,11 @@
 <script src="lib/jquery.translate.js"></script>
 <script src="lib/jquery.mask.min.js"></script>
 
-<!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
-<!--<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />-->
+
+<script src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyC9x-3ltf0Q5Y6KL2dqJWze1y-YUNIy2hw"></script>
+
+<script src="lib/gmaps.js?version=1.0.0"></script>
+
 <script src="js/jquery.geocomplete.min.js"></script>
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
@@ -166,6 +168,13 @@
     <ons-toolbar>
       <div class="left">
         <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button>        
+      </div>    
+      
+      <div class="right">
+        <ons-toolbar-button onclick="showNotificationPage();">
+            <div class="notification_count notification"></div>
+            <ons-icon icon="ion-android-notifications"></ons-icon>
+        </ons-toolbar-button>        
       </div>    
 
     </ons-toolbar>
@@ -375,12 +384,12 @@
          <span class="trn" data-trn-key="info">Info</span>
        </ons-col>
 
-       <ons-col onclick="loadMoreReviews1();" id="menu_enabled_review">
+       <ons-col onclick="showPage('reviews');" id="menu_enabled_review">
          <div><ons-icon icon="ion-ios-star-half"></ons-icon></div>
          <span class="trn" data-trn-key="reviews">Reviews</span>
        </ons-col>
 
-       <ons-col onclick="loadMap();" id="menu_enabled_map" >
+       <ons-col onclick="loadMap('merchant_map');" id="menu_enabled_map" >
          <div><ons-icon icon="ion-ios-location" ></ons-icon></div>
          <span class=" trn" data-trn-key="map">Map</span>
        </ons-col>
@@ -530,17 +539,32 @@
    
    <div class="checkout-footer">
    
-   <div class="field-wrapper">
-   <input type="text" name="delivery_date"  class="delivery_date text-input text-input--underbar" 
-   placeholder="Delivery Date" value="">
-   </div>
+   <input type="hidden" name="delivery_date" class="delivery_date">
+   <input type="hidden" name="delivery_time" class="delivery_time">
    
-   <div class="field-wrapper">
-   <input type="text" name="delivery_time" class="delivery_time text-input text-input--underbar" 
-   placeholder="Delivery Time" value="">
-   </div>
-   
-   
+   <ons-list> 
+    <ons-list-item modifier="chevron" onclick="showPopUpOptions('DateList')"  > 
+       <ons-row class="row">
+         <ons-col  width="50%">
+           <span class="small-font-dim cart_delivery_date"></span>
+         </ons-col>
+         <ons-col class="text-right indent_right normal_height" >
+           <span class="small-font-dim  cart_delivery_date_value"></span>
+         </ons-col>
+       </ons-row>
+    </ons-list-item>  
+    
+     <ons-list-item modifier="chevron" onclick="showPopUpOptions('TimeList')"   > 
+       <ons-row class="row">
+         <ons-col  width="50%">
+           <span class="small-font-dim cart_delivery_time" ></span>
+         </ons-col>
+         <ons-col class="text-right indent_right normal_height" >
+           <span class="small-font-dim cart_delivery_time_value"></span>
+         </ons-col>
+       </ons-row>
+    </ons-list-item>  
+       
    <ons-list-item modifier="tappable" class="delivery_asap_wrap">
        <label class="checkbox">
 		  <input type="checkbox" name="delivery_asap" value="1" class="delivery_asap">
@@ -550,6 +574,7 @@
 		  </span>
 		</label>
 	</ons-list-item>
+	</ons-list>  
    
    <div class="wrapper">
      <p class="p-normal pts_earn_label"></p>
@@ -563,11 +588,14 @@
        </ons-list-item>    
        
        <ons-list-item modifier="chevron" onclick="showChangeAddressPage();" class="change_address_wrap" > 
-       <span class="trn" data-trn-key="change_your_address">Change your address here</span>       
+          <span class="trn" data-trn-key="change_your_address">Change your address here</span>
+          <p class="small-font-dim google_formatted_address"></p>      
        </ons-list-item>    
        
    </ons-list>       
 
+   <input type="hidden" name="cart_subtotal" id="cart_subtotal" class="cart_subtotal">
+   
    <div style="height:20px;"></div>  
    
    <button class="button green-btn button--large " onclick="checkOut();">
@@ -713,26 +741,48 @@
        </ons-row>
    </div>  
       
-   <ons-list>
-       
+   <ons-list>       
        <ons-list-item modifier="chevron" onclick="showPageAdressSelection();" > 
-       <span class="trn" data-trn-key="delivery_address">Delivery Address</span>
-       <p class="small-font-dim delivery-address-text"></p>
-       </ons-list-item>    
-       
+       <span class="trn" data-trn-key="choose_address">Choose Address</span>    
+       <p class="small-font-dim delivery-address-text"></p>   
+       </ons-list-item>           
    </ons-list>
    
    <form id="frm-shipping" class="frm-shipping" method="post">
    <input type="hidden" name="next_step" value="payment_option">
    
-   <input type="hidden" name="street" class="street">
-   <input type="hidden" name="city" class="city">
-   <input type="hidden" name="state" class="state">   
-   <input type="hidden" name="zipcode" class="zipcode">  
-   
    <input type="hidden" name="formatted_address" class="formatted_address">  
    <input type="hidden" name="google_lat" class="google_lat">  
    <input type="hidden" name="google_lng" class="google_lng">  
+   
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="street"  class="street text-input text-input--underbar has_validation" 
+      placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="city"  class="city text-input text-input--underbar has_validation" 
+      placeholder="City" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="state"  class="state text-input text-input--underbar has_validation" 
+      placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
+      placeholder="Zipcode" value="" >
+      </div>      
+   </div>
    
    <div class="wrapper">
       <div class="field-wrapper">
@@ -1128,7 +1178,7 @@
    <ons-toolbar>        
      <div class="left"><ons-back-button></ons-back-button></div> 
      <div class="center white"><span id="search-text" class="trn" data-trn-key="reviews">Reviews</span></div>                         
-     <div class="right">        
+     <div class="right add_review_button">        
          <ons-toolbar-button onclick="showReviewForm();" ><ons-icon icon="ion-plus-round"></ons-toolbar-button>
      </div>
    </ons-toolbar>      
@@ -1172,6 +1222,8 @@
    </div> 
 
    <form id="frm-addreview" class="frm-addreview" method="post">   
+   <input type="hidden" name="order_id" class="order_id" >
+   
    <div class="wrapper">
    
       <div class="field-wrapper" style="text-align:center;">
@@ -1350,7 +1402,7 @@
     </div> 
 
    <div class="wrapper center wrapper-white fb-login-wrap">   
-      <button class="button blue-btn button--large fb-loginbutton" id="fb-loginbutton" onclick="myFacebookLogin();">
+      <button class="button blue-btn button--large fb-loginbutton" id="fb-loginbutton" onclick="fbInit();">
         <ons-icon icon="fa-facebook"></ons-icon> <span class="trn" data-trn-key="sigin_fb">Sign in with Facebook</span>
       </button>                   
    </div>   
@@ -1362,7 +1414,7 @@
    </div>   
       
    <div class="wrapper center">      
-      <h4 class="trn" data-trn-key="or_use_your_email">or use your email address</h4>                         
+      <h4 class="trn or_use_email_wrap" data-trn-key="or_use_your_email">or use your email address</h4>                         
       <br/>
       
       <button class="trn button green-btn button--large" onclick="showLogin();" data-trn-key="login">
@@ -1396,8 +1448,8 @@
     <div class="center white"><span id="search-text" class="trn" data-trn-key="login">Log in</span></div>                  
    </ons-toolbar>
 
-   <div class="wrapper center wrapper-white page-login-fb">   
-      <button class="button blue-btn button--large fb-loginbutton" id="fb-loginbutton" onclick="myFacebookLogin();">
+   <div class="wrapper center wrapper-white  fb-login-wrap">   
+      <button class="button blue-btn button--large fb-loginbutton" id="fb-loginbutton" onclick="fbInit();">
         <ons-icon icon="fa-facebook"></ons-icon> 
         <span class="sigin_fb trn" data-trn-key="sigin_fb">Sign in with Facebook</span>
       </button>                   
@@ -1410,8 +1462,8 @@
       </button>                   
    </div>     
       
-   <div class="center pad-top10">
-   <h4 class="trn" data-trn-key="or_use_your_email">or use your email address</h4>
+   <div class="center pad-top10 ">
+   <h4 class="trn or_use_email_wrap" data-trn-key="or_use_your_email">or use your email address</h4>
    </div>
       
     
@@ -1581,8 +1633,10 @@
     <div class="center white"><span id="search-text" class="trn" data-trn-key="your_recent_order">Your Recent Order</span></div>                  
    </ons-toolbar>
    
+   <div class="order_list_wrap">
    <ons-scroller id="recent-orders">      
    </ons-scroller> 
+   </div>
        
 </ons-page>
 </ons-navigator> 
@@ -2224,7 +2278,7 @@
           class="trn" data-trn-key="resto_info" >Restaurant Info</ons-list-item>
           <ons-list-item modifier="tappable" onclick="loadBookingForm1();"
           class="trn book_table_menu" data-trn-key="book_a_table"  >Book a table</ons-list-item>
-          <ons-list-item modifier="tappable" onclick="loadMoreReviews1();" 
+          <ons-list-item modifier="tappable" onclick="showPage('reviews');" 
           class="trn" data-trn-key="reviews" >Reviews</ons-list-item>
           
           <ons-list-item modifier="tappable" onclick="loadMap();" 
@@ -2246,15 +2300,21 @@
      <div class="center white"><span class="trn" data-trn-key="map" >Map</span></div>                       
    </ons-toolbar>
    
-   <div id="map_canvas_div" class="map_canvass">
+   <input type="hidden" name="map_type" id="map_type" class="map_type">
    
-       <div class="list-wrapper" id="direction-wrap">
-         <ons-button class="button green-btn button--large" onclick="viewTaskDirection()" >
-              <span class="trn" data-trn-key="view_direction">View Direction</span>
-          </ons-button>          
-        </div>
+   <input type="hidden" name="destination_lat" id="destination_lat" class="destination_lat">
+   <input type="hidden" name="destination_lng" id="destination_lng" class="destination_lng">
    
-   </div> 
+   <input type="hidden" name="origin_lat" id="origin_lat" class="origin_lat">
+   <input type="hidden" name="origin_lng" id="origin_lng" class="origin_lng">
+   
+   <div id="map_canvas_div" class="map_canvass"></div> 
+   
+   <div class="list-wrapper" id="direction-wrap">
+     <ons-button class="button green-btn button--large" onclick="viewExternalDirection()" >
+          <span class="trn" data-trn-key="view_direction">View Direction</span>
+      </ons-button>          
+    </div>
       
 </ons-page>
 </script>
@@ -2311,7 +2371,7 @@
        <span class="trn" data-trn-key="select_from_address_map">Select your address from map</span>
        </ons-list-item>    
        
-       <ons-list-item modifier="chevron" onclick="showManualAddressInput();" > 
+       <ons-list-item modifier="chevron" onclick="showManualAddressInput();" style="display:none;" > 
        <span class="trn" data-trn-key="enter_your_address">Enter your address</span>
        </ons-list-item>    
    </ons-list>
@@ -2367,24 +2427,24 @@
      </div>
    </ons-toolbar>
    
+   
    <input type="hidden" name="change_cemara_action" class="change_cemara_action">
    <input type="hidden" name="change_cemara_lat" class="change_cemara_lat">
    <input type="hidden" name="change_cemara_lng" class="change_cemara_lng">
+   <input type="hidden" name="map_type" id="map_type" class="map_type">
    
    <div class="map_search_field_wrap">      
       <ons-icon icon="ion-ios-search" modifier="iconsearch" ></ons-icon>
       <input id="search_address_geo" value="" type="text" class="search_address_geo text-input text-input--underbar trn" ng-model="text" placeholder="Street Address,City,State" data-trn-key="home_search_placeholder" >
    </div>
    
-   <div id="map_canvas_address" class="map_canvass">   
-
-       <div class="list-wrapper" id="direction-wrap">
-             <ons-button class="button green-btn button--large" onclick="useThisLocation()" >
-              <span class="trn use-location" data-trn-key="use_this_address">Use this address</span>
-             </ons-button>    
-        </div>
-     
-   </div> 
+   <div id="map_canvas_address" class="map_canvass"></div> 
+   
+   <div class="list-wrapper" id="direction-wrap">
+         <ons-button class="button green-btn button--large" onclick="useThisLocation()" >
+          <span class="trn use-location" data-trn-key="use_this_location">Use this Location</span>
+         </ons-button>    
+    </div>
       
 </ons-page>
 </script>
@@ -2421,15 +2481,15 @@
   <ons-toolbar>        
     <div class="left"><ons-back-button></ons-back-button></div>             
     <div class="center white">
-    <span  class="trn" data-trn-key="order_option">Order Options</span></div>                  
+    <span  class="trn page_title" data-trn-key="order_option">Order Options</span></div>                  
    </ons-toolbar>
    
    <input type="hidden" name="order_option_order_id" class="order_option_order_id">
  
    <ons-list>              
        
-       <ons-list-item modifier="chevron" onclick="showOrderDetails2();" > 
-       <span class="trn" data-trn-key="show_order_details">Show Order Details</span>
+       <ons-list-item modifier="chevron" onclick="loadOrderDetails();" > 
+        <span class="trn" data-trn-key="show_order_details">Show Order Details</span>
        </ons-list-item>                  
        
        <ons-list-item modifier="chevron" onclick="reOrder2();" > 
@@ -2437,8 +2497,16 @@
        </ons-list-item>                  
        
        <ons-list-item modifier="chevron" onclick="showTrackPage();" > 
-       <span class="trn" data-trn-key="track_your_order">Track your Order</span>
+       <span class="trn" data-trn-key="track_order">Track Order</span>
        </ons-list-item>                  
+       
+       <ons-list-item modifier="chevron" onclick="requestCancelOrder();" class="cancel_this_order" > 
+       <span class="trn" data-trn-key="cancel_this_order">Cancel this order</span>
+       </ons-list-item>                  
+       
+       <ons-list-item modifier="chevron" onclick="showReviewForm();" class="add_review_order" > 
+       <span class="trn" data-trn-key="add_review">Add Reviews</span>
+       </ons-list-item>
               
    </ons-list>
 
@@ -2507,9 +2575,9 @@
      </div>
    </ons-toolbar>
    
-   <div id="map_canvas_track">        
+   <div id="map_canvas_track"></div> 
    
-      <div class="list-wrapper" id="driver-details-wrap">
+   <div class="list-wrapper" id="driver-details-wrap">
          <ons-row align="center">
             <ons-col width="25%" class="center">
               <img class="driver_avatar" src=""/>
@@ -2524,9 +2592,7 @@
 			   </a>
             </ons-col>
          </ons-row>
-      </div>
-     
-   </div> 
+    </div>
       
 </ons-page>
 </script>
@@ -2851,6 +2917,10 @@
    
    <ons-list>
    
+   <ons-list-item modifier="chevron" class="trn" data-trn-key="select_from_address" onclick ="showAddressBookLocation();" >        
+    Select from your address book
+    </ons-list-item>
+    
    <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
     State
     </ons-list-item>
@@ -3085,7 +3155,7 @@
     <h4 class="trn center" data-trn-key="enter_your_location">Enter your location</h4>
     
     <section class="field-section">
-     <input id="ss" value="" type="text" class="text-input text-input--underbar trn" ng-model="text" placeholder="Street Address,City,State" data-trn-key="home_search_placeholder" 
+     <input id="ss"  type="text" class="advance_search_fields text-input text-input--underbar trn" ng-model="text" placeholder="Street Address,City,State" data-trn-key="home_search_placeholder" 
      style="display: block; width: 100%">
     </section>
     
@@ -3181,6 +3251,142 @@
   </div>
 </ons-page>  
 </script>
+
+
+<script type="text/ons-template" id="order_details.html">   
+<ons-page id="page-order_details">
+
+   <ons-toolbar>        
+    <div class="left"><ons-back-button></ons-back-button></div>             
+    <div class="center white"><span id="page_title"></span></div>                  
+   </ons-toolbar>
+   
+   <div class="receipt_wrap" id="receipt_wrap"></div>
+
+</ons-page>
+</script>  
+
+
+<script type="text/ons-template" id="popup_options.html">    
+  <ons-dialog var="dialog_popup_options" style="width:50%;height:350px;" cancelable  >
+
+  <ons-page id="page-popup_options" >  
+	     
+      <ons-scroller class="options_list" id="options_list">	  
+      </ons-scroller> 	 
+	  	  	   
+  </ons-page>
+  </ons-dialog> 
+</script>
+
+
+<script type="text/ons-template" id="postAddressDetails.html">   
+<ons-page id="page_postcode_address">
+
+   <ons-toolbar>        
+    <div class="left"><ons-back-button></ons-back-button></div>             
+    <div class="center white"><span id="page_title"></span></div>   
+
+    
+     <div class="right">
+     <ons-toolbar-button onclick="deleteAddressBookLocation();" class="delete-addressbook-location">
+        <ons-icon icon="ion-close-round"></ons-icon>
+     </ons-toolbar-button>        
+     </div>
+        
+   </ons-toolbar>
+   
+   <form id="frm_addressbook_location" class="frm-addressbook" method="post">   
+   <input type="hidden" id="id" name="id" class="id" value=""> 
+      
+   <div class="wrapper">  
+      <div class="field-wrapper">
+      <input type="text" name="street"  class="street text-input text-input--underbar has_validation" 
+      placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>            
+      
+      <div class="field-wrapper">
+      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+      placeholder="Location name" value="" >
+      </div>
+      
+	</div>
+	
+	<input type="hidden" name="state_id" id="state_id" class="state_id" >
+    <input type="hidden" name="city_id" id="city_id" class="city_id" >
+    <input type="hidden" name="area_id" id="area_id" class="area_id" >
+	
+	<ons-list modifier="inset">       
+        <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >
+        State
+        </ons-list-item>
+        
+        <ons-list-item modifier="chevron" class="trn location_city" data-trn-key="location_city" onclick ="showCity()" >        
+        City
+        </ons-list-item>
+        
+        <ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+        District / Area
+        </ons-list-item>
+        
+       </ons-list>
+       
+
+    <div class="wrapper">       
+    
+    <div class="field-wrapper">
+         <span class="small-font-dim trn" data-trn-key="defaul_address">Default address</span>
+         <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input as_default" name="as_default" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+      </div>     
+    
+      <button class="trn button green-btn button--large" onclick="saveAddressBookLocation();" data-trn-key="save">
+		Save
+		<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
+	   </button>
+    </div>	   
+	   
+   </form>
+
+</ons-page>
+</script>  
+
+<script type="text/ons-template" id="popup_address_location.html">    
+  <ons-dialog var="popup_address_location" style="width:50%;height:350px;" cancelable  >
+
+  <ons-page id="page_popup_address_location" >  
+	     
+      <ons-scroller class="options_list" id="options_list">	  
+      </ons-scroller> 	 
+	  	  	   
+  </ons-page>
+  </ons-dialog> 
+</script>
+
+
+<script type="text/ons-template" id="notifications.html">   
+<ons-page id="page_notifications" on-device-backbutton="backtoHome()" >
+
+   <ons-toolbar>        
+    <div class="left">
+     
+    <ons-toolbar-button onclick="setHome();">
+        <ons-icon icon="fa-chevron-left"></ons-icon>
+     </ons-toolbar-button>         
+    
+    </div>             
+    <div class="center white trn" data-trn-key="notifications" >Notifications</div> 
+   </ons-toolbar>
+   
+   <div class="order_list_wrap">
+   <ons-scroller id="notification_list">      
+   </ons-scroller> 
+   </div>
+
+</ons-page>
+</script>  
 
 
 </body>

@@ -3,10 +3,10 @@
     xmlns:gap = "http://phonegap.com/ns/1.0"
     xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "integracao.masterhub.cliente"
-    version   = "2.5"
+    version   = "2.6"
 	android-versionCode="1"
   	ios-CFBundleVersion="1">
-    <!-- Mobile App 2.5 -->
+    <!-- Mobile App 2.6 -->
     <name>Master Hub - Integração</name>
     <description>
         Aplicativo - Módulo Clientes para interação com o sistema Master Hub, Um MUNDO na palma da sua mão!
@@ -17,50 +17,53 @@
     <icon src="icon.png" />           
     <content src="index.html" />
                
-	<preference name="orientation" value="portrait" />
-	<preference name="android-build-tool" value="gradle" />		
-		
-	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
-	
-    <gap:plugin name="phonegap-plugin-push" source="npm" spec="1.11.1"  /> 
-    
-    <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  />            	
-    <gap:plugin name="cordova-plugin-device" source="npm" />		
-	<gap:plugin name="cordova-plugin-inappbrowser" source="npm" />		
-	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />	
-	<gap:plugin name="cordova-plugin-geolocation" source="npm" spec="1.0.1" />
-	<gap:plugin name="cordova-plugin-network-information" source="npm" />
-		
-	<gap:plugin name="cordova-plugin-request-location-accuracy" source="npm"  spec="2.2.0" />	
-	<gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.6.0" />	
-	
-	<!-- <gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.4" source="git" /> -->
-	<gap:plugin name="cordova-plugin-media" source="npm" spec="3.0.0" />	
-	<gap:plugin name="cordova.plugins.diagnostic" source="npm" spec="3.7.1" />	
-		
-	<gap:plugin name="cordova-plugin-googlemaps-plus" source="npm" spec="1.4.0" >
-       <param name="API_KEY_FOR_ANDROID" value="AIzaSyAxC0GiHixqxM4BicJxQbcvRZ_Zkcyxfl0" />
-       <param name="API_KEY_FOR_IOS" value="" />
-       <param name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="preciso usar a sua localização" />
-       <param name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="preciso usar sempre a sua localização" />
-    </gap:plugin>
-    
-    <gap:plugin name="cordova-plugin-buildinfo" source="npm" spec="1.1.0"  />
-    
-    <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="5.1.1">
-     <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.1094846057485-vspm7aug3c4tlrqgeeuapcet7gbrpl2m" />
-    </gap:plugin>
-		
-    <platform name="android" />        
-    		    
+	<preference name="orientation" value="portrait" />	
+	<preference name="phonegap-version" value="cli-7.1.0" />     
+			    
 	<preference name="AutoHideSplashScreen" value="false" />  	
     <preference name="SplashScreenDelay" value="10000" />    
     <preference name="fullscreen" value="false" />        
     <preference name="ShowSplashScreenSpinner" value="false" />	   
         
-    <preference name="android-minSdkVersion" value="17" />
+    <preference name="android-minSdkVersion" value="19" />
     <preference name="android-targetSdkVersion" value="26" />
+    <preference name="DisallowOverscroll" value="true" />
+            
     
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />	   
+    <gap:plugin name="cordova-plugin-device" source="npm" />		
+	<gap:plugin name="cordova-plugin-inappbrowser" source="npm" />		
+	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />	
+	<gap:plugin name="cordova-plugin-geolocation" source="npm" />
+	<gap:plugin name="cordova-plugin-network-information" source="npm" />
+	
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.1.2"  />    
+    
+    <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> 
+    <gap:plugin name="cordova-plugin-request-location-accuracy_sayeh" source="npm" spec="2.2.2" />
+    <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" />    
+	<!-- <gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" /> -->
+    <gap:plugin name="cordova-plugin-media" source="npm" spec="5.0.2" />
+    <gap:plugin name="cordova.plugins.diagnostic" source="npm" spec="4.0.0" />
+    <gap:plugin name="cordova-plugin-buildinfo" source="npm" spec="2.0.1"  />
+    <gap:plugin name="cordova-plugin-camera" source="npm" spec="2.4.1" />
+    <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.7.1" /> 
+       
+    <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-googleplus" source="git" >    
+      <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.1094846057485-vspm7aug3c4tlrqgeeuapcet7gbrpl2m" />
+    </gap:plugin>       
+    
+    <gap:plugin name="lycwed-cordova-plugin-facebook4" source="npm" spec="1.0.2" >
+	  <variable name="APP_ID" value="" />
+	  <variable name="APP_NAME" value="android login" />
+	</gap:plugin>
+	
+	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="4.2.1" />	
+	
+	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
+	   <variable name="ANALYTICS_VERSION" value="11.0.1" /> 
+	</plugin>
+    	
     <access origin="*" />
     <access origin="tel:*" launch-external="yes" />
        
@@ -69,11 +72,7 @@
         <application android:theme="@android:style/Theme.NoTitleBar" >            
         </application>        
     </gap:config-file> 
-	            
-    <preference name="phonegap-version" value="cli-7.1.0" />     
-    <gap:plugin name="cordova-plugin-camera" source="npm" spec="2.4.1" />
-    <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.6.2" /> 
-    <!-- <gap:plugin spec="https://github.com/danwilson/google-analytics-plugin.git" source="git" /> -->    
+    	                    
 
     <platform name="ios">    
 	    <config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
@@ -117,7 +116,11 @@
     
 	<platform name="android">
 	    <resource-file src="icon_push.png" target="res/drawable/icon_push.png" />
-	    <resource-file src="www/beep.wav" target="res/raw/beep.wav" /> 
+	    <resource-file src="www/beep.wav" target="app/src/main/res/raw/beep.wav" />
+	    <resource-file src="www/beep.wav" target="res/raw/beep.wav" /> 	    
+	    
+	    <resource-file src="google-services.json" target="google-services.json" />
+	    <resource-file src="google-services.json" target="app/google-services.json" />
 	
 		<icon density="ldpi" src="res/icons/android/drawable-ldpi-icon.png" />
 		<icon density="mdpi" src="res/icons/android/drawable-mdpi-icon.png" />
@@ -141,6 +144,9 @@
 	</platform>
 	
 	<platform name="ios">
+	
+	    <resource-file src="GoogleService-Info.plist" /> 	    
+	    <resource-file src="www/beep.wav" />
 	
 		<icon height="57" platform="ios" src="res/icons/ios/icon.png" width="57" />
 		<icon height="114" platform="ios" src="res/icons/ios/icon@2x.png" width="114" />
