@@ -1,0 +1,104 @@
+{
+  "project_info": {
+    "project_number": "1094846057485",
+    "firebase_url": "https://integracao-masterhub.firebaseio.com",
+    "project_id": "integracao-masterhub",
+    "storage_bucket": "integracao-masterhub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094846057485:android:1d77c133c8a65293",
+        "android_client_info": {
+          "package_name": "integracao.masterhub.cliente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094846057485-vspm7aug3c4tlrqgeeuapcet7gbrpl2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxC0GiHixqxM4BicJxQbcvRZ_Zkcyxfl0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094846057485:android:82b65a0739fcdca3",
+        "android_client_info": {
+          "package_name": "integracao.masterhub.entregas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094846057485-vspm7aug3c4tlrqgeeuapcet7gbrpl2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxC0GiHixqxM4BicJxQbcvRZ_Zkcyxfl0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094846057485:android:31b52a6f1978f35f",
+        "android_client_info": {
+          "package_name": "integracao.masterhub.vendas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094846057485-vspm7aug3c4tlrqgeeuapcet7gbrpl2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxC0GiHixqxM4BicJxQbcvRZ_Zkcyxfl0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
