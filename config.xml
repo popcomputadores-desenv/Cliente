@@ -25,7 +25,7 @@
     <preference name="fullscreen" value="false" />        
     <preference name="ShowSplashScreenSpinner" value="false" />	   
         
-    <preference name="android-minSdkVersion" value="19" />
+    <!-- <preference name="android-minSdkVersion" value="19" /> -->
     <preference name="android-targetSdkVersion" value="26" />
     <preference name="DisallowOverscroll" value="true" />
             
@@ -39,7 +39,7 @@
 	
     <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.1.2"  />    
     
-    <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> 
+    <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  />  -->
     <gap:plugin name="cordova-plugin-request-location-accuracy_sayeh" source="npm" spec="2.2.2" />
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" />    
 	<!-- <gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" /> -->
