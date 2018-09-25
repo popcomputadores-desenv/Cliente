@@ -81,9 +81,6 @@
 	    <config-file platform="ios" target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
         <string>preciso usar a sua localização</string>
 	    </config-file>
-	    <config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
-        <string>preciso usar a sua localização</string>
-	    </config-file>
 	</platform>   
 	
 	<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
@@ -115,7 +112,7 @@
     </edit-config>
     
 	<platform name="android">
-	    <resource-file src="icon_push.png" target="res/drawable/icon_push.png" />
+		
 	    <resource-file src="www/beep.wav" target="app/src/main/res/raw/beep.wav" />
 	    <resource-file src="www/beep.wav" target="res/raw/beep.wav" /> 	    
 	    
