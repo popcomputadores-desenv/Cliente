@@ -6,7 +6,7 @@
     version   = "2.6"
 	android-versionCode="1"
   	ios-CFBundleVersion="1">
-    <!-- Mobile App 2.6 -->
+    <!-- Mobile App 2.6 --> 
     <name>Master Hub - Integração</name>
     <description>
         Aplicativo - Módulo Clientes para interação com o sistema Master Hub, Um MUNDO na palma da sua mão!
@@ -87,7 +87,7 @@
 	</platform>   
 	
 	<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
-    <string>preciso de acesso à câmera para tirar fotos</string>
+	    <string>preciso de acesso à câmera para tirar fotos</string>
 	</edit-config>
 	
 	<edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
