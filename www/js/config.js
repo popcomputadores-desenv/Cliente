@@ -1,6 +1,6 @@
 var krms_config ={				
-	'ApiUrl':"https://dilidia.deliveryapp.rio.br/mobileapp/api",	
+	'ApiUrl':"http://integracao.masterhub.com.br/mobileapp/api",	
 	'DialogDefaultTitle':"Master Hub",	
-	'APIHasKey':"dilidia2018brainsolucoes",
+	'APIHasKey':"f0b8922f6edcb9d46f7f33e867e70e7d",
 	'debug': false
 };
