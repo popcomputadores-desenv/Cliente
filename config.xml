@@ -58,14 +58,14 @@
 	  <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
 	</gap:plugin>
     
-    <platform name="android">	
+    <!--<platform name="android">	
 		<config-file parent="/resources" target="./res/values/strings.xml">
 			<string name="fb_app_id"></string>
 			<string name="fb_app_name"></string>
 		</config-file>               
     </platform>
  
-    <!-- <gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="3.2.0" >
+     <gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="3.2.0" >
 	  <variable name="APP_ID" value="" />
 	  <variable name="APP_NAME" value="" />
 	</gap:plugin> -->
