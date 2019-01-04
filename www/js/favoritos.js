@@ -6,11 +6,11 @@ var tokem = getStorage("client_token");
 if(tokem == "" || tokem == "null" || tokem == null){
 alert("Você deve estar logado para adicionar um favorito");
 }
- else {
-	
+ else {    
+dump(ajax_url);	
  $.ajax({
     type:"GET",
-    url: ajax_url+"/AddFavorito?client_token="+getStorage("client_token")+"&merchant_id="+getStorage('merchant_id')+"",
+    url: ajax_url+"/AddFavorito?api_key="+urlencode(krms_config.APIHasKey)+"&app_version="+app_version+"&client_token="+getStorage("client_token")+"&merchant_id="+getStorage('merchant_id')+"",
 	data: { get_param: 'icone' }, 
 	dataType: 'jsonp',
     success: function(data) {
@@ -22,7 +22,7 @@ alert("Você deve estar logado para adicionar um favorito");
 		var icone = icone.replace("}","");
 		var icone = icone.replace(/[\\"]/g, '');
 
-	    if(icone == "1"){
+	    if( icone == "1"){
 		$("#imgfavorito").attr("src","images/icons/favorito.png");
 			toastMsg( getTrans("Voce adicionou este estabelecimento aos seus favoritos!",'favoritado') );
 		} else {
@@ -46,10 +46,10 @@ if(tokem == "" || tokem == "null" || tokem == null){
 }
 else {
 //callAjax('VerificaFavorito',"client_token="+getStorage("client_token")+"&merchant_id="+ getStorage('merchant_id'));	
-
+dump(ajax_url);
 $.ajax({
     type:"GET",
-    url: ajax_url+"/VerificaFavorito?client_token="+getStorage("client_token")+"&merchant_id="+getStorage('merchant_id')+"",
+    url: ajax_url+"/VerificaFavorito?api_key="+urlencode(krms_config.APIHasKey)+"&app_version="+app_version+"&client_token="+getStorage("client_token")+"&merchant_id="+getStorage('merchant_id')+"",
 	data: { get_param: 'icone' }, 
 	dataType: 'jsonp',
     success: function(data) {

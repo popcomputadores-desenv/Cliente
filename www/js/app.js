@@ -49,10 +49,10 @@ var usethislocation_lat;
 var usethislocation_lng;
 
 document.addEventListener("deviceready", onDeviceReady, false);
-/*AtualizaÁ„o Master Hub (M·scaras de Campos)*/
+/*Atualiza√ß√£o Master Hub (M√°scaras de Campos)*/
 $('.mask-phone').mask("(00) 0 0000-0000");
 $('.mask-cpf').mask("000.000.000-00");
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function onDeviceReady() {    
 	    					
 	try {
@@ -162,11 +162,11 @@ ons.ready(function() {
 	if(isDebug()){		
 		removeStorage("default_lang");
 		removeStorage("search_address");
-/*AtualizaÁ„o Master Hub (TraduÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Tradu√ß√£o)*/
 		setStorage("search_address","Cidade Jardim, Rio Claro, SP, Brasil");		
 		// setStorage("search_address","none");	
 	}
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		
 	//navigator.splashscreen.hide()	
 	$("#s").val( getStorage("search_address") );
@@ -176,10 +176,10 @@ ons.ready(function() {
 	//removeStorage("client_token");
 	
 	if(isDebug()){
-/*AtualizaÁ„o Master Hub (Nome do dispositivo quando est· em modo Debug)*/
+/*Atualiza√ß√£o Master Hub (Nome do dispositivo quando est√° em modo Debug)*/
 	   setStorage("device_id","device_web_masterhub");
 	}
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	//getLanguageSettings();
 	if(isDebug()){
  	   setTimeout('getLanguageSettings()', 1100);
@@ -268,7 +268,7 @@ function searchMerchant()
   	   	  case 1:
 	  	   	  global_city_id = $(".city_id").val();
 	  	   	  global_area_id = $(".area_id").val();
-/*AtualizaÁ„o Master Hub (FormataÁ„o do EndereÁo usando o GPS)*/
+/*Atualiza√ß√£o Master Hub (Formata√ß√£o do Endere√ßo usando o GPS)*/
 			  global_city_name = $(".city").val();
 	  	   	  global_area_name = $(".area_name").val(); 
 
@@ -292,7 +292,7 @@ function searchMerchant()
 	  	   	  global_city_id = $(".city_id").val();
 	  	   	  global_state_id = $(".state_id").val();
 			  global_area_id = $(".area_id").val(); 
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	  	   	  if(empty(global_state_id)){
 				  onsenAlert( getTrans('Please select State first','please_select_state') );
 				  return;
@@ -361,11 +361,11 @@ document.addEventListener("pageinit", function(e) {
 			
 	switch (e.target.id)
 	{		
-/* AtualizaÁ„o Master Hub (Sugestıes de Estabelecimentos) */
+/* Atualiza√ß√£o Master Hub (Sugest√µes de Estabelecimentos) */
 		case "page-addsuggestions":
 			carregandoSugestoes();
 		  break;
-/* Fim da atualizaÁ„o */
+/* Fim da atualiza√ß√£o */
 		case "page-edit_review":
 		   translatePage();
 		   break;
@@ -413,10 +413,10 @@ document.addEventListener("pageinit", function(e) {
 		  break;
 		  
 		case "page-menubycategoryitem":		   
-/* AtualizaÁ„o Jo„o Neves (Pede.ai) CabeÁalho App dentro do menu do estabelecimento */
+/* Atualiza√ß√£o Jo√£o Neves (Pede.ai) Cabe√ßalho App dentro do menu do estabelecimento */
 	$("#page-menubycategoryitem .estabelecimento-header2").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-menubycategoryitem .estabelecimento-header").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da AtualizaÁ„o */
+/* Fim da Atualiza√ß√£o */
 		  $("#page-menubycategoryitem .restauran-title").text( $(".selected_restaurant_name").val() );
 	      $("#page-menubycategoryitem .rating-stars").attr("data-score",  $(".selected_restaurant_ratings").val() );	      
 	      $("#page-menubycategoryitem .logo-wrap").html('<img src="'+ getStorage("merchant_logo") +'" />');
@@ -510,25 +510,25 @@ document.addEventListener("pageinit", function(e) {
 		case "page-booking":  
 		  translatePage();
 		  $(".number_guest").attr("placeholder", getTrans("Number Of Guests","number_of_guest") );		  
-/*AtualizaÁ„o Master Hub (Desativa entrada do cÛdigo do paÌs nos campos de telefone)*/
+/*Atualiza√ß√£o Master Hub (Desativa entrada do c√≥digo do pa√≠s nos campos de telefone)*/
 		  //*initIntelInputs();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		  setTrackView("book table: " + $(".selected_restaurant_name").val()  );
 		  break;
 		  
 	   case "page-paymentoption":
 	     translatePage();
 	     $(".order_change").attr("placeholder", getTrans('change? For how much?','order_change') );	     
-/*AtualizaÁ„o Master Hub (Campo CPF na Nota)*/
+/*Atualiza√ß√£o Master Hub (Campo CPF na Nota)*/
 	     $(".cpf_nota").attr("placeholder", getTrans('CPF na Nota','cpf_nota') );
-/*Fim da atualizaÁ„o*/
-/* AtualizaÁ„o Jo„o Neves (Pede.ai) CabeÁalho App dentro do menu do estabelecimento */
+/*Fim da atualiza√ß√£o*/
+/* Atualiza√ß√£o Jo√£o Neves (Pede.ai) Cabe√ßalho App dentro do menu do estabelecimento */
 	$("#page-paymentoption .estabelecimento-header2").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-paymentoption .estabelecimento-header").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da AtualizaÁ„o */
+/* Fim da Atualiza√ß√£o */
 		 break;
 		 
-/*AtualizaÁ„o Master Hub (Sistema Favoritos)*/
+/*Atualiza√ß√£o Master Hub (Sistema Favoritos)*/
 		  case "page-favoritos":
 		if (!isLogin()){		
 		menu.setMainPage('prelogin.html', {closeMenu: true});
@@ -536,8 +536,8 @@ document.addEventListener("pageinit", function(e) {
  	callAjax("browseFavoritos","client_token="+getStorage("client_token"));
 		}		  
 		  break;
-/* Fim da AtualizaÁ„o */
-/* AtualizaÁ„o Master Hub (Programa de Fidelidade) */
+/* Fim da Atualiza√ß√£o */
+/* Atualiza√ß√£o Master Hub (Programa de Fidelidade) */
 		  case "page-fidelidade-empresa":
 var params = "client_token="+ getStorage("client_token");
 	params+="&device_id="+ getStorage("device_id");
@@ -551,23 +551,23 @@ var params = "client_token="+ getStorage("client_token");
 			callAjax("ProgramaFidelidade", params );
 		//createElement('fidelidade-empresa',htm);	
 		  break;
-/*Fim da atualizaÁ„o*/	  
+/*Fim da atualiza√ß√£o*/	  
 	  case "page-addressbook-details":
 	    translatePage();
 	    translateValidationForm();
 	    
 	    $(".street").attr("placeholder",  getTrans("Street",'street') );
-/*AtualizaÁ„o Master Hub (N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (N√∫mero e Bairro)*/
 	    $(".numero").attr("placeholder",  getTrans("Numero",'numero') );
 	    $(".area_name").attr("placeholder",  getTrans("Bairro",'bairro') );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	    $(".city").attr("placeholder",  getTrans("City",'city') );
 	    $(".state").attr("placeholder",  getTrans("State",'state') );
 	    $(".zipcode").attr("placeholder",  getTrans("Postal code/Zip Code",'zipcode') );
 	    $(".location_name").attr("placeholder",  getTrans("Location name",'location_name') );
-/*AtualizaÁ„o Master Hub (Campo Complemento no Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Campo Complemento no Cat√°logo de Endere√ßos)*/
 	    $(".delivery_instruction").attr("placeholder",  getTrans("Delivery instructions",'delivery_instruction') );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	    var page = sNavigator.getCurrentPage();
 		record_id = page.options.id;			
 		search_mode = getSearchMode();	
@@ -612,10 +612,10 @@ var params = "client_token="+ getStorage("client_token");
 	   case "page-shipping":	  
 	   
 	      $(".street").attr("placeholder", getTrans('Street','street') );
-/*AtualizaÁ„o Master Hub (N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (N√∫mero e Bairro)*/
 	      $(".numero").attr("placeholder", getTrans("Numero",'numero') );
 	      $(".area_name").attr("placeholder", getTrans("Bairro",'bairro') );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	      $(".city").attr("placeholder", getTrans('City','city') );
 	      $(".state").attr("placeholder", getTrans('State','state') );
 	      $(".zipcode").attr("placeholder", getTrans('Postal code/Zip Code','zipcode') );
@@ -628,16 +628,16 @@ var params = "client_token="+ getStorage("client_token");
 	      	      
 	      //$('.zipcode').mask("00000-000", {placeholder: "_____-___"});
 	      
-/*AtualizaÁ„o Master Hub (Desativa entrada do cÛdigo do paÌs nos campos de telefone)*/
+/*Atualiza√ß√£o Master Hub (Desativa entrada do c√≥digo do pa√≠s nos campos de telefone)*/
 		  //*initIntelInputs();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	      
 	      var customer_contact_number=getStorage("customer_contact_number");
 	      if(!empty(customer_contact_number)){
-/*AtualizaÁ„o Master Hub (M·scara do Telefone)*/
+/*Atualiza√ß√£o Master Hub (M√°scara do Telefone)*/
 	      	  $(".contact_phone").val($(".contact_phone").masked( customer_contact_number.replace("+55","") ));
 	      }
-/*Fim da atualizaÁ„o*/	      	      
+/*Fim da atualiza√ß√£o*/	      	      
 	      if(!empty(usethislocation_lat)){
 	      	  $(".google_lat").val(usethislocation_lat);
 	      	  $(".google_lng").val(usethislocation_lng);
@@ -686,33 +686,33 @@ var params = "client_token="+ getStorage("client_token");
 		
 								
 		break;
-/*AtualizaÁ„o Master Hub (ModificaÁ„o Pagina Personalizada)*/
+/*Atualiza√ß√£o Master Hub (Modifica√ß√£o Pagina Personalizada)*/
 		case "carregarPagina-page":	
 		var pagina=getStorage("pagina");
 		callAjax("Pagina","id="+pagina);
 			break;
-/* Fim da atualizaÁ„o */
+/* Fim da atualiza√ß√£o */
 			
-/*AtualizaÁ„o Master Hub (ModificaÁ„o Slide Personalizado)*/
+/*Atualiza√ß√£o Master Hub (Modifica√ß√£o Slide Personalizado)*/
 		case "carregarSlide-page":	
 		var slide=getStorage("slide");
 		callAjax("Pagina","id="+slide);
 			break;
-/* Fim da atualizaÁ„o */
+/* Fim da atualiza√ß√£o */
 		
 		case "page-home":
 		    		    
 		    setNotificationDisplay();
 		    translatePage();
-/*AtualizaÁ„o Master Hub (Verifica se h· endereÁo cadastrado no Cat·logo de EndereÁo)*/
+/*Atualiza√ß√£o Master Hub (Verifica se h√° endere√ßo cadastrado no Cat√°logo de Endere√ßo)*/
 		if (isLogin()){
 			$(".catalogo_endereco").hide();
 			$(".search_by_location_btn").show();
 			//$(".search_by_address").hide();
 			setTimeout('carregaEndereco();', 2000);
 		} 
-/*Fim da atualizaÁ„o*/
-/*AtualizaÁ„o Master Hub (Slide Inicial)*/
+/*Fim da atualiza√ß√£o*/
+/*Atualiza√ß√£o Master Hub (Slide Inicial)*/
 	var splash_screen = getStorage("splash_screen");
 	var slide=getStorage("slide");
 	dump("slide=>"+slide);
@@ -725,7 +725,7 @@ var params = "client_token="+ getStorage("client_token");
 		setStorage("splash_screen", 2);
 		return;
 	} 
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		    search_mode = getSearchMode();
 		    if ( search_mode=="postcode"){		
 		    	
@@ -743,14 +743,14 @@ var params = "client_token="+ getStorage("client_token");
 				
 				if ( !empty(global_city_id)){
 					$(".city_id").val( global_city_id );
-/*AtualizaÁ„o Master Hub (FormataÁ„o do EndereÁo usando o GPS)*/
+/*Atualiza√ß√£o Master Hub (Formata√ß√£o do Endere√ßo usando o GPS)*/
 					$(".city").val( global_city_name );
 					$(".location_city").html( global_city_name );
 				}
 				if ( !empty(global_area_id)){
 					$(".area_id").val( global_area_id );
 					$(".area_name").val( global_area_name );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 					$(".location_area").html( global_area_name );
 				}	
 				
@@ -758,7 +758,7 @@ var params = "client_token="+ getStorage("client_token");
 				{
 					case "1":
 					case 1:
-/*AtualizaÁ„o Master Hub (PersonalizaÁ„o Estado, Cidade e Bairro como texto na tela inicial)*/
+/*Atualiza√ß√£o Master Hub (Personaliza√ß√£o Estado, Cidade e Bairro como texto na tela inicial)*/
 					$(".bairro_cidade").show();	
 					$(".cidade_estado").hide();	
 					$(".location_state").hide();
@@ -769,10 +769,10 @@ var params = "client_token="+ getStorage("client_token");
 					case 2:
 					$(".cidade_estado").show();		
 					$(".bairro_cidade").hide();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 					if ( !empty(global_state_id)){
 						$(".state_id").val( global_state_id );
-/*AtualizaÁ„o Master Hub (FormataÁ„o do EndereÁo usando o GPS)*/
+/*Atualiza√ß√£o Master Hub (Formata√ß√£o do Endere√ßo usando o GPS)*/
 						$(".state").val( global_state_name );
 						$(".location_state").html( global_state_name );
 					}
@@ -786,7 +786,7 @@ var params = "client_token="+ getStorage("client_token");
 						$(".area_id").val( global_area_id );
 						$(".area_name").val( global_area_name );
 						$(".location_area").html( global_area_name );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 					}	
 					
 					$(".location_state").show();
@@ -796,10 +796,10 @@ var params = "client_token="+ getStorage("client_token");
 					
 					case "3":
 					case 3:
-/*AtualizaÁ„o Master Hub (PersonalizaÁ„o Estado, Cidade e Bairro como texto na tela inicial)*/
+/*Atualiza√ß√£o Master Hub (Personaliza√ß√£o Estado, Cidade e Bairro como texto na tela inicial)*/
 					$(".bairro_cidade").hide();
 					$(".cidade_estado").hide();		
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 					$(".location_state").hide();
 					$(".location_city").hide();
 					$(".location_area").hide();
@@ -872,13 +872,13 @@ var params = "client_token="+ getStorage("client_token");
 		    setTrackView('homepage');		    
 			
 		break;
-/* ModificaÁ„o Pagina e Slide Personalizada */
+/* Modifica√ß√£o Pagina e Slide Personalizada */
 		case "carregarPagina-page":
 		  break;
 			
 		case "carregarSlide-page":
 		  break;		
-/* FIM da ModificaÁ„o Pagina e Slide Personalizada */
+/* FIM da Modifica√ß√£o Pagina e Slide Personalizada */
 		case "page-addsuggestions":
 			carregandoSugestoes();
 		  break;
@@ -948,9 +948,9 @@ var params = "client_token="+ getStorage("client_token");
 		case "page-settings":  
 		
 		  if (isDebug()){
-/*AtualizaÁ„o Master Hub (Vers„o do Sistema em modo Debug)*/
+/*Atualiza√ß√£o Master Hub (Vers√£o do Sistema em modo Debug)*/
 		    	$(".software_version").html( "2.7.1 - Debug" );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		  } else {
 		    	$(".software_version").html( BuildInfo.version );
 		  }
@@ -1030,10 +1030,10 @@ var params = "client_token="+ getStorage("client_token");
            translatePage();
 		   translateValidationForm();
 		   $(".stree_1").attr("placeholder",  getTrans("Street",'street') );
-/*AtualizaÁ„o Master Hub (N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (N√∫mero e Bairro)*/
 	       $(".numero_1").attr("placeholder",  getTrans("Numero",'numero') );
 	       $(".area_name_1").attr("placeholder",  getTrans("Bairro",'bairro') );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	       $(".city_1").attr("placeholder",  getTrans("City",'city') );
 	       $(".state_1").attr("placeholder",  getTrans("State",'state') );
 	       $(".zipcode_1").attr("placeholder",  getTrans("Postal code/Zip Code",'zipcode') );	      		
@@ -1132,15 +1132,15 @@ var params = "client_token="+ getStorage("client_token");
 		   }
 		   		   
            translateValidationForm();
-/*AtualizaÁ„o Master Hub (Desativa entrada do cÛdigo do paÌs nos campos de telefone)*/
+/*Atualiza√ß√£o Master Hub (Desativa entrada do c√≥digo do pa√≠s nos campos de telefone)*/
            //*initIntelInputs();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
            var customer_contact_number=getStorage("customer_contact_number");
 	       if(!empty(customer_contact_number)){
-/*AtualizaÁ„o Master Hub (M·scara do Telefone)*/
+/*Atualiza√ß√£o Master Hub (M√°scara do Telefone)*/
 	      	  $(".contact_phone").val($(".contact_phone").masked( customer_contact_number.replace("+55","") ));
 	       } 
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	       
 		   break;
 
@@ -1382,7 +1382,7 @@ var params = "client_token="+ getStorage("client_token");
 	}
     
 }, false);
-/*AtualizaÁ„o Master Hub (PersonalizaÁ„o de ocultar caixas de escolha na tela inicial)*/
+/*Atualiza√ß√£o Master Hub (Personaliza√ß√£o de ocultar caixas de escolha na tela inicial)*/
 function mudarendereco()
 {
 	$(".catalogo_endereco").show();
@@ -1405,7 +1405,7 @@ function mudarendereco()
 	removeStorage("global_area_id");
 	removeStorage("global_city_id");
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function searchResultCallBack(address)
 {
 	search_address=address;	
@@ -1502,12 +1502,12 @@ function onsenAlert(message,dialog_title)
     });
 }
 
-/*AtualizaÁ„o Master Hub (TraduÁ„o e Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Tradu√ß√£o e Cat√°logo de Endere√ßos)*/
 function onsenDialogCheckout(){
 	ons.notification.confirm({
 	  message: getTrans('Deseja finalizar o pedido?','Deseja continuar comprando?') ,	  
 	  title: dialog_title_default,
-	  buttonLabels: ['Sim', 'Ainda N„o'],
+	  buttonLabels: ['Sim', 'Ainda N√£o'],
 	  animation: 'fade', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
@@ -1519,15 +1519,15 @@ function onsenDialogCheckout(){
 	  }
 	});		
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 
-/*AtualizaÁ„o Master Hub (VerificaÁ„o de EndereÁos e Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Verifica√ß√£o de Endere√ßos e Cat√°logo de Endere√ßos)*/
 function onsenDialogAddresBook(){
 
 	ons.notification.confirm({
-	  messageHTML: getTrans('Deseja cadastrar seu endereÁo agora? <br> N„o esqueÁa de selecion·-lo como padr„o!','Deseja cadastrar seu endereÁo agora? <br> N„o esqueÁa de selecion·-lo como padr„o!') ,	  
-	  title: getTrans('N„o h· endereÁo cadastrado!','N„o h· endereÁo cadastrado!'),
-	  buttonLabels: ['Sim', 'N„o'],
+	  messageHTML: getTrans('Deseja cadastrar seu endere√ßo agora? <br> N√£o esque√ßa de selecion√°-lo como padr√£o!','Deseja cadastrar seu endere√ßo agora? <br> N√£o esque√ßa de selecion√°-lo como padr√£o!') ,	  
+	  title: getTrans('N√£o h√° endere√ßo cadastrado!','N√£o h√° endere√ßo cadastrado!'),
+	  buttonLabels: ['Sim', 'N√£o'],
 	  animation: 'fade', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
@@ -1546,9 +1546,9 @@ function onsenDialogAddresBook(){
 function onsenDialogAddresBookDefault(){
 
 	ons.notification.confirm({
-	  messageHTML: getTrans('VocÍ tem endereÁo cadastrado, porÈm nenhum est· como padr„o!<br>Deseja escolher o endereÁo padr„o agora?','VocÍ tem endereÁo cadastrado, porÈm nenhum est· como padr„o!<br>Deseja escolher o endereÁo padr„o agora?') ,	  
-	  title: getTrans('N„o h· endereÁo padr„o!','N„o h· endereÁo padr„o!'),
-	  buttonLabels: ['Sim', 'N„o'],
+	  messageHTML: getTrans('Voc√™ tem endere√ßo cadastrado, por√©m nenhum est√° como padr√£o!<br>Deseja escolher o endere√ßo padr√£o agora?','Voc√™ tem endere√ßo cadastrado, por√©m nenhum est√° como padr√£o!<br>Deseja escolher o endere√ßo padr√£o agora?') ,	  
+	  title: getTrans('N√£o h√° endere√ßo padr√£o!','N√£o h√° endere√ßo padr√£o!'),
+	  buttonLabels: ['Sim', 'N√£o'],
 	  animation: 'fade', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
@@ -1567,9 +1567,9 @@ function onsenDialogAddresBookDefault(){
 function onsenDialogAddresBookOld(){
 
 	ons.notification.confirm({
-	  messageHTML: getTrans('VocÍ tem endereÁo cadastrado, porÈm est· desatualizado!<br>Deseja atualizar seus endereÁos agora?','VocÍ tem endereÁo cadastrado, porÈm est· desatualizado!<br>Deseja atualizar seus endereÁos agora?') ,	  
-	  title: getTrans('EndereÁo desatualizado!','EndereÁo desatualizado!'),
-	  buttonLabels: ['Sim', 'N„o'],
+	  messageHTML: getTrans('Voc√™ tem endere√ßo cadastrado, por√©m est√° desatualizado!<br>Deseja atualizar seus endere√ßos agora?','Voc√™ tem endere√ßo cadastrado, por√©m est√° desatualizado!<br>Deseja atualizar seus endere√ßos agora?') ,	  
+	  title: getTrans('Endere√ßo desatualizado!','Endere√ßo desatualizado!'),
+	  buttonLabels: ['Sim', 'N√£o'],
 	  animation: 'fade', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
@@ -1587,12 +1587,12 @@ function onsenDialogAddresBookOld(){
 	  }
 	});		
 }
-/*Fim da atualizaÁ„o*/
-/*AtualizaÁ„o Master Hub (Sistema de Sugestıes)*/
+/*Fim da atualiza√ß√£o*/
+/*Atualiza√ß√£o Master Hub (Sistema de Sugest√µes)*/
 function onsenDialogSugestao(){
 
 	ons.notification.confirm({
-	  message: getTrans('Sua sugestao foi enviada com sucesso!','Sua sugest„o foi enviada com sucesso! Obrigado') ,	  
+	  message: getTrans('Sua sugestao foi enviada com sucesso!','Sua sugest√£o foi enviada com sucesso! Obrigado') ,	  
 	  title: dialog_title_default,
 	  buttonLabels: ['OK'],
 	  animation: 'default', // or 'none'
@@ -1606,7 +1606,7 @@ function onsenDialogSugestao(){
 	  }
 	});		
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 
 function hideAllModal()
 {
@@ -1809,7 +1809,7 @@ function callAjax(action,params)
 					  	 	html_promo += '<ons-list-item>'+val+'</ons-list-item>';
 					  	 });
 				  	 }
-/* AtualizaÁ„o Master Hub (Programa de Fidelidade) */
+/* Atualiza√ß√£o Master Hub (Programa de Fidelidade) */
 				  	 if(!empty(data.details.fidelidade)){
 				  	 	 html_promo += '<ons-list-header>'+ getTrans("Programa de Fidelidade","programa_fidelidades")+'</ons-list-header>';  
 					  	 $.each( data.details.fidelidade, function( key, val ) {
@@ -1817,7 +1817,7 @@ function callAjax(action,params)
 					  	 	html_promo += '<ons-list-item>'+val+'</ons-list-item>';
 					  	 });
 				  	 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				  	 if(!empty(data.details.free_delivery)){
 				  	 	html_promo += '<ons-list-header>'+ getTrans("Delivery","delivery")+'</ons-list-header>'; 
 				  	 	html_promo += '<ons-list-item>'+data.details.free_delivery+'</ons-list-item>';
@@ -1840,14 +1840,14 @@ function callAjax(action,params)
 				$(".result-msg").text(data.details.total == 1 ? +"1 empresa entrega no seu bairro" : data.details.total+" "+getTrans("Restaurant found",'restaurant_found') );
 								
 				break;
-/*AtualizaÁ„o Master Hub (Busca todos os comÈrcios Favoritos)*/
+/*Atualiza√ß√£o Master Hub (Busca todos os com√©rcios Favoritos)*/
 				case "browseFavoritos":
 				   displayFavoritosResults( data.details.data ,'browse-favoritos');
 				   //$(".result-msg").text(data.details.total+" Restaurant found");
 				   $(".result-msg").text(data.details.total+" "+ getTrans("Favorito(s) Encontrado(s)",'restaurant_favorito_found')  );
 				 break;
-/*Fim da atualizaÁ„o*/
-/*AtualizaÁ„o Master Hub (VerificaÁ„o de EndereÁos, Cat·logo de EndereÁos e PersonalizaÁ„o de texto na tela inicial)*/
+/*Fim da atualiza√ß√£o*/
+/*Atualiza√ß√£o Master Hub (Verifica√ß√£o de Endere√ßos, Cat√°logo de Endere√ßos e Personaliza√ß√£o de texto na tela inicial)*/
 				case "CarregaEndereco":
 				
 			if (data.details.has_addressbook==2){
@@ -1925,8 +1925,8 @@ search_type = getSearchType();
 						      	  	    	
 		} else onsenDialogAddresBook();				      	  	 
 				break;	
-/*Fim da atualizaÁ„o*/
-/*AtualizaÁ„o Master Hub (PersonalizaÁ„o Sugestıes, P·gina Personalizada e Abertos e Fechados)*/
+/*Fim da atualiza√ß√£o*/
+/*Atualiza√ß√£o Master Hub (Personaliza√ß√£o Sugest√µes, P√°gina Personalizada e Abertos e Fechados)*/
 				case "MenuCategory":			
 				/*save merchant logo*/								
 				setStorage("merchant_logo",data.details.logo);
@@ -1952,11 +1952,11 @@ search_type = getSearchType();
 				$("#menucategory-page .rating-stars").attr("data-score",data.details.ratings.ratings);
 				initRating();
 				$("#menucategory-page .logo-wrap").html('<img src="'+data.details.logo+'" />');
-/* AtualizaÁ„o Master Hub (Programa de Fidelidade) */
+/* Atualiza√ß√£o Master Hub (Programa de Fidelidade) */
 				if (data.details.programa_fidelidade!=false){	
 					fidelidade_PaginaCategorias(data.details);
 				}
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				if ( data.details.open){
 					$("#merchant_open").val(2);
 				} else $("#merchant_open").val(1);
@@ -1971,13 +1971,13 @@ search_type = getSearchType();
 							
 				break;
 				
-/* AtualizaÁ„o Master Hub (Programa de Fidelidade) */
+/* Atualiza√ß√£o Master Hub (Programa de Fidelidade) */
 				case "ProgramaFidelidade":
 if (data.details.programa_fidelidade!=false){	
 		fidelidade_PaginaDetalhes(data.details);
 				}
 					break;
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				case "cuisineList":
 				cuisineResults(data.details);
 				break;
@@ -1993,18 +1993,18 @@ if (data.details.programa_fidelidade!=false){
 				case "Lista_categorias":
 				categorias_Resultado(data.details);
 				break;
-/* AtualizaÁ„o Master Hub (Splash Page) */
+/* Atualiza√ß√£o Master Hub (Splash Page) */
 				case "Pagina":
 				paginaResultado(data.details);
 					translatePage();
 				break;
-/*Fim da atualizaÁ„o*/
-/* AtualizaÁ„o Master Hub (Sugestıes de Estabelecimentos) */
+/*Fim da atualiza√ß√£o*/
+/* Atualiza√ß√£o Master Hub (Sugest√µes de Estabelecimentos) */
 				case "Suggestion":
 				sugestoes_Resultado(data.details);
 				sugestoes_Campo(data.details);	
 				break;
-/* Fim da atualizaÁ„o */
+/* Fim da atualiza√ß√£o */
 					
 				case "getItemByCategory":			
 				easy_category_list='';						
@@ -2105,7 +2105,7 @@ if (data.details.programa_fidelidade!=false){
 						      	  /*if (data.msg.length>0){
 						      	  	  $(".select-addressbook").css({"display":"block"});
 						      	  } else $(".select-addressbook").hide();*/
-/*AtualizaÁ„o Master Hub (M·scara de Telefones, N˙mero e Bairro e Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (M√°scara de Telefones, N√∫mero e Bairro e Cat√°logo de Endere√ßos)*/
 						      	  if(!empty(data.msg.profile)){
 						      	  	  $(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
 						      	  	  $(".location_name").val( data.msg.profile.location_name ) ;
@@ -2161,7 +2161,7 @@ if (data.details.programa_fidelidade!=false){
 										  complete_address+=" "+ data.msg.address_book.zipcode;
 										
 											reloadCart();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 										  $(".delivery-address-text").html( complete_address ); 
 										  $(".formatted_address").val( complete_address );	
 										  
@@ -2176,9 +2176,9 @@ if (data.details.programa_fidelidade!=false){
 						      	  					      	      	  
 						      } /*end transition*/
 						    };   
-/*AtualizaÁ„o Master Hub (CorreÁ„o de tela errada de endereÁos finalizando o pedido)*/
+/*Atualiza√ß√£o Master Hub (Corre√ß√£o de tela errada de endere√ßos finalizando o pedido)*/
 						    sNavigator.pushPage("shippingLocationArea.html", options);
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 						    
 				    	}				
 					    		
@@ -2215,9 +2215,9 @@ if (data.details.programa_fidelidade!=false){
 				    	var options = {
 					      animation: 'slide',
 					      onTransitionEnd: function() { 	
-/*AtualizaÁ„o Master Hub (Desativa entrada do cÛdigo do paÌs nos campos de telefone)*/
+/*Atualiza√ß√£o Master Hub (Desativa entrada do c√≥digo do pa√≠s nos campos de telefone)*/
 					      	  //*initIntelInputs();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 					      } 
 					    };   
 					    sNavigator.pushPage("enterContact.html", options);		
@@ -2234,9 +2234,9 @@ if (data.details.programa_fidelidade!=false){
 					      	     'page-checkoutsignup');
 					      	     
 					      	  callAjax("getCustomFields",'');     
-/*AtualizaÁ„o Master Hub (Desativa entrada do cÛdigo do paÌs nos campos de telefone)*/
+/*Atualiza√ß√£o Master Hub (Desativa entrada do c√≥digo do pa√≠s nos campos de telefone)*/
 					      	  //*initIntelInputs();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 					      } 
 					    };     
 					    sNavigator.pushPage("checkoutSignup.html", options);				
@@ -2272,9 +2272,9 @@ if (data.details.programa_fidelidade!=false){
 						      	     fillShippingAddress();
 						      } 
 						    };     
-/*AtualizaÁ„o Master Hub (CorreÁ„o de tela errada de endereÁos finalizando o pedido)*/
+/*Atualiza√ß√£o Master Hub (Corre√ß√£o de tela errada de endere√ßos finalizando o pedido)*/
 					    sNavigator.pushPage("shippingLocationArea.html", options);		
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
                    	    }
 					    		
 					} else if ( data.details.next_step =="return_home") {
@@ -2343,7 +2343,7 @@ if (data.details.programa_fidelidade!=false){
 				
 				case "getPaymentOptions":				
 				   $(".frm-paymentoption").show();				   
-/*AtualizaÁ„o Master Hub (Resumo de EndereÁo na finalizaÁ„o do pedido)*/
+/*Atualiza√ß√£o Master Hub (Resumo de Endere√ßo na finaliza√ß√£o do pedido)*/
 		transaction_type=getStorage("transaction_type");
 					if (transaction_type=="delivery"){
 					$(".conferirendereco").show();
@@ -2353,14 +2353,14 @@ if (data.details.programa_fidelidade!=false){
 
 	     if (typeof entrega === "undefined" || entrega==null || entrega=="" || entrega===0 || entrega===0.0 || entrega==="0" ){
 	     $(".titulo-entrega").html("Taxa de Entrega");
-	     $(".total-entrega").html("Entrega Gr·tis");
+	     $(".total-entrega").html("Entrega Gr√°tis");
 	     } else {
 	     $(".titulo-entrega").html("Taxa de Entrega");
 	     $(".total-entrega").html(prettyPrice(entrega));
 	     }
 
 				$(".endereco_de_entrega_street").html(data.details.endereco_de_entrega.street);
-				$(".endereco_de_entrega_n").html("n∫");
+				$(".endereco_de_entrega_n").html("n¬∫");
 				$(".endereco_de_entrega_traco").html("-");
 				$(".endereco_de_entrega_barra").html("/");
 				$(".endereco_de_entrega_numero").html(data.details.endereco_de_entrega.numero);
@@ -2370,7 +2370,7 @@ if (data.details.programa_fidelidade!=false){
 				$(".endereco_de_entrega_zipcode").html(data.details.endereco_de_entrega.zipcode);
 				$(".endereco_de_entrega_location_name").html(data.details.endereco_de_entrega.location_name);
 				$(".endereco_de_entrega_delivery_instruction").html(data.details.endereco_de_entrega.delivery_instruction);	
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				   /*$(".client_id_sandbox").val( data.details.paypal_credentials.client_id_sandbox );
 			   	   $(".client_id_live").val( data.details.paypal_credentials.client_id_live );*/
 				   
@@ -2390,7 +2390,7 @@ if (data.details.programa_fidelidade!=false){
 			   	   	   $(".voucher-wrap").hide();
 			   	   }			
 
-/* AtualizaÁ„o Master Hub (Programa de Fidelidade) */
+/* Atualiza√ß√£o Master Hub (Programa de Fidelidade) */
 			   	   if (data.details.fidelidade_enabled=="yes"){
 					   
 					  if (data.details.programa_fidelidade!=false){
@@ -2401,7 +2401,7 @@ if (data.details.programa_fidelidade!=false){
 			   	   } else {
 			   	   	   $(".fidelidade-wrap").hide();
 			   	   }			
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			   	   /*set stripe key*/
 			   	   setStorage("stripe_publish_key", data.details.stripe_publish_key );	
 			   	   setStorage("stripe_publish_key", data.details.stripe_publish_key );
@@ -2441,15 +2441,15 @@ if (data.details.programa_fidelidade!=false){
 			    	if(data.details.show_mobile_number){
 			    	  	 new_fields=ContactNumberFields();					    		
 			    		 createElement("checkout_information_contact",new_fields);
-/*AtualizaÁ„o Master Hub (Desativa entrada do cÛdigo do paÌs nos campos de telefone)*/
+/*Atualiza√ß√£o Master Hub (Desativa entrada do c√≥digo do pa√≠s nos campos de telefone)*/
 			    		 //*initIntelInputs();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			       }			 
 			       
 			        translateValidationForm();
-/*AtualizaÁ„o Master Hub (Recarrega carrinho para atualizaÁ„o de valores)*/
+/*Atualiza√ß√£o Master Hub (Recarrega carrinho para atualiza√ß√£o de valores)*/
 			   	   	reloadCart();	
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			   	   displayPaymentOptions(data);
 			   	   
 			   	   $(".cod_change_required").val( data.details.cod_change_required);
@@ -2461,9 +2461,9 @@ if (data.details.programa_fidelidade!=false){
 				case "placeOrder":																  
 				
 				  setStorage("order_id",data.details.order_id);
-/*AtualizaÁ„o Master Hub (Recarrega carrinho para atualizaÁ„o de valores)*/
+/*Atualiza√ß√£o Master Hub (Recarrega carrinho para atualiza√ß√£o de valores)*/
 				  reloadCart();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				  switch (data.details.next_step){
 				  					  	  
 				  	   case "paypal_init":
@@ -2635,13 +2635,13 @@ if (data.details.programa_fidelidade!=false){
 				  	   
 				  	   
 				  	   case "mcd_init":
-/*AtualizaÁ„o Master Hub (Mercado Pago)*/
+/*Atualiza√ß√£o Master Hub (Mercado Pago)*/
 						  
 				var color = "#841011"; 
-			/* VocÍ pode definir a cor do background do checkout aqui */
+			/* Voc√™ pode definir a cor do background do checkout aqui */
 				var blackFont = true;  	   
 				MercadoPago.startCheckout( data.details.mercapago.mercado_key , data.details.mercapago.payment_ref, color, blackFont, mercapagoSuccess, mercapagoFailed );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				  	   break;
 				  	   
 				  	   case "mcd_error":
@@ -2659,7 +2659,7 @@ if (data.details.programa_fidelidade!=false){
 					      	                      data.details.payment_details.total_w_tax_pretty ,
 								  '' ,
 					      	                      'page-receipt');
-/*AtualizaÁ„o Master Hub (Resumo do EndereÁo de entrega e Valores)*/
+/*Atualiza√ß√£o Master Hub (Resumo do Endere√ßo de entrega e Valores)*/
 					      	  //$(".receipt-msg").html(data.msg); 
                                //by delivery recibo
                               var totalp = 'Total: '+data.details.payment_details.total_w_tax_pretty;
@@ -2676,7 +2676,7 @@ if (data.details.programa_fidelidade!=false){
                               if(getStorage("transaction_type")=='delivery'){ //se for entrega
                                  $htmlicoentrega+='<div class="myfa-moto fa-motorcycle fa"></div>';
                                  
-                                 $htmlentrega="EndereÁo da Entrega";
+                                 $htmlentrega="Endere√ßo da Entrega";
                                  $htmlendentrega="";
                                   
                                   $enderecoentregaw=JSON.parse('{"' + decodeURI(getStorage('shipping_address').replace(/%2C/g,"").replace(/\+/g, " ").replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}');
@@ -2713,7 +2713,7 @@ if (data.details.programa_fidelidade!=false){
                             }else{
                                 dump("pegou cartao ".$paym);
                                 $pgtoico='<ons-icon icon="fa-credit-card" class="myfa-creditcard fa-credit-card fa fa-lg"></ons-icon>';
-                                $pgtotrans="Pagar com Cart„o";
+                                $pgtotrans="Pagar com Cart√£o";
                                 $transtr+=data.details.payment_details.payment_provider_name;
                                 
             
@@ -2723,7 +2723,7 @@ if (data.details.programa_fidelidade!=false){
                            $(".t_pgtotrans").html($pgtotrans);
                            $(".t_pgtodesc").html($transtr);
                           
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 					      } 
 					    };     
 					    sNavigator.pushPage("receipt.html", options);
@@ -2853,9 +2853,9 @@ if (data.details.programa_fidelidade!=false){
 				case "iPay88Successfull":
 				case "monerisPay":
 				case "hubtelPaymentInit":
-/*AtualizaÁ„o Master Hub (Mercado Pago)*/
+/*Atualiza√ß√£o Master Hub (Mercado Pago)*/
 				case "MercadoPagoOK":	
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				case "WingCommit":
 				case "ipayMobileMoney":
 				case "ipayTransactCC":
@@ -2929,19 +2929,19 @@ if (data.details.programa_fidelidade!=false){
 				  $(".first_name").val( data.details.first_name );
 				  $(".last_name").val( data.details.last_name );
 				  $(".email_address").val( data.details.email_address );
-/*AtualizaÁ„o Master Hub (M·scara do Telefone)*/
+/*Atualiza√ß√£o Master Hub (M√°scara do Telefone)*/
 				  if(!empty(data.details.contact_phone)){
 				  $(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") )); }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				  $(".avatar").attr("src", data.details.avatar );
 				  
 				  dump('set avatar');
 				  setStorage("avatar",data.details.avatar);
 				  
 				  imageLoaded('.img_loaded');
-/*AtualizaÁ„o Master Hub (Desativa entrada do cÛdigo do paÌs nos campos de telefone)*/
+/*Atualiza√ß√£o Master Hub (Desativa entrada do c√≥digo do pa√≠s nos campos de telefone)*/
 				  //*initIntelInputs();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				  break;   
 				  
 				case "registerUsingFb":  
@@ -2977,18 +2977,18 @@ if (data.details.programa_fidelidade!=false){
 						      	     'page-shipping');					      	    
 							      	  
 	                                 if(!empty(data.details.contact_phone)){
-/*AtualizaÁ„o Master Hub (M·scara do Telefone)*/
+/*Atualiza√ß√£o Master Hub (M√°scara do Telefone)*/
 						      	  	     $(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
 						      	     } else if(!empty(data.details.default_address.contact_phone)){
 										 $(".contact_phone").val($(".contact_phone").masked( data.details.default_address.contact_phone.replace("+55","") ));
 									 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 						      	     if(!empty(data.details.location_name)){
 						      	  	     $(".location_name").val( data.details.location_name ) ;
 						      	     }
 						      	     
 						      	     var address_fill = false;
-/*AtualizaÁ„o Master Hub (Gravar Campo Complemento no Cat·logo de EndereÁos e N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (Gravar Campo Complemento no Cat√°logo de Endere√ßos e N√∫mero e Bairro)*/
 						      	     if(!empty(data.details.delivery_instruction)){
 						      	  	     $(".delivery_instruction").val( data.details.delivery_instruction ) ;
 						      	     }
@@ -3015,7 +3015,7 @@ if (data.details.programa_fidelidade!=false){
 							      	  	       $(".street").val (  data.details.default_address.street  );
 					      	  	      $(".numero").val (  data.details.default_address.numero  );
 					      	  	      $(".area_name").val (  data.details.default_address.area_name  );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 											   $(".city").val( data.details.default_address.city  );
 											   $(".state").val( data.details.default_address.state );
 											   $(".zipcode").val(  data.details.default_address.zipcode );	
@@ -3030,9 +3030,9 @@ if (data.details.programa_fidelidade!=false){
 						      	     }		
 						      } 
 						     };  
-/*AtualizaÁ„o Master Hub (CorreÁ„o de tela errada de endereÁos finalizando o pedido)*/
+/*Atualiza√ß√£o Master Hub (Corre√ß√£o de tela errada de endere√ßos finalizando o pedido)*/
 						     sNavigator.pushPage("shippingLocationArea.html", options);		
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				  	     }
 				  	 break;
 				  	 
@@ -3082,17 +3082,17 @@ if (data.details.programa_fidelidade!=false){
 				   
 				case "getAddressBook":  
 				  displayAddressBook(data.details);
-/*AtualizaÁ„o Master Hub (Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Cat√°logo de Endere√ßos)*/
 					if (data.details.address.length>0){
 				if (empty(data.details.default_address)){
 					$(".endereco_padrao").show();
 					} else $(".endereco_padrao").hide();
 				} else $(".endereco_padrao").hide();
 				  break;  
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			    case "getAddressBookDetails":
 			      fillAddressBook(data.details);
-/*AtualizaÁ„o Master Hub (Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Cat√°logo de Endere√ßos)*/
 					if (data.details.area_id==0 || data.details.city_id==0){
 			$("#frm-addressbook .location_area").html(getTrans("District / Area","destrict_area"));
 			$("#frm-addressbook .location_city").html(getTrans("City", "city"));
@@ -3101,19 +3101,19 @@ if (data.details.programa_fidelidade!=false){
 			$("#frm-addressbook .state_id").val("");		
 		}
 			      break;  
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			    case "saveAddressBook":  
-/*AtualizaÁ„o Master Hub (Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Cat√°logo de Endere√ßos)*/
 						sNavigator.popPage({cancelIfRunning: true});
 						callAjax('getAddressBook', "client_token="+getStorage("client_token"));
 
 			      if (data.details=="add") {
-							onsenAlert("EndereÁo adicionado");
+							onsenAlert("Endere√ßo adicionado");
 			      } else {
-							onsenAlert("EndereÁo atualizado");
+							onsenAlert("Endere√ßo atualizado");
 			      }
 			      break;  
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			    case "deleteAddressBook":  
 			         sNavigator.popPage({cancelIfRunning: true});			         
 			         callAjax('getAddressBook',
@@ -3141,7 +3141,7 @@ if (data.details.programa_fidelidade!=false){
 			    /*silent */
 			    break;
 			    
-/*AtualizaÁ„o Master Hub (Preenchimento dos dados no Cat·logo de EndereÁos adquiridos pelo GPS)*/
+/*Atualiza√ß√£o Master Hub (Preenchimento dos dados no Cat√°logo de Endere√ßos adquiridos pelo GPS)*/
 			    case "reverseGeoCoding":
 			       //$("#s").val( data.details );
 			       			       
@@ -3177,7 +3177,7 @@ if (data.details.programa_fidelidade!=false){
 					global_state_id = data.details.ids.state_id;
 					
 					if (empty(data.details.ids)){
-					toastMsg( getTrans("N„o foi possÌvel encontrar o seu bairro em nosso sistema, por favor escolha manualmente!",'escolha_o_bairro') );	
+					toastMsg( getTrans("N√£o foi poss√≠vel encontrar o seu bairro em nosso sistema, por favor escolha manualmente!",'escolha_o_bairro') );	
 			       setStorage("geo_address_result_country",data.details.country);
 					$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
 					$(".location_city").html(getTrans("Select City", "select_city"));
@@ -3191,11 +3191,11 @@ if (data.details.programa_fidelidade!=false){
 			       setStorage("geo_address_result_formatted_address",data.details.formatted_address);
 			       
 			       break;
-/*Fim da atualizaÁ„o*/
-/*AtualizaÁ„o Master Hub (Preenchimento dos dados no Cat·logo de EndereÁos adquiridos pelo CEP)*/
+/*Fim da atualiza√ß√£o*/
+/*Atualiza√ß√£o Master Hub (Preenchimento dos dados no Cat√°logo de Endere√ßos adquiridos pelo CEP)*/
 				case "IdsDoCEP":
 					if(!empty(data.details)){
-				toastMsg( getTrans("Preencha o n˙mero da sua residÍncia ou de onde vocÍ est·!",'preencha_o_numero') );		
+				toastMsg( getTrans("Preencha o n√∫mero da sua resid√™ncia ou de onde voc√™ est√°!",'preencha_o_numero') );		
 					$(".location_area").html(data.details.bairro);
 					$(".location_city").html(data.details.cidade);
 					$(".location_state").html(data.details.estado);
@@ -3212,7 +3212,7 @@ if (data.details.programa_fidelidade!=false){
 					global_state_id = data.details.state_id;					
 					} 
 					/* if(data.msg'OK'){ 
-					toastMsg( getTrans("N„o foi possÌvel encontrar o seu bairro em nosso sistema, por favor escolha manualmente!",'escolha_o_bairro') );	
+					toastMsg( getTrans("N√£o foi poss√≠vel encontrar o seu bairro em nosso sistema, por favor escolha manualmente!",'escolha_o_bairro') );	
 			       setStorage("geo_address_result_formatted_address",data.details.formatted_address);
 					$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
 					$(".location_city").html(getTrans("Select City", "select_city"));
@@ -3242,7 +3242,7 @@ if (data.details.programa_fidelidade!=false){
 					global_state_id = data.details.state_id;					
 					} 
 					break;
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			    case "getSettings":      			       
 			       if ( data.details.enabled_push==1){		
 			       	   enabled_push.setChecked(true);			       	   	       	  			       	  
@@ -3312,11 +3312,11 @@ if (data.details.programa_fidelidade!=false){
 			       /*pts*/
 			       setStorage("pts",data.details.settings.pts);
 			       
-/*AtualizaÁ„o Master Hub (PersonalizaÁıes)*/
+/*Atualiza√ß√£o Master Hub (Personaliza√ß√µes)*/
 					/*splash_paginas slide*/
 				   setStorage("slide",data.details.settings.splash_paginas);
 				   
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			
 			       /*facebook_flag*/
 			       setStorage("facebook_flag",data.details.settings.facebook_flag);
@@ -3372,12 +3372,12 @@ if (data.details.programa_fidelidade!=false){
 				   kSettingsNavigator.resetToPage("slidingMenu.html", options);	
 			       
 			       break;
-/* AtualizaÁ„o Master Hub (Programa de Fidelidade) */
+/* Atualiza√ß√£o Master Hub (Programa de Fidelidade) */
 			   case "applyFidelidade":   
 			       dump(data.details);			       
 			       $(".fidelidade_amount").val(data.details.amount);
 			      $(".fidelidade_type").val(data.details.fidelidade_type);
-/*AtualizaÁ„o Master Hub (Ao aplicar o cupom atualiza o resumo)*/
+/*Atualiza√ß√£o Master Hub (Ao aplicar o cupom atualiza o resumo)*/
 				   carrinho=getStorage("cart_sub_total");
 				   embalagem=getStorage("cart_packaging");
 				   entrega=getStorage("cart_delivery_charges");
@@ -3434,7 +3434,7 @@ if (data.details.programa_fidelidade!=false){
 							}
 							if (taxa_entrega==0){	
 				$("#page-paymentoption .titulo-entrega").css({"display":"block"});
-				$("#page-paymentoption .total-entrega").html("Entrega Gr·tis");
+				$("#page-paymentoption .total-entrega").html("Entrega Gr√°tis");
 							}		
 				$("#page-paymentoption .fidelidade_amount").css({"display":"block"});
 				$("#page-paymentoption .titulo-cupom").css({"display":"block"});
@@ -3475,12 +3475,12 @@ if (data.details.programa_fidelidade!=false){
  				$(".total-amount").html( prettyPrice(new_total2));
  								}
 			       break;
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			   case "applyVoucher":   
 			       dump(data.details);			       
 			       $(".voucher_amount").val( data.details.amount );
 			       $(".voucher_type").val( data.details.voucher_type );
-/*AtualizaÁ„o Master Hub (Ao aplicar o cupom atualiza o resumo)*/
+/*Atualiza√ß√£o Master Hub (Ao aplicar o cupom atualiza o resumo)*/
 				   carrinho=getStorage("cart_sub_total");
 				   embalagem=getStorage("cart_packaging");
 				   entrega=getStorage("cart_delivery_charges");
@@ -3537,7 +3537,7 @@ if (data.details.programa_fidelidade!=false){
 							}
 							if (taxa_entrega==0){	
 				$("#page-paymentoption .titulo-entrega").css({"display":"block"});
-				$("#page-paymentoption .total-entrega").html("Entrega Gr·tis");
+				$("#page-paymentoption .total-entrega").html("Entrega Gr√°tis");
 							}		
 				$("#page-paymentoption .voucher_amount").css({"display":"block"});
 				$("#page-paymentoption .titulo-cupom").css({"display":"block"});
@@ -3576,7 +3576,7 @@ if (data.details.programa_fidelidade!=false){
  				$(".total-amount").html( prettyPrice(new_total2));
  								}
 			       break;
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			       
 			    case "validateCLient":   
 			       setStorage("client_token", data.details.token ); // register token
@@ -3602,9 +3602,9 @@ if (data.details.programa_fidelidade!=false){
 						      	     
 						      } 
 						    };     
-/*AtualizaÁ„o Master Hub (CorreÁ„o de tela errada de endereÁos finalizando o pedido)*/
+/*Atualiza√ß√£o Master Hub (Corre√ß√£o de tela errada de endere√ßos finalizando o pedido)*/
 						     sNavigator.pushPage("shippingLocationArea.html", options);		
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
                    	    }
 					    
                    } else if ( data.details.is_checkout=="payment_option" )  {
@@ -3655,7 +3655,7 @@ if (data.details.programa_fidelidade!=false){
 			      $(".pts_points_label").html( data.details.pts_points +" ("+ data.details.pts_amount+")" );
 			      $(".pts_pts").hide();
 			      $(".pts_pts_cancel").css({"display":"block"});
-/*AtualizaÁ„o Master Hub (Ao aplicar o pontos atualiza o resumo)*/
+/*Atualiza√ß√£o Master Hub (Ao aplicar o pontos atualiza o resumo)*/
 					carrinho=getStorage("cart_sub_total");
 				    embalagem=getStorage("cart_packaging");
 					entrega=getStorage("cart_delivery_charges");
@@ -3737,15 +3737,15 @@ if (data.details.programa_fidelidade!=false){
  								}else{
  				$(".total-amount").html( prettyPrice(new_total2));
  								}
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			    break;
 			    
 			    case "addToCart":
 			    //onsenAlert(  getTrans("Item added to cart",'item_added_to_cart') );
-/*AtualizaÁ„o Master Hub (RemoÁ„o da mensagem de Ìtem adicionado e CorreÁ„o da tela de exibiÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Remo√ß√£o da mensagem de √≠tem adicionado e Corre√ß√£o da tela de exibi√ß√£o)*/
 			    //toastMsg( getTrans("Item added to cart",'item_added_to_cart') );
 			onsenDialogCheckout();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			    break;
 			    
 			   
@@ -4128,7 +4128,7 @@ if (data.details.programa_fidelidade!=false){
 				   menu.setMainPage('searchCategorias.html',options);
 				
 			    break;
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			    case "initBrowseMerchant":
 			       setStorage("browse_total", data.details.total);			       
 			       setStorage("browse_total_raw", data.details.total_raw);	
@@ -4163,10 +4163,10 @@ if (data.details.programa_fidelidade!=false){
 				      	 if(!empty(data.details.merchant_photo_bg)){
 				      	 	//$(".menu-header").css("background","url("+data.details.merchant_photo_bg+") no-repeat center center / cover");
 				      	 	$(".menu-header").css("background", 'url("' + data.details.merchant_photo_bg + '") no-repeat center center / cover ');
-/* AtualizaÁ„o Jo„o Neves (Pede.ai) CabeÁalho App dentro do menu do estabelecimento */
+/* Atualiza√ß√£o Jo√£o Neves (Pede.ai) Cabe√ßalho App dentro do menu do estabelecimento */
 	$("#menucategory-page .estabelecimento-header2").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#menucategory-page .estabelecimento-header").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da AtualizaÁ„o */
+/* Fim da Atualiza√ß√£o */
 							 
 				      	 }
 				      } 
@@ -4487,13 +4487,13 @@ if (data.details.programa_fidelidade!=false){
 				  toastMsg(data.msg);
 			    break;
 			    
-/* AtualizaÁ„o Master Hub (Sugestıes de Estabelecimentos) */
+/* Atualiza√ß√£o Master Hub (Sugest√µes de Estabelecimentos) */
 				case "Suggestion":
 				$("#mensagem_nao").hide();	
 				sugestoes_Campo(data.details);
 				toastMsg(data.msg);
 				break;		
-/* Fim da atualizaÁ„o */
+/* Fim da atualiza√ß√£o */
 				case "loadPhotos":		
 				   toastMsg(data.msg);
 				break;
@@ -4639,7 +4639,7 @@ if (data.details.programa_fidelidade!=false){
    });
 }
 
-/*AtualizaÁ„o Master Hub (Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Cat√°logo de Endere√ßos)*/
 function setEnderecoNovo()
 {
 	dump("setEnderecoNovo");
@@ -4650,7 +4650,7 @@ function setEnderecoNovo()
 	   };	   	   	   
 	menu.setMainPage('addressBook.html', options); 	
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function setHome()
 {
 	dump("setHome");
@@ -4661,7 +4661,7 @@ function setHome()
 	   };	   	   	   
 	 menu.setMainPage('home.html',options);
 }
-/*AtualizaÁ„o Master Hub (Bot„o Fechar da Splash Page)*/
+/*Atualiza√ß√£o Master Hub (Bot√£o Fechar da Splash Page)*/
 function setHome2()
 {
 	 dump("setHome");
@@ -4672,7 +4672,7 @@ function setHome2()
 	   };	   	   	   
 	 menu.setMainPage('home.html',options);
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function setHomeCallback()
 {	
 	refreshConnection();
@@ -4680,7 +4680,7 @@ function setHomeCallback()
 
 function displayRestaurantResults(data , target_id)
 {	
-/*AtualizaÁ„o Master Hub (Empresas abertas e fechadas)*/
+/*Atualiza√ß√£o Master Hub (Empresas abertas e fechadas)*/
 	//dump(data);	
 	var htm='';	
 	
@@ -4694,8 +4694,8 @@ function displayRestaurantResults(data , target_id)
 			abertas.push(data[i]);
 	}
 	data = abertas.concat(fechadas);
-/*Fim da atualizaÁ„o*/
-/*AtualizaÁ„o Master Hub (PersonalizaÁ„o da tela de busca de Empresas)*/
+/*Fim da atualiza√ß√£o*/
+/*Atualiza√ß√£o Master Hub (Personaliza√ß√£o da tela de busca de Empresas)*/
     $.each( data, function( key, val ) {     
     	
     	// dump(val);
@@ -4732,11 +4732,11 @@ function displayRestaurantResults(data , target_id)
 		  				htm+='<i class="green-color '+val.tag_dinheiro+'" style="font-size: 23px;"></i>   ';
 			};
 			//Fim Dinheiro
-			// Cart„o
+			// Cart√£o
 						if(!empty(val.tag_cartao)){
 		  				htm+='  <i class="green-color '+val.tag_cartao+'" style="font-size: 23px;"></i>';
 			};
-			//Fim Cart„o
+			//Fim Cart√£o
 					   htm+='</span></div>';
 	    	           htm+='<p class="restauran-title concat-text">'+val.restaurant_name+'</p>';
 	    	           htm+='<p class="concat-textx">'+val.cuisine+'</p>';
@@ -4780,7 +4780,7 @@ function displayRestaurantResults(data , target_id)
     	                   if(!empty(val.delivery_fee)){
 							   
 							   if (val.delivery_fee=='R$ 0,00'){
-							  	fee_pretty = "Entrega Gr·tis";
+							  	fee_pretty = "Entrega Gr√°tis";
  								}else{
  								fee_pretty = val.delivery_fee;
  								}
@@ -4791,7 +4791,7 @@ function displayRestaurantResults(data , target_id)
     	                 
 		
     	             /*Fim Taxa de entrega*/
-					 /*Pedido minÌmo*/
+					 /*Pedido min√≠mo*/
     	              
 					   	  if (!empty(val.minimum_order)){  
 						  htm+='     <i class="fa green-color fa-money aria-hidden="true"" style="font-size: 15px;"></i>  <span class="p-small trn" data-trn-key="min_order">Min. Order</span>';
@@ -4810,7 +4810,7 @@ function displayRestaurantResults(data , target_id)
 	    	           	   });
 	    	           }
     	              htm+='</ons-col>';
-					  /*Fim Pedido minÌmo*/
+					  /*Fim Pedido min√≠mo*/
     	              htm+='</ons-col>'; 
     	           
     	     htm+='</ons-col>';
@@ -4818,7 +4818,7 @@ function displayRestaurantResults(data , target_id)
     	 htm+='</ons-row>';
     	 htm+='</ons-list-item>';
     });
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
       
     createElement(target_id,htm);
         
@@ -4964,7 +4964,7 @@ function menuCategoryResult(data)
 		toastMsg(  getTrans("This restaurant has not published their menu yet.",'this_restaurant_no_menu') );
 	}	
 }
-/*AtualizaÁ„o Master Hub (Menu Categorias suspenso)*/
+/*Atualiza√ß√£o Master Hub (Menu Categorias suspenso)*/
 function loadMenuFromShortcut(cat_id,mtid)
 {
 
@@ -4990,7 +4990,7 @@ function loadMenuFromShortcut(cat_id,mtid)
 	// showEasyCategory(this);
 
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function loadmenu(cat_id,mtid)
 {			       
 	
@@ -5284,7 +5284,7 @@ actions='"loadItemDetails('+ "'"+val.item_id+"'," +  "'"+data.merchant_id+"'," +
              html+='</ons-col>';
              
          } else {
-/*AtualizaÁ„o Master Hub (Mostra logo da empresa quando n„o h· logo do produto.)*/
+/*Atualiza√ß√£o Master Hub (Mostra logo da empresa quando n√£o h√° logo do produto.)*/
 		var upload_url = krms_config.UploadUrl;
 		dump("upload_url=>"+upload_url); 
          	
@@ -5308,7 +5308,7 @@ actions='"loadItemDetails('+ "'"+val.item_id+"'," +  "'"+data.merchant_id+"'," +
                 html+='<ons-col class="col-description" width="65%" style="border-bottom: 0px solid #333; margin-left: 12px;">';
                 html+='<p class="restauran-title concat-text" style="margin-top: 5px;">'+val.item_name+'</p>';
                 html+='<p class="" style="margin-top: 5px; font-size: 13px; margin-bottom: 15px;">'+val.item_description+'</p>';   
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
                 if ( val.prices.length>0){
 	                $.each( val.prices, function( key_price, price ) { 
 	                   if (!empty(price.price_discount_pretty)){
@@ -5464,9 +5464,9 @@ function displayItem(data)
 	                                 'sub_item', 
 	                                 val2.sub_item_id+"|"+val2.price +"|"+val2.sub_item_name,
 	                                 val2.sub_item_name,
-/*AtualizaÁ„o Master Hub (CorreÁ„o de valor zerado)*/
+/*Atualiza√ß√£o Master Hub (Corre√ß√£o de valor zerado)*/
 	                                 val2.price>0?val2.pretty_price:'',
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	                                 val.multi_option_val,
 	                                 val2.item_description
 	                                 );	
@@ -5477,9 +5477,9 @@ function displayItem(data)
 					  	            'sub_item', 
 	                                 val2.sub_item_id+"|"+val2.price +"|"+val2.sub_item_name,
 	                                 val2.sub_item_name,
-/*AtualizaÁ„o Master Hub (CorreÁ„o de valor zerado)*/
+/*Atualiza√ß√£o Master Hub (Corre√ß√£o de valor zerado)*/
 	                                 val2.price>0?val2.pretty_price:'');	
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	                     
 	                     if(show_addon_description==1){
 		                     if(!empty(val2.item_description)){
@@ -5494,9 +5494,9 @@ function displayItem(data)
                                    //val2.sub_item_id+"|"+val2.price + "|"+val2.sub_item_name  , 
                                    val2.sub_item_id+"|"+val2.price + "|"+val2.sub_item_name + "|" + val.two_flavor_position  , 
                                    val2.sub_item_name,
-/*AtualizaÁ„o Master Hub (CorreÁ„o de valor zerado)*/
+/*Atualiza√ß√£o Master Hub (Corre√ß√£o de valor zerado)*/
                                    val2.price>0?val2.pretty_price:'',
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
                                    false,
                                    val2.item_description
                                    );                                                           
@@ -5618,9 +5618,9 @@ jQuery(document).ready(function() {
 			   if ( transaction_type =="delivery" ) {
 			      $(".order_change").attr("data-validation","required");
 			   }
-/*AtualizaÁ„o Master Hub (CorreÁ„o de Troco obrigatÛrio)*/
+/*Atualiza√ß√£o Master Hub (Corre√ß√£o de Troco obrigat√≥rio)*/
 			   $(".order_change").attr("data-validation-error-msg","Preencha o valor antes de continuar");
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			} else {
 				$(".order_change").removeAttr("data-validation");
 			}
@@ -5736,7 +5736,7 @@ jQuery(document).ready(function() {
 		dump(address_split);
 		if ( address_split.length>0){
 			$(".street").val( address_split[0] );
-/*AtualizaÁ„o Master Hub (Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Cat√°logo de Endere√ßos)*/
 			$(".numero").val( address_split[1] );
 			
 			$(".bairro").html(address_split[2]);
@@ -5784,7 +5784,7 @@ jQuery(document).ready(function() {
 			$(".formatted_address").val( '' );			
 			
 			dialogAddressBook.hide();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			//sNavigator.popPage({cancelIfRunning: true}); //back button
 			
 		} else {
@@ -6062,11 +6062,11 @@ function addToCart()
 		   sNavigator.popPage({cancelIfRunning: true}); //back button
 		} else {
 			sNavigator.popPage({cancelIfRunning: true}); //back button
-/*AtualizaÁ„o Master Hub (RemoÁ„o da mensagem de Ìtem adicionado e CorreÁ„o da tela de exibiÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Remo√ß√£o da mensagem de √≠tem adicionado e Corre√ß√£o da tela de exibi√ß√£o)*/
 			//toastMsg(  getTrans("Item added to cart",'item_added_to_cart') );
 			onsenDialogCheckout();
 		}
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		showCartNosOrder();
 	}
 }
@@ -6095,7 +6095,7 @@ function showCartNosOrder()
 		$(".cart-num").hide();
 	}
 }
-/* AtualizaÁ„o Master Hub (Alerta de mudanÁa de taxa de entrega) */
+/* Atualiza√ß√£o Master Hub (Alerta de mudan√ßa de taxa de entrega) */
 function showDialogChangeAddressAlerta (deliveryPrice) {
 	if (typeof dialogBrowseResto === "undefined" || dialogBrowseResto==null || dialogBrowseResto=="" ) {
 		ons.createDialog('filterBrowseResto.html').then(function(dialog) {
@@ -6116,7 +6116,7 @@ function showDialogChangeAddressAlerta (deliveryPrice) {
 	    $(".restaurant_name").attr("placeholder", getTrans('Enter Restaurant name','enter_resto_name')  );*/
 	}
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function displayCart(data)
 {	
 	// display merchant logo
@@ -6139,12 +6139,12 @@ function displayCart(data)
     /*for pts computation refference*/
     setStorage("cart_sub_total", data.cart.sub_total.amount );
     if(!empty(data.cart.delivery_charges)){
-/*AtualizaÁ„o Master Hub (Mensagem de mudanÁa na taxa de entrega)*/
+/*Atualiza√ß√£o Master Hub (Mensagem de mudan√ßa na taxa de entrega)*/
     if (sNavigator.getCurrentPage().name == "paymentOption.html" && getStorage("cart_delivery_charges") != data.cart.delivery_charges.amount) {
-    var message = "A taxa de entrega para a localizaÁ„o selecionada È " + data.cart.delivery_charges.amount_pretty;
+    var message = "A taxa de entrega para a localiza√ß√£o selecionada √© " + data.cart.delivery_charges.amount_pretty;
     	toastMsg(message);
 			} 
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
        setStorage("cart_delivery_charges", data.cart.delivery_charges.amount );
     }
     if(!empty(data.cart.packaging)){
@@ -6161,7 +6161,7 @@ function displayCart(data)
 	if (!empty(data.estimation_delivery_date)){
 	    $(".delivery_date").val( data.estimation_delivery_date);
 	}*/		
-/*AtualizaÁ„o Master Hub (Resumo carrinho finalizaÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Resumo carrinho finaliza√ß√£o)*/
     if(!empty(data.cart.delivery_charges)){
 		setStorage("cart_delivery_charges_final", data.cart.delivery_charges.amount_pretty);
 		$(".total-entrega").html(data.cart.delivery_charges.amount_pretty);
@@ -6187,7 +6187,7 @@ function displayCart(data)
 	if (!empty(data.cart.tips)){			
      setStorage("cart_tip_final", data.cart.tips.tips_pretty);
 		} 
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	
 	if (!empty(data.cart)){
 		
@@ -6464,11 +6464,11 @@ function editOrderInit()
 	$(".edit-order").hide();
 	$(".qty-label").hide();
 	$(".row-del-wrap").show();
-/*AtualizaÁ„o Master Hub (ReorganizaÁ„o dos botıes de editar do carrinho)*/
+/*Atualiza√ß√£o Master Hub (Reorganiza√ß√£o dos bot√µes de editar do carrinho)*/
 	$(".row-del-wrap").css('display', 'flex');
 	$(".esconde-ao-editar").hide();
 	$(".mostra-ao-editar").show();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	var x=1;
 	$.each( $(".item-qty") , function( key, val ) {
 		$.each( $(".subitem-qty"+x) , function( key2, val2 ) {
@@ -6488,10 +6488,10 @@ function applyCartChanges()
 	$(".qty-label").show();
 	$(".subitem-qty").hide();
 	$(".row-del-wrap").hide();
-/*AtualizaÁ„o Master Hub (ReorganizaÁ„o dos botıes de editar do carrinho)*/
+/*Atualiza√ß√£o Master Hub (Reorganiza√ß√£o dos bot√µes de editar do carrinho)*/
 	$(".esconde-ao-editar").show();
 	$(".mostra-ao-editar").hide();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	dump( "qty L=>"+ $(".item-qty").length );
 	if (!empty( $(".item-qty") )){
 		cart=[];		
@@ -6676,7 +6676,7 @@ function clientRegistration()
 	      }
 	      
 	      // save mobile number
-/*AtualizaÁ„o Master Hub (M·scara do Telefone)*/
+/*Atualiza√ß√£o Master Hub (M√°scara do Telefone)*/
 	     // setStorage("customer_contact_number", $(".contact_phone").val().replace(/[^0-9\.]+/g, ''));
 
 				var form = $( "#frm-checkoutsignup").serializeArray();
@@ -6687,7 +6687,7 @@ function clientRegistration()
 						field.value = "%2B55"+field.value.replace(/[^0-9\.]+/g, '');
 					params += field.name+"="+field.value+"&";
 				});
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	      params+="&transaction_type=" +  getStorage("transaction_type") ;
 	      params+="&device_id="+ getStorage("device_id");
 	      
@@ -6739,7 +6739,7 @@ function clientShipping()
 			      	  );
 			      	  params+="&merchant_id="+ getStorage("merchant_id");
 			      	  params+="&street="+ urlencode($(".street").val());
-/*AtualizaÁ„o Master Hub (Cat·logo de EndereÁos e N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (Cat√°logo de Endere√ßos e N√∫mero e Bairro)*/
 		      	  params+="&numero="+ urlencode($(".numero").val());
 		      	  params+="&area_name="+ urlencode($(".area_name").val());
 			      	  params+="&city="+ urlencode($(".city").val());
@@ -6749,7 +6749,7 @@ function clientShipping()
 			  params+="&city_id="+ urlencode($(".city_id").val());
 			  params+="&area_id="+ urlencode($(".area_id").val());
 			  params+="&delivery_instruction="+ urlencode($(".delivery_instruction").val());
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			      	  params+="&location_name="+ urlencode($(".location_name").val());
 			      	  params+="&save_address="+$('.save_address:checked').val();
 			      	  params+="&transaction_type=" +  getStorage("transaction_type") ;
@@ -6870,15 +6870,15 @@ function showMerchantInfo(data)
 {
 	dump(data);
 	setTrackView("restaurant information: " + data.merchant_info.restaurant_name );
-/* AtualizaÁ„o Jo„o Neves (Pede.ai) CabeÁalho App dentro do menu do estabelecimento */
+/* Atualiza√ß√£o Jo√£o Neves (Pede.ai) Cabe√ßalho App dentro do menu do estabelecimento */
 	$("#page-merchantinfo .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.merchant_info.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-merchantinfo .estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.merchant_info.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da AtualizaÁ„o */
+/* Fim da Atualiza√ß√£o */
 	$("#page-merchantinfo h3").html(data.merchant_info.restaurant_name);
 	$("#page-merchantinfo h5").html(data.merchant_info.cuisine);
-/* AtualizaÁ„o Jo„o Neves (Pede.ai) CabeÁalho App dentro do menu do estabelecimento */
+/* Atualiza√ß√£o Jo√£o Neves (Pede.ai) Cabe√ßalho App dentro do menu do estabelecimento */
 	$("#page-merchantinfo address").html(data.merchant_info.merchant_information);
-/* Fim da AtualizaÁ„o */
+/* Fim da Atualiza√ß√£o */
 	$("#page-merchantinfo .rating-stars").attr("data-score",data.merchant_info.ratings.ratings);	
 	if (!empty(data.reviews)){
 	   $(".total-reviews").html(data.reviews.total_review + " "+ getTrans("reviews",'reviews') );
@@ -6991,10 +6991,10 @@ function loadMoreReviews()
       	     'page-reviews'
       	  );       	  
 
-/* AtualizaÁ„o Jo„o Neves (Pede.ai) CabeÁalho App dentro do menu do estabelecimento */
+/* Atualiza√ß√£o Jo√£o Neves (Pede.ai) Cabe√ßalho App dentro do menu do estabelecimento */
 	$("#page-reviews .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-reviews .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da AtualizaÁ„o */
+/* Fim da Atualiza√ß√£o */
 		  
       	  var params="merchant_id=" +  getStorage("merchant_id") ;
       	  params+="&client_token="+ getStorage("client_token");
@@ -7026,10 +7026,10 @@ function showReviewForm()
       	     'page-addreviews'
       	  );          	  
 		  
-/* AtualizaÁ„o Jo„o Neves (Pede.ai) CabeÁalho App dentro do menu do estabelecimento */
+/* Atualiza√ß√£o Jo√£o Neves (Pede.ai) Cabe√ßalho App dentro do menu do estabelecimento */
 	$("#page-addreviews .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 	$("#page-addreviews .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da AtualizaÁ„o */
+/* Fim da Atualiza√ß√£o */
 		  
       	  translatePage();
       	  $(".rating").attr("placeholder", getTrans('Your Rating 1 to 5','your_rating') );
@@ -7161,7 +7161,7 @@ function login()
 	    }  
 	});	
 }
-/*AtualizaÁ„o Master Hub (VerificaÁ„o de EndereÁos e Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Verifica√ß√£o de Endere√ßos e Cat√°logo de Endere√ßos)*/
 function carregaEndereco()
 {
 	var params = "client_token="+ getStorage("client_token");
@@ -7173,7 +7173,7 @@ function carregaEndereco()
 	      }	
    callAjax("CarregaEndereco",params);	       
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function logout()
 {		
 	ons.notification.confirm({
@@ -7284,9 +7284,9 @@ function showSignupForm()
       animation: 'slide',
       onTransitionEnd: function() {          	  
       	  callAjax("getCustomFields",'');   
-/*AtualizaÁ„o Master Hub (Desativa entrada do cÛdigo do paÌs nos campos de telefone)*/
+/*Atualiza√ß√£o Master Hub (Desativa entrada do c√≥digo do pa√≠s nos campos de telefone)*/
       	  /*initIntelInputs();*/
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
       } 
     };   
     sNavigator.pushPage("signup.html", options);		 	
@@ -7308,7 +7308,7 @@ function signup()
 		      	 return;
 		      }
 	      }
-/*AtualizaÁ„o Master Hub (M·scara do Telefone)*/
+/*Atualiza√ß√£o Master Hub (M√°scara do Telefone)*/
 				var form = $( "#frm-signup").serializeArray();
 				var params = "";
 
@@ -7318,7 +7318,7 @@ function signup()
 					params += field.name+"="+field.value+"&";
 			  });
 	      params+="&device_id="+ getStorage("device_id");
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	      if (isDebug()){
 	      	  params+="&device_platform=Android";
 	      } else {
@@ -7445,7 +7445,7 @@ function reOrder(order_id)
 
 function displayAddressBook(data)
 {
-/*AtualizaÁ„o Master Hub (VerificaÁ„o de EndereÁos e Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Verifica√ß√£o de Endere√ßos e Cat√°logo de Endere√ßos)*/
 	var htm='<ons-list>';
 	if ( data.address.length>0){		
 	   $.each( data.address, function( key, val ) {  
@@ -7462,7 +7462,7 @@ function displayAddressBook(data)
 	                 htm+='<ons-icon icon="ion-ios-location-outline"></ons-icon>';
 	              }
 	            htm+='</ons-col>';
-			   htm+='<i class="white text-center" style="margin-top: -20px; margin-bottom: -7px; font-size: 12px;">Este endereÁo est· desatualizado!</i>';			   
+			   htm+='<i class="white text-center" style="margin-top: -20px; margin-bottom: -7px; font-size: 12px;">Este endere√ßo est√° desatualizado!</i>';			   
 	         htm+='<ons-row>';
 	     htm+='</ons-list-item>';
 			   
@@ -7486,7 +7486,7 @@ function displayAddressBook(data)
    
    createElement('address-book-list', htm );
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 
 function modifyAddressBook(id)
 {	
@@ -7512,7 +7512,7 @@ function fillAddressBook(data)
 	
 	$(".id").val( data.id );
 	$(".street").val( data.street );
-/*AtualizaÁ„o Master Hub (N˙mero e Bairro e Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (N√∫mero e Bairro e Cat√°logo de Endere√ßos)*/
 	$(".numero").val( data.numero );
 	$(".location_area", "#frm-addressbook").html(data.area_name);
 	$(".area_name", "#frm-addressbook").val(data.area_name);
@@ -7531,11 +7531,11 @@ function fillAddressBook(data)
 		$(".as_default").attr("checked","checked");
 	} else $(".as_default").removeAttr("checked");
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 
 function saveAddressBook()
 {
-/*AtualizaÁ„o Master Hub (VerificaÁ„o de EndereÁos e Cat·logo de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Verifica√ß√£o de Endere√ßos e Cat√°logo de Endere√ßos)*/
 if ($(".city").val()!="" && $(".state").val()!="" && $(".area_name").val()!=""){
 	$.validate({ 	
 	    form : '#frm-addressbook',    
@@ -7550,11 +7550,11 @@ if ($(".city").val()!="" && $(".state").val()!="" && $(".area_name").val()!=""){
 	    }  
 	});
 } else {
-	toastMsg( getTrans('VocÍ precisa preencher o seu endereÁo corretamente!','VocÍ precisa preencher o seu endereÁo corretamente!')); 
+	toastMsg( getTrans('Voc√™ precisa preencher o seu endere√ßo corretamente!','Voc√™ precisa preencher o seu endere√ßo corretamente!')); 
 		return;
 	}	
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 
 function newAddressBook()
 {
@@ -7582,9 +7582,9 @@ function deleteAddressBook()
 	ons.notification.confirm({
 	  message: getTrans('Delete this records?','delete_this_records') ,	  
 	  title: dialog_title_default,
-/*AtualizaÁ„o Master Hub (TraduÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Tradu√ß√£o)*/
 	  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	  animation: 'default', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
@@ -7621,7 +7621,7 @@ function popUpAddressBook()
 function displayAddressBookPopup(data)
 {		
 	var htm='<ons-list>';
-/*AtualizaÁ„o Master Hub (VerificaÁ„o de EndereÁos e Cat·logos de EndereÁos)*/
+/*Atualiza√ß√£o Master Hub (Verifica√ß√£o de Endere√ßos e Cat√°logos de Endere√ßos)*/
 	if ( data.address.length>0){		
 	   $.each( data.address, function( key, val ) {   		
 	   	 var complete_address=val.street+"|";
@@ -7638,10 +7638,10 @@ function displayAddressBookPopup(data)
 	   	 complete_address+=val.delivery_instruction+"|";
 		   
 	if (val.area_id==0 || val.city_id==0){
-	 toastMsg( getTrans('O endereÁo "'+val.street+' n∫ '+val.numero+', '+val.area_name+'" est· desatualizado no cat·logo de endereÁos, atualize-o antes de selecion·-lo!','O endereÁo '+val.street+' n∫ '+val.numero+' - '+val.area_name+' est· desatualizado no cat·logo de endereÁos, atualize-o antes de selecion·-lo!')); 
+	 toastMsg( getTrans('O endere√ßo "'+val.street+' n¬∫ '+val.numero+', '+val.area_name+'" est√° desatualizado no cat√°logo de endere√ßos, atualize-o antes de selecion√°-lo!','O endere√ßo '+val.street+' n¬∫ '+val.numero+' - '+val.area_name+' est√° desatualizado no cat√°logo de endere√ßos, atualize-o antes de selecion√°-lo!')); 
 		return;
 		}
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	     htm+='<ons-list-item modifier="tappable" class="setAddress" data-address="'+complete_address+'" >';
 	         htm+='<ons-row class="row">';
 	            htm+='<ons-col class="" width="80%">';
@@ -7964,7 +7964,7 @@ function geolocationSuccess(position)
 	
 	callAjax("reverseGeoCoding",params);
 }
-/*AtualizaÁ„o Master Hub (FunÁ„o de Pesquisar Ids pelo nome do Bairro)*/
+/*Atualiza√ß√£o Master Hub (Fun√ß√£o de Pesquisar Ids pelo nome do Bairro)*/
 function buscar_ids_por_CEP(nome_bairro)
 {
 	callAjax("IdsDoCEP","nome_bairro="+nome_bairro);
@@ -7974,7 +7974,7 @@ function buscar_ids_por_Bairro(nome_bairro)
 {
 	callAjax("IdsDoBairro","nome_bairro="+nome_bairro);
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function geolocationError(error)
 {
 	hideAllModal();
@@ -8051,7 +8051,7 @@ function addressPopup()
 	}	
 		
 }
-/*AtualizaÁ„o Master Hub (Converter Data para data do Brasil e Extensa)*/
+/*Atualiza√ß√£o Master Hub (Converter Data para data do Brasil e Extensa)*/
 function dataAtualFormatada(converter_data){
     var data = new Date(converter_data);
     var dia = data.getDate();
@@ -8065,8 +8065,8 @@ function dataAtualFormatada(converter_data){
 }
 
 function dataAtualFormatada_NomeMes(converter_data){
-	var nomeMeses = ['Janeiro', 'Fevereiro', 'MarÁo', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-    var diaSemana = ['Domingo', 'Segunda-Feira', 'TerÁa-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'S·bado']	
+	var nomeMeses = ['Janeiro', 'Fevereiro', 'Mar√ßo', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    var diaSemana = ['Domingo', 'Segunda-Feira', 'Ter√ßa-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'S√°bado']	
     var data = new Date(converter_data);
     var diaS = data.getDay();
 	diaS = diaSemana[diaS];
@@ -8079,8 +8079,8 @@ function dataAtualFormatada_NomeMes(converter_data){
 }
 
 function dataAtualFormatada_NomeMes_hora(converter_data){
-	var nomeMeses = ['Janeiro', 'Fevereiro', 'MarÁo', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-    var diaSemana = ['Domingo', 'Segunda-Feira', 'TerÁa-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'S·bado']	
+	var nomeMeses = ['Janeiro', 'Fevereiro', 'Mar√ßo', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    var diaSemana = ['Domingo', 'Segunda-Feira', 'Ter√ßa-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'S√°bado']	
     var data = new Date(converter_data);
     var diaS = data.getDay();
 	diaS = diaSemana[diaS];
@@ -8105,10 +8105,10 @@ function dataAtualFormatada_NomeMes_hora(converter_data){
    if (str_segundos.length < 2)
       str_segundos = 0 + str_segundos;
     
-	data_completa=[diaS]+", "+[dia, mes, ano].join(' de ')+" ‡s "+str_horas + ":" + str_minutos + ":" + str_segundos;
+	data_completa=[diaS]+", "+[dia, mes, ano].join(' de ')+" √†s "+str_horas + ":" + str_minutos + ":" + str_segundos;
     return data_completa;
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function changeAddress()
 {	
 	$.validate({ 	
@@ -8176,7 +8176,7 @@ function itemNotAvailable(options)
 	switch (options)
 	{
 		case 1:
-		toastMsg( getTrans("item n„o disponÌvel",'item_not_available') );
+		toastMsg( getTrans("item n√£o dispon√≠vel",'item_not_available') );
 		break;
 		
 		case 2:
@@ -8349,9 +8349,9 @@ function setLanguage(lang_id)
        ons.notification.confirm({
 		  message: 'Language file has not been loaded, would you like to reload?',		  
 		  title: dialog_title_default ,
-/*AtualizaÁ„o Master Hub (TraduÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Tradu√ß√£o)*/
 		  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		  animation: 'none',
 		  primaryButtonIndex: 1,
 		  cancelable: true,
@@ -8420,14 +8420,14 @@ function removeVoucher()
 	$(".voucher_amount").val( '' );
     $(".voucher_type").val( '' );
     $(".voucher_code").val('');
-/*AtualizaÁ„o Master Hub (Aplica personalizaÁıes quando Remover cupom))*/
+/*Atualiza√ß√£o Master Hub (Aplica personaliza√ß√µes quando Remover cupom))*/
 	$("#page-paymentoption .voucher_amount").css({"display":"none"});
 	$("#page-paymentoption .titulo-cupom").css({"display":"none"});	
 	$("#page-paymentoption .titulo-subtotal_new").css({"display":"none"});
 	$("#page-paymentoption .subtotal_new").css({"display":"none"});
 	$("#page-paymentoption .total-comodidade").html( getStorage("cart_tax_final"));
 	$("#page-paymentoption .total-gorjeta").html( getStorage("cart_tip_final"));			
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
    
     $(".apply-voucher").show();
     $(".remove-voucher").hide();
@@ -8436,7 +8436,7 @@ function removeVoucher()
     
     $(".total-amount").html( prettyPrice(getStorage("order_total_raw")) );
 }
-/* AtualizaÁ„o Master Hub (Programa de Fidelidade) */
+/* Atualiza√ß√£o Master Hub (Programa de Fidelidade) */
 function applyFidelidade()
 {
 	
@@ -8478,14 +8478,14 @@ function removeFidelidade()
 	$(".fidelidade_amount").val( '' );
     $(".fidelidade_type").val( '' );
     //$(".fidelidade_code").val('');
-/*AtualizaÁ„o Master Hub (Aplica personalizaÁıes quando Remover fidelidade))*/
+/*Atualiza√ß√£o Master Hub (Aplica personaliza√ß√µes quando Remover fidelidade))*/
 	$("#page-paymentoption .fidelidade_amount").css({"display":"none"});
 	$("#page-paymentoption .titulo-cupom").css({"display":"none"});	
 	$("#page-paymentoption .titulo-subtotal_new").css({"display":"none"});
 	$("#page-paymentoption .subtotal_new").css({"display":"none"});
 	$("#page-paymentoption .total-comodidade").html( getStorage("cart_tax_final"));
 	$("#page-paymentoption .total-gorjeta").html( getStorage("cart_tip_final"));			
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
    
     $(".apply-fidelidade").show();
     $(".remove-fidelidade").hide();
@@ -8494,7 +8494,7 @@ function removeFidelidade()
     
     $(".total-amount").html( prettyPrice(getStorage("order_total_raw")) );
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 
 function deviceBackReceipt()
 {
@@ -8520,11 +8520,11 @@ function prettyPrice( price )
 	price = number_format(price,decimal_place, decimal_separator ,  thousand_separator ) ;
 	
 	if ( currency_position =="left"){
-/*AtualizaÁ„o Master Hub (Separar o sÌmbolo da moeda do valor)*/
+/*Atualiza√ß√£o Master Hub (Separar o s√≠mbolo da moeda do valor)*/
 		return currency_symbol+" "+price;
 	} else {
 		return price+" "+currency_symbol;
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	}
 }
 
@@ -8761,11 +8761,11 @@ function autoAddToCart(item_id,price,discount,category_id)
 		callAjax("addToCart", "cart="+ JSON.stringify(cart_value) + "&device_id=" + getStorage("device_id") );		
 	} else {		
 	    //sNavigator.popPage({cancelIfRunning: true}); //back button
-/*AtualizaÁ„o Master Hub (RemoÁ„o da mensagem de Ìtem adicionado e CorreÁ„o da tela de exibiÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Remo√ß√£o da mensagem de √≠tem adicionado e Corre√ß√£o da tela de exibi√ß√£o)*/
 			//toastMsg(  getTrans("Item added to cart",'item_added_to_cart') );
 			onsenDialogCheckout();
 		}
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	showCartNosOrder();
 }
 
@@ -8836,9 +8836,9 @@ function applyRedeem()
 		params+="&client_token="+getStorage("client_token");
 		params+="&merchant_id="+ getStorage("merchant_id");
 		params+="&voucher_amount="+ $(".voucher_amount").val();
-/* AtualizaÁ„o Master Hub (Programa de Fidelidade) */
+/* Atualiza√ß√£o Master Hub (Programa de Fidelidade) */
 		params+="&fidelidade_amount="+ $(".fidelidade_amount").val();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		params+="&subtotal_order="+ getStorage("cart_sub_total");
 		
 		params+="&cart_sub_total="+ getStorage("cart_sub_total");
@@ -8864,7 +8864,7 @@ function cancelRedeem()
     $(".pts_redeem_amount").val( '' );
     $(".pts_pts").show();
     $(".pts_pts_cancel").hide();
-/* AtualizaÁ„o Master Hub (Programa de Fidelidade) */
+/* Atualiza√ß√£o Master Hub (Programa de Fidelidade) */
 	$("#page-paymentoption .total-pontos").css({"display":"none"});
 	$("#page-paymentoption .titulo-pontos").css({"display":"none"});
 	$("#page-paymentoption .titulo-subtotal_new").css({"display":"none"});
@@ -8872,7 +8872,7 @@ function cancelRedeem()
 	$("#page-paymentoption .titulo-gorjeta").html('Gorjeta: ');
 	$("#page-paymentoption .total-gorjeta").html(getStorage("cart_tip_final"));			
 	$("#page-paymentoption .total-comodidade").html( getStorage("cart_tax_final"));   $(".total-amount").html( prettyPrice(getStorage("order_total_raw")) );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
     $(".total-amount").html( prettyPrice(getStorage("order_total_raw")) );
 }
 
@@ -8885,7 +8885,7 @@ function backtoHome()
    menu.setMainPage('home.html',options);
 }
 
-/* AtualizaÁ„o Master Hub (PersonalizaÁ„o) */
+/* Atualiza√ß√£o Master Hub (Personaliza√ß√£o) */
 function backtoSearch()
 {
 	var options = {     	  		  
@@ -8894,7 +8894,7 @@ function backtoSearch()
    };	   	   	   
    menu.setMainPage('searchCategorias.html',options);
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 
 function exitKApp()
 {
@@ -9535,7 +9535,7 @@ function setManualAddress()
 	    },	    
 	    onSuccess : function() {     	      
 	       $(".street").val( $(".stree_1").val()  );	
-/*AtualizaÁ„o Master Hub (Recaregando Carrinho e N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (Recaregando Carrinho e N√∫mero e Bairro)*/
 	       $(".numero").val( $(".numero_1").val()  );	
 	       $(".area_name").val( $(".area_name_1").val()  );	
 	       $(".city").val( $(".city_1").val()  );	
@@ -9560,7 +9560,7 @@ function setManualAddress()
 	    }  
 	});
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function showMapAddress(map_address_action)
 {
 	setStorage("map_address_action",map_address_action)
@@ -9603,7 +9603,7 @@ function checkGPS_AddressMap()
 	    	 
 	    	 $('.map_search_field_wrap').css('height',"auto");
 	    	 
-/*AtualizaÁ„o Master Hub (N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (N√∫mero e Bairro)*/
 	    	 var address = "", numero="", area_name="", city="", state="" ;			 			 
 			 var zip = "", formatted_address="", s_lat='', s_lng=''; 
 
@@ -9635,16 +9635,16 @@ function checkGPS_AddressMap()
 					case "neighborhood":
 	                    area_name = this.short_name;
 	                    break;
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	            }
 	        });
 	        
 	        dump("formatted_address=>"+formatted_address);
 	        dump("address=>"+address);
-/*AtualizaÁ„o Master Hub (N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (N√∫mero e Bairro)*/
 	        dump("numero=>"+numero);
 	        dump("area_name=>"+area_name);
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	        dump("city=>"+city);
 	        dump("state=>"+state);
 	        dump("zip=>"+zip);
@@ -9670,10 +9670,10 @@ function checkGPS_AddressMap()
 	         dump(map_address_action);
 	         	         
 	         setStorage("map_address_result_address", address );
-/*AtualizaÁ„o Master Hub (N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (N√∫mero e Bairro)*/
 			 setStorage("map_address_result_numero", numero );
 			 setStorage("map_address_result_area_name", area_name );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			 setStorage("map_address_result_city", city );
 			 setStorage("map_address_result_state",state);
 			 setStorage("map_address_result_zip",zip);				
@@ -9922,10 +9922,10 @@ function useThisLocationOld()
 		
 		    //remove this when going live
 		    if(isDebug()){
-/*AtualizaÁ„o Master Hub (TraduÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Tradu√ß√£o)*/
 		    	$(".street").val( "Rua 9 JA" );
 				$(".numero").val( "501" );
-				$(".area_name").val( "Jardim AmÈrica" );
+				$(".area_name").val( "Jardim Am√©rica" );
 				$(".city").val( "Rio Claro" );
 				$(".state").val( "SP" );
 				$(".zipcode").val( "13506033" );	
@@ -9937,17 +9937,17 @@ function useThisLocationOld()
 				$(".delivery-address-text").html( "Rua 9 JA, 501 - Jardim America, Rio Claro - SP" );  
 				
 					reloadCart();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 				sNavigator.popPage({cancelIfRunning: true}); //back button
 		        sNavigator.popPage({cancelIfRunning: true}); //back button    
 		    	return;
 		    }
 		
 		    $(".street").val( getStorage("map_address_result_address") );
-/*AtualizaÁ„o Master Hub (N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (N√∫mero e Bairro)*/
 			$(".numero").val( getStorage("map_address_result_numero") );
 			$(".area_name").val( getStorage("map_address_result_area_name") );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 			$(".city").val( getStorage("map_address_result_city") );
 			$(".state").val( getStorage("map_address_result_state") );
 			$(".zipcode").val( getStorage("map_address_result_zip") );	
@@ -9957,9 +9957,9 @@ function useThisLocationOld()
 			$(".formatted_address").val( getStorage("map_address_result_formatted_address") );	
 			
 			$(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );  
-/*AtualizaÁ„o Master Hub (Recarregando o carrinho)*/
+/*Atualiza√ß√£o Master Hub (Recarregando o carrinho)*/
 				reloadCart();		
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		    sNavigator.popPage({cancelIfRunning: true}); //back button
 		    sNavigator.popPage({cancelIfRunning: true}); //back button    
 		break;
@@ -10675,9 +10675,9 @@ function deleteCC()
 	ons.notification.confirm({
 	  message: getTrans('Delete this records?','delete_this_records') ,	  
 	  title: dialog_title_default,
-/*AtualizaÁ„o Master Hub (TraduÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Tradu√ß√£o)*/
 	  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	  animation: 'default', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
@@ -10700,10 +10700,10 @@ function fillShippingAddress()
 		 dump('p1');
   	     $(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );
   	     $(".street").val( getStorage("map_address_result_address") );
-/*AtualizaÁ„o Master Hub (N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (N√∫mero e Bairro)*/
 		 $(".numero").val( getStorage("map_address_result_numero") );
 		 $(".area_name").val( getStorage("map_address_result_area_name") );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		 $(".city").val( getStorage("map_address_result_city") );
 		 $(".state").val( getStorage("map_address_result_state") );
 		 $(".zipcode").val( getStorage("map_address_result_zip") );	
@@ -10716,10 +10716,10 @@ function fillShippingAddress()
   	 	if(!empty(getStorage("geo_address_result_formatted_address"))){
   	 	   $(".delivery-address-text").html( getStorage("geo_address_result_formatted_address") );
   	       $(".street").val( getStorage("geo_address_result_address") );
-/*AtualizaÁ„o Master Hub (N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (N√∫mero e Bairro)*/
 		 $(".numero").val( getStorage("map_address_result_numero") );
 		 $(".area_name").val( getStorage("map_address_result_area_name") );
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		   $(".city").val( getStorage("geo_address_result_city") );
 		   $(".state").val( getStorage("geo_address_result_state") );
 		   $(".zipcode").val( getStorage("geo_address_result_zip") );	
@@ -10817,9 +10817,9 @@ function initSlideMenu()
        }
        
        initCustomPages();
-/*AtualizaÁ„o Master Hub (P·gina de IntroduÁ„o)*/
+/*Atualiza√ß√£o Master Hub (P√°gina de Introdu√ß√£o)*/
 	   Splash_Pagina_menu();
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
        translatePage();    
           
   });  
@@ -10991,9 +10991,9 @@ function showArea()
 
 function setLocationArea(area_id, area_name )
 {
-/*AtualizaÁ„o Master Hub (Buscar IDs por nome do Bairro)*/
+/*Atualiza√ß√£o Master Hub (Buscar IDs por nome do Bairro)*/
 	buscar_ids_por_Bairro(area_name);
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	global_area_name = area_name;
 	global_area_id = area_id;
 	
@@ -11027,14 +11027,14 @@ function clearAllStorage()
   removeStorage('cart_delivery_charges');
   removeStorage('cart_packaging');
   removeStorage('cart_tax');
-/*AtualizaÁ„o Master Hub (Remove vari·veis do resumo de pedido)*/
+/*Atualiza√ß√£o Master Hub (Remove vari√°veis do resumo de pedido)*/
   removeStorage('cart_sub_total_final');
   removeStorage('cart_delivery_charges_final');
   removeStorage('cart_packaging_final');
   removeStorage('cart_tip_final');
   removeStorage('cart_tax_final');
   removeStorage("cart_discount_final"),
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
   removeStorage('map_address_result_formatted_address');
   removeStorage("customer_contact_number");
   
@@ -11085,11 +11085,11 @@ function showLocationSelect(force_show)
 		      onTransitionEnd: function() { 		      	  		      	
 		      } 
 		    };   
-/*AtualizaÁ„o Master Hub (Verifica se o cliente est· logado)*/
+/*Atualiza√ß√£o Master Hub (Verifica se o cliente est√° logado)*/
 			 if (!isLogin()){
 				return true;
 				    } else
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		    sNavigator.pushPage("locationTypeCityArea.html", options);		
 		    return false;
 		}
@@ -11118,11 +11118,11 @@ function showLocationSelect(force_show)
 		      onTransitionEnd: function() { 		  		      	  
 		      } 
 		    };   
-/*AtualizaÁ„o Master Hub (Verifica se o cliente est· logado)*/
+/*Atualiza√ß√£o Master Hub (Verifica se o cliente est√° logado)*/
 		    if (!isLogin()){
 				return true;
 				    } else
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		    sNavigator.pushPage("locationTypeCityArea.html", options);		
 		    return false;
 		 }
@@ -11144,11 +11144,11 @@ function showShippingLocation(data)
       animation: 'slide',
       onTransitionEnd: function() { 		
       	  if(!empty(data.msg.profile)){
-/*AtualizaÁ„o Master Hub (M·scara de Telefone)*/
+/*Atualiza√ß√£o Master Hub (M√°scara de Telefone)*/
       	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
       	  	$(".location_name").val( data.msg.profile.location_name ) ;
-/*AtualizaÁ„o Master Hub (Complemento de endereÁo e N˙mero e Bairro)*/
+/*Atualiza√ß√£o Master Hub (Complemento de endere√ßo e N√∫mero e Bairro)*/
       	  }
 		  		if (global_area_name===data.msg.address_book.area_name){
       	  if(!empty(data.msg.address_book)){
@@ -11158,7 +11158,7 @@ function showShippingLocation(data)
       	  	 $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
       	  }
 		  		}
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
       	  if(!empty(data.msg.state_info)){
       	  	 global_state_id  = data.msg.state_info.state_id;
       	  	 global_state_name  = data.msg.state_info.state_name;
@@ -11168,24 +11168,24 @@ function showShippingLocation(data)
       	  	 
       	  	 $(".state").val( data.msg.state_info.state_name );
       	  }
-/*AtualizaÁ„o Master Hub (FunÁ„o de finalizaÁ„o com os mesmos dados selecionados no inicio)*/
+/*Atualiza√ß√£o Master Hub (Fun√ß√£o de finaliza√ß√£o com os mesmos dados selecionados no inicio)*/
 			$(".city_id").val(getStorage("global_city_id"));
 			$(".area_id").val(getStorage("global_area_id"));
 			$(".city").val(getStorage("global_city_name"));
 			$(".area_name").val(getStorage("global_area_name"));
 		    $(".location_area").html( getStorage("global_area_name") ) ;
 		    $(".location_city").html( getStorage("global_city_name") ) ;
-/*Fim da atualizaÁ„o*/
-/*AtualizaÁ„o Master Hub (M·scara de Telefone)*/
+/*Fim da atualiza√ß√£o*/
+/*Atualiza√ß√£o Master Hub (M√°scara de Telefone)*/
       	  if(!empty(data.details.contact_phone)){
       	  	$(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
       	  }
-/*Fim da atualizaÁ„o*/
-/*AtualizaÁ„o Master Hub (FunÁ„o de finalizaÁ„o com os mesmos dados selecionados no inicio)*/
+/*Fim da atualiza√ß√£o*/
+/*Atualiza√ß√£o Master Hub (Fun√ß√£o de finaliza√ß√£o com os mesmos dados selecionados no inicio)*/
       	  if(!empty(global_area_name)){
       	  	 $(".area_name").val( global_area_name );
       	  }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
       } 
     };   
     sNavigator.pushPage("shippingLocationArea.html", options);
@@ -11221,7 +11221,7 @@ function showShippingLocation(data)
 	}	*/
 }
 
-/*AtualizaÁ„o Master Hub (Bot„o de Login novo)*/
+/*Atualiza√ß√£o Master Hub (Bot√£o de Login novo)*/
 function showShippingLocation_login_btn(data)
 {	
    var options = {
@@ -11262,7 +11262,7 @@ function showShippingLocation_login_btn(data)
 	
     sNavigator.pushPage("shippingLocationArea.html", options);
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 function showState()
 {
 	if (typeof locationState === "undefined" || locationState==null || locationState=="" ) { 	    
@@ -11560,14 +11560,14 @@ function googleLogin()
 {
 	if(isDebug()){
 		
-/*AtualizaÁ„o Master Hub (TraduÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Tradu√ß√£o)*/
 		var params = "email=robson@google.com";
 		params+="&userid=14000000";
 		params+="&fullname=Robson";
 		params+="&lastname=Web";
 		params+="&imageurl=";		
 		params+="&device_id="+ encodeURIComponent(getStorage("device_id"));
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 		if (isDebug()){
       	  params+="&device_platform=Android";
         } else {
@@ -11863,14 +11863,14 @@ function getPage(page_id)
 	    }
 	});	
 }
-/*AtualizaÁ„o Master Hub (Sistema P·gina Inicial)*/
+/*Atualiza√ß√£o Master Hub (Sistema P√°gina Inicial)*/
 function Splash_Pagina_menu()
 {
 	var slide=getStorage("slide");
 	var html='';
 	html+='<ons-list-item onclick="getSlide('+slide+');" class="bottom-menu-item" style="border-bottom: 1px solid #DFDFE0;">';
 	html+='<ons-icon icon="ion-university"></ons-icon> ';
-	html+='<span class="trn" data-trn-key="apresentacao">ApresentaÁ„o Inicial</span>';
+	html+='<span class="trn" data-trn-key="apresentacao">Apresenta√ß√£o Inicial</span>';
 	html+='</ons-list-item>';
 		
 			createElement("splash-pagina-menu",html);
@@ -11884,7 +11884,7 @@ function getSlide(slide)
 	    }
 	});	
 }
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 
 function browseCamera()
 {
@@ -11977,7 +11977,7 @@ function uploadPhoto(imageURI)
 
 function mercapagoSuccess(payment)
 {
-/*AtualizaÁ„o Master Hub (Mercado Pago)*/
+/*Atualiza√ß√£o Master Hub (Mercado Pago)*/
 	 if (payment != null){         
 	 	//alert(JSON.stringify(payment));     
         //toastMsg(JSON.parse(payment).status);
@@ -11987,7 +11987,7 @@ function mercapagoSuccess(payment)
 			params+="&order_id="+JSON.parse(payment).externalReference;
 			params+="&merchant_id="+ getStorage("merchant_id");
 		callAjax("MercadoPagoOK",params); 
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
     } else {
         toastMsg("The user did not make the payment");
     }
@@ -11995,9 +11995,9 @@ function mercapagoSuccess(payment)
 
 function mercapagoFailed(error)
 {
-/*AtualizaÁ„o Master Hub (TraduÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Tradu√ß√£o)*/
 	toastMsg("Erro do Plugin do Mercado Pago: " + error);
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 }
 
 function setTrackView(pagename , campaign_details )
@@ -12097,9 +12097,9 @@ function deleteReview()
 	ons.notification.confirm({
 	  message: getTrans('Are you sure?','are_you_sure') ,	  
 	  title: dialog_title_default,
-/*AtualizaÁ„o Master Hub (TraduÁ„o)*/
+/*Atualiza√ß√£o Master Hub (Tradu√ß√£o)*/
 	  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
-/*Fim da atualizaÁ„o*/
+/*Fim da atualiza√ß√£o*/
 	  animation: 'default', // or 'none'
 	  primaryButtonIndex: 1,
 	  cancelable: true,
