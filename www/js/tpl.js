@@ -144,12 +144,12 @@ function subItemRowWithCheckboxQty(subcat_id,radio_name,radio_value,label,price)
 	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
 	   htm+='</label>';
 	  htm+='</ons-col>';	
-	  
+/*Atualização Master Hub (Tradução)*/
 	  htm+='<ons-col class="concat-text" width="20%">';
 	  htm+='<input name="subitem-qty" type="number" class="text-center numeric_only small-input text-center text-input text-input--underbar subitem-qty " ';
-      htm+='placeholder="qty" value="1">';
+      	  htm+='placeholder="quant." value="1">';
 	  htm+='</ons-col>';	
-	  
+/*Fim da atualização*/
 	  htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
     htm+='</ons-row>';
     htm+='</ons-list-item>';
@@ -231,8 +231,9 @@ function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_
    htm+='<ons-row >';
 	   htm+='<ons-col class="concat-text" width="60%">';
 		 htm+='<input name="qty" type="number" class="item-qty qty numeric_only small-input text-center text-input text-input--underbar" ';
-		  htm+='placeholder="qty" value="'+qty+'" data-rowid="'+x+'">';
-		  
+/*Atualização Master Hub (Tradução)*/
+		  htm+='placeholder="quant." value="'+qty+'" data-rowid="'+x+'">';
+/*Fim da atualização*/
 		  htm+='<input type="hidden" name="'+field_name+'" class="'
 		  +field_name + ' price'+x + ' " value="'+price+'" >';		  
 		  
@@ -249,9 +250,11 @@ function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_
 		  alert(size);*/
 		  
 		  if (empty(size))	{
-		     htm+='<p class="description item-name concat-text bold"><span class="qty-label">'+qty+"x</span> "+prettyPrice(price2)+' '+item_name+'</p>';
+/*Atualização Master Hub (Personalização)*/
+		     htm+='<p class="description item-name concat-text bold"><span class="qty-label vermelho">'+qty+"x </span> "+item_name+'</p>';
 		  } else {
-		  	htm+='<p class="description item-name concat-text bold"><span class="qty-label">'+qty+"x</span> "+prettyPrice(price2)+" "+item_name+
+		  	htm+='<p class="description item-name concat-text bold"><span class="qty-label vermelho">'+qty+"x </span> "+item_name+
+/*Fim da atualização*/
 		  	" <size>("+size+")</size>"
 		  	+'</p>';
 		  }
@@ -277,14 +280,17 @@ function tplCartRowNoBorderSub(subcat_id, sub_item_id, item_name, price, pretty_
       htm+='<ons-col width="3%"></ons-col>';
 	   htm+='<ons-col class="concat-text" width="60%">';
 		 htm+='<input name="qty" type="number" class="subitem-qty'+x+' qty small-input text-center text-input text-input--underbar" ';
-		  htm+='placeholder="qty" value="'+qty+'" data-qty="'+qty2+'" >';
-		  		  
+/*Atualização Master Hub (Tradução)*/
+		  htm+='placeholder="quant." value="'+qty+'" data-qty="'+qty2+'" >';
+/*Fim da atualização*/
 		  htm+='<input type="hidden" name="subcat_id" class="subcat_id" value="'+subcat_id+'">';
 		  htm+='<input type="hidden" name="sub_item_id" class="sub_item_id" value="'+sub_item_id+'">';
 		  htm+='<input type="hidden" name="sub_item_price" class="sub_item_price" value="'+price+'">';
 		  htm+='<input type="hidden" name="sub_item_name" class="sub_item_name" value="'+item_name+'">';
 		  
-		  htm+='<p class="description item-name concat-text"><span class="qty-label">'+qty+"x</span> "+prettyPrice(price)+" "+item_name+'</p>';
+/*Atualização Master Hub (Personalização)*/
+		  htm+='<p class="description item-name concat-text"><span class="qty-label vermelho">'+qty+"x</span> "+item_name+'</p>';
+/*Fim da atualização*/
 	   htm+='</ons-col>';
 	   htm+='<ons-col class="text-right" ><price>'+pretty_price+'</price></ons-col>';
    htm+='</ons-row>';
@@ -322,15 +328,17 @@ function tplCartRowHiddenFields(label, value, field_name, x, class_name)
 
 function initMobileScroller()
 {	
-	
+/*Atualização Master Hub (Tradução e Formato de Datas)*/
 	//https://docs.mobiscroll.com/jquery/select#localization
 	if ( $('.delivery_date').exists()){
 		$('.delivery_date').mobiscroll().date({
 			theme: 'android-holo-light', 
 			mode: "scroller",
 			display: "modal",
-			dateFormat : "yy-mm-dd",
-			//lang : "de"
+			lang: "pt-BR",
+			dateFormat : "dd-mm-yy",
+			/*timeFormat:"HH:ii",
+			timeWheels:"HHii"*/
 		});
 	}
 	
@@ -339,7 +347,8 @@ function initMobileScroller()
 			theme: 'android-holo-light', 
 			mode: "scroller",
 			display: "modal",
-			dateFormat : "yy-mm-dd",
+			lang: "pt-BR",
+			dateFormat : "dd-mm-yy",
 			/*timeFormat:"HH:ii",
 			timeWheels:"HHii"*/
 		});
@@ -350,7 +359,10 @@ function initMobileScroller()
 			theme: 'android-holo-light', 
 			mode: "scroller",
 			display: "modal",
-			dateFormat : "yy-mm-dd"
+			lang: "pt-BR",
+			dateFormat : "dd-mm-yy"
+			/*timeFormat:"HH:ii",
+			timeWheels:"HHii"*/
 		});
 	}
 	
@@ -359,11 +371,14 @@ function initMobileScroller()
 			theme: 'android-holo-light', 
 			mode: "scroller",
 			display: "modal",
-			dateFormat : "yy-mm-dd"
+			lang: "pt-BR",
+			dateFormat : "dd-mm-yy"
+			/*timeFormat:"HH:ii",
+			timeWheels:"HHii"*/
 		});
 	}
 }
-
+/*Fim da atualização*/
 function tplPaymentList(radio_name, radio_value, label, icons)
 {
 	var htm='';	
@@ -463,15 +478,40 @@ function tplReviews(avatar , rating, client_name, review, date_review, id , can_
 	return htm;
 }
 
+/* Atualização Master Hub (Sugestões de Estabelecimentos) */
+function tplSuggestions(nome_empresa, cidade, votos, date_created)
+{
+   var htm='';
+   htm+='<ons-list class="review-list">';
+	  htm+='<ons-list-item modifier="tappable" class="list-item-container">';
+	     htm+='<ons-row class="row"> ';
+		     htm+='<ons-col class="col-image" width="90px">';
+			   htm+='<ons-icon icon="fa-user" class="icon-user"></ons-icon>';
+			 htm+='</ons-col>';
+			 
+			 htm+='<ons-col class="col-description">';
+			   htm+='<p class="small-font-dim">'+nome_empresa+'</p>';
+			   htm+='<p class="small-font-dim">'+cidade+'</p>';
+			   htm+='<p class="small-font-dim">'+votos+'</p>';
+			   htm+='<p class="small-font-dim">'+date_created+'</p>';
+			 htm+='</ons-col>';
+			 
+		 htm+='</ons-row>';
+	  htm+='</ons-list-item>';
+	htm+='</ons-list>';
+	return htm;
+}
+
 function customFields(name, placeholder)
 {
 	var htm='';	
 	htm+='<div class="field-wrapper">';
-	  htm+='<input type="text" name="'+name+'"  class="text-input text-input--underbar" placeholder="'+placeholder+'" value="" has_validation data-validation="required" data-validation-error-msg="this field is mandatory!" >';
+/*Atualização Master Hub (Tradução)*/
+	  htm+='<input type="text" name="'+name+'"  class="text-input text-input--underbar" placeholder="'+placeholder+'" value="" has_validation data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >';
 	htm+='</div>';
 	return htm;
 }
-
+/*Fim da atualização*/
 function DineinFields()
 {
 	var htm='';	
@@ -482,9 +522,10 @@ function DineinFields()
    htm+='</div>';
    
     htm+='<div class="field-wrapper">';
-      htm+='<input type="text" name="dinein_number_of_guest"  class="numeric_only2 dinein_number_of_guest text-input text-input--underbar has_validation" placeholder="'+  getTrans("Number of guest",'number_of_guest') + '" data-validation="required" data-validation-error-msg="this field is mandatory!"   >';
+/*Atualização Master Hub (Tradução)*/
+      htm+='<input type="text" name="dinein_number_of_guest"  class="numeric_only2 dinein_number_of_guest text-input text-input--underbar has_validation" placeholder="'+  getTrans("Number of guest",'number_of_guest') + '" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"   >';
    htm+='</div>';
-   
+/*Fim da atualização*/
    htm+='<div class="field-wrapper">';
       htm+='<input type="text" name="dinein_special_instruction"  class="dinein_special_instruction text-input text-input--underbar has_validation" placeholder="'+ getTrans("Special Instructions",'special_instruction') + '" >';
    htm+='</div> ';
@@ -502,9 +543,10 @@ function ContactNumberFields()
    htm+='</div>';
    
     htm+='<div class="field-wrapper">';
-      htm+='<input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" placeholder="'+  getTrans("Contact phone",'contact_phone') + '" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"   >';
+/*Atualização Master Hub (Tradução)*/
+      htm+='<input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" placeholder="'+  getTrans("Contact phone",'contact_phone') + '" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"   >';
    htm+='</div>';
-      
+/*Fim da atualização*/
 	return htm;
 }
 

@@ -1,6 +1,519 @@
+/* Neste arquivo há personalizações que são específicas para cada uso, sendo necessário adaptá-las e ajustá-las pelo debug */
+/* Atualização Master Hub (Personalizações) */
+/* Atualização Master Hub (Fundo Novo) */
+@-webkit-keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 350px 0; }
+}
+.page__background.page--fundo_masterhub__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+.page__background.page--fundo_masterhub-icones__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 150%;
+    background-image: url("fundo_masterhub-icones.svg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+.page__background.page--fundo_masterhub-fidelidade__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+.page__background.page--fundo_masterhub-dinheiro__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+    animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite;
+}
+
+.page__background.page--fundo_masterhub-atualizar__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+    animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite;
+}
+
+.page__background.page--fundo_masterhub-options__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+
+.page__background.page--fundo_masterhub-entrega__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+.page__background.page--fundo_masterhub-final__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+.page__background.page--fundo_masterhub-review__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+
+.page__background.page--fundo_masterhub-profile__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+
+.page__background.page--fundo_masterhub-login__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+
+.page__background.page--fundo_masterhub-gorjeta__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+
+.page__background.page--fundo_masterhub-favoritos__background { 
+    position: absolute;
+    z-index: -999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -100%;
+    background-size: 90%;
+    background-image: url("bg_blank.jpg");
+    background-position: 0px 0px;
+    background-repeat: repeat;
+
+ /*   animation: animatedBackground 34s linear infinite;
+    -ms-animation: animatedBackground 34s linear infinite;
+    -moz-animation: animatedBackground 34s linear infinite;
+    -webkit-animation: animatedBackground 34s linear infinite; */
+}
+
+.vermelho {
+	color: #e62f2f;
+}
+
+.text-right-fidelidade{
+text-align:right;
+margin-top: -42px;
+}
+
+.load {
+  position: relative;
+  margin: 50px auto;
+  width: 100px;
+  height: 80px;
+}
+
+.imgcategoria {
+width: 32px;
+height: 32px;
+vertical-align: middle;
+margin-right: 5px;
+}
+.cod-recibo .row{
+   
+    
+}
+.cod-recibo .col{
+    text-align: center;
+    font-size: 30px;
+    vertical-align: middle;
+    color: darkgray;
+}
+
+.cod-recibo .total-amount{
+    position: relative!important;
+    font-size: 30px!important;
+    text-align: center;
+    display: block;
+    vertical-align: middle;
+    padding: 24px;
+    font-weight: 600;
+    top: auto !important;
+    left: auto!important;
+}
+
+.cod-thanks{
+        color: #6d6c6c;
+        margin-top: 0px;
+        position: relative !imporant;
+}
+
+.cod-end-entrega{
+    /*float: left; */
+    /* margin-top: 30px; */
+    /* margin-bottom: 30px; */
+    margin: auto;
+        width: 70%;
+    vertical-align: middle;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.receipt-pedido{
+    font-weight: 600;
+    }
+.t_pgtoico{
+    max-width: 30%;
+    -webkit-box-flex: 0;
+    /* flex: 0 0 40%; */
+    /* max-width: 10%; */
+    float: left;
+}
+.t_entregaico{
+       /* margin-left: 20px; */
+    width: 24%;
+    font-size: 40px;
+    vertical-align: middle;
+    float: left;
+    line-height: 80px;
+}
+.t_pgtotrans{
+        color: #5a5a5a;
+}
+.t_pgtodesc{
+    color:#7b7878;
+    padding: 2px;
+}
+.t_pgto{
+    font-size: 14px!important;
+    text-align: center;
+    width: 70%;
+    display: inline-block;
+    /* vertical-align: middle; */
+    padding: 4px!important;
+}
+.cod-rec-tempo{
+    border: 1px solid #ddd;
+    width: 98%;
+    margin: auto;
+    padding-bottom: 10px!important;
+    padding-top: 10px!important;
+        display: inline-block;
+    font-size: 24px;
+color:#666;
+}
+.cod-rec-entrega{
+    font-size: 20px;
+    color: darkgray;
+    display: block;
+    text-align: center;
+        width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #ddee;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+	margin-top: 0px;
+    /* margin-left: 8px; */
+    /* margin-right: 8px; */
+    /* padding-left: 8px; */
+    /* width: 100%; */
+    /* text-align: center; */
+    
+}
+.t_entrega{
+    
+    font-weight: bold;
+    
+}
+
+.t_tempoentrega{
+        vertical-align: middle;
+}
+.close{
+/*background:#F7F7F7;*/
+opacity: 0.3!important;
+}
+
+.gear { 
+  position: absolute;
+  z-index: -10;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 5s infinite;
+          animation: spin 5s infinite;
+}
+
+.two {
+  left: 40px;
+  width: 80px;
+  height: 80px;
+  -webkit-animation: spin-reverse 5s infinite;
+          animation: spin-reverse 5s infinite;
+}
+
+.three {
+  top: 45px;
+  left: -10px;
+  width: 60px;
+  height: 60px;
+}
+
+@-webkit-keyframes spin {
+  50% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  50% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin-reverse {
+  50% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+@keyframes spin-reverse {
+  50% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+.lil-circle {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px 2px gray, 0 0 50px white;
+  width: 100px;
+  height: 100px;
+  opacity: .65;
+}
+
+
+
+form {
+    display: block;
+    margin-top: 0em;
+	padding:10px;
+
+}
+/* Fim da atualização */
+/* Atualização Master Hub (Programa de Fidelidade) */
+.user-percent {
+    position: absolute;
+    font-size: 48px;
+    text-align: center;
+    font-weight: 300;
+    top: 55px;
+    left: 42px;
+}
+
+.user-info {
+    display: inline-block;
+    text-align: -webkit-center;
+	top: 10px;
+    position: absolute;
+    margin-left: 170px;
+    vertical-align: top;
+    z-index: 2;
+	font-size: 30px; 
+}
+
+.invisivel {
+	display: none
+}
+
+.etiqueta-fidelidade{
+border:none;
+text-align: -webkit-center;
+/* padding: 10px;*/
+background:url("images/trofeu.svg") no-repeat center center;
+	background-color: rgba(124, 218, 131, 0.4392156862745098);
+}
+.botao-fidelidade{
+    background-color: transparent!important;
+    border-top: 0px solid #fff!important;
+    border-bottom: 0px solid #fff!important;
+}
+/* Fim da atualização */
+
+/* Atualização Master Hub (Sugestões de Estabelecimentos) */
+.indicar-restaurante{
+border:none;
+height: 60px;
+text-align: -webkit-center;
+}
+
+.button.masterhub-btn{
+border-radius: 12px; 
+border: 3px solid #AF4747; 
+background: #AF0606; 
+}
+
+.button.masterhub-btn-voto{
+border-radius: 7px; 
+border: 3px solid #AF4747; 
+background: #AF0606; 
+padding: 4px 10px;
+line-height: 17px;	
+}
+
+.how_you_like_pay{
+text-align: center;
+margin-top: -15px !important;
+margin-bottom: 15px;	
+}
+/* Fim da atualização */
+
 .wrapper{
 border:0px solid red;
 padding:8px;
+}
+.wrapper3{
+border:0px solid red;
+
 }
 
 .wrapper-white{
@@ -18,10 +531,15 @@ padding:8px;
 .orange-header
 {
 max-width:100%;
-background:#f75d34;
+background:transparent;
 color:#fff;
 padding-top:10px;
 padding-bottom:15px;
+}
+.home-fundo{
+background:rgba(171,0,0,0.66);
+	padding: 18px;
+    margin-top: 1px;
 }
 .orange-header{
 padding-left:8px;
@@ -36,7 +554,7 @@ margin:auto;
 max-width:70%;
 }
 .navigation-bar{
-background:#f75d34;
+background: rgba(171,0,0,0.66);
 color:#fff;
 border:none;
 }
@@ -47,12 +565,15 @@ border:none;
 .restauran-title.white
 {
 color:#fff;
+font-size: 12px;
+vertical-align: middle;
 }
 
 .green,
 .icon-green,
 .myfa-check
 {
+font-size: 14px;
 color:#00B279;
 }
 
@@ -63,6 +584,55 @@ background:#00B279;
 
 .button.blue-btn{
 background:#3B5998;
+}
+
+.newbutton{
+  background: white;
+  width: 145px;
+  margin: auto;
+  margin-left: 2px;
+  margin-right: 2px;
+  border-radius: 30px;
+  font-size: 12px;
+  height: 44px;
+  color: #2c3849;
+  border: 0.5px solid #eeeeee;
+  font-weight: normal;
+  font-family: inherit;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.newbutton:active{
+  opacity: 0.2;
+}
+
+.newbutton:focus{
+  outline-style: none;
+}
+
+.sharebutton{
+  height: 75px;
+  width: 75px;
+  border-radius: 50px;
+  border: none;
+  color: white;
+  font-size: 24px;
+  margin-right: 10px;
+  margin-left: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.sharebutton:active{
+  opacity: 0.2;
+}
+
+.sharebutton:focus{
+  outline-style: none;
+}
+
+#page-paymentoption .newbutton{
+  margin-bottom: 10px;
+  width: 210px;
 }
 
 .pad20{
@@ -143,6 +713,11 @@ text-align:right;
 .p-normal.pts_earn_label,
 #page-pts .p-normal,
 #page-pts-details .p-normal,
+/* Atualização Master Hub (Programa de Fidelidade) */
+#page-fda .p-normal,
+#page-fda-details .p-normal,
+.em_cada_um_dos_niveis,
+/* Fim da atualização */
 .p-dim
 {
 color:#666;
@@ -152,10 +727,11 @@ color:#666;
 background:#00B279;
 color:#fff;
 text-align:center;
-padding-top:6px;
-padding-bottom:6px;
+padding-top:14px;
+padding-bottom:14px;
 font-size:14px;
 z-index:11;
+text-transform: uppercase;
 }
 
 .arrow_box { position: relative; background: #00B279; } .arrow_box:after { top: 100%; left: 50%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; border-color: rgba(0, 178, 121, 0); border-top-color: #00B279; border-width: 8px; margin-left: -8px; }
@@ -187,6 +763,18 @@ margin:auto;
 /*background:#fff;*/
 }
 
+.restaurant-list .logo-wrap3
+{
+height: 97px;
+width: 105px;
+display:block;
+margin:auto;
+/*background:rgba(255,255,255,0.6);
+border-radius: 15px;
+box-shadow: -1px 1px 4px 2px rgba(0,0,0,0.5);*/
+overflow: hidden;
+}
+
 .logo-wrap.logo-non-auto{
 float:left;
 }
@@ -198,6 +786,15 @@ max-width:100%;
 margin:auto;
 display:block;
 max-height:100px;
+}
+.logo-wrap3 img
+{
+max-width:90%;
+margin:auto;
+display:block;
+max-height:110px;
+position: relative;
+top: 50%;
 }
 
 .restaurant-list .row,
@@ -313,7 +910,7 @@ font-size:13px;
 }
 .item-header{
 height:170px;
-background:#fff;
+/* background:#fff;*/
 background-repeat: no-repeat !important;
 background-size: contain !important;
 background-position:center !important;
@@ -368,7 +965,7 @@ padding-bottom:5px;
 .onsen-display .radio-button__checkmark,
 #page-locations .radio-button__checkmark,
 #page-languageoptions .radio-button__checkmark,
-#page-expirationmonth .radio-button__checkmark,
+#page-expirationmonth .radio-button__checkmark
 {
 border:1px solid #ddd;
 }
@@ -414,6 +1011,8 @@ font-size:30px;
 .page-login-fb,
 .voucher-wrap,
 .remove-voucher,
+.fidelidade-wrap,
+.remove-fidelidade,
 .mobile-verification-msg,
 .email-verification-msg,
 .pts_pts_cancel
@@ -433,7 +1032,7 @@ margin:auto;
 #page-cart .text-big,
 #page-checkoutsignup .text-big,
 #page-shipping .text-big,
-#page-paymentoption .text-big,
+#page-paymentoption .text-big
 {
 margin-top:7px;
 }
@@ -566,7 +1165,7 @@ background:#101317;
 
 .loading-screen .inner{
 color: #FFFFFF;
-font-family: arial;
+font-family: 'Roboto', sans-serif;
 margin-top: 25%;
 position: relative;
 text-align: center;
@@ -621,6 +1220,7 @@ margin-top:5px;
 }
 
 #voucher-wrap,
+#fidelidade-wrap,
 .pts-apply-points-wrap
 {
 margin-bottom:15px;
@@ -633,14 +1233,19 @@ margin-bottom:15px;
 .p-normal.pts_earn_label{
 font-size:14px;
 }
-#page-pts .p-normal
+/* Atualização Master Hub (Programa de Fidelidade) */
+#page-pts .p-normal,
+#page-fda .p-normal,
+.em_cada_um_dos_niveis
 {
 font-size:14px;
 }
 
-#scroller-pts-details span
+#scroller-pts-details span,
+#scroller-fda-details span
 {
-color:#f75d34;
+/* Fim da atualização */
+color:#AF0606;
 }
 
 .profile-pic-wrap{
@@ -682,8 +1287,10 @@ height: 100px;
 }
 
 #page-profile .profile-pic-wrap{
-padding:30px 10px;
+padding-top:20px;
+padding-bottom: 0;
 text-align:center;
+background: white;
 }
 
 .is-broken{
@@ -732,7 +1339,7 @@ display:none;
   border-top: 1.1em solid rgba(247,93,52, 0.2);
   border-right: 1.1em solid rgba(247,93,52, 0.2);
   border-bottom: 1.1em solid rgba(247,93,52, 0.2);
-  border-left: 1.1em solid #f75d34;
+  border-left: 1.1em solid #AF0606;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
@@ -793,7 +1400,7 @@ margin-top:20px;
   border-top: 1.1em solid rgba(247,93,52, 0.2);
   border-right: 1.1em solid rgba(247,93,52, 0.2);
   border-bottom: 1.1em solid rgba(247,93,52, 0.2);
-  border-left: 1.1em solid #f75d34;
+  border-left: 1.1em solid #AF0606;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
@@ -870,14 +1477,16 @@ display:none;
 }
 
 .button.orange-btn{
-background:#f75d34;
+background:#AF0606;
 }
 
 .time-remaining-wrap{
 background:#F6F8F7;
 padding-top:15px;
 padding-bottom:15px;
-border-bottom:1px solid ##E4E4E4;
+/* Atualização Master Hub (Correção) */
+border-bottom:1px solid #E4E4E4;
+/* Fim da atualização */
 }
 
 .rounded-green {
@@ -1012,19 +1621,25 @@ border-radius: 50%;
 .notification.successful,
 .notification.paid
 {
-background:#2c9f2c;
+background:#388e3c;
 }
 .notification.accepted{
-background:#33a17e;
+background:#4caf50;
 }
 .notification.inprogress{
-background:#ec391c;
+background:#8bc34a;
 }
 .notification.assigned{
-background:#fc8344;
+background:#448aff;
 }
 .notification.started{
-background:#ba68c8;
+background:#8bc34a;
+}
+.notification.decline{
+background:#d32f2f;
+}
+.notification.cancelled{
+background:#757575;
 }
 
 .map_search_field_wrap{
@@ -1105,10 +1720,10 @@ font-size:30px;
 {
  display:none;
 }
-.search-banner{
-background:url("images/location-banner.jpg") no-repeat center center;
-background-size:cover;
-min-height:180px;
+.search-banner-logo{
+background:url("images/logo.png") no-repeat center center;
+background-size: 200px;
+min-height: 160px;
 }
 
 .category_popup_scroller{
@@ -1142,7 +1757,7 @@ padding:0;
 .spinner > div {
   width: 12px;
   height: 12px;
-  background-color: #f75d34;
+  background-color: #AF0606;
 
   border-radius: 100%;
   display: inline-block;
@@ -1221,6 +1836,10 @@ display:block;
 padding:0 0 5px;
 }
 
+#custom_pages .ons-icon{
+  color:#039be5;
+}
+
 #page-profile .profile-pic-wrap .button.green-btn{
 font-size: 11px;
 line-height: inherit;
@@ -1271,9 +1890,9 @@ border-radius: 50%;
 .menu_tab,
 .tab-bar
 {
-background:#f75d34;
+background:#AF0606;
 margin-bottom:0;
-border-top:1px solid #f8714d;
+border-top:1px solid #AF4747;
 font-size: 13px;
 }
 
@@ -1281,7 +1900,7 @@ font-size: 13px;
 color:#fff;
 text-align:center;
 padding: 8px;
-border-right: 1px solid #f58162;
+border-right: 1px solid #630606;
 }
 
 .menu_tab .col.last{
@@ -1347,7 +1966,7 @@ color:#fff;
 }
 
 .tab-bar__button{
-border-right: 1px solid #f58162;
+border-right: 1px solid #630606;
 }
 
 .menu_tabbar{
@@ -1356,7 +1975,7 @@ margin-top:180px;
 
 :checked + .tab-bar__button > .tab-bar__icon
 {
-color: #f58162;
+color: #630606;
 }
 
 .notification{
@@ -1365,6 +1984,39 @@ font-size:13px;
 
 .order_notes{
 height:100px;
+}
+
+.progress5{
+border-radius: 9px 35px; 
+background-color: rgba(33,144,19,0.73); 
+line-height: 21px; 
+margin-top: 37px; 
+margin-left: 5px; 
+margin-right: 5px; 
+border: 3px solid #8fe081; 
+padding: 5px;
+}
+
+.progress6{
+border-radius: 20px 20px; 
+background-color: rgba(33,144,19,0.73); 
+line-height: 21px; 
+margin-top: 5px; 
+margin-left: 5px; 
+margin-right: 5px; 
+border: 3px solid #8fe081; 
+padding: 5px;
+}
+
+.progress7{
+margin-top: -10px; 
+margin-left: 3%; 
+margin-right: 3%; 
+border-radius: 20px 20px; 
+background-color: rgba(33,144,19,0.73); 
+line-height: 21px; 
+border: 3px solid #8fe081; 
+padding: 7px;
 }
 
 

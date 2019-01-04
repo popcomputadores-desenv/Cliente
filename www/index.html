@@ -4,6 +4,11 @@
 <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
 <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
 <link rel="stylesheet" href="lib/raty/jquery.raty.css">
+<!-- Atualização Master Hub (Gráfico em Circulo e barra) -->
+	<link rel="stylesheet" href="css/progresscircle.css">
+	<link rel="stylesheet" href="css/cssprogress.css">
+
+<!-- Fim da atualização -->
 
 <link rel="stylesheet" href="css/app.css?ver=1.0">
 <link href="lib/mobiscroll/css/mobiscroll.frame.css" rel="stylesheet" type="text/css" />
@@ -17,6 +22,9 @@
 <link href="lib/mobiscroll/css/mobiscroll.scroller.ios-classic.css" rel="stylesheet" type="text/css" />
 <link href="lib/mobiscroll/css/mobiscroll.scroller.ios.css" rel="stylesheet" type="text/css" />
 <link href="lib/mobiscroll/css/mobiscroll.android-holo-light.css" rel="stylesheet" type="text/css" />
+<!-- Atualização Master Hub (Modificação de Fonte do App) -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet"> 
+<!-- Fim da atualização -->
 
 <script src="lib/angular/angular.js"></script>
 <script src="lib/onsen/js/onsenui.js"></script>
@@ -27,6 +35,9 @@
 <script src="lib/jquery.form-validator.min.js"></script>
 
 <script src="lib/mobiscroll/js/mobiscroll.core.js"></script>
+<!-- Atualização Master Hub (Tradução Data) -->
+<script src="lib/mobiscroll/js/i18n/mobiscroll.i18n.pt-BR.js" type="text/javascript"></script>
+<!-- Fim da atualização -->
 <script src="lib/mobiscroll/js/mobiscroll.frame.js"></script>
 <script src="lib/mobiscroll/js/mobiscroll.scroller.js"></script>
 <script src="lib/mobiscroll/js/mobiscroll.util.datetime.js"></script>
@@ -45,13 +56,16 @@
 
 <script src="js/jquery.geocomplete.min.js"></script>
 
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript" src="lib/imagesloaded.pkgd.min.js"></script>
 
 <link href="lib/intel/build/css/intlTelInput.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="lib/intel/build/js/intlTelInput.js"></script>
-
+<!-- Atualização Master Hub (Personalizações) -->
+<script type="text/javascript" src="js/favoritos.js"></script>
+<script type="text/javascript" src="js/sugestoes.js"></script>
+<script type="text/javascript" src="js/fidelidade.js"></script>	
+<script type="text/javascript" src="js/progresscircle.js"></script>	
+<!-- Fim da atualização -->
 <script src="js/config.js?ver=1.0"></script>
 <script src="js/paypal.js?ver=1.0"></script>
 <script src="js/old-openfb.js?ver=1.0"></script>
@@ -59,6 +73,9 @@
 <script src="js/tpl.js?ver=1.0"></script>
 <script src="js/countries.js?ver=1.0"></script>
 <script src="js/app.js?ver=1.0"></script>
+<!-- Atualização Master Hub (Personalizações) -->
+<script src="js/masterhub.js"></script>
+<!-- Fim da atualização -->
 </head>
 <body>
 
@@ -84,7 +101,9 @@
    <div class="main-getsettings">
      
      <div class="retry-language center">
-       <p>Retry</p>
+<!-- Atualização Master Hub (Tradução) -->
+       <p>Tentar novamente</p>
+<!-- Fim da atualização -->
        <button class="button button--quiet green" onclick="getLanguageSettings();">	       
          <ons-icon icon="ion-android-refresh" size="30px"></ons-icon>
        </button>       
@@ -119,19 +138,24 @@
     <ons-list-item onclick="setHome();" class="bottom-menu-item" >
       <ons-icon icon="ion-ios-home-outline"></ons-icon> <span class="trn" data-trn-key="home">Home</span>
     </ons-list-item>
-    
-    <ons-list-item onclick="initBrowseMerchant();" class="bottom-menu-item">
+<!-- Atualização Master Hub (Retirada do Menu a opção Ver todas as Empresas) -->
+    <!--ons-list-item onclick="initBrowseMerchant();" class="bottom-menu-item">
       <ons-icon icon="ion-android-menu"></ons-icon> 
       <span class="trn" data-trn-key="browse_resto">Browse Restaurant</span>
-    </ons-list-item>
-    
+    </ons-list-item-->
+<!-- Fim da atualização -->
     <ons-list-item onclick="showProfile();" class="bottom-menu-item">
       <ons-icon icon="ion-android-contact"></ons-icon> 
       <span class="trn" data-trn-key="profile">Profile</span>
     </ons-list-item>    
-    
+<!-- Atualização Master Hub (Inclusão no Menu a opção Favoritos) -->
+	<ons-list-item onclick="menu.setMainPage('favoritos.html', {closeMenu: true})" class="bottom-menu-item">
+      <ons-icon icon="ion-android-favorite"></ons-icon> 
+      <span class="trn" data-trn-key="Favoritos">Favoritos</span>
+    </ons-list-item>
+<!-- Fim da atualização -->
     <ons-list-item onclick="showOrders();" class="bottom-menu-item">
-      <ons-icon icon="ion-android-restaurant"></ons-icon> 
+      <ons-icon icon="ion-clipboard"></ons-icon> 
       <span class="trn" data-trn-key="orders">Orders</span>
     </ons-list-item>      
     
@@ -146,7 +170,9 @@
     </ons-list-item>    
     
     <div id="custom_pages"></div>
-    
+<!-- Atualização Master Hub (Inclusão no Menu a opção Apresentação Inicial) -->
+	<div id="splash-pagina-menu"></div>
+<!-- Fim da atualização -->
     <ons-list-item onclick="menu.setMainPage('settings.html', {closeMenu: true})" class="bottom-menu-item">
       <ons-icon icon="ion-gear-a"></ons-icon> 
       <span class="trn" data-trn-key="settings">Settings</span>
@@ -169,7 +195,12 @@
       <div class="left">
         <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button>        
       </div>    
-      
+<!-- Atualização Master Hub (Personalização Tela Inicial - Ocultar caixas de selecção de endereço) -->
+	  <div class="center search_by_location_btn" style="display: none;">
+		<ons-toolbar-button onclick="mudarendereco();">MUDAR ENTEREÇO DA PESQUISA</ons-toolbar-button>
+	  </div>
+<!-- Fim da atualização -->
+
       <div class="right">
         <ons-toolbar-button onclick="showNotificationPage();">
             <div class="notification_count notification"></div>
@@ -184,8 +215,8 @@
     <div class="home-header">
          <img src="css/images/banner.png" alt="" title="">
     </div> 
-       
-    <div class="home-page wrapper center">       
+<!-- Atualização Master Hub (Personalização Tela Inicial - Ocultar caixas de selecção de endereço) -->
+    <div class="home-page wrapper center catalogo_endereco">       
        <h4 class="trn" data-trn-key="enter_your_location">Enter your location</h4>
        
        <section class="field-section">
@@ -193,13 +224,13 @@
          style="display: block; width: 100%">
        </section>
               
-       <div class="padtop25">
+       <div class="padtop25 catalogo_endereco">
        <button class="button button--quiet green" onclick="getCurrentLocation();">
        <ons-icon icon="fa-location-arrow"></ons-icon>
          <span class="trn" data-trn-key="use_my_location">Use my current location</span>
        </button>       
        </div>
-       
+<!-- Fim da atualização -->
         <button class="button green-btn button--large" onclick="searchMerchant();">
 	      <span class="trn" data-trn-key="search_restaurant">Search Restaurant</span>    	      
 	      <div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
@@ -219,16 +250,29 @@
     </DIV>
     
     <DIV class="search_by_location">
-       <div class="search-banner"></div>
+       <div class="search-banner-logo"></div>
+<!-- Atualização Master Hub (Personalização Tela Inicial - Ocultar caixas de seleção de endereço) -->
+       <div class="home-page wrapper center" style="margin-top: -25px;">       
+       <h4 class="trn catalogo_endereco" data-trn-key="order_food_online">Order food online from 1000+ restaurants!</h4>
        
-       <div class="home-page wrapper center">       
-       <h4 class="trn" data-trn-key="order_food_online">Order food online from 1000+ restaurants!</h4>
-       
+	   <div class="bairro_cidade" style="margin-bottom: -50px; display: none;">
+		<h4 class="bairro_cidade" style="display: none;"><span id="city" class="city wrapper center"> </span><br><span id="area_name" class="area_name wrapper center"></span></h4>
+	   </div>
+	   
+	   <div class="cidade_estado" style="display: none;">
+		<h4 class="cidade_estado" style="display: none;"><span id="state" class="state wrapper center"></span><br><span id="city" class="city wrapper center"></span></h4>
+	   </div>
+	   
        <input type="hidden" name="state_id" id="state_id" class="state_id" >
        <input type="hidden" name="city_id" id="city_id" class="city_id" >
        <input type="hidden" name="area_id" id="area_id" class="area_id" >
+	   <input type="hidden" name="state" id="state" class="state" >
+       <input type="hidden" name="city" id="city" class="city" >
+       <input type="hidden" name="area_name" id="area_name" class="area_name" >
+
        
-       <ons-list modifier="inset">
+       <ons-list modifier="inset" class="catalogo_endereco">
+<!-- Fim da atualização -->
        
         <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >
         State
@@ -247,7 +291,31 @@
         </ons-list-item>
         
        </ons-list>
+<!-- Atualização Master Hub (Personalização Tela Inicial - Ocultar caixas de seleção de endereço) -->
+	   <br>
+   <div class="separate_or catalogo_endereco">
+        <ons-row >
+          <ons-col width="45%" class="text-right">
+           <hr class="hr_index">
+         </ons-col>
+          <ons-col width="10%" class="text-center">OU</ons-col>
+         <ons-col width="45%" class="text-left">
+          <hr class="hr_index">
+         </ons-col>
+       </ons-row>
+     </div>
+	   
+<div class="home-page wrapper center catalogo_endereco" style="margin-top: -15px; margin-bottom: -20px;">       
               
+       <button class="button button--quiet green" onclick="getCurrentLocation();">
+       <ons-icon icon="fa-location-arrow"></ons-icon>
+         <span class="trn" data-trn-key="Informa a minha localização atual">Informa a minha localização atual</span>
+       </button>       
+
+
+   <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho.">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho.</p> 
+    </div>  
+<!-- Fim da atualização -->
        
        <div class="padtop25">
         <button class="button green-btn button--large" onclick="searchMerchant();">
@@ -262,7 +330,7 @@
     
     <DIV class="advance_search">       
        
-      <div class="search-banner"><div class="greybg"></div></div>
+      <div class="search-banner-logo"><div class="greybg"></div></div>
     
       <div id="tabbar_wrap"></div>
       
@@ -271,7 +339,204 @@
   </ons-page>
 </ons-navigator>  
 </script>
+<!-- Atualização Master Hub (Página Personalizada e Slide) -->
+<script type="text/ons-template" id="Pagina-Personalizada.html"> 
+<ons-navigator title="Navigator" var="sNavigator"> 
+<ons-page id="carregarPagina-page" on-device-backbutton="backtoHome()" modifier="fundo_masterhub">
+  
+		  <div id="pagina-personalizada"></div>
 
+</ons-page>
+</ons-navigator>
+</script>
+	
+<script type="text/ons-template" id="Pagina2-Personalizada.html"> 
+<ons-navigator title="Navigator" var="sNavigator"> 
+<ons-page id="carregarPagina-page" on-device-backbutton="backtoSearch()" modifier="fundo_masterhub">
+  
+		  <div id="pagina-personalizada"></div>
+
+</ons-page>
+</ons-navigator>
+</script>
+	
+<script type="text/ons-template" id="Slide-Personalizado.html"> 
+<ons-navigator title="Navigator" var="sNavigator"> 
+<ons-page id="carregarSlide-page" on-device-backbutton="backtoHome()" modifier="fundo_masterhub">
+  
+		  <div id="pagina-personalizada"></div>
+
+</ons-page>
+</ons-navigator>
+</script>
+<!-- Fim da atualização -->
+<!-- Atualização Master Hub (Sugestões de Estabelecimentos) -->
+<script type="text/ons-template" id="Pagina-Indicacao.html"> 
+<ons-navigator id="indicacao-page" title="Navigator" var="sNavigator"> 
+<ons-page id="page-indicacao" ng-controller="TabbarController" modifier="fundo_masterhub">
+  <ons-toolbar>     
+   
+    <div class="left">
+     <ons-toolbar-button onclick="setHome();">
+        <ons-icon icon="ion-ios-arrow-thin-left" style="font-size: 30px;"></ons-icon>
+     </ons-toolbar-button>        
+    </div> 
+     
+     <div class="center">{{title}}</div>
+     
+      <div class="right">         
+		 <ons-toolbar-button onclick="carregarPagina('10,11,12,13,14,15,16,17,18,19');" ><ons-icon icon="ion-ios-help-outline"></ons-toolbar-button>
+      </div>
+   </ons-toolbar>
+
+  <ons-tabbar swipeable position="auto">
+  
+    <ons-tab page="votacao.html" label="Vote" icon="fa-question-circle" active-icon="fa-question-circle-o">
+	
+    </ons-tab>
+    <ons-tab page="indicacao.html" label="Indique" icon="fa-line-chart" active-icon="fa-line-chart">
+    </ons-tab>
+  </ons-tabbar>
+      <p style="text-align: center;">
+      Votação de estabelecimentos já cadastrados no sistema.
+    </p>
+</ons-page>
+</ons-navigator>
+</script>
+
+<script type="text/ons-template" id="votacao.html"> 
+<ons-page id="page-suggestion" class="onsen-display" modifier="fundo_masterhub">
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div> 
+     <div class="center"><span id="search-text" class="trn" data-trn-key="reviews">Suggestions</span></div>                         
+     <div class="right">        
+         <ons-toolbar-button onclick="showSuggestion2Form()" ><ons-icon icon="ion-plus-round"></ons-toolbar-button>
+     </div>
+   </ons-toolbar>      
+   
+   <ons-scroller id="suggestion-list-scroller">    
+   </ons-scroller>
+  
+</ons-page>
+</script>   
+
+
+<script type="text/ons-template" id="indicacao.html"> 
+<ons-page id="page-addsuggestions" class="onsen-display" modifier="fundo_masterhub">
+</br></br>
+     <div class="center trn" data-trn-key="add_suggestions">Enviar minha Sugestão!</div>                 
+
+   <form id="frm-addsuggestion" class="frm-addsuggestion" method="post">   
+   <div class="wrapper">
+   
+      <div class="field-wrapper">
+      <input type="text" name="nome_empresa"  class="review text-input text-input--underbar has_validation" 
+      placeholder="Nome da Empresa" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+      </div>
+	  
+      <div class="field-wrapper">
+      <input type="text" name="cidade"  class="review text-input text-input--underbar has_validation" 
+      placeholder="Cidade" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+      </div>
+
+      <div class="field-wrapper">
+      <input type="text" name="contato"  class="review text-input text-input--underbar" 
+      placeholder="Contato na Empresa" value="">
+      </div>
+
+      <div class="field-wrapper">
+      <input type="text" name="telefone"  class="review text-input text-input--underbar" 
+      placeholder="Telefone da Empresa" value="">
+      </div>
+</br>
+   <button class="button masterhub-btn button--large trn" onclick="addSuggestion();" data-trn-key="publish_suggestion">
+	Enviar minha Sugestão
+	<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
+   </button>
+   
+   </div>
+   </form>
+   
+</ons-page>
+</script>  
+
+<script type="text/ons-template" id="suggestion.html"> 
+<ons-page id="page-addsuggestions" class="onsen-display" modifier="fundo_masterhub">
+
+  <ons-toolbar>     
+   
+    <div class="left"><ons-back-button></ons-back-button></div>
+     
+     <div class="center">Sugerir Estabelecimentos</div>
+     
+      <div class="right">         
+		 <ons-toolbar-button onclick="carregarPagina('10,11,12,13,14,15,16,17,18,19');" ><ons-icon icon="ion-ios-help-outline"></ons-toolbar-button>
+      </div>
+   </ons-toolbar>
+	</br>
+     <div class="center trn wrapper" data-trn-key="os_estabelecimentos">Os estabelecimentos abaixo não fazem parte do nosso catálogo. Clique em 'Votar' para incentivá-los a entrarem.</div>
+	</br>
+	
+	<div class="center" id="lista-sugestoes"></div>
+
+     <div id="mensagem_nao" class="center trn" data-trn-key="add_suggestions">Não achou seu estabelecimento favorito?<br>Sugira aqui.</div>                 
+
+   <form id="frm-addsuggestion" class="frm-addsuggestion" method="post">   
+   <div class="wrapper">
+   
+      <div class="center" id="campos-sugestoes"></div>
+</br>
+   <button class="button masterhub-btn button--large trn" onclick="addSuggestion();" data-trn-key="publish_suggestion">
+	Enviar minha Sugestão
+	<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
+   </button>
+   
+   </div>
+   </form>
+   
+</ons-page>
+</script>  
+<!-- Fim da atualização -->
+<!-- Atualização Master Hub (Página Personalizada e Slide) -->
+<script type="text/ons-template" id="Pagina-Fidelidade-Empresa.html"> 
+
+<ons-page id="page-fidelidade-empresa" modifier="fundo_masterhub-fidelidade">
+
+  <ons-toolbar>     
+    <div class="left"><ons-back-button></ons-back-button></div>
+     <div class="center white">Programa de Fidelidade!</div>
+      <div class="right">         
+		 <ons-toolbar-button onclick="carregarPagina('10,11,12,13,14,15,16,17,18,19');" ><ons-icon icon="ion-ios-help-outline"></ons-toolbar-button>
+      </div>
+   </ons-toolbar>
+
+ <input type="hidden" name="selected_restaurant_name" id="selected_restaurant_name" class="selected_restaurant_name" >
+ <input type="hidden" name="selected_restaurant_ratings" id="selected_restaurant_ratings" class="selected_restaurant_ratings" >
+   
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+   <div class="orange-header wrapper">
+      <ons-row align="center">
+        <ons-col width="40%">
+           <div class="logo-wrap logo-non-auto" >           
+           </div>
+        </ons-col>
+        <ons-col class="text-right-fidelidade">
+           <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
+           <div class="rating-stars" data-score=""></div>           
+           </a>
+           <p class="restauran-title concat-text white"></p>
+        </ons-col>
+      </ons-row>
+   </div> 
+   			<div id="programa-fidelity-empresa"></div>	
+   			<div id="lista-fidelidades-detalhes" style="margin-top: -55px;"></div>	
+
+</ons-page>
+</script>
+<!-- Fim da atualização -->
 <script type="text/ons-template" id="searchResults.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 
 <ons-page id="searchresult-page" on-device-backbutton="backtoHome()"  >
@@ -298,14 +563,116 @@
        <ons-list-item ons-lazy-repeat="lazyLoadSearch" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
        </ons-list-item>
     </ons-list>
+	
+<!-- Atualização Master Hub (Sugestões de Estabelecimentos)  -->
+  <div class="indicar-restaurante"> 
+  <div style="margin-top: 5px;">Não encontrou o que queria?</div> 
+  <ons-button style="border-radius:9px; background-color: #AF0606; line-height:21px; font-size: 23px; margin-top: 5px; border: 3px solid #9B5050;" onclick="showSuggestion2Form()" >
+  Sugerir Estabelecimento	
+	</ons-button>
+   </div> 
+<!-- Fim da atualização -->
    
    </div>
   
 </ons-page>
 </ons-navigator> 
 </script>
+<!-- Atualização Master Hub (Página da nova Função carregarCategorias) -->
+<script type="text/ons-template" id="carregarCategorias.html">   
+<ons-navigator title="Navigator" var="sNavigator"> 
+<ons-page id="carregarcategorias-page" on-device-backbutton="backtoHome()" modifier="fundo_masterhub">
+   <ons-toolbar>     
+   
+    <div class="left">
+     <ons-toolbar-button onclick="setHome();">
+        <ons-icon icon="ion-ios-arrow-thin-left" style="font-size: 30px;"></ons-icon>
+     </ons-toolbar-button>        
+    </div> 
+     
+     <div class="center white"><span id="search-text"></span></div>
+     
+      <div class="right">         
+		 <ons-toolbar-button onclick="carregarPagina('10,11,12,13,14,15,16,17,18,19');" ><ons-icon icon="ion-ios-help-outline"></ons-toolbar-button>
+      </div>
+   </ons-toolbar>
+   
+   <div id="codigo-cabecalho-buscas"></div>
+   
+   <div id="codigo-destaque"></div>
+   
+   <div class="results-header arrow_box" style="border-bottom: 0px inset #333; display:none;"><span class="result-msg"></span></div>
+          
+<ons-list class="restaurant-list" id="lazy-parent" >
+       <ons-list-item ons-lazy-repeat="lazyLoadSearch" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
+       </ons-list-item>
+    </ons-list>
+  
+  <div class="indicar-restaurante">
+  
+  <div style="margin-top: 5px;">Não encontrou o que queria?</div> 
+  
+  <ons-button style="border-radius:9px; background-color: #731414; line-height:21px; font-size: 23px; margin-top: 5px; border: 1px solid currentColor;" onclick="showSuggestion2Form()" >
+  
+  Sugerir Estabelecimento
+	
+	</ons-button>
+     </div>
+  
+  
+</ons-page>
+</ons-navigator> 
+</script>
 
 
+<script type="text/ons-template" id="searchCategorias.html">   
+<ons-navigator title="Navigator" var="sNavigator"> 
+<ons-page id="searchcategorias-page" on-device-backbutton="backtoHome()" modifier="fundo_masterhub">
+   <ons-toolbar>     
+   
+    <div class="left">
+     <ons-toolbar-button onclick="setHome();">
+        <ons-icon icon="ion-ios-arrow-thin-left" style="font-size: 30px;"></ons-icon>
+     </ons-toolbar-button>        
+    </div> 
+     
+     <div class="center">
+		<div id="codigo-cabecalho-endereco"></div>
+	  </div>
+     
+      <div class="right">         
+		 <ons-toolbar-button onclick="carregarPagina('10,11,12,13,14,15,16,17,18,19');" ><ons-icon icon="ion-ios-help-outline"></ons-toolbar-button>
+      </div>
+   </ons-toolbar>
+   
+   
+   <div id="codigo-cabecalho-buscas"></div>
+   
+   <div id="codigo-destaque"></div>
+   
+   <div class="results-header arrow_box" style="border-bottom: 0px inset #333; display:none;"><span class="result-msg"></span></div>
+          
+<ons-list class="restaurant-list" id="lazy-parent" >
+       <ons-list-item ons-lazy-repeat="lazyLoadSearchCategorias" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
+       </ons-list-item>
+    </ons-list>
+  
+  <div class="indicar-restaurante">
+  
+  <div style="margin-top: 5px;">Não encontrou o que queria?</div> 
+  
+  <ons-button style="border-radius:9px; background-color: #731414; line-height:21px; font-size: 23px; margin-top: 5px; border: 1px solid currentColor;" onclick="showSuggestion2Form()" >
+  
+  Sugerir Estabelecimento
+	
+	</ons-button>
+     </div>
+  
+  
+</ons-page>
+</ons-navigator> 
+</script>
+<!-- Fim da atualização -->
 <script type="text/ons-template" id="filterOptons.html">    
   <ons-dialog var="navDialog" style="width:90%;height:350px;" cancelable  >
 
@@ -345,13 +712,20 @@
      <div class="center white"><span id="search-text" class="trn" data-trn-key="menu" >Menu</span></div>           
      
      <div class="right">     
+<!-- Atualização Master Hub (Sistema de Favoritos - Botão) -->
+		 <ons-toolbar-button>
+           <img src="images/icons/favoritar.png" id="imgfavorito" onclick='addFavorito()' class="cart ng-scope ons-icon fa-shopping-cart fa fa-lg" width="24px" height="24px">
+        </ons-toolbar-button>
+<!-- Fim da atualização -->
          <ons-toolbar-button onclick="showCart();" >         
            <div class="notification cart-num" >0</div>
            <ons-icon icon="fa-shopping-cart" class="cart">
          </ons-toolbar-button>
-         
-         
-         
+<!-- Atualização Master Hub (Menu de Categorias) -->
+         <ons-toolbar-button onclick="showMenu(this);">
+           <ons-icon icon="ion-android-more-vertical" size="30px"></ons-icon>
+        </ons-toolbar-button>
+<!-- Fim da atualização -->
      </div>
            
    </ons-toolbar>
@@ -362,19 +736,26 @@
    <input type="hidden" name="selected_restaurant_name" id="selected_restaurant_name" class="selected_restaurant_name" >
    <input type="hidden" name="selected_restaurant_ratings" id="selected_restaurant_ratings" class="selected_restaurant_ratings" >
    
-   <div class="menu-header"> 
-    <div class="inner">
-        <div class="sub-inner">
-          <div class="logo-wrap" ></div>
-          
-          <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
+<!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+   <div class="orange-header wrapper">
+      <ons-row align="center">
+        <ons-col width="40%">
+           <div class="logo-wrap logo-non-auto" >           
+           </div>
+        </ons-col>
+        <ons-col class="text-right">
+           <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
            <div class="rating-stars" data-score=""></div>           
            </a>
-          
-          <p class="restauran-title white concat-text"></p> 
-        </div>
-    </div>    
-   </div>
+           <p class="restauran-title concat-text white"></p>           
+        </ons-col>
+      </ons-row>
+   </div> 
+<!-- Fim da atualização -->
    
     
        <ons-row class="menu_tab" >
@@ -396,17 +777,23 @@
        
        <ons-col onclick="loadBookingForm1();" id="menu_enabled_booking"  >
          <div><ons-icon icon="ion-ios-bookmarks" ></ons-icon></div>
-         <span class=" trn" data-trn-key="book">Book</span>
+<!-- Atualização Master Hub (Tradução) -->
+         <span class=" trn" data-trn-key="book">Reservas</span>
+<!-- Fim da atualização -->
        </ons-col>
        
        <ons-col onclick="showPage('page-photos');" id="menu_enabled_gallery" >
          <div><ons-icon icon="ion-images" ></ons-icon></div>
-         <span class=" trn" data-trn-key="photos">Photos</span>
+<!-- Atualização Master Hub (Tradução) -->
+         <span class=" trn" data-trn-key="photos">Fotos</span>
+<!-- Fim da atualização -->
        </ons-col>
        
        <ons-col onclick="showPromoPage();" class="last" id="menu_enabled_promo" >
          <div><ons-icon icon="ion-pizza" ></ons-icon></div>
-         <span class=" trn" data-trn-key="promos">Promos</span>
+<!-- Atualização Master Hub (Tradução) -->
+         <span class=" trn" data-trn-key="promos">Ofertas</span>
+<!-- Fim da atualização -->
        </ons-col>
 
        </ons-row>
@@ -439,7 +826,12 @@
      </div>
      
    </ons-toolbar>
-      
+<!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+<!-- Fim da atualização -->
    <div class="orange-header">
       <ons-row >
         <ons-col width="40%">
@@ -462,7 +854,63 @@
   
 </ons-page>
 </script>
+<!-- Atualização Master Hub (Menu Itens) -->
+<script type="text/ons-template" id="menuItemEmpresa.html">    
+<ons-page id="page-menubycategoryitem"  modifier="fundo_masterhub-icones">
+   <ons-toolbar>        
+     <div class="left"><ons-back-button id="menuitem-back-button"></ons-back-button></div>     
+     <div class="center white"><span>Categorias</span></div>           
+          
+     
+     <div class="right">       
+        <ons-toolbar-button>
+        <span class="notification cart-num" onclick="showCart();" style="margin-left: 10px; top:3px;">0</span>
+        <ons-icon icon="fa-shopping-cart" onclick="showCart();" class="cart"></ons-toolbar-button>
 
+		<ons-toolbar-button onclick="showEasyCategory(this);">
+           <ons-icon icon="ion-ios-list" size="30px"></ons-icon>
+        </ons-toolbar-button>
+
+        
+     </div>
+     
+   </ons-toolbar>
+
+   <input type="hidden" name="selected_restaurant_name" id="selected_restaurant_name" class="selected_restaurant_name" >
+   <input type="hidden" name="selected_restaurant_ratings" id="selected_restaurant_ratings" class="selected_restaurant_ratings" >
+<!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+<!-- Fim da atualização -->
+   <div class="orange-header wrapper">
+      <ons-row align="center">
+        <ons-col width="40%">
+           <div class="logo-wrap logo-non-auto" >           
+           </div>
+        </ons-col>
+        <ons-col class="text-right">
+           <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
+           <div class="rating-stars" data-score=""></div>           
+           </a>
+           <p class="restauran-title concat-text white"></p>           
+        </ons-col>
+      </ons-row>
+   </div> 
+      
+   
+   <ons-scroller id="menu-list">      
+        <ons-list id="lazy-parent" >
+	      <ons-list-item ons-lazy-repeat="lazyItem" style="padding:0;" modifier="tappable" class="list-item-container lazy-list restaurant-list">      
+	      </ons-list-item>
+	    </ons-list>     
+   </ons-scroller>
+   
+  
+</ons-page>
+</script>
+<!-- Fim da atualização -->
 <script type="text/ons-template" id="itemDisplay.html"> 
 <ons-page id="page-itemdisplay">
    <ons-toolbar>        
@@ -482,12 +930,14 @@
     <ons-list id="item-info">                    
     </ons-list>
     </form>
-    
+<!-- Atualização Master Hub (Tradução) -->
+    <div class="wrapper">
     <button class="button green-btn button--large trn" data-trn-key="add_to_cart" onclick="addToCart();">
-	Add to Cart
+	Pedir
 	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
 	</button>
-      
+    </div>  
+<!-- Fim da atualização -->
 </ons-page>
 </script>
 
@@ -497,7 +947,9 @@
      <div class="left"><ons-back-button></ons-back-button></div>     
      <div class="center white">
      <span id="search-text" class="trn" data-trn-key="cart">
-     Cart
+<!-- Atualização Master Hub (Tradução) -->
+     Carrinho
+<!-- Fim da atualização -->
      </span>
      </div>                         
      <div class="right">
@@ -505,6 +957,12 @@
      </div>
    </ons-toolbar>
    
+<!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
+<div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+<!-- Fim da atualização -->
    <div class="orange-header">
       <ons-row >
         <ons-col width="40%">
@@ -518,21 +976,21 @@
       </ons-row>
    </div> 
    
-   <div class="wrapper">
+   <div class="wrapper" style="margin-top: 12px;">
        <ons-row class="row">
-           <ons-col class="text-big pad-top10  trn" data-trn-key="your_order">Your Order</ons-col>
-           <ons-col >           
-             <button onclick="clearCart();" class="clear-cart button button--quiet green trn" data-trn-key="clear_cart">Clear Cart</button>
-           </ons-col>
+<!-- Atualização Master Hub (Tradução) -->
+           <ons-col class="text-big pad-top10  trn" data-trn-key="your_order" style="margin: auto;font-weight: bold;padding: 0;">Pedido</ons-col>
            <ons-col class="text-right" >
-              <button class="edit-order button button--quiet green trn" data-trn-key="edit_order">Edit Order</button>
-              <button class="order-apply-changes button button--quiet green trn" data-trn-key="apply_changes">
-              Apply Changes</button>
+            <button onclick="clearCart();" class="clear-cart button button--quiet green trn" data-trn-key="clear_cart" style="padding: 0; margin-left: 35px; font-size: 16px;">Limpar</button>
+              <button class="edit-order button button--quiet green trn" data-trn-key="edit_order" style="padding: 0; margin-left: 35px; font-size: 16px;">Editar</button>
+              <button class="order-apply-changes button button--quiet green trn" data-trn-key="apply_changes" style="padding: 0; margin-left: 35px; font-size: 16px;">
+              Aplicar</button>
+<!-- Fim da atualização -->
            </ons-col>
        </ons-row>
    </div>  
    
-   <form id="frm-cart" class="frm-cart" method="post">
+   <form id="frm-cart" class="frm-cart" method="post" style="margin-top: -23px;">
    <ons-list id="cart-item">
    </ons-list>   
    </form>
@@ -564,7 +1022,7 @@
          </ons-col>
        </ons-row>
     </ons-list-item>       
-       
+<!-- Atualização Master Hub (Retirada da opção entrega imediata (ASAP) 
    <ons-list-item modifier="tappable" class="delivery_asap_wrap">
        <label class="checkbox">
 		  <input type="checkbox" name="delivery_asap" value="1" class="delivery_asap">
@@ -573,7 +1031,8 @@
 		  Deliver Asap
 		  </span>
 		</label>
-	</ons-list-item>
+	</ons-list-item> -->
+<!-- Fim da atualização -->
 	</ons-list>  
    
    <div class="wrapper">
@@ -584,7 +1043,9 @@
    <ons-list>       
    
        <ons-list-item modifier="chevron" onclick="showTip();" class="tip_amount_wrap" > 
-       <span class="trn tip_amount" data-trn-key="tip_amount">Tip Amount</span>       
+<!-- Atualização Master Hub (Tradução) -->
+       <span class="trn tip_amount" data-trn-key="tip_amount">Dar Gorjeta</span>       
+<!-- Fim da atualização -->
        </ons-list-item>    
        
        <ons-list-item modifier="chevron" onclick="showChangeAddressPage();" class="change_address_wrap" > 
@@ -599,7 +1060,11 @@
    <div style="height:20px;"></div>  
    
    <button class="button green-btn button--large " onclick="checkOut();">
-	<span class="btn_checkout trn"  data-trn-key="checkout" >Checkout</span>
+<!-- Atualização Master Hub (Tradução) -->
+	<span class="btn_checkout trn"  data-trn-key="checkout" >
+	Finalizar
+	</span>
+<!-- Fim da atualização -->
 	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
    </button>
    
@@ -647,42 +1112,43 @@
    <input type="hidden" name="next_step" value="shipping_address">
    <div class="wrapper">
       <div class="field-wrapper">
+<!-- Atualização Master Hub (Tradução e Máscara do Telefone) -->
       <input type="text" name="first_name"  class="first_name text-input text-input--underbar has_validation" 
-      placeholder="First Name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="First Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
       <input type="text" name="last_name"  class="last_name text-input text-input--underbar has_validation" 
-      placeholder="Last Name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Last Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
-      placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+	  <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
+      placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
       <input type="email" name="email_address"  class="email_address text-input text-input--underbar has_validation" 
-      placeholder="Email address" value="" data-validation="email" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Email address" value="" data-validation="email" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
       <input type="password" name="password"  class="password text-input text-input--underbar has_validation" 
-      placeholder="Password" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Password" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
       <input type="password" name="cpassword"  class="cpassword text-input text-input--underbar has_validation" 
-      placeholder="Confirm Password" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Confirm Password" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
-      
+<!-- Fim da atualização -->
       <div class="custom-fields-wrap" id="custom-fields-wrap">
       </div>
       
-      
-      <p class="small-font-dim trn" data-trn-key="create_account_terms">
+<!-- Atualização Master Hub (Personalização) -->
+      <p class="small-font-dim trn" data-trn-key="create_account_terms" style="text-align: center;">
       By creating an account, you agree to receive sms from vendor.</p>            
-      
+<!-- Fim da atualização -->
       <div class="field-wrapper iagree-wrap">
          <ons-row>
            <ons-col width="40px">
@@ -695,7 +1161,9 @@
            
            </ons-col>
            <ons-col >
-             <span class="trn small-font-dim top15 block" data-trn-key="terms_n_condition">I Agree To The Terms & Conditions</span>
+<!-- Atualização Master Hub (Tradução) -->
+             <span class="trn small-font-dim top15 block" data-trn-key="terms_n_condition">Eu aceito os termos & Condições</span>
+<!-- Fim da atualização -->
            </ons-col>
          </ons-row>
       </div>
@@ -751,6 +1219,15 @@
    <form id="frm-shipping" class="frm-shipping" method="post">
    <input type="hidden" name="next_step" value="payment_option">
    
+   <input type="hidden" name="street" class="street">
+<!-- Atualização Master Hub (Número e Bairro) -->
+   <input type="hidden" name="numero" class="numero">
+   <input type="hidden" name="area_name" class="area_name">
+<!-- Fim da atualização -->
+   <input type="hidden" name="city" class="city">
+   <input type="hidden" name="state" class="state">   
+   <input type="hidden" name="zipcode" class="zipcode">  
+   
    <input type="hidden" name="formatted_address" class="formatted_address">  
    <input type="hidden" name="google_lat" class="google_lat">  
    <input type="hidden" name="google_lng" class="google_lng">  
@@ -758,8 +1235,18 @@
    
    <div class="wrapper">
       <div class="field-wrapper">
-      <input type="text" name="street"  class="street text-input text-input--underbar has_validation" 
-      placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+<!-- Atualização Master Hub (Tradução e Máscara do Telefone) -->
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
+      placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+<!-- Fim da atualização -->
+      </div>      
+   </div>
+<!-- Atualização Master Hub (Personalização - Troca de lugar de campos) -->
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
+      placeholder="Zipcode" value="" >
       </div>      
    </div>
    
@@ -776,11 +1263,10 @@
       placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
       </div>      
    </div>
-   
    <div class="wrapper">
       <div class="field-wrapper">
-      <input type="text" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
-      placeholder="Zipcode" value="" >
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+      placeholder="Delivery instructions" value="" >
       </div>      
    </div>
    
@@ -797,14 +1283,7 @@
       placeholder="Apartment suite, unit number, or company name"  >
       </div>      
    </div>
-   
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
-      placeholder="Delivery instructions" value="" >
-      </div>      
-   </div>
-   
+<!-- Fim da atualização -->
    <div class="wrapper">
 	   <div class="field-wrapper">	     
 	     <label class="switch">
@@ -845,11 +1324,21 @@
 <ons-page id="page-paymentoption" class="onsen-display">
    <ons-toolbar>        
      <div class="left"><ons-back-button></ons-back-button></div>     
-     <div class="center white"><span id="search-text" class="trn" data-trn-key="cart">Cart</span></div>                         
+<!-- Atualização Master Hub (Tradução) -->
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="delivery_address">Endereço de Entrega</span></div>                         
+<!-- Fim da atualização -->
      <div class="right">        
      </div>
    </ons-toolbar>
+<!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
+   <input type="hidden" name="selected_restaurant_name" id="selected_restaurant_name" class="selected_restaurant_name" >
+   <input type="hidden" name="selected_restaurant_ratings" id="selected_restaurant_ratings" class="selected_restaurant_ratings" >
    
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+<!-- Fim da atualização -->
    <div class="orange-header">
       <ons-row >
         <ons-col width="40%">
@@ -877,7 +1366,10 @@
    
    <input type="hidden" name="voucher_amount" id="voucher_amount" class="voucher_amount">
    <input type="hidden" name="voucher_type" id="voucher_type" class="voucher_type">   
-   
+<!-- Atualização Master Hub (Programa de Fidelidade) -->
+   <input type="hidden" name="fidelidade_amount" id="fidelidade_amount" class="fidelidade_amount">
+   <input type="hidden" name="fidelidade_type" id="fidelidade_type" class="fidelidade_type">   
+<!-- Fim da atualização -->
    <input type="hidden" name="pts_redeem_points" id="pts_redeem_points" class="pts_redeem_points">   
    <input type="hidden" name="pts_redeem_amount" id="pts_redeem_amount" class="pts_redeem_amount">  
    
@@ -889,7 +1381,9 @@
    
    <div class="wrapper">
        <ons-row class="row">
-           <ons-col class="text-big trn" data-trn-key="how_you_like_pay" >How would you like to pay?</ons-col>           
+<!-- Atualização Master Hub (Personalização) -->
+           <ons-col class="text-big trn white how_you_like_pay" data-trn-key="how_you_like_pay" style="text-align: center;">How would you like to pay?</ons-col>           
+<!-- Fim da atualização -->
        </ons-row>
    </div>  
    
@@ -934,7 +1428,9 @@
        
       </ons-list>
    </div>
-   
+<!-- Atualização Master Hub (Programa de Fidelidade) -->
+		<div id="lista-fidelidades-pagamento"></div> 
+<!-- Fim da atualização -->
    <div class="wrapper pts-apply-points-wrap">
      <ons-list >
        <ons-list-header class="center" >
@@ -963,11 +1459,114 @@
        
      </ons-list>
    </div>
+<!-- Atualização Master Hub (Resumo de conferência da finalização do pedido) -->
+   <div class="wrapper conferirendereco">
+       <ons-row class="row">
+           <ons-col class="text-big trn" data-trn-key="" style="padding-bottom: 5px;">Endereço da Entrega</ons-col>           
+       </ons-row>
+   </div>
    
+   <div class="wrapper conferirendereco" style="padding-left: 10px;">
+   <i>
+   <span class="endereco_de_entrega_street"></span> <span class="endereco_de_entrega_n"></span>
+   <span class="endereco_de_entrega_numero"></span> <span class="endereco_de_entrega_traco"></span>
+   <span class="endereco_de_entrega_area_name"></span></br>
+   <span class="endereco_de_entrega_city"></span> <span class="endereco_de_entrega_barra"></span> <span class="endereco_de_entrega_state"></span> 
+   <span class="endereco_de_entrega_zipcode"></span></br>
+   <span class="endereco_de_entrega_location_name"></span></br>
+   <span class="endereco_de_entrega_delivery_instruction"></span>
+   </i>
+   </div>
+ 
+    <div class="wrapper">
+       <ons-row class="row">
+           <ons-col class="text-big trn" data-trn-key="" style="padding-bottom: 5px;">Conferência dos Valores</ons-col>           
+       </ons-row>
+   </div> 
+   
+  <div class="wrapper conferirvalor" style="padding-left: 10px;">
+       <div class="field-wrapper titulo-subtotal" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-subtotal" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   </div>	
+       <div class="field-wrapper titulo-cupom" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper voucher_amount" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   </div>	
+	   <div class="field-wrapper fidelidade_amount" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   </div>	
+       <div class="field-wrapper titulo-pontos" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-pontos" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   </div>	
+       <div class="field-wrapper titulo-subtotal_new" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper subtotal_new" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   </div>	
+	   <div class="field-wrapper titulo-entrega" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-entrega" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   </div>		 
+       <div class="field-wrapper titulo-comodidade" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-comodidade" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   </div>	
+       <div class="field-wrapper titulo-embalagem" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-embalagem" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   </div>	  
+       <div class="field-wrapper titulo-desconto" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-desconto" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   </div>
+	   <div class="field-wrapper titulo-gorjeta" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   </div>
+	   <div class="field-wrapper total-gorjeta" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   </div>		           
+
+       <b> <div class="field-wrapper titulo-total" style="width: 65%; font-size: 12px; float: left;">
+	   </div>
+	   <div class="field-wrapper total-amount" style="width: 20%; font-size: 12px; float: right;">
+	   </div></b>	
+   </div>
+   
+   
+   <div class="wrapper">
+      <ons-list id="payment-list">
+      </ons-list>
+   </div>   
+   
+   <div class="wrapper order-change-wrapper">
+      <div class="field-wrapper">
+      <input type="decimal" name="order_change"  class="order_change text-input text-input--underbar" 
+      placeholder="change? For how much?" value="" min="0">
+      </div>      
+   </div>
+   
+   <div class="wrapper payon-delivery-wrapper">
+      <ons-list id="payon-deliver-list">
+      </ons-list>
+   </div>
+<!-- Fim da atualização -->
+<!-- Atualização Master Hub (CPF na Nota) -->
+   <div class="wrapper">
+       <ons-row class="row" style="padding-top: 5px;padding-bottom: 5px;">
+           <ons-col class="text-big trn" data-trn-key="">CPF na Nota?</ons-col>           
+       </ons-row>
+   </div> 
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="cpf_nota"  class="cpf_nota text-input text-input--underbar" 
+      placeholder="Digite seu CPF" value="" >
+      </div>      
+
    <button class="button green-btn button--large trn" onclick="InitPlaceOrder();" data-trn-key="place_order">
 	Place Order
 	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
    </button>
+   </div>
+ <!-- Fim da atualização -->
    </form>
 
 </ons-page>
@@ -988,8 +1587,50 @@
      <div class="right">        
      </div>
    </ons-toolbar>
-   
-   <div class="orange-header">
+<!-- Atualização Master Hub (Tela Final do Pedido Personalizada (Obrigado por comprar)) -->
+   <br>
+   <div class="wrapper center">
+       <ons-icon icon="fa-check-circle" class="myfa-check">
+       <h2 class="trn" style="color: #00B279;" data-trn-key="thank_you">Thank You</h2>
+       <p class="receipt-msg button button--quiet gray" style="margin-top: -20px;"></p>
+   <div class="cod-recibo wrapper center" style="    margin: auto; margin-top: -20px;">
+       
+       <div class="recibo-wrapper" style="width:96%">
+     </div>
+       
+        <ons-row center style="display:block">
+            <p class="text-big total-amount" style="margin-top: -20px;"></p> 
+        </ons-row>
+      
+       <div class="cod-rec-entrega" style="background: rgba(232, 232, 232, 0.42);border-radius: 12px;">
+        <div class="cod-end-entrega" width="70%" style="padding-top: 10px;padding-bottom: 10px;">           
+           <p class="t_entrega"></p>
+           <p class="t_enderecoentrega"></p>
+        </div>
+		
+		   <!-- <p class="cod-end-entrega" style="font-size: 14px;color: #a50707; margin-bottom: 15px;">A entrega é de total responsabilidade do estabelecimento.</p>	-->	
+		
+    </div>
+       <ons-row >
+        <ons-col width="50%" align="center">
+          
+            <button class="button green-btn button--cta trn" onclick="menu.setMainPage('home.html', {closeMenu: true})" >
+            <ons-icon icon="fa-long-arrow-left"></ons-icon>
+                <span class="trn">Início</span>
+                
+            </button> 
+        </ons-col>
+        <ons-col class="text-right">           
+            <button class="button blue-btn2 button--cta trn" onclick="menu.setMainPage('orders.html', {closeMenu: true})" style="border-radius:  3px;">
+                <span class="trn">Meus Pedidos</span>
+                <ons-icon icon="fa-long-arrow-right"></ons-icon>
+            </button> 
+        </ons-col>
+      </ons-row>
+
+   </div> 
+<!-- Fim da atualização -->
+<!--   <div class="orange-header">
       <ons-row >
         <ons-col width="40%">
            <div class="logo-wrap logo-non-auto" >           
@@ -1011,7 +1652,7 @@
        <span class="trn" data-trn-key="back_to_home">back to home</span>
         <ons-icon icon="fa-long-arrow-right"></ons-icon>
        </button>       
-   </div> 
+   </div> -->
 
 </ons-page>
 </script>   
@@ -1024,8 +1665,16 @@
      <div class="right">        
      </div>
    </ons-toolbar>
+<!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div></div>
+   <div class="orange-header center" style="padding-bottom: 5px;">
+           <div class="logo-wrap logo-non-auto" style="float: none; width: 140px; height: 110px; border-radius: 40px 4px; padding-top: initial;">           
+           </div>
+   </div> 
    
-   <div class="orange-header">
+   <!-- <div class="orange-header">
       <ons-row >
         <ons-col width="40%">
            <div class="logo-wrap logo-non-auto" >           
@@ -1035,8 +1684,8 @@
            <p class="restauran-title concat-text white"></p>                 
         </ons-col>
       </ons-row>
-   </div> 
-   
+   </div> -->
+<!-- Fim da atualização -->
    <div class="wrapper center">
        <h3></h3>   
        <h5></h5>
@@ -1096,32 +1745,32 @@
       <input type="number" name="number_guest"  class="validation number_guest numeric_only text-input text-input--underbar has_validation" 
       placeholder="Number Of Guests" value="" data-validation="number"  data-validation-allowing="range[1;1000]" data-validation-error-msg="The input value was not a correct number" >
       </div>         
-   
+<!-- Atualização Master Hub (Tradução e Correção de tipo de campo) -->
    <div class="field-wrapper">
       <input type="text" name="date_booking"  class="date_booking text-input text-input--underbar has_validation" 
-      placeholder="Date Of Booking" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Date Of Booking" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
    </div>
    
    <div class="field-wrapper">
       <input type="text" name="booking_time"  class="booking_time text-input text-input--underbar has_validation" 
-      placeholder="Time Of Booking" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Time Of Booking" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
    </div>
    
    <div class="field-wrapper">
       <input type="text" name="booking_name"  class="booking_name text-input text-input--underbar has_validation" 
-      placeholder="Name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
    </div>
    
    <div class="field-wrapper">
-      <input type="text" name="email"  class="email text-input text-input--underbar has_validation" 
+      <input type="email" name="email"  class="email text-input text-input--underbar has_validation"
       placeholder="Email Address" value="" data-validation="email" data-validation-error-msg="You have not given a correct e-mail address!" >
    </div>
    
    <div class="field-wrapper">
       <input type="text" name="mobile"  class="mobile_inputs mobile text-input text-input--underbar has_validation" 
-      placeholder="Mobile Number" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Mobile Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
    </div>
-   
+<!-- Fim da atualização -->
    <div class="field-wrapper">
       <input type="text" name="booking_notes"  class="booking_notes text-input text-input--underbar" 
       placeholder="Your Instructions" value="" >
@@ -1182,7 +1831,12 @@
          <ons-toolbar-button onclick="showReviewForm();" ><ons-icon icon="ion-plus-round"></ons-toolbar-button>
      </div>
    </ons-toolbar>      
-
+<!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+<!-- Fim da atualização -->
     <div class="orange-header">
       <ons-row >
         <ons-col width="40%">
@@ -1208,7 +1862,12 @@
      <div class="left"><ons-back-button></ons-back-button></div> 
      <div class="center white"><span id="search-text" class="trn" data-trn-key="add_review">Add Reviews</span></div>                 
    </ons-toolbar>      
-
+<!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
+   <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
+   <div class="estabelecimento-header2"></div>
+   <div class="estabelecimento-header"></div>
+   </div>
+<!-- Fim da atualização -->
     <div class="orange-header">
       <ons-row >
         <ons-col width="40%">
@@ -1234,12 +1893,12 @@
       <input type="text" name="rating"  class="numeric_only rating text-input text-input--underbar has_validation" 
       placeholder="Your Rating 1 to 5" value="" data-validation="number" data-validation-allowing="range[1;5]"  data-validation-error-msg="please put 1 to 5 rating" >
       </div>
-      
+<!-- Atualização Master Hub (Tradução) -->
       <div class="field-wrapper">
       <input type="text" name="review"  class="review text-input text-input--underbar has_validation" 
-      placeholder="Your reviews" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Your reviews" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
-   
+<!-- Fim da atualização -->
    
    <button class="button green-btn button--large trn" onclick="addReview();" data-trn-key="published_review">
 	Publish Review
@@ -1341,37 +2000,37 @@
    
    <form id="frm-profile" class="frm-profile" method="post">   
    <div class="wrapper">
+<!-- Atualização Master Hub (Tradução e Máscara do Telefone) -->
       <div class="field-wrapper">
       <input type="text" name="first_name"  class="first_name text-input text-input--underbar has_validation" 
-      placeholder="First Name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="First Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
 
       <div class="field-wrapper">
       <input type="text" name="last_name"  class="last_name text-input text-input--underbar has_validation" 
-      placeholder="Last Name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Last Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>           
       
       <div class="field-wrapper">
       <input type="text" name="email_address"  class="email_address text-input text-input--underbar has_validation" 
-      placeholder="Email address" value="" disabled data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Email address" value="" disabled data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>       
       
       <div class="field-wrapper">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
-      placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"  >
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
+      placeholder="Telefone de Contato" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
       </div>       
-      
+
       <div class="field-wrapper">
       <input type="password" name="password"  class="password text-input text-input--underbar" 
       placeholder="Password" value="" >
       </div>               
-                  
-   </div>
-   
    <button class="trn button green-btn button--large" onclick="saveProfile();" data-trn-key="save">
 	Save
 	<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
    </button>
+   </div>   
+   <!-- Fim da atualização -->
    </form>      
               
 </ons-page>
@@ -1472,19 +2131,19 @@
    <input type="hidden" name="next_steps" class="next_steps">
       
       
-   
+<!-- Atualização Master Hub (Correção do tipo de campo e Tradução) -->
    <div class="wrapper">
       <div class="field-wrapper">
-      <input type="text" name="email_address"  class="email_address text-input text-input--underbar has_validation" 
-      placeholder="Email address" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      <input type="email" name="email_address"  class="email_address text-input text-input--underbar has_validation"
+      placeholder="Email address" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
 
       <div class="field-wrapper">
       <input type="password" name="password"  class="password text-input text-input--underbar has_validation" 
-      placeholder="Password" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"  >
+      placeholder="Password" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
       </div>                                     
    </div>
-   
+<!-- Fim da atualização -->
    <button class="button green-btn button--large trn" onclick="login();" data-trn-key="login">
 	Login
 	<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
@@ -1522,13 +2181,13 @@
       Enter your email address you registered<br/>with and we will send you
       instruction <br/>on how to reset your password
       </p>
-      
+<!-- Atualização Master Hub (Correção do tipo de campo e Tradução) -->
           <div class="field-wrapper">
-          <input type="text" name="email_address"  class="email_address text-input text-input--underbar has_validation" 
-           placeholder="Email address" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+          <input type="email" name="email_address"  class="email_address text-input text-input--underbar has_validation"
+           placeholder="Email address" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
           </div>
       </div>      
-      
+<!-- Fim da atualização -->
       <div class="wrapper center">
       <button class="trn button green-btn" onclick="forgotPassword();" data-trn-key="reset_password">
 	  Reset Password	  
@@ -1552,36 +2211,37 @@
    <form id="frm-signup" class="frm-signup" method="post">   
    <input type="hidden" name="next_step" value="return_home">
    <div class="wrapper">
+<!-- Atualização Master Hub (Tradução e Máscara de Telefone) -->
       <div class="field-wrapper">
       <input type="text" name="first_name"  class="first_name text-input text-input--underbar has_validation" 
-      placeholder="First Name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="First Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
       <input type="text" name="last_name"  class="last_name text-input text-input--underbar has_validation" 
-      placeholder="Last Name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Last Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
-      placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
+      placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
       <input type="email" name="email_address"  class="email_address text-input text-input--underbar has_validation" 
-      placeholder="Email address" value="" data-validation="email" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Email address" value="" data-validation="email" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
       <input type="password" name="password"  class="password text-input text-input--underbar has_validation" 
-      placeholder="Password" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Password" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
       <input type="password" name="cpassword"  class="cpassword text-input text-input--underbar has_validation" 
-      placeholder="Confirm Password" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Confirm Password" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
-      
+<!-- Fim da atualização -->
       
       <div class="custom-fields-wrap" id="custom-fields-wrap">
       </div>
@@ -1600,7 +2260,9 @@
            
            </ons-col>
            <ons-col >
-             <span class="trn small-font-dim top15 block" data-trn-key="terms_n_condition">I Agree To The Terms & Conditions</span>
+<!-- Atualização Master Hub (Tradução) -->
+             <span class="trn small-font-dim top15 block" data-trn-key="terms_n_condition">Eu aceito os termos & Condições</span>
+<!-- Fim da atualização -->
            </ons-col>
          </ons-row>
       </div>
@@ -1673,20 +2335,23 @@
    
     <div class="left">
      <ons-toolbar-button onclick="setHome();">
-        <ons-icon icon="fa-chevron-left"></ons-icon>
+<!-- Atualização Master Hub (Personalização e Organização do Código) -->
+        <ons-icon icon="ion-ios-arrow-thin-left" style="font-size: 24px; line-height: 14px;"></ons-icon>
      </ons-toolbar-button>        
     </div> 
          
     <div class="center white"><span id="search-text" class="trn" data-trn-key="address_book">Address Book</span></div>                  
     
     <div class="right">
-      <ons-toolbar-button><ons-icon icon="ion-plus-round" onclick="newAddressBook();"></ons-toolbar-button>
+      <ons-toolbar-button><ons-icon icon="ion-ios-plus-outline" onclick="newAddressBook();"></ons-toolbar-button>
     </div>
     
    </ons-toolbar>
    
    <ons-scroller id="address-book-list">    
    </ons-scroller> 
+   <div class="center wrapper endereco_padrao" style="font-size: 18px; display:none;"><ons-icon icon="ion-ios-location-outline"></ons-icon> <span class="trn" data-trn-key="Não há nenhum endereço seu marcado como padrão!">Não há nenhum endereço seu marcado como padrão!</span></div>
+<!-- Fim da atualização -->
        
 </ons-page>
 </ons-navigator> 
@@ -1696,12 +2361,16 @@
 <ons-page id="page-addressbook-details">
    <ons-toolbar>        
      <div class="left"><ons-back-button></ons-back-button></div>                      
-     <div class="center white"><span id="search-text" class="trn" data-trn-key="address_book_details">
-     Address Book Details</span></div>                  
-     
+<!-- Atualização Master Hub (Personalização e Organização do Código) -->
+			<div class="center white">
+				<span id="search-text" class="trn" data-trn-key="address_book_details">
+					Address Book Details
+				</span>
+			</div>
      <div class="right">
      <ons-toolbar-button onclick="deleteAddressBook();" class="delete-addressbook">
-        <ons-icon icon="ion-close-round"></ons-icon>
+        <ons-icon icon="ion-ios-close-outline"></ons-icon>
+<!-- Fim da atualização -->
      </ons-toolbar-button>        
      </div>
      
@@ -1711,27 +2380,83 @@
    <form id="frm-addressbook" class="frm-addressbook" method="post">   
    <input type="hidden" id="id" name="id" class="id" value=""> 
    <input type="hidden" id="action" name="action" class="action" value="edit"> 
+<!-- Atualização Master Hub (Personalização Cátalogo de Endereço) -->
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+   <input type="hidden" name="state" id="state" class="state">
+   <input type="hidden" name="city" id="city" class="city">
+   <input type="hidden" name="area_name" id="area_name" class="area_name">
+
    <div class="wrapper">
+   <div class="home-page wrapper center" style="margin-top: -15px; margin-bottom: -20px;">       
+              
+       <button class="button button--quiet green" onclick="getCurrentLocation();">
+       <ons-icon icon="fa-location-arrow"></ons-icon>
+         <span class="trn" data-trn-key="Informa a minha localização via GPS">Informar a minha localização via GPS</span>
+       </button>       
+
+
+   <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
+    </div>   
+<br>
+   <div class="separate_or">
+        <ons-row >
+          <ons-col width="45%" class="text-right">
+           <hr class="hr_index">
+         </ons-col>
+          <ons-col width="10%" class="text-center">OU</ons-col>
+         <ons-col width="45%" class="text-left">
+          <hr class="hr_index">
+         </ons-col>
+       </ons-row>
+     </div>
+   
       <div class="field-wrapper">
-      <input type="text" name="street"  class="street text-input text-input--underbar has_validation" 
-      placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      <input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
+      placeholder="Zipcode" value="" onblur="pesquisacep_catalogo(this.value);" >
       </div>
-      
+ 
+   <div class="wrapper">   
+   	  <div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+      <input type="text" id="street" name="street"  class="street text-input text-input--underbar has_validation" 
+      placeholder="Street" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+      <input type="text" name="numero" id="numero"  class="numero text-input text-input--underbar has_validation" 
+      placeholder="Numero" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+						</ons-col>
+					</ons-row>
+      </div>
+	  
+	  
+      <ons-list>
+   
+				<ons-list-item modifier="chevron" class="trn location_state invisivel" data-trn-key="location_state" onclick ="showState()" >        
+					State
+				</ons-list-item>
+	
+				<ons-list-item modifier="chevron" class="trn location_city invisivel" data-trn-key="city" onclick ="showCity()" >
+					City
+				</ons-list-item>
+				<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >
+					District / Area
+				</ons-list-item>
+   
+   </ons-list>  
+   <div class="center" style="font-size: 15px; margin-top: 6px; margin-bottom: 0px;">
+   <span class="location_city"></span> / <span class="location_state"></span>
+   </div>
+
       <div class="field-wrapper">
-      <input type="text" name="city"  class="city text-input text-input--underbar has_validation" 
-      placeholder="City" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>
-      
-      <div class="field-wrapper">
-      <input type="text" name="state"  class="state text-input text-input--underbar has_validation" 
-      placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>
-      
-      <div class="field-wrapper">
-      <input type="text" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
-      placeholder="Zipcode" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>
-      
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+      placeholder="Delivery instructions" value="" >
+      </div>      
+   
       <div class="field-wrapper">
       <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
       placeholder="Location name" value="" >
@@ -1751,8 +2476,9 @@
 	Save
 	<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
    </button>
+			</div>
    </form>   
-   
+<!-- Fim da atualização -->
        
 </ons-page>
 </script>
@@ -1770,8 +2496,10 @@
 	  
 	   <p>          
           <ons-button class="trn button green-btn button--large" onclick="showOrders2();" data-trn-key="view">
-          View</ons-button>
-          <button onclick="pushDialog.hide();" class="button button--quiet trn" data-trn-key="cancel">Cancel</button>
+<!-- Atualização Master Hub (Tradução) -->
+          Ver</ons-button>
+          <button onclick="pushDialog.hide();" class="button button--quiet trn" data-trn-key="close">Fechar</button>
+<!-- Fim da atualização -->
         </p>
 	  
 	  </div>  
@@ -1965,7 +2693,9 @@
    
      <div class="field-wrapper">
       <input type="text" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
-      placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="16" data-maxl="16" >
+<!-- Atualização Master Hub (Tradução) -->
+      placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16" data-maxl="16" >
+<!-- Fim da atualização -->
       </div>
       
      <ons-list modifier="inset" class="settings-list">
@@ -1979,42 +2709,42 @@
          Expiration Year
         </ons-list-item>        
       </ons-list>
-     
+<!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
       <input type="text" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
-      placeholder="CVV" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="4" data-maxl="16" >
+      placeholder="CVV" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="4" data-maxl="16" >
       </div>
       
      <div class="field-wrapper">
       <input type="text" name="x_first_name"  class="x_first_name text-input text-input--underbar has_validation" 
-      placeholder="First Name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"  >
+      placeholder="First Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
       </div>
       
      <div class="field-wrapper">
       <input type="text" name="x_last_name"  class="x_last_name text-input text-input--underbar has_validation" 
-      placeholder="Last Name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"  >
+      placeholder="Last Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
      </div> 
      
      <div class="field-wrapper">
       <input type="text" name="x_address"  class="x_address text-input text-input--underbar has_validation" 
-      placeholder="Address" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"  >
+      placeholder="Address" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
      </div>  
      
      <div class="field-wrapper">
       <input type="text" name="x_city"  class="x_city text-input text-input--underbar has_validation" 
-      placeholder="City" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"  >
+      placeholder="City" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
      </div>   
 
     <div class="field-wrapper">
       <input type="text" name="x_state"  class="x_state text-input text-input--underbar has_validation" 
-      placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"  >
+      placeholder="State" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
     </div>  
     
    <div class="field-wrapper">
-      <input type="text" name="x_zip"  class="x_zip text-input text-input--underbar has_validation" 
-      placeholder="Zip Code" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"  >
+      <input type="number" name="x_zip"  class="x_zip text-input text-input--underbar has_validation" 
+      placeholder="Zip Code" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
     </div>   
-    
+<!-- Fim da atualização -->
     
      <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" onclick="showCountry();" class="trn country_label" data-trn-key="country">
@@ -2115,12 +2845,12 @@
    <input type="hidden" id="stripe_token" name="stripe_token" class="stripe_token" value=""> 
    
    <div class="wrapper">
-   
+<!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
-      <input type="text" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
-      placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="16"  data-maxl="16" >
+      <input type="number" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
+      placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16"  data-maxl="16" >
       </div>
-      
+<!-- Fim da atualização -->
      <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" onclick="showExpirationMonth();" class="trn expiration_month_label" data-trn-key="expiration_month">
          Expiration Month
@@ -2132,12 +2862,12 @@
          Expiration Year
         </ons-list-item>        
       </ons-list>
-     
+<!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
-      <input type="text" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
-      placeholder="CVV" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="4" data-maxl="4" >
+      <input type="number" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
+      placeholder="CVV" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="4" data-maxl="4" >
       </div>
-
+<!-- Fim da atualização -->
    <button class="trn button green-btn button--large" onclick="stripePayNow();" data-trn-key="pay_now">
 	Pay Now
 	<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
@@ -2175,12 +2905,12 @@
    <p class="trn center p-dim" data-trn-key="enter_your_verification_code">
    Please enter you verification code
    </p>
-   
+<!-- Atualização Master Hub (Correção de tipo de campo) -->
    <div class="field-wrapper">
-      <input type="text" name="code"  class="code text-input text-input--underbar has_validation" 
+      <input type="number" name="code"  class="code text-input text-input--underbar has_validation"
        value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="11" >
    </div>
-   
+<!-- Fim da atualização -->
    <button class="trn button green-btn button--large" onclick="validateCLient();" data-trn-key="submit">
 	Submit
    </button>
@@ -2331,17 +3061,17 @@
    
    <form id="frm-verify-account" class="frm-verify-account" method="post">   
     <div class="wrapper top20">
-
+<!-- Atualização Master Hub (Tradução) -->
       <div class="field-wrapper">
       <input type="email" name="email_address"  class="email_address text-input text-input--underbar has_validation" 
-      placeholder="Email address" value="" data-validation="email" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Email address" value="" data-validation="email" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
       
       <div class="field-wrapper">
       <input type="text" name="code"  class="code text-input text-input--underbar has_validation" 
-       placeholder="Code" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="11" >
+       placeholder="Code" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="11" >
       </div>
-      
+<!-- Fim da atualização -->
       <button class="trn button green-btn button--large" onclick="verifyAccount();" data-trn-key="submit">
 	  Submit
       </button>
@@ -2378,31 +3108,45 @@
    
    <div class="manual-address-input">
         <form id="frm-manual-address" class="frm-manual-address" method="post">
+<!-- Atualização Master Hub (Tradução, Catálogo de Endereços e Número e Bairro) -->
+	   <div class="wrapper">
+	      <div class="field-wrapper">
+	      <input type="text" id="cep" name="zipcode_1"  class="zipcode_1 text-input text-input--underbar" 
+	      placeholder="Postal code/Zip Code" value="" onblur="pesquisacep(this.value);" >
+	      </div>      
+	   </div>
+		
         <div class="wrapper">
 	      <div class="field-wrapper">
-	      <input type="text" name="stree_1"  class="stree_1 text-input text-input--underbar has_validation" 
-	      placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+	      <input type="text" id="rua" name="stree_1"  class="stree_1 text-input text-input--underbar has_validation" 
+	      placeholder="Street" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!">
 	      </div>      
-	   </div>      
+	   </div>   
+        <div class="wrapper">
+	      <div class="field-wrapper">
+	      <input type="text" name="numero_1"  class="numero_1 text-input text-input--underbar has_validation" 
+	      placeholder="Numero" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+	      </div>      
+	   </div>   
+        <div class="wrapper">
+	      <div class="field-wrapper">
+	      <input type="text" id="area_name" name="area_name_1"  class="area_name_1 text-input text-input--underbar has_validation" 
+	      placeholder="Bairro" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!">
+	      </div>      
+	   </div>   
 	   <div class="wrapper">
 	      <div class="field-wrapper">
-	      <input type="text" name="city_1"  class="city_1 text-input text-input--underbar has_validation" 
-	      placeholder="City" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+	      <input type="text" id="cidade" name="city_1"  class="city_1 text-input text-input--underbar has_validation" 
+	      placeholder="City" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 	      </div>      
 	   </div>
 	   <div class="wrapper">
 	      <div class="field-wrapper">
-	      <input type="text" name="state_1"  class="state_1 text-input text-input--underbar has_validation" 
-	      placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+	      <input type="text" id="uf" name="state_1"  class="state_1 text-input text-input--underbar has_validation" 
+	      placeholder="State" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 	      </div>      
 	   </div>
-	   <div class="wrapper">
-	      <div class="field-wrapper">
-	      <input type="text" name="zipcode_1"  class="zipcode_1 text-input text-input--underbar" 
-	      placeholder="Postal code/Zip Code" value=""  >
-	      </div>      
-	   </div>
-	   
+<!-- Fim da atualização -->
 	   <div class="wrapper">
 	   <button class="button green-btn button--large trn" onclick="setManualAddress();" data-trn-key="submit">
 		Submit		
@@ -2615,10 +3359,10 @@
    
    <form id="frm-enter-contact" class="frm-enter-contact" method="post">   
     <div class="field-wrapper">    
-    
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
-      placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >  
-    
+<!-- Atualização Master Hub (Tradução e Máscara de Telefone) -->
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="contact_phone text-input text-input--underbar has_validation mask-phone"
+      placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >  
+<!-- Fim da atualização -->
     </div>   
     
     <button class="button green-btn button--large trn" onclick="submitContactForm();" data-trn-key="submit" style="margin-top:10px;" >
@@ -2657,11 +3401,12 @@
 	    </ons-list-item>
 	    
 	    <ons-list-item  >	     
-	     	     
+<!-- Atualização Master Hub (Correção de tipo de campo) -->
 	     <ons-row>
            <ons-col width="70%">
-               <input type="text" name="cash_tip" id="cash_tip" style="width:89%;"
+               <input type="number" name="cash_tip" id="cash_tip" style="width:89%;"
 	           class="cash_tip text-input text-input--underbar" placeholder="Cash Tip">
+<!-- Fim da atualização -->
            </ons-col>           
            <ons-col width="30%">
              <button class="trn button green-btn" onclick="applyCashTip();" data-trn-key="apply">
@@ -2732,17 +3477,17 @@
       <input type="hidden" name="expiration_month" class="expiration_month" id="expiration_month">
       <input type="hidden" name="expiration_yr" class="expiration_yr" id="expiration_yr">
       <input type="hidden" name="cc_id" class="cc_id" id="cc_id">
-      
+<!-- Atualização Master Hub (Tradução) -->
       <div class="field-wrapper">
       <input type="text" name="card_name"  class="card_name text-input text-input--underbar has_validation" 
-      placeholder="Card name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Card name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
    
      <div class="field-wrapper">
-      <input type="text" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
-      placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="16"  data-maxl="16" >
+      <input type="number" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
+      placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16"  data-maxl="16" >
       </div>
-      
+<!-- Fim da atualização -->
      <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" onclick="showExpirationMonth();" class="trn expiration_month_label" data-trn-key="expiration_month">
          Expiration Month
@@ -2754,17 +3499,17 @@
          Expiration Year
         </ons-list-item>        
       </ons-list>
-     
+<!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
-      <input type="text" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
-      placeholder="CVV" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="4" data-maxl="4" >
+      <input type="number" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
+      placeholder="CVV" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="4" data-maxl="4" >
       </div>
       
      <div class="field-wrapper">
       <input type="text" name="billing_address"  class="billing_address text-input text-input--underbar has_validation" 
-      placeholder="Billing Address" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      placeholder="Billing Address" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div> 
-      
+<!-- Fim da atualização -->
      <button class="trn button green-btn button--large" onclick="saveCC();" data-trn-key="save">
 		Save
 		<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
@@ -2783,6 +3528,37 @@
    
 </ons-page>
 </script>   
+<!-- Atualização Master Hub (Sistema Favoritos) -->
+<script type="text/ons-template" id="favoritos.html">   
+<ons-navigator title="Navigator" var="sNavigator"> 
+<ons-page id="page-favoritos" on-device-backbutton="backtoHome()"  modifier="fundo_masterhub-favoritos">
+   <ons-toolbar>     
+   
+    <div class="left">
+     <ons-toolbar-button onclick="setHome();">
+        <ons-icon icon="fa-chevron-left"></ons-icon>
+     </ons-toolbar-button>        
+    </div> 
+         
+    <div class="center white"><span id="search-text" class="trn" data-trn-key="browse_resto">Meus Favoritos</span></div>           
+    
+    <div class="right">
+      <ons-toolbar-button><ons-icon icon="fa-search" onclick="showFilterResto();"></ons-toolbar-button>
+    </div>
+        
+   </ons-toolbar>
+   
+   <div class="results-header arrow_box"><span class="result-msg trn" data-trn-key="processing">processando</span></div>
+   
+   <ons-scroller>
+     <ons-list class="restaurant-list"  id="browse-favoritos" >
+     </ons-list>
+   </ons-scroller>
+      
+</ons-page>
+</ons-navigator> 
+</script>
+<!-- Fim da atualização -->
 
 
 <script type="text/ons-template" id="locationCity.html">    
@@ -2920,19 +3696,22 @@
    <ons-list-item modifier="chevron" class="trn" data-trn-key="select_from_address" onclick ="showAddressBookLocation();" >        
     Select from your address book
     </ons-list-item>
-    
-   <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
+<!-- Atualização Master Hub (Personalização) -->
+   <ons-list-item modifier="chevron" class="trn location_state invisivel" data-trn-key="location_state" onclick ="showState()" >        
     State
     </ons-list-item>
    
-	<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="city" onclick ="showCity()" >        
+	<ons-list-item modifier="chevron" class="trn location_city invisivel" data-trn-key="city" onclick ="showCity()" >        
 	City
 	</ons-list-item>
 	
 	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
 	District / Area
 	</ons-list-item>
-	
+   <div class="center" style="font-size: 15px; margin-top: 6px; margin-bottom: 0px;">
+   <span class="location_city"></span> / <span class="location_state"></span>
+   </div>
+<!-- Fim da atualização -->
    </ons-list>
    
     <div class="wrapper">
@@ -2983,7 +3762,147 @@
 
 </ons-page>
 </script>     
+<!-- Atualização Master Hub (Catálogo de Endereços, Máscara de Telefone) -->
+<script type="text/ons-template" id="shippingLocationArea.html"> 
+<ons-page id="page-shipping-location-area" class="onsen-display" modifier="fundo_masterhub-entrega">
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     
+   </ons-toolbar>
+		<button id="menu-adress" class="button button--quiet button--large green" onclick="popUpAddressBook();">Selecione da sua lista de endereços</button>
+			
+   <div class="separate_or wrapper ">
+        <ons-row >
+          <ons-col width="45%" class="text-right">
+           <hr class="hr_index">
+         </ons-col>
+          <ons-col width="10%" class="text-center">OU</ons-col>
+         <ons-col width="45%" class="text-left">
+          <hr class="hr_index">
+         </ons-col>
+       </ons-row>
+     </div>
 
+   
+   <form id="frm-shipping" class="frm-shipping" method="post">
+   
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+   <input type="hidden" name="city" id="city" class="city">
+   <input type="hidden" name="state" id="state" class="state">   
+   <input type="hidden" name="zipcode" id="zipcode" class="zipcode">  
+   <input type="hidden" name="area_name" id="area_name" class="area_name">  
+   
+      <div class="home-page wrapper center" style="margin-top: -15px; margin-bottom: -20px;">       
+              
+       <button class="button button--quiet green" onclick="getCurrentLocation();">
+       <ons-icon icon="fa-location-arrow"></ons-icon>
+         <span class="trn" data-trn-key="Informa a minha localização atual">Informa a minha localização atual</span>
+       </button>       
+
+
+   <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
+    </div> 
+	<br>
+	<div class="separate_or">
+        <ons-row >
+          <ons-col width="45%" class="text-right">
+           <hr class="hr_index">
+         </ons-col>
+          <ons-col width="10%" class="text-center">OU</ons-col>
+         <ons-col width="45%" class="text-left">
+          <hr class="hr_index">
+         </ons-col>
+       </ons-row>
+     </div>
+   
+      <div class="field-wrapper">
+      <input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
+      placeholder="Preencha com o CEP da sua Rua" value="" onblur="pesquisacep_pedido(this.value);" >
+      </div>
+	  
+   <div class="separate_or">
+        <ons-row >
+          <ons-col width="45%" class="text-right">
+           <hr class="hr_index">
+         </ons-col>
+          <ons-col width="10%" class="text-center">OU</ons-col>
+         <ons-col width="45%" class="text-left">
+          <hr class="hr_index">
+         </ons-col>
+       </ons-row>
+     </div>
+   
+   <p class="trn menuapp center" style="margin-top: 3px; margin-bottom: 5px;">Confira ou Preencha o endereço de entrega</p>    
+   
+   <ons-list>
+   
+   <ons-list-item modifier="chevron" class="trn location_state invisivel" data-trn-key="location_state" onclick ="showState()" >        
+    State
+    </ons-list-item>
+   
+	<ons-list-item modifier="chevron" class="trn location_city invisivel" data-trn-key="city" onclick ="showCity()" >        
+	City
+	</ons-list-item>
+	
+	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+	District / Area
+	</ons-list-item>
+	
+   </ons-list>
+   <div class="center" style="font-size: 15px; margin-top: 6px; margin-bottom: -15px;">
+   <span id="cidade" class="location_city"></span> / <span id="bairro" class="location_state"></span>
+   </div>
+    <div class="wrapper">
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+							<input type="text" id="street" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+							<input type="text" id="numero" name="numero" class="numero text-input text-input--underbar" placeholder="Nº" value="" data-validation="required" data-validation-error-msg="Obrigatório">
+						</ons-col>
+					</ons-row>
+				</div>
+
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+					placeholder="Delivery instructions" value="" >
+      </div>      
+
+				<div class="field-wrapper">
+      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+					placeholder="Apartment suite, unit number, or company name" >
+      </div>      
+   
+				<div class="field-wrapper">
+					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
+					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+   </div>
+   
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 8px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+<br>
+   
+    <button class="button green-btn button--large trn" onclick="clientShipping();" data-trn-key="select_payment_method">
+	Select Payment Method
+	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
+   </button>
+			</div>
+   </form>
+</ons-page>
+</script>     
+<!-- Fim da atualização -->
 <script type="text/ons-template" id="locationState.html">    
   <ons-dialog var="locationState" style="width:90%;height:350px;" cancelable  >
 
