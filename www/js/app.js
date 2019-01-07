@@ -2556,7 +2556,7 @@ if (data.details.programa_fidelidade!=false){
                               if(getStorage("transaction_type")=='delivery'){ //se for entrega
                                  $htmlicoentrega+='<div class="myfa-moto fa-motorcycle fa"></div>';
                                  
-                                 $htmlentrega="Endereço da Entrega";
+                                 $htmlentrega=getTrans("Endereço da Entrega","endereco_entrega");
                                  $htmlendentrega="";
                                   
                                   $enderecoentregaw=JSON.parse('{"' + decodeURI(getStorage('shipping_address').replace(/%2C/g,"").replace(/\+/g, " ").replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}');
@@ -2584,14 +2584,14 @@ if (data.details.programa_fidelidade!=false){
                            $transtr="";
                             $paym=data.details.payment_type;
                            if(data.details.payment_type=='cod'){
-                               dump("pegou dinheiro ".$paym);
+                               dump("pagou dinheiro ".$paym);
                                 $pgtoico='<ons-icon icon="fa-usd" class="myfa-usd fa-usd fa fa-lg "></ons-icon>';
                                 $pgtotrans="Pagar em Dinheiro";
                                 $transtr+='Troco: ';
                                 $transtr+=prettyPrice($('.order_change').val());
                                 
                             }else{
-                                dump("pegou cartao ".$paym);
+                                dump("pagou cartao ".$paym);
                                 $pgtoico='<ons-icon icon="fa-credit-card" class="myfa-creditcard fa-credit-card fa fa-lg"></ons-icon>';
                                 $pgtotrans="Pagar com Cartão";
                                 $transtr+=data.details.payment_details.payment_provider_name;

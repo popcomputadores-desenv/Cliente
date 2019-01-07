@@ -1035,27 +1035,27 @@
        <span class="trn tip_amount" data-trn-key="tip_amount">Dar Gorjeta</span>       
 <!-- Fim da atualização -->
        </ons-list-item>    
-       
-       <ons-list-item modifier="chevron" onclick="showChangeAddressPage();" class="change_address_wrap" > 
+<!-- Atualização Master Hub (Oculta botão de modificar o endereço) -->
+    <!--   <ons-list-item modifier="chevron" onclick="showChangeAddressPage();" class="change_address_wrap" > 
           <span class="trn" data-trn-key="change_your_address">Change your address here</span>
           <p class="small-font-dim google_formatted_address"></p>      
-       </ons-list-item>    
-       
+       </ons-list-item>  -->  
+<!-- Fim da atualização -->
    </ons-list>       
 
    <input type="hidden" name="cart_subtotal" id="cart_subtotal" class="cart_subtotal">
    
    <div style="height:20px;"></div>  
-   
+<!-- Atualização Master Hub (Tradução e Personalização) -->
+   <div class="wrapper">
    <button class="button green-btn button--large " onclick="checkOut();">
-<!-- Atualização Master Hub (Tradução) -->
 	<span class="btn_checkout trn"  data-trn-key="checkout" >
 	Finalizar
 	</span>
-<!-- Fim da atualização -->
 	<div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
    </button>
-   
+ </div>  
+<!-- Fim da atualização -->
    </div>
    
 
@@ -1600,16 +1600,15 @@
 		
     </div>
        <ons-row >
-        <ons-col width="50%" align="center">
+        <ons-col class="text-right">
           
-            <button class="button green-btn button--cta trn" onclick="menu.setMainPage('home.html', {closeMenu: true})" >
+            <button class="button green-btn button--cta trn" onclick="menu.setMainPage('home.html', {closeMenu: true})">
             <ons-icon icon="fa-long-arrow-left"></ons-icon>
                 <span class="trn">Início</span>
-                
             </button> 
         </ons-col>
         <ons-col class="text-right">           
-            <button class="button blue-btn2 button--cta trn" onclick="menu.setMainPage('orders.html', {closeMenu: true})" style="border-radius:  3px;">
+            <button class="button blue-btn2 button--cta trn" onclick="menu.setMainPage('orders.html', {closeMenu: true})">
                 <span class="trn">Meus Pedidos</span>
                 <ons-icon icon="fa-long-arrow-right"></ons-icon>
             </button> 
