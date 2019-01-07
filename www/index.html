@@ -61,9 +61,8 @@
 <link href="lib/intel/build/css/intlTelInput.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="lib/intel/build/js/intlTelInput.js"></script>
 <!-- Atualização Master Hub (Personalizações) -->
-<script type="text/javascript" src="js/favoritos.js"></script>
-<script type="text/javascript" src="js/sugestoes.js"></script>
-<script type="text/javascript" src="js/fidelidade.js"></script>	
+<script type="text/javascript" src="js/sugestoes.js?ver=1.0"></script>
+<script type="text/javascript" src="js/fidelidade.js?ver=1.0"></script>	
 <script type="text/javascript" src="js/progresscircle.js"></script>	
 <!-- Fim da atualização -->
 <script src="js/config.js?ver=1.0"></script>
@@ -74,7 +73,7 @@
 <script src="js/countries.js?ver=1.0"></script>
 <script src="js/app.js?ver=1.0"></script>
 <!-- Atualização Master Hub (Personalizações) -->
-<script src="js/masterhub.js"></script>
+<script src="js/masterhub.js?ver=1.0"></script>
 <!-- Fim da atualização -->
 </head>
 <body>
@@ -148,12 +147,7 @@
       <ons-icon icon="ion-android-contact"></ons-icon> 
       <span class="trn" data-trn-key="profile">Profile</span>
     </ons-list-item>    
-<!-- Atualização Master Hub (Inclusão no Menu a opção Favoritos) -->
-	<ons-list-item onclick="menu.setMainPage('favoritos.html', {closeMenu: true})" class="bottom-menu-item">
-      <ons-icon icon="ion-android-favorite"></ons-icon> 
-      <span class="trn" data-trn-key="Favoritos">Favoritos</span>
-    </ons-list-item>
-<!-- Fim da atualização -->
+    
     <ons-list-item onclick="showOrders();" class="bottom-menu-item">
       <ons-icon icon="ion-clipboard"></ons-icon> 
       <span class="trn" data-trn-key="orders">Orders</span>
@@ -250,7 +244,7 @@
     </DIV>
     
     <DIV class="search_by_location">
-       <div class="search-banner-logo"></div>
+       <div class="search-banner"></div>
 <!-- Atualização Master Hub (Personalização Tela Inicial - Ocultar caixas de seleção de endereço) -->
        <div class="home-page wrapper center" style="margin-top: -25px;">       
        <h4 class="trn catalogo_endereco" data-trn-key="order_food_online">Order food online from 1000+ restaurants!</h4>
@@ -330,7 +324,7 @@
     
     <DIV class="advance_search">       
        
-      <div class="search-banner-logo"><div class="greybg"></div></div>
+      <div class="search-banner"><div class="greybg"></div></div>
     
       <div id="tabbar_wrap"></div>
       
@@ -563,7 +557,6 @@
        <ons-list-item ons-lazy-repeat="lazyLoadSearch" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
        </ons-list-item>
     </ons-list>
-	
 <!-- Atualização Master Hub (Sugestões de Estabelecimentos)  -->
   <div class="indicar-restaurante"> 
   <div style="margin-top: 5px;">Não encontrou o que queria?</div> 
@@ -712,19 +705,14 @@
      <div class="center white"><span id="search-text" class="trn" data-trn-key="menu" >Menu</span></div>           
      
      <div class="right">     
-<!-- Atualização Master Hub (Sistema de Favoritos - Botão) -->
-		 <ons-toolbar-button>
-           <img src="images/icons/favoritar.png" id="imgfavorito" onclick='addFavorito()' class="imgfavorito cart ng-scope ons-icon fa-shopping-cart fa fa-lg" width="24px" height="24px">
-        </ons-toolbar-button>
-<!-- Fim da atualização -->
          <ons-toolbar-button onclick="showCart();" >         
            <div class="notification cart-num" >0</div>
            <ons-icon icon="fa-shopping-cart" class="cart">
          </ons-toolbar-button>
-<!-- Atualização Master Hub (Menu de Categorias) -->
+<!-- Atualização Master Hub (Menu de Categorias) 
          <ons-toolbar-button onclick="showMenu(this);">
            <ons-icon icon="ion-android-more-vertical" size="30px"></ons-icon>
-        </ons-toolbar-button>
+        </ons-toolbar-button> -->
 <!-- Fim da atualização -->
      </div>
            
@@ -856,7 +844,7 @@
 </script>
 <!-- Atualização Master Hub (Menu Itens) -->
 <script type="text/ons-template" id="menuItemEmpresa.html">    
-<ons-page id="page-menubycategoryitem"  modifier="fundo_masterhub-icones">
+<ons-page id="page-menubycategoryitem" >
    <ons-toolbar>        
      <div class="left"><ons-back-button id="menuitem-back-button"></ons-back-button></div>     
      <div class="center white"><span>Categorias</span></div>           
@@ -867,9 +855,9 @@
         <span class="notification cart-num" onclick="showCart();" style="margin-left: 10px; top:3px;">0</span>
         <ons-icon icon="fa-shopping-cart" onclick="showCart();" class="cart"></ons-toolbar-button>
 
-		<ons-toolbar-button onclick="showEasyCategory(this);">
+		<!-- <ons-toolbar-button onclick="showEasyCategory(this);">
            <ons-icon icon="ion-ios-list" size="30px"></ons-icon>
-        </ons-toolbar-button>
+        </ons-toolbar-button> -->
 
         
      </div>
@@ -2057,7 +2045,7 @@
    
     <div class="home-header">
       <img src="css/images/banner.png" alt="" title="">
-      <p class="center trn" data-trn-key="please_log_or_reg">Please log in or register to continue with<br>your order</p>
+      <p class="center trn" data-trn-key="please_log_or_reg" style="color: black;">Please log in or register to continue with<br>your order</p>
     </div> 
 
    <div class="wrapper center wrapper-white fb-login-wrap">   
@@ -3101,7 +3089,7 @@
        <span class="trn" data-trn-key="select_from_address_map">Select your address from map</span>
        </ons-list-item>    
        
-       <ons-list-item modifier="chevron" onclick="showManualAddressInput();" style="display:none;" > 
+       <ons-list-item modifier="chevron" onclick="showManualAddressInput();" > 
        <span class="trn" data-trn-key="enter_your_address">Enter your address</span>
        </ons-list-item>    
    </ons-list>
@@ -3528,37 +3516,6 @@
    
 </ons-page>
 </script>   
-<!-- Atualização Master Hub (Sistema Favoritos) -->
-<script type="text/ons-template" id="favoritos.html">   
-<ons-navigator title="Navigator" var="sNavigator"> 
-<ons-page id="page-favoritos" on-device-backbutton="backtoHome()"  modifier="fundo_masterhub-favoritos">
-   <ons-toolbar>     
-   
-    <div class="left">
-     <ons-toolbar-button onclick="setHome();">
-        <ons-icon icon="fa-chevron-left"></ons-icon>
-     </ons-toolbar-button>        
-    </div> 
-         
-    <div class="center white"><span id="search-text" class="trn" data-trn-key="browse_resto">Meus Favoritos</span></div>           
-    
-    <div class="right">
-      <ons-toolbar-button><ons-icon icon="fa-search" onclick="showFilterResto();"></ons-toolbar-button>
-    </div>
-        
-   </ons-toolbar>
-   
-   <div class="results-header arrow_box"><span class="result-msg trn" data-trn-key="processing">processando</span></div>
-   
-   <ons-scroller>
-     <ons-list class="restaurant-list"  id="browse-favoritos" >
-     </ons-list>
-   </ons-scroller>
-      
-</ons-page>
-</ons-navigator> 
-</script>
-<!-- Fim da atualização -->
 
 
 <script type="text/ons-template" id="locationCity.html">    
@@ -3673,8 +3630,10 @@
 </ons-page>
 </script>   
 
-<script type="text/ons-template" id="shippingLocationArea.html"> 
-<ons-page id="page-shipping-location-area" class="onsen-display">
+<!-- Atualização Master Hub (Personalização) -->
+<script type="text/ons-template" id="shippingLocationArea-old.html"> 
+<ons-page id="page-shipping-location-area-old" class="onsen-display">
+<!-- Fim da atualização -->
    <ons-toolbar>        
      <div class="left"><ons-back-button></ons-back-button></div>     
      <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     
@@ -3764,7 +3723,7 @@
 </script>     
 <!-- Atualização Master Hub (Catálogo de Endereços, Máscara de Telefone) -->
 <script type="text/ons-template" id="shippingLocationArea.html"> 
-<ons-page id="page-shipping-location-area" class="onsen-display" modifier="fundo_masterhub-entrega">
+<ons-page id="page-shipping-location-area" class="onsen-display" >
    <ons-toolbar>        
      <div class="left"><ons-back-button></ons-back-button></div>     
      <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     

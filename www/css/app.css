@@ -1725,6 +1725,11 @@ background:url("images/logo.png") no-repeat center center;
 background-size: 200px;
 min-height: 160px;
 }
+.search-banner{
+background:url("images/location-banner.jpg") no-repeat center center;
+background-size:cover;
+min-height:180px;
+}
 
 .category_popup_scroller{
 max-height: 360px;

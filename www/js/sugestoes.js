@@ -92,9 +92,15 @@ function addSuggestion()
 	    onError : function() { 
 			return;
 		},	    
-	    onSuccess : function() {     	      
+	    onSuccess : function() {
 	      var params = $( "#frm-addsuggestion").serialize();	      
 	      params+="&client_token="+ getStorage("client_token");
+			
+			if(!empty(krms_config.APIHasKey)){
+			params+="&api_key="+urlencode(krms_config.APIHasKey);
+			}
+	
+			params+="&app_version="+ app_version;
 			
 	      callAjax("addSuggestion",params);
 			sNavigator.popPage({cancelIfRunning: true});
@@ -180,27 +186,29 @@ alert("Você deve estar logado para Votar");
 	
  $.ajax({
     type:"GET",
-    url: ajax_url+"/AddVoto?client_token="+getStorage("client_token")+"&sug_id="+sug_id+"",
+    url: ajax_url+"/AddVoto?client_token="+getStorage("client_token")+"&sug_id="+sug_id+"&api_key="+urlencode(krms_config.APIHasKey)+"&app_version="+ app_version,
 	data: { get_param: 'icone' }, 
 	dataType: 'jsonp',
-    success: function(data) {
+    onError : function() {      
+	    },	    
+	    onSuccess : function(data) {
 		var dados = JSON.stringify(data);
-		var obj = $.parseJSON(dados);
-		var informacao = obj['request'];
+		var obj = $.parceJSON(dados);
+		var informacao = obj["request"];
         var icone = informacao.substring(9);
 		var icone = icone.replace("{","");
 		var icone = icone.replace("}","");
 		var icone = icone.replace(/[\\"]/g, '');
 		
-	    if(icone==="1"){
+	    /* if(data.details.icone === "1"){
 		$("#imgvoto-"+sug_id).attr("src","images/icons/voto.png");
-		$("#voto-"+sug_id+"-2").val(1);	
+		$("#voto-"+sug_id+"-2").val(1);
 			toastMsg( getTrans("Obrigado por votar neste estabelecimento!",'voto_obrigado') );
 		} else {
 		$("#imgvoto-"+sug_id).attr("src","images/icons/semvoto.png");
 		$("#voto-"+sug_id+"-2").val(0);	
 			toastMsg( getTrans("Sinta-se a vontade por retirar seu voto! Obrigado pelo feedback",'voto_obrigado2') );
-		}
+		} */
 		
 		
 		var votos = Number(document.getElementById("voto-"+sug_id).value);
@@ -228,32 +236,31 @@ function verificaVoto(data, sug_id){
 var tokem = getStorage("client_token");
 if(tokem == "" || tokem == "null" || tokem == null){
 alert("Você deve estar logado para Votar");
-}
- else {
+} else {
 	
  $.ajax({
     type:"GET",
-    url: ajax_url+"/VerificaVoto?client_token="+getStorage("client_token")+"&sug_id="+sug_id+"",
+    url: ajax_url+"/VerificaVoto?client_token="+getStorage("client_token")+"&sug_id="+sug_id+"&api_key="+urlencode(krms_config.APIHasKey)+"&app_version="+ app_version,
 	data: { get_param: 'icone' }, 
 	dataType: 'jsonp',
-    success: function(data) {
+    onError : function() {      
+	    },	    
+	    onSuccess : function(data) {
 		var dados = JSON.stringify(data);
-		var obj = $.parseJSON(dados);
+		var obj = JSON.parce(dados);
 		var informacao = obj['request'];
         var icone = informacao.substring(9);
 		var icone = icone.replace("{","");
 		var icone = icone.replace("}","");
 		var icone = icone.replace(/[\\"]/g, '');
 		
-		
-		
-	    if(icone==="1"){
+	    /* if(data.details.icone === "1"){
 		$("#imgvoto-"+sug_id).attr("src","images/icons/voto.png");
 		$("#voto-"+sug_id+"-2").val(1);	
 		} else {
 		$("#imgvoto-"+sug_id).attr("src","images/icons/semvoto.png");
 		$("#voto-"+sug_id+"-2").val(0);	
-		}
+		} */
 
 		var votos = Number(document.getElementById("voto-"+sug_id).value);
     	var votoatual = Number(document.getElementById("voto-"+sug_id+"-2").value);
@@ -349,4 +356,22 @@ function carregandoSugestoes()
 callAjax('Suggestion',sparams);
 	
 }
-/* Fim da atualização */
+
+function onsenDialogSugestao(){
+
+	ons.notification.confirm({
+	  message: getTrans('Sua sugestao foi enviada com sucesso!','Sua sugestão foi enviada com sucesso! Obrigado') ,	  
+	  title: dialog_title_default,
+	  buttonLabels: ['OK'],
+	  animation: 'default', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	  	dump(index);
+	    if ( index==1){
+	    	$root.ons.findParentComponentUntil('ons-navigator', $event).popPage({cancelIfRunning: true});       
+	    }
+	  }
+	});		
+}
+/*Fim da atualização*/

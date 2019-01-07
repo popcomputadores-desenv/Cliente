@@ -445,6 +445,7 @@ function paginaResultado(data)
 	$.each( data.custom_page, function( key, val ) { 
 		
 	pagina_personalizada+='<ons-carousel-item class="fundo">';	
+	pagina_personalizada+='<div align="left" style="width: auto; margin-right: 25px; margin-top: 15px; margin-left: 10px; position: absolute;">'+val.page_name+'</div>';
 		var nome_pagina=val.page_name;
 		if (nome_pagina.indexOf("...") != -1){
 	pagina_personalizada+='<div class="box" align="right" style="right:20px;top:10px">';
@@ -458,6 +459,7 @@ function paginaResultado(data)
 	
 pagina_personalizada+='</ons-carousel>';
 pagina_personalizada+='<ons-carousel-cover>';
+pagina_personalizada+='<div class="cover-label">Arraste para a direita ou para a esquerda.</div>';
 pagina_personalizada+='</ons-carousel-cover>';
 	  
 	createElement('pagina-personalizada',pagina_personalizada);
@@ -649,7 +651,7 @@ function limpa_formulario_cep_catalogo() {
     function meu_callback_catalogo(conteudo) {
         if (!("erro" in conteudo)) {
 			
-			buscar_ids_por_CEP(conteudo.bairro);
+			buscar_ids_por_CEP(conteudo.localidade, conteudo.bairro);
             //Atualiza os campos com os valores.
             document.getElementById('street').value=(conteudo.logradouro);
 			$(".cidade").html(conteudo.localidade);
@@ -733,7 +735,7 @@ function limpa_formulario_cep_pedido() {
     function meu_callback_pedido(conteudo) {
         if (!("erro" in conteudo)) {
 			
-			buscar_ids_por_CEP(conteudo.bairro);
+			buscar_ids_por_CEP(conteudo.localidade, conteudo.bairro);
             //Atualiza os campos com os valores.
             document.getElementById('street').value=(conteudo.logradouro);
 			$(".cidade").html(conteudo.localidade);
@@ -802,3 +804,543 @@ function fechar_prop()
   {
  setHome2();
   }
+
+/*Atualização Master Hub (Personalização de ocultar caixas de escolha na tela inicial)*/
+function mudarendereco()
+{
+	$(".catalogo_endereco").show();
+	$(".search_by_location_btn").hide();
+	$(".bairro_cidade").hide();
+	$(".cidade_estado").hide();
+	
+	$(".city_id").val('');
+	$(".state_id").val('');
+	$(".area_id").val('');
+	$(".city").val('');
+	$(".area_name").val('');
+	$(".state").val('');
+	$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
+	$(".location_city").html(getTrans("Select City", "select_city"));
+	$(".location_state").html(getTrans("Select State", "select_state"));
+
+	removeStorage("global_area_name");
+	removeStorage("global_city_name");
+	removeStorage("global_area_id");
+	removeStorage("global_city_id");
+}
+/*Fim da atualização*/
+
+/*Atualização Master Hub (Tradução e Catálogo de Endereços)*/
+function onsenDialogCheckout(){
+	ons.notification.confirm({
+	  message: getTrans('Deseja finalizar o pedido?','Deseja continuar comprando?') ,	  
+	  title: dialog_title_default,
+	  buttonLabels: ['Sim', 'Ainda Não'],
+	  animation: 'fade', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	  	dump(index);
+	    if ( index==0){
+	    	showCart();       
+	    }
+	  }
+	});		
+}
+/*Fim da atualização*/
+
+/*Atualização Master Hub (Verificação de Endereços e Catálogo de Endereços)*/
+function onsenDialogAddresBook(){
+
+	ons.notification.confirm({
+	  messageHTML: getTrans('Deseja cadastrar seu endereço agora? <br> Não esqueça de selecioná-lo como padrão!','Deseja cadastrar seu endereço agora? <br> Não esqueça de selecioná-lo como padrão!') ,	  
+	  title: getTrans('Não há endereço cadastrado!','Não há endereço cadastrado!'),
+	  buttonLabels: ['Sim', 'Não'],
+	  animation: 'fade', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	  	dump(index);
+	    if ( index==0){
+	    	setEnderecoNovo();
+	    } else 
+			$(".catalogo_endereco").show();
+			$(".search_by_location_btn").hide();
+			//$(".search_by_address").hide();
+	  }
+	});		
+}
+
+function onsenDialogAddresBookDefault(){
+
+	ons.notification.confirm({
+	  messageHTML: getTrans('Você tem endereço cadastrado, porém nenhum está como padrão!<br>Deseja escolher o endereço padrão agora?','Você tem endereço cadastrado, porém nenhum está como padrão!<br>Deseja escolher o endereço padrão agora?') ,	  
+	  title: getTrans('Não há endereço padrão!','Não há endereço padrão!'),
+	  buttonLabels: ['Sim', 'Não'],
+	  animation: 'fade', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	  	dump(index);
+	    if ( index==0){
+	    	setEnderecoNovo();
+	    } else 
+			$(".catalogo_endereco").show();
+			$(".search_by_location_btn").hide();
+			//$(".search_by_address").hide();
+	  }
+	});		
+}
+
+function onsenDialogAddresBookOld(){
+
+	ons.notification.confirm({
+	  messageHTML: getTrans('Você tem endereço cadastrado, porém está desatualizado!<br>Deseja atualizar seus endereços agora?','Você tem endereço cadastrado, porém está desatualizado!<br>Deseja atualizar seus endereços agora?') ,	  
+	  title: getTrans('Endereço desatualizado!','Endereço desatualizado!'),
+	  buttonLabels: ['Sim', 'Não'],
+	  animation: 'fade', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	  	dump(index);
+	    if ( index==0){
+	    	setEnderecoNovo();
+	    } else 
+			$(".catalogo_endereco").show();
+			$(".search_by_location_btn").hide();
+			//$(".search_by_address").hide();
+		    	$(".location_area").html(getTrans("District / Area","destrict_area"));
+			$(".location_city").html(getTrans("City", "city"));
+			$(".location_state").html(getTrans("Select State", "select_state"));
+	  }
+	});		
+}
+/*Fim da atualização*/
+/*Atualização Master Hub (Catálogo de Endereços)*/
+function setEnderecoNovo()
+{
+	dump("setEnderecoNovo");
+	var options = {     	  		  
+	  	  closeMenu:true,
+	      animation: 'slide',
+	      callback:setHomeCallback
+	   };	   	   	   
+	menu.setMainPage('addressBook.html', options); 	
+}
+/*Fim da atualização*/
+/*Atualização Master Hub (Botão Fechar da Splash Page)*/
+function setHome2() //Cópia da setHome
+{
+	 dump("setHome");
+	var options = {     	  		  
+	  	  closeMenu:true,
+	      animation: 'slide',
+	      callback:setHomeCallback
+	   };	   	   	   
+	 menu.setMainPage('home.html',options);
+}
+/*Fim da atualização*/
+
+function displayMerchantLogo3(logo,total,subtotal,entrega,comodidade,embalagem,desconto,gorjeta,page_id) //Cópia de displayMerchantLogo
+{
+	if(!empty(logo)){
+	    $("#"+ page_id +" .logo-wrap").html('<img src="'+logo+'" />')		
+	}
+
+	if (!empty(subtotal)){
+		$("#"+ page_id +" .titulo-subtotal").html('Sub-Total: ');
+		$("#"+ page_id +" .total-subtotal").html(subtotal);
+		$("#"+ page_id +" .total-subtotal").css({"display":"block"});
+		$("#"+ page_id +" .titulo-subtotal").css({"display":"block"});	
+	}else{
+		$("#"+ page_id +" .total-subtotal").css({"display":"none"});
+		$("#"+ page_id +" .titulo-subtotal").css({"display":"none"});
+	}
+	
+	transaction_type=getStorage("transaction_type");
+	dump("transaction_type=>"+transaction_type);
+	
+					if ( transaction_type=="delivery"){	
+		$("#page-paymentoption .titulo-entrega").css({"display":"block"});
+		$("#page-paymentoption .total-entrega").css({"display":"block"});
+					}else{
+		$("#page-paymentoption .titulo-entrega").css({"display":"none"});
+		$("#page-paymentoption .total-entrega").css({"display":"none"});
+					}
+
+	if (!empty(entrega)){
+		$("#"+ page_id +" .titulo-entrega").html('Taxa de Entrega: ');
+		$("#"+ page_id +" .total-entrega").html(entrega);
+		//$("#"+ page_id +" .total-entrega").css({"display":"block"});
+		//$("#"+ page_id +" .titulo-entrega").css({"display":"block"});
+	}else{
+		$("#"+ page_id +" .total-entrega").css({"display":"none"});
+		$("#"+ page_id +" .titulo-entrega").css({"display":"none"});
+	}
+	
+	if (!empty(comodidade)){
+		$("#"+ page_id +" .titulo-comodidade").html('Taxa de Comodidade: ');
+		$("#"+ page_id +" .total-comodidade").html(comodidade);
+		$("#"+ page_id +" .total-comodidade").css({"display":"block"});
+		$("#"+ page_id +" .titulo-comodidade").css({"display":"block"});
+	}else{
+		$("#"+ page_id +" .total-comodidade").css({"display":"none"});
+		$("#"+ page_id +" .titulo-comodidade").css({"display":"none"});
+	}
+	
+	if (!empty(embalagem)){
+		$("#"+ page_id +" .titulo-embalagem").html('Taxa de Embalagem: ');
+		$("#"+ page_id +" .total-embalagem").html(embalagem);
+		$("#"+ page_id +" .total-embalagem").css({"display":"block"});
+		$("#"+ page_id +" .titulo-embalagem").css({"display":"block"});
+	}else{
+		$("#"+ page_id +" .total-embalagem").css({"display":"none"});
+		$("#"+ page_id +" .titulo-embalagem").css({"display":"none"});
+	}
+	
+	if (!empty(desconto)){
+		$("#"+ page_id +" .titulo-desconto").html('Descontos: ');
+		$("#"+ page_id +" .total-desconto").html(desconto);
+		$("#"+ page_id +" .total-desconto").css({"display":"block"});
+		$("#"+ page_id +" .titulo-desconto").css({"display":"block"});
+	}else{
+		$("#"+ page_id +" .total-desconto").css({"display":"none"});
+		$("#"+ page_id +" .titulo-desconto").css({"display":"none"});
+	}
+
+	if (!empty(total)){
+		$("#"+ page_id +" .titulo-total").html('Total: ');
+		$("#"+ page_id +" .total-amount").html(total);
+	}
+	
+	if (!empty(gorjeta)){
+		$("#"+ page_id +" .titulo-gorjeta").html('Gorjeta: ');
+		$("#"+ page_id +" .total-gorjeta").html(gorjeta);
+		$("#"+ page_id +" .total-gorjeta").css({"display":"block"});
+		$("#"+ page_id +" .titulo-gorjeta").css({"display":"block"});
+	}else{
+		$("#"+ page_id +" .total-gorjeta").css({"display":"none"});
+		$("#"+ page_id +" .titulo-gorjeta").css({"display":"none"});
+	}
+	
+	var merchant_name=getStorage("merchant_name");	
+	if (!empty(merchant_name)){
+		$("#"+ page_id +" .restauran-title").html(merchant_name);
+	}
+}
+
+/* function displayMerchantResumo(data,page_id)
+{
+		if(!empty(data.merchant_info)){
+		$("#"+ page_id +" .logo-wrap").html('<img src="'+data.merchant_info.logo+'" />');
+		}
+	
+		if (!empty(data.cart_total)){
+		$("#"+ page_id +" .total-amount").html(data.cart_total);
+		}
+		
+		if (!empty(data.cart.discount)){			
+			$("#"+ page_id +" .total-desconto").html(data.cart.discount.amount_pretty);
+		}				
+		if (!empty(data.cart.sub_total)){
+			$("#"+ page_id +" .total-subtotal").html(data.cart.sub_total.amount_pretty);
+		}		
+		if (!empty(data.cart.delivery_charges)){
+			$("#"+ page_id +" .total-entrega").html(data.cart.delivery_charges.amount_pretty);
+		}		
+		if (!empty(data.cart.packaging)){
+			$("#"+ page_id +" .total-embalagem").html(data.cart.packaging.amount_pretty);
+		}		
+		if (!empty(data.cart.tax)){
+			$("#"+ page_id +" .total-comodidade").html(data.cart.tax.amount);
+		}		
+		
+		if (!empty(data.cart.tips)){			
+			$("#"+ page_id +" .total-gorjeta").html(data.cart.tips.tips_pretty);
+			$(".total-gorjeta").removeClass("trn");
+			$(".total-gorjeta").html( data.cart.tips.tips_percentage_pretty );
+		} else {
+			$(".total-gorjeta").addClass("trn");
+			$(".total-gorjeta").html( getTrans("Tip Amount","tip_amount") );
+		}
+		
+		if (!empty(data.cart.grand_total)){
+			$("#"+ page_id +" .total-amount").html(data.cart.grand_total.amount_pretty);
+		} 
+		
+	if (data.has_pts==2){		
+		setStorage("earned_points", data.points );
+		$(".pts_earn_label").show();
+		$(".pts_earn_label").html(data.points_label);
+	} else {
+		$(".pts_earn_label").hide();
+		removeStorage("earned_points");
+	}
+
+}*/
+
+/* Atualização Master Hub (Alerta de mudança de taxa de entrega) */
+function showDialogChangeAddressAlerta (deliveryPrice) {
+	if (typeof dialogBrowseResto === "undefined" || dialogBrowseResto==null || dialogBrowseResto=="" ) {
+		ons.createDialog('filterBrowseResto.html').then(function(dialog) {
+			$(".restaurant_name").val('');
+	        dialog.show();
+
+	        translatePage();
+	        translateValidationForm();
+	        $(".restaurant_name").attr("placeholder", getTrans('Enter Restaurant name','enter_resto_name')  );
+
+	    });
+	} else {
+		$(".restaurant_name").val('');
+		dialogBrowseResto.show();
+
+		/*translatePage();
+	    translateValidationForm();
+	    $(".restaurant_name").attr("placeholder", getTrans('Enter Restaurant name','enter_resto_name')  );*/
+	}
+}
+/*Fim da atualização*/
+/*Atualização Master Hub (Verificação de Endereços e Catálogo de Endereços)*/
+function carregaEndereco()
+{
+	var params = "client_token="+ getStorage("client_token");
+	params+="&device_id="+ getStorage("device_id");
+	if (isDebug()){
+	      	  params+="&device_platform=Android";
+	      } else {
+	      	  params+="&device_platform="+ device.platform;
+	      }	
+   callAjax("CarregaEndereco",params);	       
+}
+/*Fim da atualização*/
+/*Atualização Master Hub (Menu Categorias suspenso)*/
+function loadMenuFromShortcut(cat_id,mtid)
+{
+
+	/*if ( $("#close_store").val()==2 || $("#merchant_open").val()==1 ){
+		onsenAlert( getTrans("This Restaurant Is Closed Now.  Please Check The Opening Times",'restaurant_close') );
+		return;
+	}*/
+
+	/*var options = {
+      animation: 'none',
+      onTransitionEnd: function() {
+      	  callAjax("getItemByCategory", "cat_id="+cat_id+"&merchant_id="+mtid);
+      	  showCartNosOrder();
+      }
+   };
+   sNavigator.pushPage("menuItem.html", options);*/
+
+	removeStorage("item_count");
+	setStorage("selected_cat_id" , cat_id);
+	callAjax("getItemCount", "cat_id="+cat_id+"&merchant_id="+mtid );
+	sNavigator.popPage();
+	myPopover.hide();
+	// showEasyCategory(this);
+
+}
+/*Fim da atualização*/
+/*Atualização Master Hub (Função de Pesquisar Ids pelo nome do Bairro)*/
+function buscar_ids_por_CEP(cidade, nome_bairro)
+{
+	callAjax("IdsDoCEP","cidade="+cidade+"&nome_bairro="+nome_bairro);
+}
+
+function buscar_ids_por_Bairro(nome_bairro)
+{
+	callAjax("IdsDoBairro","nome_bairro="+nome_bairro);
+}
+/*Fim da atualização*/
+/*Atualização Master Hub (Converter Data para data do Brasil e Extensa)*/
+function dataAtualFormatada(converter_data){
+    var data = new Date(converter_data);
+    var dia = data.getDate();
+    if (dia.toString().length == 1)
+      dia = "0"+dia;
+    var mes = data.getMonth()+1;
+    if (mes.toString().length == 1)
+      mes = "0"+mes;
+    var ano = data.getFullYear();  
+    return dia+"/"+mes+"/"+ano;
+}
+
+function dataAtualFormatada_NomeMes(converter_data){
+	var nomeMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    var diaSemana = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado']	
+    var data = new Date(converter_data);
+    var diaS = data.getDay();
+	diaS = diaSemana[diaS];
+    var dia = data.getDate();
+    var mes = data.getMonth();
+	mes = nomeMeses[mes];
+    var ano = data.getFullYear(); 
+	data_completa=[diaS]+", "+[dia, mes, ano].join(' de ');
+    return data_completa;
+}
+
+function dataAtualFormatada_NomeMes_hora(converter_data){
+	var nomeMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    var diaSemana = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado']	
+    var data = new Date(converter_data);
+    var diaS = data.getDay();
+	diaS = diaSemana[diaS];
+    var dia = data.getDate();
+    var mes = data.getMonth();
+	mes = nomeMeses[mes];
+    var ano = data.getFullYear(); 
+    var horas    = data.getHours();          // 0-23
+    var minutos  = data.getMinutes();        // 0-59
+    var segundos = data.getSeconds();        // 0-59
+    
+//converte as horas, minutos e segundos para string
+   str_horas = new String(horas);
+   str_minutos = new String(minutos);
+   str_segundos = new String(segundos);
+   
+   //se tiver menos que 2 digitos, acrescenta o 0
+   if (str_horas.length < 2)
+      str_horas = 0 + str_horas;
+   if (str_minutos.length < 2)
+      str_minutos = 0 + str_minutos;
+   if (str_segundos.length < 2)
+      str_segundos = 0 + str_segundos;
+    
+	data_completa=[diaS]+", "+[dia, mes, ano].join(' de ')+" às "+str_horas + ":" + str_minutos + ":" + str_segundos;
+    return data_completa;
+}
+/*Fim da atualização*/
+/* Atualização Master Hub (Programa de Fidelidade) */
+function applyFidelidade() //Cópia de applyVoucher
+{
+	
+	if ( checkIfhasOfferDiscount() ){
+		return false;
+	}
+		
+	fidelidade_code = $(".fidelidade_code").val();
+	if ( fidelidade_code!="" ){
+		var params="fidelidade_code="+ fidelidade_code;        
+		params+="&client_token="+getStorage("client_token");
+		params+="&merchant_id="+ getStorage("merchant_id");
+		
+		params+="&cart_sub_total="+ getStorage("cart_sub_total");
+		
+		transaction_type=getStorage("transaction_type");		
+		params+="&transaction_type=" + getStorage("transaction_type");
+		/*if ( transaction_type=="delivery"){
+		   params+="&cart_delivery_charges="+ getStorage("cart_delivery_charges");
+		}*/
+		
+		params+="&cart_packaging="+ getStorage("cart_packaging");
+		params+="&cart_tax="+ getStorage("cart_tax");
+		params+="&pts_redeem_amount="+ $(".pts_redeem_amount").val();
+		
+		if ( empty(getStorage("tips_percentage")) ){
+	       setStorage("tips_percentage",0);
+	    }
+	    params+="&tips_percentage=" + getStorage("tips_percentage");	    
+		
+        callAjax("applyFidelidade",params);	 
+	} else {
+		onsenAlert(  getTrans('invalid fidelidade code','invalid_fidelidade_code') );
+	}
+}
+
+function removeFidelidade() //Cópia de removeVoucher
+{
+	$(".fidelidade_amount").val( '' );
+    $(".fidelidade_type").val( '' );
+    //$(".fidelidade_code").val('');
+/*Atualização Master Hub (Aplica personalizações quando Remover fidelidade))*/
+	$("#page-paymentoption .fidelidade_amount").css({"display":"none"});
+	$("#page-paymentoption .titulo-cupom").css({"display":"none"});	
+	$("#page-paymentoption .titulo-subtotal_new").css({"display":"none"});
+	$("#page-paymentoption .subtotal_new").css({"display":"none"});
+	$("#page-paymentoption .total-comodidade").html( getStorage("cart_tax_final"));
+	$("#page-paymentoption .total-gorjeta").html( getStorage("cart_tip_final"));			
+/*Fim da atualização*/
+   
+    $(".apply-fidelidade").show();
+    $(".remove-fidelidade").hide();
+    
+    $(".fidelidade-header").html( getTrans("Programa de Fidelidade",'fidelidade') );
+    
+    $(".total-amount").html( prettyPrice(getStorage("order_total_raw")) );
+}
+/*Fim da atualização*/
+
+/* Atualização Master Hub (Personalização) */
+function backtoSearch() //Cópia de backtoHome
+{
+	var options = {     	  		  
+  	  closeMenu:true,
+      animation: 'slide'	    
+   };	   	   	   
+   menu.setMainPage('searchCategorias.html',options);
+}
+/*Fim da atualização*/
+/*Atualização Master Hub (Botão de Login novo)*/
+function showShippingLocation_login_btn(data)
+{	
+   var options = {
+      animation: 'slide',
+      onTransitionEnd: function() {
+			if (data.details.has_addressbook==2){
+				if(!empty(data.details.default_address)){						      	  	       
+		$(".delivery-address-text").html( data.details.default_address.address );
+		$(".street").val ( data.details.default_address.street  );
+		$(".numero").val ( data.details.default_address.numero  );
+		$(".delivery_instruction").val( data.details.default_address.delivery_instruction );
+		$(".zipcode").val(  data.details.default_address.zipcode );	
+		$(".location_name").val( data.details.default_address.location_name ) ;
+					
+		global_state_id  = data.details.default_address.state_id;
+		global_state_name  = data.details.default_address.state;
+
+		$(".location_state").html( data.details.default_address.state );
+		$(".state_id").val( data.details.default_address.state_id );
+		$(".state").val( data.details.default_address.state );
+
+		$(".city_id").val(data.details.default_address.city_id);
+		$(".city").val(data.details.default_address.city);
+		$(".location_city").html( data.details.default_address.city ) ;
+
+		$(".area_id").val(data.details.default_address.area_id);
+		$(".area_name").val(data.details.default_address.area_name);
+		$(".location_area").html( data.details.default_address.area_name ) ;
+      	$(".contact_phone").val($(".contact_phone").masked( data.details.default_address.contact_phone.replace("+55","") ));
+				}
+			}					      	  	 
+											      	  						
+      	  if(!empty(data.details.contact_phone)){
+    $(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
+		}
+      } 
+    };  
+	
+    sNavigator.pushPage("shippingLocationArea.html", options);
+}
+/*Fim da atualização*/
+/*Atualização Master Hub (Sistema Página Inicial)*/
+function Splash_Pagina_menu()
+{
+	var slide=getStorage("slide");
+	var html='';
+	html+='<ons-list-item onclick="getSlide('+slide+');" class="bottom-menu-item" style="border-bottom: 1px solid #DFDFE0;">';
+	html+='<ons-icon icon="ion-university"></ons-icon> ';
+	html+='<span class="trn" data-trn-key="apresentacao">Apresentação Inicial</span>';
+	html+='</ons-list-item>';
+		
+			createElement("splash-pagina-menu",html);
+}
+
+function getSlide(slide)
+{	
+	menu.setMainPage('Slide-Personalizado.html', {
+		closeMenu: true,
+		callback: function(index){				
+	    }
+	});	
+}
+/*Fim da atualização*/
