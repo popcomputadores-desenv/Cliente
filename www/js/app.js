@@ -3077,9 +3077,9 @@ if (data.details.programa_fidelidade!=false){
 						
 			       setStorage("geo_address_result_country",data.details.country);
 					$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
-					$(".location_city").html(getTrans("Select City", "select_city"));
-					$(".city_id").val('');
-					$(".city").val('');	
+					//$(".location_city").html(getTrans("Select City", "select_city"));
+					//$(".city_id").val('');
+					//$(".city").val('');	
 					$(".area_id").val('');
 					$(".area_name").val('');
 						
