@@ -1105,13 +1105,63 @@ var params = "client_token="+ getStorage("client_token");
 		   	   $(".state").val( global_area_name );
 		   	   $(".area_id").val( global_area_id );
 		   }
-		   
+/*Atualização Master Hub (Catálogo de Endereços na finalização do Pedido)*/
+		   	switch (search_type)
+			{
+				case "1":
+				case 1:
+				//$(".location_state").hide();
+				$(".location_postal").hide();
 		   if ( !empty(global_state_id)){
 		   	   $(".location_state").html( global_state_name );		   	   		   	   
 		   	   $(".state_id").val( global_state_id );
 		   	   $(".state").val( global_state_name );
+				}
+				if ( !empty(global_city_id)){
+					$(".city_id").val( global_city_id );
+					$(".city").val( global_city_name );
+					$(".location_city").html( global_city_name );
+				}
+				if ( !empty(global_area_id)){
+					$(".area_id").val( global_area_id );
+					$(".area_name").val( global_area_name );
+					$(".location_area").html( global_area_name );
+		   }
+				break;
+		   
+				case "2":
+				case 2:
+
+		   if ( !empty(global_state_id)){
+		   	   $(".location_state").html( global_state_name );		   	   		   	   
+		   	   $(".state_id").val( global_state_id );
+		   	   $(".state").val( global_state_name );
+				}
+				if ( !empty(global_city_id)){
+					$(".city_id").val( global_city_id );
+					$(".city").val( global_city_name );
+					$(".location_city").html( global_city_name );
+				}
+				if ( !empty(global_area_id)){
+					$(".area_id").val( global_area_id );
+					$(".area_name").val( global_area_name );
+					$(".location_area").html( global_area_name );
 		   }
 		   		   
+				$(".location_state").show();
+				$(".location_area").show();
+				$(".location_postal").hide();
+				break;
+
+				case "3":
+				case 3:
+				$(".location_state").hide();
+				$(".location_city").hide();
+				$(".location_area").hide();
+				$(".location_postal").show();
+				break;
+			}
+/*Fim da atualização*/
            translateValidationForm();
 /*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
            //*initIntelInputs();
@@ -1297,6 +1347,9 @@ var params = "client_token="+ getStorage("client_token");
 		  displayMerchantLogo2( 
             getStorage("merchant_logo") ,
            '' ,
+/*Atualização Master Hub (Correção do Cabeçalho, Imagem de fundo da empresa)*/
+      	     '' ,
+/*Fim da atualização*/
            'page-addreviews'
           );    
              
@@ -1311,6 +1364,9 @@ var params = "client_token="+ getStorage("client_token");
 		   displayMerchantLogo2( 
       	     getStorage("merchant_logo") ,
       	     '' ,
+/*Atualização Master Hub (Correção do Cabeçalho, Imagem de fundo da empresa)*/
+      	     '' ,
+/*Fim da atualização*/
       	     'page-reviews'
       	   );    
 		   
@@ -2031,7 +2087,6 @@ if (data.details.programa_fidelidade!=false){
 										  complete_address+=" "+ data.msg.address_book.zipcode;
 										
 											reloadCart();
-/*Fim da atualização*/
 										  $(".delivery-address-text").html( complete_address ); 
 										  $(".formatted_address").val( complete_address );	
 										  
@@ -2041,7 +2096,8 @@ if (data.details.programa_fidelidade!=false){
 						      	  }
 						      	  
 						      	  if(!address_fill){						      	  	
-						      	  	//fillShippingAddress();
+						      	  	fillShippingAddress();
+/*Fim da atualização*/
 						      	  }						      
 						      	  					      	      	  
 						      } /*end transition*/
@@ -5577,7 +5633,7 @@ jQuery(document).ready(function() {
 		dump(address_split);
 		if ( address_split.length>0){
 			$(".street").val( address_split[0] );
-/*Atualização Master Hub (Catálogo de Endereços)*/
+/*Atualização Master Hub (Catálogo de Endereços e Correção de preenchimento na finalização)*/
 			$(".numero").val( address_split[1] );
 			
 			$(".bairro").html(address_split[2]);
@@ -5618,7 +5674,6 @@ jQuery(document).ready(function() {
 			complete_address+=" "+ address_split[3];
 			complete_address+=" "+ address_split[4];
 			complete_address+=" "+ address_split[5];
-/*Fim da atualização*/
 			$(".delivery-address-text").html( complete_address ); 
 			$(".google_lat").val( '' );	
 			$(".google_lng").val( '' );	
@@ -5626,7 +5681,8 @@ jQuery(document).ready(function() {
 			
 			dialogAddressBook.hide();
 			
-			sNavigator.popPage({cancelIfRunning: true}); //back button
+			//sNavigator.popPage({cancelIfRunning: true}); //back button
+/*Fim da atualização*/
 			
 		} else {
 			onsenAlert(  getTrans("Error: cannot set address book",'cannot_set_address')  );
@@ -5977,12 +6033,14 @@ function displayCart(data)
        setStorage("cart_tax", data.cart.tax.tax );
     }
     	
-	/*if (!empty(data.delivery_date)){
+/* Atualização Master Hub (Preenche a data e hora de entrega corretamente) */
+	if (!empty(data.delivery_date)){
 	    $(".delivery_date").val( data.delivery_date);
 	}		
 	if (!empty(data.estimation_delivery_date)){
 	    $(".delivery_date").val( data.estimation_delivery_date);
-	}*/		
+	}		
+/*Fim da atualização*/
 /*Atualização Master Hub (Resumo carrinho finalização)*/
     if(!empty(data.cart.delivery_charges)){
 		setStorage("cart_delivery_charges_final", data.cart.delivery_charges.amount_pretty);

@@ -1721,7 +1721,7 @@ font-size:30px;
  display:none;
 }
 .search-banner-logo{
-background:url("images/logo.png") no-repeat center center;
+background:url("images/logo.svg") no-repeat center center;
 background-size: 200px;
 min-height: 160px;
 }
