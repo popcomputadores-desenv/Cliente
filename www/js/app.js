@@ -1946,6 +1946,11 @@ if (data.details.programa_fidelidade!=false){
 				$("#page-cart .wrapper").show();				
 				$(".checkout-footer").show();
 				$("#page-cart .frm-cart").show();
+					
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+	$("#page-cart .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-cart .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+/* Fim da Atualização */
 				
 				/*tips*/
 				if ( data.details.enabled_tip==2){
