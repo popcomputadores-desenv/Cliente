@@ -554,7 +554,7 @@ margin:auto;
 max-width:70%;
 }
 .navigation-bar{
-background: #750303c4;
+background: rgba(117, 3, 3, 0.7686274509803922);
 color:#fff;
 border:none;
 }
