@@ -883,7 +883,15 @@ padding-left:8px;
 .notification.pre-order
 {
 background:#00B279;
+padding: 0 8px;	
 }
+
+.notification.close
+{
+background:#D50101;
+padding: 0 8px;	
+}
+
 
 #category-list .row{
 color:#262626;

@@ -1,6 +1,7 @@
 <!doctype html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
 <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
 <link rel="stylesheet" href="lib/raty/jquery.raty.css">
@@ -586,10 +587,8 @@
            <div class="logo-wrap logo-non-auto" >           
            </div>
         </ons-col>
-        <ons-col class="text-right-fidelidade">
-           <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
+        <ons-col class="text-right-fidelidade" onclick="showPage('reviews');">
            <div class="rating-stars" data-score=""></div>           
-           </a>
            <p class="restauran-title concat-text white"></p>
         </ons-col>
       </ons-row>
@@ -804,10 +803,8 @@
            <div class="logo-wrap logo-non-auto" >           
            </div>
         </ons-col>
-        <ons-col class="text-right">
-           <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
+        <ons-col class="text-right" onclick="showPage('reviews');">
            <div class="rating-stars" data-score=""></div>           
-           </a>
            <p class="restauran-title concat-text white"></p>           
         </ons-col>
       </ons-row>
@@ -855,7 +852,9 @@
 
        </ons-row>
      
-   
+<!-- Atualização Master Hub (Programa de Fidelidade integrado ao Sistema de Pontos) -->
+  <div class="center" id="lista-fidelidades" style="margin-top: 0px;"></div>
+<!-- Fim da atualização -->
    <ons-scroller id="category-list"> 
       <ons-list id="lazy-parent" >
 	      <ons-list-item ons-lazy-repeat="lazyFoodCategory" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
@@ -947,10 +946,8 @@
            <div class="logo-wrap logo-non-auto" >           
            </div>
         </ons-col>
-        <ons-col class="text-right">
-           <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
+        <ons-col class="text-right" onclick="showPage('reviews');">
            <div class="rating-stars" data-score=""></div>           
-           </a>
            <p class="restauran-title concat-text white"></p>           
         </ons-col>
       </ons-row>

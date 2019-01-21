@@ -1360,6 +1360,11 @@ var params = "client_token="+ getStorage("client_token");
 		   if(website_review_type==2){
 		   	  $(".add_review_button").hide();
 		   }
+			
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+	$("#page-reviews .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-reviews .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+/* Fim da Atualização */
 		   
 		   displayMerchantLogo2( 
       	     getStorage("merchant_logo") ,
@@ -1857,6 +1862,43 @@ search_type = getSearchType();
 					fidelidade_PaginaCategorias(data.details);
 				}
 /*Fim da atualização*/
+/* Atualização Master Hub (Correção Menu frente app) */
+		   if(data.details.menu_enabled_gallery===1){
+	      	 	$("#menu_enabled_gallery").show();
+	       } else {
+	      	 	$("#menu_enabled_gallery").hide();
+	       }
+		   if(data.details.menu_enabled_booking===1){
+	      	 	$("#menu_enabled_booking").show();
+	       } else {
+	      	 	$("#menu_enabled_booking").hide();
+	       }
+		   if(data.details.menu_enabled_hours===1){
+	      	 	$("#menu_enabled_hours").show();
+	       } else {
+	      	 	$("#menu_enabled_hours").hide();
+	       }
+		   if(data.details.menu_enabled_review===1){		   	   
+	      	 	$("#menu_enabled_review").show();
+	       } else {
+	      	 	$("#menu_enabled_review").hide();
+	       }
+		   if(data.details.menu_enabled_map===1){
+	      	 	$("#menu_enabled_map").show();
+	       } else {
+	      	 	$("#menu_enabled_map").hide();
+	       }
+		   if(data.details.menu_enabled_info===1){
+	      	 	$("#menu_enabled_info").show();
+	       } else {
+	      	 	$("#menu_enabled_info").hide();
+	       }
+		   if(data.details.menu_enabled_promo===1){
+	      	 	$("#menu_enabled_promo").show();
+	       } else {
+	      	 	$("#menu_enabled_promo").hide();
+	       }	
+/*Fim da atualização*/					
 				if ( data.details.open){
 					$("#merchant_open").val(2);
 				} else $("#merchant_open").val(1);
@@ -1991,11 +2033,11 @@ if (data.details.programa_fidelidade!=false){
 				}			
 				
 				/*FILL ESTIMATION TIME*/				
-				/*if ( data.details.transaction_type=="delivery"){
+				if ( data.details.transaction_type=="delivery"){
 					if (!empty(data.details.estimation_delivery_time)){					    
 					   $(".delivery_time").val( data.details.estimation_delivery_time );
 					}				
-				}*/
+				}
 				
 				if(!empty(data.details.checkout_button)){
 					$(".btn_checkout").html( data.details.checkout_button );
@@ -3422,7 +3464,7 @@ if (data.details.programa_fidelidade!=false){
 						taxa_comodidade_ok=taxa_comodidade;
 					}
 					
-			       new_total= data.details.new_total;
+			       var new_total= subtotal_new;
 				
 					if (transaction_type=="delivery"){	
 		new_total2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(new_total)+parseFloat(taxa_comodidade_ok);
@@ -3523,7 +3565,7 @@ if (data.details.programa_fidelidade!=false){
 						taxa_comodidade_ok=taxa_comodidade;
 					}
 					
-			       var new_total= data.details.new_total;
+			       var new_total= subtotal_new;
 				
 					if (transaction_type=="delivery"){	
 		new_total2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(new_total)+parseFloat(taxa_comodidade_ok);
@@ -3631,36 +3673,39 @@ if (data.details.programa_fidelidade!=false){
 					entrega=getStorage("cart_delivery_charges");
 					percent_comod=getStorage("cart_tax");
 					
-					if (typeof entrega === "undefined" || entrega==null || entrega=="" || entrega==0 ){
+					if (typeof entrega === "undefined" || entrega==null || entrega=="" || entrega<0 ){
 							  	taxa_entrega=0;
  								}else{
  								taxa_entrega = entrega;
  								}
 					
-					if (typeof embalagem === "undefined" || embalagem==null || embalagem=="" || embalagem==0 ){
+					if (typeof embalagem === "undefined" || embalagem==null || embalagem=="" || embalagem<0 ){
 							  	taxa_embalagem=0;
  								}else{
  								taxa_embalagem = embalagem;
  								}
 					
-					if (typeof percent_comod === "undefined" || percent_comod==null || percent_comod=="" || percent_comod==0 ){
+					if (typeof percent_comod === "undefined" || percent_comod==null || percent_comod=="" || percent_comod<0 ){
 							  	taxa_percent_comod=0;
 								taxa_comodidade_ok=0;
  								}else{
  								taxa_percent_comod = percent_comod;
  								}
 					
-					valor_pontos=data.details.pts_amount_raw;
+					var valor_pontos=data.details.pts_amount_raw;
 					
-					subtotal_new=carrinho - valor_pontos;
-					subtotal_new2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(subtotal_new);
+					var subtotal_new=getStorage("cart_sub_total") - valor_pontos;
+					var subtotal_new2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(subtotal_new);
 					taxa_comodidade=subtotal_new*taxa_percent_comod/100;
 					gorjeta_new=getStorage("tips_percentage")*subtotal_new/100;
-		$("#page-paymentoption .total-pontos").html('('+data.details.pts_amount+')');
 		$("#page-paymentoption .titulo-pontos").html('Menos '+data.details.pts_points_raw+' Pontos: ');
+		$("#page-paymentoption .total-pontos").html('('+data.details.pts_amount+')');
+		$("#page-paymentoption .titulo-subtotal_new").html('Sub Total (- Pontos): ');
 		$("#page-paymentoption .titulo-comodidade").html('Taxa de Comodidade: ');
 		$("#page-paymentoption .total-comodidade").html(prettyPrice(taxa_comodidade));
-		$("#page-paymentoption .titulo-subtotal_new").html('Sub Total (- Pontos): ');
+		$("#page-paymentoption .subtotal_new").html(prettyPrice(subtotal_new));
+		$("#page-paymentoption .titulo-gorjeta").html('Gorjeta: ');
+		$("#page-paymentoption .total-gorjeta").html(prettyPrice(gorjeta_new));			
 					if (transaction_type=="delivery"){	
 		$("#page-paymentoption .titulo-entrega").css({"display":"block"});
 		$("#page-paymentoption .total-entrega").css({"display":"block"});
@@ -3669,12 +3714,9 @@ if (data.details.programa_fidelidade!=false){
 		$("#page-paymentoption .total-entrega").css({"display":"none"});
 					}
 					if (taxa_entrega==0){	
-		$("#page-paymentoption .titulo-entrega").css({"display":"none"});
-		$("#page-paymentoption .total-entrega").css({"display":"none"});
+		$("#page-paymentoption .titulo-entrega").css({"display":"block"});
+		$("#page-paymentoption .total-entrega").html("Entrega Grátis");
 					}					
-		$("#page-paymentoption .subtotal_new").html(prettyPrice(subtotal_new));
-		$("#page-paymentoption .titulo-gorjeta").html('Gorjeta: ');
-		$("#page-paymentoption .total-gorjeta").html(prettyPrice(gorjeta_new));			
 		$("#page-paymentoption .total-pontos").css({"display":"block"});
 		$("#page-paymentoption .titulo-pontos").css({"display":"block"});
 		$("#page-paymentoption .subtotal_new").css({"display":"block"});
@@ -3682,15 +3724,15 @@ if (data.details.programa_fidelidade!=false){
 
 			      
 			      
-			      var new_total= data.details.new_total;
-			      dump('compute new total for pts');
 					
 					if (typeof taxa_comodidade_ok === "undefined" || taxa_comodidade_ok==null || taxa_comodidade_ok=="" || taxa_comodidade_ok==0){
 						taxa_comodidade_ok=0;
 					} else {
 						taxa_comodidade_ok=taxa_comodidade;
 					}
-									
+					
+			       var new_total= subtotal_new;
+				
 					if (transaction_type=="delivery"){	
 		new_total2=parseFloat(taxa_embalagem)+parseFloat(taxa_entrega)+parseFloat(new_total)+parseFloat(taxa_comodidade_ok);
 					}else{
@@ -6881,11 +6923,6 @@ function loadMoreReviews()
 /* Fim da Atualização */
       	     'page-reviews'
       	  );       	  
-
-/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$("#page-reviews .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$("#page-reviews .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da Atualização */
 		  
       	  var params="merchant_id=" +  getStorage("merchant_id") ;
       	  params+="&client_token="+ getStorage("client_token");
@@ -7058,8 +7095,10 @@ function login()
 function logout()
 {		
 	ons.notification.confirm({
-	  message: 'Are you sure?',	  
+/*Atualização Master Hub (Tradução)*/
+	  message: getTrans('Are you sure','are_you_sure') +"?",	  
 	  title: dialog_title_default ,
+/*Fim da atualização*/
 	  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
 	  animation: 'default', // or 'none'
 	  primaryButtonIndex: 1,
@@ -11777,9 +11816,9 @@ function deleteReview()
 {	
 	var id = $(".review_id").val();	
 	ons.notification.confirm({
-	  message: getTrans('Are you sure?','are_you_sure') ,	  
-	  title: dialog_title_default,
 /*Atualização Master Hub (Tradução)*/
+	  message: getTrans("Are you sure delete review","are_you_sure_delete_review") +"?",	  
+	  title: dialog_title_default,
 	  buttonLabels: [ getTrans('Yes','yes') ,  getTrans('No','no') ],
 /*Fim da atualização*/
 	  animation: 'default', // or 'none'
