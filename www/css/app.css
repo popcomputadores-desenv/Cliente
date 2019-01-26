@@ -1961,12 +1961,11 @@ ons-carousel-item {
   position: absolute;
   left: 0px;
   width: 100%;
-  bottom: 10px;
+  bottom: 0px;
   color: white;
-  background: #af0606;
-  height: 37px;
-  padding-top: 18px;
-  margin-bottom: -10px;
+  background: rgba(175, 6, 6, 0.64);
+  height: 43px;
+  padding-top: 6px;
 }
 
 .small-font-dim.nomargin{
