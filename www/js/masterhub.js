@@ -459,7 +459,7 @@ function paginaResultado(data)
 	
 pagina_personalizada+='</ons-carousel>';
 pagina_personalizada+='<ons-carousel-cover>';
-pagina_personalizada+='<div class="cover-label">Arraste para a direita ou para a esquerda.</div>';
+pagina_personalizada+='<div class="cover-label-apresentacao">Arraste para a direita ou para a esquerda.</div>';
 pagina_personalizada+='</ons-carousel-cover>';
 	  
 	createElement('pagina-personalizada',pagina_personalizada);
