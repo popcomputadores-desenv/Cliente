@@ -413,10 +413,6 @@ document.addEventListener("pageinit", function(e) {
 		  break;
 		  
 		case "page-menubycategoryitem":		   
-/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$("#page-menubycategoryitem .estabelecimento-header2").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$("#page-menubycategoryitem .estabelecimento-header").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da Atualização */
 		  $("#page-menubycategoryitem .restauran-title").text( $(".selected_restaurant_name").val() );
 	      $("#page-menubycategoryitem .rating-stars").attr("data-score",  $(".selected_restaurant_ratings").val() );	      
 	      $("#page-menubycategoryitem .logo-wrap").html('<img src="'+ getStorage("merchant_logo") +'" />');
@@ -523,8 +519,8 @@ document.addEventListener("pageinit", function(e) {
 	     $(".cpf_nota").attr("placeholder", getTrans('CPF na Nota','cpf_nota') );
 /*Fim da atualização*/
 /* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$("#page-paymentoption .estabelecimento-header2").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$("#page-paymentoption .estabelecimento-header").attr("style",'background-image: url('+ getStorage("merchant_logo") +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-paymentoption .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+ getStorage("merchant_bg") +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-paymentoption .estabelecimento-header").attr("style",'background-image: url('+upload_url+''+ getStorage("merchant_bg") +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 /* Fim da Atualização */
 		 break;
 		 
@@ -1362,8 +1358,8 @@ var params = "client_token="+ getStorage("client_token");
 		   }
 			
 /* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$("#page-reviews .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$("#page-reviews .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-reviews .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+getStorage("merchant_bg")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-reviews .estabelecimento-header").attr("style",'background-image: url('+upload_url+''+getStorage("merchant_bg")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 /* Fim da Atualização */
 		   
 		   displayMerchantLogo2( 
@@ -1836,6 +1832,7 @@ search_type = getSearchType();
 				case "MenuCategory":			
 				/*save merchant logo*/								
 				setStorage("merchant_logo",data.details.logo);
+				setStorage("merchant_bg",data.details.merchant_bg);	
 				dump(data.details.restaurant_name);
 				setStorage("merchant_name",data.details.restaurant_name);
 				
@@ -1990,8 +1987,8 @@ if (data.details.programa_fidelidade!=false){
 				$("#page-cart .frm-cart").show();
 					
 /* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$("#page-cart .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$("#page-cart .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-cart .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.details.merchant_info.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-cart .estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.details.merchant_info.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 /* Fim da Atualização */
 				
 				/*tips*/
@@ -2085,6 +2082,11 @@ if (data.details.programa_fidelidade!=false){
 									  $(".delivery_instruction").val( data.msg.profile.delivery_instruction ) ;
 						      	  }
 						      	  
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+	$(".estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.msg.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$(".estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.msg.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+/* Fim da Atualização */
+								  
 						      	  var address_fill = false;
 						      	  
 						      	  if(!empty(getStorage("geo_address_result_formatted_address"))){
@@ -2176,7 +2178,7 @@ if (data.details.programa_fidelidade!=false){
 /*Fim da atualização*/
 					      	     'page-paymentoption'
 					      	  );
-					      	  
+							  					      	  
 					      	  var params="merchant_id="+ getStorage("merchant_id");
 					      	  params+="&client_token="+ getStorage("client_token");
 					      	  params+="&transaction_type=" + $(".transaction_type:checked").val();
@@ -2209,6 +2211,11 @@ if (data.details.programa_fidelidade!=false){
 								  '' ,
 /*Fim da atualização*/
 					      	     'page-checkoutsignup');
+							  
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+	$(".estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.msg.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$(".estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.msg.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+/* Fim da Atualização */
 					      	     
 					      	  callAjax("getCustomFields",'');     
 /*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
@@ -4618,8 +4625,8 @@ if (data.details.programa_fidelidade!=false){
 				  //onsenAlert(data.msg);
 				  toastMsg(data.msg);
 /* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$("#page-cart .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$("#page-cart .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-cart .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+getStorage("merchant_bg")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-cart .estabelecimento-header").attr("style",'background-image: url('+upload_url+''+getStorage("merchant_bg")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 /* Fim da Atualização */
 				  
 				  $("#page-cart .wrapper").hide();				
@@ -6054,6 +6061,7 @@ function displayCart(data)
 		
 	/*set storage merchant logo*/
     setStorage("merchant_logo",data.merchant_info.logo);
+	setStorage("merchant_bg",data.merchant_info.merchant_bg);
     setStorage("order_total",data.cart.grand_total.amount_pretty); 
     
     setStorage("order_total_raw",data.cart.grand_total.amount);
@@ -6957,8 +6965,8 @@ function showReviewForm()
       	  );          	  
 		  
 /* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$("#page-addreviews .estabelecimento-header2").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$("#page-addreviews .estabelecimento-header").attr("style",'background-image: url('+getStorage("merchant_logo")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-addreviews .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+getStorage("merchant_bg")+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-addreviews .estabelecimento-header").attr("style",'background-image: url('+upload_url+''+getStorage("merchant_bg")+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
 /* Fim da Atualização */
 		  
       	  translatePage();
@@ -10794,6 +10802,7 @@ function clearAllStorage()
   removeStorage('merchant_id');
   removeStorage('transaction_type');
   removeStorage('merchant_logo');
+  removeStorage('merchant_bg');
   removeStorage('order_total');
   removeStorage('merchant_name');
   removeStorage('total_w_tax');
@@ -11540,7 +11549,11 @@ function getItem(index)
 	},
 	complete: function(data) {							
 	},
-	success: function (data) {	  	   
+	success: function (data) {	
+/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+	$("#page-menubycategoryitem .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.details.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-menubycategoryitem .estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.details.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+/* Fim da Atualização */		
 	   if (data.code=1){	   		  
 	   	   if ( $('#item-results-'+index).exists() ){	      	  
 	   	   	  dump('element  exist' + index);

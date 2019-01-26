@@ -484,6 +484,7 @@ background:url("images/trofeu.svg") no-repeat center center;
 border:none;
 height: 60px;
 text-align: -webkit-center;
+margin-bottom: 20px;
 }
 
 .button.masterhub-btn{
