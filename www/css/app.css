@@ -234,6 +234,10 @@
     -webkit-animation: animatedBackground 34s linear infinite; */
 }
 
+.imagem-apresentacao {
+
+}
+
 .vermelho {
 	color: #e62f2f;
 }
@@ -1961,7 +1965,8 @@ ons-carousel-item {
   color: white;
   background: #af0606;
   height: 37px;
-  padding-top: 18px;	
+  padding-top: 18px;
+  margin-bottom: -10px;
 }
 
 .small-font-dim.nomargin{
