@@ -448,11 +448,11 @@ function paginaResultado(data)
 	pagina_personalizada+='<div align="left" style="width: auto; margin-right: 25px; margin-top: 15px; margin-left: 10px; position: absolute;">'+val.page_name+'</div>';
 		var nome_pagina=val.page_name;
 		if (nome_pagina.indexOf("...") != -1){
-	pagina_personalizada+='<div class="box" align="right" style="right:20px; top:10px; background:#af0606;">';
+	pagina_personalizada+='<div class="box" align="right" style="right:20px; top:10px;">';
 	pagina_personalizada+='<img src="css/images/bot_fecha.png" width="30px" height="40px" onclick="fechar_prop();" style="padding: 10px 10px 2px 0px;"></div>';	
 		}
 		
-	pagina_personalizada+='<div class="imagem-apresentacao" style="box-sizing: border-box; text-align: left;">'+val.content+'</div>';
+	pagina_personalizada+='<div style="box-sizing: border-box; text-align: left;">'+val.content+'</div>';
 	pagina_personalizada+='</ons-carousel-item>';  
 		
 	});
