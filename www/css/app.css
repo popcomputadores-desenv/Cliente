@@ -586,6 +586,7 @@ border:none;
 .restauran-title.white
 {
 color:#fff;
+white-space: inherit;
 }
 
 .green,
