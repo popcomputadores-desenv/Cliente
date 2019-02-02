@@ -5240,7 +5240,7 @@ actions='"loadItemDetails('+ "'"+val.item_id+"'," +  "'"+data.merchant_id+"'," +
 		dump("upload_url=>"+upload_url); 
          	
          	if (val.photo!=""){
-             html+='<ons-col class="col-image" width="29%">';
+             html+='<ons-col class="col-image" width="33%">';
                 html+='<div class="logo-wrap3" >';
                   html+='<div class="img_loaded" >';
                   html+='<img src="'+val.photo+'" />';
@@ -5248,7 +5248,7 @@ actions='"loadItemDetails('+ "'"+val.item_id+"'," +  "'"+data.merchant_id+"'," +
                 html+='</div>';
              html+='</ons-col>';
 			} else {
-             html+='<ons-col class="col-image" width="29%">';
+             html+='<ons-col class="col-image" width="33%">';
                 html+='<div class="logo-wrap3" >';
                   html+='<div class="img_loaded" >';
                   html+='<img src="'+upload_url+''+val.logotipo+'" />';
