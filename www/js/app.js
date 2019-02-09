@@ -6110,7 +6110,7 @@ function displayCart(data)
 	}
 	
 	if (!empty(data.cart.packaging)){
-     setStorage("cart_packaging_final", data.cart.packaging.amount_pretty);
+     setStorage("cart_packaging_final", data.cart.packaging.amount);
 	}
 	
 	if (!empty(data.cart.tax)){
