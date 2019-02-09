@@ -59,17 +59,17 @@
 	  <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
 	</gap:plugin>
     
-    <!--<platform name="android">	
+    <platform name="android">	
 		<config-file parent="/resources" target="./res/values/strings.xml">
-			<string name="fb_app_id"></string>
-			<string name="fb_app_name"></string>
+			<string name="fb_app_id">247951822354120</string>
+			<string name="fb_app_name">Master Hub</string>
 		</config-file>               
     </platform>
  
      <gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="3.2.0" >
-	  <variable name="APP_ID" value="" />
-	  <variable name="APP_NAME" value="" />
-	</gap:plugin> -->
+	  <variable name="APP_ID" value="247951822354120" />
+	  <variable name="APP_NAME" value="Master Hub" />
+	</gap:plugin>
 	
 	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="4.2.1" />	
 	
