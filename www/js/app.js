@@ -10828,7 +10828,7 @@ function clearAllStorage()
   removeStorage('cart_packaging_final');
   removeStorage('cart_tip_final');
   removeStorage('cart_tax_final');
-  removeStorage("cart_discount_final"),
+  removeStorage("cart_discount_final");
 /*Fim da atualização*/
   removeStorage('map_address_result_formatted_address');
   removeStorage("customer_contact_number");
