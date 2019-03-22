@@ -68,7 +68,11 @@ function onDeviceReady() {
 		
 	if(!isDebug()){
  	   getLanguageSettings();
-	}				
+	}	
+		
+Transparentstatusbar.init(function(result) {
+  // ....
+});
 	
 	document.addEventListener("pause", onPause, false);
 	document.addEventListener("resume", onResume, false);
