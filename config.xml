@@ -27,7 +27,7 @@
     <preference name="SplashMaintainAspectRatio" value="true"/>
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="SplashScreen" value="screen"/>
-    <preference name="StatusBarBackgroundColor" value="#953d3d" />
+    <preference name="StatusBarBackgroundColor" value="transparent" />
         
     <preference name="android-minSdkVersion" value="19" />
     <preference name="android-targetSdkVersion" value="26" />
