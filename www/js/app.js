@@ -1342,6 +1342,8 @@ var params = "client_token="+ getStorage("client_token");
 /*Fim da atualização*/
            'page-addreviews'
           );    
+          
+          translatePage();
              
 		 break;
 		 
@@ -10714,6 +10716,10 @@ function loadAjaxLocationCity(s)
 		global_state_id='';
 	}
 	
+	if ($('#page-home').is(':visible')) {			
+		global_state_id='';
+	}	
+	
 	params="state_id="+ global_state_id ;
 	if(!empty(s)){
 		params+="&s="+ s ;
@@ -11903,6 +11909,7 @@ function geoComplete2()
 
 function searchByAddress()
 {
+	global_filter_params='';
 	search_mode = getSearchMode();	   
 	var ss = $("#ss").val();
 	/*clear all storage*/ 

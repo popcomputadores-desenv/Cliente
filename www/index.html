@@ -1087,7 +1087,7 @@
        </ons-row>
     </ons-list-item>  
     
-     <ons-list-item modifier="chevron" onclick="showPopUpOptions('TimeList')"   > 
+     <ons-list-item modifier="chevron" onclick="showPopUpOptions('TimeList')" class="delivery_time_wrap"   > 
        <ons-row class="row">
          <ons-col  width="50%">
            <span class="small-font-dim cart_delivery_time" ></span>
@@ -1100,7 +1100,7 @@
        
    <ons-list-item modifier="tappable" class="delivery_asap_wrap">
        <label class="checkbox">
-		  <input type="checkbox" name="delivery_asap" value="1" class="delivery_asap">
+		  <input type="checkbox" name="delivery_asap" value="1" class="delivery_asap" onclick="toogleTimewrap();" >
 		  <div class="checkbox__checkmark"></div>
 		  <span class="ons-checkbox-inner small-font-dim trn" data-trn-key="deliver_asap">
 		  Deliver Asap
@@ -3672,6 +3672,9 @@
    <input type="hidden" name="state" class="state">   
    <input type="hidden" name="zipcode" class="zipcode">  
    <input type="hidden" name="area_name" class="area_name">  
+   
+   <input type="hidden" name="google_lat" class="google_lat">  
+   <input type="hidden" name="google_lng" class="google_lng">  
    
    <ons-list>
    
