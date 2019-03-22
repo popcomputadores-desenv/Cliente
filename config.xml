@@ -42,14 +42,14 @@
 	
     <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.2.3"  />
     
-    <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> 
+    <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
       <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
     </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" />         
-    <gap:plugin spec="https://github.com/bastikikang/razorypay" source="git" />
+    <!--  <gap:plugin spec="https://github.com/bastikikang/razorypay" source="git" />-->
     <gap:plugin name="cordova-plugin-media" source="npm" spec="5.0.2" />
     <gap:plugin name="cordova.plugins.diagnostic" source="npm" spec="4.0.0" />
     <gap:plugin name="cordova-plugin-buildinfo" source="npm" spec="2.0.1"  />
