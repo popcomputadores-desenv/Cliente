@@ -27,8 +27,7 @@
     <preference name="SplashMaintainAspectRatio" value="true"/>
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="SplashScreen" value="screen"/>
-    <preference name="StatusBarBackgroundColor" value="" />
-	<preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="StatusBarBackgroundColor" value="#953d3d" />
         
     <preference name="android-minSdkVersion" value="19" />
     <preference name="android-targetSdkVersion" value="26" />
@@ -42,7 +41,7 @@
 	<gap:plugin name="cordova-plugin-geolocation" source="npm" />
 	<gap:plugin name="cordova-plugin-network-information" source="npm" />
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
-	<gap:plugin name="cordova-plugin-transparent-status-bar" source="npm" />
+	
     <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.2.3"  />
     
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
