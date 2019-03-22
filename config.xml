@@ -21,11 +21,13 @@
 	<preference name="phonegap-version" value="cli-8.1.1" />
 			    
 	<preference name="AutoHideSplashScreen" value="false" />  	
-    <preference name="SplashScreenDelay" value="5000" />    
+    <preference name="SplashScreenDelay" value="3000" />    
+    <preference name="loadUrlTimeoutValue" value="700000"/>
     <preference name="fullscreen" value="false" /> 
+    <preference name="SplashMaintainAspectRatio" value="true"/>
     <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="overlaysWebView" value="true" />
-    <preference name="backgroundColorByHexString" value="#953d3d" />
+    <preference name="SplashScreen" value="screen"/>
+    <preference name="StatusBarBackgroundColor" value="#953d3d" />
         
     <preference name="android-minSdkVersion" value="19" />
     <preference name="android-targetSdkVersion" value="26" />
