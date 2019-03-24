@@ -668,7 +668,18 @@ var params = "client_token="+ getStorage("client_token");
 		} else {
 		    callAjax("search","address="+ getStorage("search_address") + "&search_mode=" + search_mode );		
 		}*/
-		
+			
+			var typingTimer; //identificador de tempo
+			var doneTypingInterval = 1000; //o tempo está em ms, 1 segundo por exemplo
+
+		//no keyup, inicie o contador
+		$('#ss_restaurant_name').keyup(function() {
+		  clearTimeout(typingTimer);
+		  if ($('#ss_restaurant_name').val) {
+			typingTimer = setTimeout(applySearch, doneTypingInterval);
+		  }
+		});		
+			
 		search_mode = getSearchMode();
 		if ( search_mode=="postcode"){
 			$("#search-text").html( '' );
@@ -1026,14 +1037,26 @@ var params = "client_token="+ getStorage("client_token");
 		   callAjax('getHubtelChannel',"client_token="+getStorage("client_token"));
 		   break;
 		   
-		/*case "page-location-city":   
-		   callAjax('getLocationCity', "" );
-		   break;*/
+		case "page-location-city":  
+			
+			var typingTimer; //identificador de tempo
+			var doneTypingInterval = 1000; //o tempo está em ms, 1 segundo por exemplo
+
+		//no keyup, inicie o contador
+		$('.search_city').keyup(function() {
+		  clearTimeout(typingTimer);
+		  if ($('.search_city').val) {
+			typingTimer = setTimeout(searchCity, doneTypingInterval);
+		  }
+		});	
+
+		   //callAjax('getLocationCity', "" );
+		   break;
 		   
 		case "page-location-area": 
 			
 			var typingTimer; //identificador de tempo
-			var doneTypingInterval = 2000; //o tempo está em ms, 1 segundo por exemplo
+			var doneTypingInterval = 1000; //o tempo está em ms, 1 segundo por exemplo
 
 		//no keyup, inicie o contador
 		$('.search_area').keyup(function() {
@@ -1470,7 +1493,7 @@ function applyFilter()
 	
 	
 	params = "address="+ getStorage("search_address") +"&services=" + services + 
-	"&cuisine_type="+cuisine_type + "&restaurant_name="+ urlencode($(".filter_restaurant_name").val()) ;
+	"&cuisine_type="+cuisine_type + "&restaurant_name=" ;
 	
 	search_mode = getSearchMode();
 	if ( search_mode=="postcode"){
@@ -11949,8 +11972,10 @@ function searchByName()
 	if(!empty(getStorage("search_address"))){
 	    search_address = getStorage("search_address");
 	} else  search_address = '';
-	global_filter_params = "&address=" + search_address +  "&stype=1&sname="+ ss_restaurant_name ;
-	callAjax("initSearch","address="+ search_address + "&search_mode=" + search_mode + "&sname="+ ss_restaurant_name + "&stype=1" );			   
+	params="&city_id="+ global_city_id;
+	params+="&area_id="+ global_area_id;
+	global_filter_params = "&address=" + search_address +  "&stype=1&sname="+ ss_restaurant_name + params ;
+	callAjax("initSearch","address="+ search_address + "&search_mode=" + search_mode + "&sname="+ ss_restaurant_name + "&stype=1"+ params );			   
 }
 
 function searchByStreet()
