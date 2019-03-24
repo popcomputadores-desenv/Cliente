@@ -244,7 +244,7 @@
 
     <ons-list-item onclick="showNotificationPage();" class="notification-login bottom-menu-item">
       <ons-icon icon="ion-android-notifications" class="crimson"></ons-icon> 
-      <span class="trn" data-trn-key="notifications">Notifications</span>
+      <span class="trn" data-trn-key="notifications">Notificações</span>
     </ons-list-item>    
     
     <ons-list-item onclick="logout();" class="bottom-menu-item logout-menu">
@@ -1058,7 +1058,7 @@
         </ons-col>
       </ons-row>
    </div> 
-   
+   <div style="background-color: #00000054; margin-top: -3px;">
    <ons-row class="row">
        <ons-col >           
          <button onclick="clearCart();" class="clear-cart button button--quiet green uppercase trn" data-trn-key="clear_cart">Clear Cart</button>
@@ -1069,7 +1069,7 @@
               Aplicar</button>
        </ons-col>
    </ons-row>
-   
+   </div>
    <form id="frm-cart" class="frm-cart" method="post">
    <ons-list id="cart-item">
    </ons-list>   
@@ -2587,7 +2587,7 @@
         </ons-list-item>
       </ons-list>
    
-     <div class="settings-header trn" data-trn-key="notifications">Notifications</div>
+     <div class="settings-header trn" data-trn-key="notifications">Notificações</div>
      <ons-list modifier="inset" class="settings-list">        
         <ons-list-item >
           <span class="trn" data-trn-key="enabled_push_notification">Enabled Push Notification</span>
@@ -3608,15 +3608,15 @@
 	       <ons-row >
              <ons-col width="70%">
              
-             <input type="text" name="search_area"  class="search_area text-input text-input--transparent" 
+             <input type="text" name="search_area" class="search_area text-input text-input--transparent" 
       placeholder="Type Area here" value=""  >
              
              </ons-col>
              <ons-col width="30%">
              
-             <button class="button green-btn button--large fix" onclick="searchArea();">
+           <!--  <button class="button green-btn button--large fix" onclick="searchArea();">
 		      <span class="trn search_title" data-trn-key="search">Search</span>    	      		      
-		   </button>
+		   </button> -->
              
              </ons-col>
            </ons-row >  
@@ -4327,7 +4327,7 @@
      </ons-toolbar-button>         
     
     </div>             
-    <div class="center white trn" data-trn-key="notifications" >Notifications</div> 
+    <div class="center white trn" data-trn-key="notifications" >Notificações</div> 
    </ons-toolbar>
    
    <div class="order_list_wrap">

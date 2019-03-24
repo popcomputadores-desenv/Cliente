@@ -1030,7 +1030,19 @@ var params = "client_token="+ getStorage("client_token");
 		   callAjax('getLocationCity', "" );
 		   break;*/
 		   
-		case "page-location-area":   
+		case "page-location-area": 
+			
+			var typingTimer; //identificador de tempo
+			var doneTypingInterval = 2000; //o tempo está em ms, 1 segundo por exemplo
+
+		//no keyup, inicie o contador
+		$('.search_area').keyup(function() {
+		  clearTimeout(typingTimer);
+		  if ($('.search_area').val) {
+			typingTimer = setTimeout(searchArea, doneTypingInterval);
+		  }
+		});	
+			
 		   callAjax('getLocationArea', "city_id=" + $(".city_id").val() );
 		   break; 
 		   
