@@ -2469,7 +2469,12 @@ if (data.details.programa_fidelidade!=false){
 /*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
 			    		 //*initIntelInputs();
 /*Fim da atualização*/
-			       }			 
+/*Atualização Master Hub (Máscara do Telefone)*/
+ var customer_contact_number=data.request.contact_phone;
+	      if(!empty(customer_contact_number)){
+	      	  $(".contact_phone").val($(".contact_phone").masked( customer_contact_number.replace("+55","") ));
+	      }
+/*Fim da atualização*/			       }			 
 			       
 			        translateValidationForm();
 /*Atualização Master Hub (Recarrega carrinho para atualização de valores)*/

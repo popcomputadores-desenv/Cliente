@@ -532,7 +532,7 @@ function ContactNumberFields()
    
     htm+='<div class="field-wrapper">';
 /*Atualização Master Hub (Tradução)*/
-      htm+='<input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" placeholder="'+  getTrans("Contact phone",'contact_phone') + '" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"   >';
+      htm+='<input type="text" name="contact_phone"  regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="mobile_inputs contact_phone text-input text-input--underbar has_validation mask-phone" placeholder="'+  getTrans("Contact phone",'contact_phone') + '" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"   >';
    htm+='</div>';
 /*Fim da atualização*/
 	return htm;

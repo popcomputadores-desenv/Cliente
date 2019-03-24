@@ -53,9 +53,10 @@
 <script src="lib/gmaps.js?version=1.0.0"></script>
 
 <script src="js/jquery.geocomplete.min.js"></script>
-
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+<!-- Atualização Master Hub (Personalizações) -->
+<!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> -->
+<!-- <script type="text/javascript" src="https://js.stripe.com/v3/"></script> -->
+<!-- Fim da atualização -->
 <script type="text/javascript" src="lib/imagesloaded.pkgd.min.js"></script>
 
 <link href="lib/intel/build/css/intlTelInput.css" rel="stylesheet" type="text/css" />
@@ -324,6 +325,10 @@
     <DIV class="search_by_location">
        
 <!-- Atualização Master Hub (Personalização Tela Inicial - Ocultar caixas de seleção de endereço) -->
+    <div class="home-header">
+         <img src="css/images/banner.png" alt="" title="">
+    </div>
+
        <div class="home-page wrapper center box">       
        <h4 class="normal white trn catalogo_endereco" data-trn-key="order_food_online">Order food online from 1000+ restaurants!</h4>
        
@@ -4173,14 +4178,14 @@
   </ons-dialog> 
 </script>
 
-
+<!-- Atualização Master Hub (Personalização Cátalogo de Endereço) -->
 <script type="text/ons-template" id="postAddressDetails.html">   
 <ons-page id="page_postcode_address">
 
    <ons-toolbar>        
     <div class="left"><ons-back-button></ons-back-button></div>             
-    <div class="center white"><span id="page_title"></span></div>   
-
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="address_book_details">
+     Address Book Details</span></div>                  
     
      <div class="right">
      <ons-toolbar-button onclick="deleteAddressBookLocation();" class="delete-addressbook-location">
@@ -4192,50 +4197,98 @@
    
    <form id="frm_addressbook_location" class="frm-addressbook" method="post">   
    <input type="hidden" id="id" name="id" class="id" value=""> 
-      
+  <!-- <input type="hidden" id="action" name="action" class="action" value="edit"> -->
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+   <input type="hidden" name="state" id="state" class="state">
+   <input type="hidden" name="city" id="city" class="city">
+   <input type="hidden" name="area_name" id="area_name" class="area_name">
+
    <div class="wrapper">  
+   <div class="home-page wrapper center" style="margin-top: -15px; margin-bottom: -20px;">       
+              
+       <button class="button button--quiet green-inicial" onclick="getCurrentLocation();">
+       <ons-icon icon="fa-location-arrow"></ons-icon>
+         <span class="trn" data-trn-key="Informa a minha localização via GPS">Informar a minha localização via GPS</span>
+       </button>       
+
+
+   <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
+    </div>   
+<br>
+   <div class="separate_or">
+        <ons-row >
+          <ons-col width="45%" class="text-right">
+           <hr class="hr_index">
+         </ons-col>
+          <ons-col width="10%" class="text-center">OU</ons-col>
+         <ons-col width="45%" class="text-left">
+          <hr class="hr_index">
+         </ons-col>
+       </ons-row>
+     </div>
+   
       <div class="field-wrapper">
-      <input type="text" name="street"  class="street text-input text-input--underbar has_validation" 
-      placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>            
-      
+      <input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
+      placeholder="Zipcode" value="" onblur="pesquisacep_catalogo(this.value);" >
+      </div>
+ 
+   <div class="wrapper">   
+   	  <div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+      <input type="text" id="street" name="street"  class="street text-input text-input--underbar has_validation" 
+      placeholder="Street" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+      <input type="text" name="numero" id="numero"  class="numero text-input text-input--underbar has_validation" 
+      placeholder="Numero" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+						</ons-col>
+					</ons-row>
+      </div>
+	  
+	  
+	<ons-list modifier="inset">       
+   
+				<ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >        
+					State
+				</ons-list-item>
+	
+				<ons-list-item modifier="chevron" class="trn location_city" data-trn-key="location_city" onclick ="showCity()" >
+					City
+				</ons-list-item>
+				<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >
+					District / Area
+				</ons-list-item>
+   
+   </ons-list>  
+   <div class="center" style="font-size: 15px; margin-top: 6px; margin-bottom: 0px;">
+   <span class="location_city"></span> / <span class="location_state"></span>
+   </div>
+
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+      placeholder="Delivery instructions" value="" >
+      </div>      
+   
       <div class="field-wrapper">
       <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
       placeholder="Location name" value="" >
       </div>
-      
-	</div>
-	
-	<input type="hidden" name="state_id" id="state_id" class="state_id" >
-    <input type="hidden" name="city_id" id="city_id" class="city_id" >
-    <input type="hidden" name="area_id" id="area_id" class="area_id" >
-	
-	<ons-list modifier="inset">       
-        <ons-list-item modifier="chevron" class="trn location_state" data-trn-key="location_state" onclick ="showState()" >
-        State
-        </ons-list-item>
-        
-        <ons-list-item modifier="chevron" class="trn location_city" data-trn-key="location_city" onclick ="showCity()" >        
-        City
-        </ons-list-item>
-        
-        <ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
-        District / Area
-        </ons-list-item>
-        
-       </ons-list>
-       
-
-    <div class="wrapper">       
-    
-    <div class="field-wrapper">
+            
+      <div class="field-wrapper">
          <span class="small-font-dim trn" data-trn-key="defaul_address">Default address</span>
          <label class="switch">
 			  <input type="checkbox" value="2" class="switch__input as_default" name="as_default" >
 			  <div class="switch__toggle"></div>
 		  </label>  		  
       </div>     
-    
+                        
+   </div>
+      
       <button class="trn button green-btn button--large" onclick="saveAddressBookLocation();" data-trn-key="save">
 		Save
 		<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
@@ -4246,6 +4299,7 @@
 
 </ons-page>
 </script>  
+<!-- Fim da atualização -->
 
 <script type="text/ons-template" id="popup_address_location.html">    
   <ons-dialog var="popup_address_location" style="width:50%;height:350px;" cancelable  >
