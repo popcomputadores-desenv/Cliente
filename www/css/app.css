@@ -575,7 +575,7 @@ margin:auto;
 max-width:70%;
 }
 .navigation-bar{
-background: rgba(117, 3, 3, 0.7686274509803922);
+background: #8d0710;
 color:#fff;
 border:none;
 }
@@ -801,8 +801,8 @@ background: transparent;
 
 .arrow_box {
 position: relative;
-background: #953d3d;
-border-bottom: 5px solid #953d3d;
+background: #8d0710;
+border-bottom: 5px solid #8d0710;
 margin-top: 1px;
 }
 
@@ -1395,7 +1395,7 @@ color:#dc143c;
 
 .profile-pic-wrap{
 min-height:50px;
-background:#a50e2c;
+background:#8d0710;
 color:#fff;
 padding:20px;
 }

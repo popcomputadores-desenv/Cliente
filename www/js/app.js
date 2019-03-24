@@ -4521,6 +4521,7 @@ if (data.details.programa_fidelidade!=false){
 				case "getPostCodeAddressBookDetails":
 				    $(".id").val( data.details.data.id );
 				    $(".street").val( data.details.data.street );
+					$(".numero").val( data.details.data.numero );
 				    $(".location_name").val( data.details.data.location_name );
 				    $(".state_id").val( data.details.data.state_id );
 				    $(".city_id").val( data.details.data.city_id );
@@ -7420,7 +7421,7 @@ function modifyAddressBook(id)
 	search_mode = getSearchMode();
 	dump("search_mode=>"+search_mode);
 	if(search_mode=="postcode"){
-		sNavigator.pushPage("postAddressDetails.html", {
+		sNavigator.pushPage("addressBookDetails.html", {
       animation: 'slide',
        	  id : id
        });	
@@ -7487,7 +7488,7 @@ function newAddressBook()
 {
 	search_mode = getSearchMode();
 	if ( search_mode=="postcode"){
-		sNavigator.pushPage("postAddressDetails.html", {
+		sNavigator.pushPage("addressBookDetails.html", {
        	  animation: 'slide',
        	  id : ''
        });	

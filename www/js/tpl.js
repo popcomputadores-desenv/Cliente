@@ -524,13 +524,13 @@ function DineinFields()
 function ContactNumberFields()
 {
 	var htm='';	
-	htm+='<div class="wrapper">';
+	htm+='<div class="wrapper" style="margin-top: -22px;">';
        htm+='<ons-row class="row">';
            htm+='<ons-col class="text-big trn">'+ getTrans("Contact information",'contact_information') +'</ons-col>';
        htm+='</ons-row>';
    htm+='</div>';
    
-    htm+='<div class="field-wrapper">';
+    htm+='<div class="field-wrapper" style="margin-top: -22px; margin-bottom: 10px;">';
 /*Atualização Master Hub (Tradução)*/
       htm+='<input type="text" name="contact_phone"  regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="mobile_inputs contact_phone text-input text-input--underbar has_validation mask-phone" placeholder="'+  getTrans("Contact phone",'contact_phone') + '" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"   >';
    htm+='</div>';
