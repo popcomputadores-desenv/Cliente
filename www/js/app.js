@@ -1,11 +1,11 @@
 /**
 KMRS MOBILE 
-Version 2.7
+Version 2.8
 */
 
 /**
 AKIMICHI THEME
-Version 2.7
+Version 2.8
 **/
 
 /**
@@ -1377,7 +1377,7 @@ var params = "client_token="+ getStorage("client_token");
 /*Fim da atualização*/
            'page-addreviews'
           );    
-          
+             
           translatePage();
              
 		 break;
@@ -1468,6 +1468,39 @@ function showFilterOptions()
 		navDialog.show();
 		//translatePage();
 	}	
+}
+
+function sticSearch() {
+
+	params = "address="+ getStorage("search_address") + "&restaurant_name="+ urlencode($(".filter_restaurant_name").val()) ;
+	
+	search_mode = getSearchMode();
+	if ( search_mode=="postcode"){
+		params+="&search_mode="+ search_mode;
+		search_type = getSearchType();
+		switch (search_type)
+		{
+			case "1":				
+			params+="&city_id="+ global_city_id;
+			params+="&area_id="+ global_area_id;
+			break;
+			
+			case "2":
+			params+="&state_id="+ global_state_id;
+			params+="&city_id="+ global_city_id;
+			break;
+			
+			case "3":
+			params+="&postal_code="+ global_postal_code;
+			break;
+			
+			default:
+			break;
+		}
+	}
+	
+	global_filter_params = params;
+	callAjax("initSearch", params );
 }
 
 function applyFilter()
@@ -4839,43 +4872,35 @@ function setHomeCallback()
 
 function displayRestaurantResults(data , target_id)
 {	
-/*Atualização Master Hub (Empresas abertas e fechadas)*/
 	//dump(data);	
 	var htm='';	
 	
-	var abertas = new Array();
-	var fechadas = new Array();
-
-	for(var i=0; i<data.length; i++) {
-		if (data[i].is_open == 'Fechado')
-			fechadas.push(data[i]);
-		else
-			abertas.push(data[i]);
-	}
-	data = abertas.concat(fechadas);
-/*Fim da atualização*/
-/*Atualização Master Hub (Personalização da tela de busca de Empresas)*/
+	htm+='<ons-list class="stic-list">';
+       
     $.each( data, function( key, val ) {     
     	
     	 //dump(val);
     	 
     	 htm+='<ons-list-item modifier="tappable" class="list-item-container stic-list-item" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
-    	 //htm+='<ons-row class="row" onclick="loadRestaurantCategory('+val.merchant_id+');" >';    	 
-    	 if(!empty(val.merchant_photo_bg)){
-    	 	htm+='<div class="stic-merchant-bg" style="background:url('+krms_config.Website+'/upload/'+val.merchant_photo_bg+') no-repeat center / cover;">';
-    	 } else {
-    	 	htm+='<div class="stic-merchant-bg" style="background:url(css/images/location-banner.jpg) no-repeat center / cover;">';
-    	 }
+    	 //htm+='<ons-row class="row" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
 
-    	 htm+='<div class="stic-bg-cover">';    	 
-    	 htm+='</div>';    	 
-    	 htm+='</div>';    	 
+    	 htm+='<ons-row class="row stic-nopad">';    	    
+	    	 if(!empty(val.merchant_photo_bg)){
+	    	 	htm+='<div class="stic-merchant-bg" style="background:url('+krms_config.Website+'/upload/'+val.merchant_photo_bg+') no-repeat center / cover;">';
+	    	 } else {
+	    	 	htm+='<div class="stic-merchant-bg" style="background:url(css/images/location-banner.jpg) no-repeat center / cover;">';
+	    	 }
+			    	 htm+='<div class="stic-bg-cover">';    	 
+	    			 htm+='</div>';    	 
+	    	 htm+='</div>';
+    	 htm+='</ons-row>';    	 
 
-    	 htm+='<ons-row class="row stic-pad-top" >';    	 
-    	     htm+='<ons-col class="col-image stic-pad-bottom border" width="65px">';
-    	          htm+='<div class="logo-wrap2" >';
+
+    	 htm+='<ons-row class="row stic-row-align" >';    	 
+    	     htm+='<ons-col class="col-image border" width="65px">';
+    	          htm+='<div class="logo-wrap2" style="margin-top:-5px;">';
     	            htm+='<div class="img_loaded" >';
-    	             htm+='<img src="'+val.logo+'" />';
+    	             htm+='<img class="rest-img" src="'+val.logo+'" />';
     	            htm+='</div>';
     	            
     	          htm+='</div>';
@@ -4903,7 +4928,7 @@ function displayRestaurantResults(data , target_id)
     	     htm+='<ons-col class="stic-align col-description border" style="margin-left:10px" width="58%">';
     	           htm+='<div>';
 	    	           htm+='<p class="restauran-title stic-restaurant concat-text">'+val.restaurant_name+'</p>';
-	    	           htm+='<p class="concat-textx stic-cuisine" style="margin-bottom:5px;">'+val.cuisine+'</p>';
+	    	           htm+='<p class="concat-textx stic-cuisine">'+val.cuisine+'</p>';
 	    	           htm+='<span class="notification '+val.tag_raw+' stic-notification">'+val.is_open+'</span>';
 	    	           
 	    	           // if(!empty(val.distance)){
@@ -4924,11 +4949,11 @@ function displayRestaurantResults(data , target_id)
 	    	           	   // }
 	    	           }
 	    	           
-	    	           // if ( val.offers.length>0){
-	    	           // 	   $.each( val.offers, function( key_offer, val_offer ) { 
-	    	           // 	   	  htm+='<p class="top10">'+val_offer+'</p>';
-	    	           // 	   });
-	    	           // }
+	    	           if ( val.offers.length>0){
+	    	           	   $.each( val.offers, function( key_offer, val_offer ) { 
+	    	           	   	  htm+='<p class="stic-offer stic-offer-desc">'+val_offer+'</p>';
+	    	           	   });
+	    	           }
 
 	    	           if(val.service==1 || val.service==2 || val.service==4 || val.service==5 ){
 	    	             htm+='<ons-icon class="stic-icon" icon="ion-android-bicycle"></ons-icon>';
@@ -4966,7 +4991,8 @@ function displayRestaurantResults(data , target_id)
     	     htm+='</ons-col>';
 
     	     htm+='<ons-col class="stic-ratings-position col-image border center" width="13%">';
-    	          htm+='<p class="stic-ratings p-small trn" data-trn-key="ratings">Ratings</p>';
+	              htm+='<ons-icon class="gold-color" icon="ion-android-star"></ons-icon>';
+    	          // htm+='<p class="stic-ratings p-small trn" data-trn-key="ratings">Ratings</p>';
 	    	  	  htm+='<span class="center stic-score trn">'+val.ratings.ratings+'</span>';
     	     htm+='</ons-col>';
     	     
@@ -5197,11 +5223,11 @@ function displayItemByCategory(data , index)
 	var actions = '';
 	
 	var html='';
-	html+='<ons-list class="top10">';	 
+	html+='<ons-list class="stic-list">';	 
 	//html+='<ons-list class="restaurant-list">';
 	$.each( data.item, function( key, val ) { 		 
 
-		html+= '<ons-list-item class="list-item-container stic-list-item-2">';
+		html+= '<ons-list-item class="list-item-container stic-list-item">';
 		
 		 if (data.disabled_ordering==2){
 		 //html+='<ons-list-item modifier="tappable" class="list-item-container" onclick="itemNotAvailable(2)" >';		
@@ -5241,7 +5267,7 @@ actions='"loadItemDetails('+ "'"+val.item_id+"'," +  "'"+data.merchant_id+"'," +
 			 }
 		 }
 		 
-         html+='<ons-row class="row" onclick='+actions+' >';
+         html+='<ons-row class="row stic-row-align" onclick='+actions+' >';
          
          /*DISH ICON*/
          var dish_icon_html = '';
@@ -5366,11 +5392,17 @@ function loadItemDetails(item_id,mtid,cat_id)
 }
 
 function displayItem(data)
-{		
-	$("#page-itemdisplay .item-header").css({
-		'background-image':'url('+data.photo+')'
-	});
-	
+{	
+	if (data.photo!==null){
+		$("#page-itemdisplay .item-header").css({
+			'background-image':'url('+data.photo+')'
+		});
+	} else {
+		$("#page-itemdisplay .item-header").css({
+			'display':'none'
+		});
+	}
+
 	$("#page-itemdisplay .title").html(data.item_name);
 	$("#page-itemdisplay .description").html(data.item_description);	
 	
@@ -6441,11 +6473,9 @@ function editOrderInit()
 	$(".edit-order").hide();
 	$(".qty-label").hide();
 	$(".row-del-wrap").show();
-/*Atualização Master Hub (Reorganização dos botões de editar do carrinho)*/
-	$(".row-del-wrap").css('display', 'flex');
-	$(".esconde-ao-editar").hide();
-	$(".mostra-ao-editar").show();
-/*Fim da atualização*/
+	$(".row-del-wrap").css("display","inherit");
+	$(".width-adjust").css("max-width","70%");
+	
 	var x=1;
 	$.each( $(".item-qty") , function( key, val ) {
 		$.each( $(".subitem-qty"+x) , function( key2, val2 ) {
@@ -6465,10 +6495,8 @@ function applyCartChanges()
 	$(".qty-label").show();
 	$(".subitem-qty").hide();
 	$(".row-del-wrap").hide();
-/*Atualização Master Hub (Reorganização dos botões de editar do carrinho)*/
-	$(".esconde-ao-editar").show();
-	$(".mostra-ao-editar").hide();
-/*Fim da atualização*/
+	$(".width-adjust").css("max-width","75%");
+	
 	dump( "qty L=>"+ $(".item-qty").length );
 	if (!empty( $(".item-qty") )){
 		cart=[];		
@@ -11485,19 +11513,21 @@ function getCategory(index)
 	   	   if ( $('#foodcategory-results-'+index).exists() ){
 	   	
 		   	   html='';
-		   	   html+='<ons-list>';	   	  
+		   	   html+='<ons-list class="stic-list">';	   	  
 		   	   
 		   	   if (app_version>="2.4"){
 		   	   	   if(data.details.show_cat_image==1){
 		   	   	   	  $.each( data.details.data, function( key, val ) {
 		   	   	   	  	 html+= '<ons-list-item class="list-item-container stic-list-item" onclick="loadmenu('+val.cat_id+','+val.merchant_id+');"  >';			   	   	   
-                         		html+='<div class="stic-merchant-bg" style="background:url('+ val.photo_url +') no-repeat center / cover;">';
-                         		html+='<div class="stic-bg-cover">';
-                         		html+='</div>';    	 
-    	 						html+='</div>';
 
- 							    html+= '<ons-row class="row stic-pad-top">';
-                               
+	   	   	   	  	 		if (val.photo_url!==null){
+                     			html+='<div class="stic-merchant-bg" style="background:url('+ val.photo_url +') no-repeat center / cover;">';
+                    	 			html+='<div class="stic-bg-cover">';
+                 	    			html+='</div>';    	 
+	 							html+='</div>';
+	   	   	   	  	 		}
+
+ 							   html+= '<ons-row class="stic-row-align">';
                                html+= '<ons-col>';
                                html+='<p class="stic-category concat-text">'+val.category_name+'</p>';
                                html+='<p class="concat-textx stic-category-desc">'+val.category_description+'</p>';

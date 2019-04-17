@@ -226,8 +226,14 @@ function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_
    var htm='';
    htm+='<ons-list-item class="row-no-border">';
    htm+='<ons-row >';
-	   htm+='<ons-col class="concat-text" width="60%">';
-		 htm+='<input name="qty" type="number" class="item-qty qty numeric_only small-input text-center text-input text-input--underbar" ';
+
+	   htm+='<ons-row class="row-del-wrap auto" >';
+   	   		htm+='<ons-button modifier="quiet" class="row-del-wrap delete-item" data-id="'+x+'"><ons-icon icon="fa-times"></ons-icon></ons-button>';
+	   htm+='</ons-row>';
+
+	   htm+='<ons-col class="stic-align width-adjust concat-text" width="75%">';
+
+		htm+='<input name="qty" type="number" class="item-qty stic-rgba list-wrapper qty numeric_only small-input text-center text-input text-input--underbar" ';
 /*Atualização Master Hub (Tradução)*/
 		  htm+='placeholder="quant." value="'+qty+'" data-rowid="'+x+'">';
 /*Fim da atualização*/
@@ -256,14 +262,13 @@ function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_
 		  	+'</p>';
 		  }
 	   htm+='</ons-col>';
-	   htm+='<ons-col class="text-right" ><price>'+pretty_price+'</price></ons-col>';
+	   htm+='<ons-col class="center-price text-right" ><price>'+pretty_price+'</price></ons-col>';
    htm+='</ons-row>';
    
-   htm+='<ons-row class="row-del-wrap" >';
-   htm+='<ons-col class="text-right" width="100%">';
-   htm+='<ons-button modifier="quiet" class="delete-item" data-id="'+x+'"><ons-icon icon="fa-times"></ons-icon></ons-button>';
-   htm+='</ons-col>';
-   htm+='</ons-row>';
+   // htm+='<ons-row class="" >';
+   // htm+='<ons-col class="text-right" width="100%">';
+   // htm+='</ons-col>';
+   // htm+='</ons-row>';
    
    htm+='</ons-list-item>';
    return htm;
@@ -275,7 +280,7 @@ function tplCartRowNoBorderSub(subcat_id, sub_item_id, item_name, price, pretty_
    htm+='<ons-list-item class="row-no-border subitem-row'+x+' ">';
    htm+='<ons-row >';
       htm+='<ons-col width="3%"></ons-col>';
-	   htm+='<ons-col class="concat-text" width="60%">';
+	   htm+='<ons-col class="concat-text" width="75%">';
 		 htm+='<input name="qty" type="number" class="subitem-qty'+x+' qty small-input text-center text-input text-input--underbar" ';
 /*Atualização Master Hub (Tradução)*/
 		  htm+='placeholder="quant." value="'+qty+'" data-qty="'+qty2+'" >';
@@ -300,10 +305,10 @@ function tplCartRow(label,price,class_name)
 	var htm='';	
 	htm+='<ons-list-item class="'+class_name+'">';
 	  htm+='<ons-row >';
-		   htm+='<ons-col class="concat-text" width="70%">';
-			  htm+='<p class="description item-name concat-text">'+label+'</p>';
+		   htm+='<ons-col class="stic-align concat-text" width="70%">';
+			  htm+='<p class="description item-name concat-text f14 bold c333">'+label+'</p>';
 		   htm+='</ons-col>';
-		   htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
+		   htm+='<ons-col class="text-right" ><price class="f14 bold c333">'+price+'</price></ons-col>';
 	   htm+='</ons-row>';
 	htm+='</ons-list-item>';
 	return htm;
@@ -428,25 +433,25 @@ function tplPaymentProvider(radio_name, radio_value, label, icons)
 function tplReviews(avatar , rating, client_name, review, date_review, id , can_modify, data_reply)
 {
    var htm='';      
-   htm+='<ons-list class="review-list">';
+   htm+='<ons-list class="stic-list review-list">';
    
       if ( can_modify == 1){
-	     htm+='<ons-list-item modifier="chevron" class="list-item-container" onclick="showReviewsDialog('+ id +')" >';
+	     htm+='<ons-list-item class="stic-list-item review" modifier="chevron" class="list-item-container" onclick="showReviewsDialog('+ id +')" >';
       } else {
-      	 htm+='<ons-list-item modifier="tappable" class="list-item-container">';
+      	 htm+='<ons-list-item class="stic-list-item review" modifier="tappable" class="list-item-container">';
       }
 	  
-	     htm+='<ons-row class="row"> ';
-		     htm+='<ons-col class="col-image" width="90px">';
+	     htm+='<ons-row class="row stic-row-align"> ';
+		     htm+='<ons-col class="col-image" width="60px">';
 			   //htm+='<ons-icon icon="fa-user" class="icon-user"></ons-icon>';
 			   htm+='<img class="avatar" src="'+ avatar +'">';
 			 htm+='</ons-col>';
 			 
 			 htm+='<ons-col class="col-description">';
 			   htm+='<div class="rating-stars" data-score="'+rating+'"></div>';
-			   htm+='<p class="restauran-title concat-text">'+client_name+'</p>';
-			   htm+='<p class="small-font-dim small-font-dim-smaller">'+date_review+'</p> ';
-			   htm+='<p class="small-font-dim">'+review+'</p>';
+			   htm+='<p class="restauran-title f14 bold concat-text">'+client_name+'</p>';
+			   htm+='<p class="small-font-dim stic-review-date small-font-dim-smaller">'+date_review+'</p> ';
+			   htm+='<p class="small-font-dim stic-review">'+review+'</p>';
 			   
 			   if($.isArray(data_reply)) {
 			   	  $.each( data_reply , function( key , val_data_reply ) { 
@@ -556,10 +561,10 @@ function wingRow(key, label , value)
 
 displayOrders = function(data){
 	
-	var htm='<ons-list>';
+	var htm='<ons-list class="stic-list">';
     $.each( data, function( key, val ) {
     	
-    	htm+='<ons-list-item modifier="tappable" class="list-item-container" onclick="showOrderOptions('+ "'" + val.order_id + "'" + ','+ "'" +  val.show_cancel_order + "'," + "'" + val.show_review + "'" + ');" >';
+    	htm+='<ons-list-item modifier="tappable" class="stic-list-item list-item-container" onclick="showOrderOptions('+ "'" + val.order_id + "'" + ','+ "'" +  val.show_cancel_order + "'," + "'" + val.show_review + "'" + ');" >';
     	  
     	  cancel_html='';
     	  if(!empty(val.cancel_status)){

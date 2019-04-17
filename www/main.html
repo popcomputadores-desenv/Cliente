@@ -22,7 +22,7 @@
 <link href="lib/mobiscroll/css/mobiscroll.scroller.ios-classic.css" rel="stylesheet" type="text/css" />
 <link href="lib/mobiscroll/css/mobiscroll.scroller.ios.css" rel="stylesheet" type="text/css" />
 <link href="lib/mobiscroll/css/mobiscroll.android-holo-light.css" rel="stylesheet" type="text/css" />
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet"> 
 
 <script src="lib/angular/angular.js"></script>
 <script src="lib/onsen/js/onsenui.js"></script>
@@ -286,7 +286,7 @@
     </div>  -->
 <!-- Atualização Master Hub (Personalização Tela Inicial - Ocultar caixas de selecção de endereço) -->
     <div class="home-page wrapper center box catalogo_endereco">       
-       <h4 class="normal white trn" data-trn-key="enter_your_location">Enter your location</h4>
+       <h4 class="uppercase f13 white trn" data-trn-key="enter_your_location">Enter your location</h4>
        
        <section class="field-section search bborder" style="box-shadow: none;">
          <input id="s" value="" type="text" class="text-input text-input--underbar trn" ng-model="text" placeholder="Street Address" data-trn-key="home_search_placeholder" 
@@ -330,7 +330,7 @@
     </div>
 
        <div class="home-page wrapper center box">       
-       <h4 class="normal white trn catalogo_endereco" data-trn-key="order_food_online">Order food online from 1000+ restaurants!</h4>
+       <h4 class="f13 uppercase white trn catalogo_endereco" data-trn-key="order_food_online">Order food online from 1000+ restaurants!</h4>
        
 	   <div class="bairro_cidade" style="margin-bottom: -50px; color: white; display: none;">
 		<h4 class="bairro_cidade" style="display: none;"><span id="city" class="city wrapper center"> </span><br><span id="area_name" class="area_name wrapper center"></span></h4>
@@ -349,19 +349,19 @@
        
        <ons-list modifier="inset" class="catalogo_endereco">
        
-        <ons-list-item modifier="chevron" class="stic-f14 stic-nobold uppercase trn location_state" data-trn-key="location_state" onclick ="showState()" >
+        <ons-list-item modifier="chevron" class="padleft20 trn location_state" data-trn-key="location_state" onclick ="showState()" >
         State
         </ons-list-item>
         
-        <ons-list-item modifier="chevron" class="stic-f14 stic-nobold uppercase trn location_city" data-trn-key="location_city" onclick ="showCity()" >        
+        <ons-list-item modifier="chevron" class="padleft20 trn location_city" data-trn-key="location_city" onclick ="showCity()" >        
         City
         </ons-list-item>
         
-        <ons-list-item modifier="chevron" class="stic-f14 stic-nobold uppercase trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+        <ons-list-item modifier="chevron" class="padleft20 trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
         District / Area
         </ons-list-item>
         
-        <ons-list-item modifier="chevron" class="stic-f14 stic-nobold uppercase trn location_postal" data-trn-key="postal_code" onclick ="showPostal()" >        
+        <ons-list-item modifier="chevron" class="padleft20 trn location_postal" data-trn-key="postal_code" onclick ="showPostal()" >        
         Postal Code/Zip Code
         </ons-list-item>
         
@@ -627,14 +627,18 @@
 
    <div class="results-header arrow_box"><span class="result-msg uppercase" style="font-weight: normal;" data-trn-key="processing">processing</span></div>
 
-    <div class="stic-wrapper">
-       <div class="field-wrapper">
-       <input id="ss_restaurant_name" value="" type="text" class="stic-restaurant-search text-input text-input--underbar trn" ng-model="text" placeholder="Busque aqui a sua empresa favorita" data-trn-key="enter_restaurant_name" >
+    <div class="stic-search-div">
+       <div class="akimichi-search">
+        <input type="text" name="restaurant_name"  class="stic-rgba w100 filter_restaurant_name restaurant_name text-input text-input--underbar has_validation" 
+        placeholder="Enter Restaurant name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+        <ons-icon class="stic-icon-search" size="1.333em" icon="ion-android-search" onclick="sticSearch();"></ons-icon> 
        </div>
-       <div>
-        <ons-icon class="stic-icon-search" size="1.333em" icon="ion-android-search" onclick="applySearch();"></ons-icon> 
+       <div class="clear-search">
+          <span class="uppercase crimson trn" data-trn-key="clear_search" onclick="sticSearch();">Clear Search</span>
        </div>
     </div>
+
+    <div id="category-carousel"></div>
           
    <div style="position:relative; margin-top: 9px;">
    
@@ -875,7 +879,7 @@
    <div class="cartposition">
       <button class="fixedcart" onclick="showCart(this);">
         <div class="notification cart-num fx">0</div>
-        <ons-icon icon="ion-ios-cart-outline" class="cart">
+        <img src="lib/raty/images/basket-white.png" class="stic-basket">
       </button>
    </div>
    
@@ -928,7 +932,7 @@
    <div class="cartposition">
       <button class="fixedcart" onclick="showCart();">
         <div class="notification cart-num fx">0</div>
-        <ons-icon icon="ion-ios-cart-outline" class="cart">
+        <img src="lib/raty/images/basket-white.png" class="stic-basket">
       </button>
    </div> 
    
@@ -1059,7 +1063,7 @@
       </ons-row>
    </div> 
    <div style="background-color: #00000054; margin-top: -3px;">
-   <ons-row class="row">
+   <ons-row class="row stic-list-item auto">
        <ons-col >           
          <button onclick="clearCart();" class="clear-cart button button--quiet green uppercase trn" data-trn-key="clear_cart">Clear Cart</button>
        </ons-col>
@@ -1070,12 +1074,12 @@
        </ons-col>
    </ons-row>
    </div>
-   <form id="frm-cart" class="frm-cart" method="post">
+   <form id="frm-cart" class="frm-cart stic-list-item" style="margin-top:0px" method="post">
    <ons-list id="cart-item">
    </ons-list>   
    </form>
    
-   <div class="checkout-footer">
+   <div class="checkout-footer stic-checkout-footer">
    
    <input type="hidden" name="delivery_date" class="delivery_date">
    <input type="hidden" name="delivery_time" class="delivery_time">
@@ -1308,7 +1312,7 @@
    
    
    <div class="wrapper">
-      <div class="field-wrapper stic-rgba">
+      <div class="field-wrapper">
 <!-- Atualização Master Hub (Tradução e Máscara do Telefone) -->
       <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="stic-rgba mobile_inputs contact_phone text-input text-input--underbar has_validation mask-phone"
       placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
@@ -1318,43 +1322,43 @@
 <!-- Atualização Master Hub (Personalização - Troca de lugar de campos) -->
    
    <div class="wrapper">
-      <div class="field-wrapper stic-rgba">
-      <input type="text" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
+      <div class="field-wrapper">
+      <input type="text" name="zipcode"  class="stic-rgba zipcode text-input text-input--underbar has_validation" 
       placeholder="Zipcode" value="" >
       </div>      
    </div>
    
    <div class="wrapper">
-      <div class="field-wrapper stic-rgba">
-      <input type="text" name="city"  class="city text-input text-input--underbar has_validation" 
+      <div class="field-wrapper">
+      <input type="text" name="city"  class="stic-rgba city text-input text-input--underbar has_validation" 
       placeholder="City" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
       </div>      
    </div>
    
    <div class="wrapper">
-      <div class="field-wrapper stic-rgba">
-      <input type="text" name="state"  class="state text-input text-input--underbar has_validation" 
+      <div class="field-wrapper">
+      <input type="text" name="state"  class="stic-rgba state text-input text-input--underbar has_validation" 
       placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
       </div>      
    </div>
    
    <div class="wrapper">
-      <div class="field-wrapper stic-rgba">
-      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="stic-rgba delivery_instruction text-input text-input--underbar" 
       placeholder="Delivery instructions" value="" >
       </div>      
    </div>
    
    <div class="wrapper">
-      <div class="field-wrapper stic-rgba">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
+      <div class="field-wrapper">
+      <input type="text" name="contact_phone"  class="stic-rgba mobile_inputs contact_phone text-input text-input--underbar has_validation" 
       placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
       </div>      
    </div>
    
    <div class="wrapper">
-      <div class="field-wrapper stic-rgba">
-      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+      <div class="field-wrapper">
+      <input type="text" name="location_name"  class="stic-rgba location_name text-input text-input--underbar" 
       placeholder="Apartment suite, unit number, or company name"  >
       </div>      
    </div>
@@ -1960,20 +1964,18 @@
    
    <div class="results-header arrow_box"><span class="result-msg uppercase" style="font-weight: normal;" data-trn-key="processing">processing</span></div>
 
-   <!-- <div class="stic-wrapper">
+   <div class="stic-search-div">
       <div class="field-wrapper">
-      <input id="ss_restaurant_name" value="" type="text" class="stic-restaurant-search text-input text-input--underbar trn" ng-model="text" placeholder="Enter Restaurant Name" data-trn-key="enter_restaurant_name" >
+      <input id="ss_restaurant_name" value="" type="text" class="w100 stic-restaurant-search text-input text-input--underbar trn" ng-model="text" placeholder="Enter Restaurant Name" data-trn-key="enter_restaurant_name" >
+      <ons-icon class="stic-icon-search" style="right:12px;" size="1.333em" icon="ion-android-search" onclick="searchByName();"></ons-icon> 
       </div>
-      <div>
-       <ons-icon class="stic-icon-search" size="1.333em" icon="ion-android-search" onclick="searchByName();"></ons-icon> 
-      </div>
-   </div> -->
-         <div style="position:relative; margin-top: 9px;">
+   </div>
+      
     <ons-list class="restaurant-list" id="lazy-parent" >
        <ons-list-item ons-lazy-repeat="lazyBrowseMerchant" modifier="tappable" class="list-item-container lazy-list">      
        </ons-list-item>
     </ons-list>      
-      </div>
+      
 </ons-page>
 </ons-navigator> 
 </script>
@@ -2111,9 +2113,7 @@
 
       <button class="trn button button--quiet green uppercase crimson" onclick="showSignupForm();" data-trn-key="create_account">
        Create Account
-       </button>                   
-       
-       <p class="small-font-dim trn" style="margin: 0; display: inline-block;">|</p>                 
+       </button>                             
        
       <button class="trn button button--quiet green uppercase crimson" onclick="showVerifyAccountPage();" data-trn-key="verify_account">
        Verify Account
@@ -2176,13 +2176,11 @@
    </div>
       
    <div class="wrapper center">                  
-      <button class="trn button button--quiet green uppercase crimson" onclick="menu.setMainPage('signup.html', {closeMenu: true})" data-trn-key="create_account">
-       Create Account
-       </button>                   
-
-       <p class="small-font-dim trn" style="margin: 0; display: inline-block;">|</p>                 
+      <button class="trn button button--quiet green uppercase crimson" onclick="showForgotPass();" data-trn-key="forgot_your_pass">
+       Forgot your password?
+       </button>        
        
-      <button class="trn button button--quiet green uppercase crimson" onclick="menu.setMainPage('verify-account.html', {closeMenu: true})" data-trn-key="verify_account">
+      <button class="trn button button--quiet green uppercase crimson" onclick="showVerifyAccountPage();" data-trn-key="verify_account">
        Verify Account
    </button>           
    </div>
@@ -2436,7 +2434,7 @@
      </div>
    
       <div class="field-wrapper">
-      <input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
+      <input type="text" id="cep" name="zipcode"  class="stic-rgba zipcode text-input text-input--underbar has_validation" 
       placeholder="Zipcode" value="" onblur="pesquisacep_catalogo(this.value);" >
       </div>
  
@@ -2444,12 +2442,12 @@
    	  <div class="field-wrapper">
 					<ons-row>
 						<ons-col width="75%">
-      <input type="text" id="street" name="street"  class="street text-input text-input--underbar has_validation" 
+      <input type="text" id="street" name="street"  class="stic-rgba street text-input text-input--underbar has_validation" 
       placeholder="Street" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 						</ons-col>
 						<ons-col width="5%"></ons-col>
 						<ons-col width="20%">
-      <input type="text" name="numero" id="numero"  class="numero text-input text-input--underbar has_validation" 
+      <input type="text" name="numero" id="numero"  class="stic-rgba numero text-input text-input--underbar has_validation" 
       placeholder="Numero" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 						</ons-col>
 					</ons-row>
@@ -2475,12 +2473,12 @@
    </div>
 
       <div class="field-wrapper">
-      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+      <input type="text" name="delivery_instruction"  class="stic-rgba delivery_instruction text-input text-input--underbar" 
       placeholder="Delivery instructions" value="" >
       </div>      
    
       <div class="field-wrapper">
-      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+      <input type="text" name="location_name"  class="stic-rgba location_name text-input text-input--underbar" 
       placeholder="Location name" value="" >
       </div>
             
@@ -2649,13 +2647,13 @@
 
   <ons-page id="page-adddresspopup" >  
 	  <ons-toolbar> 
-	      <div class="center white trn" data-trn-key="enter_your_location">Enter your location</div>   	      	      
+	      <div class="f13 uppercase center white trn" data-trn-key="enter_your_location">Enter your location</div>   	      	      
 	  </ons-toolbar>
 
 	  <form id="frm-adddresspopup" class="frm-adddresspopup" method="post">   
 	  <div class="wrapper center pad-top20">	 
 	   <div class="field-wrapper">
-          <input type="text" id="new_s" name="new_s"  class="new_s text-input text-input--underbar has_validation" 
+          <input type="text" id="new_s" name="new_s"  class="stic-rgba new_s text-input text-input--underbar has_validation" 
            placeholder="Enter your address" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
        </div>	  	  	  
 	  </div>  
@@ -2712,7 +2710,7 @@
    <div class="wrapper">
    
      <div class="field-wrapper">
-      <input type="text" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
+      <input type="text" name="cc_number"  class="stic-rgba cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
 <!-- Atualização Master Hub (Tradução) -->
       placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16" data-maxl="16" >
 <!-- Fim da atualização -->
@@ -2731,37 +2729,37 @@
       </ons-list>
 <!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
-      <input type="text" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
+      <input type="text" name="cvv"  class="stic-rgba cvv limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="CVV" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="4" data-maxl="16" >
       </div>
       
      <div class="field-wrapper">
-      <input type="text" name="x_first_name"  class="x_first_name text-input text-input--underbar has_validation" 
+      <input type="text" name="x_first_name"  class="stic-rgba x_first_name text-input text-input--underbar has_validation" 
       placeholder="First Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
       </div>
       
      <div class="field-wrapper">
-      <input type="text" name="x_last_name"  class="x_last_name text-input text-input--underbar has_validation" 
+      <input type="text" name="x_last_name"  class="stic-rgba x_last_name text-input text-input--underbar has_validation" 
       placeholder="Last Name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
      </div> 
      
      <div class="field-wrapper">
-      <input type="text" name="x_address"  class="x_address text-input text-input--underbar has_validation" 
+      <input type="text" name="x_address"  class="stic-rgba x_address text-input text-input--underbar has_validation" 
       placeholder="Address" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
      </div>  
      
      <div class="field-wrapper">
-      <input type="text" name="x_city"  class="x_city text-input text-input--underbar has_validation" 
+      <input type="text" name="x_city"  class="stic-rgba _city text-input text-input--underbar has_validation" 
       placeholder="City" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
      </div>   
 
     <div class="field-wrapper">
-      <input type="text" name="x_state"  class="x_state text-input text-input--underbar has_validation" 
+      <input type="text" name="x_state"  class="stic-rgba x_state text-input text-input--underbar has_validation" 
       placeholder="State" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
     </div>  
     
    <div class="field-wrapper">
-      <input type="number" name="x_zip"  class="x_zip text-input text-input--underbar has_validation" 
+      <input type="text" name="x_zip"  class="stic-rgba x_zip text-input text-input--underbar has_validation" 
       placeholder="Zip Code" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"  >
     </div>   
 <!-- Fim da atualização -->
@@ -2866,8 +2864,8 @@
    <div class="wrapper">
 <!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
-      <input type="number" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
-      placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16"  data-maxl="16" >
+      <input type="number" name="cc_number"  class="stic-rgba cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
+      placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="16"  data-maxl="16" >
       </div>
 <!-- Fim da atualização -->
      <ons-list modifier="inset" class="settings-list">
@@ -2883,7 +2881,7 @@
       </ons-list>
 <!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
-      <input type="number" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
+      <input type="number" name="cvv"  class="stic-rgba cvv limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="CVV" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="4" data-maxl="4" >
       </div>
 <!-- Fim da atualização -->
@@ -2925,7 +2923,7 @@
    </p>
 <!-- Atualização Master Hub (Correção de tipo de campo) -->
    <div class="field-wrapper">
-      <input type="number" name="code"  class="code text-input text-input--underbar has_validation"
+      <input type="number" name="code"  class="stic-rgba code text-input text-input--underbar has_validation"
        value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="11" >
    </div>
 <!-- Fim da atualização -->
@@ -3142,31 +3140,31 @@
 		
         <div class="wrapper">
 	      <div class="field-wrapper">
-	      <input type="text" id="rua" name="stree_1"  class="stree_1 text-input text-input--underbar has_validation" 
+	      <input type="text" id="rua" name="stree_1"  class="stic-rgba stree_1 text-input text-input--underbar has_validation" 
 	      placeholder="Street" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!">
 	      </div>      
 	   </div>   
         <div class="wrapper">
 	      <div class="field-wrapper">
-	      <input type="text" name="numero_1"  class="numero_1 text-input text-input--underbar has_validation" 
+	      <input type="text" name="numero_1"  class="stic-rgba numero_1 text-input text-input--underbar has_validation" 
 	      placeholder="Numero" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 	      </div>      
 	   </div>   
         <div class="wrapper">
 	      <div class="field-wrapper">
-	      <input type="text" id="area_name" name="area_name_1"  class="area_name_1 text-input text-input--underbar has_validation" 
+	      <input type="text" id="area_name" name="area_name_1"  class="stic-rgba area_name_1 text-input text-input--underbar has_validation" 
 	      placeholder="Bairro" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!">
 	      </div>      
 	   </div>   
 	   <div class="wrapper">
 	      <div class="field-wrapper">
-	      <input type="text" id="cidade" name="city_1"  class="city_1 text-input text-input--underbar has_validation" 
+	      <input type="text" id="cidade" name="city_1"  class="stic-rgba city_1 text-input text-input--underbar has_validation" 
 	      placeholder="City" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 	      </div>      
 	   </div>
 	   <div class="wrapper">
 	      <div class="field-wrapper">
-	      <input type="text" id="uf" name="state_1"  class="state_1 text-input text-input--underbar has_validation" 
+	      <input type="text" id="uf" name="state_1"  class="stic-rgba state_1 text-input text-input--underbar has_validation" 
 	      placeholder="State" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 	      </div>      
 	   </div>
@@ -3354,7 +3352,7 @@
               <p class="small-font-dim trn" data-trn-key="your_delivery_guy" >Your Delivery Guy</p>
             </ons-col>
             <ons-col width="25%" class="center">
-               <a class="button green-btn-fone button--large call_driver">
+               <a class="button green-btn-fone button--large call_driver fix">
 				<ons-icon icon="ion-android-call">
 			   </a>
             </ons-col>
@@ -3383,7 +3381,7 @@
    <form id="frm-enter-contact" class="frm-enter-contact" method="post">   
     <div class="field-wrapper">    
 <!-- Atualização Master Hub (Tradução e Máscara de Telefone) -->
-      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="mobile_inputs contact_phone text-input text-input--underbar has_validation mask-phone" 
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="stic-rgba mobile_inputs contact_phone text-input text-input--underbar has_validation mask-phone" 
       placeholder="Mobile Phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >  
 <!-- Fim da atualização -->
     </div>   
@@ -3427,11 +3425,11 @@
 	     <ons-row>
            <ons-col width="70%">
                <input type="number" name="cash_tip" id="cash_tip" style="width:89%;"
-	           class="cash_tip text-input text-input--underbar" placeholder="Cash Tip">
+	           class="stic-rgba middle cash_tip text-input text-input--underbar" placeholder="Cash Tip">
 <!-- Fim da atualização -->
            </ons-col>           
            <ons-col width="30%">
-             <button class="trn button green-btn" onclick="applyCashTip();" data-trn-key="apply">
+             <button class="trn fix button green-btn" onclick="applyCashTip();" data-trn-key="apply">
 	          Apply
 	         </button>	     
            </ons-col>
@@ -3440,7 +3438,7 @@
 	    </ons-list-item>
 	    
 	    <ons-list-item modifier="tappable" onclick="removeTips();" >
-	      <span class="trn" data-trn-key="remove_tips" >Remove Tips</span>
+	      <span class="uppercase crimson trn" data-trn-key="remove_tips" >Remove Tips</span>
 	    </ons-list-item>
 	    
 	    
@@ -3501,12 +3499,12 @@
       <input type="hidden" name="cc_id" class="cc_id" id="cc_id">
 <!-- Atualização Master Hub (Tradução) -->
       <div class="field-wrapper">
-      <input type="text" name="card_name"  class="card_name text-input text-input--underbar has_validation" 
+      <input type="text" name="card_name"  class="stic-rgba card_name text-input text-input--underbar has_validation" 
       placeholder="Card name" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div>
    
      <div class="field-wrapper">
-      <input type="number" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
+      <input type="number" name="cc_number"  class="stic-rgba cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="16"  data-maxl="16" >
       </div>
 <!-- Fim da atualização -->
@@ -3523,12 +3521,12 @@
       </ons-list>
 <!-- Atualização Master Hub (Tradução) -->
      <div class="field-wrapper">
-      <input type="number" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
+      <input type="number" name="cvv"  class="stic-rgba cvv limit_char numeric_only text-input text-input--underbar has_validation" 
       placeholder="CVV" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" maxlength="4" data-maxl="4" >
       </div>
       
      <div class="field-wrapper">
-      <input type="text" name="billing_address"  class="billing_address text-input text-input--underbar has_validation" 
+      <input type="text" name="billing_address"  class="stic-rgba billing_address text-input text-input--underbar has_validation" 
       placeholder="Billing Address" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
       </div> 
 <!-- Fim da atualização -->
@@ -3708,28 +3706,28 @@
    
     <div class="wrapper">
       <div class="field-wrapper">
-      <input type="text" name="street"  class="street text-input text-input--underbar has_validation" 
+      <input type="text" name="street"  class="stic-rgba street text-input text-input--underbar has_validation" 
       placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
       </div>      
    </div>
    
    <div class="wrapper">
       <div class="field-wrapper">
-      <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
+      <input type="text" name="contact_phone"  class="stic-rgba mobile_inputs contact_phone text-input text-input--underbar has_validation" 
       placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
       </div>      
    </div>
    
    <div class="wrapper">
       <div class="field-wrapper">
-      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+      <input type="text" name="location_name"  class="stic-rgba location_name text-input text-input--underbar" 
       placeholder="Apartment suite, unit number, or company name"  >
       </div>      
    </div>
    
    <div class="wrapper">
       <div class="field-wrapper">
-      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+      <input type="text" name="delivery_instruction"  class="stic-rgba delivery_instruction text-input text-input--underbar" 
       placeholder="Delivery instructions" value="" >
       </div>      
    </div>
@@ -4026,7 +4024,7 @@
     <div class="wrapper">         
       
 	      <div class="field-wrapper">
-	      <input type="text" name="review"  class="review text-input text-input--underbar has_validation" 
+	      <input type="text" name="review"  class="stic-rgba review text-input text-input--underbar has_validation" 
 	      placeholder="Your reviews" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
 	      </div>
 	   
@@ -4061,7 +4059,7 @@
 <script type="text/ons-template" id="page_search.html">   
 <ons-page id="page_search" modifier="back">
   <div class="wrapper center box">
-    <h4 class="white normal trn center" data-trn-key="enter_your_location">Enter your location</h4>
+    <h4 class="f13 uppercase white trn center" data-trn-key="enter_your_location">Enter your location</h4>
     
     <section class="field-section search bborder" style="box-shadow: none;">
       <input id="ss" type="text" class="advance_search_fields text-input text-input--underbar trn" ng-model="text" placeholder="Street Address" data-trn-key="home_search_placeholder" 
@@ -4233,7 +4231,7 @@
      </div>
    
       <div class="field-wrapper">
-      <input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
+      <input type="text" id="cep" name="zipcode"  class="stic-rgba zipcode text-input text-input--underbar has_validation" 
       placeholder="Zipcode" value="" onblur="pesquisacep_catalogo(this.value);" >
       </div>
  
@@ -4241,12 +4239,12 @@
    	  <div class="field-wrapper">
 					<ons-row>
 						<ons-col width="75%">
-      <input type="text" id="street" name="street"  class="street text-input text-input--underbar has_validation" 
+      <input type="text" id="street" name="street"  class="stic-rgba street text-input text-input--underbar has_validation" 
       placeholder="Street" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 						</ons-col>
 						<ons-col width="5%"></ons-col>
 						<ons-col width="20%">
-      <input type="text" name="numero" id="numero"  class="numero text-input text-input--underbar has_validation" 
+      <input type="text" name="numero" id="numero"  class="stic-rgba numero text-input text-input--underbar has_validation" 
       placeholder="Numero" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
 						</ons-col>
 					</ons-row>
@@ -4272,12 +4270,12 @@
    </div>
 
       <div class="field-wrapper">
-      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+      <input type="text" name="delivery_instruction"  class="stic-rgba delivery_instruction text-input text-input--underbar" 
       placeholder="Delivery instructions" value="" >
       </div>      
    
       <div class="field-wrapper">
-      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+      <input type="text" name="location_name"  class="stic-rgba location_name text-input text-input--underbar" 
       placeholder="Location name" value="" >
       </div>
             
