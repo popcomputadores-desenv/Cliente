@@ -4872,11 +4872,22 @@ function setHomeCallback()
 
 function displayRestaurantResults(data , target_id)
 {	
+/*Atualização Master Hub (Empresas abertas e fechadas)*/
 	//dump(data);	
 	var htm='';	
-	
 	htm+='<ons-list class="stic-list">';
-       
+	
+	var abertas = new Array();
+	var fechadas = new Array();
+
+	for(var i=0; i<data.length; i++) {
+		if (data[i].is_open == 'Fechado')
+			fechadas.push(data[i]);
+		else
+			abertas.push(data[i]);
+	}
+	data = abertas.concat(fechadas);
+/*Fim da atualização*/
     $.each( data, function( key, val ) {     
     	
     	 //dump(val);

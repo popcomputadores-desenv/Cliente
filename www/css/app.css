@@ -380,7 +380,7 @@ color:#666;
 }
 .close{
 /*background:#F7F7F7;*/
-opacity: 0.3!important;
+opacity: 0.7!important;
 }
 
 .gear { 
@@ -1014,7 +1014,7 @@ background:#5cc45c;
 }
 
 .notification.close {
-background: rgba(255,255,255,0.5);
+background: #d4d4d4;
 width: 100%;
 height: 100%;
 top: 0;
