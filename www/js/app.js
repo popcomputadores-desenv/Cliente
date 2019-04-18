@@ -7915,7 +7915,7 @@ function onRequestSuccess()
 }
 
 function onRequestFailure(error){    
-	//alert("Accuracy request failed: error code="+error.code+"; error message="+error.message);    
+	alert("Falha na solicitação de precisão: cód. do erro = "+error.code+"; msg. do erro = "+error.message);    
     if(error.code == 4){
     	toastMsg( getTrans("You have choosen not to turn on location accuracy",'turn_off_location') );
     	getCurrentLocation();

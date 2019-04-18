@@ -49,6 +49,11 @@
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
       <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
     </gap:plugin>
+	
+    <gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm">    
+      	<variable name="APP_DOMAIN" value="app.masterhub.com.br" />
+		<variable name="PAGE_LINK_DOMAIN" value="link.masterhub.com.br" />	
+    </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" />         
     
