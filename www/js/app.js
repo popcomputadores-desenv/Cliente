@@ -59,7 +59,34 @@ $('.mask-phone').mask("(00) 0 0000-0000");
 $('.mask-cpf').mask("000.000.000-00");
 /*Fim da atualização*/
 function onDeviceReady() {    
-	    					
+	    				
+	var app = {
+  initialize: function() {
+    this.bindEvents();
+  },
+  bindEvents: function() {
+    document.addEventListener('deviceready', this.onDeviceReady, false);
+    document.addEventListener('resume', this.onDeviceResume, false);
+  },
+  onDeviceReady: function() {
+    app.handleBranch();
+  },
+  onDeviceResume: function() {
+    app.handleBranch();
+  },
+  handleBranch: function() {
+    // Branch initialization
+    Branch.initSession().then(function(data) {
+      if (data['+clicked_branch_link']) {
+        // read deep link data on click
+        alert('Deep Link Data: ' + JSON.stringify(data));
+      }
+    });
+  }
+};
+
+app.initialize();
+	
 	try {
 			
 	navigator.splashscreen.hide();
