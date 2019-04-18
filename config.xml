@@ -50,7 +50,7 @@
       <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
     </gap:plugin>
 	
-	<gap:plugin name="branch-cordova-sdk" spec="^3.1.6" />
+	<plugin name="branch-cordova-sdk" source="npm" spec="^3.1.6" />
 	  <branch-config>
 		<branch-key value="key_live_piOiWWOZSthFtQoKxn5zqljksEa9ALvU" />
 		<uri-scheme value="branchcordova" />
