@@ -50,11 +50,11 @@
       <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
     </gap:plugin>
 	
-    <gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" spec="^1.0.0" >    
+    <!-- <gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" spec="^1.0.0" >    
       	<variable name="APP_DOMAIN" value="masterhub.com.br" />
 		<variable name="PAGE_LINK_DOMAIN" value="link.masterhub.com.br" />
 		<variable name="FIREBASE_DYNAMIC_LINKS_VERSION" value="+" />
-    </gap:plugin>
+    </gap:plugin> -->
 	<gap:plugin name="cordova-plugin-firebase-analytics" source="npm" />
     <gap:plugin name="cordova-support-google-services" source="npm" spec="^1.2.0" /> 
     <gap:plugin name="cordova-plugin-firebase-messaging" source="npm" spec="^1.1.0">
