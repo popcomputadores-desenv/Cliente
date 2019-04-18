@@ -4,7 +4,7 @@
     xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "app.masterhub.cliente"
     version   = "2.8"
-	android-versionCode="20"
+	android-versionCode="21"
   	ios-CFBundleVersion="1">
     <!-- Mobile App 2.8 --> 
     <name>Master Hub®</name>
@@ -49,16 +49,8 @@
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
       <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
     </gap:plugin>
-	
-	<plugin name="branch-cordova-sdk" source="npm" spec="^3.1.6" />
-	  <branch-config>
-		<branch-key value="key_live_piOiWWOZSthFtQoKxn5zqljksEa9ALvU" />
-		<uri-scheme value="branchcordova" />
-		<link-domain value="mh.app.link" />
-		<ios-team-release value="" />
-	  </branch-config>
-	
-	<gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" />         
+    
+    <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" />         
     
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.4.3" source="git" />-->
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" />-->
