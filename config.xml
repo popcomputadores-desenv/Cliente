@@ -51,9 +51,12 @@
     </gap:plugin>
 	
     <gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm">    
-      	<variable name="APP_DOMAIN" value="app.masterhub.com.br" />
-		<variable name="PAGE_LINK_DOMAIN" value="link.masterhub.com.br" />	
+      	<variable name="APP_DOMAIN" value="masterhub.com.br" />
+		<variable name="PAGE_LINK_DOMAIN" value="link.masterhub.com.br" />
+		<variable name="FIREBASE_DYNAMIC_LINKS_VERSION" value="+" />
     </gap:plugin>
+	
+	<gap:plugin name="cordova-plugin-firebase-analytics" source="npm">
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" />         
     
