@@ -519,6 +519,11 @@ function DineinFields()
       htm+='<input type="text" name="dinein_number_of_guest"  class="numeric_only2 dinein_number_of_guest stic-rgba text-input text-input--underbar has_validation" placeholder="'+  getTrans("Number of guest",'number_of_guest') + '" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"   >';
    htm+='</div>';
 /*Fim da atualização*/
+   
+    htm+='<div class="field-wrapper">';
+      htm+='<input type="text" name="dinein_table_number"  class="dinein_table_number stic-rgba text-input text-input--underbar has_validation" placeholder="'+  getTrans("Table number",'table_number') + '" data-validation="required" data-validation-error-msg="this field is mandatory!"   >';
+   htm+='</div>';
+   
    htm+='<div class="field-wrapper">';
       htm+='<input type="text" name="dinein_special_instruction"  class="dinein_special_instruction text-input stic-rgba text-input--underbar has_validation" placeholder="'+ getTrans("Special Instructions",'special_instruction') + '" >';
    htm+='</div> ';
@@ -612,4 +617,71 @@ displayNotification = function(data){
 	});
 	htm+='</ons-list>';
 	createElement('notification_list',htm);	
+};
+
+smsOrderTemplate = function(){	
+	var html ='';
+	html+='<div class="wrapper">';
+       html+='<ons-row class="row">';
+           html+='<ons-col class="text-big concat-text trn" width="60%" data-trn-key="sms_verification">';
+           html+= getTrans('SMS verification','sms_verification');
+           html+='</ons-col>        ';   
+       html+='</ons-row>';
+       
+      html+='<p class="small-font-dim">'+ getTrans('This merchant has required SMS verification before you can place your order','require_order_sms');
+	  html+='<ons-button modifier="quiet" class="green-color small-font-dim" onclick="showEnterMobile()">';
+	  html+= getTrans('Click here','click_here');
+	  html+='</ons-button>' + getTrans('to receive your order sms code','receive_sms_code');
+	  html+='</p>';
+	  
+	  html+='<section class="field-section">';
+	     html+='<input name="sms_code" id="sms_code" value="" type="text" class="text-input text-input--underbar trn" ng-model="text" ';
+	     html+='placeholder="'+ getTrans('SMS code','sms_code') +'" data-trn-key="sms_code" maxlength="6"';
+	     html+='data-validation="required" data-validation-error-msg="this field is mandatory!"';
+	     html+='style="display: block; width: 100%">';
+      html+='</section>';
+       
+   html+='</div>';
+   createElement('sms_order_verification_wrap',html);
+};
+
+CategoryListSmall = function(data){
+	if (data.length<=0){
+		return;
+	}		
+	var html='';
+		
+	$.each( data  , function( key, val ) {
+		html+='<ons-list-item tappable onclick="loadmenu('+val.cat_id+','+val.merchant_id+');" >';		    
+		   html+='<ons-row align="center">';
+		     html+='<ons-col width="40px" align="center" ><img class="list-item__thumbnail" src="'+ val.photo_url +'"></ons-col>';
+		     html+='<ons-col >';
+		        html+='<span class="item_title">' + val.category_name + '</span>';
+		        html+='<span class="item_subtitle">'+ val.item_found +'</span>';
+		     html+='</ons-col>';
+		   html+='</ons-row>';
+		html+='</ons-list-item>';				
+	});	
+	
+	createElement('s_category_name_results',html);
+};
+
+ItemListSmall = function(data){
+	if (data.length<=0){
+		return;
+	}		
+	var html='';
+		
+	$.each( data  , function( key, val ) {
+		html+='<ons-list-item tappable onclick="loadItemDetails('+val.item_id+','+val.merchant_id+','+val.category_id+' );" >';		    
+		   html+='<ons-row align="center">';
+		     html+='<ons-col width="40px" align="center" ><img class="list-item__thumbnail" src="'+ val.photo_url +'"></ons-col>';
+		     html+='<ons-col >';
+		        html+='<span class="item_title">' + val.item_name + '</span>';
+		        html+='<span class="item_subtitle">'+ val.item_description +'</span>';
+		     html+='</ons-col>';
+		   html+='</ons-row>';
+		html+='</ons-list-item>';				
+	});	
+	createElement('s_item_results',html);
 };

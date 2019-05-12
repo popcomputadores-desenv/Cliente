@@ -3,10 +3,10 @@
     xmlns:gap = "http://phonegap.com/ns/1.0"
     xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "app.masterhub.cliente"
-    version   = "2.8"
-	android-versionCode="21"
+    version   = "3.0"
+	android-versionCode="22"
   	ios-CFBundleVersion="1">
-    <!-- Mobile App 2.8 --> 
+    <!-- Mobile App 3.0 --> 
     <name>Master Hub®</name>
     <description>
         Aplicativo - Módulo Clientes para interação com o sistema Master Hub, Um MUNDO na palma da sua mão!
@@ -41,20 +41,20 @@
 	<gap:plugin name="cordova-plugin-geolocation" source="npm" />
 	<gap:plugin name="cordova-plugin-network-information" source="npm" />
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
-	
-    <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.2.3"  />
+	    
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.1.2"  />
     
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
-      <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
+      <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
     </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" />         
-    
+        
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.4.3" source="git" />-->
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" />-->
-        
+    
     <gap:plugin name="cordova-plugin-media" source="npm" spec="5.0.2" />
     <gap:plugin name="cordova.plugins.diagnostic" source="npm" spec="4.0.0" />
     <gap:plugin name="cordova-plugin-buildinfo" source="npm" spec="2.0.1"  />
@@ -63,7 +63,7 @@
                
     <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="6.0.0"  >
 	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
-	  <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
+	  <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
 	</gap:plugin>
     
     <platform name="android">	
@@ -73,17 +73,17 @@
 		</config-file>               
     </platform>
  
-     <gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="3.2.0" >
+    <gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="3.2.0" >
 	  <variable name="APP_ID" value="247951822354120" />
 	  <variable name="APP_NAME" value="Master Hub" />
 	</gap:plugin>
-	
+		
 	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="5.0.4" >
        <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="" />
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
-	   <variable name="ANALYTICS_VERSION" value="11.6.2" /> 
+	   <variable name="ANALYTICS_VERSION" value="11.0.1" /> 
 	</plugin>
 	
 	    	
@@ -164,7 +164,9 @@
 	</platform>
 	
 	<platform name="ios">
-	
+		    
+	    <allow-intent href="tel:*" />
+	    
 	    <resource-file src="GoogleService-Info.plist" /> 	    
 	    <resource-file src="www/beep.wav" />
 	

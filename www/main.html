@@ -50,6 +50,17 @@
 
 <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCjgZJOBT5K3Ms5ns20Q3lbopscSoGt3aI"></script>
 
+<script src="lib/leaflet/leaflet.js"></script>
+<link href="lib/leaflet/leaflet.css" rel="stylesheet" type="text/css" />
+
+<script src="lib/leaflet/plugin/routing/leaflet-routing-machine.min.js"></script>
+<link href="lib/leaflet/plugin/routing/leaflet-routing-machine.css" rel="stylesheet" type="text/css" />
+
+<script src="lib/leaflet/plugin/geocoder/mapbox-gl-geocoder.min.js"></script>
+<link href="lib/leaflet/plugin/geocoder/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
+
+<script src="js/mapbox_wrapper.js?version=1.0.0"></script>
+
 <script src="lib/gmaps.js?version=1.0.0"></script>
 
 <script src="js/jquery.geocomplete.min.js"></script>
@@ -811,6 +822,11 @@
    <input type="hidden" name="selected_restaurant_name" id="selected_restaurant_name" class="selected_restaurant_name" >
    <input type="hidden" name="selected_restaurant_ratings" id="selected_restaurant_ratings" class="selected_restaurant_ratings" >
    
+   <div class="search_wrapper">
+     <input type="text" name="f"  class="f text-input text-input--underbar has_validation" 
+      placeholder="Search category" value="" onclick="showPage2('search_by_category','none');"  >
+   </div>
+   
 <!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
    <div style="height: 174px; background-color: rgba(0,0,0,0.42); margin-bottom: -153px;">
    <div class="estabelecimento-header"></div>
@@ -910,6 +926,11 @@
      </div> -->
      
    </ons-toolbar>
+      
+   <div class="search_wrapper">
+     <input type="text" name="f"  class="f text-input text-input--underbar has_validation" 
+      placeholder="Search item" value="" onclick="showPage2('search_by_item','none');"  >
+   </div>
 <!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
    <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
    <div class="estabelecimento-header2"></div>
@@ -1083,6 +1104,7 @@
    
    <input type="hidden" name="delivery_date" class="delivery_date">
    <input type="hidden" name="delivery_time" class="delivery_time">
+   <input type="hidden" name="global_merchant_id" class="global_merchant_id">
    
    <ons-list> 
     <ons-list-item modifier="chevron" onclick="showPopUpOptions('DateList')"  > 
@@ -1630,6 +1652,8 @@
       placeholder="Digite seu CPF" value="" >
       </div>      
 
+   <DIV id="sms_order_verification_wrap"></DIV>
+   
    <button class="button green-btn button--large marg20 trn" onclick="InitPlaceOrder();" data-trn-key="place_order">
 	Place Order
    </button>
@@ -3193,14 +3217,16 @@
      </div>
    </ons-toolbar>
    
+   
    <input type="hidden" name="change_cemara_action" class="change_cemara_action">
    <input type="hidden" name="change_cemara_lat" class="change_cemara_lat">
    <input type="hidden" name="change_cemara_lng" class="change_cemara_lng">
    <input type="hidden" name="map_type" id="map_type" class="map_type">
    
    <div class="map_search_field_wrap">      
-      <ons-icon icon="ion-ios-search" modifier="iconsearch" ></ons-icon>
+      <ons-icon icon="ion-ios-search" modifier="iconsearch" class="iconsearch" ></ons-icon>
       <input id="search_address_geo" value="" type="text" class="search_address_geo text-input text-input--underbar trn" ng-model="text" placeholder="Street Address,City,State" data-trn-key="home_search_placeholder" >
+      <div id="mapbox_geocoder"></div>
    </div>
    
    <div id="map_canvas_address" class="map_canvass"></div> 
@@ -3320,7 +3346,10 @@
       <div class="horizontal-line"></div>      
    </div>
    
-   <button class="button green-btn button--large trn track_driver marg20" onclick="showTrackingPage();" data-trn-key="track_driver">
+   <button class="button green-btn button--large trn track_driver"
+    onclick="showTrackingPage();" data-trn-key="track_driver"
+    style="position:fixed;bottom:0;"
+    >
 	Track Driver	
    </button>
 
@@ -4350,6 +4379,7 @@
    <div class="map_search_field_wrap">      
       <ons-icon icon="ion-ios-search" modifier="iconsearch" ></ons-icon>
       <input id="search_address_geo" value="" type="text" class="search_address_geo text-input text-input--underbar trn" ng-model="text" placeholder="Street Address,City,State" data-trn-key="home_search_placeholder" >
+      <div id="mapbox_geocoder"></div>
    </div>
    
    <div id="map_canvas_div" class="map_canvass"></div> 
@@ -4363,6 +4393,75 @@
 </ons-page>
 </script>
 
+
+<script type="text/ons-template" id="enter_mobile.html">    
+  <ons-dialog var="dialog_enter_mobile"  cancelable  style="height:170px;"  >
+  <ons-page id="page_enter_mobile" >  
+  
+   <ons-toolbar> 
+     <div class="center white trn" data-trn-key="enter_your_mobile">Enter your mobile</div>   	      	      
+   </ons-toolbar>
+	
+  <form id="frm-enter_mobile" class="frm-enter_mobile" method="post">   
+  <div class="wrapper">
+
+   <div class="field-wrapper">
+    <input type="text" name="contact_phone"  class="mobile_inputs contact_phone text-input text-input--underbar has_validation" 
+    placeholder="" value="" data-validation="required" data-validation-error-msg="this field is mandatory!"  >
+   </div>    
+   
+   <button class="button green-btn button--large trn" onclick="submitMobile();" data-trn-key="submit">
+	 Submit
+    </button>
+  
+  </div>
+  </form>
+  
+  </ons-page>
+  </ons-dialog> 
+</script>
+
+
+<script type="text/ons-template" id="search_by_category.html"> 
+<ons-page id="page_search_by_category" class="onsen-display">
+
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>                      
+     <div class="center white"><span class="trn" data-trn-key="browse_by_category">Browse by category</span></div>                       
+   </ons-toolbar>
+   
+	<div class="search_wrapper">	
+	<input type="text" id="s_category_name" name="s_category_name"  class="s_category_name text-input text-input--underbar has_validation" 
+	placeholder="Search category" value=""  >
+	</div>
+	
+	<ons-list id="s_category_name_results" modifier="list_small">
+    </ons-list>	    
+    <div class="no_results small-font-dim wrapper"></div>
+
+</ons-page>
+</script>
+
+
+<script type="text/ons-template" id="search_by_item.html"> 
+<ons-page id="page_search_by_item" class="onsen-display">
+
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>                      
+     <div class="center white"><span class="trn" data-trn-key="browse_by_item">Browse by item</span></div>                       
+   </ons-toolbar>
+   
+	<div class="search_wrapper">	
+	<input type="text" id="s_item_name" name="s_item_name"  class="s_item_name text-input text-input--underbar has_validation" 
+	placeholder="Search item" value=""  >
+	</div>
+	
+	<ons-list id="s_item_results" modifier="list_small">
+    </ons-list>	    
+    <div class="no_results small-font-dim wrapper"></div>
+
+</ons-page>
+</script>
 
 
 </body>
