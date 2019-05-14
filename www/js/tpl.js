@@ -377,7 +377,7 @@ function tplPaymentList(radio_name, radio_value, label, icons)
 	var htm='';	
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
-          htm+='<ons-col class="concat-text" width="60%">';
+          htm+='<ons-col class="concat-text" width="80%">';
              htm+='<label class="radio-button checkbox--list-item">';
                htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'">';
                htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
@@ -397,7 +397,7 @@ function tplPaymentListStatic(radio_value, label, icons)
 	var htm='';	
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
-          htm+='<ons-col class="concat-text" width="60%">';          
+          htm+='<ons-col class="concat-text" width="80%">';          
                htm+='<p class="description item-name concat-text"> '+label+'</p>';             
           htm+='</ons-col>';
           htm+='<ons-col class="text-right '+radio_value+'" >';
@@ -413,7 +413,7 @@ function tplPaymentProvider(radio_name, radio_value, label, icons)
 	var htm='';	
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
-          htm+='<ons-col class="concat-text" width="60%">';
+          htm+='<ons-col class="concat-text" width="80%">';
              htm+='<label class="radio-button checkbox--list-item">';
                htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'">';
                htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
