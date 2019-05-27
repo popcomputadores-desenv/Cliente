@@ -13273,6 +13273,10 @@ processAjax = function(action, params){
 	//dump(ajax_url+"/"+action+"?"+params);
 	var ajax_uri = ajax_url+"/"+action + "/?json=1&lang="+ getStorage("default_lang");
 	
+	if(!empty(krms_config.APIHasKey)){
+        ajax_uri+="&api_key="+urlencode(krms_config.APIHasKey);
+    }	
+	
 	ajax_process = $.ajax({
 	  url: ajax_uri,
 	  method: "POST" ,
