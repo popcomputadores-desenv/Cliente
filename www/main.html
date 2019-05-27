@@ -638,9 +638,9 @@
 
    <div class="results-header arrow_box"><span class="result-msg uppercase" style="font-weight: normal;" data-trn-key="processing">processing</span></div>
 
-    <div class="stic-search-div">
-       <div class="akimichi-search">
-        <input type="text" name="restaurant_name"  class="stic-rgba w100 filter_restaurant_name restaurant_name text-input text-input--underbar has_validation" 
+    <div class="plr10">
+       <div class="stic-new-search home">
+        <input type="text" name="restaurant_name"  class="filter_restaurant_name restaurant_name text-input text-input--underbar has_validation" 
         placeholder="Busque pelo nome da empresa" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
         <ons-icon class="stic-icon-search" size="1.333em" icon="ion-android-search" onclick="sticSearch();"></ons-icon> 
        </div>
@@ -648,8 +648,6 @@
           <span class="uppercase crimson trn" data-trn-key="clear_search" onclick="sticSearch();">Limpar</span>
        </div>
     </div>
-
-    <div id="category-carousel"></div>
           
    <div style="position:relative; margin-top: 9px;">
    
@@ -891,6 +889,12 @@
        </ons-row>
      </ons-list-item>
    </ons-list>
+
+   <div class="stic-new-search">
+     <input type="text" name="f"  class="f text-input text-input--underbar has_validation" 
+      placeholder="Search category" value="" onclick="showPage2('search_by_category','simpleslide');"  >
+      <ons-icon size="1.333em" icon="ion-android-search" onclick="showPage2('search_by_category','simpleslide');"></ons-icon> 
+   </div>
      
    <div class="cartposition">
       <button class="fixedcart" onclick="showCart(this);">
@@ -927,9 +931,10 @@
      
    </ons-toolbar>
       
-   <div class="search_wrapper">
+   <div class="stic-new-search">
      <input type="text" name="f"  class="f text-input text-input--underbar has_validation" 
-      placeholder="Search item" value="" onclick="showPage2('search_by_item','none');"  >
+      placeholder="Search item" value="" onclick="showPage2('search_by_item','simpleslide');"  >
+      <ons-icon size="1.333em" icon="ion-android-search" onclick="showPage2('search_by_item','simpleslide');"></ons-icon> 
    </div>
 <!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
    <div style="height: 123px; background-color: rgba(0,0,0,0.42); margin-bottom: -123px;">
@@ -1988,9 +1993,9 @@
    
    <div class="results-header arrow_box"><span class="result-msg uppercase" style="font-weight: normal;" data-trn-key="processing">processing</span></div>
 
-   <div class="stic-search-div">
-      <div class="field-wrapper">
-      <input id="ss_restaurant_name" value="" type="text" class="w100 stic-restaurant-search text-input text-input--underbar trn" ng-model="text" placeholder="Busque pelo nome da empresa" data-trn-key="enter_restaurant_name" >
+   <div class="plr10">
+      <div class="stic-new-search">
+      <input id="ss_restaurant_name" value="" type="text" class="stic-restaurant-search text-input text-input--underbar trn" ng-model="text" placeholder="Enter Restaurant Name" data-trn-key="enter_restaurant_name" >
       <ons-icon class="stic-icon-search" style="right:12px;" size="1.333em" icon="ion-android-search" onclick="searchByName();"></ons-icon> 
       </div>
    </div>
@@ -3346,7 +3351,7 @@
       <div class="horizontal-line"></div>      
    </div>
    
-   <button class="button green-btn button--large trn track_driver"
+   <button class="button green-btn button--large trn track_driver marg20"
     onclick="showTrackingPage();" data-trn-key="track_driver"
     style="position:fixed;bottom:0;"
     >
@@ -4111,10 +4116,10 @@
 <script type="text/ons-template" id="page_search_byname.html">   
 <ons-page id="page_search_byname" modifier="back">
   <div class="wrapper center box">
-    <h4 class="trn center normal white" data-trn-key="find_by_name">Find restaurant by name</h4>
+    <h4 class="f13 uppercase white trn center" data-trn-key="find_by_name">Find restaurant by name</h4>
     
     <section class="field-section bborder search">
-     <input id="ss_restaurant_name" value="" type="text" class="text-input text-input--underbar center trn" ng-model="text" placeholder="Busque pelo nome da empresa" data-trn-key="enter_restaurant_name" 
+     <input id="ss_restaurant_name" value="" type="text" class="text-input text-input--underbar center trn" ng-model="text" placeholder="Enter Restaurant Name" data-trn-key="enter_restaurant_name" 
      style="display: block; width: 100%">
     </section>
     
@@ -4129,7 +4134,7 @@
 <script type="text/ons-template" id="page_search_bystreet.html">   
 <ons-page id="page_search_bystreet" modifier="back">
   <div class="wrapper center box">
-    <h4 class="white normal trn center" data-trn-key="find_by_street">Find by street name</h4>
+    <h4 class="f13 uppercase white trn center" data-trn-key="find_by_street">Find by street name</h4>
     
     <section class="field-section bborder search">
      <input id="ss_street" value="" type="text" class="text-input text-input--underbar center trn" ng-model="text" placeholder="Enter Street Name" data-trn-key="enter_street_name" 
@@ -4147,7 +4152,7 @@
 <script type="text/ons-template" id="page_search_bycuisine.html">   
 <ons-page id="page_search_bycuisine" modifier="back">
   <div class="wrapper center box">
-    <h4 class="white normal trn center" data-trn-key="find_by_cuisine">Find restaurant by cuisine</h4>
+    <h4 class="f13 uppercase white trn center" data-trn-key="find_by_cuisine">Find restaurant by cuisine</h4>
     
     <section class="field-section bborder search">
      <input id="ss_cuisine" value="" type="text" class="text-input text-input--underbar center trn" ng-model="text" placeholder="Enter Cuisine Name" data-trn-key="enter_cuisine" 
@@ -4165,7 +4170,7 @@
 <script type="text/ons-template" id="page_search_byfood.html">   
 <ons-page id="page_search_byfood" modifier="back">
   <div class="wrapper center box">
-    <h4 class="white normal trn center" data-trn-key="find_by_food">Find restaurant by food</h4>
+    <h4 class="f13 uppercase white trn center" data-trn-key="find_by_food">Find restaurant by food</h4>
     
     <section class="field-section bborder search">
      <input id="ss_item_name" value="" type="text" class="text-input text-input--underbar center trn" ng-model="text" placeholder="Enter Food Name" data-trn-key="enter_food" 
@@ -4430,14 +4435,15 @@
      <div class="center white"><span class="trn" data-trn-key="browse_by_category">Browse by category</span></div>                       
    </ons-toolbar>
    
-	<div class="search_wrapper">	
-	<input type="text" id="s_category_name" name="s_category_name"  class="s_category_name text-input text-input--underbar has_validation" 
+	<div class="stic-new-search">	
+	 <input type="text" id="s_category_name" name="s_category_name"  class="s_category_name text-input text-input--underbar has_validation" 
 	placeholder="Search category" value=""  >
+    <ons-icon size="1.333em" icon="ion-android-search"></ons-icon>
 	</div>
 	
-	<ons-list id="s_category_name_results" modifier="list_small">
-    </ons-list>	    
-    <div class="no_results small-font-dim wrapper"></div>
+	<ons-list class="stic-list" id="s_category_name_results" modifier="list_small"></ons-list>	    
+  
+  <div class="no_results small-font-dim wrapper"></div>
 
 </ons-page>
 </script>
@@ -4451,14 +4457,15 @@
      <div class="center white"><span class="trn" data-trn-key="browse_by_item">Browse by item</span></div>                       
    </ons-toolbar>
    
-	<div class="search_wrapper">	
-	<input type="text" id="s_item_name" name="s_item_name"  class="s_item_name text-input text-input--underbar has_validation" 
-	placeholder="Search item" value=""  >
+	<div class="stic-new-search">	
+    <input type="text" id="s_item_name" name="s_item_name"  class="s_item_name text-input text-input--underbar has_validation" 
+    placeholder="Search item" value=""  >
+    <ons-icon size="1.333em" icon="ion-android-search"></ons-icon>
 	</div>
 	
-	<ons-list id="s_item_results" modifier="list_small">
-    </ons-list>	    
-    <div class="no_results small-font-dim wrapper"></div>
+	<ons-list class="stic-list" id="s_item_results" modifier="list_small"></ons-list>
+
+  <div class="no_results small-font-dim wrapper"></div>
 
 </ons-page>
 </script>

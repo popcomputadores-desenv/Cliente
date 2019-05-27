@@ -755,7 +755,13 @@ background: transparent;
 #page-reviews .page__background,
 #menucategory-page .page__background,
 #page-cart .page__background,
-#page-menubycategoryitem .page__background {
+#page-menubycategoryitem .page__background,
+#page_search_by_item .page__background,
+#page_search_by_category .page__background {
+background: #f5f5f5;
+}
+
+.grey-bg {
 background: #f5f5f5;
 }
 
@@ -1224,6 +1230,7 @@ border:none;
 }
 .small-input{
 width:60px;
+vertical-align: middle;
 }
 
 #cart-item .line-separator{
@@ -2474,8 +2481,7 @@ color: #333;
 
 /*INDEX*/
 
-.stic-search-div {
-background: #fff;
+.plr10 {
 padding: 0px 10px;
 }
 
@@ -2600,6 +2606,10 @@ transition: all .25s linear;
 box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.4);
 }
 
+.stic-list-item:first-child {
+margin-top: 5px;
+}
+
 .stic-list-item:last-child {
 margin-bottom: 10px !important;
 }
@@ -2660,7 +2670,7 @@ top: 35px;
 position: absolute;
 bottom: 10px;
 right: 10px;
-width: 65px;
+width: auto;
 text-transform: uppercase;
 font-size: 7px;
 letter-spacing: 1px;
@@ -2719,6 +2729,43 @@ text-align: center;
 padding: 2px 10px;
 border-radius: 3px;
 width: max-content;
+}
+
+.stic-new-search {
+margin: 10px 10px 5px;
+}
+
+.stic-new-search input {
+background-color: #fff;
+width: 95%;
+padding: 0 15px;
+border-radius: 5px !important;
+box-shadow: 0px 2px 5px rgba(0,0,0,0.09);
+height: 40px;
+}
+
+.stic-new-search ons-icon {
+position: absolute;
+background: crimson;
+color: white;
+transform: rotate(90deg);
+height: 40px;
+width: 40px;
+right: 10px;
+padding: 0px;
+line-height: 40px;
+text-align: center;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+}
+
+.stic-new-search.home {
+width: 81%;
+display: inline-block;
+}
+
+.stic-new-search.home ons-icon {
+right: 20.5%;
 }
 
 #menucategory-page ons-toolbar + .page__background + .page__content {
@@ -2835,24 +2882,22 @@ vertical-align:middle;
 
 .clear-search {
 display: inline-block;
-height: 47px;
+height: 60px;
 width: 17%;
 text-align: center;
 float: right;
-line-height: 11px !important;
+line-height: 14px;
 }
 
 .clear-search span {
 position: relative;
-top: 25%;
+top: 20%;
 font-weight: normal !important;
 font-size: 10px !important;
 }
 
-.akimichi-search {
-width: 81%;
-display: inline-block;
-padding: 10px 0;
+.plr10 .stic-new-search {
+margin: 10px 0;
 }
 
 .stic-offer {
@@ -2970,4 +3015,6 @@ span.highlight {
 }
 .no_results{
 margin-top: 0;
+text-align: center;
+color:#777;
 }

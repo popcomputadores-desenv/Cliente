@@ -1,16 +1,9 @@
-/**
-KMRS MOBILE 
-Version 3.0
-*/
+/** KMRS MOBILE Version 3.0 **/
 
-/**
-AKIMICHI THEME
-Version 2.8 - UPDATED
-**/
+/** AKIMICHI THEME Version 3.0 **/
 
-/**
-Default variable declarations 
-*/
+/** Default variable declarations **/
+
 var ajax_url= krms_config.ApiUrl ;
 var dialog_title_default= krms_config.DialogDefaultTitle;
 var upload_url= krms_config.UploadUrl;
@@ -5413,7 +5406,7 @@ actions='"loadItemDetails('+ "'"+val.item_id+"'," +  "'"+data.merchant_id+"'," +
 		var upload_url = krms_config.UploadUrl;
 		dump("upload_url=>"+upload_url); 
          	
-         	if (val.photo!=""){
+         	if (val.photo!==null){
              html+='<ons-col class="col-image" width="33%">';
                 html+='<div class="logo-wrap3" >';
                   html+='<div class="img_loaded" >';
@@ -11619,14 +11612,14 @@ function getCategory(index)
 		   	   	   	  });
 		   	   	   } else {
 		   	   	   	  $.each( data.details.data, function( key, val ) {
-			   	   	   html+= '<ons-list-item onclick="loadmenu('+val.cat_id+','+val.merchant_id+');"  >';			   	   	   
+			   	   	   html+= '<ons-list-item class="stic-list-item bold" style="padding: 0 10px;" onclick="loadmenu('+val.cat_id+','+val.merchant_id+');"  >';			   	   	   
 				   	   	   html+= val.category_name;	   	   	   			   	   	   
 			   	   	   html+= '</ons-list-item>';
 			   	   });	   	   		   	   
 		   	   	   }
 		   	   } else {		   	       	  
 			   	   $.each( data.details, function( key, val ) {
-			   	   	   html+= '<ons-list-item onclick="loadmenu('+val.cat_id+','+val.merchant_id+');"  >';			   	   	   
+			   	   	   html+= '<ons-list-item class="stic-list-item bold" style="padding: 0 10px;" onclick="loadmenu('+val.cat_id+','+val.merchant_id+');"  >';			   	   	   
 				   	   	   html+= val.category_name;	   	   	   			   	   	   
 			   	   	   html+= '</ons-list-item>';
 			   	   });	   	   		   	   
@@ -12079,10 +12072,12 @@ function searchByName()
 	if(!empty(getStorage("search_address"))){
 	    search_address = getStorage("search_address");
 	} else  search_address = '';
+/*Atualização Master Hub*/
 	params="&city_id="+ global_city_id;
 	params+="&area_id="+ global_area_id;
 	global_filter_params = "&address=" + search_address +  "&stype=1&sname="+ ss_restaurant_name + params ;
 	callAjax("initSearch","address="+ search_address + "&search_mode=" + search_mode + "&sname="+ ss_restaurant_name + "&stype=1"+ params );			   
+/*Fim da atualização*/
 }
 
 function searchByStreet()
