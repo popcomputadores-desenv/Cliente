@@ -120,7 +120,7 @@ function sugestoes_Resultado(data)
 {		
 		var htm='';
 	
-	htm+='<div><span style="border-bottom: 2px dotted #000; padding-bottom: 5px;" class="trn" data-trn-key="escolha_uma_ategoria">VOTE NO SEU ESTABELECIMENTO FAVORITO</span></div>';
+	htm+='<div><span style="border-bottom: 2px dotted #000; padding-bottom: 5px; font-size: 12px;" class="trn" data-trn-key="escolha_uma_ategoria">VOTE NO SEU ESTABELECIMENTO FAVORITO</span></div>';
 	htm+='<div class="wrapper center" style="margin: 15px auto; white-space: nowrap; overflow:auto;">';
 	
 	$.each( data.sugestoes, function( key, val ) {

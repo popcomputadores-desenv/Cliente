@@ -50,6 +50,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 /*Atualização Master Hub (Máscaras de Campos)*/
 $('.mask-phone').mask("(00) 0 0000-0000");
 $('.mask-cpf').mask("000.000.000-00");
+$('.mask-cnpj').mask("00.000.000/0000-00");
 /*Fim da atualização*/
 function onDeviceReady() {    
 	    					
@@ -491,6 +492,7 @@ document.addEventListener("pageinit", function(e) {
 		break;
 		
 		case "page-merchantinfo":				
+		case "page-taxasdeentrega":	
 		case "page-change-address":				
 		  translatePage();
 		  break;
@@ -526,7 +528,7 @@ document.addEventListener("pageinit", function(e) {
 	     translatePage();
 	     $(".order_change").attr("placeholder", getTrans('change? For how much?','order_change') );	     
 /*Atualização Master Hub (Campo CPF na Nota)*/
-	     $(".cpf_nota").attr("placeholder", getTrans('CPF na Nota','cpf_nota') );
+	     $(".cpf_nota").attr("placeholder", getTrans('CPF na Nota? Digite seu CPF','cpf_nota') );
 /*Fim da atualização*/
 /* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
 	$("#page-paymentoption .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+ getStorage("merchant_bg") +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
@@ -708,7 +710,82 @@ var params = "client_token="+ getStorage("client_token");
 		callAjax("Pagina","id="+slide);
 			break;
 /* Fim da atualização */
+		case "searchcategorias-page":	
+
+		// Destaques da semana vindo do Admin
+		var codigo_destaque = getStorage("codigo_destaque");
+		createElement('codigo-destaque',codigo_destaque);
+			
+		// Cabeçalho das Buscas vindo do Admin
+		var codigo_cabecalho_buscas = getStorage("codigo_cabecalho_buscas");
+		createElement('codigo-cabecalho-buscas',codigo_cabecalho_buscas);
+			
+		search_mode = getSearchMode();
+		if ( search_mode=="postcode"){
+			$("#search-text").html( '' );
+			switch (search_type)
+			{
+				case "1":				
+			var endereco='<ons-toolbar-button  onclick="">'+global_area_name+'</ons-toolbar-button>';
+				createElement('codigo-cabecalho-endereco', endereco);					
+				break;
+				
+				case "2":
+			var endereco='<ons-toolbar-button  onclick="">'+global_city_name+' -  '+global_state_name+'</ons-toolbar-button>';
+				createElement('codigo-cabecalho-endereco', endereco);		
+				break;
+				
+				case "3":
+				break;
+				
+				default:
+				break;
+			}			
+		} else {
+			$("#search-text").html( getStorage("search_address") );
+		}
+						
+		break;	
+			
+		case "carregarcategorias-page":	
 		
+		var restaurant_name='';
+		var seguimento=getStorage("seguimentoGlobal");
+			
+		$("#search-text2").html( getStorage("search_address") );
+		callAjax("search","address="+ getStorage("search_address")+"&cuisine_type="+seguimento+
+		"&restaurant_name="+ restaurant_name);
+			
+		switch (search_type)
+			{
+				case "1":				
+			var endereco='<ons-toolbar-button  onclick="">'+global_city_name+' - '+global_area_name+'</ons-toolbar-button>';
+				createElement('codigo-cabecalho-endereco', endereco);
+					
+				break;
+				
+				case "2":
+			var endereco='<ons-toolbar-button  onclick="">'+global_city_name+' -  '+global_state_name+'</ons-toolbar-button>';
+				createElement('codigo-cabecalho-endereco', endereco);		
+				break;
+				
+				case "3":
+				break;
+				
+				default:
+				break;
+			}			
+
+			
+		// Destaques da semana vindo do Admin
+		var codigo_destaque = getStorage("codigo_destaque");
+		createElement('codigo-destaque',codigo_destaque);
+			
+		// Cabeçalho das Buscas vindo do Admin
+		var codigo_cabecalho_buscas = getStorage("codigo_cabecalho_buscas");
+		createElement('codigo-cabecalho-buscas',codigo_cabecalho_buscas);
+		
+		break;
 		case "page-home":
 		    
 		    setNotificationDisplay();
@@ -718,7 +795,7 @@ var params = "client_token="+ getStorage("client_token");
 			$(".catalogo_endereco").hide();
 			$(".search_by_location_btn").show();
 			//$(".search_by_address").hide();
-			setTimeout('carregaEndereco();', 2000);
+			setTimeout('carregaEndereco();', 800);
 		} 
 /*Fim da atualização*/
 /*Atualização Master Hub (Slide Inicial)*/
@@ -1098,6 +1175,22 @@ var params = "client_token="+ getStorage("client_token");
 		   {
 		   	   case "1":
 		   	   $(".location_state").hide();
+		   if ( !empty(global_state_id)){
+		   	   $(".location_state").html( global_state_name );		   	   		   	   
+		   	   $(".state_id").val( global_state_id );
+		   	   $(".state").val( global_state_name );
+				}
+				if ( !empty(global_city_id)){
+					$(".city_id").val( global_city_id );
+					$(".city").val( global_city_name );
+					$(".location_city").html( global_city_name );
+				}
+				if ( !empty(global_area_id)){
+					$(".area_id").val( global_area_id );
+					$(".area_name").val( global_area_name );
+					$(".location_area").html( global_area_name );
+		   }
+				   
 		   	   break;
 		   	   
 		   	   case "2":
@@ -1781,7 +1874,7 @@ function callAjax(action,params)
 		type: 'post',                  
 		async: false,
 		dataType: 'jsonp',
-		timeout: 30000,
+		timeout: 20000,
 		crossDomain: true,
 	 beforeSend: function() {
 		if(ajax_request != null) {			 	
@@ -1796,7 +1889,7 @@ function callAjax(action,params)
 				hideAllModal();				
 				ajax_request.abort();
 	            toastMsg( getTrans('Request taking lot of time. Please try again','request_taking_lot_time')  );	            
-	        }, 30000);
+	        }, 20000);
 			  
 			switch(action)
 			{
@@ -2078,7 +2171,8 @@ search_type = getSearchType();
 				$(".selected_restaurant_name").val( data.details.restaurant_name );
 				$(".selected_restaurant_ratings").val( data.details.ratings.ratings );
 				
-				
+				dump(data.details.tempo_de_entrega);
+				menu_Resultado(data.details.tempo_de_entrega);			
 				break;
 				
 /* Atualização Master Hub (Programa de Fidelidade) */
@@ -2202,11 +2296,11 @@ if (data.details.programa_fidelidade!=false){
 				}			
 				
 				/*FILL ESTIMATION TIME*/				
-				/*if ( data.details.transaction_type=="delivery"){
+				if ( data.details.transaction_type=="delivery"){
 					if (!empty(data.details.estimation_delivery_time)){					    
 					   $(".delivery_time").val( data.details.estimation_delivery_time );
 					}				
-				}*/
+				}
 				
 				if(!empty(data.details.checkout_button)){
 					$(".btn_checkout").html( data.details.checkout_button );
@@ -2828,11 +2922,12 @@ if (data.details.programa_fidelidade!=false){
 /*Atualização Master Hub (Resumo do Endereço de entrega e Valores)*/
 					      	  //$(".receipt-msg").html(data.msg); 
                                //by delivery recibo
+                              pedidostr="PEDIDO ENVIADO";
                               var totalp = 'Total: '+data.details.payment_details.total_w_tax_pretty;
                               $(".cod-thanks").html(getStorage("merchant_name"));
                               $(".total-amount").html('Total: '+ data.details.payment_details.total_w_tax_pretty);
-                              //$(".receipt-pedido").html(pedidostr); 
-					      	  $(".receipt-msg").html(data.msg); 
+                              $(".receipt-pedido").html(pedidostr); 
+			      $(".receipt-msg").html(data.msg); 
                               $htmlicoentrega='';
                               $htmltentrega='';
                               $htmendentrega='';
@@ -2851,11 +2946,19 @@ if (data.details.programa_fidelidade!=false){
                                   
                                   $enderecoico='<div class="myfa-home fa-home fa"></div>'
                                  
-                                 }else{//se for busca
+                             } else if(getStorage("transaction_type")=='pickup'){ //se for buscar								 
                                 $enderecoico='<div icon="fa-institution" class="myfa-inst fa-intitution fa"></div>'     
                                 $enderecoentrega =getStorage('merchant_address');
                                  $htmlicoentrega+='<div class="myfa-male fa-male fa"></div>';
                                  $htmlentrega="Buscar no Restaurante";
+                                 $htmlendentra="";
+                                 }
+								 
+                              else if(getStorage("transaction_type")=='dinein'){ //se for consumir								 
+                                $enderecoico='<div icon="fa-institution" class="myfa-inst fa-intitution fa"></div>'     
+                                $enderecoentrega =getStorage('merchant_address');
+                                 $htmlicoentrega+='<div class="myfa-male fa-male fa"></div>';
+                                 $htmlentrega="Consumir no Local";
                                  $htmlendentra="";
                                  }
                                  
@@ -2880,7 +2983,7 @@ if (data.details.programa_fidelidade!=false){
                                 dump("pagou cartao ".$paym);
                                 $pgtoico='<ons-icon icon="fa-credit-card" class="myfa-creditcard fa-credit-card fa fa-lg"></ons-icon>';
                                 $pgtotrans="Pagar com Cartão";
-                                $transtr+=data.details.payment_details.payment_provider_name;
+                                //$transtr+=data.details.payment_details.payment_provider_name;
                                 
             
                             }
@@ -3057,6 +3160,10 @@ if (data.details.programa_fidelidade!=false){
 				
 				case "getMerchantInfo":
 				   showMerchantInfo(data.details)
+				   break;
+					
+				case "getTaxasdeEntrega":
+				   showTaxasdeEntrega(data.details)
 				   break;
 								
 				case "bookTable":
@@ -4750,10 +4857,14 @@ if (data.details.programa_fidelidade!=false){
 				  onsenAlert(data.msg);	
 				  break;				
 			}
-			
-			/* end ok conditions*/
-		} else {
-			/*failed condition*/
+/* Atualização (Quando da sessão de login expirada na tela principal do app, ele manda para a tela do login) */			
+		} else if (data.code==3){
+			      	 menu.setMainPage('prelogin2.html', {
+                 animation: 'slide'
+                });            
+        } else {
+            /*failed condition*/
+/* Fim da atualização */			
 			
 			dump('failed condition');
 			switch(action)
@@ -5653,7 +5764,41 @@ jQuery(document).ready(function() {
 	$(".pac-item span",this).addClass("needsclick");
 	}
 	}, ".pac-container");
-	
+    
+    $( document ).on( "click", ".prod-qtd-mais", function(){ 
+        var $button = $(this);
+        var oldValue = $button.parent().find("input").val();
+        $button.parent().parent().find("input").prop("checked",true);
+
+            var newVal = parseFloat(oldValue) + 1;
+	   $button.parent().find("input").val(newVal);
+           setCartValue();
+  });
+$( document ).on( "click", ".prod-qtd-menos", function(){
+          
+        var $button = $(this);
+        var oldValue = $button.parent().find("input").val();
+
+        
+   // Don't allow decrementing below zero
+        if (oldValue > 0) {
+            var newVal = parseFloat(oldValue) - 1;
+
+        } else {
+            newVal = 0;
+			
+        }
+    $button.parent().find("input").val(newVal);
+
+    if(newVal==0){
+    	$button.parent().parent().find("input").prop("checked",false);
+    }
+           setCartValue();
+  
+
+  
+	});
+
 	$( document ).on( "click", ".price", function() {
 		setCartValue();
 	});
@@ -6262,12 +6407,14 @@ function displayCart(data)
        setStorage("cart_tax", data.cart.tax.tax );
     }
     	
-	/*if (!empty(data.delivery_date)){
+/* Atualização Master Hub (Preenche a data e hora de entrega corretamente) */
+	if (!empty(data.delivery_date)){
 	    $(".delivery_date").val( data.delivery_date);
-	}
+	}		
 	if (!empty(data.estimation_delivery_date)){
 	    $(".delivery_date").val( data.estimation_delivery_date);
-	}*/	
+	}		
+/*Fim da atualização*/
 /*Atualização Master Hub (Resumo carrinho finalização)*/
     if(!empty(data.cart.delivery_charges)){
 		setStorage("cart_delivery_charges_final", data.cart.delivery_charges.amount_pretty);
@@ -6454,8 +6601,10 @@ function displayCart(data)
 	}
 	dump("transaction_type=>"+transaction_type);
 	setStorage('transaction_type',transaction_type);
-		
-	htm+='<ons-list-header class="trn" data-trn-key="delivery_options">Delivery Options</ons-list-header>';
+	
+	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Cupom/Plano Fidelidade/Pontos</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	
+	htm+='<ons-list-header style="font-size: 15px;" class="trn list-header" data-trn-key="delivery_options">Delivery Options</ons-list-header>';
 	/*htm+=privateRowWithRadio('transaction_type','delivery','Delivery');
 	htm+=privateRowWithRadio('transaction_type','pickup','Pickup');*/		
 	
@@ -6559,6 +6708,17 @@ function displayCart(data)
 		$(".pts_earn_label").hide();
 		removeStorage("earned_points");
 	}
+	
+		$( document ).on( "click", "#btnadditens", function() { 
+           //sNavigator.resetToPage('menucategory.html');
+		 // sNavigator.routes.pop();
+           // sNavigator.popPage();
+            dump("paginas=>"+sNavigator.getPages());
+            //loadRestaurantCategory(event,data.merchant_info.merchant_id);
+            sNavigator.getPages()[1].destroy();
+            sNavigator.popPage({animation: 'slide'});
+            
+		});	
 	
 	initMobileScroller();
 	translatePage();
@@ -7023,6 +7183,26 @@ function showMerchantInfo(data)
 	
 	
 	$("#book-table").hide();
+	
+	initRating();	
+}
+
+function showTaxasdeEntrega(data)
+{
+	dump(data);
+	/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
+	$("#page-taxasdeentrega .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.merchant_info.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#page-taxasdeentrega .estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.merchant_info.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	/* Fim da Atualização */
+	
+	if (!empty(data.taxadeentrega)){
+		var p='';
+		p+='<ons-list-header class="center trn" data-trn-key="taxas_entregas">Taxas das Entregas</ons-list-header>';
+		 $.each( $(data.taxadeentrega) , function( key, val ) { 			
+		   p+=tplTaxasdeEntrega(val.area_id, val.area_name, val.city_name, val.fee);
+		});
+		createElement('merchant-entregas', p );
+	}
 	
 	initRating();	
 }
@@ -9033,6 +9213,24 @@ function loadPageMerchantInfo()
     }
 }
 
+function carregaTaxasdeEntrega()
+{
+	var options = {
+      animation: 'none',
+      onTransitionEnd: function() { 	 	      	  
+      	  displayMerchantLogo2( 
+	      	     getStorage("merchant_logo") ,
+	      	     '' ,
+	      	     '' ,
+	      	     'page-taxasdeentrega'
+	      );	  		      
+	      callAjax("getTaxasdeEntrega","merchant_id="+ getStorage('merchant_id'));  		      
+      } 
+    };  
+    sNavigator.pushPage("taxasdeentrega.html", options);	   
+    //merhantPopOverMenu.hide(); 
+}
+
 function loadBookingForm1()
 {
 	if (typeof merhantPopOverMenu === "undefined" || merhantPopOverMenu==null || merhantPopOverMenu=="" ) {	     
@@ -9500,7 +9698,6 @@ function showMapAddress(map_address_action)
 
 function checkGPS_AddressMap()
 {
-	//puta
 	
 	$('#map_canvas_address').css('height', $(window).height() - $('#map_canvas_address').offset().top);
 	
@@ -11251,7 +11448,7 @@ var lazyLoadSearch = {
     return $element[0];    
   },
   calculateItemHeight: function(index) {  	
-    return 1100;
+    return 25;
   },
   countItems: function() {  	
     return getStorage("search_total");
@@ -11362,7 +11559,7 @@ var lazyBrowseMerchant = {
     return $element[0];    
   },
   calculateItemHeight: function(index) {  	
-    return 1200;
+    return 25;
   },
   countItems: function() {  	
     return getStorage("browse_total");

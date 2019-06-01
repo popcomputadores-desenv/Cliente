@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
 <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
 <link rel="stylesheet" href="lib/raty/jquery.raty.css">
+<link rel="stylesheet" href="css/feather/style.css">
 <!-- Atualização Master Hub (Gráfico em Circulo e barra) -->
 	<link rel="stylesheet" href="css/progresscircle.css">
 	<link rel="stylesheet" href="css/cssprogress.css">
@@ -72,6 +73,7 @@
 
 <link href="lib/intel/build/css/intlTelInput.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="lib/intel/build/js/intlTelInput.js"></script>
+<script src="lib/mobiscroll/js/i18n/mobiscroll.i18n.pt-BR.js"></script>
 <!-- Atualização Master Hub (Personalizações) -->
 <script type="text/javascript" src="js/sugestoes.js?ver=1.0"></script>
 <script type="text/javascript" src="js/fidelidade.js?ver=1.0"></script>	
@@ -550,7 +552,7 @@
    
     <div class="left"><ons-back-button></ons-back-button></div>
      
-     <div class="center">Sugerir Estabelecimentos</div>
+     <div class="center white">Sugerir Estabelecimentos</div>
      
       <div class="right">         
 		 <ons-toolbar-button onclick="carregarPagina('10,11,12,13,14,15,16,17,18,19');" ><ons-icon icon="ion-ios-help-outline"></ons-toolbar-button>
@@ -656,10 +658,12 @@
        </ons-list-item>
     </ons-list>
 <!-- Atualização Master Hub (Sugestões de Estabelecimentos)  -->
-  <div class="indicar-restaurante"> 
-  <div style="margin-top: 5px;">Não encontrou o que queria?</div> 
-  <ons-button style="border-radius:9px; background-color: #AF0606; line-height:21px; height: 35px; font-size: 23px; margin-top: 5px; border: 3px solid #9B5050;" onclick="showSuggestion2Form()" >
-  Sugerir Estabelecimento	
+  <ons-button onclick="showSuggestion2Form()" class="ng-isolate-scope button effeckt-button slide-left" style="width: 100%; background: #fcc127; color: #000;padding-left: 30px;"><span class="label ons-button-inner">
+  <div class="indicar-restaurante">
+  <i class="ion-android-pin" style="font-size: 35px;color: #931a14;"></i>
+     </div>
+     <div class="texto1-indicacao"><b>Não encontrou?</b></div>
+  <div class="texto2-indicacao">Indique novos locais!</div>
 	</ons-button>
    </div> 
 <!-- Fim da atualização -->
@@ -699,13 +703,12 @@
        </ons-list-item>
     </ons-list>
   
+  <ons-button onclick="showSuggestion2Form()" class="ng-isolate-scope button effeckt-button slide-left" style="width: 100%; background: #fcc127; color: #000;padding-left: 30px;"><span class="label ons-button-inner">
   <div class="indicar-restaurante">
-  
-  <div style="margin-top: 5px;">Não encontrou o que queria?</div> 
-  
-  <ons-button style="border-radius:9px; background-color: #731414; line-height:21px; height: 35px; font-size: 23px; margin-top: 5px; border: 1px solid currentColor;" onclick="showSuggestion2Form()" >
-  
-  Sugerir Estabelecimento
+  <i class="ion-android-pin" style="font-size: 35px;color: #931a14;"></i>
+     </div>
+     <div class="texto1-indicacao"><b>Não encontrou?</b></div>
+  <div class="texto2-indicacao">Indique novos locais!</div>
 	
 	</ons-button>
      </div>
@@ -748,13 +751,12 @@
        </ons-list-item>
     </ons-list>
   
+  <ons-button onclick="showSuggestion2Form()" class="ng-isolate-scope button effeckt-button slide-left" style="width: 100%; background: #fcc127; color: #000;padding-left: 30px;"><span class="label ons-button-inner">
   <div class="indicar-restaurante">
-  
-  <div style="margin-top: 5px;">Não encontrou o que queria?</div> 
-  
-  <ons-button style="border-radius:9px; background-color: #731414; line-height:21px; height: 35px; font-size: 23px; margin-top: 5px; border: 1px solid currentColor;" onclick="showSuggestion2Form()" >
-  
-  Sugerir Estabelecimento
+  <i class="ion-android-pin" style="font-size: 35px;color: #931a14;"></i>
+     </div>
+     <div class="texto1-indicacao"><b>Não encontrou?</b></div>
+  <div class="texto2-indicacao">Indique novos locais!</div>
 	
 	</ons-button>
      </div>
@@ -800,7 +802,6 @@
            <ons-icon icon="ion-ios-arrow-back" size="1.333333em"></ons-icon>
         </ons-toolbar-button>     
      </div>     
-                
      
 <!--      <div class="right">     
          <ons-toolbar-button onclick="showCart();" >         
@@ -847,44 +848,6 @@
     </div>    
    </div> -->
    
-   <ons-list class="stic-white-bg" style="border-top: none;">
-     <ons-list-item style="line-height: 1; padding: 0;">
-       <ons-row class="action top10">
-
-       <ons-col class="action-col" onclick="loadPageMerchantInfo();" id="menu_enabled_info">
-         <div class="action-icon"><ons-icon icon="ion-ios-information-outline"></ons-icon></div>
-         <span class="action-label trn" data-trn-key="info">Info</span>
-       </ons-col>
-
-       <ons-col class="action-col" onclick="showPage('reviews');" id="menu_enabled_review">
-         <div class="action-icon"><ons-icon icon="ion-ios-star-half"></ons-icon></div>
-         <span class="action-label trn" data-trn-key="reviews">Reviews</span>
-       </ons-col>
-
-       <ons-col class="action-col" onclick="loadBookingForm1();" id="menu_enabled_booking">
-         <div class="action-icon"><ons-icon icon="ion-compose"></ons-icon></div>
-         <span class="action-label trn" data-trn-key="book_a_table">Booking</span>
-       </ons-col>
-       
-       <ons-col class="action-col" onclick="loadMap('merchant_map');" id="menu_enabled_map">
-         <div class="action-icon"><ons-icon icon="ion-android-map"></ons-icon></div>
-         <span class="action-label trn" data-trn-key="map">Map</span>
-       </ons-col>
-       
-       <ons-col class="action-col" onclick="showPage('page-photos');" id="menu_enabled_gallery">
-         <div class="action-icon"><ons-icon icon="ion-images"></ons-icon></div>
-         <span class="action-label trn" data-trn-key="photos">Photos</span>
-       </ons-col>
-       
-       <ons-col class="action-col" onclick="showPromoPage();" class="last" id="menu_enabled_promo">
-         <div class="action-icon"><ons-icon icon="ion-pizza"></ons-icon></div>
-         <span class="action-label trn" data-trn-key="promos">Promos</span>
-       </ons-col>
-
-       </ons-row>
-     </ons-list-item>
-   </ons-list>
-
    <div class="stic-new-search">
      <input type="text" name="f"  class="f text-input text-input--underbar has_validation" 
       placeholder="Procurar por Categoria" value="" onclick="showPage2('search_by_category','simpleslide');"  >
@@ -907,7 +870,49 @@
 	      </ons-list-item>
 	  </ons-list>
    </ons-scroller>  
-   
+ <p></p>
+  <ons-bottom-toolbar class="stic-white-bg" style="border-top: none; white-space: nowrap;overflow: auto;height: 54px;box-shadow: rgb(136, 128, 128) 0px 11px 8px -10px inset;z-index: 0;background:  #e6e6e6;">
+   <ons-list class="stic-white-bg" style="border-top: none;">
+     <ons-list-item style="line-height: 1; padding: 0;">
+       <ons-row class="action top10">
+
+       <ons-col class="action-col" onclick="loadPageMerchantInfo();" id="menu_enabled_info">
+         <div class="action-icon"><ons-icon icon="ion-ios-information-outline"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="info">Info</span>
+       </ons-col>
+
+     <ons-col class="action-col" onclick="showPage('reviews');" id="menu_enabled_review">
+         <div class="action-icon"><ons-icon icon="ion-ios-star-half"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="reviews">Reviews</span>
+       </ons-col>
+
+    	<ons-col class="action-col" id="menu-resultado"></ons-col>
+       
+       <ons-col class="action-col" onclick="loadMap('merchant_map');" id="menu_enabled_map">
+         <div class="action-icon"><ons-icon icon="ion-android-map"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="map">Map</span>
+       </ons-col>
+       
+       <ons-col class="action-col" onclick="showPage('page-photos');" id="menu_enabled_gallery">
+         <div class="action-icon"><ons-icon icon="ion-images"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="photos">Photos</span>
+       </ons-col>
+       
+       <ons-col class="action-col" onclick="showPromoPage();" class="last" id="menu_enabled_promo">
+         <div class="action-icon"><ons-icon icon="ion-pricetags"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="ofertas">Ofertas</span>
+       </ons-col>
+	   
+       <!-- <ons-col class="action-col" onclick="carregaTaxasdeEntrega();" class="last">
+         <div class="action-icon"><ons-icon icon="fa-motorcycle"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="">Entrega</span>
+       </ons-col> -->	   
+
+       </ons-row>
+     </ons-list-item>
+   </ons-list>		
+		
+</ons-bottom-toolbar>        
 </ons-page>
 </script>
 
@@ -1036,8 +1041,9 @@
     </ons-list>
     </form>
 <!-- Atualização Master Hub (Tradução) -->
-    <button class="button green-btn button--large marg20 trn" data-trn-key="add_to_cart" onclick="addToCart();">
-	Pedir
+    <button class="button verde-btn button--large marg20 trn" onclick="addToCart();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn">PEDIR</span>
 	</button>
       
 <!-- Fim da atualização -->
@@ -1157,10 +1163,9 @@
 
    <input type="hidden" name="cart_subtotal" id="cart_subtotal" class="cart_subtotal">
    
-   <button class="button green-btn button--large marg20" onclick="checkOut();">
-	<span class="btn_checkout trn"  data-trn-key="checkout" >
-	Finalizar
-	</span>
+   <button class="button verde-btn button--large marg20" onclick="checkOut();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn">FINALIZAR</span>
    </button>
    
    </div>
@@ -1392,8 +1397,9 @@
 	    </div> 
     </div> 
    
-   <button class="button green-btn button--large trn marg20" onclick="clientShipping();" data-trn-key="select_payment_method">
-	Select Payment Method
+   <button class="button verde-btn button--large trn marg20" onclick="clientShipping();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn">Forma de Pagamento</span>
    </button>
    </form>
 
@@ -1419,9 +1425,7 @@
 <ons-page id="page-paymentoption" class="onsen-display">
    <ons-toolbar>        
      <div class="left"><ons-back-button></ons-back-button></div>     
-<!-- Atualização Master Hub (Tradução) -->
-     <div class="center white"><span id="search-text" class="trn" data-trn-key="delivery_address">Endereço de Entrega</span></div>                         
-<!-- Fim da atualização -->
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="">Finalização do Pedido</span></div>                         
      <div class="right">        
      </div>
    </ons-toolbar>
@@ -1468,189 +1472,195 @@
    
    <input type="hidden" name="cod_change_required" id="cod_change_required" class="cod_change_required">  
 
-<!-- Atualização Master Hub (Personalização) -->
-   <div class="wrapper" style="height: 30px;">
-       <ons-row class="row">
-           <ons-col class="stic-title text-big trn white how_you_like_pay" data-trn-key="how_you_like_pay" style="text-align: center;">How would you like to pay?</ons-col>           
-       </ons-row>
-   </div>  
-<!-- Fim da atualização -->
-      
-   <div class="wrapper" style="margin-top:-20px;">
-      <ons-list id="payment-list">
-      </ons-list>
-   </div>  
    
-   <div class="wrapper order-change-wrapper">
-      <div class="field-wrapper">
-      <input type="number" name="order_change"  class="stic-rgba numeric_only order_change text-input text-input--underbar" 
-      placeholder="Change? For how much?" value="" min="0" inputmode="numeric" pattern="[0-9]*"  >
-      </div>      
-   </div>
-   
-   <div class="wrapper payon-delivery-wrapper">
-      <ons-list id="payon-deliver-list">
-      </ons-list>
-   </div>
-   
-   <div class="wrapper voucher-wrap">
+   <div class="checkout_information_dinein" id="checkout_information_dinein"></div>
+   <div class="checkout_information_contact" id="checkout_information_contact"></div>
+ 
+   <div class="wrapper voucher-wrap" style="margin-bottom: 0px;">
    
       <ons-list id="voucher-wrap">
-       <ons-list-header class="center voucher-header trn" data-trn-key="voucher">Voucher</ons-list-header>
+       <ons-list-header class="center voucher-header trn menuapp" style="padding-top: 5px; padding-bottom: 5px;" data-trn-key="">Cupom de Desconto</ons-list-header>
        
-        <ons-list-item class="center apply-voucher" style="padding-top: 10px;">                 
-        <input type="text" name="voucher_code"  class="stic-rgba voucher_code center text-input text-input--underbar" 
-         placeholder="Enter Voucher here" value=""  >                
+        <ons-list-item class="center apply-voucher">                 
+        <input type="text" name="voucher_code"  class="stic-rgba voucher_code text-input text-input--underbar center" 
+         placeholder="Enter Voucher here" value="" style="padding-top: 5px; padding-bottom: 5px; margin-top: 5px;
+" >                
         </ons-list-item>
         
-        <ons-list-item class="center apply-voucher" onclick="applyVoucher();" style="margin-top: -10px;">
-         <span class="uppercase crimson trn" data-trn-key="apply_voucher">Apply Voucher</span>          
+        <ons-list-item class="center apply-voucher" style="padding-bottom: 5px; padding-top: 5px;">
+		   <button class="button verde-btn button--large" onclick="applyVoucher();">
+			<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+			<ons-icon icon="ios-search"></ons-icon> <span class="trn">Adicionar o Cupom</span>
+		   </button>		
         </ons-list-item>
         
-        <ons-list-item class="center remove-voucher">
-        <button class="button button--quiet green uppercase" onclick="removeVoucher();" >
-         <span class="trn" data-trn-key="remove_voucher">Remove Voucher</span>          
+        <ons-list-item class="center remove-voucher" style="padding-bottom: 5px; padding-top: 5px;">
+        <button class="button vermelho-btn button--large" onclick="removeVoucher();" >
+         <span class="trn">Remover o Cupom</span> 
         </button>  
         </ons-list-item>
        
       </ons-list>
    </div>
+   
 <!-- Atualização Master Hub (Programa de Fidelidade) -->
 		<div id="lista-fidelidades-pagamento"></div> 
-<!-- Fim da atualização -->
-   <div class="wrapper pts-apply-points-wrap">
+<!-- Fim da atualização -->    
+   <div class="wrapper pts-apply-points-wrap" style="margin-bottom: 0px;">
      <ons-list >
-       <ons-list-header class="center" >
+       <ons-list-header class="center menuapp" >
        <span class="trn" data-trn-key="your_points" >Your points</span> :
        <span class="pts_available_points"></span>
        </ons-list-header>
        
-       <ons-list-item class="center pts_pts" style="padding-top: 10px;">                 
-        <input type="number" name="redeem_points" class="stic-rgba redeem_points center numeric_only text-input text-input--underbar" 
+       <ons-list-item class="center pts_pts">                 
+        <input type="number" name="redeem_points"  style="margin-top: 5px;" class="stic-rgbaamarelo redeem_points center numeric_only text-input text-input--underbar" 
          value=""  >                
        </ons-list-item>
        
        <ons-list-item class="center pts_pts">
-        <button class="button button--quiet green" onclick="applyRedeem();" style="margin-top: -10px;">
-         <span class="uppercase crimson trn" data-trn-key="redeem">Redeem</span>          
-        </button>  
+		<button class="button verde-btn button--large" style="
+		margin-bottom: 5px;" onclick="applyRedeem();" class="trn" data-trn-key="">Usar Meus Pontos
+		</button> 
         </ons-list-item>
         
         <p class="center pts_pts_cancel pts_points_label small-font-dim"></p>
         
         <ons-list-item class="center pts_pts_cancel">
-        <button class="button button--quiet green" onclick="cancelRedeem();" >
-         <span class="uppercase trn" data-trn-key="cancel">Cancel</span>          
+        <button class="button vermelho-btn button--large" onclick="cancelRedeem();" >
+         <span class="trn">Cancelar os Pontos</span>  
         </button>  
         </ons-list-item>
        
      </ons-list>
    </div>
 <!-- Atualização Master Hub (Resumo de conferência da finalização do pedido) -->
-   <div class="wrapper conferirendereco">
+   <div class="wrapper conferirendereco" style="padding-top: 0px; padding-bottom: 10px;">
        <ons-row class="row">
-           <ons-col class="text-big trn" data-trn-key="" style="padding-bottom: 5px;">Endereço da Entrega</ons-col>           
+           <ons-col class="trn center ultimatela menuapp col ons-col-inner" data-trn-key="" style="padding-bottom: 5px;">Endereço da Entrega</ons-col>           
        </ons-row>
    </div>
    
-   <div class="wrapper conferirendereco" style="padding-left: 10px;">
-   <i>
+   <div class="wrapper conferirendereco" style="padding-left: 10px; padding-top: 0px;">
+   <i style="font-size: 13.5px;font-style: normal;color:#666666">
    <span class="endereco_de_entrega_street"></span> <span class="endereco_de_entrega_n"></span>
    <span class="endereco_de_entrega_numero"></span> <span class="endereco_de_entrega_traco"></span>
    <span class="endereco_de_entrega_area_name"></span></br>
    <span class="endereco_de_entrega_city"></span> <span class="endereco_de_entrega_barra"></span> <span class="endereco_de_entrega_state"></span> 
    <span class="endereco_de_entrega_zipcode"></span></br>
-   <span class="endereco_de_entrega_location_name"></span></br>
-   <span class="endereco_de_entrega_delivery_instruction"></span>
+   <span class="trn" style="font-weight: bold;">Ponto de Referência: </span><span class="endereco_de_entrega_delivery_instruction"></span></br>
+   <span class="trn" style="font-weight: bold;" >Complemento do Endereço: </span><span class="endereco_de_entrega_location_name"></span>
    </i>
    </div>
  
-<!-- Atualização Master Hub (Informações de contato no local certo) -->
-   <div class="checkout_information_dinein" id="checkout_information_dinein"></div>
-   <div class="checkout_information_contact" id="checkout_information_contact"></div>
-<!-- Fim da atualização -->
- 
     <div class="wrapper">
        <ons-row class="row">
-           <ons-col class="text-big trn" data-trn-key="" style="padding-bottom: 5px;">Conferência dos Valores</ons-col>           
+           <ons-col class="trn center ultimatela menuapp">Conferência dos Valores</ons-col>           
        </ons-row>
    </div> 
    
-  <div class="wrapper conferirvalor" style="padding-left: 10px;">
-       <div class="field-wrapper titulo-subtotal" style="width: 65%; font-size: 12px; float: left; display: none;">
+   <div class="wrapper conferirvalor" style="padding-left: 10px;">
+       <div class="stic-rgba field-wrapper titulo-subtotal bordar conferenciavalortexto" style="margin-bottom: 5px;">
 	   </div>
-	   <div class="field-wrapper total-subtotal" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   <div class="stic-rgba field-wrapper total-subtotal bordar conferenciavalor" style="margin-bottom: 5px;">
 	   </div>	
-       <div class="field-wrapper titulo-cupom" style="width: 65%; font-size: 12px; float: left; display: none;">
+       <div class="stic-rgba field-wrapper titulo-cupom bordar conferenciavalortexto" style="margin-bottom: 5px;">
 	   </div>
-	   <div class="field-wrapper voucher_amount" style="width: 20%; font-size: 12px; float: right; display: none;">
-	   </div>	
-	   <div class="field-wrapper fidelidade_amount" style="width: 20%; font-size: 12px; float: right; display: none;">
-	   </div>	
-       <div class="field-wrapper titulo-pontos" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   <div class="stic-rgba field-wrapper voucher_amount bordar conferenciavalor" style="margin-bottom: 5px;">
 	   </div>
-	   <div class="field-wrapper total-pontos" style="width: 20%; font-size: 12px; float: right; display: none;">
-	   </div>	
-       <div class="field-wrapper titulo-subtotal_new" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   <div class="stic-rgba field-wrapper fidelidade_amount bordar conferenciavalor" style="margin-bottom: 5px;">
+	   </div>	   
+       <div class="stic-rgba field-wrapper titulo-pontos bordar conferenciavalortexto" style="margin-bottom: 5px;">
 	   </div>
-	   <div class="field-wrapper subtotal_new" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   <div class="stic-rgba field-wrapper total-pontos bordar conferenciavalor" style="margin-bottom: 5px;">
 	   </div>	
-	   <div class="field-wrapper titulo-entrega" style="width: 65%; font-size: 12px; float: left; display: none;">
+       <div class="stic-rgba field-wrapper titulo-subtotal_new bordar conferenciavalortexto" style="margin-bottom: 5px;">
 	   </div>
-	   <div class="field-wrapper total-entrega" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   <div class="stic-rgba field-wrapper subtotal_new bordar conferenciavalor" style="margin-bottom: 5px;">
+	   </div>	
+	   <div class="stic-rgba field-wrapper titulo-entrega bordar conferenciavalortexto" style="margin-bottom: 5px;">
+	   </div>
+	   <div class="stic-rgba field-wrapper total-entrega bordar conferenciavalor" style="margin-bottom: 5px;">
 	   </div>		 
-       <div class="field-wrapper titulo-comodidade" style="width: 65%; font-size: 12px; float: left; display: none;">
+       <div class="stic-rgba field-wrapper titulo-comodidade bordar conferenciavalortexto" style="margin-bottom: 5px;">
 	   </div>
-	   <div class="field-wrapper total-comodidade" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   <div class="stic-rgba field-wrapper total-comodidade bordar conferenciavalor" style="margin-bottom: 5px;">
 	   </div>	
-       <div class="field-wrapper titulo-embalagem" style="width: 65%; font-size: 12px; float: left; display: none;">
+       <div class="stic-rgba field-wrapper titulo-embalagem bordar conferenciavalortexto" style="margin-bottom: 5px;">
 	   </div>
-	   <div class="field-wrapper total-embalagem" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   <div class="stic-rgba field-wrapper total-embalagem bordar conferenciavalor" style="margin-bottom: 5px;">
 	   </div>	  
-       <div class="field-wrapper titulo-desconto" style="width: 65%; font-size: 12px; float: left; display: none;">
+      <!-- <div class="stic-rgba field-wrapper titulo-desconto bordar conferenciavalortexto" style="margin-bottom: 5px;">
 	   </div>
-	   <div class="field-wrapper total-desconto" style="width: 20%; font-size: 12px; float: right; display: none;">
+	   <div class="stic-rgba field-wrapper total-desconto bordar conferenciavalor" style="margin-bottom: 5px;">
 	   </div>
-	   <div class="field-wrapper titulo-gorjeta" style="width: 65%; font-size: 12px; float: left; display: none;">
+	   <div class="stic-rgba field-wrapper titulo-gorjeta bordar conferenciavalortexto" style="margin-bottom: 5px;">
 	   </div>
-	   <div class="field-wrapper total-gorjeta" style="width: 20%; font-size: 12px; float: right; display: none;">
-	   </div>		           
+	   <div class="stic-rgba field-wrapper total-gorjeta bordar conferenciavalor" style="margin-bottom: 5px;">
+	   </div>		-->           
 
-       <b> <div class="field-wrapper titulo-total" style="width: 65%; font-size: 12px; float: left;">
+       <b> <div class="stic-rgba field-wrapper titulo-total bordar" style="width: 60%; float: left; font-size: 14px; margin-bottom: 5px;" >
 	   </div>
-	   <div class="field-wrapper total-amount" style="width: 20%; font-size: 12px; float: right;">
-	   </div></b>	
+	   <div class="stic-rgba field-wrapper total-amount bordar" style="width: 23%;float: right;font-size:  13px;text-align: center; margin-bottom: 5px;" >
+	   </div> </b>	
    </div>
    
+   <div class="wrapper" style="background: #fff;">
+       <ons-row class="row" style="padding-top: 0px;padding-bottom: 0px;background: #f9f9f9;">
+           <ons-col class="trn center ultimatela menuapp" data-trn-key="how_you_like_pay">How would you like to pay?</ons-col>           
+       </ons-row>
+   </div>  
    
    <div class="wrapper">
       <ons-list id="payment-list">
       </ons-list>
    </div>   
    
-   <div class="wrapper payon-delivery-wrapper">
+   <!--<div class="wrapper order-change-wrapper" style="padding-bottom: 0px;"> 	
+      <div class="field-wrapper text-input text-input--underbar" style="width: 50%; float: left; padding-top: 10px; padding-bottom: 0px; font-size: 14px; color: #666; padding-left: 5px;">
+		Troco
+    </div> -->    
+    
+    <div class="wrapper" style="	padding-top: 0px; padding-bottom: 0px;">	
+    <div class="field-wrapper order-change-wrapper" >
+      <input type="number" name="order_change" class="stic-rgbaamarelo numeric_only order_change text-input text-input--underbar"
+      placeholder="Troco para quantos!?" value="" min="0" inputmode="numeric" pattern="[0-9]*"  >
+    </div>      
+   </div>
+   
+   <div class="wrapper payon-delivery-wrapper" style="padding-top: 8px;padding-bottom: 8px;">
       <ons-list id="payon-deliver-list">
       </ons-list>
    </div>
-<!-- Fim da atualização -->
-
-<!-- Atualização Master Hub (CPF na Nota) -->
-   <div class="wrapper">
-       <ons-row class="row" style="padding-top: 5px;padding-bottom: 5px;">
-           <ons-col class="text-big trn" data-trn-key="">CPF na Nota?</ons-col>           
-       </ons-row>
-   </div> 
    
-   <div class="wrapper">
-      <div class="field-wrapper">
-      <input type="text" name="cpf_nota"  class="stic-rgba cpf_nota text-input text-input--underbar" 
+  <!-- <div class="wrapper" style="padding-bottom: 0px;"> 	
+      <div class="field-wrapper text-input text-input--underbar" style="padding-top: 10px; padding-bottom: 0px; font-size: 14px; color: #666; padding-left: 5px;">
+		CPF
+    </div>    --> 
+    
+   <div class="wrapper" style="	padding-top: 0px; padding-bottom: 0px;">	
+    <div class="field-wrapper" style="padding-top: 5px;">
+      <input type="text" name="cpf_nota" class="stic-rgba cpf_nota text-input text-input--underbar mask-cpf" 
       placeholder="Digite seu CPF" value="" >
-      </div>      
-
-   <DIV id="sms_order_verification_wrap"></DIV>
+    </div> 
+   <!-- <div class="field-wrapper" >
+      <input type="text" name="cpf_nota" class="stic-rgba cpf_nota text-input text-input--underbar mask-cnpj" 
+      placeholder="Digite o CNPJ" value="" >
+    </div> 	-->	   
+   </div>
    
-   <button class="button green-btn button--large marg20 trn" onclick="InitPlaceOrder();" data-trn-key="place_order">
-	Place Order
+        <ons-list-item class="center pts_pts_cancel">
+        <button class="button button--large button green-btn5" onclick="cancelRedeem();" >
+         <span class="trn">Cancelar os Pontos</span>  
+        </button>  
+        </ons-list-item>
+          
+	
+   </div>
+   
+   <button class="button verde-btn button--large" style="top: 15px; margin-bottom: 10px;" onclick="InitPlaceOrder();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn">FINALIZAR O PEDIDO</span>
    </button>
    </form>
 
@@ -3768,8 +3778,9 @@
 	    </div> 
     </div> 
    
-    <button class="button green-btn button--large trn" onclick="clientShipping();" data-trn-key="select_payment_method">
-	Select Payment Method
+    <button class="button verde-btn button--large trn" onclick="clientShipping();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn">Forma de Pagamento</span>
    </button>
    </form>
 
@@ -3907,8 +3918,9 @@
 	    </div> 
 <br>
    
-    <button class="button green-btn button--large trn" onclick="clientShipping();" data-trn-key="select_payment_method">
-	Select Payment Method
+    <button class="button verde-btn button--large trn" onclick="clientShipping();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn">Forma de Pagamento</span>
    </button>
 			</div>
    </form>

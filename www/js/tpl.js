@@ -137,7 +137,7 @@ function subItemRowWithCheckboxQty(subcat_id,radio_name,radio_value,label,price)
 	var htm='';
 	htm+='<ons-list-item modifier="tappable">';
     htm+='<ons-row class="row">';
-     htm+='<ons-col class="concat-text" width="60%">';
+     htm+='<ons-col class="concat-text" width="56%">';
        htm+='<label class="checkbox checkbox--list-item">';
 	     htm+='<input type="checkbox" name="'+radio_name+'" class="'+radio_name+' sub_item_name_'+subcat_id+'" " value="'+radio_value+'" data-id="'+subcat_id+'" data-withqty="2" >';
 	     htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
@@ -145,16 +145,18 @@ function subItemRowWithCheckboxQty(subcat_id,radio_name,radio_value,label,price)
 	   htm+='</label>';
 	  htm+='</ons-col>';	
 /*Atualização Master Hub (Tradução)*/
-	  htm+='<ons-col class="concat-text" width="20%">';
-	  htm+='<input name="subitem-qty" type="number" class="text-center numeric_only small-input text-center text-input text-input--underbar subitem-qty " ';
-      	  htm+='placeholder="quant." value="1">';
+	  htm+='<ons-col class="concat-text text-left quantidade" width="24%">';
+     htm+='<ons-icon class="prod-qtd-menos" icon="ion-minus-circled"></ons-icon>';
+	  htm+='<input disabled name="subitem-qty" type="number" style="padding-top: 10px;" class="text-center numeric_only small-input text-center text-input text-input--underbar subitem-qty " ';
+      	  htm+='placeholder="quant." value="0">';
+     htm+='<ons-icon class="prod-qtd-mais" icon="ion-plus-circled"></ons-icon>';		  
 	  htm+='</ons-col>';	
 /*Fim da atualização*/
 	  htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
     htm+='</ons-row>';
     htm+='</ons-list-item>';
     return htm;
-}
+} 
 
 function privateRowWithRadio(radio_name,radio_value,label)
 {
@@ -195,7 +197,7 @@ function cartFooter(currency_code)
    htm+='<ons-row class="row stic-align">';
       htm+='<ons-col class="concat-text text-right" width="25%">';
         htm+='<button class="button button--quiet" onclick="addCartQty(1)">';
-          htm+='<ons-icon class="icon-green" icon="ion-minus-circled"></ons-icon>';
+          htm+='<ons-icon class="prod-qtd-menos" icon="ion-minus-circled"></ons-icon>';
         htm+='</button>';
       htm+='</ons-col>';
 
@@ -210,7 +212,7 @@ function cartFooter(currency_code)
 
       htm+='<ons-col class="concat-text" width="25%">';
          htm+='<button class="button button--quiet" onclick="addCartQty(2)">';
-          htm+='<ons-icon class="icon-green" icon="ion-plus-circled"></ons-icon>';
+          htm+='<ons-icon class="prod-qtd-mais" icon="ion-plus-circled"></ons-icon>';
         htm+='</button>';
       htm+='</ons-col>';
 
@@ -226,14 +228,8 @@ function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_
    var htm='';
    htm+='<ons-list-item class="row-no-border">';
    htm+='<ons-row >';
-
-	   htm+='<ons-row class="row-del-wrap auto" >';
-   	   		htm+='<ons-button modifier="quiet" class="row-del-wrap delete-item" data-id="'+x+'"><ons-icon icon="fa-times"></ons-icon></ons-button>';
-	   htm+='</ons-row>';
-
-	   htm+='<ons-col class="stic-align width-adjust concat-text" width="75%">';
-
-		htm+='<input name="qty" type="number" class="item-qty stic-rgba list-wrapper qty numeric_only small-input text-center text-input text-input--underbar" ';
+	   htm+='<ons-col class="concat-text" width="60%">';
+		 htm+='<input name="qty" type="number" class="item-qty qty numeric_only small-input text-center text-input text-input--underbar green bold"  style="padding-top: 13px; border-bottom: 1px solid #ddd;"';
 /*Atualização Master Hub (Tradução)*/
 		  htm+='placeholder="quant." value="'+qty+'" data-rowid="'+x+'">';
 /*Fim da atualização*/
@@ -262,13 +258,14 @@ function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_
 		  	+'</p>';
 		  }
 	   htm+='</ons-col>';
-	   htm+='<ons-col class="center-price text-right" ><price>'+pretty_price+'</price></ons-col>';
+	   htm+='<ons-col class="text-right" ><price>'+pretty_price+'</price></ons-col>';
    htm+='</ons-row>';
    
-   // htm+='<ons-row class="" >';
-   // htm+='<ons-col class="text-right" width="100%">';
-   // htm+='</ons-col>';
-   // htm+='</ons-row>';
+   htm+='<ons-row class="row-del-wrap" >';
+   htm+='<ons-col class="text-right" width="100%">';
+   htm+='<ons-button modifier="quiet" class="delete-item" data-id="'+x+'"><ons-icon icon="fa-times"></ons-icon></ons-button>';
+   htm+='</ons-col>';
+   htm+='</ons-row>';
    
    htm+='</ons-list-item>';
    return htm;
@@ -280,7 +277,7 @@ function tplCartRowNoBorderSub(subcat_id, sub_item_id, item_name, price, pretty_
    htm+='<ons-list-item class="row-no-border subitem-row'+x+' ">';
    htm+='<ons-row >';
       htm+='<ons-col width="3%"></ons-col>';
-	   htm+='<ons-col class="concat-text" width="75%">';
+	   htm+='<ons-col class="concat-text" width="60%">';
 		 htm+='<input name="qty" type="number" class="subitem-qty'+x+' qty small-input text-center text-input text-input--underbar" ';
 /*Atualização Master Hub (Tradução)*/
 		  htm+='placeholder="quant." value="'+qty+'" data-qty="'+qty2+'" >';
@@ -305,10 +302,10 @@ function tplCartRow(label,price,class_name)
 	var htm='';	
 	htm+='<ons-list-item class="'+class_name+'">';
 	  htm+='<ons-row >';
-		   htm+='<ons-col class="stic-align concat-text" width="70%">';
-			  htm+='<p class="description item-name concat-text f14 bold c333">'+label+'</p>';
+		   htm+='<ons-col class="concat-text" width="70%">';
+			  htm+='<p class="description item-name concat-text">'+label+'</p>';
 		   htm+='</ons-col>';
-		   htm+='<ons-col class="text-right" ><price class="f14 bold c333">'+price+'</price></ons-col>';
+		   htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
 	   htm+='</ons-row>';
 	htm+='</ons-list-item>';
 	return htm;
@@ -330,15 +327,17 @@ function tplCartRowHiddenFields(label, value, field_name, x, class_name)
 
 function initMobileScroller()
 {	
-	
+/*Atualização Master Hub (Tradução e Formato de Datas)*/
 	//https://docs.mobiscroll.com/jquery/select#localization
 	if ( $('.delivery_date').exists()){
 		$('.delivery_date').mobiscroll().date({
 			theme: 'android-holo-light', 
 			mode: "scroller",
 			display: "modal",
-			dateFormat : "yy-mm-dd",
-			//lang : "de"
+			lang: "pt-BR",
+			dateFormat : "d/m/Y",
+			/*timeFormat:"HH:ii",
+			timeWheels:"HHii"*/
 		});
 	}
 	
@@ -347,7 +346,8 @@ function initMobileScroller()
 			theme: 'android-holo-light', 
 			mode: "scroller",
 			display: "modal",
-			dateFormat : "yy-mm-dd",
+			lang: "pt-BR",
+			dateFormat : "d/m/Y",
 			/*timeFormat:"HH:ii",
 			timeWheels:"HHii"*/
 		});
@@ -358,7 +358,10 @@ function initMobileScroller()
 			theme: 'android-holo-light', 
 			mode: "scroller",
 			display: "modal",
-			dateFormat : "yy-mm-dd"
+			lang: "pt-BR",
+			dateFormat : "d/m/Y"
+			/*timeFormat:"HH:ii",
+			timeWheels:"HHii"*/
 		});
 	}
 	
@@ -367,17 +370,20 @@ function initMobileScroller()
 			theme: 'android-holo-light', 
 			mode: "scroller",
 			display: "modal",
-			dateFormat : "yy-mm-dd"
+			lang: "pt-BR",
+			dateFormat : "d/m/Y"
+			/*timeFormat:"HH:ii",
+			timeWheels:"HHii"*/
 		});
 	}
 }
-
+/*Fim da atualização*/
 function tplPaymentList(radio_name, radio_value, label, icons)
 {
 	var htm='';	
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
-          htm+='<ons-col class="concat-text" width="80%">';
+          htm+='<ons-col class="concat-text" width="60%">';
              htm+='<label class="radio-button checkbox--list-item">';
                htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'">';
                htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
@@ -397,11 +403,27 @@ function tplPaymentListStatic(radio_value, label, icons)
 	var htm='';	
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
-          htm+='<ons-col class="concat-text" width="80%">';          
+          htm+='<ons-col class="concat-text" width="60%">';          
                htm+='<p class="description item-name concat-text"> '+label+'</p>';             
           htm+='</ons-col>';
           htm+='<ons-col class="text-right '+radio_value+'" >';
             htm+='<ons-icon icon="'+icons+'"></ons-icon>';
+          htm+='</ons-col>';
+       htm+='</ons-row>';
+     htm+='</ons-list-item>';
+     return htm;
+}
+
+function tplTaxasdeEntrega(id_bairro, bairro, cidade, taxa)
+{
+	var htm='';	
+	 htm+='<ons-list-item modifier="tappable">';
+       htm+='<ons-row class="row">';
+          htm+='<ons-col class="concat-text" width="60%">';          
+               htm+='<p class="description item-name concat-text"> '+bairro+'</p>';             
+          htm+='</ons-col>';
+          htm+='<ons-col class="text-right">';
+            htm+='<span class="description item-name concat-text">'+prettyPrice(taxa)+'</span>';
           htm+='</ons-col>';
        htm+='</ons-row>';
      htm+='</ons-list-item>';
@@ -413,7 +435,7 @@ function tplPaymentProvider(radio_name, radio_value, label, icons)
 	var htm='';	
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
-          htm+='<ons-col class="concat-text" width="80%">';
+          htm+='<ons-col class="concat-text" width="60%">';
              htm+='<label class="radio-button checkbox--list-item">';
                htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'">';
                htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
@@ -542,7 +564,7 @@ function ContactNumberFields()
    
     htm+='<div class="field-wrapper" style="margin-top: -22px; margin-bottom: 10px;">';
 /*Atualização Master Hub (Tradução)*/
-      htm+='<input type="text" name="contact_phone"  regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="mobile_inputs contact_phone text-input text-input--underbar has_validation mask-phone" placeholder="'+  getTrans("Contact phone",'contact_phone') + '" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"   >';
+      htm+='<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="mobile_inputs contact_phone text-input text-input--underbar has_validation mask-phone" placeholder="'+  getTrans("Contact phone",'contact_phone') + '" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!"   >';
    htm+='</div>';
 /*Fim da atualização*/
 	return htm;

@@ -5,7 +5,7 @@ function fidelidade_PaginaCategorias(data)
 	
 	    htm+='<ons-carousel swipeable overscrollable auto-scroll  setAutoScrollRatio(0.7) var="carousel" style="width: 100%; height:158px; margin: auto; box-shadow: 0 0 10px 3px rgba(0,0,0,0.6);" class="etiqueta-fidelidade">';
 		htm+='<div style=" position: initial; margin-top: 10px;"><b style="background: rgba(33,144,19,0.73); z-index: 9999; color:  white; padding:  3px 10px; border-radius: 10px;">';
-		htm+='Programa de Fidelidade!';
+		htm+='Plano de Fidelidade!';
 		htm+='</b></div>';
 		//htm+='<div class="etiqueta-fidelidade">';
 
@@ -58,7 +58,7 @@ function fidelidade_PaginaCategorias(data)
 		htm+='<span style="font-size: 15px; color: #ffffff;" class="mensagem_programa_fidelidade">';
 		htm+=mensagem_fidelidade;
 		htm+='</span><br>';			
-		htm+='<span style="font-size: 15px; color: #ffffff;">'+msg_meta+'</span>';			
+		htm+='<span style="font-size: 13px; color: #ffffff;">'+msg_meta+'</span>';			
 		htm+='</div>';
 		htm+='</div>';
 		htm+='</ons-carousel-item>';
@@ -203,13 +203,13 @@ function fidelidade_PaginaPagamentos(data)
 		htm+='<div class="wrapper">';
 		htm+='<ons-list id="fidelidade-wrap">';
 		htm+='<ons-list-header class="center fidelidade-header trn" data-trn-key="fidelidade">Fidelidade</ons-list-header>';
-		htm+='<ons-carousel swipeable overscrollable auto-scroll  setAutoScrollRatio(0.7) var="carousel" style="width: 100%; height:158px; margin: auto;" class="etiqueta-fidelidade">';			
+		htm+='<ons-carousel swipeable overscrollable auto-scroll  setAutoScrollRatio(0.7) var="carousel" style="width: 100%; height:180px; margin: auto;" class="etiqueta-fidelidade">';			
 		htm+='<ons-carousel-item class="carousel_item">';
 		htm+='<div class="progress6">';
 		htm+='<div onclick="showFidelidadeEmpresa();">';
 		htm+='<span style="font-size: 15px; color: #ffffff;">';
 		htm+=data.programa_fidelidade.premio;
-		htm+='<br>'+getTrans("Clique abaixo para aceitar este desconto!",'clique_para_aceitar_desconto');
+		htm+='<br>'+getTrans("Clique abaixo para aplicar esse desconto!",'clique_para_aceitar_desconto');
 		htm+='</span><br>';			
 		htm+='</div>';
 		htm+='</div>';
@@ -217,13 +217,15 @@ function fidelidade_PaginaPagamentos(data)
 		htm+='<div id="fidelidade-wrap">';
 		htm+='<input type="hidden" name="fidelidade_code"  class="fidelidade_code text-input text-input--underbar" value="'+data.programa_fidelidade.fidelidade_name+'">';
 		htm+='<p class="center apply-fidelidade botao-fidelidade">';
-		htm+='<button class="newbutton" onclick="applyFidelidade();">';
-		htm+='<span class="trn" data-trn-key="apply_fidelidade">Usar esta campanha!</span>';
+		htm+='<button class="button verde-btn button--large" onclick="applyFidelidade();" style="margin-top: -12px;" >';
+		htm+='<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>';
+		htm+='<ons-icon icon="ios-search"></ons-icon> <span class="trn" data-trn-key="apply_fidelidade">Usar esta campanha!</span>';
 		htm+='</button>';
 		htm+='</p>';
-		htm+='<p class="center remove-fidelidade botao-fidelidade">';
-		htm+='<button class="newbutton" onclick="removeFidelidade();" >';
-		htm+='<span class="trn" data-trn-key="remove_fidelidade">Remover Campanha!</span>';
+		htm+='<p class="center remove-fidelidade botao-fidelidade">';	
+		htm+='<button class="button vermelho-btn button--large" onclick="removeFidelidade();" style="margin-top: -12px;" >';
+		htm+='<ons-icon icon="minus-circle" style="line-height: 0;"></ons-icon>';			
+		htm+='<ons-icon icon="ios-search"></ons-icon> <span class="trn" data-trn-key="remove_fidelidade">Remover Campanha!</span>';
 		htm+='</button>';
 		htm+='</p>';
 		htm+='</ons-carousel-item>';
@@ -253,8 +255,8 @@ function fidelidade_PaginaDetalhes(data)
 	    dump("upload_url=>"+upload_url);
 		var mensagem_fidelidade='';
 		htm+='<ons-carousel-item class="carousel_item">';
-		htm+='<div style="box-sizing: border-box;font-size: 12px; text-align: right; padding-right: 7px; margin-top: 2px;" class="white concat-text">'+getTrans('Esta campanha esta valida ate:','campanha_valida_ate')+'<br>'+dataAtualFormatada_NomeMes(val.expiration)+'.</div>';
-		htm+='<img src="css/images/trofeu.svg" style="max-width: 100%; margin-top: -6px;" />';
+		htm+='<div style="box-sizing: border-box;font-size: 12px; text-align: right; padding-right: 7px; margin-top: 12px;" class="white concat-text">'+getTrans('Esta campanha esta valida ate:','campanha_valida_ate')+'<br>'+dataAtualFormatada_NomeMes(val.expiration)+'.</div>';
+		htm+='<img src="css/images/trofeu.svg" style="max-width: 90%; margin-top: -6px;" />';
 		htm+='<div class="progress7">';
 
 		var meta='';
@@ -303,7 +305,7 @@ function fidelidade_PaginaDetalhes(data)
 		  htm+=''+mensagem_fidelidade;
 		  htm+='</span>';			
 		  htm+='</div>';			
-		  htm+='<p style="text-align:center;font-size:25px;line-height: 0; margin-top: 16px;">'+msg_meta+'</p>';
+		  htm+='<p style="text-align:center;font-size:20px;line-height: 0; margin-top: 16px;">'+msg_meta+'</p>';
 			
 		  htm+='<p style="text-align:  center;font-weight: bold;font-size:  36px;line-height: 1;margin-top:-10px;margin-bottom:  -14px;"><b style="text-align:  center;">'+meta+'</b></p>';		  
 		  htm+='<p style="text-align:center;font-size:14px;">'+total_meta+'</p>';

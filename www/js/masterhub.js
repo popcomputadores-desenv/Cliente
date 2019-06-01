@@ -454,8 +454,8 @@ function paginaResultado(data)
 	pagina_personalizada+='<div align="left" style="width: auto; margin-right: 25px; margin-top: 15px; margin-left: 10px; position: absolute;">'+val.page_name+'</div>';
 		}
 		if (nome_pagina.indexOf("...") != -1){
-	pagina_personalizada+='<div align="right" style="right:20px; top:10px;">';
-	pagina_personalizada+='<img src="css/images/bot_fecha.png" width="40px" height="40px" onclick="fechar_prop();" style="padding: 10px 10px 2px 0px;"></div>';	
+	pagina_personalizada+='<div class="box2" align="right">';
+	pagina_personalizada+='<img src="css/images/bot_fecha.png" width="60px" height="80px" onclick="fechar_prop();" style="padding: 10px 10px 2px 0px;"></div>';	
 		}
 		
 	pagina_personalizada+='<div style="box-sizing: border-box; text-align: left;">'+val.content+'</div>';
@@ -478,7 +478,7 @@ function categorias_Resultado(data)
 {		
 		var htm='';
 	
-	htm+='<div style="color: #fff;"><span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;" class="trn" data-trn-key="escolha_uma_ategoria">ESCOLHA UMA CATEGORIA</span></div>';
+	htm+='<div style="color: #fbf0da;"><span style="border-bottom: 2px outset #fbf0da; padding-bottom: 5px;" class="trn" data-trn-key="escolha_uma_ategoria">ESCOLHA UMA CATEGORIA</span></div>';
 	htm+='<div class="wrapper center" style="margin: 15px auto; white-space: nowrap; overflow:auto;">';
 	
 	$.each( data.category, function( key, val ) {
@@ -494,7 +494,7 @@ function categorias_Resultado(data)
 		} else {
 		htm+='<img src="css/images/logo-padrao.svg" style="width:60px;">';			
 		}
-		htm+='<div style="display: block; margin-top: 10px; color: #ddd; font-size: 14px;">';
+		htm+='<div style="display: block; margin-top: 10px; color: #fbf0da; font-size: 14px;">';
 		htm+=''+val.category_name;
 		htm+='</div>';
 		htm+='</div>';
@@ -506,6 +506,17 @@ function categorias_Resultado(data)
 
 	createElement('lista-categorias',htm);	
 			   
+			   
+}
+
+function menu_Resultado(tempo_entrega)
+{		
+		var htm='';
+		
+       htm+='<div class="action-icon"><ons-icon icon="ion-clock"></ons-icon><br>';
+       htm+='<span class="action-label trn tempo_de_entrega">'+tempo_entrega+'</span></div>';
+
+	createElement('menu-resultado',htm);	
 			   
 }
 
