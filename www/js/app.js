@@ -92,23 +92,8 @@ function onPause() {
 }
 
 function handleOpenURL(url) {
-  console.log("received url: " + url);
+  console.log("url recebida: " + url);
 }
-
-Meteor.startup(function() {
-  if (Meteor.isCordova) {
-    window.plugins.launchmyapp.getLastIntent(function(url) {
-      if (intent.indexOf('masterhub://' > -1)) {
-        console.log("url recebida: " + url);
-      } else {
-        return console.log("ignore intent: " + url);
-      }
-    }, function(error) {
-      return console.log("no intent received");
-    });
-    return;
-  }
-});
 
 function onResume() {   
    try {
