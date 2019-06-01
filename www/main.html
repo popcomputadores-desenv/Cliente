@@ -876,29 +876,29 @@
      <ons-list-item style="line-height: 1; padding: 0;">
        <ons-row class="action top10">
 
-       <ons-col class="action-col" onclick="loadPageMerchantInfo();" id="menu_enabled_info">
+       <ons-col class="action-col" onclick="loadPageMerchantInfo();" id="menu_enabled_info" style="display: none;">
          <div class="action-icon"><ons-icon icon="ion-ios-information-outline"></ons-icon></div>
          <span class="action-label trn" data-trn-key="info">Info</span>
        </ons-col>
 
-     <ons-col class="action-col" onclick="showPage('reviews');" id="menu_enabled_review">
+     <ons-col class="action-col" onclick="showPage('reviews');" id="menu_enabled_review" style="display: none;">
          <div class="action-icon"><ons-icon icon="ion-ios-star-half"></ons-icon></div>
          <span class="action-label trn" data-trn-key="reviews">Reviews</span>
        </ons-col>
 
     	<ons-col class="action-col" id="menu-resultado"></ons-col>
        
-       <ons-col class="action-col" onclick="loadMap('merchant_map');" id="menu_enabled_map">
+       <ons-col class="action-col" onclick="loadMap('merchant_map');" id="menu_enabled_map" style="display: none;">
          <div class="action-icon"><ons-icon icon="ion-android-map"></ons-icon></div>
          <span class="action-label trn" data-trn-key="map">Map</span>
        </ons-col>
        
-       <ons-col class="action-col" onclick="showPage('page-photos');" id="menu_enabled_gallery">
+       <ons-col class="action-col" onclick="showPage('page-photos');" id="menu_enabled_gallery" style="display: none;">
          <div class="action-icon"><ons-icon icon="ion-images"></ons-icon></div>
          <span class="action-label trn" data-trn-key="photos">Photos</span>
        </ons-col>
        
-       <ons-col class="action-col" onclick="showPromoPage();" class="last" id="menu_enabled_promo">
+       <ons-col class="action-col" onclick="showPromoPage();" class="last" id="menu_enabled_promo" style="display: none;">
          <div class="action-icon"><ons-icon icon="ion-pricetags"></ons-icon></div>
          <span class="action-label trn" data-trn-key="ofertas">Ofertas</span>
        </ons-col>
@@ -963,6 +963,50 @@
 	      </ons-list-item>
 	    </ons-list>     
    </ons-scroller>
+   
+ <p></p>
+  <ons-bottom-toolbar class="stic-white-bg" style="border-top: none; white-space: nowrap;overflow: auto;height: 54px;box-shadow: rgb(136, 128, 128) 0px 11px 8px -10px inset;z-index: 0;background:  #e6e6e6;">
+   <ons-list class="stic-white-bg" style="border-top: none;">
+     <ons-list-item style="line-height: 1; padding: 0;">
+       <ons-row class="action top10">
+
+       <ons-col class="action-col" onclick="loadPageMerchantInfo();" id="menu_enabled_info2" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-ios-information-outline"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="info">Info</span>
+       </ons-col>
+
+     <ons-col class="action-col" onclick="showPage('reviews');" id="menu_enabled_review2" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-ios-star-half"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="reviews">Reviews</span>
+       </ons-col>
+
+    	<ons-col class="action-col" id="menu-resultado2"></ons-col>
+       
+       <ons-col class="action-col" onclick="loadMap('merchant_map');" id="menu_enabled_map2" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-android-map"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="map">Map</span>
+       </ons-col>
+       
+       <ons-col class="action-col" onclick="showPage('page-photos');" id="menu_enabled_gallery2" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-images"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="photos">Photos</span>
+       </ons-col>
+       
+       <ons-col class="action-col" onclick="showPromoPage();" class="last" id="menu_enabled_promo2" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-pricetags"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="ofertas">Ofertas</span>
+       </ons-col>
+	   
+       <!-- <ons-col class="action-col" onclick="carregaTaxasdeEntrega();" class="last">
+         <div class="action-icon"><ons-icon icon="fa-motorcycle"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="">Entrega</span>
+       </ons-col> -->	   
+
+       </ons-row>
+     </ons-list-item>
+   </ons-list>		
+		
+</ons-bottom-toolbar>        
   
 </ons-page>
 </script>
@@ -1047,6 +1091,50 @@
 	</button>
       
 <!-- Fim da atualização -->
+
+ <p></p>
+  <ons-bottom-toolbar class="stic-white-bg" style="border-top: none; white-space: nowrap;overflow: auto;height: 54px;box-shadow: rgb(136, 128, 128) 0px 11px 8px -10px inset;z-index: 0;background:  #e6e6e6;">
+   <ons-list class="stic-white-bg" style="border-top: none;">
+     <ons-list-item style="line-height: 1; padding: 0;">
+       <ons-row class="action top10">
+
+       <ons-col class="action-col" onclick="loadPageMerchantInfo();" id="menu_enabled_info3" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-ios-information-outline"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="info">Info</span>
+       </ons-col>
+
+     <ons-col class="action-col" onclick="showPage('reviews');" id="menu_enabled_review3" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-ios-star-half"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="reviews">Reviews</span>
+       </ons-col>
+
+    	<ons-col class="action-col" id="menu-resultado3"></ons-col>
+       
+       <ons-col class="action-col" onclick="loadMap('merchant_map');" id="menu_enabled_map3" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-android-map"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="map">Map</span>
+       </ons-col>
+       
+       <ons-col class="action-col" onclick="showPage('page-photos');" id="menu_enabled_gallery3" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-images"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="photos">Photos</span>
+       </ons-col>
+       
+       <ons-col class="action-col" onclick="showPromoPage();" class="last" id="menu_enabled_promo3" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-pricetags"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="ofertas">Ofertas</span>
+       </ons-col>
+	   
+       <!-- <ons-col class="action-col" onclick="carregaTaxasdeEntrega();" class="last">
+         <div class="action-icon"><ons-icon icon="fa-motorcycle"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="">Entrega</span>
+       </ons-col> -->	   
+
+       </ons-row>
+     </ons-list-item>
+   </ons-list>		
+		
+</ons-bottom-toolbar>        
 </ons-page>
 </script>
 

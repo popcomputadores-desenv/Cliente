@@ -512,12 +512,25 @@ function categorias_Resultado(data)
 function menu_Resultado(tempo_entrega)
 {		
 		var htm='';
-		
        htm+='<div class="action-icon"><ons-icon icon="ion-clock"></ons-icon><br>';
        htm+='<span class="action-label trn tempo_de_entrega">'+tempo_entrega+'</span></div>';
+	createElement('menu-resultado',htm);
+}
 
-	createElement('menu-resultado',htm);	
-			   
+function menu_Resultado2(tempo_entrega)
+{		
+		var htm='';
+       htm+='<div class="action-icon"><ons-icon icon="ion-clock"></ons-icon><br>';
+       htm+='<span class="action-label trn tempo_de_entrega">'+tempo_entrega+'</span></div>';
+	createElement('menu-resultado2',htm);
+}
+
+function menu_Resultado3(tempo_entrega)
+{		
+		var htm='';
+       htm+='<div class="action-icon"><ons-icon icon="ion-clock"></ons-icon><br>';
+       htm+='<span class="action-label trn tempo_de_entrega">'+tempo_entrega+'</span></div>';
+	createElement('menu-resultado3',htm);
 }
 
 function carregandoCategorias()

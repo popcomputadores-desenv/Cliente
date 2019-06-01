@@ -91,6 +91,25 @@ function onPause() {
    //toastMsg('pause');
 }
 
+function handleOpenURL(url) {
+  console.log("received url: " + url);
+}
+
+Meteor.startup(function() {
+  if (Meteor.isCordova) {
+    window.plugins.launchmyapp.getLastIntent(function(url) {
+      if (intent.indexOf('masterhub://' > -1)) {
+        console.log("url recebida: " + url);
+      } else {
+        return console.log("ignore intent: " + url);
+      }
+    }, function(error) {
+      return console.log("no intent received");
+    });
+    return;
+  }
+});
+
 function onResume() {   
    try {
 	   push.setApplicationIconBadgeNumber(function(){
@@ -416,8 +435,57 @@ document.addEventListener("pageinit", function(e) {
 		  $("#page-menubycategoryitem .restauran-title").text( $(".selected_restaurant_name").val() );
 	      $("#page-menubycategoryitem .rating-stars").attr("data-score",  $(".selected_restaurant_ratings").val() );	      
 	      $("#page-menubycategoryitem .logo-wrap").html('<img src="'+ getStorage("merchant_logo") +'" />');
-	      initRating();	      
-	      
+	      initRating();	  
+			
+		   menu_enabled_gallery = getStorage("menu_enabled_gallery");
+		   if(menu_enabled_gallery==1){
+	      	 	$("#menu_enabled_gallery2").show();
+	       } else {
+	      	 	$("#menu_enabled_gallery2").hide();
+	       }
+	       
+	       menu_enabled_booking = getStorage("menu_enabled_booking");
+		   if(menu_enabled_booking==1){
+	      	 	$("#menu_enabled_booking2").show();
+	       } else {
+	      	 	$("#menu_enabled_booking2").hide();
+	       }
+	       
+	       menu_enabled_hours = getStorage("menu_enabled_hours");
+		   if(menu_enabled_hours==1){
+	      	 	$("#menu_enabled_hours2").show();
+	       } else {
+	      	 	$("#menu_enabled_hours2").hide();
+	       }
+	       
+	       menu_enabled_review = getStorage("menu_enabled_review");	       
+		   if(menu_enabled_review==1){		   	   
+	      	 	$("#menu_enabled_review2").show();
+	       } else {
+	      	 	$("#menu_enabled_review2").hide();
+	       }
+	       
+	       menu_enabled_map = getStorage("menu_enabled_map");
+		   if(menu_enabled_map==1){
+	      	 	$("#menu_enabled_map2").show();
+	       } else {
+	      	 	$("#menu_enabled_map2").hide();
+	       }
+	       
+	       menu_enabled_info = getStorage("menu_enabled_info");
+		   if(menu_enabled_info==1){
+	      	 	$("#menu_enabled_info2").show();
+	       } else {
+	      	 	$("#menu_enabled_info2").hide();
+	       }
+	       
+	       menu_enabled_promo = getStorage("menu_enabled_promo");
+		   if(menu_enabled_promo==1){
+	      	 	$("#menu_enabled_promo2").show();
+	       } else {
+	      	 	$("#menu_enabled_promo2").hide();
+	       }	      
+						
 	      enabled_food_search_menu = getStorage("enabled_food_search_menu");	      
 	      if(enabled_food_search_menu==1){
 	       	 $(".search_wrapper").show();
@@ -425,7 +493,61 @@ document.addEventListener("pageinit", function(e) {
 	       	 $(".search_wrapper").hide();
 	      }
 		break;
-		
+			
+		case "page-itemdisplay":	
+			translatePage();
+			
+		   menu_enabled_gallery = getStorage("menu_enabled_gallery");
+		   if(menu_enabled_gallery==1){
+	      	 	$("#menu_enabled_gallery3").show();
+	       } else {
+	      	 	$("#menu_enabled_gallery3").hide();
+	       }
+	       
+	       menu_enabled_booking = getStorage("menu_enabled_booking");
+		   if(menu_enabled_booking==1){
+	      	 	$("#menu_enabled_booking3").show();
+	       } else {
+	      	 	$("#menu_enabled_booking3").hide();
+	       }
+	       
+	       menu_enabled_hours = getStorage("menu_enabled_hours");
+		   if(menu_enabled_hours==1){
+	      	 	$("#menu_enabled_hours3").show();
+	       } else {
+	      	 	$("#menu_enabled_hours3").hide();
+	       }
+	       
+	       menu_enabled_review = getStorage("menu_enabled_review");	       
+		   if(menu_enabled_review==1){		   	   
+	      	 	$("#menu_enabled_review3").show();
+	       } else {
+	      	 	$("#menu_enabled_review3").hide();
+	       }
+	       
+	       menu_enabled_map = getStorage("menu_enabled_map");
+		   if(menu_enabled_map==1){
+	      	 	$("#menu_enabled_map3").show();
+	       } else {
+	      	 	$("#menu_enabled_map3").hide();
+	       }
+	       
+	       menu_enabled_info = getStorage("menu_enabled_info");
+		   if(menu_enabled_info==1){
+	      	 	$("#menu_enabled_info3").show();
+	       } else {
+	      	 	$("#menu_enabled_info3").hide();
+	       }
+	       
+	       menu_enabled_promo = getStorage("menu_enabled_promo");
+		   if(menu_enabled_promo==1){
+	      	 	$("#menu_enabled_promo3").show();
+	       } else {
+	      	 	$("#menu_enabled_promo3").hide();
+	       }	      
+						
+		break;		
+			
 		case "page-getsettings":
 		  //getLanguageSettings();		  
 		  break;
@@ -2123,41 +2245,9 @@ search_type = getSearchType();
 				}
 /*Fim da atualização*/
 /* Atualização Master Hub (Correção Menu frente app) */
-		   if(data.details.menu_enabled_gallery===1){
-	      	 	$("#menu_enabled_gallery").show();
-	       } else {
-	      	 	$("#menu_enabled_gallery").hide();
-	       }
-		   if(data.details.menu_enabled_booking===1){
-	      	 	$("#menu_enabled_booking").show();
-	       } else {
-	      	 	$("#menu_enabled_booking").hide();
-	       }
-		   if(data.details.menu_enabled_hours===1){
-	      	 	$("#menu_enabled_hours").show();
-	       } else {
-	      	 	$("#menu_enabled_hours").hide();
-	       }
-		   if(data.details.menu_enabled_review===1){		   	   
-	      	 	$("#menu_enabled_review").show();
-	       } else {
-	      	 	$("#menu_enabled_review").hide();
-	       }
-		   if(data.details.menu_enabled_map===1){
-	      	 	$("#menu_enabled_map").show();
-	       } else {
-	      	 	$("#menu_enabled_map").hide();
-	       }
-		   if(data.details.menu_enabled_info===1){
-	      	 	$("#menu_enabled_info").show();
-	       } else {
-	      	 	$("#menu_enabled_info").hide();
-	       }
-		   if(data.details.menu_enabled_promo===1){
-	      	 	$("#menu_enabled_promo").show();
-	       } else {
-	      	 	$("#menu_enabled_promo").hide();
-	       }	
+				dump(data.details.tempo_de_entrega);
+				menu_Resultado(data.details.tempo_de_entrega);			
+					
 /*Fim da atualização*/					
 /*Fim da atualização*/					
 				if ( data.details.open){
@@ -2171,10 +2261,8 @@ search_type = getSearchType();
 				$(".selected_restaurant_name").val( data.details.restaurant_name );
 				$(".selected_restaurant_ratings").val( data.details.ratings.ratings );
 				
-				dump(data.details.tempo_de_entrega);
-				menu_Resultado(data.details.tempo_de_entrega);			
 				break;
-				
+					
 /* Atualização Master Hub (Programa de Fidelidade) */
 				case "ProgramaFidelidade":
 if (data.details.programa_fidelidade!=false){	
@@ -2244,8 +2332,10 @@ if (data.details.programa_fidelidade!=false){
 				
 				case "getItemDetails":
 				displayItem(data.details);
+				dump(data.details.tempo_de_entrega);
+				menu_Resultado3(data.details.tempo_de_entrega);			
 				break;
-				
+														
 				case "loadCart":
 				$("#page-cart .wrapper").show();				
 				$(".checkout-footer").show();
@@ -4572,6 +4662,14 @@ if (data.details.programa_fidelidade!=false){
 			    case "getItemCount":
 			    			       
 			       setTrackView( $(".selected_restaurant_name").val() + " category" ,  data.details.category_name );
+					
+			       setStorage("menu_enabled_gallery", data.details.menu_enabled_gallery);
+			       setStorage("menu_enabled_booking", data.details.menu_enabled_booking);
+			       setStorage("menu_enabled_hours", data.details.menu_enabled_hours);
+			       setStorage("menu_enabled_review", data.details.menu_enabled_review);
+			       setStorage("menu_enabled_map", data.details.menu_enabled_map);
+			       setStorage("menu_enabled_info", data.details.menu_enabled_info);
+			       setStorage("menu_enabled_promo", data.details.menu_enabled_promo);
 			       
 			       setStorage("item_count",data.details.total)			       
 			       var options = {
@@ -5614,8 +5712,7 @@ function displayItem(data)
 
 	$("#page-itemdisplay .title").html(data.item_name);
 	$("#page-itemdisplay .description").html(data.item_description);	
-	
-	
+				
 	if (!empty(data.category_info)){
 		$("#page-itemdisplay #search-text").text(data.category_info.category_name);
 	}
@@ -11890,12 +11987,12 @@ function getItem(index)
 	},
 	complete: function(data) {							
 	},
-	success: function (data) {	  	   
-/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$("#page-menubycategoryitem .estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.details.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$("#page-menubycategoryitem .estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.details.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da Atualização */		
-	   if (data.code=1){	   		  
+	success: function (data) {	 
+		
+				dump(data.details.tempo_de_entrega);
+				menu_Resultado2(data.details.tempo_de_entrega);			
+
+		if (data.code=1){	   		  
 	   	   if ( $('#item-results-'+index).exists() ){	      	  
 	   	   	  dump('element  exist' + index);
 	   	      displayItemByCategory(data.details, index);

@@ -3203,20 +3203,18 @@ font-weight: bold;
 
 .prod-qtd-mais {
     color: #5cc45c;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
     margin-top: 12px;
     line-height: 12px;
-    padding-left: 2px;
 }
 
 .prod-qtd-menos {
     color: #b83838;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
     margin-top: 12px;
     line-height: 12px;
-    padding-right: 2px;	
  
 }
 

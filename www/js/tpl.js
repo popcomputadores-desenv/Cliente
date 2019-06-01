@@ -145,7 +145,7 @@ function subItemRowWithCheckboxQty(subcat_id,radio_name,radio_value,label,price)
 	   htm+='</label>';
 	  htm+='</ons-col>';	
 /*Atualização Master Hub (Tradução)*/
-	  htm+='<ons-col class="concat-text text-left quantidade" width="24%">';
+	  htm+='<ons-col class="concat-text text-left quantidade" width="25%">';
      htm+='<ons-icon class="prod-qtd-menos" icon="ion-minus-circled"></ons-icon>';
 	  htm+='<input disabled name="subitem-qty" type="number" style="padding-top: 10px;" class="text-center numeric_only small-input text-center text-input text-input--underbar subitem-qty " ';
       	  htm+='placeholder="quant." value="0">';
