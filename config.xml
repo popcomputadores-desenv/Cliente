@@ -72,7 +72,7 @@
     <gap:plugin name="cordova-plugin-camera" source="npm" spec="2.4.1" />
     <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.7.1" /> 
                
-    <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="6.0.0"  >
+    <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="7.0.0"  >
 	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
 	  <variable name="PLAY_SERVICES_VERSION" value="11.0.3" /> 
 	</gap:plugin>
