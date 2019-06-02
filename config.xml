@@ -82,7 +82,7 @@
         <variable name="FIREBASE_VERSION" value="11.6.+" />
 	</gap:plugin> 
 	
-	<gap:plugin name="cordova-support-google-services" source="npm" />   
+	<!--<gap:plugin name="cordova-support-google-services" source="npm" />-->
 	<gap:plugin name="cordova-play-services-version-adapter" source="npm" />    
 
 	
