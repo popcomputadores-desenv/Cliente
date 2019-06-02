@@ -78,12 +78,12 @@
 	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.6.2" />
 	</gap:plugin> -->      
 
- 	<!--<gap:plugin name="cordova-plugin-firebase" source="npm" spec="^2.0.5" />
+ 	<gap:plugin name="cordova-plugin-firebase" source="npm" spec="^2.0.5" />
     <gap:plugin name="cordova-android-play-services-gradle-release" source="npm" spec="^2.0.0">
-        <variable name="PLAY_SERVICES_VERSION" value="11.0.1" />
+        <variable name="PLAY_SERVICES_VERSION" value="11.6.2" />
     </gap:plugin>
 	
-    <gap:plugin name="cordova-android-firebase-gradle-release" source="npm" spec="^2.0.0">
+    <!--<gap:plugin name="cordova-android-firebase-gradle-release" source="npm" spec="^2.0.0">
         <variable name="FIREBASE_VERSION" value="+" />
     </gap:plugin>-->
 	
