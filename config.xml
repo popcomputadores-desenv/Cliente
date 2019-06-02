@@ -91,6 +91,7 @@
       <replace-string file="project.properties" find="com.google.gms:google-services:+" replace="com.google.gms:google-services:3.1.1" />
 	</platform>	-->
 	
+    <gap:plugin name="cordova-android-firebase-gradle-release" source="npm" spec="15.+" />
 	
     <platform name="android">	
 		<config-file parent="/resources" target="./res/values/strings.xml">
