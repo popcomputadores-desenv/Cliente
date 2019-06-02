@@ -19,8 +19,8 @@
                
 	<preference name="orientation" value="portrait" />		
 	<preference name="phonegap-version" value="cli-8.1.1" />
-	<gap:engine name="android" spec="^7.1.4" />
-	<gap:engine name="ios" spec="^4.5.5" />
+	<engine name="android" spec="https://github.com/apache/cordova-android/tree/8.0.0" />
+	<engine name="ios" spec="^4.5.5" />
 			    
 	<preference name="AutoHideSplashScreen" value="false" />  	
     <preference name="SplashScreenDelay" value="10000" />    
