@@ -60,6 +60,7 @@
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
 	  <param name="FIREBASE_CORE_VERSION" value="16.1.0" />
+	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="17.0.1" />
 	</gap:plugin>        
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.4.3" source="git" />-->
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" />-->
@@ -70,7 +71,7 @@
     <gap:plugin name="cordova-plugin-camera" source="npm" spec="2.4.1" />
     <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.7.1" /> 
                
-    <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="7.0.0"  >
+    <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="6.0.0"  >
 	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
 	  <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
 	</gap:plugin>
@@ -80,9 +81,9 @@
         <variable name="PLAY_SERVICES_VERSION" value="11.0.1" />
     </gap:plugin>
 	
-    <gap:plugin name="cordova-android-firebase-gradle-release" source="npm" spec="^2.0.0">
+    <!--<gap:plugin name="cordova-android-firebase-gradle-release" source="npm" spec="^2.0.0">
         <variable name="FIREBASE_VERSION" value="+" />
-    </gap:plugin> 
+    </gap:plugin>-->
 	
     <platform name="android">	
 		<config-file parent="/resources" target="./res/values/strings.xml">
