@@ -19,6 +19,8 @@
                
 	<preference name="orientation" value="portrait" />		
 	<preference name="phonegap-version" value="cli-8.1.1" />
+	<engine name="android" spec="^7.1.4" />
+	<engine name="ios" spec="^4.5.5" />
 			    
 	<preference name="AutoHideSplashScreen" value="false" />  	
     <preference name="SplashScreenDelay" value="10000" />    
@@ -49,7 +51,7 @@
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
-      <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
+      <variable name="PLAY_SERVICES_VERSION" value="16.0.6" /> 
     </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
@@ -69,18 +71,18 @@
                
     <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="7.0.0"  >
 	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
-	  <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
+	  <variable name="PLAY_SERVICES_VERSION" value="16.0.6" /> 
 	</gap:plugin>
 	
 	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" spec="0.13.2" >
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
-	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.6.2" />
+	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="16.0.6" />
 	</gap:plugin>       
 
  	<!--<gap:plugin name="cordova-plugin-firebase" source="npm" spec="^2.0.0" />
     <gap:plugin name="cordova-android-play-services-gradle-release" source="npm" spec="^2.0.0">
-        <variable name="PLAY_SERVICES_VERSION" value="11.6.2" />
+        <variable name="PLAY_SERVICES_VERSION" value="16.0.6" />
     </gap:plugin>-->
 	
 	<platform name="android">
@@ -109,7 +111,7 @@
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
-	   <variable name="ANALYTICS_VERSION" value="11.6.2" /> 
+	   <variable name="ANALYTICS_VERSION" value="16.0.6" /> 
 	</plugin>
 	
 	    	
