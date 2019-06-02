@@ -56,7 +56,7 @@
 	  <param name="URL_SCHEME" value="masterhub" />
 	</gap:plugin> -->
 	
-	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm">
+	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" spec="16.0.0">
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
 	</gap:plugin>        
