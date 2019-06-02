@@ -46,6 +46,10 @@ var analytics;
 var usethislocation_lat;
 var usethislocation_lng;
 
+var handleOpenURL = function(url) {
+    alert("URL Recebida: " + url);
+};
+
 document.addEventListener("deviceready", onDeviceReady, false);
 /*Atualização Master Hub (Máscaras de Campos)*/
 $('.mask-phone').mask("(00) 0 0000-0000");
@@ -55,6 +59,10 @@ $('.mask-cnpj').mask("00.000.000/0000-00");
 function onDeviceReady() {    
 	    					
 	try {
+		
+		/* var handleOpenURL = function(url) {
+    window.localStorage.setItem("external_load", url);
+		}; */
 			
 		navigator.splashscreen.hide();
 		
@@ -89,10 +97,6 @@ function onOnline()
 
 function onPause() {
    //toastMsg('pause');
-}
-
-function handleOpenURL(url) {
-  console.log("url recebida: " + url);
 }
 
 function onResume() {   
