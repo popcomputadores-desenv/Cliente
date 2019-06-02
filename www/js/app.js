@@ -145,8 +145,8 @@ function explode(sep,string)
 
 function handleOpenURL(url) {
   setTimeout(function() {
-    alert("url recebida: " + url);
-  }, 0);
+    loadRestaurantCategory(4);
+  }, 3000);
 }
 
 function urlencode(data)
