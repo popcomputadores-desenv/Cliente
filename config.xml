@@ -89,7 +89,7 @@
 	</gap:plugin>
 		
 	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="5.0.4" >
-       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="" />
+       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyCjgZJOBT5K3Ms5ns20Q3lbopscSoGt3aI" />
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
