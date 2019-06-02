@@ -42,7 +42,9 @@
 	<gap:plugin name="cordova-plugin-network-information" source="npm" />
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
 	    
-    <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.1.2"  />
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="~2.1.2"  >
+		<variable name="FCM_VERSION" value="11.0.0" />
+	</plugin>
     
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
@@ -56,11 +58,10 @@
 	  <param name="URL_SCHEME" value="masterhub" />
 	</gap:plugin> -->
 	
-	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" >
+	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" spec="0.13.2" >
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
-	  <param name="FIREBASE_CORE_VERSION" value="16.1.0" />
-	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="17.0.1" />
+	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.0.1" />
 	</gap:plugin>        
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.4.3" source="git" />-->
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" />-->
