@@ -47,7 +47,7 @@
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
-      <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
+      <variable name="PLAY_SERVICES_VERSION" value="+" /> 
     </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
@@ -60,8 +60,6 @@
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
 	  <param name="FIREBASE_CORE_VERSION" value="16.1.0" />
-	  <param name="FIREBASE_COMMON_VERSION" value="16.0.3" />
-	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="17.+" />
 	</gap:plugin>        
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.4.3" source="git" />-->
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" />-->
@@ -72,10 +70,19 @@
     <gap:plugin name="cordova-plugin-camera" source="npm" spec="2.4.1" />
     <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.7.1" /> 
                
-    <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="6.0.0"  >
+    <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="7.0.0"  >
 	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
+	  <variable name="PLAY_SERVICES_VERSION" value="+" /> 
 	</gap:plugin>
-    
+	
+	<gap:plugin name="cordova-plugin-firebase" spec="^2.0.5" />
+    <gap:plugin name="cordova-android-play-services-gradle-release" spec="^2.0.0">
+        <variable name="PLAY_SERVICES_VERSION" value="+" />
+    </gap:plugin>
+    <gap:plugin name="cordova-android-firebase-gradle-release" spec="^2.0.0">
+        <variable name="FIREBASE_VERSION" value="+" />
+    </gap:plugin> 
+	
     <platform name="android">	
 		<config-file parent="/resources" target="./res/values/strings.xml">
 			<string name="fb_app_id">247951822354120</string>
@@ -89,11 +96,11 @@
 	</gap:plugin>
 		
 	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="5.0.4" >
-       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyCjgZJOBT5K3Ms5ns20Q3lbopscSoGt3aI" />
+       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="" />
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
-	   <variable name="ANALYTICS_VERSION" value="11.6.2" /> 
+	   <variable name="ANALYTICS_VERSION" value="+" /> 
 	</plugin>
 	
 	    	
