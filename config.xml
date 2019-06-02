@@ -47,7 +47,7 @@
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
-      <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
+      <variable name="PLAY_SERVICES_VERSION" value="11.8.0" /> 
     </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
@@ -56,7 +56,7 @@
 	  <param name="URL_SCHEME" value="masterhub" />
 	</gap:plugin> -->
 	
-	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" spec="16.0.0">
+	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" >
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
 	</gap:plugin>        
@@ -71,7 +71,7 @@
                
     <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="6.0.0"  >
 	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
-	  <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
+	  <variable name="PLAY_SERVICES_VERSION" value="11.8.0" /> 
 	</gap:plugin>
     
     <platform name="android">	
@@ -91,7 +91,7 @@
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
-	   <variable name="ANALYTICS_VERSION" value="11.0.1" /> 
+	   <variable name="ANALYTICS_VERSION" value="11.8.0" /> 
 	</plugin>
 	
 	    	
