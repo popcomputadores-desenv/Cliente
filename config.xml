@@ -47,7 +47,7 @@
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
-      <variable name="PLAY_SERVICES_VERSION" value="11.+" /> 
+      <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
     </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
@@ -60,6 +60,7 @@
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
 	  <param name="FIREBASE_CORE_VERSION" value="16.1.0" />
+	  <param name="FIREBASE_COMMON_VERSION" value="16.0.3" />
 	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="17.+" />
 	</gap:plugin>        
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.4.3" source="git" />-->
@@ -92,7 +93,7 @@
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
-	   <variable name="ANALYTICS_VERSION" value="12.+" /> 
+	   <variable name="ANALYTICS_VERSION" value="11.6.2" /> 
 	</plugin>
 	
 	    	
