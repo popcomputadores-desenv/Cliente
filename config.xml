@@ -19,8 +19,6 @@
                
 	<preference name="orientation" value="portrait" />		
 	<preference name="phonegap-version" value="cli-8.1.1" />
-	<engine name="android" spec="https://github.com/apache/cordova-android/tree/8.0.0" />
-	<engine name="ios" spec="^4.5.5" />
 			    
 	<preference name="AutoHideSplashScreen" value="false" />  	
     <preference name="SplashScreenDelay" value="10000" />    
@@ -45,13 +43,13 @@
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
 	    
     <gap:plugin name="phonegap-plugin-push" source="npm" spec="~2.1.2"  >
-		<variable name="FCM_VERSION" value="11.6.2" />
+		<variable name="FCM_VERSION" value="11.8.0" />
 	</gap:plugin>
     
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
-      <variable name="PLAY_SERVICES_VERSION" value="16.0.6" /> 
+      <variable name="PLAY_SERVICES_VERSION" value="11.8.0" /> 
     </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
@@ -71,23 +69,23 @@
                
     <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="7.0.0"  >
 	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
-	  <variable name="PLAY_SERVICES_VERSION" value="16.0.6" /> 
+	  <variable name="PLAY_SERVICES_VERSION" value="11.8.0" /> 
 	</gap:plugin>
 	
 	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" spec="0.13.2" >
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
-	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="16.0.6" />
+	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.8.0" />
 	</gap:plugin>       
 
  	<!--<gap:plugin name="cordova-plugin-firebase" source="npm" spec="^2.0.0" />
     <gap:plugin name="cordova-android-play-services-gradle-release" source="npm" spec="^2.0.0">
-        <variable name="PLAY_SERVICES_VERSION" value="16.0.6" />
+        <variable name="PLAY_SERVICES_VERSION" value="11.8.0" />
     </gap:plugin>-->
 	
 	<platform name="android">
-      <replace-string file="project.properties" find="com.google.android.gms:play-services-auth:11.8.0" replace="com.google.android.gms:play-services-auth:+" />
-      <replace-string file="project.properties" find="com.google.android.gms:play-services-identity:11.8.0" replace="com.google.android.gms:play-services-identity:+" />
+      <replace-string file="project.properties" find="com.android.tools.build:gradle:+" replace="com.android.tools.build:gradle:2.2.1" />
+      <replace-string file="project.properties" find="com.google.gms:google-services:+" replace="com.google.gms:google-services:3.1.1" />
 	</platform>	
 	
     <!--<gap:plugin name="cordova-android-firebase-gradle-release" source="npm" spec="^2.0.0">
