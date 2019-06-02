@@ -52,8 +52,13 @@
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
 	
-	<gap:plugin name="cordova-plugin-customurlscheme" source="npm">
+	<!-- <gap:plugin name="cordova-plugin-customurlscheme" source="npm">
 	  <param name="URL_SCHEME" value="masterhub" />
+	</gap:plugin> -->
+	
+	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm">
+	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
+	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
 	</gap:plugin>        
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.4.3" source="git" />-->
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" />-->

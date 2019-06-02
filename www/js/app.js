@@ -143,11 +143,174 @@ function explode(sep,string)
 	return res;
 }
 
-function handleOpenURL(url) {
+/* function handleOpenURL(url) {
+var identificador = url.substring(url.indexOf("?") + 1, url.indexOf("="));
+var variante = url.substring(url.indexOf("&") + 1);
+var resultado = url.substring(url.indexOf("=") + 1,url.indexOf("&"));
+	
+	if (identificador == "pagina") {
+		
+	switch (variante)
+  	   {
+  	   	  case "facebook":
+			   break;
+  	   	  case "instagram":
+			   break;
+  	   	  case "twitter":
+			   break;
+  	   	  case "google":
+			   break;
+  	   	  case "whatsapp":
+			   break;
+			   
+  	   	  case "facebook-oferta":		   
   setTimeout(function() {
-    getSlide(10,19);
-  }, 1000);
-}
+	  getSlide(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "instagram-oferta":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "twitter-oferta":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "google-oferta":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "whatsapp-oferta":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "facebook-info":		   
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "instagram-info":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "twitter-info":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "google-info":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "whatsapp-info":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 500);				   
+			   break;
+	   }	
+	}
+		
+	if (identificador == "empresa") {
+		
+	switch (variante)
+  	   {
+  	   	  case "facebook":
+			   break;
+  	   	  case "instagram":
+			   break;
+  	   	  case "twitter":
+			   break;
+  	   	  case "google":
+			   break;
+  	   	  case "whatsapp":
+			   break;
+			   
+  	   	  case "facebook-oferta":		   
+  setTimeout(function() {
+	  carregaEmpresa(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "instagram-oferta":
+  setTimeout(function() {
+	  carregaEmpresa(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "twitter-oferta":
+  setTimeout(function() {
+	  carregaEmpresa(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "google-oferta":
+  setTimeout(function() {
+	  carregaEmpresa(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "whatsapp-oferta":
+  setTimeout(function() {
+	  carregaEmpresa(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "facebook-info":		   
+  setTimeout(function() {
+	  carregaEmpresa(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "instagram-info":
+  setTimeout(function() {
+	  carregaEmpresa(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "twitter-info":
+  setTimeout(function() {
+	  carregaEmpresa(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "google-info":
+  setTimeout(function() {
+	  carregaEmpresa(resultado);
+  }, 500);				   
+			   break;
+			   
+  	   	  case "whatsapp-info":
+  setTimeout(function() {
+	  carregaEmpresa(resultado);
+  }, 500);				   
+			   break;
+	   }	
+	}	
+	
+} */
+
+cordova.plugins.firebase.dynamiclinks.onDynamicLink(function(data) {
+    //console.log("Dynamic link click with data:", data);
+	setTimeout(function() {
+    alert("Dynamic link click with data: " + data);
+  }, 200);
+	
+});
 
 function urlencode(data)
 {
