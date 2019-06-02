@@ -4,7 +4,7 @@
     xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "app.masterhub.cliente"
     version   = "3.0"
-	android-versionCode="25"
+	android-versionCode="26"
   	ios-CFBundleVersion="1">
     <!-- Mobile App 3.0 --> 
     <name>Master Hub®</name>
@@ -73,7 +73,7 @@
 	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" >
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
-	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.6.+" />
+	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.8.+" />
 	  <param name="FIREBASE_CORE_VERSION" value="11.8.+" />
 	</gap:plugin>       
 
@@ -91,7 +91,7 @@
       <replace-string file="project.properties" find="com.google.gms:google-services:+" replace="com.google.gms:google-services:3.1.1" />
 	</platform>	-->
 	
-    <gap:plugin name="cordova-android-firebase-gradle-release" source="npm" spec="15.+" />
+    <gap:plugin name="cordova-android-firebase-gradle-release" source="npm" />
 	
     <platform name="android">	
 		<config-file parent="/resources" target="./res/values/strings.xml">
