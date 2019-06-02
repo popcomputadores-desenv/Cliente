@@ -82,7 +82,7 @@
         <variable name="FIREBASE_VERSION" value="11.6.+" />
 	</gap:plugin> 
 	
-	    <gap:plugin spec="https://github.com/google/play-services-plugins.git" source="git" />    
+	<gap:plugin spec="https://github.com/google/play-services-plugins.git" source="git" />    
 
 	
 	<!--<platform name="android">
