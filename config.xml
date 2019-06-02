@@ -49,7 +49,7 @@
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
-      <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
+      <variable name="PLAY_SERVICES_VERSION" value="11.0.0" /> 
     </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
@@ -61,7 +61,7 @@
 	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" spec="0.13.2" >
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
-	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.6.2" />
+	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.0.0" />
 	</gap:plugin>        
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.4.3" source="git" />-->
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" />-->
@@ -74,16 +74,16 @@
                
     <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="7.0.0"  >
 	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
-	  <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
+	  <variable name="PLAY_SERVICES_VERSION" value="11.0.0" /> 
 	</gap:plugin>
 	
 	<!--<gap:plugin name="cordova-plugin-firebase" source="npm" spec="^2.0.5" />
     <gap:plugin name="cordova-android-play-services-gradle-release" source="npm" spec="^2.0.0">
-        <variable name="PLAY_SERVICES_VERSION" value="11.0.1" />
+        <variable name="PLAY_SERVICES_VERSION" value="11.0.0" />
     </gap:plugin>
 	
     <gap:plugin name="cordova-android-firebase-gradle-release" source="npm" spec="^2.0.0">
-        <variable name="FIREBASE_VERSION" value="+" />
+        <variable name="FIREBASE_VERSION" value="11.0.0" />
     </gap:plugin>-->
 	
     <platform name="android">	
@@ -103,7 +103,7 @@
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
-	   <variable name="ANALYTICS_VERSION" value="11.6.2" /> 
+	   <variable name="ANALYTICS_VERSION" value="11.0.0" /> 
 	</plugin>
 	
 	    	
