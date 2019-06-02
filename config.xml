@@ -79,7 +79,11 @@
 
  	<gap:plugin name="cordova-plugin-firebase" source="npm" spec="^2.0.5" >
 	  <variable name="PLAY_SERVICES_VERSION" value="11.6.+" /> 
+        <variable name="FIREBASE_VERSION" value="11.6.+" />
 	</gap:plugin> 
+	
+	    <gap:plugin spec="https://github.com/google/play-services-plugins.git" source="git" />    
+
 	
 	<!--<platform name="android">
       <replace-string file="project.properties" find="com.google.gms.googleservices.GoogleServicesPlugin" replace="com.google.gms.googleservices.GoogleServicesPlugin:+" />
