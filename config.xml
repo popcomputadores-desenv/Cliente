@@ -47,7 +47,7 @@
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
-      <variable name="PLAY_SERVICES_VERSION" value="+" /> 
+      <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
     </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
@@ -72,12 +72,12 @@
                
     <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="7.0.0"  >
 	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
-	  <variable name="PLAY_SERVICES_VERSION" value="+" /> 
+	  <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
 	</gap:plugin>
 	
 	<gap:plugin name="cordova-plugin-firebase" source="npm" spec="^2.0.5" />
     <gap:plugin name="cordova-android-play-services-gradle-release" source="npm" spec="^2.0.0">
-        <variable name="PLAY_SERVICES_VERSION" value="+" />
+        <variable name="PLAY_SERVICES_VERSION" value="11.0.1" />
     </gap:plugin>
 	
     <gap:plugin name="cordova-android-firebase-gradle-release" source="npm" spec="^2.0.0">
@@ -97,11 +97,11 @@
 	</gap:plugin>
 		
 	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="5.0.4" >
-       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="" />
+       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyCjgZJOBT5K3Ms5ns20Q3lbopscSoGt3aI" />
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
-	   <variable name="ANALYTICS_VERSION" value="+" /> 
+	   <variable name="ANALYTICS_VERSION" value="11.0.1" /> 
 	</plugin>
 	
 	    	
