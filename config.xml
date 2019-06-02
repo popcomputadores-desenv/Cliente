@@ -43,8 +43,8 @@
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
 	    
     <gap:plugin name="phonegap-plugin-push" source="npm" spec="~2.1.2"  >
-		<variable name="FCM_VERSION" value="11.0.0" />
-	</plugin>
+		<variable name="FCM_VERSION" value="11.0.1" />
+	</gap:plugin>
     
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
