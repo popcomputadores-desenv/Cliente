@@ -77,9 +77,9 @@
 	  <param name="FIREBASE_CORE_VERSION" value="11.6.2" />-->
 	</gap:plugin>       
 	
-	<gap:plugin name="cordova-play-services-version-adapter" source="npm" /> 
+	<!--<gap:plugin name="cordova-play-services-version-adapter" source="npm" /> 
 	
-	<!--<gap:plugin name="cordova-plugin-firebase" source="npm" /> -->
+	<gap:plugin name="cordova-plugin-firebase" source="npm" /> -->
 	<!--<gap:plugin name="cordova-support-google-services" source="npm" />
 	<gap:plugin spec="https://github.com/briantq/cordova-plugin-firebase.git#android-build" source="git" /> -->
 	
