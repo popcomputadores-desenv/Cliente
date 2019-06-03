@@ -75,11 +75,11 @@
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
 	</gap:plugin>       
 	
+	<gap:plugin name="cordova-play-services-version-adapter" source="npm" /> 
+	
 	<!--<gap:plugin name="cordova-plugin-firebase" source="npm" /> -->
 	<!--<gap:plugin name="cordova-support-google-services" source="npm" />
-	 <gap:plugin name="cordova-play-services-version-adapter" source="npm" />   -->
-
-	<gap:plugin spec="https://github.com/briantq/cordova-plugin-firebase.git#android-build" source="git" /> 
+	<gap:plugin spec="https://github.com/briantq/cordova-plugin-firebase.git#android-build" source="git" /> -->
 	
 	<!--<platform name="android">
       <replace-string file="project.properties" find="com.google.gms.googleservices.GoogleServicesPlugin" replace="com.google.gms.googleservices.GoogleServicesPlugin:+" />
