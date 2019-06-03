@@ -24,7 +24,7 @@ function carregarEstabelecimento(mtid)
    };
    sNavigator.pushPage("menucategory.html", options);
    */ 
-  callAjax("getCategoryCount","mtid="+ mtid + "&device_id="+getStorage("device_id") );
+  callAjax("getCategoryCount","mtid="+ mtid );
 }
 
 
