@@ -143,9 +143,9 @@ function explode(sep,string)
 	return res;
 }
 
-function abreCaixaCupom(cod_cupom){
+function abreCaixaCupom(cod_cupom,empresa){
 	ons.notification.confirm({
-	  message: getTrans('Voce ganhou um cupom de desconto, deseja usar ele agora?','Voce ganhou um cupom de desconto, deseja usar ele agora?') ,	  
+	  message: getTrans('Voce ganhou um cupom de desconto<br>'+cod_cupom+'<br> deseja usar ele agora?','Voce ganhou um cupom de desconto<br>'+cod_cupom+'<br> deseja usar ele agora?') ,	  
 	  title: dialog_title_default,
 	  buttonLabels: ['Sim', 'Não'],
 	  animation: 'fade', // or 'none'
@@ -154,7 +154,10 @@ function abreCaixaCupom(cod_cupom){
 	  callback: function(index) {
 	  	dump(index);
 	    if ( index==0){
-	    	$(".voucher_code").val(cod_cupom);       
+	    	$(".voucher_code").val(cod_cupom);   
+			setTimeout(function() {
+	  			carregarEstabelecimento(empresa);
+  			}, 1000);
 	    }
 	  }
 	});		
@@ -163,8 +166,14 @@ function abreCaixaCupom(cod_cupom){
 
 function handleOpenURL(url) {
 var identificador = url.substring(url.indexOf("?") + 1, url.indexOf("="));
-var variante = url.substring(url.indexOf("&") + 1);
+var variante = url.substring(url.indexOf("&") + 1, url.indexOf("#"));
 var resultado = url.substring(url.indexOf("=") + 1,url.indexOf("&"));
+var resultado2 = url.substring(url.indexOf("#") + 1);	
+	
+	/* 
+	Modelo do link:
+	masterhub://?cupom=YterfEw342FffG&facebook#teste
+	*/
 	
 	if (identificador == "pagina") {
 		
@@ -248,73 +257,88 @@ var resultado = url.substring(url.indexOf("=") + 1,url.indexOf("&"));
 	switch (variante)
   	   {
   	   	  case "facebook":
+  setTimeout(function() {
+	  carregarEstabelecimento(resultado);
+  }, 500);				   
 			   break;
   	   	  case "instagram":
+  setTimeout(function() {
+	  carregarEstabelecimento(resultado);
+  }, 500);				   
 			   break;
   	   	  case "twitter":
+  setTimeout(function() {
+	  carregarEstabelecimento(resultado);
+  }, 500);				   
 			   break;
   	   	  case "google":
+  setTimeout(function() {
+	  carregarEstabelecimento(resultado);
+  }, 500);				   
 			   break;
   	   	  case "whatsapp":
+  setTimeout(function() {
+	  carregarEstabelecimento(resultado);
+  }, 500);				   
 			   break;
 			   
   	   	  case "facebook-oferta":		   
   setTimeout(function() {
-	  carregaEmpresa(resultado);
+	  carregarEstabelecimento(resultado);
   }, 500);				   
 			   break;
 			   
   	   	  case "instagram-oferta":
   setTimeout(function() {
-	  carregaEmpresa(resultado);
+	  carregarEstabelecimento(resultado);
   }, 500);				   
 			   break;
 			   
   	   	  case "twitter-oferta":
   setTimeout(function() {
-	  abreCaixaCupom(resultado);
+	  carregarEstabelecimento(resultado);
   }, 500);				   
 			   break;
 			   
   	   	  case "google-oferta":
   setTimeout(function() {
-	  carregaEmpresa(resultado);
+	  carregarEstabelecimento(resultado);
   }, 500);				   
 			   break;
 			   
   	   	  case "whatsapp-oferta":
   setTimeout(function() {
-	  carregaEmpresa(resultado);
+	  carregarEstabelecimento(resultado);
   }, 500);				   
 			   break;
 			   
   	   	  case "facebook-info":		   
   setTimeout(function() {
-	  carregaEmpresa(resultado);
+	  carregarEstabelecimento(resultado);
   }, 500);				   
 			   break;
 			   
   	   	  case "instagram-info":
   setTimeout(function() {
-	  carregaEmpresa(resultado);
+	  carregarEstabelecimento(resultado);
   }, 500);				   
 			   break;
 			   
   	   	  case "twitter-info":
   setTimeout(function() {
-	  carregaEmpresa(resultado);
+	  carregarEstabelecimento(resultado);
   }, 500);				   
 			   break;
 			   
   	   	  case "google-info":
   setTimeout(function() {
-	  carregaEmpresa(resultado);
+	  carregarEstabelecimento(resultado);
   }, 500);				   
 			   break;
 			   
   	   	  case "whatsapp-info":
   setTimeout(function() {
-	  carregaEmpresa(resultado);
+	  carregarEstabelecimento(resultado);
   }, 500);				   
 			   break;
 	   }	
@@ -326,27 +350,27 @@ var resultado = url.substring(url.indexOf("=") + 1,url.indexOf("&"));
   	   {
   	   	  case "facebook":
 	  setTimeout(function() {
-		  abreCaixaCupom(resultado);
+		  abreCaixaCupom(resultado,resultado2);
 	  }, 2500);				   
 			   break;
   	   	  case "instagram":
 	  setTimeout(function() {
-		  abreCaixaCupom(resultado);
+		  abreCaixaCupom(resultado,resultado2);
 	  }, 2500);				   
 			   break;
   	   	  case "twitter":
 	  setTimeout(function() {
-		  abreCaixaCupom(resultado);
+		  abreCaixaCupom(resultado,resultado2);
 	  }, 2500);				   
 			   break;
   	   	  case "google":
 	  setTimeout(function() {
-		  abreCaixaCupom(resultado);
+		  abreCaixaCupom(resultado,resultado2);
 	  }, 2500);				   
 			   break;
   	   	  case "whatsapp":
 	  setTimeout(function() {
-		  abreCaixaCupom(resultado);
+		  abreCaixaCupom(resultado,resultado2);
 	  }, 2500);				   
 			   break;
 	   }	
