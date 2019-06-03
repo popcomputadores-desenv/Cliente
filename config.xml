@@ -73,8 +73,8 @@
 	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" >
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
-	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="15.+" />
-	  <param name="FIREBASE_CORE_VERSION" value="11.6.2" />
+	  <!--<param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="15.+" />
+	  <param name="FIREBASE_CORE_VERSION" value="11.6.2" />-->
 	</gap:plugin>       
 	
 	<gap:plugin name="cordova-play-services-version-adapter" source="npm" /> 
