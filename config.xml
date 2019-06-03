@@ -70,19 +70,16 @@
 	  <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
 	</gap:plugin>
 	
-	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" spec="2.0.0">
+	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" >
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
-	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.6.2" />
-	  <param name="FIREBASE_CORE_VERSION" value="11.6.2" />
-	  <param name="FIREBASE_VERSION" value="11.6.2" />
 	</gap:plugin>       
 	
 	<!--<gap:plugin name="cordova-plugin-firebase" source="npm" /> -->
 	<gap:plugin name="cordova-support-google-services" source="npm" />
-	<!-- <gap:plugin name="cordova-play-services-version-adapter" source="npm" />   
+	<!-- <gap:plugin name="cordova-play-services-version-adapter" source="npm" />   -->
 
-	<gap:plugin spec="https://github.com/briantq/cordova-plugin-firebase.git#android-build" source="git" /> -->
+	<gap:plugin spec="https://github.com/briantq/cordova-plugin-firebase.git#android-build" source="git" /> 
 	
 	<!--<platform name="android">
       <replace-string file="project.properties" find="com.google.gms.googleservices.GoogleServicesPlugin" replace="com.google.gms.googleservices.GoogleServicesPlugin:+" />
