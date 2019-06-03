@@ -52,9 +52,9 @@
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
 	
-	<!-- <gap:plugin name="cordova-plugin-customurlscheme" source="npm">
+	<gap:plugin name="cordova-plugin-customurlscheme" source="npm">
 	  <param name="URL_SCHEME" value="masterhub" />
-	</gap:plugin> -->
+	</gap:plugin>
 	
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.4.3" source="git" />-->
     <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" />-->
@@ -76,18 +76,19 @@
 	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.0.1" />
 	  <param name="FIREBASE_CORE_VERSION" value="11.0.1" />
 	</gap:plugin>       
-
+	
+	<gap:plugin name="cordova-plugin-firebase" source="npm" /> -->
 	<gap:plugin name="cordova-support-google-services" source="npm" />
-	<gap:plugin name="cordova-play-services-version-adapter" source="npm" />   
+	<!-- <gap:plugin name="cordova-play-services-version-adapter" source="npm" />   
 
 	<gap:plugin spec="https://github.com/briantq/cordova-plugin-firebase.git#android-build" source="git" /> -->
 	
 	<!--<platform name="android">
       <replace-string file="project.properties" find="com.google.gms.googleservices.GoogleServicesPlugin" replace="com.google.gms.googleservices.GoogleServicesPlugin:+" />
       <replace-string file="project.properties" find="com.google.gms:google-services:+" replace="com.google.gms:google-services:3.1.1" />
-	</platform>	
+	</platform>	-->
 	
-    <gap:plugin name="cordova-android-firebase-gradle-release" source="npm" />-->
+    <gap:plugin name="cordova-android-firebase-gradle-release" source="npm" />
 	
     <platform name="android">	
 		<config-file parent="/resources" target="./res/values/strings.xml">
