@@ -47,7 +47,7 @@
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
-      <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
+      <variable name="PLAY_SERVICES_VERSION" value="+" /> 
     </gap:plugin>
     
     <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
@@ -67,7 +67,7 @@
                
     <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="7.0.0"  >
 	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
-	  <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
+	  <variable name="PLAY_SERVICES_VERSION" value="+" /> 
 	</gap:plugin>
 	
 	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" >
@@ -105,7 +105,7 @@
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
-	   <variable name="ANALYTICS_VERSION" value="11.6.2" /> 
+	   <variable name="ANALYTICS_VERSION" value="+" /> 
 	</plugin>
 	
 	    	
