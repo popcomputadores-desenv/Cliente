@@ -145,7 +145,7 @@ function explode(sep,string)
 
 function abreCaixaCupom(cod_cupom,empresa){
 	ons.notification.confirm({
-	  message: getTrans('Voce ganhou um cupom de desconto<br>'+cod_cupom+'<br> deseja usar ele agora?','Voce ganhou um cupom de desconto<br>'+cod_cupom+'<br> deseja usar ele agora?') ,	  
+	  message: getTrans('Voce ganhou um cupom de desconto, deseja usar ele agora?','Voce ganhou um cupom de desconto, deseja usar ele agora?') ,	  
 	  title: dialog_title_default,
 	  buttonLabels: ['Sim', 'Não'],
 	  animation: 'fade', // or 'none'
