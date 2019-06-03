@@ -143,7 +143,25 @@ function explode(sep,string)
 	return res;
 }
 
-/* function handleOpenURL(url) {
+function abreCaixaCupom(cod_cupom){
+	ons.notification.confirm({
+	  message: getTrans('Voce ganhou um cupom de desconto, deseja usar ele agora?','Voce ganhou um cupom de desconto, deseja usar ele agora?') ,	  
+	  title: dialog_title_default,
+	  buttonLabels: ['Sim', 'Não'],
+	  animation: 'fade', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	  	dump(index);
+	    if ( index==0){
+	    	$(".voucher_code").val(cod_cupom);       
+	    }
+	  }
+	});		
+}
+
+
+function handleOpenURL(url) {
 var identificador = url.substring(url.indexOf("?") + 1, url.indexOf("="));
 var variante = url.substring(url.indexOf("&") + 1);
 var resultado = url.substring(url.indexOf("=") + 1,url.indexOf("&"));
@@ -254,7 +272,7 @@ var resultado = url.substring(url.indexOf("=") + 1,url.indexOf("&"));
 			   
   	   	  case "twitter-oferta":
   setTimeout(function() {
-	  carregaEmpresa(resultado);
+	  abreCaixaCupom(resultado);
   }, 500);				   
 			   break;
 			   
@@ -302,15 +320,38 @@ var resultado = url.substring(url.indexOf("=") + 1,url.indexOf("&"));
 	   }	
 	}	
 	
-} */
-
-cordova.plugins.firebase.dynamiclinks.onDynamicLink(function(data) {
-    //console.log("Dynamic link click with data:", data);
-	setTimeout(function() {
-    alert("Dynamic link click with data: " + data);
-  }, 200);
-	
-});
+	if (identificador == "cupom") {
+		
+	switch (variante)
+  	   {
+  	   	  case "facebook":
+	  setTimeout(function() {
+		  abreCaixaCupom(resultado);
+	  }, 2500);				   
+			   break;
+  	   	  case "instagram":
+	  setTimeout(function() {
+		  abreCaixaCupom(resultado);
+	  }, 2500);				   
+			   break;
+  	   	  case "twitter":
+	  setTimeout(function() {
+		  abreCaixaCupom(resultado);
+	  }, 2500);				   
+			   break;
+  	   	  case "google":
+	  setTimeout(function() {
+		  abreCaixaCupom(resultado);
+	  }, 2500);				   
+			   break;
+  	   	  case "whatsapp":
+	  setTimeout(function() {
+		  abreCaixaCupom(resultado);
+	  }, 2500);				   
+			   break;
+	   }	
+	}		
+}
 
 function urlencode(data)
 {
