@@ -154,7 +154,7 @@ function abreCaixaCupom(cod_cupom,empresa){
 	  callback: function(index) {
 	  	dump(index);
 	    if ( index==0){
-	    	$(".voucher_code").val(cod_cupom);   
+	    	$("#page-paymentoption .voucher_code").val(cod_cupom);   
 			setTimeout(function() {
 	  			carregarEstabelecimento(empresa);
   			}, 1000);
