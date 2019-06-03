@@ -193,61 +193,61 @@ var resultado2 = url.substring(url.indexOf("#") + 1);
   	   	  case "facebook-oferta":		   
   setTimeout(function() {
 	  getSlide(resultado);
-  }, 500);				   
+  }, 1500);				   
 			   break;
 			   
   	   	  case "instagram-oferta":
   setTimeout(function() {
 	  getSlide(resultado);
-  }, 500);				   
+  }, 1500);				   
 			   break;
 			   
   	   	  case "twitter-oferta":
   setTimeout(function() {
 	  getSlide(resultado);
-  }, 500);				   
+  }, 1500);				   
 			   break;
 			   
   	   	  case "google-oferta":
   setTimeout(function() {
 	  getSlide(resultado);
-  }, 500);				   
+  }, 1500);				   
 			   break;
 			   
   	   	  case "whatsapp-oferta":
   setTimeout(function() {
 	  getSlide(resultado);
-  }, 500);				   
+  }, 1500);				   
 			   break;
 			   
   	   	  case "facebook-info":		   
   setTimeout(function() {
 	  getSlide(resultado);
-  }, 500);				   
+  }, 1500);				   
 			   break;
 			   
   	   	  case "instagram-info":
   setTimeout(function() {
 	  getSlide(resultado);
-  }, 500);				   
+  }, 1500);				   
 			   break;
 			   
   	   	  case "twitter-info":
   setTimeout(function() {
 	  getSlide(resultado);
-  }, 500);				   
+  }, 1500);				   
 			   break;
 			   
   	   	  case "google-info":
   setTimeout(function() {
 	  getSlide(resultado);
-  }, 500);				   
+  }, 1500);				   
 			   break;
 			   
   	   	  case "whatsapp-info":
   setTimeout(function() {
 	  getSlide(resultado);
-  }, 500);				   
+  }, 1500);				   
 			   break;
 	   }	
 	}
@@ -259,87 +259,87 @@ var resultado2 = url.substring(url.indexOf("#") + 1);
   	   	  case "facebook":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
   	   	  case "instagram":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
   	   	  case "twitter":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
   	   	  case "google":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
   	   	  case "whatsapp":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 			   
   	   	  case "facebook-oferta":		   
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 			   
   	   	  case "instagram-oferta":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 			   
   	   	  case "twitter-oferta":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 			   
   	   	  case "google-oferta":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 			   
   	   	  case "whatsapp-oferta":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 			   
   	   	  case "facebook-info":		   
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 			   
   	   	  case "instagram-info":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 			   
   	   	  case "twitter-info":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 			   
   	   	  case "google-info":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 			   
   	   	  case "whatsapp-info":
   setTimeout(function() {
 	  carregarEstabelecimento(resultado);
-  }, 500);				   
+  }, 2500);				   
 			   break;
 	   }	
 	}	
