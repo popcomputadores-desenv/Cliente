@@ -42,8 +42,8 @@
 	<gap:plugin name="cordova-plugin-network-information" source="npm" />
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
 	    
-    <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.1.3" >
-	  <variable name="FCM_VERSION" value="11.6.2" /> 
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="~2.1.2" >
+	  <variable name="FCM_VERSION" value="11.0.0" /> 
     </gap:plugin>
     
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
@@ -75,6 +75,7 @@
 	<gap:plugin name="cordova-plugin-firebase-dynamiclinks" source="npm" >
 	  <param name="APP_DOMAIN" value="app.masterhub.com.br" />
 	  <param name="PAGE_LINK_DOMAIN" value="masterhub.page.link" />
+	  <param name="FIREBASE_DYNAMIC_LINKS_VERSION" value="11.0.0" />
 	</gap:plugin>       
 	
 	<gap:plugin name="cordova-play-services-version-adapter" source="npm" /> 
