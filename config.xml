@@ -42,9 +42,9 @@
 	<gap:plugin name="cordova-plugin-network-information" source="npm" />
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
 	    
-    <gap:plugin name="phonegap-plugin-push" source="npm" spec="~2.1.2"  />
+    <!--<gap:plugin name="phonegap-plugin-push" source="npm" spec="~2.1.2"  />
     
-    <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
+     <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
     <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
       <variable name="PLAY_SERVICES_VERSION" value="11.6.2" /> 
