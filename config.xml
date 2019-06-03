@@ -42,7 +42,7 @@
 	<gap:plugin name="cordova-plugin-network-information" source="npm" />
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
 	    
-    <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.1.3"  />
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.2.0"  />
     
     <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
         
