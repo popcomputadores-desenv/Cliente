@@ -4,30 +4,6 @@ var seguimentoGlobal;
 var pagina;
 var upload_url = krms_config.UploadUrl;
 
-function carregarEstabelecimento(mtid)
-{		  	
-  cart = [] ; /*clear cart variable*/
-  removeStorage("tips_percentage");  
-  removeStorage("cc_id");  
-  removeStorage("category_count");  
-  removeStorage("item_count");
-    
-  dump('clear cart');
-  
-  setStorage("merchant_id",mtid);
-    
-  /*var options = {
-      animation: 'slide',
-      onTransitionEnd: function() { 
-      	  callAjax("MenuCategory","merchant_id="+mtid + "&device_id=" + getStorage("device_id")  );	
-      } 
-   };
-   sNavigator.pushPage("menucategory.html", options);
-   */ 
-  callAjax("getCategoryCount","mtid="+ mtid );
-}
-
-
 var spinner='<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
 
 var lazyLoadSearchCategorias = {
