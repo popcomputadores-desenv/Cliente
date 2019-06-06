@@ -291,5 +291,31 @@ var resultado2 = url.substring(url.indexOf("#") + 1);
 		  carregarEstabelecimento(resultado);
 	  }, 2500);				   
 			   break;
+  	   	  case "panfleto-cupom":
+	  setTimeout(function() {
+		  abreCaixaCupom(resultado,resultado2);
+	  }, 2500);				   
+			   break;
+  	   	  case "banner-cupom":
+	  setTimeout(function() {
+		  abreCaixaCupom(resultado,resultado2);
+	  }, 2500);				   
+			   break;
+  	   	  case "cartao-cupom":
+	  setTimeout(function() {
+		  abreCaixaCupom(resultado,resultado2);
+	  }, 2500);				   
+			   break;
+  	   	  case "adesivo-cupom":
+	  setTimeout(function() {
+		  abreCaixaCupom(resultado,resultado2);
+	  }, 2500);				   
+			   break;
+  	   	  case "brinde-cupom":
+	  setTimeout(function() {
+		  abreCaixaCupom(resultado,resultado2);
+	  }, 2500);				   
+			   break;			   
 	   }	
-	}		}
+	}		
+}
