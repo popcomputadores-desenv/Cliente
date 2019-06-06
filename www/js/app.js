@@ -805,8 +805,7 @@ var params = "client_token="+ getStorage("client_token");
 		var pagina=getStorage("pagina");
 		callAjax("Pagina","id="+pagina);
 			break;
-/* Fim da atualização */
-			
+/* Fim da atualização */			
 /*Atualização Master Hub (Modificação Slide Personalizado)*/
 		case "carregarSlide-page":	
 		var slide=getStorage("slide");
@@ -906,8 +905,9 @@ var params = "client_token="+ getStorage("client_token");
 	var slide=getStorage("slide");
 	dump("slide=>"+slide);
 		
-	
-	if (empty(splash_screen))
+	if (empty(slide)){
+	} else 
+		if (empty(splash_screen))
 	{
 		carregarPagina(slide);
 		
@@ -2292,25 +2292,23 @@ if (data.details.programa_fidelidade!=false){
 				categorias_Resultado(data.details);
 				break;
 /*Fim da atualização*/
-/* Atualização Master Hub (Splash Page) */
-				case "Pagina":
-				paginaResultado(data.details);
-					translatePage();
-				break;
-/*Fim da atualização*/
 /* Atualização Master Hub (Sugestões de Estabelecimentos) */
 				case "Suggestion":
 				sugestoes_Resultado(data.details);
 				sugestoes_Campo(data.details);	
 				break;
 /* Fim da atualização */
-					
 				case "getItemByCategory":			
 				easy_category_list='';						
 				displayItemByCategory(data.details);
 				fillPopOverCategoryList(data.details.category_list);
 				break;
-				
+/* Atualização Master Hub (Splash Page) */
+				case "Pagina":
+				paginaResultado(data.details);
+					translatePage();
+				break;
+/*Fim da atualização*/
 				case "getItemDetails":
 				displayItem(data.details);
 				dump(data.details.tempo_de_entrega);

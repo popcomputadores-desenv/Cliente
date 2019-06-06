@@ -487,3 +487,61 @@ function showFidelidadeEmpresa(data)
 		menu.setMainPage('prelogin.html', {closeMenu: true})
 	}
 }
+
+function applyFidelidade() //Cópia de applyVoucher
+{
+	
+	if ( checkIfhasOfferDiscount() ){
+		return false;
+	}
+		
+	fidelidade_code = $(".fidelidade_code").val();
+	if ( fidelidade_code!="" ){
+		var params="fidelidade_code="+ fidelidade_code;        
+		params+="&client_token="+getStorage("client_token");
+		params+="&merchant_id="+ getStorage("merchant_id");
+		
+		params+="&cart_sub_total="+ getStorage("cart_sub_total");
+		
+		transaction_type=getStorage("transaction_type");		
+		params+="&transaction_type=" + getStorage("transaction_type");
+		/*if ( transaction_type=="delivery"){
+		   params+="&cart_delivery_charges="+ getStorage("cart_delivery_charges");
+		}*/
+		
+		params+="&cart_packaging="+ getStorage("cart_packaging");
+		params+="&cart_tax="+ getStorage("cart_tax");
+		params+="&pts_redeem_amount="+ $(".pts_redeem_amount").val();
+		
+		if ( empty(getStorage("tips_percentage")) ){
+	       setStorage("tips_percentage",0);
+	    }
+	    params+="&tips_percentage=" + getStorage("tips_percentage");	    
+		
+        callAjax("applyFidelidade",params);	 
+	} else {
+		onsenAlert(  getTrans('invalid fidelidade code','invalid_fidelidade_code') );
+	}
+}
+
+function removeFidelidade() //Cópia de removeVoucher
+{
+	$(".fidelidade_amount").val( '' );
+    $(".fidelidade_type").val( '' );
+    //$(".fidelidade_code").val('');
+/*Atualização Master Hub (Aplica personalizações quando Remover fidelidade))*/
+	$("#page-paymentoption .fidelidade_amount").css({"display":"none"});
+	$("#page-paymentoption .titulo-cupom").css({"display":"none"});	
+	$("#page-paymentoption .titulo-subtotal_new").css({"display":"none"});
+	$("#page-paymentoption .subtotal_new").css({"display":"none"});
+	$("#page-paymentoption .total-comodidade").html( getStorage("cart_tax_final"));
+	$("#page-paymentoption .total-gorjeta").html( getStorage("cart_tip_final"));			
+/*Fim da atualização*/
+   
+    $(".apply-fidelidade").show();
+    $(".remove-fidelidade").hide();
+    
+    $(".fidelidade-header").html( getTrans("Programa de Fidelidade",'fidelidade') );
+    
+    $(".total-amount").html( prettyPrice(getStorage("order_total_raw")) );
+}

@@ -1,7 +1,6 @@
 var versao_aplicativo;
 var versao_aplicativo_code;
 var seguimentoGlobal;
-var pagina;
 var upload_url = krms_config.UploadUrl;
 
 var spinner='<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
@@ -26,14 +25,6 @@ var lazyLoadSearchCategorias = {
   destroyItemContent: function(index, element) {
     console.log("Destroyed item " + index);
   }
-}
-
-function SairdoSlide(){
-	if (isLogin()){		
-		menu.setMainPage('home.html', {closeMenu: true});
-	} else {
-		menu.setMainPage('prelogin.html', {closeMenu: true});
-	}
 }
 
 function getcarregarCategorias(index)
@@ -394,61 +385,6 @@ function seguimentosResults(data)
 }
 
 /*Atualização Master Hub (Cria, Mostra e Oculta Seguimentos)*/
-
-/* Modificação Pagina Personalizada */
-
-function carregarPagina(pagina)
-{	
-	if (typeof pagina === "undefined" || pagina==null || pagina=="" ) { 
-	setStorage("pagina",'');	
-	} else {												
-	setStorage("pagina",pagina);
-	}
-	
-   menu.setMainPage('Pagina-Personalizada.html');
-	translatePage();
-}
-
-
-function paginaResultado(data)
-{	
-	getStorage("pagina");
-	
-	var pagina_personalizada='';
-	
-	pagina_personalizada+='<ons-carousel swipeable overscrollable auto-scroll fullscreen var="carousel">';
-	translatePage();
-	$.each( data.custom_page, function( key, val ) { 
-	
-		
-		var nome_pagina=val.page_name;
-		if (nome_pagina.indexOf(".-") != -1){
-	pagina_personalizada+='<ons-carousel-item class="fundo">';	
-	pagina_personalizada+='<div align="left" style="width: auto; margin-right: 25px; margin-top: 15px; margin-left: 10px; position: absolute;"></div>';
-		} else {
-	pagina_personalizada+='<ons-carousel-item class="fundo">';	
-	pagina_personalizada+='<div align="left" style="width: auto; margin-right: 25px; margin-top: 15px; margin-left: 10px; position: absolute;">'+val.page_name+'</div>';
-		}
-		if (nome_pagina.indexOf("...") != -1){
-	pagina_personalizada+='<div class="box2" align="right">';
-	pagina_personalizada+='<img src="css/images/bot_fecha.png" width="60px" height="80px" onclick="fechar_prop();" style="padding: 10px 10px 2px 0px;"></div>';	
-		}
-		
-	pagina_personalizada+='<div style="box-sizing: border-box; text-align: left;">'+val.content+'</div>';
-	pagina_personalizada+='</ons-carousel-item>';  
-		
-	});
-	
-pagina_personalizada+='</ons-carousel>';
-pagina_personalizada+='<ons-carousel-cover>';
-pagina_personalizada+='<div class="cover-label-apresentacao">Arraste para a direita ou para a esquerda.</div>';
-pagina_personalizada+='</ons-carousel-cover>';
-	  
-	createElement('pagina-personalizada',pagina_personalizada);
-	
-}
-
-/* FIM da Modificação Pagina Personalizada */
 
 function categorias_Resultado(data)
 {		
@@ -1216,66 +1152,6 @@ function dataAtualFormatada_NomeMes_hora(converter_data){
     return data_completa;
 }
 /*Fim da atualização*/
-/* Atualização Master Hub (Programa de Fidelidade) */
-function applyFidelidade() //Cópia de applyVoucher
-{
-	
-	if ( checkIfhasOfferDiscount() ){
-		return false;
-	}
-		
-	fidelidade_code = $(".fidelidade_code").val();
-	if ( fidelidade_code!="" ){
-		var params="fidelidade_code="+ fidelidade_code;        
-		params+="&client_token="+getStorage("client_token");
-		params+="&merchant_id="+ getStorage("merchant_id");
-		
-		params+="&cart_sub_total="+ getStorage("cart_sub_total");
-		
-		transaction_type=getStorage("transaction_type");		
-		params+="&transaction_type=" + getStorage("transaction_type");
-		/*if ( transaction_type=="delivery"){
-		   params+="&cart_delivery_charges="+ getStorage("cart_delivery_charges");
-		}*/
-		
-		params+="&cart_packaging="+ getStorage("cart_packaging");
-		params+="&cart_tax="+ getStorage("cart_tax");
-		params+="&pts_redeem_amount="+ $(".pts_redeem_amount").val();
-		
-		if ( empty(getStorage("tips_percentage")) ){
-	       setStorage("tips_percentage",0);
-	    }
-	    params+="&tips_percentage=" + getStorage("tips_percentage");	    
-		
-        callAjax("applyFidelidade",params);	 
-	} else {
-		onsenAlert(  getTrans('invalid fidelidade code','invalid_fidelidade_code') );
-	}
-}
-
-function removeFidelidade() //Cópia de removeVoucher
-{
-	$(".fidelidade_amount").val( '' );
-    $(".fidelidade_type").val( '' );
-    //$(".fidelidade_code").val('');
-/*Atualização Master Hub (Aplica personalizações quando Remover fidelidade))*/
-	$("#page-paymentoption .fidelidade_amount").css({"display":"none"});
-	$("#page-paymentoption .titulo-cupom").css({"display":"none"});	
-	$("#page-paymentoption .titulo-subtotal_new").css({"display":"none"});
-	$("#page-paymentoption .subtotal_new").css({"display":"none"});
-	$("#page-paymentoption .total-comodidade").html( getStorage("cart_tax_final"));
-	$("#page-paymentoption .total-gorjeta").html( getStorage("cart_tip_final"));			
-/*Fim da atualização*/
-   
-    $(".apply-fidelidade").show();
-    $(".remove-fidelidade").hide();
-    
-    $(".fidelidade-header").html( getTrans("Programa de Fidelidade",'fidelidade') );
-    
-    $(".total-amount").html( prettyPrice(getStorage("order_total_raw")) );
-}
-/*Fim da atualização*/
-
 /* Atualização Master Hub (Personalização) */
 function backtoSearch() //Cópia de backtoHome
 {
@@ -1326,27 +1202,5 @@ function showShippingLocation_login_btn(data)
     };  
 	
     sNavigator.pushPage("shippingLocationArea.html", options);
-}
-/*Fim da atualização*/
-/*Atualização Master Hub (Sistema Página Inicial)*/
-function Splash_Pagina_menu()
-{
-	var slide=getStorage("slide");
-	var html='';
-	html+='<ons-list-item onclick="getSlide('+slide+');" class="bottom-menu-item" style="border-bottom: 1px solid #DFDFE0;">';
-	html+='<ons-icon icon="ion-university" class="crimson"></ons-icon>';
-	html+='<span class="trn" data-trn-key="apresentacao">Apresentação Inicial</span>';
-	html+='</ons-list-item>';
-		
-			createElement("splash-pagina-menu",html);
-}
-
-function getSlide(slide)
-{	
-	menu.setMainPage('Slide-Personalizado.html', {
-		closeMenu: true,
-		callback: function(index){				
-	    }
-	});	
 }
 /*Fim da atualização*/

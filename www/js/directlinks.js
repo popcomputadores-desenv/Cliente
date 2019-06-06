@@ -1,23 +1,13 @@
-function carregarEstabelecimento(mtid)
+function carregarEstabelecimento(mtid) /* cópia da função loadRestaurantCategory(mtid) */
 {		  	
   cart = [] ; /*clear cart variable*/
   removeStorage("tips_percentage");  
   removeStorage("cc_id");  
   removeStorage("category_count");  
   removeStorage("item_count");
-    
-  dump('clear cart');
   
   setStorage("merchant_id",mtid);
     
-  /*var options = {
-      animation: 'slide',
-      onTransitionEnd: function() { 
-      	  callAjax("MenuCategory","merchant_id="+mtid + "&device_id=" + getStorage("device_id")  );	
-      } 
-   };
-   sNavigator.pushPage("menucategory.html", options);
-   */ 
   callAjax("getCategoryCount","mtid="+ mtid );
 }
 
@@ -41,13 +31,15 @@ function abreCaixaCupom(cod_cupom,empresa){
 	});		
 }
 
-
 function handleOpenURL(url) {
 var identificador = url.substring(url.indexOf("?") + 1, url.indexOf("="));
 var variante = url.substring(url.indexOf("&") + 1, url.indexOf("#"));
 var resultado = url.substring(url.indexOf("=") + 1,url.indexOf("&"));
 var resultado2 = url.substring(url.indexOf("#") + 1);	
 	
+	if (typeof resultado2 === "undefined" || resultado2==null || resultado2=="" || resultado2=="null" ){
+		var resultado2="0";
+	}
 	/* 
 	Modelo do link:
 	masterhub://?cupom=YterfEw342FffG&facebook#teste
@@ -58,14 +50,30 @@ var resultado2 = url.substring(url.indexOf("#") + 1);
 	switch (variante)
   	   {
   	   	  case "facebook":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 1500);				   
 			   break;
   	   	  case "instagram":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 1500);				   
 			   break;
+
   	   	  case "twitter":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 1500);				   
 			   break;
   	   	  case "google":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 1500);				   
 			   break;
   	   	  case "whatsapp":
+  setTimeout(function() {
+	  getSlide(resultado);
+  }, 1500);				   
 			   break;
 			   
   	   	  case "facebook-oferta":		   
@@ -252,5 +260,36 @@ var resultado2 = url.substring(url.indexOf("#") + 1);
 	  }, 2500);				   
 			   break;
 	   }	
-	}		
-}
+	}	
+	
+	if (identificador == "impresso") {
+		
+	switch (variante)
+  	   {
+  	   	  case "panfleto":
+	  setTimeout(function() {
+		  carregarEstabelecimento(resultado);
+	  }, 2500);				   
+			   break;
+  	   	  case "banner":
+	  setTimeout(function() {
+		  carregarEstabelecimento(resultado);
+	  }, 2500);				   
+			   break;
+  	   	  case "cartao":
+	  setTimeout(function() {
+		  carregarEstabelecimento(resultado);
+	  }, 2500);				   
+			   break;
+  	   	  case "adesivo":
+	  setTimeout(function() {
+		  carregarEstabelecimento(resultado);
+	  }, 2500);				   
+			   break;
+  	   	  case "brinde":
+	  setTimeout(function() {
+		  carregarEstabelecimento(resultado);
+	  }, 2500);				   
+			   break;
+	   }	
+	}		}

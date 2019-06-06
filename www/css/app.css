@@ -1,4 +1,4 @@
-containcontaincontaincontaincontainslide-inicial/* Neste arquivo há personalizações que são específicas para cada uso, sendo necessário adaptá-las e ajustá-las pelo debug */
+/* Neste arquivo há personalizações que são específicas para cada uso, sendo necessário adaptá-las e ajustá-las pelo debug */
 /* Atualização Master Hub (Personalizações) */
 /* Atualização Master Hub (Fundo Novo) */
 @-webkit-keyframes animatedBackground {
@@ -236,12 +236,6 @@ containcontaincontaincontaincontainslide-inicial/* Neste arquivo há personalizaç
 
 .imagem-apresentacao {
 
-}
-
-.slide-inicial {
-    background-size: 100%;
-	background-position: top;
-    background-repeat: no-repeat;
 }
 
 .vermelho {
