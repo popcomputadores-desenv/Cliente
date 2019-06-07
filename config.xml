@@ -4,7 +4,7 @@
     xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "app.masterhub.cliente"
     version   = "3.0"
-	android-versionCode="26"
+	android-versionCode="27"
   	ios-CFBundleVersion="1">
     <!-- Mobile App 3.0 --> 
     <name>Master Hub®</name>
