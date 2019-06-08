@@ -72,6 +72,11 @@ function getSlide(slide)
 	});	
 }
 
+function fechar_prop()
+	  {
+	 setHome2();
+	  }
+
 function SairdoSlide(){
 	if (isLogin()){		
 		menu.setMainPage('home.html', {closeMenu: true});

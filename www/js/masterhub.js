@@ -742,11 +742,6 @@ function limpa_formulario_cep_pedido() {
         }
     }
 /*Fim da atualização*/
-function fechar_prop()
-  {
- setHome2();
-  }
-
 /*Atualização Master Hub (Personalização de ocultar caixas de escolha na tela inicial)*/
 function mudarendereco()
 {
