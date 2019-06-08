@@ -73,9 +73,9 @@ function getSlide(slide)
 }
 
 function fechar_prop()
-	  {
-	 setHome2();
-	  }
+		{
+		menu.setMainPage('home.html', {closeMenu: true});
+	}
 
 function SairdoSlide(){
 	if (isLogin()){		
