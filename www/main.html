@@ -1218,7 +1218,7 @@
        </ons-row>
     </ons-list-item>  
        
-   <ons-list-item modifier="tappable" class="delivery_asap_wrap">
+   <!-- <ons-list-item modifier="tappable" class="delivery_asap_wrap">
        <label class="checkbox">
 		  <input type="checkbox" name="delivery_asap" value="1" class="delivery_asap" onclick="toogleTimewrap();" >
 		  <div class="checkbox__checkmark"></div>
@@ -1226,7 +1226,7 @@
 		  Deliver Asap
 		  </span>
 		</label>
-	</ons-list-item>
+	</ons-list-item> botão de entrega imediata retirado -->
 	</ons-list>  
    
    <div class="wrapper">
@@ -1561,8 +1561,8 @@
    <input type="hidden" name="cod_change_required" id="cod_change_required" class="cod_change_required">  
 
    
-   <div class="checkout_information_dinein" id="checkout_information_dinein"></div>
-   <div class="checkout_information_contact" id="checkout_information_contact"></div>
+   <div class="checkout_information_dinein" id="checkout_information_dinein" style="margin-top: 30px;"></div>
+   <div class="checkout_information_contact" id="checkout_information_contact" style="margin-top: 30px;"></div>
  
    <div class="wrapper voucher-wrap" style="margin-bottom: 0px;">
    
@@ -3441,8 +3441,7 @@
    
    <button class="button green-btn button--large trn track_driver marg20"
     onclick="showTrackingPage();" data-trn-key="track_driver"
-    style="position:fixed;bottom:0;"
-    >
+    style="position:sticky;bottom:20;">
 	Track Driver	
    </button>
 
@@ -3473,11 +3472,11 @@
               <h3 class="_driver_name"></h3>
               <p class="small-font-dim trn" data-trn-key="your_delivery_guy" >Your Delivery Guy</p>
             </ons-col>
-            <ons-col width="25%" class="center">
+            <!-- <ons-col width="25%" class="center">
                <a class="button green-btn-fone button--large call_driver fix">
 				<ons-icon icon="ion-android-call">
 			   </a>
-            </ons-col>
+            </ons-col> Tirei para não ligar para o motoboy -->
          </ons-row>
     </div>
       

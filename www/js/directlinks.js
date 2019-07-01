@@ -43,6 +43,8 @@ var resultado2 = url.substring(url.indexOf("#") + 1);
 	/* 
 	Modelo do link:
 	masterhub://?cupom=YterfEw342FffG&facebook#teste
+	Teste de Parametros:
+	https://jsfiddle.net/popcomputadores/3goacyke/
 	*/
 	
 	if (identificador == "pagina") {

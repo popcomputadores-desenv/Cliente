@@ -3,7 +3,7 @@ function privatePriceRowWithRadio(radio_name,radio_value,label,price,ischecked)
 	var htm='';
 	htm+='<ons-list-item modifier="tappable">';
     htm+='<ons-row class="row">';
-     htm+='<ons-col class="concat-text" width="60%">';
+     htm+='<ons-col class="concat-text" width="70%">';
        htm+='<label class="radio-button checkbox--list-item">';
 	     htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'" '+ischecked+' >';
 	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
@@ -50,7 +50,7 @@ function subItemRowWithRadio(subcat_id,radio_name,radio_value,label,price,ischec
      }
      
        htm+='<label class="radio-button checkbox--list-item">';
-	     htm+='<input type="radio" name="'+radio_name+subcat_id+'" class="'+radio_name+' sub_item_name_'+subcat_id+'" value="'+radio_value+'" '+ischecked+' data-id="'+subcat_id+'"  >';
+	     htm+='<input type="radio" name="'+radio_name+subcat_id+'" class="'+radio_name+' sub_item_name_'+subcat_id+'" value="'+radio_value+'" '+ischecked+' data-id="'+subcat_id+'" data-withqty="2" >';
 	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
 	     
 	     if(show_addon_description!=1){
@@ -84,47 +84,65 @@ function subItemRowWithRadio(subcat_id,radio_name,radio_value,label,price,ischec
 
 function subItemRowWithCheckbox(subcat_id, radio_name, radio_value, label, price, multi_option_val, description )
 {
+/*Atualização Master Hub (Correção Descrição)*/
 	
 	var show_addon_description=getStorage("show_addon_description");	
 		
 	var htm='';
 	htm+='<ons-list-item modifier="tappable">';
+	htm+='<div class="accordion click-accordion">';
     htm+='<ons-row class="row">';
-    
-     if(show_addon_description==1){
-        htm+='<ons-col class="concat-text" width="10%">';
-     } else {
-     	htm+='<ons-col class="concat-text" width="60%">';
-     }
-          
+     	htm+='<ons-col class="concat-text" width="56%">';
+
        htm+='<label class="checkbox checkbox--list-item">';
 	     htm+='<input type="checkbox" name="'+radio_name+'" class="sub_item_custom '+radio_name+' sub_item_name_'+subcat_id+' " value="'+radio_value+'" data-id="'+subcat_id+'" data-multi="'+multi_option_val+'"  >';
 	     htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
-	     
-	     if(show_addon_description!=1){
-	       htm+='<p class="description item-name concat-text"> '+label+'</p>';
-	     }
-	     
+	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
 	   htm+='</label>';
-	  htm+='</ons-col>';	
+	  htm+='</ons-col>';
+/*Fim da atualização*/	 
+		  	htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
 	  	  
 	  if(show_addon_description==1){
-	     htm+='<ons-col class="small-font-dim" width="30%" style="margin-top:10px;" >'+label+'</ons-col>';
+	     htm+='<ons-row class="small-font-dim" style="margin-top:-2px;font-size: 11px;" >'+description+'</ons-row>';
 	  }
-	  
-	  if(empty(description)){
+	  if(show_addon_description==1 || empty(description)){
 	  	description='';
-	  }
+	  }	
 	  
+    htm+='</ons-row>';
+	htm+='</div>';
+    htm+='</ons-list-item>';
+    return htm;
+
+}
+
+function subItemRowWithCheckboxQtd(subcat_id, radio_name, radio_value, label, price, multi_option_val, description )
+{
+/*Atualização Master Hub (Correção Descrição)*/
+	var show_addon_description=getStorage("show_addon_description");	
+		
+	var htm='';
+	htm+='<ons-list-item modifier="tappable">';
+    htm+='<ons-row class="row">';
+/*Atualização Master Hub (Correção 2 Sabores)*/
+     	htm+='<ons-col class="concat-text" width="56%">';
+
+       htm+='<label class="checkbox checkbox--list-item">';
+	     htm+='<input type="checkbox" name="'+radio_name+'" class="sub_item_custom_qty '+radio_name+' sub_item_name_'+subcat_id+' " value="'+radio_value+'" data-id="'+subcat_id+'" data-multi="'+multi_option_val+'" data-withqty="2" >';
+	     htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
+	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
+	   htm+='</label>';
+	  htm+='</ons-col>';
+/*Fim da atualização*/	 
+		  	htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
+	  	  
 	  if(show_addon_description==1){
-	     htm+='<ons-col class="small-font-dim" width="40%" style="margin-top:10px;padding-left:5px;" >'+description+'</ons-col>';
+	     htm+='<ons-row class="small-font-dim" style="margin-top:-2px;font-size: 11px;" >'+description+'</ons-row>';
 	  }
-	  
-	  if(show_addon_description==1){
-	    htm+='<ons-col class="text-right" width="20%" ><price>'+price+'</price></ons-col>';
-	  } else {
-	  	htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
-	  }
+	  if(show_addon_description==1 || empty(description)){
+	  	description='';
+	  }	
 	  
     htm+='</ons-row>';
     htm+='</ons-list-item>';
@@ -137,9 +155,10 @@ function subItemRowWithCheckboxQty(subcat_id,radio_name,radio_value,label,price)
 	var htm='';
 	htm+='<ons-list-item modifier="tappable">';
     htm+='<ons-row class="row">';
+	
      htm+='<ons-col class="concat-text" width="56%">';
        htm+='<label class="checkbox checkbox--list-item">';
-	     htm+='<input type="checkbox" name="'+radio_name+'" class="'+radio_name+' sub_item_name_'+subcat_id+'" " value="'+radio_value+'" data-id="'+subcat_id+'" data-withqty="2" >';
+	     htm+='<input type="checkbox" name="'+radio_name+'" class="sub_item_custom_qty '+radio_name+' sub_item_name_'+subcat_id+'" " value="'+radio_value+'" data-id="'+subcat_id+'" data-withqty="2" >';
 	     htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
 	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
 	   htm+='</label>';
@@ -147,7 +166,7 @@ function subItemRowWithCheckboxQty(subcat_id,radio_name,radio_value,label,price)
 /*Atualização Master Hub (Tradução)*/
 	  htm+='<ons-col class="concat-text text-left quantidade" width="25%">';
      htm+='<ons-icon class="prod-qtd-menos" icon="ion-minus-circled"></ons-icon>';
-	  htm+='<input disabled name="subitem-qty" type="number" style="padding-top: 10px;" class="text-center numeric_only small-input text-center text-input text-input--underbar subitem-qty " ';
+	  htm+='<input disabled name="subitem-qty" type="number" style="padding-top: 10px; padding: 15px 0px 0px 0px;width: 12px!important;font-size: 10px;" class="text-center numeric_only small-input text-center text-input text-input--underbar subitem-qty " ';
       	  htm+='placeholder="quant." value="0">';
      htm+='<ons-icon class="prod-qtd-mais" icon="ion-plus-circled"></ons-icon>';		  
 	  htm+='</ons-col>';	
@@ -254,7 +273,7 @@ function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_
 		  } else {
 		  	htm+='<p class="description item-name concat-text bold"><span class="qty-label vermelho">'+qty+"x </span> "+item_name+
 /*Fim da atualização*/
-		  	" <size>("+size+")</size>"
+		  	" <size style=\"font-size: x-small; margin-top: -12px;\">- "+size+"</size>"
 		  	+'</p>';
 		  }
 	   htm+='</ons-col>';
@@ -383,7 +402,7 @@ function tplPaymentList(radio_name, radio_value, label, icons)
 	var htm='';	
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
-          htm+='<ons-col class="concat-text" width="60%">';
+          htm+='<ons-col class="concat-text" width="75%">';
              htm+='<label class="radio-button checkbox--list-item">';
                htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'">';
                htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
@@ -403,7 +422,7 @@ function tplPaymentListStatic(radio_value, label, icons)
 	var htm='';	
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
-          htm+='<ons-col class="concat-text" width="60%">';          
+          htm+='<ons-col class="concat-text" width="75%">';          
                htm+='<p class="description item-name concat-text"> '+label+'</p>';             
           htm+='</ons-col>';
           htm+='<ons-col class="text-right '+radio_value+'" >';
@@ -419,7 +438,7 @@ function tplTaxasdeEntrega(id_bairro, bairro, cidade, taxa)
 	var htm='';	
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
-          htm+='<ons-col class="concat-text" width="60%">';          
+          htm+='<ons-col class="concat-text" width="75%">';          
                htm+='<p class="description item-name concat-text"> '+bairro+'</p>';             
           htm+='</ons-col>';
           htm+='<ons-col class="text-right">';
@@ -435,7 +454,7 @@ function tplPaymentProvider(radio_name, radio_value, label, icons)
 	var htm='';	
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
-          htm+='<ons-col class="concat-text" width="60%">';
+          htm+='<ons-col class="concat-text" width="70%">';
              htm+='<label class="radio-button checkbox--list-item">';
                htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'">';
                htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
@@ -547,7 +566,7 @@ function DineinFields()
    htm+='</div>';
    
    htm+='<div class="field-wrapper">';
-      htm+='<input type="text" name="dinein_special_instruction"  class="dinein_special_instruction text-input stic-rgba text-input--underbar has_validation" placeholder="'+ getTrans("Special Instructions",'special_instruction') + '" >';
+      htm+='<input type="text" name="dinein_special_instruction"  class="dinein_special_instruction text-input stic-rgba text-input--underbar has_validation" placeholder="'+ getTrans("Special Instructions",'special_instruction2') + '" >';
    htm+='</div> ';
    
 	return htm;
