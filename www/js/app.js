@@ -6416,38 +6416,23 @@ function addToCart()
 	   	   	   	}
 				if (required_sabores_selected <= 3){
 					
-					
-					
-					
-					
-					
-					
-					
-					
-			var err_msg= getTrans("Voce selecionou","voce_selecionou")+" ("+ contagem_selected+") "+getTrans("itens na secao","itens_em") +" - "+ required_sabores_name;		
-				
-			onsenAlert(err_msg);		
-					
-					
-			var sub_item_selected=$(".sub_item:checked").length; 			
-   	   	   
-   	   	   var xx=0; var addon_price_array=[];
+   	   	   var xx=0; var sabor_price_array=[];
    	   	   $.each( $(".sub_item:checked") , function( key, val ) { 	
 				var parent=$(this).parent().parent().parent();		
 				var sub_item_qty = parent.find(".subitem-qty").val()
 				if (empty(sub_item_qty)){
-					sub_item_qty="itemqty";
+					sub_item_qty=1;
 				}
 				var subcat_id=$(this).data("id");	
 
-				var addon_price=$(this).val();
-				addon_price=addon_price.split("|");				
+				var sabor_price=$(this).val();
+				sabor_price=sabor_price.split("|");				
 				
 			
-				if (!empty(addon_price[3])){
-				   addon_price_array[xx]=addon_price[1];
+				if (!empty(sabor_price[3])){
+				   sabor_price_array[xx]=sabor_price[1];
 				} else {
-				   addon_price_array[xx]=0;
+				   sabor_price_array[xx]=0;
 				}
 							
 				sub_item[sub_item.length] = {
@@ -6459,7 +6444,7 @@ function addToCart()
 				xx++;
 			});	
 			
-			dump(addon_price_array);			
+			dump(sabor_price_array);			
 			
 			largest=0;
 			
@@ -6467,31 +6452,28 @@ function addToCart()
 			dump("two_flavor_option=>"+two_flavor_option);
 			
 			if(two_flavor_option==2){
-				if($.isArray(addon_price_array)) {
-					var two_flavor_sum = 0;
-					$.each( addon_price_array , function( key_1, val_1 ) {							
-						two_flavor_sum+= parseFloat(val_1);
+				if($.isArray(sabor_price_array)) {
+					var sabor_sum = 0;
+					$.each( sabor_price_array , function( key_1, val_1 ) {							
+						sabor_sum+= parseFloat(val_1);
 					});
 					
-					dump("two_flavor_sum =>" +two_flavor_sum);
-					if(two_flavor_sum>0){
-					  largest = two_flavor_sum/2;
+					dump("sabor_sum =>" +sabor_sum);
+					if(sabor_sum>0){
+					  largest = sabor_sum/2;
 					}
 				}
 			} else {
-			   largest = Math.max.apply(Math,addon_price_array);
+			   largest = Math.max.apply(Math,sabor_price_array);
 			}
 			
 			dump("largest price => "+largest);
-			price=largest;	
+			teste=largest;	
 			   	   	   
 			
-					
-					
-					
-					
-					
-					
+		var msgem= getTrans("Voce selecionou","voce_selecionou")+" ("+ teste +") "+getTrans("num total","num_total") +" - "+ contagem_selected;		
+				
+			onsenAlert(msgem);		
 					
 				}
 				
