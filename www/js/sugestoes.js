@@ -179,10 +179,6 @@ function sugestoes_Resultado(data)
 function addVoto(sug_id) {
 
 var tokem = getStorage("client_token");
-if(tokem == "" || tokem == "null" || tokem == null){
-alert("Você deve estar logado para Votar");
-}
- else {
 	
  $.ajax({
     type:"GET",
@@ -200,7 +196,7 @@ alert("Você deve estar logado para Votar");
 		var icone = icone.replace("}","");
 		var icone = icone.replace(/[\\"]/g, '');
 		
-	    /* if(data.details.icone === "1"){
+	   /* if(data.details.icone == "1" || data.details.icone == 1){
 		$("#imgvoto-"+sug_id).attr("src","images/icons/voto.png");
 		$("#voto-"+sug_id+"-2").val(1);
 			toastMsg( getTrans("Obrigado por votar neste estabelecimento!",'voto_obrigado') );
@@ -226,12 +222,10 @@ alert("Você deve estar logado para Votar");
 
   });
  
- }
- 
 }
 
 //Verifico se o estabelecimento já é um favorito do cliente
-function verificaVoto(data, sug_id){
+function verificaVoto(data2, sug_id){
 
 var tokem = getStorage("client_token");
 if(tokem == "" || tokem == "null" || tokem == null){
@@ -254,13 +248,13 @@ alert("Você deve estar logado para Votar");
 		var icone = icone.replace("}","");
 		var icone = icone.replace(/[\\"]/g, '');
 		
-	    /* if(data.details.icone === "1"){
+	    if(icone === "1"){
 		$("#imgvoto-"+sug_id).attr("src","images/icons/voto.png");
 		$("#voto-"+sug_id+"-2").val(1);	
 		} else {
 		$("#imgvoto-"+sug_id).attr("src","images/icons/semvoto.png");
 		$("#voto-"+sug_id+"-2").val(0);	
-		} */
+		}
 
 		var votos = Number(document.getElementById("voto-"+sug_id).value);
     	var votoatual = Number(document.getElementById("voto-"+sug_id+"-2").value);
