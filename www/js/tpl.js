@@ -572,7 +572,8 @@ function customFields(name, placeholder)
 	var htm='';	
 	htm+='<div class="field-wrapper">';
 /*Atualização Master Hub (Tradução)*/
-	  htm+='<input type="text" name="'+name+'"  class="text-input text-input--underbar" placeholder="'+placeholder+'" value="" has_validation data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >';
+	/*  htm+='<input type="text" name="'+name+'"  class="text-input text-input--underbar" placeholder="'+placeholder+'" value="" has_validation data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >'; */
+	  htm+='<input type="text" name="'+name+'"  class="text-input text-input--underbar" placeholder="'+placeholder+'" value="" >';
 	htm+='</div>';
 	return htm;
 }

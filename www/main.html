@@ -1294,7 +1294,7 @@
        <ons-row class="row">
            <ons-col class="stic-title concat-text white trn" width="60%" data-trn-key="signup" >Signup</ons-col>
            <ons-col class="text-right" >
-              <button class="button button--quiet green uppercase trn" onclick="showLogin(1);" data-trn-key="sign_in">
+       <button class="button button--quiet green uppercase trn" onclick="showLogin(1);" data-trn-key="sign_in" style="color: white;">
               Sign in
               </button>              
            </ons-col>
@@ -1366,7 +1366,12 @@
 	Create Account
    </button>
    
+      <button class="button verde-btn button--large" id="loginbutton" onclick="showLogin(1);" style="font-size: xx-small;width: 100%;">
+        <ons-icon icon="fa-facebook"></ons-icon> <ons-icon icon="ion-social-googleplus"></ons-icon><span class="trn" data-trn-key="entrar-com-redes-sociais">Cadastrar com dados do Facebook ou Google</span>
+   
    </div>
+   
+   
    
    </form>
 
@@ -2247,9 +2252,8 @@
 
    <ons-toolbar>        
     <div class="left">
-      <ons-toolbar-button onclick="setHome();">
-         <ons-icon icon="ion-ios-arrow-back"></ons-icon>
-      </ons-toolbar-button>  
+	 <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text"></span></div>                         
     </div>  
          
     <div class="center">
@@ -2299,7 +2303,7 @@
        
       <button class="trn button button--quiet green uppercase crimson" onclick="showVerifyAccountPage();" data-trn-key="verify_account">
        Verify Account
-   </button>           
+   </button>
    </div>
               
 </ons-page>
@@ -3189,9 +3193,8 @@
 
    <ons-toolbar>        
     <div class="left">
-      <ons-toolbar-button onclick="setHome();">
-         <ons-icon icon="ion-ios-arrow-back"></ons-icon>
-      </ons-toolbar-button>  
+	 <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text"></span></div>                         
     </div>  
 
     <div class="center white">
