@@ -30,7 +30,7 @@
     <preference name="StatusBarBackgroundColor" value="#8d0710" />
         
     <preference name="android-minSdkVersion" value="19" />
-    <preference name="android-targetSdkVersion" value="26" />
+    <preference name="android-targetSdkVersion" value="28" />
     <preference name="DisallowOverscroll" value="true" />
             
     
