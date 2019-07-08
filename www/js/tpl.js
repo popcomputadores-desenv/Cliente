@@ -115,7 +115,7 @@ function subItemRowWithCheckbox(subcat_id, radio_name, radio_value, label, price
 
 }
 
-function subItemRowWithCheckboxSabor(subcat_id, radio_name, radio_value, label, price, limite_sabores, description )
+function subItemRowWithCheckboxSabor(subcat_id, radio_name, radio_value, label, price, limite_sabores, description, result_obj)
 {
 /*Atualização Master Hub (Correção Descrição)*/
 	
@@ -127,13 +127,13 @@ function subItemRowWithCheckboxSabor(subcat_id, radio_name, radio_value, label, 
      	htm+='<ons-col class="concat-text" width="56%">';
 
        htm+='<label class="checkbox checkbox--list-item">';
-	     htm+='<input type="checkbox" name="'+radio_name+'" class="sub_item_sabor '+radio_name+' sub_item_name_'+subcat_id+' " value="'+radio_value+'" data-id="'+subcat_id+'" data-multi="'+limite_sabores+'" data-sabores="limitado"  >';
+	     htm+='<input type="checkbox" name="'+radio_name+'" class="sub_item_sabor '+radio_name+' sub_item_name_'+subcat_id+' " value='+radio_value+' data-id="'+subcat_id+'" data-multi="'+limite_sabores+'" data-sabores="limitado"  >';
 	     htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
 	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
 	   htm+='</label>';
 	  htm+='</ons-col>';
 /*Fim da atualização*/	 
-		  	htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
+		  	htm+='<ons-col class="text-right" ><price>'+result_obj+'</price></ons-col>';
 	  	  
 	  if(show_addon_description==1){
 	     htm+='<ons-row class="small-font-dim" style="margin-top:-2px;font-size: 11px;" >'+description+'</ons-row>';

@@ -5677,6 +5677,13 @@ function loadItemDetails(item_id,mtid,cat_id)
    sNavigator.pushPage("itemDisplay.html", options);
 }
 
+function procuraSabor(size_id, saboresOK2){
+var saborOK=saboresOK2;
+    return $.grep(saborOK, function(item){
+      return item.size_id == size_id;
+    });
+}
+
 function displayItem(data)
 {	
 	if (data.photo!==null){
@@ -5712,46 +5719,83 @@ function displayItem(data)
 	}
 	
 	if (data.dois_sabores==2){
-		//data.has_price=1;
+		data.has_price=1;
 	}
-	
+	var sabor_selecionado='';
 	if ( data.has_price==2){	
-		htm+='<ons-list-header class="list-header trn" data-trn-key="price">Price</ons-list-header>';
+		htm+='<ons-list-header class="list-header trn" data-trn-key="price_a_partir">Valor a partir de</ons-list-header>';
 		var x=0
 		$.each( data.prices, function( key, val ) { 				
 			if (data.discount>0){
 				var discount_price='<price class="discount">'+val.pretty_price;				
 				discount_price+='</price>';
 				discount_price+='<price>'+val.discounted_price_pretty+'</price>';
-				if (x==0){	
+				if (x==0){
 					htm+=privatePriceRowWithRadio2('price',
-					val.price+'|'+val.size ,
+					val.price+'|'+val.size+'|'+val.size_id ,
 					val.size,
 					discount_price,
 					'checked="checked"');
 				} else {
 					htm+=privatePriceRowWithRadio2('price',
-					val.price+'|'+val.size,
+					val.price+'|'+val.size+'|'+val.size_id,
 					val.size,
 					discount_price);
 				}	
 			} else {			
-				if (x==0){				
+				if (x==0){	
 					htm+=privatePriceRowWithRadio('price',
-					val.price+'|'+val.size ,
+					val.price+'|'+val.size+'|'+val.size_id ,
 					val.size,
 					val.pretty_price,
 					'checked="checked"');
 				} else {
 					htm+=privatePriceRowWithRadio('price',
-					val.price+'|'+val.size,
+					val.price+'|'+val.size+'|'+val.size_id,
 					val.size,
 					val.pretty_price);
 				}		
 			}	
 			x++;
 		});	
-	}
+	} else {
+		htm+='<ons-list-header class="list-header trn" data-trn-key="price_a_partir">Valor a partir de</ons-list-header>';
+		var x=0
+		$.each( data.prices, function( key, val ) { 				
+			if (data.discount>0){
+				var discount_price='<price class="discount">'+val.pretty_price;				
+				discount_price+='</price>';
+				discount_price+='<price>'+val.discounted_price_pretty+'</price>';
+				if (x==0){
+					sabor_selecionado=val.size_id;
+					htm+=privatePriceRowWithRadio2('price',
+					0+'|'+val.size+'|'+val.size_id ,
+					val.size,
+					discount_price,
+					'checked="checked"');
+				} else {
+					htm+=privatePriceRowWithRadio2('price',
+					0+'|'+val.size+'|'+val.size_id,
+					val.size,
+					discount_price);
+				}	
+			} else {			
+				if (x==0){	
+					sabor_selecionado=val.size_id;
+					htm+=privatePriceRowWithRadio('price',
+					0+'|'+val.size+'|'+val.size_id ,
+					val.size,
+					val.pretty_price,
+					'checked="checked"');
+				} else {
+					htm+=privatePriceRowWithRadio('price',
+					0+'|'+val.size+'|'+val.size_id,
+					val.size,
+					val.pretty_price);
+				}		
+			}	
+			x++;
+		});		}
 	
 	if (!empty(data.cooking_ref)){
 		htm+='<ons-list-header class="list-header trn" data-trn-key="cooking_ref">Cooking Preference</ons-list-header>';
@@ -5772,19 +5816,21 @@ function displayItem(data)
 	if (!empty(data.sabores_escolhidos)){
 		$.each( data.sabores_escolhidos, function( key, val ) { 
 			htm+='<ons-list-header class="list-header require_sabores_'+val.subcat_id+' ">'+val.subcat_name+'</ons-list-header>';
-			
 			htm+='<input type="hidden" name="require_sabores_'+val.subcat_id+'" class="require_sabores" value="'+val.required_sabores+'" data-id="'+val.subcat_id+'" data-multi="'+val.limite_sabores+'" data-name="'+val.subcat_name+'" >'
 			if (!empty(val.sub_item)){
-				$.each( val.sub_item, function( key2, val2 ) { 				
-					  
+				$.each( val.sub_item, function( key2, val2 ) { 
+					var saboresOK=val2.price;
+					result_obj=procuraSabor(sabor_selecionado, saboresOK)[0].price;
+					//alert(procuraSabor(sabor_selecionado, saboresOK)[0].price);					
 	                     htm+=subItemRowWithCheckboxSabor(
 	                                 val.subcat_id,
 	                                 'sub_item', 
-	                                 val2.sub_item_id+"|"+val2.price+"|"+val2.sub_item_name,
+	                                 val2.sub_item_id+"|"+result_obj+"|"+val2.sub_item_name,
 	                                 val2.sub_item_name,
-	                                 val2.price>0?val2.pretty_price:'',
+	                                 result_obj>0?prettyPrice(result_obj):'',
 	                                 val.limite_sabores,
-	                                 val2.item_description
+	                                 val2.item_description,
+							 		 prettyPrice(result_obj)
 	                                 );	
 				});	
 			}
@@ -6206,7 +6252,6 @@ function setCartValue()
 	if (isNaN(selected_price)){
 		selected_price=0;
 	}	
-	
 	dump("discount=>"+discount);
 	dump("selected_price=>"+selected_price);
 	var qty=parseFloat($(".qty").val());
@@ -6237,7 +6282,8 @@ function setCartValue()
         } else {
         	addon_total+=qty* parseFloat(addo_price[1]);
         	//addon_prices.push(addon_total);			
-		}        
+		}  
+		//alert(addo_price[1]);
     });
 	
     $('#page-itemdisplay .sub_item:radio:checked').each(function(){        		
@@ -6277,7 +6323,6 @@ function addToCart()
 {		
 	var proceed=true;
 	var proceed2=true;
-	var proceed3=true;
 	
 	/*check if sub item has required*/
 	if ( $(".require_addon").exists()){
@@ -6436,23 +6481,23 @@ function addToCart()
        
         addon_total+=qty * parseFloat(sabor_price[1]);
         sabor_price_array.push( parseFloat(sabor_price[1]) );
-		//addon_total = Math.max.apply(Math, sabor_price);
+		//addon_total = Math.max.apply(Math, sabor_price_array);
 			
-				/* if (!empty(sabor_price[2])){
-				   sabor_price_array[xx]=sabor_price[1];
-				} else {
-				   sabor_price_array[xx]=0;
-				} */
+				// if (!empty(sabor_price[2])){
+				//   sabor_price_array[xx]=sabor_price[1];
+				//} else {
+				//   sabor_price_array[xx]=0;
+				//} 
 		
 				sub_item[sub_item.length] = {
 					'subcat_id':subcat_id,
 					'value':valor_sabores,
 					'qty':sub_item_qty
 				};	
-					//xx++;
+					xx++;
 		
 			dump(sabor_price_array);			
-			addon_total=0;
+			//addon_total=0;
 			//price=price;
 			two_flavor_option = getStorage("two_flavor_option");
 			dump("two_flavor_option=>"+two_flavor_option);
