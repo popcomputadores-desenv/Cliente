@@ -50,7 +50,7 @@ function subItemRowWithRadio(subcat_id,radio_name,radio_value,label,price,ischec
      }
      
        htm+='<label class="radio-button checkbox--list-item">';
-	     htm+='<input type="radio" name="'+radio_name+subcat_id+'" class="'+radio_name+' sub_item_name_'+subcat_id+'" value="'+radio_value+'" '+ischecked+' data-id="'+subcat_id+'" data-withqty="2" >';
+	     htm+='<input type="radio" name="'+radio_name+subcat_id+'" class="'+radio_name+' sub_item_name_'+subcat_id+'" value="'+radio_value+'" '+ischecked+' data-id="'+subcat_id+'"  >';
 	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
 	     
 	     if(show_addon_description!=1){
@@ -193,14 +193,15 @@ function subItemRowWithCheckboxQty(subcat_id,radio_name,radio_value,label,price)
 	     htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
 	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
 	   htm+='</label>';
-	  htm+='</ons-col>';	
+	  htm+='</ons-col>';
+
 /*Atualização Master Hub (Tradução)*/
-	  htm+='<ons-col class="concat-text text-left quantidade" width="25%">';
+	htm+='<ons-col class="concat-text text-left quantidade" width="25%">';
      htm+='<ons-icon class="prod-qtd-menos" icon="ion-minus-circled"></ons-icon>';
 	  htm+='<input disabled name="subitem-qty" type="number" style="padding-top: 10px; padding: 15px 0px 0px 0px;width: 12px!important;font-size: 10px;" class="text-center numeric_only small-input text-center text-input text-input--underbar subitem-qty " ';
       	  htm+='placeholder="quant." value="0">';
      htm+='<ons-icon class="prod-qtd-mais" icon="ion-plus-circled"></ons-icon>';		  
-	  htm+='</ons-col>';	
+	  htm+='</ons-col>';
 /*Fim da atualização*/
 	  htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
     htm+='</ons-row>';

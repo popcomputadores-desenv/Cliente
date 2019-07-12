@@ -1977,7 +1977,7 @@ function callAjax(action,params)
 		type: 'post',                  
 		async: false,
 		dataType: 'jsonp',
-		timeout: 30000,
+		timeout: 20000,
 		crossDomain: true,
 	 beforeSend: function() {
 		if(ajax_request != null) {			 	
@@ -1992,7 +1992,7 @@ function callAjax(action,params)
 				hideAllModal();				
 				ajax_request.abort();
 	            toastMsg( getTrans('Request taking lot of time. Please try again','request_taking_lot_time')  );	            
-	        }, 30000);
+	        }, 20000);
 			  
 			switch(action)
 			{
@@ -5795,7 +5795,8 @@ function displayItem(data)
 				}		
 			}	
 			x++;
-		});		}
+		});		
+	}
 	
 	if (!empty(data.cooking_ref)){
 		htm+='<ons-list-header class="list-header trn" data-trn-key="cooking_ref">Cooking Preference</ons-list-header>';
@@ -5830,7 +5831,7 @@ function displayItem(data)
 	                                 result_obj>0?prettyPrice(result_obj):'',
 	                                 val.limite_sabores,
 	                                 val2.item_description,
-							 		 prettyPrice(result_obj)
+					 				 prettyPrice(result_obj)
 	                                 );	
 				});	
 			}
@@ -6252,6 +6253,7 @@ function setCartValue()
 	if (isNaN(selected_price)){
 		selected_price=0;
 	}	
+	
 	dump("discount=>"+discount);
 	dump("selected_price=>"+selected_price);
 	var qty=parseFloat($(".qty").val());
@@ -6275,14 +6277,14 @@ function setCartValue()
 		dump(addo_price);
         dump(addo_price[1]);
                
-        addon_total+=qty * parseFloat(addo_price[1]);
+        addon_total+=qtysub * parseFloat(addo_price[1]);
         addon_prices.push( parseFloat(addo_price[1]) );
 		addon_total = Math.max.apply(Math,addon_prices);
 
-        } else {
+        } else {        	
         	addon_total+=qty* parseFloat(addo_price[1]);
-        	//addon_prices.push(addon_total);			
-		}  
+        	//addon_prices.push(addon_total);
+        }        
 		//alert(addo_price[1]);
     });
 	
@@ -6390,7 +6392,6 @@ function addToCart()
 	if (!proceed2){
 		return;
 	}	
-	var price=0
 	var selected_price=parseFloat($(".price:checked").val());
 	if (isNaN(selected_price)){
 		selected_price=0;
@@ -6398,8 +6399,10 @@ function addToCart()
 	var sub_item=[];
 	var cooking_ref=[];	
 	var ingredients=[];
+	var squence='';
 	var item_id='';
 	var qty=0;
+	var price=0;
 	var order_notes='';
 	var discount='';
 	var category_id='';  //cart category
@@ -6409,6 +6412,9 @@ function addToCart()
 	if (!empty(params)){
 		$.each( params, function( key, val ) { 			
 			/*item*/
+			if (val.name=="sequence"){
+				sequence=val.value;
+			}			
 			if (val.name=="item_id"){
 				item_id=val.value;
 			}			
@@ -6466,6 +6472,10 @@ function addToCart()
 				var multi = $(this).data("multi");
 				//var sabor_price=$(this).val();
 				//sabor_price=sabor_price.split("|");
+				var sub_item_qty = parent.find(".subitem-qty").val()
+				if (empty(sub_item_qty)){
+					sub_item_qty="saborqty";
+				}
 			   	var xx=0; 
 				var sabor_price_array=[];
 				var sabor_price=explode("|",$(this).val());
@@ -6497,7 +6507,7 @@ function addToCart()
 					xx++;
 		
 			dump(sabor_price_array);			
-			//addon_total=0;
+			addon_total=0;
 			//price=price;
 			two_flavor_option = getStorage("two_flavor_option");
 			dump("two_flavor_option=>"+two_flavor_option);
@@ -6761,7 +6771,7 @@ function displayCart(data)
 				 	 htm+='<ons-list-header class="subitem-row'+xx+'">'+val_sub[0]['category_name']+'</ons-list-header>';
 				 	 $.each( val_sub  , function( key_sub2, val_sub2 ) {			 		 
 				 	      dump(val_sub2);	
-				 	      if ( val_sub2.qty =="itemqty"){
+				 	      if ( val_sub2.qty =="itemqty" || val_sub2.qty =="saborqty"){
 				 	      	 subitem_qty=val.qty;
 				 	      } else {
 				 	      	 subitem_qty=val_sub2.qty;
@@ -6968,7 +6978,7 @@ function editOrderInit()
 	var x=1;
 	$.each( $(".item-qty") , function( key, val ) {
 		$.each( $(".subitem-qty"+x) , function( key2, val2 ) {
-			if ( $(this).data("qty")!="itemqty"){
+			if ( $(this).data("qty")!="itemqty" && $(this).data("qty")!="saborqty"){
 				$(this).show();
 			}
 		});
@@ -7029,7 +7039,7 @@ function applyCartChanges()
 		    /*get sub item*/		    
 		    $.each( $(".subitem-qty"+x) , function( key2, val2 ) { 		    	 
 		    	 subqty = $(this).data("qty");
-		    	 if ( $(this).data("qty") != "itemqty"){
+		    	 if ( $(this).data("qty") != "itemqty" && $(this).data("qty") != "saborqty"){
 		    	 	subqty = $(this).val();
 		    	 }
 		    	 var parent=$(this).parent().parent();		 
