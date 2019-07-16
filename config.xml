@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    id        = "app.masterhub.cliente.ios"
+    version   = "3.0"
+  	ios-CFBundleVersion="1">
+    <!-- Mobile App 3.0 --> 
+    <name>Master Hub®</name>
+    <description>
+        Aplicativo - Módulo Clientes para interação com o sistema Master Hub, Um MUNDO na palma da sua mão!
+    </description>
+    <author email="robson@popcomputadores.com.br" href="http://popcomputadores.com.br">
+        popcomputadores.com.br
+    </author>
+            
+    <content src="index.html" />
+               
+	<preference name="orientation" value="portrait" />		
+	<preference name="phonegap-version" value="cli-8.1.1" />
+			    
+	<preference name="AutoHideSplashScreen" value="false" />  	
+    <preference name="SplashScreenDelay" value="10000" />    
+    <preference name="loadUrlTimeoutValue" value="700000"/>
+    <preference name="fullscreen" value="false" /> 
+    <preference name="SplashMaintainAspectRatio" value="true"/>
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="SplashScreen" value="screen"/>
+    <preference name="StatusBarBackgroundColor" value="#8d0710" />
+    <preference name="DisallowOverscroll" value="true" />
+            
+    
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />	   
+    <gap:plugin name="cordova-plugin-device" source="npm" />		
+	<gap:plugin name="cordova-plugin-inappbrowser" source="npm" />		
+	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />	
+	<gap:plugin name="cordova-plugin-geolocation" source="npm" />
+	<gap:plugin name="cordova-plugin-network-information" source="npm" />
+	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
+	    
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="~2.1.2" >
+	  <variable name="FCM_VERSION" value="11.0.2" /> 
+    </gap:plugin>
+    
+    <!-- <gap:plugin name="com.paypal.cordova.mobilesdk" source="npm"  /> -->
+        
+    <gap:plugin spec="https://github.com/bastikikang/cordova-plugin-request-location-accuracy" source="git">    
+      <variable name="PLAY_SERVICES_VERSION" value="11.0.2" /> 
+    </gap:plugin>
+    
+    <gap:plugin name="cordova-plugin-x-toast" source="npm" spec="2.7.0" /> 
+	
+	<gap:plugin name="cordova-plugin-customurlscheme" source="npm">
+	  <param name="URL_SCHEME" value="masterhub" />
+	</gap:plugin>
+	
+    <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.4.3" source="git" />-->
+    <!--<gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git#v1.3.5" source="git" />-->
+    
+    <gap:plugin name="cordova-plugin-media" source="npm" spec="5.0.2" />
+    <gap:plugin name="cordova.plugins.diagnostic" source="npm" spec="4.0.0" />
+    <gap:plugin name="cordova-plugin-buildinfo" source="npm" spec="2.0.1"  />
+    <gap:plugin name="cordova-plugin-camera" source="npm" spec="2.4.1" />
+    <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.7.1" /> 
+               
+    <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="6.0.0"  >
+	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
+	  <variable name="PLAY_SERVICES_VERSION" value="11.0.2" /> 
+	</gap:plugin>
+ 
+    <gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="3.2.0" >
+	  <variable name="APP_ID" value="247951822354120" />
+	  <variable name="APP_NAME" value="Master Hub" />
+	</gap:plugin>
+		
+	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="5.0.4" >
+       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyCjgZJOBT5K3Ms5ns20Q3lbopscSoGt3aI" />
+    </plugin>
+	
+	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
+	   <variable name="ANALYTICS_VERSION" value="11.0.2" /> 
+	</plugin>
+	
+	    	
+    <access origin="*" />
+    <access origin="tel:*" launch-external="yes" />
+
+    <platform name="ios">    
+	    <config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+	        <string>preciso usar sempre a sua localização</string>
+	    </config-file>
+	    <config-file platform="ios" target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+	        <string>preciso usar a sua localização</string>
+	    </config-file>
+	</platform>   
+	
+	<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+    <string>preciso de acesso à câmera para tirar fotos</string>
+	</edit-config>
+	
+	<edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+	    <string>preciso de acesso à biblioteca de fotos para obter fotos a partir daí</string>
+	</edit-config>
+	
+	<edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+	    <string>preciso de acesso à localização para encontrar coisas próximas</string>
+	</edit-config>
+	
+	<edit-config target="NSLocationAlwaysAndWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+	    <string>preciso de acesso à localização para encontrar comércios por perto</string>
+	</edit-config>
+	
+	<edit-config target="NSLocationAlwaysUsageDescription" file="*-Info.plist" mode="merge">
+	    <string>preciso de acesso à localização para encontrar comércios por perto</string>
+	</edit-config>
+	
+	<edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="merge">
+	    <string>preciso acessar a biblioteca de fotos para salvar imagens de lá</string>
+	</edit-config>
+	
+	<edit-config target="NSMicrophoneUsageDescription" file="*-Info.plist" mode="merge">
+      <string>preciso acessar o microfone para gravar algum som</string>
+    </edit-config>
+	
+	<platform name="ios">
+		    
+	    <allow-intent href="tel:*" />
+	    
+	    <resource-file src="GoogleService-Info.plist" /> 	    
+	    <resource-file src="www/beep.wav" />
+	
+		<icon height="57" platform="ios" src="res/icons/ios/icon.png" width="57" />
+		<icon height="114" platform="ios" src="res/icons/ios/icon@2x.png" width="114" />
+		<icon height="40" platform="ios" src="res/icons/ios/icon-40.png" width="40" />
+		<icon height="80" platform="ios" src="res/icons/ios/icon-40@2x.png" width="80" />
+		<icon height="50" platform="ios" src="res/icons/ios/icon-50.png" width="50" />
+		<icon height="100" platform="ios" src="res/icons/ios/icon-50@2x.png" width="100" />
+		<icon height="60" platform="ios" src="res/icons/ios/icon-60.png" width="60" />
+		<icon height="120" platform="ios" src="res/icons/ios/icon-60@2x.png" width="120" />
+		<icon height="180" platform="ios" src="res/icons/ios/icon-60@3x.png" width="180" />
+		<icon height="72" platform="ios" src="res/icons/ios/icon-72.png" width="72" />
+		<icon height="144" platform="ios" src="res/icons/ios/icon-72@2x.png" width="144" />
+		<icon height="76" platform="ios" src="res/icons/ios/icon-76.png" width="76" />
+		<icon height="152" platform="ios" src="res/icons/ios/icon-76@2x.png" width="152" />
+		<icon height="29" platform="ios" src="res/icons/ios/icon-small.png" width="29" />
+		<icon height="58" platform="ios" src="res/icons/ios/icon-small@2x.png" width="58" />
+		<icon height="87" platform="ios" src="res/icons/ios/icon-small@3x.png" width="87" />
+		
+		<icon height="1024" platform="ios" src="res/icons/ios/icon-1024.png" width="1024" />
+		
+		<splash height="1136" platform="ios" src="res/screens/ios/Default-568h@2x~iphone.png" width="640" />
+		<splash height="1334" platform="ios" src="res/screens/ios/Default-667h.png" width="750" />
+		<splash height="2208" platform="ios" src="res/screens/ios/Default-736h.png" width="1242" />
+		<splash height="1242" platform="ios" src="res/screens/ios/Default-Landscape-736h.png" width="2208" />
+		<splash height="1536" platform="ios" src="res/screens/ios/Default-Landscape@2x~ipad.png" width="2048" />
+		<splash height="768" platform="ios" src="res/screens/ios/Default-Landscape~ipad.png" width="1024" />
+		<splash height="2048" platform="ios" src="res/screens/ios/Default-Portrait@2x~ipad.png" width="1536" />
+		<splash height="1024" platform="ios" src="res/screens/ios/Default-Portrait~ipad.png" width="768" />
+		<splash height="960" platform="ios" src="res/screens/ios/Default@2x~iphone.png" width="640" />
+		<splash height="480" platform="ios" src="res/screens/ios/Default~iphone.png" width="320" />
+	</platform>    
+ 	       
+</widget>
