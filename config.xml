@@ -5,7 +5,7 @@
     version   = "3.0"
   	ios-CFBundleVersion="1">
     <!-- Mobile App 3.0 --> 
-    <name>Master Hub - iOS</name>
+    <name>Master Hub</name>
     <description>
         Aplicativo - Módulo Clientes para interação com o sistema Master Hub, Um MUNDO na palma da sua mão!
     </description>
@@ -145,7 +145,7 @@
 		<icon height="58" platform="ios" src="res/icons/ios/icon-small@2x.png" width="58" />
 		<icon height="87" platform="ios" src="res/icons/ios/icon-small@3x.png" width="87" />
 		
-		<icon height="1024" platform="ios" src="res/icons/ios/icon-1024.png" width="1024" />
+		<icon height="1024" platform="ios" src="res/icons/ios/icon-1024.jpg" width="1024" />
 		
 		<splash height="1136" platform="ios" src="res/screens/ios/Default-568h@2x~iphone.png" width="640" />
 		<splash height="1334" platform="ios" src="res/screens/ios/Default-667h.png" width="750" />
