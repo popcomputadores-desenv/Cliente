@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
-    id        = "app.masterhub.cliente.ios"
+    id        = "9BDH3KX8N6.app.masterhub.cliente.ios"
     version   = "3.0"
   	ios-CFBundleVersion="1">
     <!-- Mobile App 3.0 --> 
@@ -63,7 +63,7 @@
     <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.7.1" /> 
                
     <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="6.0.0"  >
-	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
+	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-5gu1muhn7tkv2nfuktan8udfseibs1et" />
 	  <variable name="PLAY_SERVICES_VERSION" value="11.0.2" /> 
 	</gap:plugin>
  
@@ -73,7 +73,7 @@
 	</gap:plugin>
 		
 	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="5.0.4" >
-       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyCjgZJOBT5K3Ms5ns20Q3lbopscSoGt3aI" />
+       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyAajQJirMxSvYiLBzUTevdgUfTkHALWH7o" />
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
