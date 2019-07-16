@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
-    id        = "9BDH3KX8N6.app.masterhub.cliente.ios"
+    id        = "app.masterhub.cliente.ios"
     version   = "3.0"
   	ios-CFBundleVersion="1">
     <!-- Mobile App 3.0 --> 
