@@ -4,5 +4,5 @@ var krms_config ={
 	'UploadUrl':"https://app.masterhub.com.br/upload/",
 	'DialogDefaultTitle':"Master Hub®",	
 	'APIHasKey':"4m1DDci5rKsyeNlmkwZlSsQDCpg=",
-	'debug': true
+	'debug': false
 };
