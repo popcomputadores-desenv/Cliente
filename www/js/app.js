@@ -6399,7 +6399,7 @@ function addToCart()
 	var sub_item=[];
 	var cooking_ref=[];	
 	var ingredients=[];
-	var squence='';
+	var sequence='';
 	var item_id='';
 	var qty=0;
 	var price=0;
@@ -6449,6 +6449,7 @@ function addToCart()
 				
 		/*get sub item */
 			
+		if ( $(".dois_sabores").val()==2 ){			
 			var sub_item_selected=$(".sub_item:checked").length; 			
 			
    	   	   $.each( $(".sub_item:checked") , function( key, val ) { 	
@@ -6534,9 +6535,36 @@ function addToCart()
 			//dump("price =>"+price);
 			//price=price;
 		
+		 } else {
+				var parent=$(this).parent().parent().parent();		
+				var sub_item_qty = parent.find(".subitem-qty").val()
+				if (empty(sub_item_qty)){
+					sub_item_qty="itemqty";
+				}
+				var subcat_id=$(this).data("id");						
+				sub_item[sub_item.length] = {
+					'subcat_id':subcat_id,
+					'value':$(this).val(),
+					'qty':sub_item_qty
+				};
 		 }
 				
 			});	
+		} else {
+			$.each( $(".sub_item:checked") , function( key, val ) { 	
+				var parent=$(this).parent().parent().parent();		
+				var sub_item_qty = parent.find(".subitem-qty").val()
+				if (empty(sub_item_qty)){
+					sub_item_qty="itemqty";
+				}
+				var subcat_id=$(this).data("id");						
+				sub_item[sub_item.length] = {
+					'subcat_id':subcat_id,
+					'value':$(this).val(),
+					'qty':sub_item_qty
+				};
+			});	
+		}
 			
 		cart[cart.length]={		  
 		  "item_id":item_id,
