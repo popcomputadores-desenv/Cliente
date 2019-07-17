@@ -7364,6 +7364,7 @@ function placeOrder()
 		}		
 		
 		extra_params+="&delivery_asap="+ $(".delivery_asap:checked").val();		
+		extra_params+="&mobile_app=mobile_app_ios";		
 		extra_params+="&formatted_address="+ urlencode($(".formatted_address").val());	
 		extra_params+="&google_lat="+ $(".google_lat").val();	
 		extra_params+="&google_lng="+ $(".google_lng").val();
