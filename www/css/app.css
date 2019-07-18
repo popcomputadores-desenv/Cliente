@@ -2925,6 +2925,8 @@ margin-top: 5px !important;
 .stic-basket {
 width: 25px;
 vertical-align: bottom;
+-webkit-box-align: center;
+text-align: center;	
 }
 
 .gm-style .gm-style-iw-c {
