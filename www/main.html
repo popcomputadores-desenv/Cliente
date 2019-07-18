@@ -274,7 +274,7 @@
   <ons-page id="page-home" on-device-backbutton="exitKApp()" modifier="back" sliding-menu-ignore="true" >
         
     <ons-toolbar>
-      <div class="left">
+      <div class="left" style="width: 12%;">
         <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="ion-android-menu"></ons-icon></ons-toolbar-button>        
       </div>   
 <!-- Atualização Master Hub (Personalização Tela Inicial - Ocultar caixas de selecção de endereço) -->
@@ -642,7 +642,7 @@
 
     <div class="plr10">
        <div class="stic-new-search home">
-        <input type="text" name="restaurant_name"  class="filter_restaurant_name restaurant_name text-input text-input--underbar has_validation" 
+        <input type="text" name="restaurant_name"  class="filter_restaurant_name restaurant_name text-input text-input--underbar has_validation" style="font-size: 11px;"
         placeholder="Busque pelo nome da empresa" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
         <ons-icon class="stic-icon-search" size="1.333em" icon="ion-android-search" onclick="sticSearch();"></ons-icon> 
        </div>
@@ -781,7 +781,7 @@
 	  
 <!-- 	  <div class="wrapper">
 	      <div class="field-wrapper">
-	      <input type="text" name="restaurant_name"  class="filter_restaurant_name restaurant_name text-input text-input--underbar has_validation" 
+	      <input type="text" name="restaurant_name"  class="filter_restaurant_name restaurant_name text-input text-input--underbar has_validation" style="font-size: 11px;"
 	      placeholder="Busque pelo nome da empresa" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
 	      </div>
 	  </div>	 -->
@@ -918,17 +918,28 @@
 
 <script type="text/ons-template" id="menuItem.html">    
 <ons-page id="page-menubycategoryitem">
-   <ons-toolbar>        
-     <div class="left"><ons-back-button id="menuitem-back-button"></ons-back-button></div>     
+   <!-- <ons-toolbar>        
+     <div class="left"><ons-back-button id="menuitem-back-button "></ons-back-button></div>     
      <div class="center white"><span id="search-text"></span></div>           
           
      
-<!--      <div class="right">       
+     <div class="right">       
         <ons-toolbar-button>
         <span class="notification cart-num" onclick="showCart();" >0</span>
         <ons-icon icon="fa-shopping-cart" onclick="showCart();" class="cart"></ons-toolbar-button>
-     </div> -->
+     </div> 
      
+   </ons-toolbar>-->
+   
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white">
+     <span id="search-text" class="trn" data-trn-key="produtos">
+<!-- Atualização Master Hub (Tradução) -->
+     Produtos
+<!-- Fim da atualização -->
+     </span>
+     </div>                         
    </ons-toolbar>
       
    <div class="stic-new-search">
