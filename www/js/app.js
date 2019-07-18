@@ -7287,7 +7287,7 @@ function clientShipping()
 		      	  params+="&save_address="+$('.save_address:checked').val();
 		      	  params+="&transaction_type=" +  getStorage("transaction_type") ;
 		      	  params+="&client_token="+ getStorage('client_token');
-		      	  params+="&contact_phone="+ $(".contact_phone").val();
+		      	  params+="&contact_phone="+ $("#page-shipping .contact_phone").val();
 		      	  
 		      	  params+="&cart_subtotal="+ $(".cart_subtotal").val();
 		      	  		      	  
