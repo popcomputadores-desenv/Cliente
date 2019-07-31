@@ -904,6 +904,12 @@ text-overflow: unset;
 white-space: unset;
 }
 
+#page-cart ons-list-item .concat-texto {
+text-overflow: unset;
+white-space: unset;
+display: -webkit-inline-box;
+}
+
 #page-cart .list__item--chevron:before {
 right: 5px;
 }

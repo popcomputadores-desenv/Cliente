@@ -421,6 +421,19 @@ function categorias_Resultado(data)
 			   
 }
 
+function botao_cancelar(tipo_de_servico)
+{		
+		var htm='';
+	if (tipo_de_servico==8 || tipo_de_servico==9 || tipo_de_servico==10 || tipo_de_servico==11 || tipo_de_servico==12){
+       htm+='<ons-toolbar-button onclick="cancelCartOrderEntregadores();">';
+       htm+='<ons-icon icon="ion-ios-arrow-back" size="1.333333em"></ons-icon>';
+       htm+='</ons-toolbar-button>';
+	} else {
+	   htm+='<ons-back-button></ons-back-button>';
+	}
+	createElement('botao_cancelar',htm);
+}
+
 function menu_Resultado(tempo_entrega)
 {		
 		var htm='';
@@ -785,6 +798,22 @@ function onsenDialogCheckout(){
 	});		
 }
 /*Fim da atualização*/
+function onsenDialogCheckout2(){
+	ons.notification.confirm({
+	  message: getTrans('Escolha corretamente a rota do entregador!','Escolha corretamente a rota do entregador!') ,	  
+	  title: dialog_title_default,
+	  buttonLabels: ['OK'],
+	  animation: 'fade', // or 'none'
+	  primaryButtonIndex: 1,
+	  cancelable: true,
+	  callback: function(index) {
+	  	dump(index);
+	    if ( index==0){
+	    	showCart();       
+	    }
+	  }
+	});		
+}
 
 /*Atualização Master Hub (Verificação de Endereços e Catálogo de Endereços)*/
 function onsenDialogAddresBook(){
@@ -897,7 +926,7 @@ function displayMerchantLogo3(logo,total,subtotal,entrega,comodidade,embalagem,d
 	transaction_type=getStorage("transaction_type");
 	dump("transaction_type=>"+transaction_type);
 	
-					if ( transaction_type=="delivery"){	
+	if ( transaction_type=="delivery" || transaction_type=="coleta" || transaction_type=="coleta_retorno" || transaction_type=="pre_coleta" || transaction_type=="pre_coleta_retorno"){	
 		$("#page-paymentoption .titulo-entrega").css({"display":"block"});
 		$("#page-paymentoption .total-entrega").css({"display":"block"});
 					}else{
