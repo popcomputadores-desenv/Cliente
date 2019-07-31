@@ -1152,7 +1152,7 @@
 <script type="text/ons-template" id="cart.html"> 
 <ons-page id="page-cart" class="onsen-display">
    <ons-toolbar>        
-     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="left" id="botao_cancelar"></div>     
      <div class="center white">
      <span id="search-text" class="trn" data-trn-key="cart">
 <!-- Atualização Master Hub (Tradução) -->
@@ -1204,6 +1204,8 @@
    
    <input type="hidden" name="delivery_date" class="delivery_date">
    <input type="hidden" name="delivery_time" class="delivery_time">
+   <input type="hidden" name="data_entrega" class="data_entrega">
+   <input type="hidden" name="hora_entrega" class="hora_entrega">
    <input type="hidden" name="global_merchant_id" class="global_merchant_id">
    
    <ons-list> 
@@ -1495,7 +1497,7 @@
 			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
 			  <div class="switch__toggle"></div>
 		  </label>  		  
-		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 8px; display: inline-block">
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 11px; font-size: 11px; display: inline-block">
 		    Save to my address book
 		  </span>
 	    </div> 
@@ -1504,6 +1506,248 @@
    <button class="button verde-btn button--large trn marg20" onclick="clientShipping();">
 	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
 	<ons-icon icon="ios-search"></ons-icon> <span class="trn">Forma de Pagamento</span>
+   </button>
+   </form>
+
+</ons-page>
+</script>     
+	
+<script type="text/ons-template" id="shippingColeta.html"> 
+<ons-page id="page-shipping-coleta" class="onsen-display">
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="cart">Cart</span></div>     
+   </ons-toolbar>
+   
+   <div class="orange-header">
+      <ons-row >
+        <ons-col width="40%">
+           <div class="logo-wrap logo-non-auto" >           
+           </div>
+        </ons-col>
+        <ons-col class="text-right">           
+           <p class="restauran-title concat-text white trn" data-trn-key="total">Total</p>  
+           <p class="text-big white total-amount ft16"></p>         
+        </ons-col>
+      </ons-row>
+   </div>
+
+   <div class="wrapper">
+       <ons-row class="row">
+           <ons-col class="stic-title concat-text trn" width="60%" data-trn-key="shipping_address" >Shipping address</ons-col>
+           <ons-col class="text-right" width="40%">
+              <button class="button button--quiet green uppercase trn" onclick="showPageAdressSelection();" data-trn-key="change_address">
+              Change Address
+              </button>              
+           </ons-col>
+       </ons-row>
+   </div> 
+   
+   <form id="frm-shipping" class="frm-shipping" method="post">
+   <input type="hidden" name="next_step" value="payment_option">
+   
+   <input type="hidden" name="street" class="street">
+<!-- Atualização Master Hub (Número e Bairro) -->
+   <input type="hidden" name="numero" class="numero">
+   <input type="hidden" name="area_name" class="area_name">
+<!-- Fim da atualização -->
+   <input type="hidden" name="city" class="city">
+   <input type="hidden" name="state" class="state">   
+   <input type="hidden" name="zipcode" class="zipcode">  
+   
+   <input type="hidden" name="formatted_address" class="formatted_address">  
+   <input type="hidden" name="google_lat" class="google_lat">  
+   <input type="hidden" name="google_lng" class="google_lng">  
+   
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+<!-- Atualização Master Hub (Tradução e Máscara do Telefone) -->
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="stic-rgba mobile_inputs contact_phone text-input text-input--underbar has_validation mask-phone"
+      placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+<!-- Fim da atualização -->
+      </div>      
+   </div>
+<!-- Atualização Master Hub (Personalização - Troca de lugar de campos) -->
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="zipcode"  class="stic-rgba zipcode text-input text-input--underbar has_validation" 
+      placeholder="Zipcode" value="" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="city"  class="stic-rgba city text-input text-input--underbar has_validation" 
+      placeholder="City" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="state"  class="stic-rgba state text-input text-input--underbar has_validation" 
+      placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="stic-rgba delivery_instruction text-input text-input--underbar" 
+      placeholder="Delivery instructions" value="" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="contact_phone"  class="stic-rgba mobile_inputs contact_phone text-input text-input--underbar has_validation" 
+      placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="location_name"  class="stic-rgba location_name text-input text-input--underbar" 
+      placeholder="Apartment suite, unit number, or company name"  >
+      </div>      
+   </div>
+<!-- Fim da atualização -->
+   <div class="wrapper">
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 11px; font-size: 11px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+    </div> 
+   
+   <button class="button verde-btn button--large trn marg20" onclick="clientEntrega();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn" data-trn-key="endereco_de_entrega">Endereco de Entrega</span>
+   </button>
+   </form>
+
+</ons-page>
+</script>     
+	
+<script type="text/ons-template" id="shippingPreColeta.html"> 
+<ons-page id="page-shipping-pre-coleta" class="onsen-display">
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="cart">Cart</span></div>     
+   </ons-toolbar>
+   
+   <div class="orange-header">
+      <ons-row >
+        <ons-col width="40%">
+           <div class="logo-wrap logo-non-auto" >           
+           </div>
+        </ons-col>
+        <ons-col class="text-right">           
+           <p class="restauran-title concat-text white trn" data-trn-key="total">Total</p>  
+           <p class="text-big white total-amount ft16"></p>         
+        </ons-col>
+      </ons-row>
+   </div>
+
+   <div class="wrapper">
+       <ons-row class="row">
+           <ons-col class="stic-title concat-text trn" width="60%" data-trn-key="shipping_address" >Shipping address</ons-col>
+           <ons-col class="text-right" width="40%">
+              <button class="button button--quiet green uppercase trn" onclick="showPageAdressSelection();" data-trn-key="change_address">
+              Change Address
+              </button>              
+           </ons-col>
+       </ons-row>
+   </div> 
+   
+   <form id="frm-shipping" class="frm-shipping" method="post">
+   <input type="hidden" name="next_step" value="payment_option">
+   
+   <input type="hidden" name="street" class="street">
+<!-- Atualização Master Hub (Número e Bairro) -->
+   <input type="hidden" name="numero" class="numero">
+   <input type="hidden" name="area_name" class="area_name">
+<!-- Fim da atualização -->
+   <input type="hidden" name="city" class="city">
+   <input type="hidden" name="state" class="state">   
+   <input type="hidden" name="zipcode" class="zipcode">  
+   
+   <input type="hidden" name="formatted_address" class="formatted_address">  
+   <input type="hidden" name="google_lat" class="google_lat">  
+   <input type="hidden" name="google_lng" class="google_lng">  
+   
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+<!-- Atualização Master Hub (Tradução e Máscara do Telefone) -->
+      <input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="stic-rgba mobile_inputs contact_phone text-input text-input--underbar has_validation mask-phone"
+      placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="este campo precisa ser preenchido!" >
+<!-- Fim da atualização -->
+      </div>      
+   </div>
+<!-- Atualização Master Hub (Personalização - Troca de lugar de campos) -->
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="zipcode"  class="stic-rgba zipcode text-input text-input--underbar has_validation" 
+      placeholder="Zipcode" value="" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="city"  class="stic-rgba city text-input text-input--underbar has_validation" 
+      placeholder="City" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="state"  class="stic-rgba state text-input text-input--underbar has_validation" 
+      placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="stic-rgba delivery_instruction text-input text-input--underbar" 
+      placeholder="Delivery instructions" value="" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="contact_phone"  class="stic-rgba mobile_inputs contact_phone text-input text-input--underbar has_validation" 
+      placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>      
+   </div>
+   
+   <div class="wrapper">
+      <div class="field-wrapper">
+      <input type="text" name="location_name"  class="stic-rgba location_name text-input text-input--underbar" 
+      placeholder="Apartment suite, unit number, or company name"  >
+      </div>      
+   </div>
+<!-- Fim da atualização -->
+   <div class="wrapper">
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 11px; font-size: 11px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+    </div> 
+   
+   <button class="button verde-btn button--large trn marg20" onclick="clientColeta();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn" data-trn-key="endereco_de_coleta">Endereco de Coleta</span>
    </button>
    </form>
 
@@ -2099,13 +2343,13 @@
 
    <div class="plr10">
       <div class="stic-new-search">
-      <input id="ss_restaurant_name" value="" type="text" class="stic-restaurant-search text-input text-input--underbar trn" ng-model="text" placeholder="Enter Restaurant Name" data-trn-key="enter_restaurant_name" >
+      <input id="ss_restaurant_name" value="" type="text" class="stic-restaurant-search text-input text-input--underbar trn" ng-model="text" placeholder="Busque pelo nome da empresa" data-trn-key="enter_restaurant_name" >
       <ons-icon class="stic-icon-search" style="right:12px;" size="1.333em" icon="ion-android-search" onclick="searchByName();"></ons-icon> 
       </div>
    </div>
       
     <ons-list class="restaurant-list" id="lazy-parent" >
-       <ons-list-item ons-lazy-repeat="lazyBrowseMerchant" modifier="tappable" class="list-item-container lazy-list">      
+       <ons-list-item ons-lazy-repeat="lazyBrowseMerchant" modifier="tappable" style="font-size: 11px;" class="list-item-container lazy-list">      
        </ons-list-item>
     </ons-list>      
       
@@ -2542,33 +2786,21 @@
    <input type="hidden" name="area_name" id="area_name" class="area_name">
 
    <div class="wrapper">
-   <div class="home-page wrapper center" style="margin-top: -15px; margin-bottom: -20px;">       
-              
-       <button class="button button--quiet green-inicial" onclick="getCurrentLocation();">
-       <ons-icon icon="fa-location-arrow"></ons-icon>
-         <span class="trn" data-trn-key="informa_a_minha_localizacao_gps">Informar a minha localização via GPS</span>
-       </button>       
-
-
-   <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
-    </div>   
-<br>
-   <div class="separate_or">
-        <ons-row >
-          <ons-col width="45%" class="text-right">
-           <hr class="hr_index">
-         </ons-col>
-          <ons-col width="10%" class="text-center">OU</ons-col>
-         <ons-col width="45%" class="text-left">
-          <hr class="hr_index">
-         </ons-col>
-       </ons-row>
-     </div>
-   
-      <div class="field-wrapper">
-      <input type="text" id="cep" name="zipcode"  class="stic-rgba zipcode text-input text-input--underbar has_validation" 
-      placeholder="Zipcode" value="" onblur="pesquisacep_catalogo(this.value);" >
-      </div>
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+		<input type="text" id="cep" name="zipcode"  class="stic-rgba zipcode text-input text-input--underbar has_validation" placeholder="Digite o CEP" value="" onblur="pesquisacep_catalogo(this.value);" style="margin-top: 18px;">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="getCurrentLocation();" style="margin-top:-18px;">
+			   <img src="css/images/gps_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="sua_localizacao">Sua Localizacao</p>		</button>
+						</ons-col>
+					</ons-row>
+				</div>
+				
+   <p class="trn menuapp center" style="margin-top: -15px; margin-bottom: 0px; font-size: x-large;" data-trn-key="titulo_confira_o_endereco">Endereco de Entrega</p>
+   <p class="trn menuapp center" style="margin-top: -12px; margin-bottom: 5px; font-size: small;" data-trn-key="confira_o_endereco">Confira ou Preencha o endereço de entrega.</p>    
  
    <div class="wrapper">   
    	  <div class="field-wrapper">
@@ -2614,6 +2846,11 @@
       placeholder="Location name" value="" >
       </div>
             
+      <div class="field-wrapper">
+      <input type="tel" name="telefone_contato" regex="^(|\(\d{2})\)\d{4,5}-\d{4}" class="stic-rgba mobile_inputs telefone_contato text-input text-input--underbar has_validation mask-phone" 
+      placeholder="Telefone de Contato" value="" >  
+      </div>
+			
       <div class="field-wrapper">
          <span class="small-font-dim trn" data-trn-key="defaul_address">Default address</span>
          <label class="switch">
@@ -3873,7 +4110,7 @@
 			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
 			  <div class="switch__toggle"></div>
 		  </label>  		  
-		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 8px; display: inline-block">
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 11px; font-size: 11px; display: inline-block">
 		    Save to my address book
 		  </span>
 	    </div> 
@@ -3892,22 +4129,8 @@
 <ons-page id="page-shipping-location-area" class="onsen-display" >
    <ons-toolbar>        
      <div class="left"><ons-back-button></ons-back-button></div>     
-     <div class="center white"><span id="search-text" class="trn" data-trn-key="checkout">Checkout</span></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="endereco_da_entrega">Endereco de ENTREGA</span></div>     
    </ons-toolbar>
-		<button id="menu-adress" class="button button--quiet button--large green" onclick="popUpAddressBook();">Selecione da sua lista de endereços</button>
-			
-   <div class="separate_or wrapper ">
-        <ons-row >
-          <ons-col width="45%" class="text-right">
-           <hr class="hr_index">
-         </ons-col>
-          <ons-col width="10%" class="text-center">OU</ons-col>
-         <ons-col width="45%" class="text-left">
-          <hr class="hr_index">
-         </ons-col>
-       </ons-row>
-     </div>
-
    
    <form id="frm-shipping" class="frm-shipping" method="post">
    
@@ -3919,48 +4142,29 @@
    <input type="hidden" name="state" id="state" class="state">   
    <input type="hidden" name="zipcode" id="zipcode" class="zipcode">  
    <input type="hidden" name="area_name" id="area_name" class="area_name">  
-   
-      <div class="home-page wrapper center" style="margin-top: -15px; margin-bottom: -20px;">       
-              
-       <button class="button button--quiet green-inicial" onclick="getCurrentLocation();">
-       <ons-icon icon="fa-location-arrow"></ons-icon>
-         <span class="trn" data-trn-key="informa_a_minha_localizacao_atual">Informa a minha localização atual</span>
-       </button>       
-
-
-   <p class="trn center" style="font-size:  12px; margin-top: 3px; margin-bottom: 5px;" data-trn-key="A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.">A minha localização, irá informar o seu endereço atual com base no GPS do seu aparelho, confira a numeração da sua localização.</p> 
-    </div> 
-	<br>
-	<div class="separate_or">
-        <ons-row >
-          <ons-col width="45%" class="text-right">
-           <hr class="hr_index">
-         </ons-col>
-          <ons-col width="10%" class="text-center">OU</ons-col>
-         <ons-col width="45%" class="text-left">
-          <hr class="hr_index">
-         </ons-col>
-       </ons-row>
-     </div>
-   
-      <div class="field-wrapper">
-      <input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
-      placeholder="Preencha com o CEP da sua Rua" value="" onblur="pesquisacep_pedido(this.value);" >
-      </div>
 	  
-   <div class="separate_or">
-        <ons-row >
-          <ons-col width="45%" class="text-right">
-           <hr class="hr_index">
-         </ons-col>
-          <ons-col width="10%" class="text-center">OU</ons-col>
-         <ons-col width="45%" class="text-left">
-          <hr class="hr_index">
-         </ons-col>
-       </ons-row>
-     </div>
-   
-   <p class="trn menuapp center" style="margin-top: 3px; margin-bottom: 5px;">Confira ou Preencha o endereço de entrega</p>    
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="50%">
+		<input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" placeholder="Digite o CEP" value="" onblur="pesquisacep_pedido(this.value);" style="margin-top: 18px;">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="getCurrentLocation();" style="margin-top:-18px;">
+			   <img src="css/images/gps_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="sua_localizacao">Sua Localizacao</p>		</button>
+						</ons-col>
+						<ons-col width="5%">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="popUpAddressBook();" style="margin-top:-18px;">
+	   			<img src="css/images/catalogo_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="seu_catalogo">Seu Catalogo</p>			
+		</button>		</ons-col>
+					</ons-row>
+				</div>
+
+	<p class="trn menuapp center" style="margin-top: -15px; margin-bottom: 0px; font-size: x-large;" data-trn-key="titulo_confira_o_endereco">Endereco de Entrega</p>
+   <p class="trn menuapp center" style="margin-top: -12px; margin-bottom: 5px; font-size: small;" data-trn-key="confira_o_endereco">Confira ou Preencha o endereço de entrega.</p>    
    
    <ons-list>
    
@@ -4003,17 +4207,22 @@
 					placeholder="Apartment suite, unit number, or company name" >
       </div>      
    
-				<div class="field-wrapper">
+				<div class="field-wrapper contact_phone" style="display:none">
 					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
 					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
-   </div>
+   				</div>
+				
+				<div class="field-wrapper telefone_contato" style="display:none">
+					<input type="tel" name="telefone_contato" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="telefone_contato text-input text-input--underbar has_validation mask-phone"
+					placeholder="Telefone de Contato" value="" >
+   				</div>
    
 	   <div class="field-wrapper">	     
 	     <label class="switch">
 			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
 			  <div class="switch__toggle"></div>
 		  </label>  		  
-		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 8px; display: inline-block">
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 11px; font-size: 11px; display: inline-block">
 		    Save to my address book
 		  </span>
 	    </div> 
@@ -4028,6 +4237,569 @@
 </ons-page>
 </script>     
 <!-- Fim da atualização -->
+<!-- Atualização Master Hub (Catálogo de Endereços, Máscara de Telefone) -->
+<script type="text/ons-template" id="shippingLocationAreaColetaRetorno.html"> 
+<ons-page id="page-shipping-location-area-coleta-retorno" class="onsen-display" >
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="endereco_retorno">Endereco do RETORNO</span></div>     
+   </ons-toolbar>
+   
+   <form id="frm-coleta-retorno" class="frm-coleta-retorno" method="post">
+   
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+   <input type="hidden" name="city" id="city" class="city">
+   <input type="hidden" name="state" id="state" class="state">   
+   <input type="hidden" name="zipcode" id="zipcode" class="zipcode">  
+   <input type="hidden" name="area_name" id="area_name" class="area_name">  
+	  
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="50%">
+		<input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" placeholder="Digite o CEP" value="" onblur="pesquisacep_pedido(this.value);" style="margin-top: 18px;">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="getCurrentLocation();" style="margin-top:-18px;">
+			   <img src="css/images/gps_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="sua_localizacao">Sua Localizacao</p>		</button>
+						</ons-col>
+						<ons-col width="5%">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="popUpAddressBook();" style="margin-top:-18px;">
+	   			<img src="css/images/catalogo_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="seu_catalogo">Seu Catalogo</p>			
+		</button>		</ons-col>
+					</ons-row>
+				</div>
+   
+   <p class="trn menuapp center" style="margin-top: -15px; margin-bottom: 0px; font-size: x-large;" data-trn-key="titulo_confira_o_endereco_retorno">Endereco do Retorno</p>
+   <p class="trn menuapp center" style="margin-top: -12px; margin-bottom: 5px; font-size: small;" data-trn-key="confira_o_endereco_do_retorno">Confira ou Preencha o endereço do Retorno.</p>    
+   
+   <ons-list>
+   
+   <ons-list-item modifier="chevron" class="trn location_state invisivel" data-trn-key="location_state" onclick ="showState()" >        
+    State
+    </ons-list-item>
+   
+	<ons-list-item modifier="chevron" class="trn location_city invisivel" data-trn-key="city" onclick ="showCity()" >        
+	City
+	</ons-list-item>
+	
+	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+	District / Area
+	</ons-list-item>
+	
+   </ons-list>
+   <div class="center" style="font-size: 15px; margin-top: 6px; margin-bottom: -15px;">
+   <span id="cidade" class="location_city"></span> / <span id="estado" class="location_state"></span>
+   </div>
+    <div class="wrapper">
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+							<input type="text" id="street" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+							<input type="text" id="numero" name="numero" class="numero text-input text-input--underbar" placeholder="Nº" value="" data-validation="required" data-validation-error-msg="Obrigatório">
+						</ons-col>
+					</ons-row>
+				</div>
+
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+					placeholder="Delivery instructions" value="" >
+      </div>      
+
+				<div class="field-wrapper">
+      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+					placeholder="Apartment suite, unit number, or company name" >
+      </div>      
+   
+				<div class="field-wrapper contact_phone" style="display:none">
+					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
+					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+   </div>
+				<div class="field-wrapper telefone_contato" style="display:none">
+					<input type="tel" name="telefone_contato" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="telefone_contato text-input text-input--underbar has_validation mask-phone"
+					placeholder="Telefone de Contato" value="" >
+   				</div>
+   
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 11px; font-size: 11px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+<br>
+   
+    <button class="button verde-btn button--large trn" onclick="clientShippingPreColeta();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn">Forma de Pagamento</span>
+   </button>
+			</div>
+   </form>
+</ons-page>
+</script>     
+<!-- Fim da atualização -->
+<!-- Atualização Master Hub (Catálogo de Endereços, Máscara de Telefone) -->
+<script type="text/ons-template" id="shippingLocationAreaPreColeta.html"> 
+<ons-page id="page-shipping-location-area-pre-coleta" class="onsen-display" >
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="endereco_precoleta">Endereco da PRE-COLETA</span></div>     
+   </ons-toolbar>
+   
+   <form id="frm-pre-coleta" class="frm-pre-coleta" method="post">
+   
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+   <input type="hidden" name="city" id="city" class="city">
+   <input type="hidden" name="state" id="state" class="state">   
+   <input type="hidden" name="zipcode" id="zipcode" class="zipcode">  
+   <input type="hidden" name="area_name" id="area_name" class="area_name">  
+	  
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="50%">
+		<input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" placeholder="Digite o CEP" value="" onblur="pesquisacep_pedido(this.value);" style="margin-top: 18px;">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="getCurrentLocation();" style="margin-top:-18px;">
+			   <img src="css/images/gps_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="sua_localizacao">Sua Localizacao</p>		</button>
+						</ons-col>
+						<ons-col width="5%">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="popUpAddressBook();" style="margin-top:-18px;">
+	   			<img src="css/images/catalogo_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="seu_catalogo">Seu Catalogo</p>			
+		</button>		</ons-col>
+					</ons-row>
+				</div>
+   
+   <p class="trn menuapp center" style="margin-top: -15px; margin-bottom: 0px; font-size: x-large;" data-trn-key="titulo_confira_o_endereco_precoleta">Endereco da Pre-Coleta</p>
+   <p class="trn menuapp center" style="margin-top: -12px; margin-bottom: 5px; font-size: small;" data-trn-key="confira_o_endereco_da_precoleta">Confira ou Preencha o endereço da Pre-Coleta.</p>    
+   
+   <ons-list>
+   
+   <ons-list-item modifier="chevron" class="trn location_state invisivel" data-trn-key="location_state" onclick ="showState()" >        
+    State
+    </ons-list-item>
+   
+	<ons-list-item modifier="chevron" class="trn location_city invisivel" data-trn-key="city" onclick ="showCity()" >        
+	City
+	</ons-list-item>
+	
+	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+	District / Area
+	</ons-list-item>
+	
+   </ons-list>
+   <div class="center" style="font-size: 15px; margin-top: 6px; margin-bottom: -15px;">
+   <span id="cidade" class="location_city"></span> / <span id="estado" class="location_state"></span>
+   </div>
+    <div class="wrapper">
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+							<input type="text" id="street" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+							<input type="text" id="numero" name="numero" class="numero text-input text-input--underbar" placeholder="Nº" value="" data-validation="required" data-validation-error-msg="Obrigatório">
+						</ons-col>
+					</ons-row>
+				</div>
+
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+					placeholder="Delivery instructions" value="" >
+      </div>      
+
+				<div class="field-wrapper">
+      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+					placeholder="Apartment suite, unit number, or company name" >
+      </div>      
+   
+				<div class="field-wrapper contact_phone" style="display:none">
+					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
+					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+   </div>
+				<div class="field-wrapper telefone_contato" style="display:none">
+					<input type="tel" name="telefone_contato" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="telefone_contato text-input text-input--underbar has_validation mask-phone"
+					placeholder="Telefone de Contato" value="" >
+   				</div>
+   
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 11px; font-size: 11px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+<br>
+   
+    <button class="button verde-btn button--large trn" onclick="checkOutPreColeta();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn" data-trn-key="endereco_coleta">Endereco de Coleta</span>
+   </button>
+			</div>
+   </form>
+</ons-page>
+</script>     
+<!-- Fim da atualização -->
+<!-- Atualização Master Hub (Catálogo de Endereços, Máscara de Telefone) -->
+<script type="text/ons-template" id="shippingLocationAreaColeta.html"> 
+<ons-page id="page-shipping-location-area-coleta" class="onsen-display" >
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="endereco_coleta">Endereco da COLETA</span></div>     
+   </ons-toolbar>
+   
+   <form id="frm-coleta" class="frm-coleta" method="post">
+   
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+   <input type="hidden" name="city" id="city" class="city">
+   <input type="hidden" name="state" id="state" class="state">   
+   <input type="hidden" name="zipcode" id="zipcode" class="zipcode">  
+   <input type="hidden" name="area_name" id="area_name" class="area_name">  
+	  
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="50%">
+		<input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" placeholder="Digite o CEP" value="" onblur="pesquisacep_pedido(this.value);" style="margin-top: 18px;">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="getCurrentLocation();" style="margin-top:-18px;">
+			   <img src="css/images/gps_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="sua_localizacao">Sua Localizacao</p>		</button>
+						</ons-col>
+						<ons-col width="5%">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="popUpAddressBook();" style="margin-top:-18px;">
+	   			<img src="css/images/catalogo_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="seu_catalogo">Seu Catalogo</p>			
+		</button>		</ons-col>
+					</ons-row>
+				</div>
+   
+   <p class="trn menuapp center" style="margin-top: -15px; margin-bottom: 0px; font-size: x-large;" data-trn-key="titulo_confira_o_endereco_coleta">Endereco da Coleta</p>
+   <p class="trn menuapp center" style="margin-top: -12px; margin-bottom: 5px; font-size: small;" data-trn-key="confira_o_endereco_da_coleta">Confira ou Preencha o endereço da Coleta.</p>    
+   <p class="trn menuapp center" style="margin-top: -12px; margin-bottom: 5px; font-size: small;" data-trn-key="confira_o_endereco_da_coleta2">Obs. do endereço da Coleta.</p>    
+   
+   <ons-list>
+   
+   <ons-list-item modifier="chevron" class="trn location_state invisivel" data-trn-key="location_state" onclick ="showState()" >        
+    State
+    </ons-list-item>
+   
+	<ons-list-item modifier="chevron" class="trn location_city invisivel" data-trn-key="city" onclick ="showCity()" >        
+	City
+	</ons-list-item>
+	
+	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+	District / Area
+	</ons-list-item>
+	
+   </ons-list>
+   <div class="center" style="font-size: 15px; margin-top: 6px; margin-bottom: -15px;">
+   <span id="cidade" class="location_city"></span> / <span id="estado" class="location_state"></span>
+   </div>
+    <div class="wrapper">
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+							<input type="text" id="street" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+							<input type="text" id="numero" name="numero" class="numero text-input text-input--underbar" placeholder="Nº" value="" data-validation="required" data-validation-error-msg="Obrigatório">
+
+						</ons-col>
+					</ons-row>
+				</div>
+
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+					placeholder="Delivery instructions" value="" >
+      </div>      
+
+				<div class="field-wrapper">
+      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+					placeholder="Apartment suite, unit number, or company name" >
+      </div>      
+   
+				<div class="field-wrapper contact_phone" style="display:none">
+					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
+					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+   </div>
+				<div class="field-wrapper telefone_contato" style="display:none">
+					<input type="tel" name="telefone_contato" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="telefone_contato text-input text-input--underbar has_validation mask-phone"
+					placeholder="Telefone de Contato" value="" >
+   				</div>
+   
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 11px; font-size: 11px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+<br>
+   
+    <button class="button verde-btn button--large trn" onclick="checkOutColeta();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn" data-trn-key="endereco_entrega">Endereco de Entrega</span>
+   </button>
+			</div>
+   </form>
+</ons-page>
+</script>     
+<!-- Fim da atualização -->
+<!-- Atualização Master Hub (Catálogo de Endereços, Máscara de Telefone) -->
+<script type="text/ons-template" id="shippingLocationAreaPreColetaRetorno.html"> 
+<ons-page id="page-shipping-location-area-pre-coleta-retorno" class="onsen-display" >
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="endereco_da_entrega">Endereco da ENTREGA</span></div>     
+   </ons-toolbar>
+   
+   <form id="frm-coleta-retorno" class="frm-coleta-retorno" method="post">
+   
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+   <input type="hidden" name="city" id="city" class="city">
+   <input type="hidden" name="state" id="state" class="state">   
+   <input type="hidden" name="zipcode" id="zipcode" class="zipcode">  
+   <input type="hidden" name="area_name" id="area_name" class="area_name">  
+	  
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="50%">
+		<input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" placeholder="Digite o CEP" value="" onblur="pesquisacep_pedido(this.value);" style="margin-top: 18px;">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="getCurrentLocation();" style="margin-top:-18px;">
+			   <img src="css/images/gps_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="sua_localizacao">Sua Localizacao</p>		</button>
+						</ons-col>
+						<ons-col width="5%">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="popUpAddressBook();" style="margin-top:-18px;">
+	   			<img src="css/images/catalogo_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="seu_catalogo">Seu Catalogo</p>			
+		</button>		</ons-col>
+					</ons-row>
+				</div>
+   
+   <p class="trn menuapp center" style="margin-top: -15px; margin-bottom: 0px; font-size: x-large;" data-trn-key="titulo_confira_o_endereco">Endereco de Entrega</p>
+   <p class="trn menuapp center" style="margin-top: -12px; margin-bottom: 5px; font-size: small;" data-trn-key="confira_o_endereco">Confira ou Preencha o endereço de entrega.</p>    
+   
+   <ons-list>
+   
+   <ons-list-item modifier="chevron" class="trn location_state invisivel" data-trn-key="location_state" onclick ="showState()" >        
+    State
+    </ons-list-item>
+   
+	<ons-list-item modifier="chevron" class="trn location_city invisivel" data-trn-key="city" onclick ="showCity()" >        
+	City
+	</ons-list-item>
+	
+	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+	District / Area
+	</ons-list-item>
+	
+   </ons-list>
+   <div class="center" style="font-size: 15px; margin-top: 6px; margin-bottom: -15px;">
+   <span id="cidade" class="location_city"></span> / <span id="estado" class="location_state"></span>
+   </div>
+    <div class="wrapper">
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+							<input type="text" id="street" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+							<input type="text" id="numero" name="numero" class="numero text-input text-input--underbar" placeholder="Nº" value="" data-validation="required" data-validation-error-msg="Obrigatório">
+						</ons-col>
+					</ons-row>
+				</div>
+
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+					placeholder="Delivery instructions" value="" >
+      </div>      
+
+				<div class="field-wrapper">
+      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+					placeholder="Apartment suite, unit number, or company name" >
+      </div>      
+   
+				<div class="field-wrapper contact_phone" style="display:none">
+					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
+					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+   </div>
+				<div class="field-wrapper telefone_contato" style="display:none">
+					<input type="tel" name="telefone_contato" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="telefone_contato text-input text-input--underbar has_validation mask-phone"
+					placeholder="Telefone de Contato" value="" >
+   				</div>
+   
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 11px; font-size: 11px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+<br>
+   
+    <button class="button verde-btn button--large trn" onclick="clientShippingPreColeta();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn" data-trn-key="endereco_de_retorno">Endereco de Retorno</span>
+   </button>
+			</div>
+   </form>
+</ons-page>
+</script>     
+<!-- Fim da atualização -->
+<!-- Atualização Master Hub (Catálogo de Endereços, Máscara de Telefone) -->
+<script type="text/ons-template" id="shippingLocationAreaEntregaRetorno.html"> 
+<ons-page id="page-shipping-location-area-entrega-retorno" class="onsen-display" >
+   <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>     
+     <div class="center white"><span id="search-text" class="trn" data-trn-key="endereco_da_entrega">Endereco da ENTREGA</span></div>     
+   </ons-toolbar>
+   
+   <form id="frm-entrega" class="frm-entrega" method="post">
+   
+   <input type="hidden" name="state_id" id="state_id" class="state_id" >  
+   <input type="hidden" name="city_id" id="city_id" class="city_id" >
+   <input type="hidden" name="area_id" id="area_id" class="area_id" >
+   
+   <input type="hidden" name="city" id="city" class="city">
+   <input type="hidden" name="state" id="state" class="state">   
+   <input type="hidden" name="zipcode" id="zipcode" class="zipcode">  
+   <input type="hidden" name="area_name" id="area_name" class="area_name">  
+	  
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="50%">
+		<input type="text" id="cep" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" placeholder="Digite o CEP" value="" onblur="pesquisacep_pedido(this.value);" style="margin-top: 18px;">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="getCurrentLocation();" style="margin-top:-18px;">
+			   <img src="css/images/gps_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="sua_localizacao">Sua Localizacao</p>		</button>
+						</ons-col>
+						<ons-col width="5%">
+						</ons-col>
+						<ons-col width="22%">
+		<button id="menu-adress" class="button button--quiet" onclick="popUpAddressBook();" style="margin-top:-18px;">
+	   			<img src="css/images/catalogo_endereco.svg" style="height: 57px;">
+<p class="trn center" style="margin-top: -17px; margin-bottom: -5px; font-size: 8px;" data-trn-key="seu_catalogo">Seu Catalogo</p>			
+		</button>		</ons-col>
+					</ons-row>
+				</div>
+   
+   <p class="trn menuapp center" style="margin-top: -15px; margin-bottom: 0px; font-size: x-large;" data-trn-key="titulo_confira_o_endereco">Endereco de Entrega</p>
+   <p class="trn menuapp center" style="margin-top: -12px; margin-bottom: 5px; font-size: small;" data-trn-key="confira_o_endereco">Confira ou Preencha o endereço de entrega.</p>    
+   
+   <ons-list>
+   
+   <ons-list-item modifier="chevron" class="trn location_state invisivel" data-trn-key="location_state" onclick ="showState()" >        
+    State
+    </ons-list-item>
+   
+	<ons-list-item modifier="chevron" class="trn location_city invisivel" data-trn-key="city" onclick ="showCity()" >        
+	City
+	</ons-list-item>
+	
+	<ons-list-item modifier="chevron" class="trn location_area" data-trn-key="destrict_area" onclick ="showArea()" >        
+	District / Area
+	</ons-list-item>
+	
+   </ons-list>
+   <div class="center" style="font-size: 15px; margin-top: 6px; margin-bottom: -15px;">
+   <span id="cidade" class="location_city"></span> / <span id="estado" class="location_state"></span>
+   </div>
+    <div class="wrapper">
+				<div class="field-wrapper">
+					<ons-row>
+						<ons-col width="75%">
+							<input type="text" id="street" name="street" class="street text-input text-input--underbar has_validation" placeholder="Street" value="" data-validation="required" data-validation-error-msg="this field is mandatory!">
+						</ons-col>
+						<ons-col width="5%"></ons-col>
+						<ons-col width="20%">
+							<input type="text" id="numero" name="numero" class="numero text-input text-input--underbar" placeholder="Nº" value="" data-validation="required" data-validation-error-msg="Obrigatório">
+						</ons-col>
+					</ons-row>
+				</div>
+
+      <div class="field-wrapper">
+      <input type="text" name="delivery_instruction"  class="delivery_instruction text-input text-input--underbar" 
+					placeholder="Delivery instructions" value="" >
+      </div>      
+
+				<div class="field-wrapper">
+      <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
+					placeholder="Apartment suite, unit number, or company name" >
+      </div>      
+   
+				<div class="field-wrapper contact_phone" style="display:none">
+					<input type="tel" name="contact_phone" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="contact_phone text-input text-input--underbar has_validation mask-phone"
+					placeholder="Contact phone" value="" data-validation="required" data-validation-error-msg="Este campo é obrigatório!" >
+   </div>
+				<div class="field-wrapper telefone_contato" style="display:none">
+					<input type="tel" name="telefone_contato" regex="^(|\(\d{2})\)\d{4,5}-\d{4}"  class="telefone_contato text-input text-input--underbar has_validation mask-phone"
+					placeholder="Telefone de Contato" value="" >
+   				</div>
+   
+	   <div class="field-wrapper">	     
+	     <label class="switch">
+			  <input type="checkbox" value="2" class="switch__input save_address" name="save_address" >
+			  <div class="switch__toggle"></div>
+		  </label>  		  
+		  <span class="small-font-dim trn" data-trn-key="save_address_book" style="margin-top: 11px; font-size: 11px; display: inline-block">
+		    Save to my address book
+		  </span>
+	    </div> 
+<br>
+   
+    <button class="button verde-btn button--large trn" onclick="checkOutEntrega();">
+	<ons-icon icon="chevron-circle-down" style="line-height: 0;"></ons-icon>
+	<ons-icon icon="ios-search"></ons-icon> <span class="trn" data-trn-key="endereco_de_retorno">Endereco de Retorno</span>
+   </button>
+			</div>
+   </form>
+</ons-page>
+</script>     
+<!-- Fim da atualização -->
+	
 <script type="text/ons-template" id="locationState.html">    
   <ons-dialog var="locationState" style="width:90%;height:350px;" cancelable  >
 
@@ -4222,8 +4994,8 @@
     <h4 class="f13 uppercase white trn center" data-trn-key="find_by_name">Find restaurant by name</h4>
     
     <section class="field-section bborder search">
-     <input id="ss_restaurant_name" value="" type="text" class="text-input text-input--underbar center trn" ng-model="text" placeholder="Enter Restaurant Name" data-trn-key="enter_restaurant_name" 
-     style="display: block; width: 100%">
+     <input id="ss_restaurant_name" value="" type="text" class="text-input text-input--underbar center trn" ng-model="text" placeholder="Busque pelo nome da empresa" data-trn-key="enter_restaurant_name" 
+     style="display: block; font-size: 11px; width: 100%">
     </section>
     
     <button class="button green-btn button--large marg20" onclick="searchByName();">

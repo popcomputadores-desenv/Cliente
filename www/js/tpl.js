@@ -3,11 +3,11 @@ function privatePriceRowWithRadio(radio_name,radio_value,label,price,ischecked)
 	var htm='';
 	htm+='<ons-list-item modifier="tappable">';
     htm+='<ons-row class="row">';
-     htm+='<ons-col class="concat-text" width="70%">';
+     htm+='<ons-col class="concat-text" width="79%">';
        htm+='<label class="radio-button checkbox--list-item">';
 	     htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'" '+ischecked+' >';
 	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
-	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
+	     htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
 	   htm+='</label>';
 	  htm+='</ons-col>';	
 	  htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
@@ -25,7 +25,7 @@ function privatePriceRowWithRadio2(radio_name,radio_value,label,price,ischecked)
        htm+='<label class="radio-button checkbox--list-item">';
 	     htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'" '+ischecked+' >';
 	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
-	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
+	     htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
 	   htm+='</label>';
 	  htm+='</ons-col>';	
 	  htm+='<ons-col class="text-right" >'+price+'</ons-col>';
@@ -54,14 +54,14 @@ function subItemRowWithRadio(subcat_id,radio_name,radio_value,label,price,ischec
 	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
 	     
 	     if(show_addon_description!=1){
-	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
+	     htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
 	     }
 	     
 	   htm+='</label>';
 	  htm+='</ons-col>';	
 	  
 	  if(show_addon_description==1){
-	     htm+='<ons-col class="small-font-dim" width="30%" style="margin-top:10px;" >'+label+'</ons-col>';
+	     htm+='<ons-col class="small-font-dim" width="30%" style="margin-top:10px;" >'+getTrans(label, label)+'</ons-col>';
 	  }
 	  
 	  if(empty(description)){
@@ -96,7 +96,7 @@ function subItemRowWithCheckbox(subcat_id, radio_name, radio_value, label, price
        htm+='<label class="checkbox checkbox--list-item">';
 	     htm+='<input type="checkbox" name="'+radio_name+'" class="sub_item_custom '+radio_name+' sub_item_name_'+subcat_id+' " value="'+radio_value+'" data-id="'+subcat_id+'" data-multi="'+multi_option_val+'"  >';
 	     htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
-	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
+	     htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
 	   htm+='</label>';
 	  htm+='</ons-col>';
 /*Fim da atualização*/	 
@@ -127,9 +127,9 @@ function subItemRowWithCheckboxSabor(subcat_id, radio_name, radio_value, label, 
      	htm+='<ons-col class="concat-text" width="56%">';
 
        htm+='<label class="checkbox checkbox--list-item">';
-	     htm+='<input type="checkbox" name="'+radio_name+'" class="sub_item_sabor '+radio_name+' sub_item_name_'+subcat_id+' " value='+radio_value+' data-id="'+subcat_id+'" data-multi="'+limite_sabores+'" data-sabores="limitado"  >';
+	     htm+='<input type="checkbox" name="'+radio_name+'" class="sub_item_sabor '+radio_name+' sub_item_name_'+subcat_id+' " value='+radio_value+' data-id="'+subcat_id+'" data-multi="'+limite_sabores+'" data-nome_produto="'+label+'" data-sabores="limitado"  >';
 	     htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
-	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
+	     htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
 	   htm+='</label>';
 	  htm+='</ons-col>';
 /*Fim da atualização*/	 
@@ -162,7 +162,7 @@ function subItemRowWithCheckboxQtd(subcat_id, radio_name, radio_value, label, pr
        htm+='<label class="checkbox checkbox--list-item">';
 	     htm+='<input type="checkbox" name="'+radio_name+'" class="sub_item_custom_qty '+radio_name+' sub_item_name_'+subcat_id+' " value="'+radio_value+'" data-id="'+subcat_id+'" data-multi="'+multi_option_val+'" data-withqty="2" >';
 	     htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
-	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
+	     htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
 	   htm+='</label>';
 	  htm+='</ons-col>';
 /*Fim da atualização*/	 
@@ -191,7 +191,7 @@ function subItemRowWithCheckboxQty(subcat_id,radio_name,radio_value,label,price)
        htm+='<label class="checkbox checkbox--list-item">';
 	     htm+='<input type="checkbox" name="'+radio_name+'" class="sub_item_custom_qty '+radio_name+' sub_item_name_'+subcat_id+'" " value="'+radio_value+'" data-id="'+subcat_id+'" data-withqty="2" >';
 	     htm+='<div class="checkbox__checkmark checkbox--list-item__checkmark"></div>';
-	     htm+='<p class="description item-name concat-text"> '+label+'</p>';
+	     htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
 	   htm+='</label>';
 	  htm+='</ons-col>';
 
@@ -217,6 +217,32 @@ function privateRowWithRadio(radio_name,radio_value,label)
 	     htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'" >';
 	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
 	     htm+='<p class="description item-name"> '+label+'</p>';
+	   htm+='</label>';
+	htm+='</ons-list-item>';
+	return htm;
+}
+
+function privateRowWithRadio2(radio_name,radio_value,label)
+{
+	var htm='';
+	htm+='<ons-list-item modifier="tappable">';
+       htm+='<label class="radio-button checkbox--list-item">';
+	     htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'" >';
+	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
+	     htm+='<p class="description item-name" style="font-size: 14px;"> '+label+'</p>';
+	   htm+='</label>';
+	htm+='</ons-list-item>';
+	return htm;
+}
+
+function privateRowWithRadio3(radio_name,radio_value,label)
+{
+	var htm='';
+	htm+='<ons-list-item modifier="tappable">';
+       htm+='<label class="radio-button checkbox--list-item">';
+	     htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'" >';
+	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
+	     htm+='<p class="description item-name" style="font-size: 14px;"> '+label+'</p>';
 	   htm+='</label>';
 	htm+='</ons-list-item>';
 	return htm;
@@ -274,12 +300,31 @@ function cartFooter(currency_code)
     return htm
 }
 
+function cartFooter_coleta(currency_code)
+{
+  var htm='';  
+  
+  htm+='<div class="wrapper">';
+      htm+='<div class="field-wrapper">';
+      htm+='<textarea name="order_notes" class="trn order_notes text-input text-input--underbar" placeholder="'+getTrans("Special Instructions",'special_instruction2')+'"></textarea>';
+      htm+='</div>';
+   htm+='</div>';   
+   
+   htm+='<ons-row class="row stic-align" style="display:none">';
+
+      htm+='<input name="qty" type="number" class="qty numeric_only text-input text-input--transparent" value="1">';
+      htm+='<ons-col class="total_value text-left">'+ currency_code+'</ons-col>';
+      
+    htm+='</ons-row>';
+
+    return htm
+}
 function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_name,size,x ,price2, discount, category_id)
 {	
    var htm='';
    htm+='<ons-list-item class="row-no-border">';
    htm+='<ons-row >';
-	   htm+='<ons-col class="concat-text" width="60%">';
+	   htm+='<ons-col class="concat-text" width="73%">';
 		 htm+='<input name="qty" type="number" class="item-qty qty numeric_only small-input text-center text-input text-input--underbar green bold"  style="padding-top: 13px; border-bottom: 1px solid #ddd;"';
 /*Atualização Master Hub (Tradução)*/
 		  htm+='placeholder="quant." value="'+qty+'" data-rowid="'+x+'">';
@@ -301,11 +346,11 @@ function tplCartRowNoBorder(item_id, item_name, price, pretty_price, qty, field_
 		  
 		  if (empty(size))	{
 /*Atualização Master Hub (Personalização)*/
-		     htm+='<p class="description item-name concat-text bold"><span class="qty-label vermelho">'+qty+"x </span> "+item_name+'</p>';
+		     htm+='<p class="description item-name concat-texto bold"><span class="qty-label vermelho">'+qty+"x </span>"+getTrans(item_name, item_name)+'</span></p>';
 		  } else {
-		  	htm+='<p class="description item-name concat-text bold"><span class="qty-label vermelho">'+qty+"x </span> "+item_name+
+		  	htm+='<p class="description item-name concat-texto bold"><span class="qty-label vermelho">'+qty+"x </span>"+getTrans(item_name, item_name)+
 /*Fim da atualização*/
-		  	" <size style=\"font-size: x-small; margin-top: -12px;\">- "+size+"</size>"
+		  	"</span></p><p class=\"description item-name concat-text bold\"> <size style=\"font-size: x-small; margin-top: -12px;\">- "+getTrans(size, size)+"</size>"
 		  	+'</p>';
 		  }
 	   htm+='</ons-col>';
@@ -336,10 +381,10 @@ function tplCartRowNoBorderSub(subcat_id, sub_item_id, item_name, price, pretty_
 		  htm+='<input type="hidden" name="subcat_id" class="subcat_id" value="'+subcat_id+'">';
 		  htm+='<input type="hidden" name="sub_item_id" class="sub_item_id" value="'+sub_item_id+'">';
 		  htm+='<input type="hidden" name="sub_item_price" class="sub_item_price" value="'+price+'">';
-		  htm+='<input type="hidden" name="sub_item_name" class="sub_item_name" value="'+item_name+'">';
+		  htm+='<input type="hidden" name="sub_item_name" class="sub_item_name" value="'+getTrans(item_name, item_name)+'">';
 		  
 /*Atualização Master Hub (Personalização)*/
-		  htm+='<p class="description item-name concat-text"><span class="qty-label vermelho">'+qty+"x</span> "+item_name+'</p>';
+		  htm+='<p class="description item-name concat-text"><span class="qty-label vermelho">'+qty+"x</span> "+getTrans(item_name, item_name)+'</p>';
 /*Fim da atualização*/
 	   htm+='</ons-col>';
 	   htm+='<ons-col class="text-right" ><price>'+pretty_price+'</price></ons-col>';
@@ -353,8 +398,22 @@ function tplCartRow(label,price,class_name)
 	var htm='';	
 	htm+='<ons-list-item class="'+class_name+'">';
 	  htm+='<ons-row >';
-		   htm+='<ons-col class="concat-text" width="70%">';
-			  htm+='<p class="description item-name concat-text">'+label+'</p>';
+		   htm+='<ons-col class="concat-text" width="75%">';
+			  htm+='<p class="description item-name concat-text">'+getTrans(label, label)+'</p>';
+		   htm+='</ons-col>';
+		   htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
+	   htm+='</ons-row>';
+	htm+='</ons-list-item>';
+	return htm;
+}
+
+function tplCartRow2(label,price,class_name)
+{
+	var htm='';	
+	htm+='<ons-list-item class="'+class_name+'">';
+	  htm+='<ons-row >';
+		   htm+='<ons-col class="concat-text" width="77%">';
+			  htm+='<p class="description item-name concat-text">'+getTrans(label, label)+'</p>';
 		   htm+='</ons-col>';
 		   htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
 	   htm+='</ons-row>';
@@ -369,7 +428,7 @@ function tplCartRowHiddenFields(label, value, field_name, x, class_name)
 	  htm+='<ons-row >';
 		   htm+='<ons-col class="concat-text" >';
 		      htm+='<input type="hidden" name="'+field_name+x+'"  class="'+field_name+x+'" value="'+value+'" >';
-			  htm+='<p class="description item-name concat-text">'+label+'</p>';
+			  htm+='<p class="description item-name concat-text">'+getTrans(label, label)+'</p>';
 		   htm+='</ons-col>';		   
 	   htm+='</ons-row>';
 	htm+='</ons-list-item>';
@@ -438,7 +497,7 @@ function tplPaymentList(radio_name, radio_value, label, icons)
              htm+='<label class="radio-button checkbox--list-item">';
                htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'">';
                htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
-               htm+='<p class="description item-name concat-text"> '+label+'</p>';
+               htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
              htm+='</label>';
           htm+='</ons-col>';
           htm+='<ons-col class="text-right '+radio_value+'" >';
@@ -455,7 +514,7 @@ function tplPaymentListStatic(radio_value, label, icons)
 	 htm+='<ons-list-item modifier="tappable">';
        htm+='<ons-row class="row">';
           htm+='<ons-col class="concat-text" width="80%">';          
-               htm+='<p class="description item-name concat-text"> '+label+'</p>';             
+               htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';             
           htm+='</ons-col>';
           htm+='<ons-col class="text-right '+radio_value+'" >';
             htm+='<ons-icon icon="'+icons+'"></ons-icon>';
@@ -490,7 +549,7 @@ function tplPaymentProvider(radio_name, radio_value, label, icons)
              htm+='<label class="radio-button checkbox--list-item">';
                htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'">';
                htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
-               htm+='<p class="description item-name concat-text"> '+label+'</p>';
+               htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
              htm+='</label>';
           htm+='</ons-col>';
           htm+='<ons-col class="text-right" >';
