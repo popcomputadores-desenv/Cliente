@@ -7638,29 +7638,29 @@ function displayItem(data)
 				discount_price+='</price>';
 				discount_price+='<price>'+val.discounted_price_pretty+'</price>';
 				if (x==0){
-					htm+=privatePriceRowWithRadio2('price',
+					htm+=privatePriceRowWithRadio2a('price',
 					val.price+'|'+val.size+'|'+val.size_id ,
 					val.size,
-					'---',
+					'',
 					'checked="checked"');
 				} else {
-					htm+=privatePriceRowWithRadio2('price',
+					htm+=privatePriceRowWithRadio2a('price',
 					val.price+'|'+val.size+'|'+val.size_id,
 					val.size,
-					'---');
+					'');
 				}	
 			} else {			
 				if (x==0){	
-					htm+=privatePriceRowWithRadio('price',
+					htm+=privatePriceRowWithRadioa('price',
 					val.price+'|'+val.size+'|'+val.size_id ,
 					val.size,
-					'---',
+					'',
 					'checked="checked"');
 				} else {
-					htm+=privatePriceRowWithRadio('price',
+					htm+=privatePriceRowWithRadioa('price',
 					val.price+'|'+val.size+'|'+val.size_id,
 					val.size,
-					'---');
+					'');
 				}		
 			}	
 			x++;
