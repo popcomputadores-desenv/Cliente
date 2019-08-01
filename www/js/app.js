@@ -8820,8 +8820,47 @@ function displayCart(data)
 		}		
 		
 	}
+	var aceita_trocar_pontos='';
+	if (!data.merchant_info.aceita_trocar_pontos && !data.merchant_info.aceita_pontos){
+		aceita_trocar_pontos = 'sim';
+	} else if (data.merchant_info.aceita_trocar_pontos=='1' && !data.merchant_info.aceita_pontos){
+		aceita_trocar_pontos = 'nao';
+	} else if (!data.merchant_info.aceita_trocar_pontos && data.merchant_info.aceita_pontos=='2'){
+		aceita_trocar_pontos = 'nao';
+	} else if (data.merchant_info.aceita_trocar_pontos=='1' && data.merchant_info.aceita_pontos=='2'){
+		aceita_trocar_pontos = 'nao';
+	}
 	
+	if (!data.merchant_info.aceita_cupom && !data.merchant_info.aceita_fidelidade && aceita_trocar_pontos=='nao'){
+		//não aparece nenhuma mensagem
+	} else 
+		if (data.merchant_info.aceita_cupom=='yes' && !data.merchant_info.aceita_fidelidade && aceita_trocar_pontos=='nao')
+		{
+	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Cupom</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	} else 
+		if (!data.merchant_info.aceita_cupom && data.merchant_info.aceita_fidelidade=='yes' && aceita_trocar_pontos=='nao')
+		{
+	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Plano Fidelidade</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	} else 
+		if (data.merchant_info.aceita_cupom=='yes' && data.merchant_info.aceita_fidelidade=='yes' && aceita_trocar_pontos=='nao')
+		{
+	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Cupom ou Plano Fidelidade</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	} else
+		if (!data.merchant_info.aceita_cupom && data.merchant_info.aceita_fidelidade=='yes' && aceita_trocar_pontos=='sim')
+		{
+	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Plano Fidelidade ou Programa de Pontos</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	} else
+		if (data.merchant_info.aceita_cupom=='yes' && !data.merchant_info.aceita_fidelidade && aceita_trocar_pontos=='sim')
+		{
+	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Cupom ou Programa de Pontos</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	} else
+		if (!data.merchant_info.aceita_cupom && !data.merchant_info.aceita_fidelidade && aceita_trocar_pontos=='sim')
+		{
+	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Programa de Pontos</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	} else {
 	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Cupom/Plano Fidelidade/Pontos</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	}
+	
 	if (transaction_type == 'coleta' || transaction_type == 'coleta_retorno' || transaction_type == 'pre_coleta' || transaction_type == 'pre_coleta_retorno'){	
 	htm+='<ons-list-header style="font-size: 15px;" class="trn list-header" data-trn-key="delivery_options_extra">Delivery Options</ons-list-header>';
 	} else {
