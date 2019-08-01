@@ -34,6 +34,44 @@ function privatePriceRowWithRadio2(radio_name,radio_value,label,price,ischecked)
     return htm;
 }
 
+function privatePriceRowWithRadioa(radio_name,radio_value,label,price,ischecked)
+{
+	var htm='';
+	htm+='<ons-list-item modifier="tappable">';
+    htm+='<ons-row class="row">';
+     htm+='<ons-col class="concat-text" width="82%">';
+       htm+='<label class="radio-button checkbox--list-item">';
+	     htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'" '+ischecked+' >';
+	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
+	     htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
+	   htm+='</label>';
+	  htm+='</ons-col>';	
+	  htm+='<ons-col class="text-right" ><price>'+price+'</price></ons-col>';
+    htm+='</ons-row>';
+	htm+='<p class="coleta-descricao-text"> '+getTrans("descricao", label+'_titulo')+'</p>';
+    htm+='</ons-list-item>';
+    return htm;
+}
+
+function privatePriceRowWithRadio2a(radio_name,radio_value,label,price,ischecked)
+{
+	var htm='';
+	htm+='<ons-list-item modifier="tappable">';
+    htm+='<ons-row class="row">';
+     htm+='<ons-col class="concat-text" width="50%">';
+       htm+='<label class="radio-button checkbox--list-item">';
+	     htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'" '+ischecked+' >';
+	     htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
+	     htm+='<p class="description item-name concat-text"> '+getTrans(label, label)+'</p>';
+	   htm+='</label>';
+	  htm+='</ons-col>';	
+	  htm+='<ons-col class="text-right" >'+price+'</ons-col>';
+    htm+='</ons-row>';
+	htm+='<p class="coleta-descricao-text"> '+getTrans("descricao", label+'_titulo')+'</p>';
+    htm+='</ons-list-item>';
+    return htm;
+}
+
 function subItemRowWithRadio(subcat_id,radio_name,radio_value,label,price,ischecked , description)
 {
 	

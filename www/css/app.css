@@ -923,6 +923,23 @@ overflow: hidden;
 text-overflow: ellipsis;
 display:block;
 }
+
+.coleta-descricao-text
+{
+width: 100%;
+overflow: hidden;
+text-overflow: ellipsis;
+display: block;
+	font-size: x-small;
+    color: #bdbdbd;
+    margin: -25px 0px -10px 0px;
+    margin-block-start: -10px;
+    margin-block-end: 2px;
+    margin-inline-start: -10px;
+    margin-inline-end: 0px;
+    line-height: 12px;
+}
+
 .restaurant-list .logo-wrap,
 .restaurant-list .logo-wrap2,
 .logo-wrap
@@ -1118,7 +1135,7 @@ color: #dc143c;
 height:170px;
 background:#fff;
 background-repeat: no-repeat !important;
-background-size: cover !important;
+background-size: contain !important;
 background-position:center !important;
 }
 
