@@ -1132,47 +1132,14 @@ function dataAtualFormatada(converter_data){
 }
 
 function dataAtualFormatada_NomeMes(converter_data){
-	var nomeMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-    var diaSemana = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado']	
-    var data = new Date(converter_data);
-    var diaS = data.getDay();
-	diaS = diaSemana[diaS];
-    var dia = data.getDate();
-    var mes = data.getMonth();
-	mes = nomeMeses[mes];
-    var ano = data.getFullYear(); 
-	data_completa=[diaS]+", "+[dia, mes, ano].join(' de ');
+	moment.locale('pt-BR');
+	data_completa=moment(converter_data).format('ll');
     return data_completa;
 }
 
 function dataAtualFormatada_NomeMes_hora(converter_data){
-    var nomeMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-    var diaSemana = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];	
-    var data = new Date(converter_data);
-    var diaS = data.getDay();
-	diaS = diaSemana[diaS];
-    var dia = data.getDate();
-    var mes = data.getMonth();
-	mes = nomeMeses[mes];
-    var ano = data.getFullYear(); 
-    var horas    = data.getHours();          // 0-23
-    var minutos  = data.getMinutes();        // 0-59
-    var segundos = data.getSeconds();        // 0-59
-    
-//converte as horas, minutos e segundos para string
-   str_horas = new String(horas);
-   str_minutos = new String(minutos);
-   str_segundos = new String(segundos);
-   
-   //se tiver menos que 2 digitos, acrescenta o 0
-   if (str_horas.length < 2)
-      str_horas = 0 + str_horas;
-   if (str_minutos.length < 2)
-      str_minutos = 0 + str_minutos;
-   if (str_segundos.length < 2)
-      str_segundos = 0 + str_segundos;
-    
-	data_completa=[diaS]+", "+[dia, mes, ano].join(' de ')+" às "+str_horas + ":" + str_minutos + ":" + str_segundos;
+	moment.locale('pt-BR');
+	data_completa=moment(converter_data).format('llll');
     return data_completa;
 }
 /*Fim da atualização*/
