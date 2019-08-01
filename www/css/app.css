@@ -931,7 +931,7 @@ overflow: hidden;
 text-overflow: ellipsis;
 display: block;
 	font-size: x-small;
-    color: #bdbdbd;
+    color: #555555;
         margin: -10px -3px 3px 0px;
     line-height: 12px;
 }
