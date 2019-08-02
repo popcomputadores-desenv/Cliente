@@ -7015,7 +7015,8 @@ function displayRestaurantResults(data , target_id)
     	 
     	 htm+='<ons-list-item modifier="tappable" class="list-item-container stic-list-item" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
     	 //htm+='<ons-row class="row" onclick="loadRestaurantCategory('+val.merchant_id+');" >';
-
+		if (val.is_open=='Fechado'){
+		} else {
     	 htm+='<ons-row class="row stic-nopad">';    	    
 	    	 if(!empty(val.merchant_photo_bg)){
 	    	 	htm+='<div class="stic-merchant-bg" style="background:url('+krms_config.Website+'/upload/'+val.merchant_photo_bg+') no-repeat center / cover;">';
@@ -7026,7 +7027,7 @@ function displayRestaurantResults(data , target_id)
 	    			 htm+='</div>';    	 
 	    	 htm+='</div>';
     	 htm+='</ons-row>';    	 
-
+		}
 
     	 htm+='<ons-row class="row stic-row-align" >';    	 
     	     htm+='<ons-col class="col-image border" width="65px">';
@@ -7061,8 +7062,12 @@ function displayRestaurantResults(data , target_id)
     	           htm+='<div>';
 	    	           htm+='<p class="restauran-title stic-restaurant concat-text">'+val.restaurant_name+'</p>';
 	    	           htm+='<p class="concat-textx stic-cuisine">'+val.cuisine+'</p>';
+		if (val.is_open=='Fechado'){
+						htm+='<i class="stic-fechado">'+val.is_open+'</i>';
 	    	           htm+='<span class="notification '+val.tag_raw+' stic-notification">'+val.is_open+'</span>';
-	    	           
+		} else {
+	    	           htm+='<span class="notification '+val.tag_raw+' stic-notification">'+val.is_open+'</span>';
+		}
 	    	           // if(!empty(val.distance)){
 	    	           // 	   htm+='<ons-icon class="stic-icon" icon="ion-android-pin"></ons-icon>';
 	    	           // 	   htm+='<p class="stic-info">'+val.distance+'</p>';
@@ -7128,12 +7133,13 @@ function displayRestaurantResults(data , target_id)
     	           // htm+='</ons-row>';
     	           
     	     htm+='</ons-col>';
-
+				if (val.ratings.ratings!=0){
     	     htm+='<ons-col class="stic-ratings-position col-image border center" width="13%">';
 	              htm+='<ons-icon class="gold-color" icon="ion-android-star"></ons-icon>';
     	          // htm+='<p class="stic-ratings p-small trn" data-trn-key="ratings">Ratings</p>';
 	    	  	  htm+='<span class="center stic-score trn">'+val.ratings.ratings+'</span>';
     	     htm+='</ons-col>';
+				}
     	     
     	 htm+='</ons-row>';
     	 htm+='</ons-list-item>';
@@ -8836,29 +8842,29 @@ function displayCart(data)
 	} else 
 		if (data.merchant_info.aceita_cupom=='yes' && !data.merchant_info.aceita_fidelidade && aceita_trocar_pontos=='nao')
 		{
-	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Cupom</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	htm+='<p class="textopequeno wrapper trn center" style="background-color: rgba(255,216,104,0.48);">O <b>'+getTrans('Cupom','cupom')+'</b> '+getTrans('podera ser aplicado na tela de Conferencia de Valores.','podera_ser_aplicado')+'</p>';
 	} else 
 		if (!data.merchant_info.aceita_cupom && data.merchant_info.aceita_fidelidade=='yes' && aceita_trocar_pontos=='nao')
 		{
-	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Plano Fidelidade</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	htm+='<p class="textopequeno wrapper trn center" style="background-color: rgba(255,216,104,0.48);">O <b>'+getTrans('Fidelidade','fidelidade')+'</b> '+getTrans('podera ser aplicado na tela de Conferencia de Valores.','podera_ser_aplicado')+'</p>';
 	} else 
 		if (data.merchant_info.aceita_cupom=='yes' && data.merchant_info.aceita_fidelidade=='yes' && aceita_trocar_pontos=='nao')
 		{
-	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Cupom ou Plano Fidelidade</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	htm+='<p class="textopequeno wrapper trn center" style="background-color: rgba(255,216,104,0.48);">O <b>'+getTrans('Cupom ou Fidelidade','cupom_fidelidade')+'</b> '+getTrans('podera ser aplicado na tela de Conferencia de Valores.','podera_ser_aplicado')+'</p>';
 	} else
 		if (!data.merchant_info.aceita_cupom && data.merchant_info.aceita_fidelidade=='yes' && aceita_trocar_pontos=='sim')
 		{
-	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Plano Fidelidade ou Programa de Pontos</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	htm+='<p class="textopequeno wrapper trn center" style="background-color: rgba(255,216,104,0.48);">O <b>'+getTrans('Plano Fidelidade ou Programa de Pontos','fidelidade_pontos')+'</b> '+getTrans('podera ser aplicado na tela de Conferencia de Valores.','podera_ser_aplicado')+'</p>';
 	} else
 		if (data.merchant_info.aceita_cupom=='yes' && !data.merchant_info.aceita_fidelidade && aceita_trocar_pontos=='sim')
 		{
-	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Cupom ou Programa de Pontos</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	htm+='<p class="textopequeno wrapper trn center" style="background-color: rgba(255,216,104,0.48);">O <b>'+getTrans('Cupom ou Programa de Pontos','cupom_pontos')+'</b> '+getTrans('podera ser aplicado na tela de Conferencia de Valores.','podera_ser_aplicado')+'</p>';
 	} else
 		if (!data.merchant_info.aceita_cupom && !data.merchant_info.aceita_fidelidade && aceita_trocar_pontos=='sim')
 		{
-	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Programa de Pontos</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	htm+='<p class="textopequeno wrapper trn center" style="background-color: rgba(255,216,104,0.48);">O <b>'+getTrans('Programa de Pontos','pontos')+'</b> '+getTrans('podera ser aplicado na tela de Conferencia de Valores.','podera_ser_aplicado')+'</p>';
 	} else {
-	htm+='<p class="textopequeno trn center" style="background-color: rgba(255,216,104,0.48);">O <b>Cupom/Plano Fidelidade/Pontos</b> poderá ser aplicado na tela de Conferência de Valores.</p>';
+	htm+='<p class="textopequeno wrapper trn center" style="background-color: rgba(255,216,104,0.48);">O <b>'+getTrans('Cupom / Plano Fidelidade / Programa de Pontos','cupom_fidelidade_pontos')+'</b> '+getTrans('podera ser aplicado na tela de Conferencia de Valores.','podera_ser_aplicado')+'</p>';
 	}
 	
 	if (transaction_type == 'coleta' || transaction_type == 'coleta_retorno' || transaction_type == 'pre_coleta' || transaction_type == 'pre_coleta_retorno'){	
