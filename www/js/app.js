@@ -4066,7 +4066,7 @@ if (data.details.programa_fidelidade!=false){
 				    
 				    setStorage("avatar",data.details.avatar);
                     setStorage("client_name_cookie",data.details.client_name_cookie);
-				    setStorage("customer_contact_number",data.details.contact_phone);
+		    setStorage("customer_contact_number",data.details.contact_phone);
 					
 					if (data.details.next_step=="shipping_address"){
 						
@@ -6617,7 +6617,7 @@ if (data.details.programa_fidelidade!=false){
 		                setStorage("geo_address_result_state", location_res.state );
 		                setStorage("geo_address_result_zip", location_res.zip );	               
 		                
-		                var cart_params=JSON.stringify(cart);      			     
+		                var cart_params=JSON.stringify(cart);       			     
 					    if (saveCartToDb()){
 					       var cart_params='';
 					    }
@@ -9274,6 +9274,7 @@ function checkOutColeta()
 		      	  params+=" - "+ $("#frm-coleta .zipcode").val();
 			
 					setStorage('coleta_address',params);
+					setStorage('merchant_address',params);
 			        setStorage('coleta_address_phone', $("#frm-coleta .telefone_contato").val());
 			
     var extra_params= "&delivery_date=" +  $(".delivery_date").val();  
@@ -9308,7 +9309,6 @@ function checkOutColeta()
 	    }  
 	});
 }	
-/* fim */	
 
 }
 
@@ -10310,7 +10310,7 @@ function fillAddressBook(data)
 	$(".zipcode").val( data.zipcode );
 	$(".location_name", "#frm-addressbook").val( data.location_name );	
 	$(".delivery_instruction", "#frm-addressbook").val( data.delivery_instruction );	
-	$(".telefone_contato", "#frm-addressbook").val( data.telefone_contato );
+	$(".telefone_contato", "#frm-addressbook").val( data.telefone_contato );	
 	$(".country_code").val( data.country_code );		
 	if (data.as_default==2){
 		$(".as_default").attr("checked","checked");
