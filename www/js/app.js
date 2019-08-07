@@ -670,7 +670,7 @@ var params = "client_token="+ getStorage("client_token");
 	    $(".location_name").attr("placeholder",  getTrans("Location name",'location_name') );
 /*Atualização Master Hub (Campo Complemento no Catálogo de Endereços)*/
 	    $(".delivery_instruction").attr("placeholder",  getTrans("Delivery instructions",'delivery_instruction') );
-	    $(".telefone_contato").attr("placeholder",  getTrans("Telefone de Contato",'telefone_contato') );
+	    $(".telefone_contato").attr("placeholder",  getTrans("Telefone de Contato",'telefone_contato_deste') );
 /*Fim da atualização*/
 	    var page = sNavigator.getCurrentPage();
 		record_id = page.options.id;			
@@ -1307,33 +1307,26 @@ var params = "client_token="+ getStorage("client_token");
 		   
 		   break;
 		   
-		case "page-shipping-location-area": 
-		case "page-shipping-location-area-coleta":   
-		case "page-shipping-location-area-entrega":   
-		case "page-shipping-location-area-retorno":   
-		case "page-shipping-location-area-entrega-retorno":   
-		case "page-shipping-location-area-coleta-retorno":   
-		case "page-shipping-location-area-pre-coleta-retorno":   
-		case "page-shipping-location-area-pre-coleta":   
-		
-		   translatePage();
-		   $(".street").attr("placeholder", getTrans('Street','street') );
-		   $(".contact_phone").attr("placeholder", getTrans('Contact phone','contact_phone') );
-	       $(".location_name").attr("placeholder", getTrans('Apartment suite, unit number, or company name','location_name2') );
-	       $(".delivery_instruction").attr("placeholder", getTrans('Delivery instructions','delivery_instruction') );
+		case "page-shipping-location-area-coleta": 
+			
+			translatePage();
+		   $("#frm-coleta .street").attr("placeholder", getTrans('Street','street') );
+		   $("#frm-coleta .contact_phone").attr("placeholder", getTrans('Contact phone','contact_phone') );
+	       $("#frm-coleta .location_name").attr("placeholder", getTrans('Apartment suite, unit number, or company name','location_name2') );
+	       $("#frm-coleta .delivery_instruction").attr("placeholder", getTrans('Delivery instructions','delivery_instruction') );
 		   
 		   if ( !empty(global_city_id)){
-		   	   $(".location_city").html( global_city_name );
+		   	   $("#frm-coleta .location_city").html( global_city_name );
 		   	   
-		   	   $(".city").val( global_city_name );
-		   	   $(".city_id").val( global_city_id );
+		   	   $("#frm-coleta .city").val( global_city_name );
+		   	   $("#frm-coleta .city_id").val( global_city_id );
 		   }
 		   
 		   if ( !empty(global_area_id)){
-		   	   $(".location_area").html( global_area_name );
+		   	   $("#frm-coleta .location_area").html( global_area_name );
 		   	   
-		   	   $(".state").val( global_area_name );
-		   	   $(".area_id").val( global_area_id );
+		   	   $("#frm-coleta .state").val( global_area_name );
+		   	   $("#frm-coleta .area_id").val( global_area_id );
 		   }
 /*Atualização Master Hub (Catálogo de Endereços na finalização do Pedido)*/
 		   	switch (search_type)
@@ -1341,21 +1334,21 @@ var params = "client_token="+ getStorage("client_token");
 				case "1":
 				case 1:
 				//$(".location_state").hide();
-				$(".location_postal").hide();
+				$("#frm-coleta .location_postal").hide();
 		   if ( !empty(global_state_id)){
-		   	   $(".location_state").html( global_state_name );		   	   		   	   
-		   	   $(".state_id").val( global_state_id );
-		   	   $(".state").val( global_state_name );
+		   	   $("#frm-coleta .location_state").html( global_state_name );		   	   		   	   
+		   	   $("#frm-coleta .state_id").val( global_state_id );
+		   	   $("#frm-coleta .state").val( global_state_name );
 				}
 				if ( !empty(global_city_id)){
-					$(".city_id").val( global_city_id );
-					$(".city").val( global_city_name );
-					$(".location_city").html( global_city_name );
+					$("#frm-coleta .city_id").val( global_city_id );
+					$("#frm-coleta .city").val( global_city_name );
+					$("#frm-coleta .location_city").html( global_city_name );
 				}
 				if ( !empty(global_area_id)){
-					$(".area_id").val( global_area_id );
-					$(".area_name").val( global_area_name );
-					$(".location_area").html( global_area_name );
+					$("#frm-coleta .area_id").val( global_area_id );
+					$("#frm-coleta .area_name").val( global_area_name );
+					$("#frm-coleta .location_area").html( global_area_name );
 		   }
 				break;
 		   
@@ -1363,32 +1356,32 @@ var params = "client_token="+ getStorage("client_token");
 				case 2:
 
 		   if ( !empty(global_state_id)){
-		   	   $(".location_state").html( global_state_name );		   	   		   	   
-		   	   $(".state_id").val( global_state_id );
-		   	   $(".state").val( global_state_name );
+		   	   $("#frm-coleta .location_state").html( global_state_name );		   	   		   	   
+		   	   $("#frm-coleta .state_id").val( global_state_id );
+		   	   $("#frm-coleta .state").val( global_state_name );
 				}
 				if ( !empty(global_city_id)){
-					$(".city_id").val( global_city_id );
-					$(".city").val( global_city_name );
-					$(".location_city").html( global_city_name );
+					$("#frm-coleta .city_id").val( global_city_id );
+					$("#frm-coleta .city").val( global_city_name );
+					$("#frm-coleta .location_city").html( global_city_name );
 				}
 				if ( !empty(global_area_id)){
-					$(".area_id").val( global_area_id );
-					$(".area_name").val( global_area_name );
-					$(".location_area").html( global_area_name );
+					$("#frm-coleta .area_id").val( global_area_id );
+					$("#frm-coleta .area_name").val( global_area_name );
+					$("#frm-coleta .location_area").html( global_area_name );
 		   }
 		   		   
-				$(".location_state").show();
-				$(".location_area").show();
-				$(".location_postal").hide();
+				$("#frm-coleta .location_state").show();
+				$("#frm-coleta .location_area").show();
+				$("#frm-coleta .location_postal").hide();
 				break;
 
 				case "3":
 				case 3:
-				$(".location_state").hide();
-				$(".location_city").hide();
-				$(".location_area").hide();
-				$(".location_postal").show();
+				$("#frm-coleta .location_state").hide();
+				$("#frm-coleta .location_city").hide();
+				$("#frm-coleta .location_area").hide();
+				$("#frm-coleta .location_postal").show();
 				break;
 			}
 /*Fim da atualização*/
@@ -1396,14 +1389,214 @@ var params = "client_token="+ getStorage("client_token");
 /*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
            //*initIntelInputs();
 /*Fim da atualização*/
-           var customer_contact_number=getStorage("customer_contact_number");
+			var customer_contact_number;
+			if (!empty(getStorage("customer_contact_number"))){
+            customer_contact_number=getStorage("customer_contact_number");
+			}
+			
 	       if(!empty(customer_contact_number)){
-			  $(".contact_phone").hide(); 
-	      	  $(".contact_phone").val($(".contact_phone").masked( customer_contact_number.replace("+55","") ));
-			  $(".telefone_contato").show();  
+			  $("#frm-coleta .telefone_contato_titulo").show();  
+			  $("#frm-coleta .contact_phone_titulo").hide(); 
+	      	  $("#frm-coleta .contact_phone").val(customer_contact_number.replace("+55",""));
 	       } else {
-			  $(".contact_phone").show();  
-			  $(".telefone_contato").hide();  
+			  $("#frm-coleta .contact_phone_titulo").show();  
+			  $("#frm-coleta .telefone_contato_titulo").hide();   
+		   }
+	       
+		   break;
+		
+		case "page-shipping-location-area": 
+			
+			translatePage();
+		   $("#frm-shipping .street").attr("placeholder", getTrans('Street','street') );
+		   $("#frm-shipping .contact_phone").attr("placeholder", getTrans('Contact phone','contact_phone') );
+	       $("#frm-shipping .location_name").attr("placeholder", getTrans('Apartment suite, unit number, or company name','location_name2') );
+	       $("#frm-shipping .delivery_instruction").attr("placeholder", getTrans('Delivery instructions','delivery_instruction') );
+		   
+		   if ( !empty(global_city_id)){
+		   	   $("#frm-shipping .location_city").html( global_city_name );
+		   	   
+		   	   $("#frm-shipping .city").val( global_city_name );
+		   	   $("#frm-shipping .city_id").val( global_city_id );
+		   }
+		   
+		   if ( !empty(global_area_id)){
+		   	   $("#frm-shipping .location_area").html( global_area_name );
+		   	   
+		   	   $("#frm-shipping .state").val( global_area_name );
+		   	   $("#frm-shipping .area_id").val( global_area_id );
+		   }
+/*Atualização Master Hub (Catálogo de Endereços na finalização do Pedido)*/
+		   	switch (search_type)
+			{
+				case "1":
+				case 1:
+				//$(".location_state").hide();
+				$("#frm-shipping .location_postal").hide();
+		   if ( !empty(global_state_id)){
+		   	   $("#frm-shipping .location_state").html( global_state_name );		   	   		   	   
+		   	   $("#frm-shipping .state_id").val( global_state_id );
+		   	   $("#frm-shipping .state").val( global_state_name );
+				}
+				if ( !empty(global_city_id)){
+					$("#frm-shipping .city_id").val( global_city_id );
+					$("#frm-shipping .city").val( global_city_name );
+					$("#frm-shipping .location_city").html( global_city_name );
+				}
+				if ( !empty(global_area_id)){
+					$("#frm-shipping .area_id").val( global_area_id );
+					$("#frm-shipping .area_name").val( global_area_name );
+					$("#frm-shipping .location_area").html( global_area_name );
+		   }
+				break;
+		   
+				case "2":
+				case 2:
+
+		   if ( !empty(global_state_id)){
+		   	   $("#frm-shipping .location_state").html( global_state_name );		   	   		   	   
+		   	   $("#frm-shipping .state_id").val( global_state_id );
+		   	   $("#frm-shipping .state").val( global_state_name );
+				}
+				if ( !empty(global_city_id)){
+					$("#frm-shipping .city_id").val( global_city_id );
+					$("#frm-shipping .city").val( global_city_name );
+					$("#frm-shipping .location_city").html( global_city_name );
+				}
+				if ( !empty(global_area_id)){
+					$("#frm-shipping .area_id").val( global_area_id );
+					$("#frm-shipping .area_name").val( global_area_name );
+					$("#frm-shipping .location_area").html( global_area_name );
+		   }
+		   		   
+				$("#frm-shipping .location_state").show();
+				$("#frm-shipping .location_area").show();
+				$("#frm-shipping .location_postal").hide();
+				break;
+
+				case "3":
+				case 3:
+				$("#frm-shipping .location_state").hide();
+				$("#frm-shipping .location_city").hide();
+				$("#frm-shipping .location_area").hide();
+				$("#frm-shipping .location_postal").show();
+				break;
+			}
+/*Fim da atualização*/
+           translateValidationForm();
+/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
+           //*initIntelInputs();
+/*Fim da atualização*/
+			var customer_contact_number;
+			if (!empty(getStorage("customer_contact_number"))){
+            customer_contact_number=getStorage("customer_contact_number");
+			}
+			
+	       if(!empty(customer_contact_number)){
+			  $("#frm-shipping .telefone_contato_titulo").show();  
+			  $("#frm-shipping .contact_phone_titulo").hide(); 
+	      	  $("#frm-shipping .contact_phone").val(customer_contact_number.replace("+55",""));
+	       } else {
+			  $("#frm-shipping .contact_phone_titulo").show();  
+			  $("#frm-shipping .telefone_contato_titulo").hide();   
+		   }
+	       
+		   break;
+		
+		case "page-shipping-location-area-pre-coleta":   
+		
+		   translatePage();
+		   $("#frm-pre-coleta .street").attr("placeholder", getTrans('Street','street') );
+		   $("#frm-pre-coleta .contact_phone").attr("placeholder", getTrans('Contact phone','contact_phone') );
+	       $("#frm-pre-coleta .location_name").attr("placeholder", getTrans('Apartment suite, unit number, or company name','location_name2') );
+	       $("#frm-pre-coleta .delivery_instruction").attr("placeholder", getTrans('Delivery instructions','delivery_instruction') );
+		   
+		   if ( !empty(global_city_id)){
+		   	   $("#frm-pre-coleta .location_city").html( global_city_name );
+		   	   
+		   	   $("#frm-pre-coleta .city").val( global_city_name );
+		   	   $("#frm-pre-coleta .city_id").val( global_city_id );
+		   }
+		   
+		   if ( !empty(global_area_id)){
+		   	   $("#frm-pre-coleta .location_area").html( global_area_name );
+		   	   
+		   	   $("#frm-pre-coleta .state").val( global_area_name );
+		   	   $("#frm-pre-coleta .area_id").val( global_area_id );
+		   }
+/*Atualização Master Hub (Catálogo de Endereços na finalização do Pedido)*/
+		   	switch (search_type)
+			{
+				case "1":
+				case 1:
+				//$(".location_state").hide();
+				$("#frm-pre-coleta .location_postal").hide();
+		   if ( !empty(global_state_id)){
+		   	   $("#frm-pre-coleta .location_state").html( global_state_name );		   	   		   	   
+		   	   $("#frm-pre-coleta .state_id").val( global_state_id );
+		   	   $("#frm-pre-coleta .state").val( global_state_name );
+				}
+				if ( !empty(global_city_id)){
+					$("#frm-pre-coleta .city_id").val( global_city_id );
+					$("#frm-pre-coleta .city").val( global_city_name );
+					$("#frm-pre-coleta .location_city").html( global_city_name );
+				}
+				if ( !empty(global_area_id)){
+					$("#frm-pre-coleta .area_id").val( global_area_id );
+					$("#frm-pre-coleta .area_name").val( global_area_name );
+					$("#frm-pre-coleta .location_area").html( global_area_name );
+		   }
+				break;
+		   
+				case "2":
+				case 2:
+
+		   if ( !empty(global_state_id)){
+		   	   $("#frm-pre-coleta .location_state").html( global_state_name );		   	   		   	   
+		   	   $("#frm-pre-coleta .state_id").val( global_state_id );
+		   	   $("#frm-pre-coleta .state").val( global_state_name );
+				}
+				if ( !empty(global_city_id)){
+					$("#frm-pre-coleta .city_id").val( global_city_id );
+					$("#frm-pre-coleta .city").val( global_city_name );
+					$("#frm-pre-coleta .location_city").html( global_city_name );
+				}
+				if ( !empty(global_area_id)){
+					$("#frm-pre-coleta .area_id").val( global_area_id );
+					$("#frm-pre-coleta .area_name").val( global_area_name );
+					$("#frm-pre-coleta .location_area").html( global_area_name );
+		   }
+		   		   
+				$("#frm-pre-coleta .location_state").show();
+				$("#frm-pre-coleta .location_area").show();
+				$("#frm-pre-coleta .location_postal").hide();
+				break;
+
+				case "3":
+				case 3:
+				$("#frm-pre-coleta .location_state").hide();
+				$("#frm-pre-coleta .location_city").hide();
+				$("#frm-pre-coleta .location_area").hide();
+				$("#frm-pre-coleta .location_postal").show();
+				break;
+			}
+/*Fim da atualização*/
+           translateValidationForm();
+/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
+           //*initIntelInputs();
+/*Fim da atualização*/
+			var customer_contact_number;
+			if (!empty(getStorage("customer_contact_number"))){
+            customer_contact_number=getStorage("customer_contact_number");
+			}
+			
+	       if(!empty(customer_contact_number)){
+			  $("#frm-pre-coleta .telefone_contato_titulo").show();  
+			  $("#frm-pre-coleta .contact_phone_titulo").hide(); 
+	      	  $("#frm-pre-coleta .contact_phone").val(customer_contact_number.replace("+55",""));
+	       } else {
+			  $("#frm-pre-coleta .contact_phone_titulo").show();  
+			  $("#frm-pre-coleta .telefone_contato_titulo").hide();   
 		   }
 	       
 		   break;
@@ -1949,7 +2142,6 @@ function callAjax(action,params)
 		case "checkout":
 		case "checkoutcoleta":
 		case "checkoutprecoleta":
-		case "checkoutentrega":
 			
 			  search_mode = getSearchMode();
 			  if ( search_mode=="postcode"){
@@ -2662,7 +2854,7 @@ if (data.details.programa_fidelidade!=false){
 						      	     getStorage("order_total") ,
 /*Atualização Master Hub (Máscara de Telefones, Número e Bairro e Catálogo de Endereços)*/
 								  '' ,
-						      	     'page-shipping-coleta-retorno');
+						      	     'page-shipping-coleta');
 						      	  
 						      	  if(!empty(data.msg.profile)){
 						      	  	  $(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
@@ -2864,7 +3056,7 @@ if (data.details.programa_fidelidade!=false){
 						      	     getStorage("order_total") ,
 /*Atualização Master Hub (Máscara de Telefones, Número e Bairro e Catálogo de Endereços)*/
 								  '' ,
-						      	     'page-shipping-pre-coleta-retorno');
+						      	     'page-shipping-pre-coleta');
 						      	  
 						      	  if(!empty(data.msg.profile)){
 						      	  	  $(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
@@ -3227,7 +3419,7 @@ if (data.details.programa_fidelidade!=false){
 				    	search_mode = getSearchMode();
 				    	if (search_mode=="postcode"){
 
-				    		showShippingLocationEntregaRetorno(data);			    		
+				    		showShippingLocation(data);			    		
 				    		
 				    	} else {				    
 				    			    					    		
@@ -3239,7 +3431,7 @@ if (data.details.programa_fidelidade!=false){
 						      	     getStorage("order_total") ,
 /*Atualização Master Hub (Máscara de Telefones, Número e Bairro e Catálogo de Endereços)*/
 								  '' ,
-						      	     'page-shipping-entrega-retorno');
+						      	     'page-shipping');
 						      	  
 						      	  if(!empty(data.msg.profile)){
 						      	  	  $(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
@@ -3318,7 +3510,7 @@ if (data.details.programa_fidelidade!=false){
 						      } /*end transition*/
 						    };   
 /*Atualização Master Hub (Correção de tela errada de endereços finalizando o pedido)*/
-						    sNavigator.pushPage("shippingLocationAreaEntregaRetorno.html", options);
+						    sNavigator.pushPage("shippingLocationArea.html", options);
 /*Fim da atualização*/
 						    
 				    	}				
@@ -3429,7 +3621,7 @@ if (data.details.programa_fidelidade!=false){
 				    	search_mode = getSearchMode();
 				    	if (search_mode=="postcode"){
 
-				    		showShippingLocationEntregaRetorno(data);			    		
+				    		showShippingLocationColeta(data);			    		
 				    		
 				    	} else {				    
 				    			    					    		
@@ -3521,280 +3713,6 @@ if (data.details.programa_fidelidade!=false){
 						    };   
 /*Atualização Master Hub (Correção de tela errada de endereços finalizando o pedido)*/
 						    sNavigator.pushPage("shippingLocationAreaColeta.html", options);
-/*Fim da atualização*/
-						    
-				    	}				
-					    		
-				    } else if ( data.details =="payment_method") {
-				    	
-				    	/*alert(data.msg.transaction_type);
-				    	alert(data.msg.show_mobile_number);*/
-				    	
-					    var options = {
-					      animation: 'slide',
-					      onTransitionEnd: function() { 						      	  
-/*Atualização Master Hub (Correção do Cabeçalho, Imagem de fundo da empresa)*/
-					      	  displayMerchantLogo3( 
-					      	     getStorage("merchant_logo") ,
-					      	     getStorage("order_total") ,
-								 getStorage("cart_sub_total_final") , 
-								 getStorage("cart_delivery_charges_final"),
-								 getStorage("cart_tax_final"), 
-								 getStorage("cart_packaging_final"),
-								 getStorage("cart_discount_final"),
-								 getStorage("cart_tip_final"),							  
-/*Fim da atualização*/
-					      	     'page-paymentoption'
-					      	  );
-					      	  
-					      	  var params="merchant_id="+ getStorage("merchant_id");
-					      	  params+="&client_token="+ getStorage("client_token");
-					      	  params+="&transaction_type=" + $(".transaction_type:checked").val();
-					      	  callAjax("getPaymentOptions",params);
-					      } 
-					    };   
-					    sNavigator.pushPage("paymentOption.html", options);		       
-				    	
-				    } else if ( data.details =="enter_contact_number") {
-				    	 
-				    	var options = {
-					      animation: 'slide',
-					      onTransitionEnd: function() { 	
-/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
-					      	  //*initIntelInputs();
-/*Fim da atualização*/
-					      } 
-					    };   
-					    sNavigator.pushPage("enterContact.html", options);		
-				    	 
-				    } else {
-						var options = {
-					      animation: 'slide',
-					      onTransitionEnd: function() { 	
-					      	  dump( getStorage("merchant_logo") );	      	  
-					      	  dump( getStorage("order_total") );
-					      	  displayMerchantLogo2( getStorage("merchant_logo") ,
-					      	     getStorage("order_total") ,
-/*Atualização Master Hub (Correção do Cabeçalho, Imagem de fundo da empresa)*/
-								  '' ,
-/*Fim da atualização*/
-					      	     'page-checkoutsignup');
-							  
-/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$(".estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.msg.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$(".estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.msg.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da Atualização */
-					      	     
-					      	  callAjax("getCustomFields",'');     
-/*Atualização Master Hub (Desativa entrada do código do país nos campos de telefone)*/
-					      	  //*initIntelInputs();
-/*Fim da atualização*/
-					      } 
-					    };     
-					    sNavigator.pushPage("checkoutSignup.html", options);				
-				    }
-				break;
-					
-				case "checkoutentrega":
-								
-				    if ( data.details=="coleta_retorno"){		
-				    	
-				    	search_mode = getSearchMode();
-				    	if (search_mode=="postcode"){
-
-				    		showShippingLocationColetaRetorno(data);			    		
-				    		
-				    	} else {				    
-				    			    					    		
-					    	var options = {
-						      animation: 'slide',
-						      onTransitionEnd: function() { 	
-						      							      				      	  
-						      	  displayMerchantLogo2( getStorage("merchant_logo") ,
-						      	     getStorage("order_total") ,
-/*Atualização Master Hub (Máscara de Telefones, Número e Bairro e Catálogo de Endereços)*/
-								  '' ,
-						      	     'page-shipping-coleta-retorno');
-						      	  
-						      	  if(!empty(data.msg.profile)){
-						      	  	  $(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
-						      	  	  $(".location_name").val( data.msg.profile.location_name ) ;
-									  $(".delivery_instruction").val( data.msg.profile.delivery_instruction ) ;
-						      	  }
-						      	  
-/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$(".estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.msg.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$(".estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.msg.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da Atualização */
-								  
-						      	  var address_fill = false;
-						      	  
-						      	  if(!empty(getStorage("geo_address_result_formatted_address"))){
-						      	  							      	  
-						      	  	   $(".delivery-address-text").html( getStorage("geo_address_result_formatted_address") );
-							  	       $(".street").val( getStorage("geo_address_result_address") );
-									   $(".city").val( getStorage("geo_address_result_city") );
-									   $(".state").val( getStorage("geo_address_result_state") );
-									   $(".zipcode").val( getStorage("geo_address_result_zip") );	
-									   $(".formatted_address").val( getStorage("geo_address_result_formatted_address") );	
-						      	  				
-									   dump('d0');						   
-									   
-						      	  } else if ( !empty( getStorage("map_address_result_formatted_address") )){
-						      	  	    $(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );
-									    $(".street").val( getStorage("map_address_result_address") );
-/*Atualização Master Hub (Número e Bairro e Catálogo de Endereços)*/
-							  		    $(".numero").val( getStorage("map_address_result_numero") );
-							  		    $(".area_name").val( getStorage("map_address_result_area_name") );
-									    $(".city").val( getStorage("map_address_result_city") );
-									    $(".state").val( getStorage("map_address_result_state") );
-									    $(".zipcode").val( getStorage("map_address_result_zip") );	
-									    $(".formatted_address").val( getStorage("map_address_result_formatted_address") );	
-										reloadCart();
-									 
-									    $(".google_lat").val( getStorage("google_lat") );	
-									    $(".google_lng").val( getStorage("google_lng") );	
-									    
-									    address_fill = true;
-									    dump('d1');
-						      	  } else {
-						      	  	  if(!empty(data.msg.address_book)){
-						      	  	  	  $(".street").val( data.msg.address_book.street );
-									  	  $(".numero").val( data.msg.address_book.numero );
-									  	  $(".area_name").val( data.msg.address_book.area_name );
-										  $(".city").val( data.msg.address_book.city );
-										  $(".state").val( data.msg.address_book.state );
-										  $(".zipcode").val( data.msg.address_book.zipcode );
-										  $(".location_name").val( data.msg.address_book.location_name );
-										  $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
-										  
-										  
-										  var complete_address = data.msg.address_book.street;
-								  		  complete_address+=" "+ data.msg.address_book.numero;
-									  	  complete_address+=" "+ data.msg.address_book.area_name;
-										  complete_address+=" "+ data.msg.address_book.city;
-										  complete_address+=" "+ data.msg.address_book.state;
-										  complete_address+=" "+ data.msg.address_book.zipcode;
-										
-											reloadCart();
-										  $(".delivery-address-text").html( complete_address ); 
-										  $(".formatted_address").val( complete_address );	
-										  
-										  address_fill = true;
-										  dump('d2');			  
-						      	  	  }
-						      	  }
-						      	  
-						      	  if(!address_fill){						      	  	
-						      	  	fillShippingAddress();
-/*Fim da atualização*/
-						      	  }						      
-						      	  					      	      	  
-						      } /*end transition*/
-						    };   
-/*Atualização Master Hub (Correção de tela errada de endereços finalizando o pedido)*/
-						    sNavigator.pushPage("shippingLocationAreaColetaRetorno.html", options);
-/*Fim da atualização*/
-						    
-				    	}				
-					    		
-				    } else if ( data.details=="pre_coleta_retorno"){		
-				    	
-				    	search_mode = getSearchMode();
-				    	if (search_mode=="postcode"){
-
-				    		showShippingLocationColetaRetorno(data);			    		
-				    		
-				    	} else {				    
-				    			    					    		
-					    	var options = {
-						      animation: 'slide',
-						      onTransitionEnd: function() { 	
-						      							      				      	  
-						      	  displayMerchantLogo2( getStorage("merchant_logo") ,
-						      	     getStorage("order_total") ,
-/*Atualização Master Hub (Máscara de Telefones, Número e Bairro e Catálogo de Endereços)*/
-								  '' ,
-						      	     'page-shipping-coleta-retorno');
-						      	  
-						      	  if(!empty(data.msg.profile)){
-						      	  	  $(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
-						      	  	  $(".location_name").val( data.msg.profile.location_name ) ;
-									  $(".delivery_instruction").val( data.msg.profile.delivery_instruction ) ;
-						      	  }
-						      	  
-/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$(".estabelecimento-header2").attr("style",'background-image: url('+upload_url+''+data.msg.merchant_bg+'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$(".estabelecimento-header").attr("style",'background-image: url('+upload_url+''+data.msg.merchant_bg+'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da Atualização */
-								  
-						      	  var address_fill = false;
-						      	  
-						      	  if(!empty(getStorage("geo_address_result_formatted_address"))){
-						      	  							      	  
-						      	  	   $(".delivery-address-text").html( getStorage("geo_address_result_formatted_address") );
-							  	       $(".street").val( getStorage("geo_address_result_address") );
-									   $(".city").val( getStorage("geo_address_result_city") );
-									   $(".state").val( getStorage("geo_address_result_state") );
-									   $(".zipcode").val( getStorage("geo_address_result_zip") );	
-									   $(".formatted_address").val( getStorage("geo_address_result_formatted_address") );	
-						      	  				
-									   dump('d0');						   
-									   
-						      	  } else if ( !empty( getStorage("map_address_result_formatted_address") )){
-						      	  	    $(".delivery-address-text").html( getStorage("map_address_result_formatted_address") );
-									    $(".street").val( getStorage("map_address_result_address") );
-/*Atualização Master Hub (Número e Bairro e Catálogo de Endereços)*/
-							  		    $(".numero").val( getStorage("map_address_result_numero") );
-							  		    $(".area_name").val( getStorage("map_address_result_area_name") );
-									    $(".city").val( getStorage("map_address_result_city") );
-									    $(".state").val( getStorage("map_address_result_state") );
-									    $(".zipcode").val( getStorage("map_address_result_zip") );	
-									    $(".formatted_address").val( getStorage("map_address_result_formatted_address") );	
-										reloadCart();
-									 
-									    $(".google_lat").val( getStorage("google_lat") );	
-									    $(".google_lng").val( getStorage("google_lng") );	
-									    
-									    address_fill = true;
-									    dump('d1');
-						      	  } else {
-						      	  	  if(!empty(data.msg.address_book)){
-						      	  	  	  $(".street").val( data.msg.address_book.street );
-									  	  $(".numero").val( data.msg.address_book.numero );
-									  	  $(".area_name").val( data.msg.address_book.area_name );
-										  $(".city").val( data.msg.address_book.city );
-										  $(".state").val( data.msg.address_book.state );
-										  $(".zipcode").val( data.msg.address_book.zipcode );
-										  $(".location_name").val( data.msg.address_book.location_name );
-										  $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
-										  
-										  
-										  var complete_address = data.msg.address_book.street;
-								  		  complete_address+=" "+ data.msg.address_book.numero;
-									  	  complete_address+=" "+ data.msg.address_book.area_name;
-										  complete_address+=" "+ data.msg.address_book.city;
-										  complete_address+=" "+ data.msg.address_book.state;
-										  complete_address+=" "+ data.msg.address_book.zipcode;
-										
-											reloadCart();
-										  $(".delivery-address-text").html( complete_address ); 
-										  $(".formatted_address").val( complete_address );	
-										  
-										  address_fill = true;
-										  dump('d2');			  
-						      	  	  }
-						      	  }
-						      	  
-						      	  if(!address_fill){						      	  	
-						      	  	fillShippingAddress();
-/*Fim da atualização*/
-						      	  }						      
-						      	  					      	      	  
-						      } /*end transition*/
-						    };   
-/*Atualização Master Hub (Correção de tela errada de endereços finalizando o pedido)*/
-						    sNavigator.pushPage("shippingLocationAreaColetaRetorno.html", options);
 /*Fim da atualização*/
 						    
 				    	}				
@@ -4148,7 +4066,8 @@ if (data.details.programa_fidelidade!=false){
 				    
 				    setStorage("avatar",data.details.avatar);
                     setStorage("client_name_cookie",data.details.client_name_cookie);
-				    
+		    setStorage("customer_contact_number",data.details.contact_phone);
+					
 					if (data.details.next_step=="shipping_address"){
 						
 					    search_mode = getSearchMode();
@@ -4309,10 +4228,48 @@ if (data.details.programa_fidelidade!=false){
 				   $(".frm-paymentoption").show();				   
 /*Atualização Master Hub (Resumo de Endereço na finalização do pedido)*/
 		transaction_type=getStorage("transaction_type");
-					if (transaction_type=="delivery" || transaction_type=="coleta" || transaction_type=="coleta_retorno" || transaction_type=="pre_coleta" || transaction_type=="pre_coleta_retorno" || transaction_type=="prestacao_servico"){
-					$(".conferirendereco").show();
-					}else{
+					if (transaction_type=="delivery" || transaction_type=="prestacao_servico"){
+					$(".conferirendereco").show();	
+					$(".conferirenderecoentrega").hide();
+					$(".conferirenderecocoleta").hide();
+					$(".conferirenderecoprecoleta").hide();	
+					$(".conferirenderecoretorno").hide();	
+					}else if (transaction_type=="coleta"){
 					$(".conferirendereco").hide();	
+					$(".conferirenderecocoleta").show();
+					$(".conferirenderecoentrega").show();
+					$(".conferirenderecoprecoleta").hide();	
+					$(".conferirenderecoretorno").hide();	
+						setStorage('merchant_address',getStorage("coleta_address"));
+					} else if (transaction_type=="coleta_retorno"){
+					$(".conferirendereco").hide();	
+					$(".conferirenderecocoleta").show();
+					$(".conferirenderecoentrega").show();
+					$(".conferirenderecoprecoleta").hide();	
+					$(".conferirenderecoretorno").show();	
+						setStorage('merchant_address',getStorage("coleta_address"));
+						setStorage('retorno_address',getStorage("coleta_address"));
+					} else if (transaction_type=="pre_coleta"){
+					$(".conferirendereco").hide();	
+					$(".conferirenderecoprecoleta").show();	
+					$(".conferirenderecocoleta").show();
+					$(".conferirenderecoentrega").show();
+					$(".conferirenderecoretorno").hide();	
+						setStorage('merchant_address',getStorage("coleta_address"));
+					} else if (transaction_type=="pre_coleta_retorno"){
+					$(".conferirendereco").hide();	
+					$(".conferirenderecoprecoleta").show();	
+					$(".conferirenderecocoleta").show();
+					$(".conferirenderecoentrega").show();
+					$(".conferirenderecoretorno").show();	
+						setStorage('retorno_address',getStorage("coleta_address"));
+						setStorage('merchant_address',getStorage("coleta_address"));
+					} else {
+					$(".conferirendereco").hide();	
+					$(".conferirenderecocoleta").hide();
+					$(".conferirenderecoentrega").hide();
+					$(".conferirenderecoprecoleta").hide();	
+					$(".conferirenderecoretorno").hide();	
 					}
 
 	     if (typeof entrega === "undefined" || entrega==null || entrega=="" || entrega===0 || entrega===0.0 || entrega==="0" ){
@@ -4323,6 +4280,18 @@ if (data.details.programa_fidelidade!=false){
 	     $(".total-entrega").html(prettyPrice(entrega));
 	     }
 
+					
+					if (getStorage("precoleta_address")){
+					$(".endereco_de_precoleta").html(getStorage("precoleta_address"));	
+					}
+					if (getStorage("coleta_address")){
+					$(".endereco_de_coleta").html(getStorage("coleta_address"));	
+					}
+					if (getStorage("retorno_address")){
+					$(".endereco_de_retorno").html(getStorage("retorno_address"));	
+					}
+					
+					
 				$(".endereco_de_entrega_street").html(data.details.endereco_de_entrega.street);
 				$(".endereco_de_entrega_n").html("nº");
 				$(".endereco_de_entrega_traco").html("-");
@@ -4947,7 +4916,9 @@ if (data.details.programa_fidelidade!=false){
 				  setStorage("client_token",data.details.token);
 				  
 				  setStorage("avatar",data.details.avatar);
+				  setStorage("customer_contact_number",data.details.contact_phone);
                   setStorage("client_name_cookie",data.details.client_name_cookie);
+					
                   
                   if (!empty(data.details.social_strategy)){
                   	  setStorage("social_strategy",data.details.social_strategy);
@@ -6222,11 +6193,11 @@ if (data.details.programa_fidelidade!=false){
 					//htm+='<ons-list-header class="list-header trn" >'+ getTrans('City','city') +'</ons-list-header>';
 			       $.each( data.details, function( city_key , city_val ) { 
 			       	
-			       	 htm+='<ons-list-item modifier="tappable" onclick="setLocationCity('+"'"+city_val.id+"',"+"'"+city_val.name+"',"+  "'" + city_val.state_id + "'" +  ');">';
+			       	 htm+='<ons-list-item modifier="tappable" onclick="setLocationCity('+"'"+city_val.id+"',"+"'"+city_val.name+"',"+  "'" + city_val.state_id +"',"+"'"+city_val.estado+"'" +  ');">';
 					 htm+='<label class="radio-button checkbox--list-item">';
 						htm+='<input type="radio" name="channel_m" class="channel_m" value="'+city_val.id+'"  >';
 						htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
-						htm+=' '+city_val.name;
+						htm+=' '+city_val.name+'/'+city_val.estado;
 					  htm+='</label>'; 
 					htm+='</ons-list-item>';
 					
@@ -6672,7 +6643,7 @@ if (data.details.programa_fidelidade!=false){
 			      html+='<ons-list>';
 			      $.each( data.details.info, function( key, val ) {     
 			      	 dump(val);
-			      	 html+=wingRow( '', val.label, val.value );
+			      	 html+=wingRow( '', val.label, val.value, val.phone );
 			      });
 			      html+='</ons-list>';
 			      
@@ -8103,21 +8074,21 @@ $( document ).on( "click", ".prod-qtd-menos", function(){
 			
 			$(".bairro").html(address_split[2]);
 			$(".area_name").val( address_split[2] );
-			$(".area_id", "#frm-shipping").val(address_split[8]);
-			$(".location_area", "#frm-shipping").html(address_split[2]);
+			$(".area_id").val(address_split[8]);
+			$(".location_area").html(address_split[2]);
 			global_area_name = address_split[2];
 			global_area_id = address_split[8];
 			
 			$(".cidade").html(address_split[3]);
 			$(".city").val( address_split[3]);
-			$(".city_id", "#frm-shipping").val(address_split[9]);
-			$(".location_city", "#frm-shipping").html(address_split[3]);
+			$(".city_id").val(address_split[9]);
+			$(".location_city").html(address_split[3]);
 			global_city_name = address_split[3];
 			global_city_id = address_split[9];
 			
 			$(".state").val( address_split[4] );
 			$(".state_id").val( address_split[10] );
-			$(".location_state", "#frm-shipping").html(address_split[4]);
+			$(".location_state").html(address_split[4]);
 			global_state_name = address_split[4];
 			global_state_id = address_split[10];
 			
@@ -8129,13 +8100,12 @@ $( document ).on( "click", ".prod-qtd-menos", function(){
 			var number='';
 			if (!empty(address_split[7])){
 				if (!empty(address_split[12])){
-				$(".telefone_contato").show();	
-				$(".contact_phone").hide();
+				$(".telefone_contato_titulo").show();	
+				$(".contact_phone_titulo").hide();
 				} else {
-				$(".contact_phone").show();	
-				number=address_split[7];								
+				//$(".contact_phone").show();	
 				}
-				//number=number.replace("+","");				
+				number=getStorage("customer_contact_number");	
 			}
 			
 			$(".contact_phone").val( number );
@@ -8248,6 +8218,28 @@ function addToCart()
 {		
 	var proceed=true;
 	var proceed2=true;
+	
+	/*check if sub item has required*/
+	if ( $(".require_addon").exists()){
+		$(".small-red-text").remove();	
+		$('.require_addon').each(function () {
+			if ( $(this).val()==2 ) {
+				var required_addon_id=$(this).data("id");
+	   	   	   	var required_addon_name=$(this).data("name");
+	   	   	   	var required_addon_selected=$(".sub_item_name_"+required_addon_id+":checked").length; 
+	   	   	   	if ( required_addon_selected <=0){
+	   	   	   		proceed=false;
+	   	   	   			   	   	  
+	   	   	   		var err_msg= getTrans("You must select at least one addon","select_addon") +  " - "+ required_addon_name;
+	   	   	   		   	   	   		
+	   	   	   		$(".require_addon_"+required_addon_id).after( 
+					"<span class=\"small-red-text\">"+err_msg 
+					+'</span');
+					onsenAlert(err_msg);
+	   	   	   	}
+			}
+		});
+	}
 	
 	/*check if sub item has required*/
 	if ( $(".require_addon").exists()){
@@ -9272,28 +9264,37 @@ function checkOutColeta()
 	    },	    
 	    onSuccess : function() {  
 	       var params2 = $( "#frm-coleta").serialize();	
-		      	  var params = $(".street").val();
-		      	  params+=" "+ $(".numero").val();
-		      	  params+=" "+ $(".area_name").val();
-		      	  params+=" "+ $(".city").val();
-		      	  params+=" "+ $(".state").val();
-		      	  params+=" "+ $(".zipcode").val();
-		      	  params+=" Brasil";
+		      	  var params = $("#frm-coleta .location_name").val();
+		      	  params+=" | "+ $("#frm-coleta .street").val();
+		      	  params+=" nº "+ $("#frm-coleta .numero").val();
+		      	  params+=" - "+ $("#frm-coleta .delivery_instruction").val();
+		      	  params+=" - "+ $("#frm-coleta .area_name").val();
+		      	  params+=" - "+ $("#frm-coleta .city").val();
+		      	  params+="/"+ $("#frm-coleta .state").val();
+		      	  params+=" - "+ $("#frm-coleta .zipcode").val();
 			
+					setStorage('coleta_address',params);
 					setStorage('merchant_address',params);
-	    }  
-	});
-}	
-/* fim */	
-		
-		    
+			        setStorage('coleta_address_phone', $("#frm-coleta .telefone_contato").val());
+			
     var extra_params= "&delivery_date=" +  $(".delivery_date").val();  
 	if ( !empty($(".delivery_time").val()) ){
 		extra_params+="&delivery_time="+$(".delivery_time").val();
 	}			
-	
-	extra_params+="&delivery_asap="+ $(".delivery_asap:checked").val();
-	
+			extra_params+="&telefone_contato="+ urlencode($("#frm-coleta .telefone_contato").val());
+			extra_params+="&street="+ urlencode($("#frm-coleta .street").val());
+			extra_params+="&numero="+ urlencode($("#frm-coleta .numero").val());
+			extra_params+="&area_name="+ urlencode($("#frm-coleta .area_name").val());
+			extra_params+="&city="+ urlencode($("#frm-coleta .city").val());
+			extra_params+="&state="+ urlencode($("#frm-coleta .state").val());
+			extra_params+="&zipcode="+ urlencode($("#frm-coleta .zipcode").val());
+			extra_params+="&state_id="+ urlencode($("#frm-coleta .state_id").val());
+			extra_params+="&city_id="+ urlencode($("#frm-coleta .city_id").val());
+			extra_params+="&area_id="+ urlencode($("#frm-coleta .area_id").val());
+			extra_params+="&delivery_instruction="+ urlencode($("#frm-coleta .delivery_instruction").val());
+			extra_params+="&location_name="+ urlencode($("#frm-coleta .location_name").val());
+			extra_params+="&save_address="+$('#frm-coleta .save_address:checked').val();
+				
 	extra_params+="&client_token="+getStorage("client_token");
 	//extra_params+="&transaction_type2=" + $(".transaction_type:checked").val();
 	
@@ -9304,99 +9305,11 @@ function checkOutColeta()
     callAjax("checkoutcoleta","merchant_id="+ getStorage('merchant_id')+"&search_address=" + 
       	  encodeURIComponent(getStorage("search_address")) + "&transaction_type=" + 
       	  getStorage("transaction_type") + extra_params );	
-}
-
-function checkOutColetaRetorno()
-{	
-	var validation_msg=$(".validation_msg").val();
-	dump(validation_msg);
-	dump(cart);
-	if ( cart.length<1){
-		onsenAlert( getTrans("Your cart is empty",'your_cart_is_empty') );
-		return;
-	}
-	
-	if ( validation_msg!="" ){		
-		onsenAlert(validation_msg);
-		return;
-	}		
-	
-	var tr_type = $(".transaction_type:checked").val();
-	dump("tr_type=>"+tr_type);
-	
-	switch (tr_type)
-	{
-		case "coleta":
-		case "coleta_retorno":
-		case "pre_coleta":
-		case "pre_coleta_retorno":
-		  search_mode = getSearchMode();
-		  if ( search_mode=="postcode"){		  	  
-		  	  if(!showLocationSelect()){
-		  	  	 return;
-		  	  }
-		  }
-		break;
-	}
-	
-/* início */	
-	
-	var google_lat = $(".google_lat").val();
-	var google_lng = $(".google_lng").val();
-	enabled_delivery_select_map = getStorage("enabled_delivery_select_map");
-	
-	if (empty(google_lat) && enabled_delivery_select_map==1){						
-		sNavigator.pushPage("map_delivery.html", {
-       	  animation: 'none',       	  
-       });	
-	} else {	
-	$.validate({ 	
-	    form : '#frm-coleta',    
-	    borderColorOnError:"#FF0000",
-	    onError : function() {      
-	    },	    
-	    onSuccess : function() {  
-	       var params2 = $( "#frm-coleta").serialize();	
-		      	  var params = $(".street").val();
-		      	  params+=" "+ $(".numero").val();
-		      	  params+=" "+ $(".area_name").val();
-		      	  params+=" "+ $(".city").val();
-		      	  params+=" "+ $(".state").val();
-		      	  params+=" "+ $(".zipcode").val();
-		      	  params+=" Brasil";
 			
-					setStorage('coleta_retorno_address',params);
 	    }  
 	});
 }	
-/* fim */	
-		
-	if ( $(".required_time").val()==2){
-		if ( $(".delivery_time").val() ==""){			
-			if ( $(".delivery_asap:checked").length<=0){
-				onsenAlert( tr_type+ " "+ getTrans('time is required','time_is_required') );
-				return;
-			}
-		}
-	}		
-		    
-    var extra_params= "&delivery_date=" +  $(".delivery_date").val();  
-	if ( !empty($(".delivery_time").val()) ){
-		extra_params+="&delivery_time="+$(".delivery_time").val();
-	}			
-	
-	extra_params+="&delivery_asap="+ $(".delivery_asap:checked").val();
-	
-	extra_params+="&client_token="+getStorage("client_token");
-	//extra_params+="&transaction_type2=" + $(".transaction_type:checked").val();
-	
-	extra_params+="&cart_subtotal"+ $(".cart_subtotal").val();
-	
-	setTrackView("checkoutcoletaretorno");
-	
-    callAjax("checkoutcoletaretorno","merchant_id="+ getStorage('merchant_id')+"&search_address=" + 
-      	  encodeURIComponent(getStorage("search_address")) + "&transaction_type=" + 
-      	  getStorage("transaction_type") + extra_params );	
+
 }
 
 function checkOutPreColeta()
@@ -9450,20 +9363,23 @@ function checkOutPreColeta()
 	    },	    
 	    onSuccess : function() {  
 	       var params2 = $( "#frm-pre-coleta").serialize();	
-		      	  var params = $(".street").val();
-		      	  params+=" "+ $(".numero").val();
-		      	  params+=" "+ $(".area_name").val();
-		      	  params+=" "+ $(".city").val();
-		      	  params+=" "+ $(".state").val();
-		      	  params+=" "+ $(".zipcode").val();
-		      	  params+=" Brasil";
+		      	  var params = $("#frm-pre-coleta .location_name").val();
+		      	  params+=" | "+ $("#frm-pre-coleta .street").val();
+		      	  params+=" nº "+ $("#frm-pre-coleta .numero").val();
+		      	  params+=" - "+ $("#frm-pre-coleta .delivery_instruction").val();
+		      	  params+=" - "+ $("#frm-pre-coleta .area_name").val();
+		      	  params+=" - "+ $("#frm-pre-coleta .city").val();
+		      	  params+="/"+ $("#frm-pre-coleta .state").val();
+		      	  params+=" - "+ $("#frm-pre-coleta .zipcode").val();
 			
-					setStorage('pre_coleta_address',params);
-	    }  
-	});
-}	
-/* fim */	
-		
+					setStorage('precoleta_address',params);
+			        setStorage('precoleta_address_phone', $("#frm-pre-coleta .telefone_contato").val());
+			
+    var extra_params= "&delivery_date=" +  $(".delivery_date").val();  
+	if ( !empty($(".delivery_time").val()) ){
+		extra_params+="&delivery_time="+$(".delivery_time").val();
+	}			
+			
 	if ( $(".required_time").val()==2){
 		if ( $(".delivery_time").val() ==""){			
 			if ( $(".delivery_asap:checked").length<=0){
@@ -9472,13 +9388,19 @@ function checkOutPreColeta()
 			}
 		}
 	}		
-		    
-    var extra_params= "&delivery_date=" +  $(".delivery_date").val();  
-	if ( !empty($(".delivery_time").val()) ){
-		extra_params+="&delivery_time="+$(".delivery_time").val();
-	}			
-	
-	extra_params+="&delivery_asap="+ $(".delivery_asap:checked").val();
+			extra_params+="&telefone_contato="+ urlencode($("#frm-pre-coleta .telefone_contato").val());
+			extra_params+="&street="+ urlencode($("#frm-pre-coleta .street").val());
+			extra_params+="&numero="+ urlencode($("#frm-pre-coleta .numero").val());
+			extra_params+="&area_name="+ urlencode($("#frm-pre-coleta .area_name").val());
+			extra_params+="&city="+ urlencode($("#frm-pre-coleta .city").val());
+			extra_params+="&state="+ urlencode($("#frm-pre-coleta .state").val());
+			extra_params+="&zipcode="+ urlencode($("#frm-pre-coleta .zipcode").val());
+			extra_params+="&state_id="+ urlencode($("#frm-pre-coleta .state_id").val());
+			extra_params+="&city_id="+ urlencode($("#frm-pre-coleta .city_id").val());
+			extra_params+="&area_id="+ urlencode($("#frm-pre-coleta .area_id").val());
+			extra_params+="&delivery_instruction="+ urlencode($("#frm-pre-coleta .delivery_instruction").val());
+			extra_params+="&location_name="+ urlencode($("#frm-pre-coleta .location_name").val());
+			extra_params+="&save_address="+$('#frm-pre-coleta .save_address:checked').val();
 	
 	extra_params+="&client_token="+getStorage("client_token");
 	//extra_params+="&transaction_type2=" + $(".transaction_type:checked").val();
@@ -9490,130 +9412,11 @@ function checkOutPreColeta()
     callAjax("checkoutprecoleta","merchant_id="+ getStorage('merchant_id')+"&search_address=" + 
       	  encodeURIComponent(getStorage("search_address")) + "&transaction_type=" + 
       	  getStorage("transaction_type") + extra_params );	
-}
-
-function checkOutPreColetaRetorno()
-{	
-	var validation_msg=$(".validation_msg").val();
-	dump(validation_msg);
-	dump(cart);
-	if ( cart.length<1){
-		onsenAlert( getTrans("Your cart is empty",'your_cart_is_empty') );
-		return;
-	}
-	
-	if ( validation_msg!="" ){		
-		onsenAlert(validation_msg);
-		return;
-	}		
-	
-	var tr_type = $(".transaction_type:checked").val();
-	dump("tr_type=>"+tr_type);
-	
-	switch (tr_type)
-	{
-		case "coleta":
-		case "coleta_retorno":
-		case "pre_coleta":
-		case "pre_coleta_retorno":
-		  search_mode = getSearchMode();
-		  if ( search_mode=="postcode"){		  	  
-		  	  if(!showLocationSelect()){
-		  	  	 return;
-		  	  }
-		  }
-		break;
-	}
-	
-		
-	if ( $(".required_time").val()==2){
-		if ( $(".delivery_time").val() ==""){			
-			if ( $(".delivery_asap:checked").length<=0){
-				onsenAlert( tr_type+ " "+ getTrans('time is required','time_is_required') );
-				return;
-			}
-		}
-	}		
-		    
-    var extra_params= "&delivery_date=" +  $(".delivery_date").val();  
-	if ( !empty($(".delivery_time").val()) ){
-		extra_params+="&delivery_time="+$(".delivery_time").val();
-	}			
-	
-	extra_params+="&delivery_asap="+ $(".delivery_asap:checked").val();
-	
-	extra_params+="&client_token="+getStorage("client_token");
-	//extra_params+="&transaction_type2=" + $(".transaction_type:checked").val();
-	
-	extra_params+="&cart_subtotal"+ $(".cart_subtotal").val();
-	
-	setTrackView("checkoutprecoletaretorno");
-	
-    callAjax("checkoutprecoletaretorno","merchant_id="+ getStorage('merchant_id')+"&search_address=" + 
-      	  encodeURIComponent(getStorage("search_address")) + "&transaction_type=" + 
-      	  getStorage("transaction_type") + extra_params );	
-}
-
-function checkOutEntrega()
-{	
-	var validation_msg=$(".validation_msg").val();
-	dump(validation_msg);
-	dump(cart);
-	if ( cart.length<1){
-		onsenAlert( getTrans("Your cart is empty",'your_cart_is_empty') );
-		return;
-	}
-	
-	if ( validation_msg!="" ){		
-		onsenAlert(validation_msg);
-		return;
-	}		
-	
-	var tr_type = $(".transaction_type:checked").val();
-	dump("tr_type=>"+tr_type);
-	
-	switch (tr_type)
-	{
-		case "coleta":
-		case "coleta_retorno":
-		case "pre_coleta":
-		case "pre_coleta_retorno":
-		  search_mode = getSearchMode();
-		  if ( search_mode=="postcode"){		  	  
-		  	  if(!showLocationSelect()){
-		  	  	 return;
-		  	  }
-		  }
-		break;
-	}
-	
-		
-	if ( $(".required_time").val()==2){
-		if ( $(".delivery_time").val() ==""){			
-			if ( $(".delivery_asap:checked").length<=0){
-				onsenAlert( tr_type+ " "+ getTrans('time is required','time_is_required') );
-				return;
-			}
-		}
-	}		
-		    
-    var extra_params= "&delivery_date=" +  $(".delivery_date").val();  
-	if ( !empty($(".delivery_time").val()) ){
-		extra_params+="&delivery_time="+$(".delivery_time").val();
-	}			
-	
-	extra_params+="&delivery_asap="+ $(".delivery_asap:checked").val();
-	
-	extra_params+="&client_token="+getStorage("client_token");
-	//extra_params+="&transaction_type2=" + $(".transaction_type:checked").val();
-	
-	extra_params+="&cart_subtotal"+ $(".cart_subtotal").val();
-	
-	setTrackView("checkoutentrega");
-	
-    callAjax("checkoutentrega","merchant_id="+ getStorage('merchant_id')+"&search_address=" + 
-      	  encodeURIComponent(getStorage("search_address")) + "&transaction_type=" + 
-      	  getStorage("transaction_type") + extra_params );	
+			
+	    }  
+	});
+}	
+/* fim */	
 }
 
 function clientRegistration()
@@ -9642,8 +9445,9 @@ function clientRegistration()
 
 				jQuery.each( form, function(i, field) {
 					if (field.name == "contact_phone")
-						field.value = "%2B55"+field.value.replace(/[^0-9\.]+/g, '');
+						field.value = field.value.replace(/[^0-9\.]+/g, '');
 					params += field.name+"="+field.value+"&";
+					setStorage('customer_contact_number',field.value);
 				});
 /*Fim da atualização*/
 	      params+="&transaction_type=" +  getStorage("transaction_type") ;
@@ -9680,6 +9484,7 @@ function clientShipping()
 	    onSuccess : function() {  
 	       var params = $( "#frm-shipping").serialize();			      	       
 	       setStorage('shipping_address',params);
+		   setStorage('shipping_address_phone', $("#frm-shipping .telefone_contato").val());
 	       dump(params);	       
 	       var options = {
 		      animation: 'slide',
@@ -9698,157 +9503,24 @@ function clientShipping()
 		      	     'page-paymentoption'
 		      	  );
 		      	  params+="&merchant_id="+ getStorage("merchant_id");
-		      	  params+="&street="+ urlencode($(".street").val());
+		      	  params+="&street="+ urlencode($("#frm-shipping .street").val());
 /*Atualização Master Hub (Catálogo de Endereços e Número e Bairro)*/
-		      	  params+="&numero="+ urlencode($(".numero").val());
-		      	  params+="&area_name="+ urlencode($(".area_name").val());
-		      	  params+="&city="+ urlencode($(".city").val());
-		      	  params+="&state="+ urlencode($(".state").val());
-		      	  params+="&zipcode="+ urlencode($(".zipcode").val());
-			  params+="&state_id="+ urlencode($(".state_id").val());
-			  params+="&city_id="+ urlencode($(".city_id").val());
-			  params+="&area_id="+ urlencode($(".area_id").val());
-			  params+="&delivery_instruction="+ urlencode($(".delivery_instruction").val());
+		      	  params+="&numero="+ urlencode($("#frm-shipping .numero").val());
+		      	  params+="&area_name="+ urlencode($("#frm-shipping .area_name").val());
+		      	  params+="&city="+ urlencode($("#frm-shipping .city").val());
+		      	  params+="&state="+ urlencode($("#frm-shipping .state").val());
+		      	  params+="&zipcode="+ urlencode($("#frm-shipping .zipcode").val());
+			  params+="&state_id="+ urlencode($("#frm-shipping .state_id").val());
+			  params+="&city_id="+ urlencode($("#frm-shipping .city_id").val());
+			  params+="&area_id="+ urlencode($("#frm-shipping .area_id").val());
+			  params+="&delivery_instruction="+ urlencode($("#frm-shipping .delivery_instruction").val());
 /*Fim da atualização*/
-		      	  params+="&location_name="+ urlencode($(".location_name").val());
-		      	  params+="&save_address="+$('.save_address:checked').val();
+		      	  params+="&location_name="+ urlencode($("#frm-shipping .location_name").val());
+		      	  params+="&save_address="+$('#frm-shipping .save_address:checked').val();
 		      	  params+="&transaction_type=" +  getStorage("transaction_type") ;
 		      	  params+="&client_token="+ getStorage('client_token');
-		      	  params+="&contact_phone="+ $("#page-shipping .contact_phone").val();
-		      	  
-		      	  params+="&cart_subtotal="+ $(".cart_subtotal").val();
-		      	  		      	  
-		      	  callAjax("getPaymentOptions",params);
-		      } 
-		    };   
-		    sNavigator.pushPage("paymentOption.html", options);		       
-	       return false;
-	    }  
-	});
-}
-}
-
-function clientShippingColeta()
-{	
-	var google_lat = $(".google_lat").val();
-	var google_lng = $(".google_lng").val();
-	enabled_delivery_select_map = getStorage("enabled_delivery_select_map");
-	
-	if (empty(google_lat) && enabled_delivery_select_map==1){						
-		sNavigator.pushPage("map_delivery.html", {
-       	  animation: 'none',       	  
-       });	
-	} else {	
-	$.validate({ 	
-	    form : '#frm-coleta-retorno',    
-	    borderColorOnError:"#FF0000",
-	    onError : function() {      
-	    },	    
-	    onSuccess : function() {  
-	       var params = $( "#frm-coleta-retorno").serialize();			      	       
-	       setStorage('shipping_address',params);
-	       dump(params);	       
-	       var options = {
-		      animation: 'slide',
-		      onTransitionEnd: function() { 						      	  
-/*Atualização Master Hub (Correção do Cabeçalho, Imagem de fundo da empresa)*/
-			displayMerchantLogo3( 
-		      	     getStorage("merchant_logo") ,
-		      	     getStorage("order_total") ,
-				getStorage("cart_sub_total_final") , 
-				getStorage("cart_delivery_charges_final"),
-				getStorage("cart_tax_final"), 
-				getStorage("cart_packaging_final"),
-				getStorage("cart_discount_final"),
-				getStorage("cart_tip_final"),
-/*Fim da atualização*/
-		      	     'page-paymentoption'
-		      	  );
-		      	  params+="&merchant_id="+ getStorage("merchant_id");
-		      	  params+="&street="+ urlencode($(".street").val());
-/*Atualização Master Hub (Catálogo de Endereços e Número e Bairro)*/
-		      	  params+="&numero="+ urlencode($(".numero").val());
-		      	  params+="&area_name="+ urlencode($(".area_name").val());
-		      	  params+="&city="+ urlencode($(".city").val());
-		      	  params+="&state="+ urlencode($(".state").val());
-		      	  params+="&zipcode="+ urlencode($(".zipcode").val());
-			  params+="&state_id="+ urlencode($(".state_id").val());
-			  params+="&city_id="+ urlencode($(".city_id").val());
-			  params+="&area_id="+ urlencode($(".area_id").val());
-			  params+="&delivery_instruction="+ urlencode($(".delivery_instruction").val());
-/*Fim da atualização*/
-		      	  params+="&location_name="+ urlencode($(".location_name").val());
-		      	  params+="&save_address="+$('.save_address:checked').val();
-		      	  params+="&transaction_type=" +  getStorage("transaction_type") ;
-		      	  params+="&client_token="+ getStorage('client_token');
-		      	  params+="&contact_phone="+ $("#page-shipping .contact_phone").val();
-		      	  
-		      	  params+="&cart_subtotal="+ $(".cart_subtotal").val();
-		      	  		      	  
-		      	  callAjax("getPaymentOptions",params);
-		      } 
-		    };   
-		    sNavigator.pushPage("paymentOption.html", options);		       
-	       return false;
-	    }  
-	});
-}
-}
-
-function clientShippingPreColeta()
-{	
-	var google_lat = $(".google_lat").val();
-	var google_lng = $(".google_lng").val();
-	enabled_delivery_select_map = getStorage("enabled_delivery_select_map");
-	
-	if (empty(google_lat) && enabled_delivery_select_map==1){						
-		sNavigator.pushPage("map_delivery.html", {
-       	  animation: 'none',       	  
-       });	
-	} else {	
-	$.validate({ 	
-	    form : '#frm-coleta-retorno',    
-	    borderColorOnError:"#FF0000",
-	    onError : function() {      
-	    },	    
-	    onSuccess : function() {  
-	       var params = $( "#frm-coleta-retorno").serialize();			      	       
-	       setStorage('shipping_address',params);
-	       dump(params);	       
-	       var options = {
-		      animation: 'slide',
-		      onTransitionEnd: function() { 						      	  
-/*Atualização Master Hub (Correção do Cabeçalho, Imagem de fundo da empresa)*/
-			displayMerchantLogo3( 
-		      	     getStorage("merchant_logo") ,
-		      	     getStorage("order_total") ,
-				getStorage("cart_sub_total_final") , 
-				getStorage("cart_delivery_charges_final"),
-				getStorage("cart_tax_final"), 
-				getStorage("cart_packaging_final"),
-				getStorage("cart_discount_final"),
-				getStorage("cart_tip_final"),
-/*Fim da atualização*/
-		      	     'page-paymentoption'
-		      	  );
-		      	  params+="&merchant_id="+ getStorage("merchant_id");
-		      	  params+="&street="+ urlencode($(".street").val());
-/*Atualização Master Hub (Catálogo de Endereços e Número e Bairro)*/
-		      	  params+="&numero="+ urlencode($(".numero").val());
-		      	  params+="&area_name="+ urlencode($(".area_name").val());
-		      	  params+="&city="+ urlencode($(".city").val());
-		      	  params+="&state="+ urlencode($(".state").val());
-		      	  params+="&zipcode="+ urlencode($(".zipcode").val());
-			  params+="&state_id="+ urlencode($(".state_id").val());
-			  params+="&city_id="+ urlencode($(".city_id").val());
-			  params+="&area_id="+ urlencode($(".area_id").val());
-			  params+="&delivery_instruction="+ urlencode($(".delivery_instruction").val());
-/*Fim da atualização*/
-		      	  params+="&location_name="+ urlencode($(".location_name").val());
-		      	  params+="&save_address="+$('.save_address:checked').val();
-		      	  params+="&transaction_type=" +  getStorage("transaction_type") ;
-		      	  params+="&client_token="+ getStorage('client_token');
-		      	  params+="&contact_phone="+ $("#page-shipping .contact_phone").val();
+		      	  params+="&contact_phone="+ $("#frm-shipping .contact_phone").val();
+		      	  params+="&telefone_contato="+ $("#frm-shipping .telefone_contato").val();
 		      	  
 		      	  params+="&cart_subtotal="+ $(".cart_subtotal").val();
 		      	  		      	  
@@ -9929,11 +9601,22 @@ function placeOrder()
 		extra_params+="&formatted_address="+ urlencode($(".formatted_address").val());	
 		extra_params+="&google_lat="+ $(".google_lat").val();	
 		extra_params+="&google_lng="+ $(".google_lng").val();
-		
+		if (!empty(getStorage('coleta_address'))){
+		extra_params+="&coleta_address="+ getStorage('coleta_address');
+		extra_params+="&coleta_address_phone="+ getStorage('coleta_address_phone');	
+		}
+		if (!empty(getStorage('precoleta_address'))){
+		extra_params+="&pre_coleta_address="+ getStorage('precoleta_address');	
+		extra_params+="&pre_coleta_address_phone="+ getStorage('precoleta_address_phone');	
+		}
+		if (!empty(getStorage('retorno_address'))){
+		extra_params+="&retorno_address="+ getStorage('retorno_address');	
+		}
 		//extra_params+="&payment_method="+ $(".payment_list:checked").val();
 		//extra_params+="&order_change="+ $(".order_change").val();
 		//extra_params+="&"+ urlencode(getStorage("shipping_address")) ;
 		extra_params+="&"+getStorage("shipping_address") ;
+		extra_params+="&shipping_address_phone="+ getStorage('shipping_address_phone');	
 		extra_params+="&client_token="+ getStorage('client_token');
 		extra_params+="&search_address="+ urlencode(getStorage('search_address'));
 		/*pts*/
@@ -10413,8 +10096,9 @@ function signup()
 
 			  jQuery.each( form, function(i, field) {
 					if (field.name == "contact_phone")
-						field.value = "%2B55"+field.value.replace(/[^0-9\.]+/g, '');
+						field.value = field.value.replace(/[^0-9\.]+/g, '');
 					params += field.name+"="+field.value+"&";
+				  setStorage('customer_contact_number',field.value);
 			  });
 	      params+="&device_id="+ getStorage("device_id");
 /*Fim da atualização*/
@@ -11402,7 +11086,7 @@ function applyVoucher()
 		
 		transaction_type=getStorage("transaction_type");		
 		params+="&transaction_type=" + getStorage("transaction_type");
-		if ( transaction_type=="delivery" || transaction_type=="coleta" || transaction_type=="coleta_retorno" || transaction_type=="pre_coleta" || transaction_type=="pre_coleta_retorno"){
+		if ( transaction_type=="delivery" || transaction_type=="coleta" || transaction_type=="coleta_retorno" || transaction_type=="pre_coleta" || transaction_type=="pre_coleta_retorno" || transaction_type=="prestacao_servico"){
 		   params+="&cart_delivery_charges="+ getStorage("cart_delivery_charges");
 		}
 		
@@ -13909,13 +13593,18 @@ function loadAjaxLocationCity(s)
     }*/
 }
 
-function setLocationCity(city_id , city_name, state_id )
+function setLocationCity(city_id, city_name, state_id, state_name)
 {
 	global_city_name = city_name;
 	global_city_id = city_id;
 	
 	if(!empty(state_id)){
 	   global_state_id = state_id;
+	$(".state_id").val( state_id );
+	}
+	if(!empty(state_name)){
+	   global_state_name = state_name;
+	$(".state").val( state_name );
 	}
 	
 	$(".city_id").val( city_id );
@@ -13978,6 +13667,9 @@ function clearAllStorage()
   removeStorage('shipping_address');  
   removeStorage('coleta_address');  
   removeStorage('precoleta_address');  
+  removeStorage('shipping_address_phone');  
+  removeStorage('coleta_address_phone');  
+  removeStorage('precoleta_address_phone');  
   removeStorage('retorno_address');  
   removeStorage('merchant_id');
   removeStorage('data_da_entrega');
@@ -14008,7 +13700,7 @@ function clearAllStorage()
   removeStorage("cart_discount_final");
 /*Fim da atualização*/
   removeStorage('map_address_result_formatted_address');
-  removeStorage("customer_contact_number");
+  //removeStorage("customer_contact_number");
   
   removeStorage("category_count");
   removeStorage("item_count");    
@@ -14117,12 +13809,15 @@ function showShippingLocation(data)
       animation: 'slide',
       onTransitionEnd: function() { 		
       	  if(!empty(data.msg.profile)){
-/*Atualização Master Hub (Máscara de Telefone)*/
-      	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
-/*Fim da atualização*/
       	  	$(".location_name").val( data.msg.profile.location_name ) ;
-/*Atualização Master Hub (Complemento de endereço e Número e Bairro)*/
       	  }
+		  if(data.msg.show_mobile_number == 'true' || data.msg.show_mobile_number == true){
+			$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));  
+		  } else {
+			  $(".contact_phone_titulo").hide;
+			  $(".telefone_contato_titulo").show;
+		  }
+		  
 		  		if (global_area_name===data.msg.address_book.area_name){
       	  if(!empty(data.msg.address_book)){
       	  	 $(".street").val( data.msg.address_book.street );
@@ -14196,27 +13891,18 @@ function showShippingLocation(data)
 
 function showShippingLocationColeta(data)
 {	
-	
    var options = {
       animation: 'slide',
       onTransitionEnd: function() { 		
       	  if(!empty(data.msg.profile)){
-/*Atualização Master Hub (Máscara de Telefone)*/
-      	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
-/*Fim da atualização*/
       	  	$(".location_name").val( data.msg.profile.location_name ) ;
-/*Atualização Master Hub (Complemento de endereço e Número e Bairro)*/
       	  }
-		  		if (global_area_name===data.msg.address_book.area_name){
-      	  if(!empty(data.msg.address_book)){
-      	  	 $(".street").val( data.msg.address_book.street );
-      	  	 $(".numero").val( data.msg.address_book.numero );
-      	  	 $(".location_name").val( data.msg.address_book.location_name );
-      	  	 $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
-      	  	 $(".telefone_contato").val( data.msg.address_book.telefone_contato );
-      	  }
-		  		}
-/*Fim da atualização*/
+		  if(data.msg.show_mobile_number == 'true' || data.msg.show_mobile_number == true){
+			$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));  
+		  } else {
+			  $(".contact_phone_titulo").hide;
+			  $(".telefone_contato_titulo").show;
+		  }
       	  if(!empty(data.msg.state_info)){
       	  	 global_state_id  = data.msg.state_info.state_id;
       	  	 global_state_name  = data.msg.state_info.state_name;
@@ -14226,142 +13912,15 @@ function showShippingLocationColeta(data)
       	  	 
       	  	 $(".state").val( data.msg.state_info.state_name );
       	  }
-/*Atualização Master Hub (Função de finalização com os mesmos dados selecionados no inicio)*/
-			$(".city_id").val(getStorage("global_city_id"));
-			$(".area_id").val(getStorage("global_area_id"));
-			$(".city").val(getStorage("global_city_name"));
-			$(".area_name").val(getStorage("global_area_name"));
-		    $(".location_area").html( getStorage("global_area_name") ) ;
-		    $(".location_city").html( getStorage("global_city_name") ) ;
-/*Fim da atualização*/
-/*Atualização Master Hub (Máscara de Telefone)*/
       	  if(!empty(data.details.contact_phone)){
       	  	$(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
       	  }
-/*Fim da atualização*/
-/*Atualização Master Hub (Função de finalização com os mesmos dados selecionados no inicio)*/
       	  if(!empty(global_area_name)){
       	  	 $(".area_name").val( global_area_name );
       	  }
-/*Fim da atualização*/
       } 
     };   
     sNavigator.pushPage("shippingLocationAreaColeta.html", options);
-		    
-	/*search_type = getSearchType();		
-	dump("search_type=>"+search_type);
-	dump(data);
-	switch (search_type){
-		case "1":
-		case "2":
-		case "3":
-		
-			var options = {
-		      animation: 'slide',
-		      onTransitionEnd: function() { 		
-
-		      	  if(!empty(data.msg.profile)){
-		      	  	$(".contact_phone").val( data.msg.profile.contact_phone ) ;
-		      	  	$(".location_name").val( data.msg.profile.location_name ) ;
-		      	  }
-		      	  if(!empty(data.msg.address_book)){
-		      	  	 $(".street").val( data.msg.address_book.street );
-		      	  	 $(".location_name").val( data.msg.address_book.location_name );
-		      	  }
-		      } 
-		    };   
-		    sNavigator.pushPage("shippingLocationArea.html", options);
-		
-		break;
-		
-		default:
-	    break;
-	}	*/
-}
-
-function showShippingLocationColetaRetorno(data)
-{	
-	
-   var options = {
-      animation: 'slide',
-      onTransitionEnd: function() { 		
-      	  if(!empty(data.msg.profile)){
-/*Atualização Master Hub (Máscara de Telefone)*/
-      	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
-/*Fim da atualização*/
-      	  	$(".location_name").val( data.msg.profile.location_name ) ;
-/*Atualização Master Hub (Complemento de endereço e Número e Bairro)*/
-      	  }
-		  		if (global_area_name===data.msg.address_book.area_name){
-      	  if(!empty(data.msg.address_book)){
-      	  	 $(".street").val( data.msg.address_book.street );
-      	  	 $(".numero").val( data.msg.address_book.numero );
-      	  	 $(".location_name").val( data.msg.address_book.location_name );
-      	  	 $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
-      	  	 $(".telefone_contato").val( data.msg.address_book.telefone_contato );
-      	  }
-		  		}
-/*Fim da atualização*/
-      	  if(!empty(data.msg.state_info)){
-      	  	 global_state_id  = data.msg.state_info.state_id;
-      	  	 global_state_name  = data.msg.state_info.state_name;
-      	  	 
-      	  	 $(".location_state").html( data.msg.state_info.state_name );
-      	  	 $(".state_id").html( data.msg.state_info.state_id );
-      	  	 
-      	  	 $(".state").val( data.msg.state_info.state_name );
-      	  }
-/*Atualização Master Hub (Função de finalização com os mesmos dados selecionados no inicio)*/
-			$(".city_id").val(getStorage("global_city_id"));
-			$(".area_id").val(getStorage("global_area_id"));
-			$(".city").val(getStorage("global_city_name"));
-			$(".area_name").val(getStorage("global_area_name"));
-		    $(".location_area").html( getStorage("global_area_name") ) ;
-		    $(".location_city").html( getStorage("global_city_name") ) ;
-/*Fim da atualização*/
-/*Atualização Master Hub (Máscara de Telefone)*/
-      	  if(!empty(data.details.contact_phone)){
-      	  	$(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
-      	  }
-/*Fim da atualização*/
-/*Atualização Master Hub (Função de finalização com os mesmos dados selecionados no inicio)*/
-      	  if(!empty(global_area_name)){
-      	  	 $(".area_name").val( global_area_name );
-      	  }
-/*Fim da atualização*/
-      } 
-    };   
-    sNavigator.pushPage("shippingLocationAreaColetaRetorno.html", options);
-		    
-	/*search_type = getSearchType();		
-	dump("search_type=>"+search_type);
-	dump(data);
-	switch (search_type){
-		case "1":
-		case "2":
-		case "3":
-		
-			var options = {
-		      animation: 'slide',
-		      onTransitionEnd: function() { 		
-
-		      	  if(!empty(data.msg.profile)){
-		      	  	$(".contact_phone").val( data.msg.profile.contact_phone ) ;
-		      	  	$(".location_name").val( data.msg.profile.location_name ) ;
-		      	  }
-		      	  if(!empty(data.msg.address_book)){
-		      	  	 $(".street").val( data.msg.address_book.street );
-		      	  	 $(".location_name").val( data.msg.address_book.location_name );
-		      	  }
-		      } 
-		    };   
-		    sNavigator.pushPage("shippingLocationArea.html", options);
-		
-		break;
-		
-		default:
-	    break;
-	}	*/
 }
 
 function showShippingLocationPreColeta(data)
@@ -14370,23 +13929,15 @@ function showShippingLocationPreColeta(data)
    var options = {
       animation: 'slide',
       onTransitionEnd: function() { 		
-      	  if(!empty(data.msg.profile)){
-/*Atualização Master Hub (Máscara de Telefone)*/
-      	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
-/*Fim da atualização*/
-      	  	$(".location_name").val( data.msg.profile.location_name ) ;
-/*Atualização Master Hub (Complemento de endereço e Número e Bairro)*/
-      	  }
-		  		if (global_area_name===data.msg.address_book.area_name){
-      	  if(!empty(data.msg.address_book)){
-      	  	 $(".street").val( data.msg.address_book.street );
-      	  	 $(".numero").val( data.msg.address_book.numero );
-      	  	 $(".location_name").val( data.msg.address_book.location_name );
-      	  	 $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
-       	  	 $(".telefone_contato").val( data.msg.address_book.telefone_contato );
-     	  }
-		  		}
-/*Fim da atualização*/
+      	  
+		  if(data.msg.show_mobile_number == 'true' || data.msg.show_mobile_number == true){
+			$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));  
+		  } else {
+			  $(".contact_phone_titulo").hide;
+			  $(".telefone_contato_titulo").show;
+		  }
+		 
+
       	  if(!empty(data.msg.state_info)){
       	  	 global_state_id  = data.msg.state_info.state_id;
       	  	 global_state_name  = data.msg.state_info.state_name;
@@ -14396,227 +13947,15 @@ function showShippingLocationPreColeta(data)
       	  	 
       	  	 $(".state").val( data.msg.state_info.state_name );
       	  }
-/*Atualização Master Hub (Função de finalização com os mesmos dados selecionados no inicio)*/
-			$(".city_id").val(getStorage("global_city_id"));
-			$(".area_id").val(getStorage("global_area_id"));
-			$(".city").val(getStorage("global_city_name"));
-			$(".area_name").val(getStorage("global_area_name"));
-		    $(".location_area").html( getStorage("global_area_name") ) ;
-		    $(".location_city").html( getStorage("global_city_name") ) ;
-/*Fim da atualização*/
-/*Atualização Master Hub (Máscara de Telefone)*/
       	  if(!empty(data.details.contact_phone)){
       	  	$(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
       	  }
-/*Fim da atualização*/
-/*Atualização Master Hub (Função de finalização com os mesmos dados selecionados no inicio)*/
       	  if(!empty(global_area_name)){
       	  	 $(".area_name").val( global_area_name );
       	  }
-/*Fim da atualização*/
       } 
     };   
     sNavigator.pushPage("shippingLocationAreaPreColeta.html", options);
-		    
-	/*search_type = getSearchType();		
-	dump("search_type=>"+search_type);
-	dump(data);
-	switch (search_type){
-		case "1":
-		case "2":
-		case "3":
-		
-			var options = {
-		      animation: 'slide',
-		      onTransitionEnd: function() { 		
-
-		      	  if(!empty(data.msg.profile)){
-		      	  	$(".contact_phone").val( data.msg.profile.contact_phone ) ;
-		      	  	$(".location_name").val( data.msg.profile.location_name ) ;
-		      	  }
-		      	  if(!empty(data.msg.address_book)){
-		      	  	 $(".street").val( data.msg.address_book.street );
-		      	  	 $(".location_name").val( data.msg.address_book.location_name );
-		      	  }
-		      } 
-		    };   
-		    sNavigator.pushPage("shippingLocationArea.html", options);
-		
-		break;
-		
-		default:
-	    break;
-	}	*/
-}
-
-function showShippingLocationPreColetaRetorno(data)
-{	
-	
-   var options = {
-      animation: 'slide',
-      onTransitionEnd: function() { 		
-      	  if(!empty(data.msg.profile)){
-/*Atualização Master Hub (Máscara de Telefone)*/
-      	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
-/*Fim da atualização*/
-      	  	$(".location_name").val( data.msg.profile.location_name ) ;
-/*Atualização Master Hub (Complemento de endereço e Número e Bairro)*/
-      	  }
-		  		if (global_area_name===data.msg.address_book.area_name){
-      	  if(!empty(data.msg.address_book)){
-      	  	 $(".street").val( data.msg.address_book.street );
-      	  	 $(".numero").val( data.msg.address_book.numero );
-      	  	 $(".location_name").val( data.msg.address_book.location_name );
-      	  	 $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
-       	  	 $(".telefone_contato").val( data.msg.address_book.telefone_contato );
-     	  }
-		  		}
-/*Fim da atualização*/
-      	  if(!empty(data.msg.state_info)){
-      	  	 global_state_id  = data.msg.state_info.state_id;
-      	  	 global_state_name  = data.msg.state_info.state_name;
-      	  	 
-      	  	 $(".location_state").html( data.msg.state_info.state_name );
-      	  	 $(".state_id").html( data.msg.state_info.state_id );
-      	  	 
-      	  	 $(".state").val( data.msg.state_info.state_name );
-      	  }
-/*Atualização Master Hub (Função de finalização com os mesmos dados selecionados no inicio)*/
-			$(".city_id").val(getStorage("global_city_id"));
-			$(".area_id").val(getStorage("global_area_id"));
-			$(".city").val(getStorage("global_city_name"));
-			$(".area_name").val(getStorage("global_area_name"));
-		    $(".location_area").html( getStorage("global_area_name") ) ;
-		    $(".location_city").html( getStorage("global_city_name") ) ;
-/*Fim da atualização*/
-/*Atualização Master Hub (Máscara de Telefone)*/
-      	  if(!empty(data.details.contact_phone)){
-      	  	$(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
-      	  }
-/*Fim da atualização*/
-/*Atualização Master Hub (Função de finalização com os mesmos dados selecionados no inicio)*/
-      	  if(!empty(global_area_name)){
-      	  	 $(".area_name").val( global_area_name );
-      	  }
-/*Fim da atualização*/
-      } 
-    };   
-    sNavigator.pushPage("shippingLocationAreaPreColetaRetorno.html", options);
-		    
-	/*search_type = getSearchType();		
-	dump("search_type=>"+search_type);
-	dump(data);
-	switch (search_type){
-		case "1":
-		case "2":
-		case "3":
-		
-			var options = {
-		      animation: 'slide',
-		      onTransitionEnd: function() { 		
-
-		      	  if(!empty(data.msg.profile)){
-		      	  	$(".contact_phone").val( data.msg.profile.contact_phone ) ;
-		      	  	$(".location_name").val( data.msg.profile.location_name ) ;
-		      	  }
-		      	  if(!empty(data.msg.address_book)){
-		      	  	 $(".street").val( data.msg.address_book.street );
-		      	  	 $(".location_name").val( data.msg.address_book.location_name );
-		      	  }
-		      } 
-		    };   
-		    sNavigator.pushPage("shippingLocationArea.html", options);
-		
-		break;
-		
-		default:
-	    break;
-	}	*/
-}
-
-function showShippingLocationEntregaRetorno(data)
-{	
-	
-   var options = {
-      animation: 'slide',
-      onTransitionEnd: function() { 		
-      	  if(!empty(data.msg.profile)){
-/*Atualização Master Hub (Máscara de Telefone)*/
-      	  	$(".contact_phone").val($(".contact_phone").masked( data.msg.profile.contact_phone.replace("+55","") ));
-/*Fim da atualização*/
-      	  	$(".location_name").val( data.msg.profile.location_name ) ;
-/*Atualização Master Hub (Complemento de endereço e Número e Bairro)*/
-      	  }
-		  		if (global_area_name===data.msg.address_book.area_name){
-      	  if(!empty(data.msg.address_book)){
-      	  	 $(".street").val( data.msg.address_book.street );
-      	  	 $(".numero").val( data.msg.address_book.numero );
-      	  	 $(".location_name").val( data.msg.address_book.location_name );
-      	  	 $(".delivery_instruction").val( data.msg.address_book.delivery_instruction );
-        	 $(".telefone_contato").val( data.msg.address_book.telefone_contato );
-    	  }
-		  		}
-/*Fim da atualização*/
-      	  if(!empty(data.msg.state_info)){
-      	  	 global_state_id  = data.msg.state_info.state_id;
-      	  	 global_state_name  = data.msg.state_info.state_name;
-      	  	 
-      	  	 $(".location_state").html( data.msg.state_info.state_name );
-      	  	 $(".state_id").html( data.msg.state_info.state_id );
-      	  	 
-      	  	 $(".state").val( data.msg.state_info.state_name );
-      	  }
-/*Atualização Master Hub (Função de finalização com os mesmos dados selecionados no inicio)*/
-			$(".city_id").val(getStorage("global_city_id"));
-			$(".area_id").val(getStorage("global_area_id"));
-			$(".city").val(getStorage("global_city_name"));
-			$(".area_name").val(getStorage("global_area_name"));
-		    $(".location_area").html( getStorage("global_area_name") ) ;
-		    $(".location_city").html( getStorage("global_city_name") ) ;
-/*Fim da atualização*/
-/*Atualização Master Hub (Máscara de Telefone)*/
-      	  if(!empty(data.details.contact_phone)){
-      	  	$(".contact_phone").val($(".contact_phone").masked( data.details.contact_phone.replace("+55","") ));
-      	  }
-/*Fim da atualização*/
-/*Atualização Master Hub (Função de finalização com os mesmos dados selecionados no inicio)*/
-      	  if(!empty(global_area_name)){
-      	  	 $(".area_name").val( global_area_name );
-      	  }
-/*Fim da atualização*/
-      } 
-    };   
-    sNavigator.pushPage("shippingLocationAreaEntregaRetorno.html", options);
-		    
-	/*search_type = getSearchType();		
-	dump("search_type=>"+search_type);
-	dump(data);
-	switch (search_type){
-		case "1":
-		case "2":
-		case "3":
-		
-			var options = {
-		      animation: 'slide',
-		      onTransitionEnd: function() { 		
-
-		      	  if(!empty(data.msg.profile)){
-		      	  	$(".contact_phone").val( data.msg.profile.contact_phone ) ;
-		      	  	$(".location_name").val( data.msg.profile.location_name ) ;
-		      	  }
-		      	  if(!empty(data.msg.address_book)){
-		      	  	 $(".street").val( data.msg.address_book.street );
-		      	  	 $(".location_name").val( data.msg.address_book.location_name );
-		      	  }
-		      } 
-		    };   
-		    sNavigator.pushPage("shippingLocationArea.html", options);
-		
-		break;
-		
-		default:
-	    break;
-	}	*/
 }
 
 function showState()

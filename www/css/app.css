@@ -584,6 +584,9 @@ color:#fff;
 .restauran-title.white {
 color: #fff;
 font-weight: 600;
+	white-space: unset;
+    overflow: hidden;
+    text-overflow: clip;
 }
 
 .green,
@@ -2955,7 +2958,6 @@ width: 25px;
 vertical-align: bottom;
 -webkit-box-align: center;
 text-align: center;	
-margin-right: 14px;	
 }
 
 .gm-style .gm-style-iw-c {

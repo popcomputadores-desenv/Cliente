@@ -719,7 +719,7 @@ function ContactNumberFields()
 	return htm;
 }
 
-function wingRow(key, label , value)
+function wingRow(key, label , value, phone)
 {
    var htm='';	
    htm+='<ons-list-item modifier="tappable">';
@@ -728,7 +728,11 @@ function wingRow(key, label , value)
 	    htm+= label;
 	    htm+='</ons-col>';
 	    htm+='<ons-col width="60%" >';
-	       htm+=": "+value
+	if (!empty(phone)){
+		htm+=": "+value+"<br>"+phone
+	} else {
+		htm+=": "+value
+	}
 	    htm+='</ons-col>';
 	   htm+='</ons-row >';
    htm+='</ons-list-item>';
