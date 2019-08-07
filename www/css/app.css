@@ -584,6 +584,9 @@ color:#fff;
 .restauran-title.white {
 color: #fff;
 font-weight: 600;
+	white-space: unset;
+    overflow: hidden;
+    text-overflow: clip;
 }
 
 .green,

@@ -755,6 +755,172 @@ function limpa_formulario_cep_pedido() {
         }
     }
 /*Fim da atualização*/
+/*Atualização Master Hub (Função de busca por CEP na Finalização do Pre Coleta)*/
+function limpa_formulario_cep_pre_coleta() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('street0').value=("");
+			$(".cidade").html("");
+			$(".bairro").html("");
+            document.getElementById('state0').value=("");
+			document.getElementById('numero0').value=("");
+			document.getElementById('city0').value=("");
+			document.getElementById('state0').value=("");
+			document.getElementById('area_name0').value=("");
+			$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
+			$(".location_city").html(getTrans("Select City", "select_city"));
+			$(".location_state").html(getTrans("Select State", "select_state"));    }
+
+    function meu_callback_pre_coleta(conteudo) {
+        if (!("erro" in conteudo)) {
+			
+			buscar_ids_por_CEP(conteudo.localidade, conteudo.bairro);
+            //Atualiza os campos com os valores.
+            document.getElementById('street0').value=(conteudo.logradouro);
+			$(".cidade").html(conteudo.localidade);
+			$(".bairro").html(conteudo.bairro);
+            document.getElementById('state0').value=("");
+			document.getElementById('numero0').value=("");
+			document.getElementById('city0').value=("");
+			document.getElementById('state0').value=("");
+			document.getElementById('area_name0').value=("");
+			//$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
+			//$(".location_city").html(getTrans("Select City", "select_city"));
+			//$(".location_state").html(getTrans("Select State", "select_state"));
+
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulario_cep_pre_coleta();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep_pre_coleta(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('street0').value="...";
+				$(".cidade").html("...");
+				$(".bairro").html("...");
+                document.getElementById('state0').value="...";
+				document.getElementById('numero0').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback_pre_coleta';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulario_cep_pre_coleta();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            //limpa_formulário_cep();
+        }
+    }
+/*Fim da atualização*/
+/*Atualização Master Hub (Função de busca por CEP na Finalização do Coleta)*/
+function limpa_formulario_cep_coleta() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('street1').value=("");
+			$(".cidade").html("");
+			$(".bairro").html("");
+            document.getElementById('state1').value=("");
+			document.getElementById('numero1').value=("");
+			document.getElementById('city1').value=("");
+			document.getElementById('state1').value=("");
+			document.getElementById('area_name1').value=("");
+			$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
+			$(".location_city").html(getTrans("Select City", "select_city"));
+			$(".location_state").html(getTrans("Select State", "select_state"));    }
+
+    function meu_callback_coleta(conteudo) {
+        if (!("erro" in conteudo)) {
+			
+			buscar_ids_por_CEP(conteudo.localidade, conteudo.bairro);
+            //Atualiza os campos com os valores.
+            document.getElementById('street1').value=(conteudo.logradouro);
+			$(".cidade").html(conteudo.localidade);
+			$(".bairro").html(conteudo.bairro);
+            document.getElementById('state1').value=("");
+			document.getElementById('numero1').value=("");
+			document.getElementById('city1').value=("");
+			document.getElementById('state1').value=("");
+			document.getElementById('area_name1').value=("");
+			//$(".location_area").html(getTrans("Select District / Area","select_destrict_area"));
+			//$(".location_city").html(getTrans("Select City", "select_city"));
+			//$(".location_state").html(getTrans("Select State", "select_state"));
+
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulario_cep_coleta();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep_coleta(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('street1').value="...";
+				$(".cidade").html("...");
+				$(".bairro").html("...");
+                document.getElementById('state1').value="...";
+				document.getElementById('numero1').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback_coleta';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulario_cep_coleta();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            //limpa_formulário_cep();
+        }
+    }
+/*Fim da atualização*/
 /*Atualização Master Hub (Personalização de ocultar caixas de escolha na tela inicial)*/
 function mudarendereco()
 {
@@ -798,22 +964,6 @@ function onsenDialogCheckout(){
 	});		
 }
 /*Fim da atualização*/
-function onsenDialogCheckout2(){
-	ons.notification.confirm({
-	  message: getTrans('Escolha corretamente a rota do entregador!','Escolha corretamente a rota do entregador!') ,	  
-	  title: dialog_title_default,
-	  buttonLabels: ['OK'],
-	  animation: 'fade', // or 'none'
-	  primaryButtonIndex: 1,
-	  cancelable: true,
-	  callback: function(index) {
-	  	dump(index);
-	    if ( index==0){
-	    	showCart();       
-	    }
-	  }
-	});		
-}
 
 /*Atualização Master Hub (Verificação de Endereços e Catálogo de Endereços)*/
 function onsenDialogAddresBook(){
@@ -926,7 +1076,7 @@ function displayMerchantLogo3(logo,total,subtotal,entrega,comodidade,embalagem,d
 	transaction_type=getStorage("transaction_type");
 	dump("transaction_type=>"+transaction_type);
 	
-	if ( transaction_type=="delivery" || transaction_type=="coleta" || transaction_type=="coleta_retorno" || transaction_type=="pre_coleta" || transaction_type=="pre_coleta_retorno"){	
+	if ( transaction_type=="delivery" || transaction_type=="coleta" || transaction_type=="coleta_retorno" || transaction_type=="pre_coleta" || transaction_type=="pre_coleta_retorno" || transaction_type=="prestacao_servico"){	
 		$("#page-paymentoption .titulo-entrega").css({"display":"block"});
 		$("#page-paymentoption .total-entrega").css({"display":"block"});
 					}else{
