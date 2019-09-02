@@ -4262,8 +4262,11 @@ if (data.details.programa_fidelidade!=false){
 					$(".conferirenderecocoleta").show();
 					$(".conferirenderecoentrega").show();
 					$(".conferirenderecoretorno").show();	
-						setStorage('retorno_address',getStorage("coleta_address"));
-						setStorage('merchant_address',getStorage("coleta_address"));
+						
+					var retorno_address_array = [];
+				retorno_address_array[0]={label: getStorage("precoleta_address"), value:"pre_coleta"}; 
+				retorno_address_array[1]={label: getStorage("coleta_address"), value:"coleta"}; 
+						
 					} else {
 					$(".conferirendereco").hide();	
 					$(".conferirenderecocoleta").hide();
@@ -4287,8 +4290,8 @@ if (data.details.programa_fidelidade!=false){
 					if (getStorage("coleta_address")){
 					$(".endereco_de_coleta").html(getStorage("coleta_address"));	
 					}
-					if (getStorage("retorno_address")){
-					$(".endereco_de_retorno").html(getStorage("retorno_address"));	
+					if (transaction_type=="pre_coleta_retorno"){
+					displayRetornoList(retorno_address_array);
 					}
 					
 					
@@ -8016,6 +8019,22 @@ $( document ).on( "click", ".prod-qtd-menos", function(){
 		}
 	});
 	
+	$( document ).on( "click", ".endereco_retorno", function() {		
+		switch( $(this).val() )
+		{
+			case "coleta":
+			setStorage('retorno_address',getStorage("coleta_address"));
+			  break;
+				
+			case "pre_coleta":
+			setStorage('retorno_address',getStorage("precoleta_address"));
+			  break;
+						
+			default:
+			break;
+		}
+	});	
+	
 	$( document ).on( "click", ".logo-wrap img", function() {
 		var page = sNavigator.getCurrentPage();	
 		dump("pagename=>"+page.name);		
@@ -9555,6 +9574,16 @@ function displayPaymentOptions(data)
 	//$(':radio[value=cod]').attr('checked',true);
 }
 
+function displayRetornoList(data)
+{
+	var htm='';
+	$.each( $(data) , function( key, val ) { 			
+		dump(val);
+		htm+=tplRetornoList('endereco_retorno', val.value, val.label);
+	});		
+	createElement('endereco_de_retorno',htm);
+}
+
 function placeOrder()
 {	
 	if ( $('.payment_list:checked').length > 0){
@@ -9568,6 +9597,12 @@ function placeOrder()
 				return;
 			}
 		}
+
+		dump( $('.endereco_retorno:checked').length );
+			if ( $('.endereco_retorno:checked').length <= 0){
+				onsenAlert( getTrans("Por favor, selecione o endereco de retorno",'selecione_endereco_retorno') );
+				return;
+			}
 		
 		if ( selected_payment=="ocr"){
 			if ( empty( getStorage("cc_id") )){
@@ -9582,6 +9617,7 @@ function placeOrder()
 				return;
 			}
 		}*/
+		
 		
 		
 		var params = $( "#frm-paymentoption").serialize();	

@@ -546,6 +546,27 @@ function tplPaymentList(radio_name, radio_value, label, icons)
      return htm;
 }
 
+function tplRetornoList(radio_name, radio_value, label)
+{
+	var htm='';	
+	 htm+='<ons-list-item modifier="tappable" style="padding: 0;">';
+       htm+='<ons-row class="row" >';
+          htm+='<ons-col class="concat-text" width="90%">';
+             htm+='<label class="radio-button checkbox--list-item">';
+               htm+='<input type="radio" name="'+radio_name+'" class="'+radio_name+'" value="'+radio_value+'">';
+               htm+='<div class="radio-button__checkmark checkbox--list-item__checkmark"></div>';
+	htm+='<p class="description item-name concat-text" style="white-space: initial; font-size: 16px; margin: 0px;"> '+getTrans(radio_value+'_titulo2', radio_value+'_titulo2')+'</p>';
+             htm+='</label>';
+          htm+='</ons-col>';
+          htm+='<ons-col class="text-right '+radio_value+'" >';
+            htm+='<ons-icon icon="ion-reply-all" class="ons-icon ion-reply-all fa fa-lg" style="font-size: xx-large; color: #8d0710;"></ons-icon>';
+          htm+='</ons-col>';
+       htm+='</ons-row>';
+ htm+='<p class="description item-name concat-text" style="white-space: initial; font-size: 12px; margin: -8px 0px 0px 0px; display: block;"> '+label+'</p>';     
+	htm+='</ons-list-item>';
+     return htm;
+}
+
 function tplPaymentListStatic(radio_value, label, icons)
 {
 	var htm='';	
