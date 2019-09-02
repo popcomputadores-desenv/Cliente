@@ -3,7 +3,7 @@
     xmlns:gap = "http://phonegap.com/ns/1.0"
     id        = "app.masterhub.cliente.ios"
     version   = "3.0.2"
-  	ios-CFBundleVersion="12">
+  	ios-CFBundleVersion="13">
     <!-- Mobile App 3.0 --> 
     <name>Master Hub</name>
     <description>
