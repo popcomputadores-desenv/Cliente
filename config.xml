@@ -2,8 +2,8 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
     id        = "app.masterhub.cliente.ios"
-    version   = "3.0.2"
-  	ios-CFBundleVersion="14">
+    version   = "3.0.3"
+  	ios-CFBundleVersion="16">
     <!-- Mobile App 3.0 --> 
     <name>Master Hub®</name>
     <description>
