@@ -4293,6 +4293,9 @@ if (data.details.programa_fidelidade!=false){
 					if (transaction_type=="pre_coleta_retorno"){
 					displayRetornoList(retorno_address_array);
 					}
+					if (transaction_type=="coleta_retorno"){
+					$(".endereco_de_retorno").html(getStorage("coleta_address"));
+					}
 					
 					
 				$(".endereco_de_entrega_street").html(data.details.endereco_de_entrega.street);
@@ -8022,9 +8025,6 @@ $( document ).on( "click", ".prod-qtd-menos", function(){
 	$( document ).on( "click", ".endereco_retorno", function() {		
 		switch( $(this).val() )
 		{
-			case "coleta":
-			setStorage('retorno_address',getStorage("coleta_address"));
-			  break;
 				
 			case "pre_coleta":
 			setStorage('retorno_address',getStorage("precoleta_address"));
@@ -9597,13 +9597,15 @@ function placeOrder()
 				return;
 			}
 		}
-
+if (getStorage("transaction_type")=="pre_coleta_retorno"){
 		dump( $('.endereco_retorno:checked').length );
 			if ( $('.endereco_retorno:checked').length <= 0){
 				onsenAlert( getTrans("Por favor, selecione o endereco de retorno",'selecione_endereco_retorno') );
 				return;
 			}
-		
+		} else if (getStorage("transaction_type")=="coleta_retorno"){
+			setStorage('retorno_address',getStorage("coleta_address"));
+		}
 		if ( selected_payment=="ocr"){
 			if ( empty( getStorage("cc_id") )){
 				onsenAlert( getTrans("Please select credit card",'please_select_cc') );
