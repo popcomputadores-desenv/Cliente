@@ -79,10 +79,10 @@
 		</config-file>               
     </platform>
  
-    <gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="3.2.0" >
+    <!--<gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="3.2.0" >
 	  <variable name="APP_ID" value="247951822354120" />
 	  <variable name="APP_NAME" value="Master Hub" />
-	</gap:plugin>
+	</gap:plugin> -->
 	
       <gap:plugin name="cordova-plugin-fb-accountkit" source="npm"  spec="0.1.0-beta" >
 	  <variable name="FB_APP_NAME" value="Master Hub" />
