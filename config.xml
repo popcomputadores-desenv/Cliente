@@ -147,11 +147,7 @@
     </edit-config>
     
 	<platform name="android">
-		
-		<uses-permission android:name="android.permission.RECEIVE_SMS" />
-		<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-		<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-		
+				
 	    <resource-file src="www/beep.wav" target="app/src/main/res/raw/beep.wav" />
 	    <resource-file src="www/beep.wav" target="res/raw/beep.wav" /> 	    
 	    
