@@ -84,10 +84,10 @@
 	  <variable name="APP_NAME" value="Master Hub" />
 	</gap:plugin>
 	
-      <gap:plugin name="cordova-plugin-fb-accountkit" source="npm"  spec="0.1.0-beta" >
-	  <variable name="FB_APP_NAME" value="Master Hub" />
-	  <variable name="FB_APP_ID" value="247951822354120" />
-	  <variable name="FB_CLIENT_TOKEN" value="a6ac8ae96e16d63ff87e36998750985b" />
+      <gap:plugin name="cordova-plugin-facebook-account-kit" source="npm" >
+	  <variable name="APP_NAME" value="Master Hub" />
+	  <variable name="APP_ID" value="247951822354120" />
+	  <variable name="AK_TOKEN" value="a6ac8ae96e16d63ff87e36998750985b" />
 	</gap:plugin>
 		
 	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="5.0.4" >
