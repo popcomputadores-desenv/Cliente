@@ -77,7 +77,7 @@
 			<string name="fb_app_id">247951822354120</string>
 			<string name="fb_app_name">Master Hub</string>
 		</config-file>               
-    </platform> 
+    </platform>
  
     <gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="3.2.0" >
 	  <variable name="APP_ID" value="247951822354120" />
