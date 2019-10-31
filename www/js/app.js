@@ -595,64 +595,7 @@ document.addEventListener("pageinit", function(e) {
 		break;
 			
 		case "menucategorydirect-page":
-		
-		   menu_enabled_gallery = getStorage("menu_enabled_gallery");
-		   if(menu_enabled_gallery==1){
-	      	 	$("#menu_enabled_gallery").show();
-	       } else {
-	      	 	$("#menu_enabled_gallery").hide();
-	       }
-	       
-	       menu_enabled_booking = getStorage("menu_enabled_booking");
-		   if(menu_enabled_booking==1){
-	      	 	$("#menu_enabled_booking").show();
-	       } else {
-	      	 	$("#menu_enabled_booking").hide();
-	       }
-	       
-	       menu_enabled_hours = getStorage("menu_enabled_hours");
-		   if(menu_enabled_hours==1){
-	      	 	$("#menu_enabled_hours").show();
-	       } else {
-	      	 	$("#menu_enabled_hours").hide();
-	       }
-	       
-	       menu_enabled_review = getStorage("menu_enabled_review");	       
-		   if(menu_enabled_review==1){		   	   
-	      	 	$("#menu_enabled_review").show();
-	       } else {
-	      	 	$("#menu_enabled_review").hide();
-	       }
-	       
-	       menu_enabled_map = getStorage("menu_enabled_map");
-		   if(menu_enabled_map==1){
-	      	 	$("#menu_enabled_map").show();
-	       } else {
-	      	 	$("#menu_enabled_map").hide();
-	       }
-	       
-	       menu_enabled_info = getStorage("menu_enabled_info");
-		   if(menu_enabled_info==1){
-	      	 	$("#menu_enabled_info").show();
-	       } else {
-	      	 	$("#menu_enabled_info").hide();
-	       }
-	       
-	       menu_enabled_promo = getStorage("menu_enabled_promo");
-		   if(menu_enabled_promo==1){
-	      	 	$("#menu_enabled_promo").show();
-	       } else {
-	      	 	$("#menu_enabled_promo").hide();
-	       }
-	       
-	       enabled_food_search_menu = getStorage("enabled_food_search_menu");
-	       if(enabled_food_search_menu==1){
-	       	  $(".search_wrapper").show();
-	       } else {
-	       	  $(".search_wrapper").hide();
-	       }
-	       
-		   callAjax("MenuCategory", "merchant_id="+getStorage("merchant_id") );		   
+		  loadRestaurantCategory(getStorage("merchant_id"));		   
 		break;
 		
 		case "page-merchantinfo":				
@@ -6523,52 +6466,7 @@ if (data.details.programa_fidelidade!=false){
 			    break;
 			    
 			    case "getCategoryCountDirect":
-/*Atualização Master Hub (Login forçado antes de ver as empresas)*/
-				var login_force_on=getStorage("login_force_on");
-				dump("login_force_on=>"+login_force_on);
-				
-			if(login_force_on==="yes"){	
-		
-			if (!isLogin()){
-		menu.setMainPage('prelogin.html', {closeMenu: true});
-		} else {
-			       setTrackView("restaurant menu - " + data.details.restaurant_name );
-			    
-			       setStorage("category_count", data.details.total);
-			       
-			       /*setStorage("enabled_gallery", data.details.enabled_gallery);
-			       setStorage("enabled_booking", data.details.enabled_booking);*/
-			       
-			       setStorage("menu_enabled_gallery", data.details.menu_enabled_gallery);
-			       setStorage("menu_enabled_booking", data.details.menu_enabled_booking);
-			       setStorage("menu_enabled_hours", data.details.menu_enabled_hours);
-			       setStorage("menu_enabled_review", data.details.menu_enabled_review);
-			       setStorage("menu_enabled_map", data.details.menu_enabled_map);
-			       setStorage("menu_enabled_info", data.details.menu_enabled_info);
-			       setStorage("menu_enabled_promo", data.details.menu_enabled_promo);
-			       
-			       
-			       var options = {
-				      animation: 'slide',
-				      onTransitionEnd: function() { 	
-				      					      	
-				      	 if(data.details.total<=0){
-				      	    toastMsg(data.msg);	
-				      	 }
-				      	 if(!empty(data.details.merchant_photo_bg)){
-				      	 	//$(".menu-header").css("background","url("+data.details.merchant_photo_bg+") no-repeat center center / cover");
-				      	 	//$(".menu-header").css("background", 'url("' + data.details.merchant_photo_bg + '") no-repeat center center / cover ');
-/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$("#menucategory-page .estabelecimento-header2").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$("#menucategory-page .estabelecimento-header").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 165px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da Atualização */
-							 
-				      	 }
-				      } 
-				   };
-				   sNavigator.pushPage("menucategorydirect.html", options);
-}
-				} else {
+/*Atualização Master Hub (Direct Links)*/
 		       setTrackView("restaurant menu - " + data.details.restaurant_name );
 			    
 			       setStorage("category_count", data.details.total);
@@ -6590,8 +6488,7 @@ if (data.details.programa_fidelidade!=false){
 				      	 }
 				      } 
 				   };
-				   sNavigator.pushPage("menucategorydirect.html", options);
-}					
+				   sNavigator.pushPage("menucategorydirect.html", options);				
 /* Fim da Atualização */
 			    break;
 					
