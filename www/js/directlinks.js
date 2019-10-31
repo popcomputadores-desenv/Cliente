@@ -8,7 +8,7 @@ function carregarEstabelecimento(mtid) /* cópia da função loadRestaurantCateg
   
   setStorage("merchant_id",mtid);
     
-  callAjax("getCategoryCount","mtid="+ mtid + "&device_id="+getStorage("device_id") );
+  callAjax("getCategoryCountDirect","mtid="+ mtid + "&device_id="+getStorage("device_id") );
 }
 
 function abreCaixaCupom(cod_cupom,empresa){
