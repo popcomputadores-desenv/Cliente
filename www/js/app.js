@@ -6572,7 +6572,7 @@ if (data.details.programa_fidelidade!=false){
 			    break;
 					
 			    case "getCategoryCountDirect":
-		       setTrackView("restaurant menu - " + data.details.restaurant_name );
+		       setTrackView("homepage");
 			    
 			       setStorage("category_count", data.details.total);
 			       var options = {
