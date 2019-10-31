@@ -1,14 +1,16 @@
 function carregarEstabelecimento(mtid) /* cópia da função loadRestaurantCategory(mtid) */
 {		  	
   cart = [] ; /*clear cart variable*/
+	initBrowseMerchant();
   removeStorage("tips_percentage");  
   removeStorage("cc_id");  
   removeStorage("category_count");  
   removeStorage("item_count");
   
   setStorage("merchant_id",mtid);
-    
-  callAjax("getCategoryCountDirect","mtid="+ mtid + "&device_id="+getStorage("device_id") );
+    setTimeout(function() {
+	  callAjax("getCategoryCountDirect","mtid="+ mtid + "&device_id="+getStorage("device_id") );
+  			}, 600);
 }
 
 function abreCaixaCupom(cod_cupom,empresa){
