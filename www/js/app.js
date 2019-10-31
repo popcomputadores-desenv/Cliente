@@ -593,6 +593,67 @@ document.addEventListener("pageinit", function(e) {
 	       
 		   callAjax("MenuCategory", "merchant_id="+getStorage("merchant_id") );		   
 		break;
+			
+		case "menucategorydirect-page":
+		
+		   menu_enabled_gallery = getStorage("menu_enabled_gallery");
+		   if(menu_enabled_gallery==1){
+	      	 	$("#menu_enabled_gallery").show();
+	       } else {
+	      	 	$("#menu_enabled_gallery").hide();
+	       }
+	       
+	       menu_enabled_booking = getStorage("menu_enabled_booking");
+		   if(menu_enabled_booking==1){
+	      	 	$("#menu_enabled_booking").show();
+	       } else {
+	      	 	$("#menu_enabled_booking").hide();
+	       }
+	       
+	       menu_enabled_hours = getStorage("menu_enabled_hours");
+		   if(menu_enabled_hours==1){
+	      	 	$("#menu_enabled_hours").show();
+	       } else {
+	      	 	$("#menu_enabled_hours").hide();
+	       }
+	       
+	       menu_enabled_review = getStorage("menu_enabled_review");	       
+		   if(menu_enabled_review==1){		   	   
+	      	 	$("#menu_enabled_review").show();
+	       } else {
+	      	 	$("#menu_enabled_review").hide();
+	       }
+	       
+	       menu_enabled_map = getStorage("menu_enabled_map");
+		   if(menu_enabled_map==1){
+	      	 	$("#menu_enabled_map").show();
+	       } else {
+	      	 	$("#menu_enabled_map").hide();
+	       }
+	       
+	       menu_enabled_info = getStorage("menu_enabled_info");
+		   if(menu_enabled_info==1){
+	      	 	$("#menu_enabled_info").show();
+	       } else {
+	      	 	$("#menu_enabled_info").hide();
+	       }
+	       
+	       menu_enabled_promo = getStorage("menu_enabled_promo");
+		   if(menu_enabled_promo==1){
+	      	 	$("#menu_enabled_promo").show();
+	       } else {
+	      	 	$("#menu_enabled_promo").hide();
+	       }
+	       
+	       enabled_food_search_menu = getStorage("enabled_food_search_menu");
+	       if(enabled_food_search_menu==1){
+	       	  $(".search_wrapper").show();
+	       } else {
+	       	  $(".search_wrapper").hide();
+	       }
+	       
+		   callAjax("MenuCategoryDirect", "merchant_id="+getStorage("merchant_id") );		   
+		break;
 		
 		case "page-merchantinfo":				
 		case "page-taxasdeentrega":	
@@ -2450,6 +2511,55 @@ search_type = getSearchType();
 				$("#menucategory-page .rating-stars").attr("data-score",data.details.ratings.ratings);
 				initRating();
 				$("#menucategory-page .logo-wrap").html('<img src="'+data.details.logo+'" />');
+/* Atualização Master Hub (Programa de Fidelidade) */
+				if (data.details.programa_fidelidade!=false){	
+					fidelidade_PaginaCategorias(data.details);
+				}
+/*Fim da atualização*/
+/* Atualização Master Hub (Correção Menu frente app) */
+				dump(data.details.tempo_de_entrega);
+				menu_Resultado(data.details.tempo_de_entrega);			
+					
+/*Fim da atualização*/					
+/*Fim da atualização*/					
+				if ( data.details.open){
+					$("#merchant_open").val(2);
+				} else $("#merchant_open").val(1);
+					
+				if (data.details.merchant_close_store){
+					$("#close_store").val(2);
+				} else $("#close_store").val(1);
+				
+				$(".selected_restaurant_name").val( data.details.restaurant_name );
+				$(".selected_restaurant_ratings").val( data.details.ratings.ratings );
+				
+				break;
+					
+				case "MenuCategoryDirect":			
+				/*save merchant logo*/								
+				setStorage("merchant_logo",data.details.logo);
+				setStorage("merchant_bg",data.details.merchant_bg);	
+				dump(data.details.restaurant_name);
+				setStorage("merchant_name",data.details.restaurant_name);
+				
+				setStorage("enabled_table_booking",data.details.enabled_table_booking);
+				
+				setStorage("merchant_latitude",data.details.coordinates.latitude);
+				setStorage("merchant_longtitude",data.details.coordinates.longtitude);
+				setStorage("merchant_address",data.details.address);
+				
+				removeStorage("transaction_type");
+				setStorage("merchant_services",data.details.service);
+				
+				removeStorage("two_flavor_option");
+				if(!empty(data.details.two_flavor_option)){
+				   setStorage("two_flavor_option",data.details.two_flavor_option);				   
+				}
+				
+				$("#menucategorydirect-page .restauran-title").text(data.details.restaurant_name);
+				$("#menucategorydirect-page .rating-stars").attr("data-score",data.details.ratings.ratings);
+				initRating();
+				$("#menucategorydirect-page .logo-wrap").html('<img src="'+data.details.logo+'" />');
 /* Atualização Master Hub (Programa de Fidelidade) */
 				if (data.details.programa_fidelidade!=false){	
 					fidelidade_PaginaCategorias(data.details);
@@ -6460,6 +6570,27 @@ if (data.details.programa_fidelidade!=false){
 }					
 /* Fim da Atualização */
 			    break;
+					
+			    case "getCategoryCountDirect":
+		       setTrackView("restaurant menu - " + data.details.restaurant_name );
+			    
+			       setStorage("category_count", data.details.total);
+			       var options = {
+				      animation: 'slide',
+				      onTransitionEnd: function() { 	
+				      	 if(data.details.total<=0){
+				      	    toastMsg(data.msg);	
+				      	 }
+				      	 if(!empty(data.details.merchant_photo_bg)){
+							 
+	$("#menucategorydirect-page .estabelecimento-header2").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+	$("#menucategorydirect-page .estabelecimento-header").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 216px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
+							 
+				      	 }
+				      } 
+				   };
+				   sNavigator.pushPage("menucategorydirect.html", options);					
+			    break;
 			    
 			    case "getItemCount":
 			    			       
@@ -7264,6 +7395,35 @@ function menuCategoryResult(data)
 		});	
 		htm+='</ons-list>';
 		createElement('category-list',htm);	
+	} else {
+		toastMsg(  getTrans("This restaurant has not published their menu yet.",'this_restaurant_no_menu2') );
+	}	
+}
+
+function menuCategoryResultDirect(data)
+{
+	$("#menucategorydirect-page .restauran-title").text(data.restaurant_name);
+	$("#menucategorydirect-page .rating-stars").attr("data-score",data.ratings.ratings);
+	initRating();
+	$("#menucategorydirect-page .logo-wrap").html('<img src="'+data.logo+'" />')
+	
+	if ( data.open){
+		$("#merchant_open").val(2);
+	} else $("#merchant_open").val(1);
+		
+	if (data.merchant_close_store){
+		$("#close_store").val(2);
+	} else $("#close_store").val(1);
+	
+	if (data.has_menu_category==2){
+		var htm='';
+		htm+='<ons-list>';
+		$.each( data.menu_category, function( key, val ) { 			  
+             htm+='<ons-list-item modifier="tappable" class="row" onclick="loadmenu('+
+             val.cat_id+','+val.merchant_id+');">'+val.category_name+'</ons-list-item>';
+		});	
+		htm+='</ons-list>';
+		createElement('category-list-direct',htm);	
 	} else {
 		toastMsg(  getTrans("This restaurant has not published their menu yet.",'this_restaurant_no_menu2') );
 	}	
@@ -14378,6 +14538,127 @@ function getCategory(index)
 {
 	var params='';
 	action="getCategory";
+	params+="&page="+index;	
+	params+="&mtid="+  getStorage("merchant_id");
+		
+	/*add language use parameters*/
+	params+="&lang_id="+getStorage("default_lang");
+	params+="&lang="+getStorage("default_lang");
+	if(!empty(krms_config.APIHasKey)){
+		params+="&api_key="+krms_config.APIHasKey;
+	}
+		
+	params+="&app_version=" + app_version;
+	
+	dump(ajax_url+"/"+action+"?"+params);		
+    ajax_lazy = $.ajax({
+		url: ajax_url+"/"+action, 
+		data: params,
+		type: 'post',                  
+		async: false,
+		dataType: 'jsonp',
+		timeout: 8000,
+		crossDomain: true,
+	 beforeSend: function() {			 	
+	},
+	complete: function(data) {							
+	},
+	success: function (data) {		   
+	   if (data.code=1){	   	
+	   	
+	   	   if ( $('#foodcategory-results-'+index).exists() ){
+	   	
+		   	   html='';
+		   	   html+='<ons-list class="stic-list">';	   	  
+		   	   
+		   	   if (app_version>="2.4"){
+		   	   	   if(data.details.show_cat_image==1){
+		   	   	   	  $.each( data.details.data, function( key, val ) {
+		   	   	   	  	 html+= '<ons-list-item class="list-item-container stic-list-item" onclick="loadmenu('+val.cat_id+','+val.merchant_id+');"  >';			   	   	   
+
+	   	   	   	  	 		if (val.photo_url!==null){
+                     			html+='<div class="stic-merchant-bg" style="background:url('+ val.photo_url +') no-repeat center / cover;">';
+                    	 			html+='<div class="stic-bg-cover">';
+                 	    			html+='</div>';    	 
+	 							html+='</div>';
+	   	   	   	  	 		}
+
+ 							   html+= '<ons-row class="stic-row-align">';
+                               html+= '<ons-col>';
+                               html+='<p class="stic-category concat-text">'+val.category_name+'</p>';
+                               html+='<p class="concat-textx stic-category-desc">'+val.category_description+'</p>';
+                               
+                               if($.isArray(val.dish_list)) {
+                               	  html+='<div class="dish_wrap">';
+                               	  $.each( val.dish_list, function( d_key, d_val ) {
+                               	  	  html+='<div class="dish_col">';
+                               	  	  html+='<img class="dish_icon" src="'+ d_val +'">';
+                               	  	  html+='</div>';
+                               	  });
+                               	  html+='</div>';
+                               }
+                               
+                               html+= '</ons-col>';
+                               
+                             html+= '</ons-row>';
+			   	   	     html+= '</ons-list-item>';
+		   	   	   	  });
+		   	   	   } else {
+		   	   	   	  $.each( data.details.data, function( key, val ) {
+			   	   	   html+= '<ons-list-item class="stic-list-item bold" style="padding: 0 10px;" onclick="loadmenu('+val.cat_id+','+val.merchant_id+');"  >';			   	   	   
+				   	   	   html+= val.category_name;	   	   	   			   	   	   
+			   	   	   html+= '</ons-list-item>';
+			   	   });	   	   		   	   
+		   	   	   }
+		   	   } else {		   	       	  
+			   	   $.each( data.details, function( key, val ) {
+			   	   	   html+= '<ons-list-item class="stic-list-item bold" style="padding: 0 10px;" onclick="loadmenu('+val.cat_id+','+val.merchant_id+');"  >';			   	   	   
+				   	   	   html+= val.category_name;	   	   	   			   	   	   
+			   	   	   html+= '</ons-list-item>';
+			   	   });	   	   		   	   
+		   	   }
+		   	   
+		   	   html+='</ons-list>';
+		   	   createElement( 'foodcategory-results-'+index, html);
+	   	   
+	   	   } else {
+			  dump('element not exist');
+			  ajax_lazy.abort();
+			  ajax_lazy = null;
+			} 	  	   	   
+	   } else {	   	  
+	   	  $("#foodcategory-results-"+index).html(data.msg);
+	   }
+	},
+	error: function (request,error) {	        
+		hideAllModal();				
+		$("#foodcategory-results-"+index).html( getTrans("Network error has occurred please try again!",'network_error') );		
+	}
+   });       	
+}
+
+var lazyFoodCategoryDirect = {
+  createItemContent: function(index, oldContent) {      	
+  	  	
+    var $element = $('<div id="foodcategory-results-'+index+'">'+spinner+'</div>');     
+    getCategoryDirect(index);   
+    return $element[0];    
+  },
+  calculateItemHeight: function(index) {  	
+    return 50;
+  },
+  countItems: function() {  	
+    return getStorage("category_count");
+  },
+  destroyItemContent: function(index, element) {
+    console.log("Destroyed item " + index);
+  }
+}
+
+function getCategoryDirect(index)
+{
+	var params='';
+	action="getCategoryDirect";
 	params+="&page="+index;	
 	params+="&mtid="+  getStorage("merchant_id");
 		

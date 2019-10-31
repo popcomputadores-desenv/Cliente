@@ -917,6 +917,128 @@
 </ons-bottom-toolbar>        
 </ons-page>
 </script>
+	
+<script type="text/ons-template" id="menucategorydirect.html">    
+<ons-page id="menucategorydirect-page" >
+   <ons-toolbar class="transparent">        
+     <div class="left">
+        <ons-toolbar-button onclick="cancelCartOrder();">
+           <ons-icon icon="ion-ios-arrow-back" size="1.333333em"></ons-icon>
+        </ons-toolbar-button>     
+     </div>     
+     
+<!--      <div class="right">     
+         <ons-toolbar-button onclick="showCart();" >         
+           <div class="notification cart-num" >0</div>
+           <ons-icon icon="fa-shopping-cart" class="cart">
+         </ons-toolbar-button>
+         
+         
+         
+     </div> -->
+           
+   </ons-toolbar>
+             
+   <input type="hidden" name="merchant_open" id="merchant_open" >
+   <input type="hidden" name="close_store" id="close_store" >
+   
+   <input type="hidden" name="selected_restaurant_name" id="selected_restaurant_name" class="selected_restaurant_name" >
+   <input type="hidden" name="selected_restaurant_ratings" id="selected_restaurant_ratings" class="selected_restaurant_ratings" >
+   
+<!-- Atualização Master Hub (Organização do Logo e Imagem da Empresa) -->
+   <div style="height: 174px; background-color: rgba(0,0,0,0.42); margin-bottom: -153px;">
+   <div class="estabelecimento-header"></div>
+   </div>
+	  <div class="logo-wrap logo-non-auto" style="float: none; width: 140px; height: 110px; border-radius: 40px 4px; padding-top: initial;">           
+</div>
+          
+          <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
+           <div class="rating-stars center" data-score="" style="margin-top: -10px;"></div>           
+           </a>
+          
+          <p class="restauran-title white center" style="margin-bottom: 11px;"></p> 
+<!-- Fim da atualização -->
+  <!-- <div class="menu-header"> 
+    <div class="inner">
+        <div class="sub-inner">
+          <div class="logo-wrap" ></div>
+          
+          <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
+           <div class="rating-stars" data-score=""></div>           
+           </a>
+          
+          <p class="restauran-title white concat-text"></p> 
+        </div> 
+    </div>    
+   </div> -->
+   
+   <div class="stic-new-search">
+     <input type="text" name="f"  class="f text-input text-input--underbar has_validation" 
+      placeholder="Procurar por Categoria" value="" onclick="showPage2('search_by_category','simpleslide');"  >
+      <ons-icon size="1.333em" icon="ion-android-search" onclick="showPage2('search_by_category','simpleslide');"></ons-icon> 
+   </div>
+     
+   <div class="cartposition">
+      <button class="fixedcart" onclick="showCart(this);">
+        <div class="notification cart-num fx">0</div>
+        <img src="lib/raty/images/basket-white.png" class="stic-basket">
+      </button>
+   </div>
+   
+<!-- Atualização Master Hub (Programa de Fidelidade integrado ao Sistema de Pontos) -->
+  <div class="center" id="lista-fidelidades" style="margin-top: 0px;"></div>
+<!-- Fim da atualização -->
+   <ons-scroller id="category-list-direct"> 
+      <ons-list id="lazy-parent" >
+	      <ons-list-item ons-lazy-repeat="lazyFoodCategoryDirect" style="padding:0;" modifier="tappable" class="list-item-container lazy-list">      
+	      </ons-list-item>
+	  </ons-list>
+   </ons-scroller>  
+ <p></p>
+  <ons-bottom-toolbar class="stic-white-bg" style="border-top: none; white-space: nowrap;overflow: auto;height: 54px;box-shadow: rgb(136, 128, 128) 0px 11px 8px -10px inset;z-index: 0;background:  #e6e6e6;">
+   <ons-list class="stic-white-bg" style="border-top: none;">
+     <ons-list-item style="line-height: 1; padding: 0;">
+       <ons-row class="action top10">
+
+       <ons-col class="action-col" onclick="loadPageMerchantInfo();" id="menu_enabled_info" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-ios-information-outline"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="info">Info</span>
+       </ons-col>
+
+     <ons-col class="action-col" onclick="showPage('reviews');" id="menu_enabled_review" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-ios-star-half"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="reviews">Reviews</span>
+       </ons-col>
+
+    	<ons-col class="action-col" id="menu-resultado"></ons-col>
+       
+       <ons-col class="action-col" onclick="loadMap('merchant_map');" id="menu_enabled_map" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-android-map"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="map">Map</span>
+       </ons-col>
+       
+       <ons-col class="action-col" onclick="showPage('page-photos');" id="menu_enabled_gallery" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-images"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="photos">Photos</span>
+       </ons-col>
+       
+       <ons-col class="action-col" onclick="showPromoPage();" class="last" id="menu_enabled_promo" style="display: none;">
+         <div class="action-icon"><ons-icon icon="ion-pricetags"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="ofertas">Ofertas</span>
+       </ons-col>
+	   
+       <!-- <ons-col class="action-col" onclick="carregaTaxasdeEntrega();" class="last">
+         <div class="action-icon"><ons-icon icon="fa-motorcycle"></ons-icon></div>
+         <span class="action-label trn" data-trn-key="">Entrega</span>
+       </ons-col> -->	   
+
+       </ons-row>
+     </ons-list-item>
+   </ons-list>		
+		
+</ons-bottom-toolbar>        
+</ons-page>
+</script>
 
 <script type="text/ons-template" id="menuItem.html">    
 <ons-page id="page-menubycategoryitem">
