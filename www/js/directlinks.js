@@ -1,16 +1,16 @@
 function carregarEstabelecimento(mtid) /* cópia da função loadRestaurantCategory(mtid) */
 {		  	
   cart = [] ; /*clear cart variable*/
-	initBrowseMerchant();
-  removeStorage("tips_percentage");  
-  removeStorage("cc_id");  
-  removeStorage("category_count");  
-  removeStorage("item_count");
-  
+  //removeStorage("tips_percentage");  
+  //removeStorage("cc_id");  
+  //removeStorage("category_count");  
+  //removeStorage("item_count");
+  clearAllStorage();
   setStorage("merchant_id",mtid);
-    setTimeout(function() {
-	  callAjax("getCategoryCountDirect","mtid="+ mtid + "&device_id="+getStorage("device_id") );
-  			}, 600);
+    			setTimeout(function() {
+  callAjax("getCategoryCount","mtid="+ mtid + "&device_id="+getStorage("device_id") );
+  			}, 1100);
+
 }
 
 function abreCaixaCupom(cod_cupom,empresa){
