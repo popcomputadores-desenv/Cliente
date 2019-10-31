@@ -593,10 +593,6 @@ document.addEventListener("pageinit", function(e) {
 	       
 		   callAjax("MenuCategory", "merchant_id="+getStorage("merchant_id") );		   
 		break;
-			
-		case "menucategorydirect-page":
-		  loadRestaurantCategory(getStorage("merchant_id"));		   
-		break;
 		
 		case "page-merchantinfo":				
 		case "page-taxasdeentrega":	
@@ -6465,33 +6461,6 @@ if (data.details.programa_fidelidade!=false){
 /* Fim da Atualização */
 			    break;
 			    
-			    case "getCategoryCountDirect":
-/*Atualização Master Hub (Direct Links)*/
-		       setTrackView("restaurant menu - " + data.details.restaurant_name );
-			    
-			       setStorage("category_count", data.details.total);
-			       var options = {
-				      animation: 'slide',
-				      onTransitionEnd: function() { 	
-				      	 if(data.details.total<=0){
-				      	    toastMsg(data.msg);	
-				      	 }
-				      	 if(!empty(data.details.merchant_photo_bg)){
-							 
-	//$(".menu-header").css("background","url("+data.details.merchant_photo_bg+") no-repeat center center / cover");
-							 
-/* Atualização João Neves (Pede.ai) Cabeçalho App dentro do menu do estabelecimento */
-	$("#menucategory-page .estabelecimento-header2").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: 108%; padding-bottom: 42px; box-sizing: border-box; position: fixed; top: 0px; left: 0px; right: 0px; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-	$("#menucategory-page .estabelecimento-header").attr("style",'background-image: url('+ data.details.merchant_photo_bg +'); background-size: cover; box-sizing: border-box; position: relative; top: -42px; left: 0px; right: 0px; height: 216px; z-index: -1; box-shadow: 0 -5px 7px -5px #000, 0 3px 7px -2px #000;');
-/* Fim da Atualização */
-							 
-				      	 }
-				      } 
-				   };
-				   sNavigator.pushPage("menucategorydirect.html", options);				
-/* Fim da Atualização */
-			    break;
-					
 			    case "getItemCount":
 			    			       
 			       setTrackView( $(".selected_restaurant_name").val() + " category" ,  data.details.category_name );
