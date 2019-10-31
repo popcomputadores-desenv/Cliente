@@ -8602,16 +8602,6 @@ function displayCart(data)
        setStorage("cart_delivery_charges", data.cart.delivery_charges.amount );
     }
 	
-    if(!empty(data.cart.delivery_charges)){
-/*Atualização Master Hub (Mensagem de mudança na taxa de entrega)*/
-    if (sNavigator.getCurrentPage().name == "paymentOption.html" && getStorage("cart_delivery_charges") != data.cart.delivery_charges.amount) {
-    var message = "A taxa de entrega para a localização selecionada é " + data.cart.delivery_charges.amount_pretty;
-    	toastMsg(message);
-			} 
-/*Fim da atualização*/
-       setStorage("cart_delivery_charges", data.cart.delivery_charges.amount );
-    }
-	
     if(!empty(data.cart.packaging)){
        setStorage("cart_packaging", data.cart.packaging.amount );
     }

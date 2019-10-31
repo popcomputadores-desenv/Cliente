@@ -76,8 +76,12 @@
 		<config-file parent="/resources" target="./res/values/strings.xml">
 			<string name="fb_app_id">247951822354120</string>
 			<string name="fb_app_name">Master Hub</string>
-		</config-file>               
-    </platform>
+		</config-file>  
+		
+		<edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+           <application android:usesCleartextTraffic="true" />
+        </edit-config>
+	</platform>
  
     <gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="3.2.0" >
 	  <variable name="APP_ID" value="247951822354120" />
