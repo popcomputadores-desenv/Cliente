@@ -1,11 +1,12 @@
 function carregarEstabelecimento(mtid) /* cópia da função loadRestaurantCategory(mtid) */
-{		  	
+{	
+  menu.setMainPage('home.html', {closeMenu: true});
   cart = [] ; /*clear cart variable*/
-  //removeStorage("tips_percentage");  
-  //removeStorage("cc_id");  
-  //removeStorage("category_count");  
-  //removeStorage("item_count");
-  clearAllStorage();
+  removeStorage("tips_percentage");  
+  removeStorage("cc_id");  
+  removeStorage("category_count");  
+  removeStorage("item_count");
+  //clearAllStorage();
   setStorage("merchant_id",mtid);
     			setTimeout(function() {
   callAjax("getCategoryCount","mtid="+ mtid + "&device_id="+getStorage("device_id") );
