@@ -8,7 +8,10 @@ function carregarEstabelecimento(mtid) /* cópia da função loadRestaurantCateg
   removeStorage("item_count");
   //clearAllStorage();
   setStorage("merchant_id",mtid);
-  setTimeout(function() {callAjax("getCategoryCount","mtid="+ mtid + "&device_id="+getStorage("device_id"));}, 1100);
+    			setTimeout(function() {
+  callAjax("getCategoryCount","mtid="+ mtid + "&device_id="+getStorage("device_id") );
+  			}, 1100);
+
 }
 
 function abreCaixaCupom(cod_cupom,empresa){
