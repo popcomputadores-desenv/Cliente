@@ -63,12 +63,12 @@
 	</gap:plugin>
        
 	<!--ENABLED FACEBOOK ONLY IF YOU HAVE APP ID-->
-	<!--
+	
 	<gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="5.0.0" >
 	  <variable name="APP_ID" value="247951822354120" />
 	  <variable name="APP_NAME" value="Master Hub" />
 	</gap:plugin>	
-	-->
+	
 		
 	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="5.0.4" >
        <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyCjgZJOBT5K3Ms5ns20Q3lbopscSoGt3aI" />
