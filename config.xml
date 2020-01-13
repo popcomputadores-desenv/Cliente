@@ -2,15 +2,16 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
     xmlns:android = "http://schemas.android.com/apk/res/android"
-    id        = "com.bastisapp.mobileapp2"
-    versionCode = "1.4"
-    version   = "1.4">
-    <name>Senju Theme for Karenderia App Version 2</name>
+    id        = "app.masterhub.clientev2"
+    version   = "1.4"
+	android-versionCode="1"
+  	ios-CFBundleVersion="1">
+    <name>Master Hub® - v2</name>
     <description>
-        Senju Theme for Karenderia App Version 2
+        Aplicativo - Módulo Clientes para interação com o sistema Master Hub, Um MUNDO na palma da sua mão!
     </description>
-    <author email="ramiro@sticstore.com" href="https://sticstore.com">
-        bastisapp.com
+    <author email="robson@popcomputadores.com.br" href="http://popcomputadores.com.br">
+        popcomputadores.com.br
     </author>
             
     <content src="index.html" />
@@ -57,8 +58,7 @@
     <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.7.1" /> 
                        
     <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="7.0.2"  >    
-	  <variable name="REVERSED_CLIENT_ID" value="" />
-	  <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
+	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />	  <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
 	</gap:plugin>
        
 	<!--ENABLED FACEBOOK ONLY IF YOU HAVE APP ID-->
@@ -70,7 +70,7 @@
 	-->
 		
 	<plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" spec="5.0.4" >
-       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="" />
+       <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyCjgZJOBT5K3Ms5ns20Q3lbopscSoGt3aI" />
     </plugin>
 	
 	<plugin name="com.cmackay.plugins.googleanalytics" source="npm" spec="1.0.4" >	
