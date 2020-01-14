@@ -228,7 +228,7 @@ function onDeviceReady() {
 		device_platform = device.platform;
 		
 		if(device.platform=="android" || device.platform=="Android" ){
-		   StatusBar.backgroundColorByHexString("#ef6625");
+		   StatusBar.backgroundColorByHexString("#770007");
 		}
 		
 		initPush(false);
