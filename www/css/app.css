@@ -1,5 +1,5 @@
 .page--orange_bg__background {
-   background: #40C15A;
+   background: #770007;
 }
 
 .page__content {
@@ -501,7 +501,7 @@ width:100%;*/
 .list-item--list_column p,
 .bottom-bar--bottom_toolbar_carousel p {
    font-family: "GoogleSans";
-   font-size: 14px;
+   font-size: 9px;
    margin: 0;
    padding: 0;
 }

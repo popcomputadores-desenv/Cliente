@@ -145,7 +145,7 @@ MerchantCarousel = function (data) {
 		html += '</div>';
 		html += '</div>';
 
-		if (!empty(val.rating)) {
+		if (val.rating.ratings >= 2) {
 			html += '<div class="ratings-box text-right">';
 			html += '<ons-icon class="gold-color f13" icon="star"></ons-icon>';
 			html += '<span class="center stic-score bold m0 f14 trn">' + val.rating.ratings + '</span>';
@@ -241,7 +241,7 @@ MerchantList = function (data) {
 		html += '<ons-col class="stic-div-details">';
 		html += '<div class="mb5" style="width:77%;">';
 		html += '<h4>' + val.restaurant_name + '</h4>';
-		if (!empty(val.rating)) {
+		if (val.rating.ratings >= 2) {
 			html += '<span class="center stic-score trn"> · ' + val.rating.ratings + '</span>';
 			html += '<ons-icon class="gold-color" icon="star"></ons-icon>';
 			// html += '<span class="center ultra-light-gray reviews-qty trn">('+reviews_qty+')</span>';
@@ -416,7 +416,7 @@ restaurantList = function (data, element) {
 		html += '<ons-col class="stic-div-details">';
 		html += '<div class="mb5 is_rtl_text_right" style="width:77%;">';
 		html += '<h4>' + val.restaurant_name + '</h4>';
-		if (!empty(val.rating)) {
+		if (val.rating.ratings >= 2) {
 			html += '<span class="center stic-score trn"> · ' + val.rating.ratings + '</span>';
 			html += '<ons-icon class="gold-color" icon="star"></ons-icon>';
 			// html += '<span class="center ultra-light-gray reviews-qty trn">('+reviews_qty+')</span>';
@@ -2932,7 +2932,7 @@ setFavoriteList = function (data, element) {
 		html += '<p class="ultra-light-gray f12 concat_text">' + val.date_added + '</p>';
 		html += '</ons-col>';
 
-		if (!empty(val.rating)) {
+		if (val.rating.ratings >= 2) {
 			var reviews_qty = val.rating.review_count.match(/\d+/)[0];
 			html += '<ons-col class="ratings-col text-right" vertical-align="center" width="26%">';
 			html += '<span class="center bold stic-score trn">' + val.rating.ratings + '</span>';
@@ -5140,7 +5140,7 @@ addTermsCondition = function(element){
 	 html='';
 	        
 	 html+='<ons-list-item modifier="list_small nodivider">';
-	 html+='<p>'+ t("By creating an account, you agree to receive sms from vendor.") +'</p>';
+	 html+='<p style="padding: 0px 14px 0px 14px;">'+ t("Ao criar uma conta, você concorda em receber sms do fornecedor.") +'</p>';
 	 html+='</ons-list-item>';
 	 
 	 var newItem = ons.createElement(html);

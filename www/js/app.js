@@ -439,7 +439,7 @@ document.addEventListener('init', function (event) {
 		case "login":
 
 			placeholder(".user_mobile", "Mobile number or Email");
-			placeholder("#password", "Password");
+			placeholder(".password", "Password");
 
 			next_step = getStorage("next_step");
 			dump("next_step=>" + next_step);
@@ -555,6 +555,7 @@ document.addEventListener('init', function (event) {
 
    	    /*RTL CODE*/
    	    current_lang_code = getLanguageCode();
+		placeholder("#home .what_are_you_looking_for", t("What are you looking for?"));
    	    if(isRTL(current_lang_code)){
    	       $("ons-button ons-icon").attr("icon","ion-ios-arrow-left");
    	    }
@@ -734,7 +735,7 @@ document.addEventListener('init', function (event) {
 		case "restaurant_page":
 
 			setCartTheme();
-
+			placeholder("#restaurant_page .looking_for_something", t("Looking for something?"));
 			removeStorage("click_tab");
 
 			merchant_id = page.data.merchant_id;
