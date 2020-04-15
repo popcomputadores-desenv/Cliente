@@ -337,6 +337,13 @@ initGeocomplete = function(element){
 						    } else {
 						       $(".street").val('');
 						    }
+							
+						    if(!empty(components.street_number)){						      
+						       $(".numero").val(components.street_number);
+						    } else {
+						       $(".numero").val('');
+						    }	
+						    
 					    	
 						    if(!empty(components.locality)){						      
 						       $(".city").val(components.locality);
@@ -1020,6 +1027,12 @@ map_moveMarker = function(index, lat , lng){
 map_setLangLngValue = function(lat, lng){
 	$(".lat").val( lat );
 	$(".lng").val( lng );	  		    
+};
+
+map_setEnderecoValue = function(){
+	lat = $(".lat").val();
+	lng = $(".lng").val();
+	geoCodeMapa(lat,lng);
 };
 
 

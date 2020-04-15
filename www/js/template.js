@@ -44,7 +44,7 @@ fillMobilePrefix = function (data) {
 
 
 MerchantCarousel = function (data) {
-	html = '<ons-carousel class="stic-carousel" swipeable auto-scroll overscrollable id="carousel" direction="horizontal" item-width="70%" >';
+	html = '<ons-carousel class="stic-carousel rtlMerchantCarousel" swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable id="carousel" direction="horizontal" item-width="70%" >';	
 
 	$.each(data, function (key, val) {
 		html += '<ons-carousel-item class="width" onclick="loadMerchant(' + val.merchant_id + ')"  >';
@@ -130,7 +130,7 @@ MerchantCarousel = function (data) {
 
 		html += '<div class="offers-only mt5">';
 		if (!empty(val.offers)) {
-			html += '<ons-carousel swipeable auto-scroll overscrollable direction="horizontal" item-width="80%" >';
+		html+='<ons-carousel swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable direction="horizontal" item-width="80%" >';
 			$.each(val.offers, function (key_offer, val_offer) {
 				html += '<ons-carousel-item class="min-offers-carousel">';
 				html += '<div class="content">';
@@ -145,7 +145,7 @@ MerchantCarousel = function (data) {
 		html += '</div>';
 		html += '</div>';
 
-		if (!empty(val.rating)) {
+		if (val.rating.ratings >= 2) {
 			html += '<div class="ratings-box text-right">';
 			html += '<ons-icon class="gold-color f13" icon="star"></ons-icon>';
 			html += '<span class="center stic-score bold m0 f14 trn">' + val.rating.ratings + '</span>';
@@ -159,8 +159,240 @@ MerchantCarousel = function (data) {
 	return html;
 };
 
+MerchantSpecialOffers = function(data){
+	html = '<ons-carousel class="stic-carousel rtlSpecialCarousel" swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable id="carousel" direction="horizontal" item-width="70%" >';	
+
+		$.each(data, function(key, val){		
+			html +='<ons-carousel-item class="width" onclick="loadMerchant('+ val.merchant_id+')"  >';
+				html +='<div class="carousel-content">';
+			    	html +='<ons-ripple modifier="material"></ons-ripple>';
+				    html +='<div class="banner">';
+					    html +='<div class="hide_all show_cover">';
+						    html +='<div>';
+							    html +='<img class="hide" src="'+val.background_url+'">';
+							    html +='<div class="header_bg" style="background-image: url('+ "'" + val.background_url + "'" +')"  >';
+							    html +='<div class="spinner"></div>';			      
+							    html +='</div>';
+						    html +='</div>';
+					    html +='</div>';
+					    
+					    html +='<div class="hide_all show_logo">';
+						    html +='<div>';
+							    html +='<img class="hide" src="'+val.logo+'">';
+							    html +='<div class="header_bg" style="background-image: url('+ "'" + val.logo + "'" +')"  >';
+							      html +='<div class="spinner"></div>';			      
+							    html +='</div>';
+						    html +='</div>';
+					    html +='</div>';
+
+					    if (val.minimum_order_raw>0){
+						    /*html +='<div class="min_tag">';
+						     html += val.minimum_order+'<br><small>MIN</small>';
+						    html +='</div>';*/
+					    }
+					    
+						if( !empty(val.offers)){
+							x=0;
+							$.each( val.offers  , function( key_offer, val_offer ) {
+								if(x<=0){
+									html +='<div class="pink_tag ">'+ val_offer.raw +'</div>';			       	  			       	 
+								}
+								x++;
+							});			       
+						}
+
+						if(!empty(val.open_status_raw)){
+							html +='<div class="green_tag '+ val.open_status_raw +' ">'+ val.open_status +'</div>';
+						}
+
+					html +='</div>';			
+
+					  
+				    html +='<div class="min-carousel-wrap">';
+
+						html += '<div class="">';
+							html +='<h4>'+ val.restaurant_name +'</h4>';
+							    if(!empty(val.delivery_distance)){
+							    	html += '<span class="center distance stic-score trn"> · '+ val.delivery_distance+''+t("km")+'</span>';
+							    }
+
+								html += '<div class="new-box">';
+									if(val.is_sponsored==2) {
+									   html +='<div class="ribbon">';
+								       		html += '<span class="stic-store-dot"> · </span><span class="center stic-score trn">'+t("New")+'</span>';
+								       		html += '<div>';
+												html+='<img src="lib/icons/new.svg" onerror="this.src=\'new.png\'">';
+								       		html += '</div>';
+								       	html += '</div>';
+									}
+								html += '</div>';
+
+						html += '</div>';
+
+						if(!empty(val.cuisine)){
+							html +='<div class="cuisine-box">';			
+								html +='<p class="stic-cuisine concat_text">'+ val.cuisine +'</p>';
+							html +='</div>';			
+						}
+
+						if(!empty(val.delivery_estimation)){
+							html+='<div class="rest-info mt10">';
+								html+='<div>'
+									html+='<img src="lib/icons/time.svg" onerror="this.src=\'time.png\'">';
+									html+='<p class="concat_text trn">'+t("Delivers in")+' '+val.delivery_estimation+'</p>';	    	           	   
+								html+='</div>'
+							html+='</div>'
+						}
+
+						html+='<div class="offers-only mt5">';
+						if(!empty(val.offers)){
+							html+='<ons-carousel swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable direction="horizontal" item-width="80%" >';
+							$.each( val.offers  , function( key_offer, val_offer ) {       	
+					       		html +='<ons-carousel-item class="min-offers-carousel">';      	  			       	 
+									html+='<div class="content">';
+										html+='<span class="offer-full">'+ val_offer.full +'</span>';
+									html+='</div>';
+								html+='</ons-carousel-item>';
+					       });	
+							html+='</ons-carousel>';
+						}	
+						html+='</div>';
+
+				    html +='</div>';
+				html +='</div>';
+
+			    if(!empty(val.rating)){
+				    html += '<div class="ratings-box text-right">';
+				    	html += '<ons-icon class="gold-color f13" icon="star"></ons-icon>';
+				    	html += '<span class="center stic-score bold m0 f14 trn">'+ val.rating.ratings+'</span>';
+				    html += '</div>';
+			    }
+
+			html +='</ons-carousel-item>';	
+		});
+	
+	html +='</ons-carousel>';
+	return html;
+};
+
+MerchantFavorites = function(data){
+	html = '<ons-carousel class="stic-carousel rtlFavoritesCarousel" swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable id="carousel" direction="horizontal" item-width="70%" >';	
+
+		$.each(data, function(key, val){		
+			html +='<ons-carousel-item class="width" onclick="loadMerchant('+ val.merchant_id+')"  >';
+				html +='<div class="carousel-content">';
+			    	html +='<ons-ripple modifier="material"></ons-ripple>';
+				    html +='<div class="banner">';
+					    html +='<div class="hide_all show_cover">';
+						    html +='<div>';
+							    html +='<img class="hide" src="'+val.background_url+'">';
+							    html +='<div class="header_bg" style="background-image: url('+ "'" + val.background_url + "'" +')"  >';
+							    html +='<div class="spinner"></div>';			      
+							    html +='</div>';
+						    html +='</div>';
+					    html +='</div>';
+					    
+					    html +='<div class="hide_all show_logo">';
+						    html +='<div>';
+							    html +='<img class="hide" src="'+val.logo+'">';
+							    html +='<div class="header_bg" style="background-image: url('+ "'" + val.logo + "'" +')"  >';
+							      html +='<div class="spinner"></div>';			      
+							    html +='</div>';
+						    html +='</div>';
+					    html +='</div>';
+
+					    if (val.minimum_order_raw>0){
+						    /*html +='<div class="min_tag">';
+						     html += val.minimum_order+'<br><small>MIN</small>';
+						    html +='</div>';*/
+					    }
+					    
+						if( !empty(val.offers)){
+							x=0;
+							$.each( val.offers  , function( key_offer, val_offer ) {
+								if(x<=0){
+									html +='<div class="pink_tag ">'+ val_offer.raw +'</div>';			       	  			       	 
+								}
+								x++;
+							});			       
+						}
+
+						if(!empty(val.open_status_raw)){
+							html +='<div class="green_tag '+ val.open_status_raw +' ">'+ val.open_status +'</div>';
+						}
+
+					html +='</div>';			
+
+					  
+				    html +='<div class="min-carousel-wrap">';
+
+						html += '<div class="">';
+							html +='<h4>'+ val.restaurant_name +'</h4>';
+							    if(!empty(val.delivery_distance)){
+							    	html += '<span class="center distance stic-score trn"> · '+ val.delivery_distance+''+t("km")+'</span>';
+							    }
+
+								html += '<div class="new-box">';
+									if(val.is_sponsored==2) {
+									   html +='<div class="ribbon">';
+								       		html += '<span class="stic-store-dot"> · </span><span class="center stic-score trn">'+t("New")+'</span>';
+								       		html += '<div>';
+												html+='<img src="lib/icons/new.svg" onerror="this.src=\'new.png\'">';
+								       		html += '</div>';
+								       	html += '</div>';
+									}
+								html += '</div>';
+
+						html += '</div>';
+
+						if(!empty(val.cuisine)){
+							html +='<div class="cuisine-box">';			
+								html +='<p class="stic-cuisine concat_text">'+ val.cuisine +'</p>';
+							html +='</div>';			
+						}
+
+						if(!empty(val.delivery_estimation)){
+							html+='<div class="rest-info mt10">';
+								html+='<div>'
+									html+='<img src="lib/icons/time.svg" onerror="this.src=\'time.png\'">';
+									html+='<p class="concat_text trn">'+t("Delivers in")+' '+val.delivery_estimation+'</p>';	    	           	   
+								html+='</div>'
+							html+='</div>'
+						}
+
+						html+='<div class="offers-only mt5">';
+						if(!empty(val.offers)){
+							html+='<ons-carousel swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable direction="horizontal" item-width="80%" >';
+							$.each( val.offers  , function( key_offer, val_offer ) {       	
+					       		html +='<ons-carousel-item class="min-offers-carousel">';      	  			       	 
+									html+='<div class="content">';
+										html+='<span class="offer-full">'+ val_offer.full +'</span>';
+									html+='</div>';
+								html+='</ons-carousel-item>';
+					       });	
+							html+='</ons-carousel>';
+						}	
+						html+='</div>';
+
+				    html +='</div>';
+				html +='</div>';
+
+			    if(!empty(val.rating)){
+				    html += '<div class="ratings-box text-right">';
+				    	html += '<ons-icon class="gold-color f13" icon="star"></ons-icon>';
+				    	html += '<span class="center stic-score bold m0 f14 trn">'+ val.rating.ratings+'</span>';
+				    html += '</div>';
+			    }
+
+			html +='</ons-carousel-item>';	
+		});
+	
+	html +='</ons-carousel>';
+	return html;
+};
+
 MerchantFeatured = function (data) {
-	html = '<ons-carousel class="stic-carousel featured" swipeable auto-scroll overscrollable id="carousel" direction="horizontal" item-width="100%" >';
+	html = '<ons-carousel class="stic-carousel rtlFeaturedCarousel featured" swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable id="carousel" direction="horizontal" item-width="100%" >';	
 
 	$.each(data, function (key, val) {
 		html += '<ons-carousel-item class="width" onclick="loadMerchant(' + val.merchant_id + ')"  >';
@@ -179,7 +411,7 @@ MerchantFeatured = function (data) {
 		html += '</div>';
 
 		html += '<div class="featured-carousel-wrap">';
-		html += '<h4>' + val.restaurant_name + '</h4>';
+		html += '<h4 class="concatenar">' + val.restaurant_name + '</h4>';
 		html += '<div class="view-btn">';
 		html += '<span class="trn">' + t("View restaurant") + '</span>';
 		html += '<ons-icon icon="ion-ios-arrow-thin-right"></ons-icon>';
@@ -241,7 +473,7 @@ MerchantList = function (data) {
 		html += '<ons-col class="stic-div-details">';
 		html += '<div class="mb5" style="width:77%;">';
 		html += '<h4>' + val.restaurant_name + '</h4>';
-		if (!empty(val.rating)) {
+		if (val.rating.ratings >= 2) {
 			html += '<span class="center stic-score trn"> · ' + val.rating.ratings + '</span>';
 			html += '<ons-icon class="gold-color" icon="star"></ons-icon>';
 			// html += '<span class="center ultra-light-gray reviews-qty trn">('+reviews_qty+')</span>';
@@ -336,7 +568,7 @@ MerchantList = function (data) {
 
 CuisineCarousel = function (data) {
 
-	html = '<ons-carousel swipeable auto-scroll overscrollable class="stic-carousel cuisine-carousel" id="carousel" direction="horizontal" item-width="80px">';
+	html = '<ons-carousel swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable class="stic-carousel cuisine-carousel rtlCuisineCarousel" id="carousel" direction="horizontal" item-width="80px">';	
 	$.each(data, function (key, val) {
 
 		html += '<ons-carousel-item class="stic-carousel" onclick="showRestaurantListCuisine(\'byCuisine\',' + val.id + ')" >';
@@ -414,9 +646,9 @@ restaurantList = function (data, element) {
 		html += '</ons-col>';
 
 		html += '<ons-col class="stic-div-details">';
-		html += '<div class="mb5 is_rtl_text_right" style="width:77%;">';
-		html += '<h4>' + val.restaurant_name + '</h4>';
-		if (!empty(val.rating)) {
+		html += '<div class="mb5" style="width:77%;">';
+		html +='<h4 class="is_rtl_text_right">'+ val.restaurant_name +'</h4>';
+		if (val.rating.ratings >= 2) {
 			html += '<span class="center stic-score trn"> · ' + val.rating.ratings + '</span>';
 			html += '<ons-icon class="gold-color" icon="star"></ons-icon>';
 			// html += '<span class="center ultra-light-gray reviews-qty trn">('+reviews_qty+')</span>';
@@ -972,7 +1204,7 @@ sortList = function (data, element_id) {
 
 restoPageCarousel = function (data) {
 	html = '';
-	html = '<ons-carousel fullscreen swipeable auto-scroll overscrollable id="resto_page_carousel">';
+	html='<ons-carousel fullscreen swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable id="resto_page_carousel">';
 	$.each(data, function (key, val) {
 		html += '<ons-carousel-item>';
 		html += '<div class="banner" style="background-image: url(' + "'" + val + "'" + ')" >';
@@ -1035,7 +1267,7 @@ fillRestoPageInfo = function (data) {
 
 	if (!empty(data.offers)) {
 		html += '<ons-row class="stic-lateral-wrap auto">';
-		html += '<ons-carousel class="stic-carousel" swipeable auto-scroll overscrollable direction="horizontal" item-width="80%" >';
+		html+='<ons-carousel class="stic-carousel" swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable direction="horizontal" item-width="80%" >';
 		$.each(data.offers, function (key_offer, val_offer) {
 			html += '<ons-carousel-item class="rest-offers-carousel">';
 			html += '<div class="content">';
@@ -1082,7 +1314,7 @@ restoBanner = function (data) {
 
 restoTabMenu = function (data) {
 	x = 0;
-	html = '<ons-carousel fullscreen swipeable auto-scroll overscrollable id="carousel_resto_menu" direction="horizontal" item-width="30%"  >';
+	html='<ons-carousel fullscreen swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable id="carousel_resto_menu" direction="horizontal" item-width="30%"  >';
 	$.each(data, function (key, val) {
 		is_selected = 'class="selected"';
 		if (x >= 1) {
@@ -1148,40 +1380,40 @@ restaurantCategory = function (data, element) {
 				}
 
 				if (!empty(item_val.item_description)) {
-					html += '<span class="stic-ingridients list-item__subtitle">' + item_val.item_description + '</span>';
+					//html += '<span class="stic-ingridients list-item__subtitle">' + item_val.item_description + '</span>';
 			         if(code_version=="1.4"){
 			         	if (item_val.prices2.length>0){
 			         		html+='<br/>';
 			     			$.each( item_val.prices2  , function( pricekey, priceval ) {
 			     				if(priceval.discount>0.001){
-			     					html+='<price>'+ '<span class="tag_discount">'+ priceval.original_price+'</span>' + priceval.discounted_price_pretty+'<price>';
+			     					html+='<br/><price>'+ '<span class="tag_discount">'+ priceval.original_price+'</span>' + priceval.discounted_price_pretty+'</price>';
 			     				} else {
-			     					html+='<price>'+priceval.original_price+'<price>';
+			     					html+='<br/><price>'+priceval.original_price+'</price>';
 			     				}
 			     			});
 			     		}
 			         } else {
 					if (item_val.prices.length > 0) {
 						$.each(item_val.prices, function (pricekey, priceval) {
-							html += '<price>' + priceval + '</price>';
+							html += '<br/><price>' + priceval + '</price>';
 						});
 					}
-				}
-				else {
+				} 
+			     } else {
 			     	if(code_version=="1.4"){			     		 
 			     		if (item_val.prices2.length>0){
 			     			$.each( item_val.prices2  , function( pricekey, priceval ) {
 			     				if(priceval.discount>0.001){
-			     					html+='<price>'+ '<span class="tag_discount">'+ priceval.original_price+'</span>' + priceval.discounted_price_pretty+'<price>';
+			     					html+='<br/><price>'+ '<span class="tag_discount">'+ priceval.original_price+'</span>' + priceval.discounted_price_pretty+'</price>';
 			     				} else {
-			     					html+='<price>'+priceval.original_price+'<price>';
+			     					html+='<br/><price>'+priceval.original_price+'</price>';
 			     				}
 			     			});
 			     		}
 			     	} else {
 					if (item_val.prices.length > 0) {
 						$.each(item_val.prices, function (pricekey, priceval) {
-							html += '<price>' + priceval + '</price>';
+							html += '<br/><price>' + priceval + '</price>';
 						});
 					}
 				}
@@ -1318,9 +1550,9 @@ setItemList = function (data, element) {
 		    		if (val.prices2.length>0){
 		    			$.each( val.prices2  , function( pricekey, priceval ) {
 		    				if(priceval.discount>0.001){
-							  	html+= '<span class="tag_discount">'+ priceval.original_price+'</span>' + priceval.discounted_price_pretty + '<br/>';
+							  	html+= '<br/><price> <span class="tag_discount">'+ priceval.original_price+'</span>' + priceval.discounted_price_pretty + '</price>';
 							  } else {
-							  	html+= ''+priceval.original_price + '<br/>';
+							  	html+= '<br/><price>'+priceval.original_price + '</price>';
 							  }			    		  
 		    			});
 		    		}
@@ -1357,7 +1589,7 @@ setCategoryCarousel = function (data, selected_cat_id) {
 	}
 	var html = '';
 
-	html += '<ons-carousel id="carousel_category" class="carousel_small" swipeable auto-scroll overscrollable direction="horizontal" item-width="30%" >';
+	html+='<ons-carousel id="carousel_category" class="carousel_small" swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable direction="horizontal" item-width="30%" >';
 	$.each(data, function (key, val) {
 		is_selected = 'class="selected"';
 		if (val.cat_id != selected_cat_id) {
@@ -1441,6 +1673,7 @@ var displayItemDetails = function (data, cart_data) {
 	else {
 		html += '<div class="fake-toolbar"></div>';
 		$("#item_details ons-back-button span").addClass("fill-black");
+		$("#item_details ons-back-button").addClass("background-white");
 	}
 
 	html += '<div class="wrap stic-item-wrap">';
@@ -1492,7 +1725,7 @@ var displayItemDetails = function (data, cart_data) {
 		html += '</div>'
 
 		html += '<div class="white_list_wrapper" style="padding:0;margin:0 0 10px;" >';
-		html += '<ons-carousel fullscreen swipeable auto-scroll overscrollable direction="horizontal" item-width="45%" >';
+       	  	html+='<ons-carousel fullscreen swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable direction="horizontal" item-width="45%" >';	
 		$.each(data.gallery, function (gallery_key, gallery_val) {
 			html += '<ons-carousel-item onclick="FullImageView(' + "'" + addslashes(gallery_val) + "'" + ')">';
 			html += '<div class="banner">';
@@ -1839,8 +2072,9 @@ var displayCartDetails = function (datas) {
 
 	var html = '';
 
+	var html='<div class="relative" style="z-index: -1;">';
 	html += '<div class="cart_header" style="background-image: url(' + "'" + datas.merchant.background_url + "'" + ')"   >';
-
+	html+='</div>';
 	html += '<div class="is-loading medium-loader">';
 	html += '<div class="spinner"></div>';
 	html += '<img class="hide" src="' + datas.merchant.background_url + '">';
@@ -1849,24 +2083,31 @@ var displayCartDetails = function (datas) {
 	html += '</div>';
 
 	html += '<div class="cream_header">';
-	html += '<div class="stic-lateral-wrap">';
-	html += '<h3 class="block trn">' + t("Order details") + '</h3>';
+	html+='<div class="wrap" style="border-radius: 30px;margin-top: -52px;z-index: 32;background-color: white;">';
+		html+='<h3 class="block trn" style="font-size: 18px;padding: 10px 0px 10px 0px;">'+t("Order details")+'</h3>';
 	html += '<p class="small inline trn">' + t("You're ordering at") + '</p>';
 	html += '<p class="small inline bold ml4">' + datas.merchant.restaurant_name + '</p>';
 	html += '</div>';
 	html += '</div>';
 
-
+		html+='<ons-list-item modifier="nodivider" style="margin-top: -99px; position: absolute;">';				  
+		  html+='<div class="right">';
+		  html+='<ons-button class="cc-btn" modifier="quiet small_button" onclick="confirmClearCart();" >';
+		  	html+='<span class="darkblue bold">'+t("CLEAR CART")+'</span>';
+		  	html+='</ons-button>';
+		  html+='</div>';
+	    html+='</ons-list-item>';
+	
 	html += '<ons-list>';
 	if (!empty(data.item)) {
 		$.each(data.item, function (item_key, item_val) {
-			html += '<ons-list-item modifier="nodivider">';
+			html+='<ons-list-item modifier="nodivider" class="mb10">';
 
 			html += '<ons-row vertical-align="center">';
 			html += '<ons-col class="left" width="20px">';
 			html += '<span class="notification green f15">' + item_val.qty + '</span>';
 			html += '</ons-col>';
-			html += '<ons-col class="center bold darkblue f15" onclick="itemDetails(' + "'" + item_val.item_id + "'," + "'" + item_val.category_id + "'," + "'" + item_key + "'" + ')">';
+			html += '<ons-col class="center bold darkblue f15" onclick="itemDetails(' + "'" + item_val.item_id + "'," + "'" + item_val.category_id + "'," + "'" + item_key + "'" + ')" style="white-space: nowrap; width: 12em; overflow: hidden; text-overflow: ellipsis;">';
 			html += '<span>' + item_val.item_name + '</span>';
 			html += '</ons-col>';
 			html += '<ons-col class="right text-right" width="20px">';
@@ -1954,14 +2195,23 @@ var displayCartDetails = function (datas) {
 			/*SUB ITEM*/
 			if (!empty(item_val.new_sub_item)) {
 				$.each(item_val.new_sub_item, function (new_sub_item_key, new_sub_item_val) {
-					html += '<ons-list-item modifier="nodivider normal_list" >';
-					html += '<ons-list-header style="padding-left:0;"><span class="list-item__subtitle">' + new_sub_item_key + '</span></ons-list-header>';
+					html+='<ons-list-item modifier="nodivider normal_list" style="margin-top: -20px;">';
+					    html+='<ons-list-header style="padding-left:0; background: transparent;"><span class="list-item__subtitle">'+ new_sub_item_key +'</span></ons-list-header>';
 					$.each(new_sub_item_val, function (new_sub_item_val_key, new_sub_item_val_val) {
 						dump(new_sub_item_val_val);
 						html += '<ons-row>';
-						html += '<ons-col vertical-align="center" width="70px" >' + new_sub_item_val_val.addon_qty + 'x' + prettyPrice(new_sub_item_val_val.addon_price) + '</ons-col>';
-						html += '<ons-col vertical-align="center" >' + new_sub_item_val_val.addon_name + '</ons-col>';
-						html += '<ons-col vertical-align="center" class="text_right" width="40px" >' + prettyPrice(parseFloat(new_sub_item_val_val.addon_qty) * parseFloat(new_sub_item_val_val.addon_price)) + '</ons-col>';
+							if (new_sub_item_val_val.addon_price > 0){
+					    	  html+='<ons-col vertical-align="center" width="70px" style="font-size: smaller;">'+ new_sub_item_val_val.addon_qty + 'x  ' + prettyPrice(new_sub_item_val_val.addon_price)  +'</ons-col>';
+							} else {
+					    	  html+='<ons-col vertical-align="center" width="70px" style="font-size: smaller;">'+ new_sub_item_val_val.addon_qty + 'x </ons-col>';
+							}
+
+					    	  html+='<ons-col vertical-align="center" style="font-size: smaller;">'+ new_sub_item_val_val.addon_name  +'</ons-col>';
+							if (new_sub_item_val_val.addon_price > 0){
+					    	  html+='<ons-col vertical-align="center" class="text_right" width="50px" style="font-size: smaller;">'+  prettyPrice(parseFloat(new_sub_item_val_val.addon_qty)*parseFloat(new_sub_item_val_val.addon_price))  +'</ons-col>';
+							} else {
+					    	  html+='<ons-col vertical-align="center" class="text_right" width="40px" style="font-size: smaller;"> ---- </ons-col>';
+							}
 						html += '</ons-row>';
 					});
 					html += '</ons-list-item>';
@@ -1969,18 +2219,8 @@ var displayCartDetails = function (datas) {
 			}
 
 		});
-
-
-		html += '<ons-list-item class="" modifier="nodivider" >';
-		html += '<div class="right">';
-		html += '<ons-button modifier="quiet small_button" onclick="confirmClearCart();" >';
-		html += '<span class="darkblue bold">' + t("CLEAR CART") + '</span>';
-		html += '</ons-button>';
-		html += '</div>';
-		html += '</ons-list-item>';
-
-	}
-	else {
+				
+	} else {
 		dump('no row');
 	}
 
@@ -2098,12 +2338,18 @@ var displayCartDetails = function (datas) {
 		if (!empty(datas.cart_details)) {
 			if (!empty(datas.cart_details.street)) {
 				selected_delivery_address = datas.cart_details.street;
-				selected_delivery_address += " ";
+				selected_delivery_address += ", ";
+				selected_delivery_address += datas.cart_details.numero;
+				selected_delivery_address += "</br>";
+				selected_delivery_address+= datas.cart_details.area_name;
+				selected_delivery_address+=" - ";
 				selected_delivery_address += datas.cart_details.city;
-				selected_delivery_address += " ";
+				selected_delivery_address+="/";
 				selected_delivery_address += datas.cart_details.state;
-				selected_delivery_address += " ";
-				selected_delivery_address += datas.cart_details.zipcode;
+			if (!empty(datas.cart_details.zipcode))	{
+				selected_delivery_address+="</br>";
+			}
+				selected_delivery_address+= datas.cart_details.zipcode;
 				$(".delivery_address").val(selected_delivery_address);
 			}
 		}
@@ -2120,7 +2366,16 @@ var displayCartDetails = function (datas) {
 	html += '<div class="right"><span class="list-item__subtitle transaction_type_label">' + t(services[selected_services]) + '</span></div>';
 	html += '</ons-list-item>';
 
-
+	html+='<ons-list-item class="stic-options-list" tappable modifier="chevron longdivider" onclick="showDeliveryDateList()" >';	
+	  html+='<div class="left">'+ delivery_date_list_label +'</div>';
+	   html+='<div class="right"><span class="list-item__subtitle delivery_date_label">'+ default_delivery_date_pretty +'</span></div>';
+	html+='</ons-list-item>';
+	
+	html+='<ons-list-item class="stic-options-list" tappable modifier="chevron longdivider" onclick="showDeliveryTime()" >';	
+	  html+='<div class="left">' + delivery_time_list_label + '</div>';
+	   html+='<div class="right"><span class="list-item__subtitle delivery_time_label">'+ selected_delivery_time +'</span></div>';
+	html+='</ons-list-item>';	
+	
 	if (!empty(data.total.delivery_charges)) {
 		if (data.total.delivery_charges > 0.0001) {
 			html += twoColumnBoldOnly(t('Delivery Fee'), prettyPrice(data.total.delivery_charges));
@@ -2492,7 +2747,7 @@ accountMenu = function (login) {
 	    if(app_settings.contact_us.enabled_contact){
 		html+='<ons-list-item tappable modifier="chevron" onclick="showPage(\'contact_us.html\');" >';
 		  html+='<div class="left">';
-		    html+='<ons-icon icon="md-email" size="25px" class="list-item__icon"></ons-icon>';
+		    html+='<img src="lib/icons/mail.svg" onerror="this.src=\'mail.png\'">';
 		  html+='</div>';
 		  html+='<div class="center">';
 		    html+= t('Contact Us');
@@ -2546,7 +2801,6 @@ accountMenu = function (login) {
 		html += '<div class="center">' + t('Address Book') + '</div>';
 		html += '</ons-list-item>';
 		
-	        html+=getCustomPages(1);
 	}
 
 
@@ -2560,6 +2814,8 @@ accountMenu = function (login) {
 		html += t('Settings');
 		html += '</div>';
 		html += '</ons-list-item>';
+
+		html+=getCustomPages(1);			      
 
 		html += '<ons-list-item modifier="chevron" tappable  onclick="logout();" >';
 		html += '<div class="left"><img src="lib/icons/logout.svg" onerror="this.src=\'logout.png\'"></div>';
@@ -2595,6 +2851,7 @@ accountMenu = function (login) {
 
 filAddress = function (id, data) {
 	$(id + " .street").val(data.street);
+	$(id + " .numero").val(data.numero);
 	$(id + " .city").val(data.city);
 	$(id + " .state").val(data.state);
 	$(id + " .zipcode").val(data.zipcode);
@@ -2696,6 +2953,8 @@ settingsMenu = function (login) {
 	//   html+='</div>';	  	  
 	// html+='</ons-list-item>';
 
+	html+=getCustomPages(2);
+
 	html += '<ons-list-item>';
 	html += '<div class="left">';
 	html += '<img src="lib/icons/mobile.svg" onerror="this.src=\'mobile.png\'">';
@@ -2721,9 +2980,29 @@ settingsMenu = function (login) {
 	html += '</ons-list-item>';
 
 	/*ADD CUSTOM PAGE*/
-	
-
-	html+=getCustomPages(2);
+	if(app_settings = getAppSettings()){		
+		if(app_settings.custom_pages.length>0){
+			$.each( app_settings.custom_pages  , function( page_key, page_val ) {
+				
+				html+='<ons-list-item tappable modifier="chevron" onclick="loadCustomPage('+ page_val.page_id +')" >';
+				  html+='<div class="left">';
+				   
+				    if(!empty(page_val.icon)){
+				       icon = page_val.icon;
+				    } else {
+				       icon = "ion-ios-circle-outline";
+				    }
+				  
+					html+='<img src="lib/icons/open.svg" onerror="this.src=\'open.png\'">';
+				  html+='</div>';
+				  html+='<div class="center">';
+				    html+= t(page_val.title);
+				  html+='</div>';	  	  
+				html+='</ons-list-item>';
+				
+			});
+		}
+	}
 	
 
 	if (login) {
@@ -2932,7 +3211,7 @@ setFavoriteList = function (data, element) {
 		html += '<p class="ultra-light-gray f12 concat_text">' + val.date_added + '</p>';
 		html += '</ons-col>';
 
-		if (!empty(val.rating)) {
+		if (val.rating.ratings >= 2) {
 			var reviews_qty = val.rating.review_count.match(/\d+/)[0];
 			html += '<ons-col class="ratings-col text-right" vertical-align="center" width="26%">';
 			html += '<span class="center bold stic-score trn">' + val.rating.ratings + '</span>';
@@ -3387,13 +3666,13 @@ setReviewList = function (data, element) {
 
 				html += '<ons-list-item modifier="longdivider full_list" tappable >';
 				html += '<ons-row>';
-				html += '<ons-col width="60px" vertical-align="center" >';
+				html += '<ons-col width="13%" vertical-align="center" >';
 				html += '<div class="is-loading xxsmall-loader">';
 				html += '<div class="spinner"></div>'
-				html += '<img class="small_avatar" src="' + val2.logo + '">';
+				html += '<img class="small_avatar" src="' + val2.logo + '" style="height: 30px; width: 30px;">';
 				html += '</div>';
 				html += '</ons-col>';
-				html += '<ons-col width="160px" vertical-align="top"><h5 class="f16">' + val2.customer_name + '</h5><p class="small">' + val2.date_posted + '</p></ons-col>';
+				html += '<ons-col width="87%" vertical-align="top"><h5 class="f16" style="font-size: 11px; color: #bf2238;">' + val2.customer_name + '</h5><p class="small" style="font-size: 10px;">' + val2.date_posted + '</p></ons-col>';
 				html += '</ons-row>';
 				html += '<div class="gap"></div>';
 				html += val2.review;
@@ -3668,7 +3947,7 @@ setGetRecentLocation = function (data, element_id) {
 
 		//setRecentSearch = function(address, lat, lng, street, city,  state, zipcode, location_name){
 		//html+='<ons-list-item class="recent_loc_child" tappable onclick="setRecentSearch('+ "'" + val.search_address + "',"+ "'"+ val.latitude + "'," +  "'"  + val.longitude + "'" +')" >';
-		params_data = clickFormat( val.search_address+ "|" + val.latitude + "|"+ val.longitude + "|" + val.street  + "|" + val.city  + "|" + val.state  + "|" + val.zipcode  + "|" + val.location_name );
+		params_data = clickFormat( val.search_address+ "|" + val.latitude + "|"+ val.longitude + "|" + val.street  + "|" + val.numero  + "|" + val.city  + "|" + val.state  + "|" + val.zipcode  + "|" + val.location_name );
 		html+='<ons-list-item class="recent_loc_child" tappable onclick="setRecentSearch('+ params_data +')" >';
 		html += '<div class="left">';
 		html += '<ons-icon icon="redo" class="list-item__icon"></ons-icon>';
@@ -3710,7 +3989,7 @@ setMerchantFoodList = function (data, element_id) {
 		html += '<div class="center">';
 		html += '<span class="list-item__title">' + val.title + '</span>';
 		html += '<span class="list-item__subtitle">' + val.sub_title + '</span>';
-		html += '<span class="list-item__subtitle serch_type capitalize">' + t(val.restaurant) + '</span>';
+		html+='<span class="list-item__subtitle search_type capitalize">'+ t(val.restaurant) +'</span>';
 		html += '</div>';
 		html += '</ons-list-item>';
 
@@ -4005,9 +4284,9 @@ setItemListColumn = function (data, element) {
 					col+='<p>';
 					$.each( val.prices2  , function( pricekey, priceval ) {		    		
 						  if(priceval.discount>0.001){
-						  	col+= '<span class="tag_discount">'+ priceval.original_price+'</span>' + priceval.discounted_price_pretty + '<br/>';
+						  	col+= '<br/><price> <span class="tag_discount">'+ priceval.original_price+'</span>' + priceval.discounted_price_pretty + '</price>';
 						  } else {
-						  	col+= ''+priceval.original_price + '<br/>';
+						  	col+= '<br/><price>'+priceval.original_price + '</price>';
 						  }			    		  
 			    	});
 			    	col+='</p>';
@@ -4407,75 +4686,70 @@ setBookingDetails = function (data, element_id) {
 };
 
 
-fillStartupBanner = function (div) {
-	var html = '';
+fillStartupBanner = function(element){
+	var list = document.getElementById( element );
+	var html=''; pager='';
+	x =0;
+	$(".startup_banner_index").val(0);
+	if(settings = getAppSettings()){	
+		contagem=settings.startup.banner.length-1;
 
-	if (app_settings = getAppSettings()) {
-		banner = app_settings.startup.banner;
+		$.each( settings.startup.banner, function( key, val ) {
+			
+			html+='<ons-carousel-item>';
 
-		if (banner.length <= 0) {
-			return;
-		}
+				html+='<div class="stic-walkthrough-img" style="background-image: url('+ "'" + val + "'" +')" ></div>';
 
-		html += '<ons-carousel fullscreen swipeable auto-scroll overscrollable id="startup_carousel"  >';
-		$.each(banner, function (key, val) {
-			html += '<ons-carousel-item>';
-			html += '<div class="banner" style="background-image: url(' + "'" + val + "'" + ')"  >';
-			html += '<div class="is-loading xlarge-loader">';
-			html += '<div class="spinner"></div>';
-			html += '<img class="hide" src="' + val + '">';
-			html += '</div>';
-			html += '</div>';
+		   		if (key == contagem || key == ""+contagem+"") {
+					html+='<div class="stic-walkthrough-log is_rtl">';
+						html +='<h3 class="trn">'+ t('Titulo '+key) +'</h3>'; 
+						html +='<p class="small trn">'+ t('Descricao '+key)+'</p>'; 
+					html+='</div>';
+					
+					html+='<div class="stic-walkthrough-login is_rtl">';
 
-			if (key == 0 || key == "0") {
-				html += '<div id="skip_presentation" class="cream_header">';
-				html += '<h3 id="walk_title" class="trn">' + t('Find restaurants nearby') + '</h3>';
-				html += '<p id="walk_desc" class="small trn">' + t('Order delicious food from your favourite restaurants with a few clicks') + '</p>';
-				html += '</div>';
-			}
-
-			if (key == 1 || key == "1") {
-				html += '<div id="skip_presentation" class="cream_header">';
-				html += '<h3 id="walk_title" class="trn">' + t('Secure and private') + '</h3>';
-				html += '<p id="walk_desc" class="small trn">' + t('Paying trought the app is easy, fast and safe. Here your info are private') + '</p>';
-				html += '</div>';
-			}
-
-			if (key == 2 || key == "2") {
-				html += '<div id="skip_presentation" class="cream_header">';
-				html += '<h3 id="walk_title" class="trn">' + t('We take it to you') + '</h3>';
-				html += '<p id="walk_desc" class="small trn">' + t('Get the order at home. You don\'t even have to get up off the couch') + '</p>';
-				html += '</div>';
-
-				html += '<div class="stic-start">';
+						html+='<div class="stic-start">';
 				html += '<ons-button modifier="large normal_large to_orange" onclick="showPage(\'create_account.html\')">';
 				html += '<span class="trn">' + t('Register') + '</span>';
-				html += '</ons-button>';
+							html+='</ons-button>';
+			
+							html+='<ons-button modifier="large normal_large to_neutral" onclick="showPage(\'login.html\')" >';
+								html+='<span class="trn">'+ t('Sign in') +'</span>';
+							html+='</ons-button>';	
+						html+='</div>';
+					html+='</div>';
+					html+='<ons-icon class="stic-skip-icon" icon="long-arrow-alt-right" size="16px" ></ons-icon>';
+					html+='<ons-button class="stic-skip" onclick="skip(\'map_select_location.html\')" >';
+						html+='<span class="trn">'+ t('Skip') +'</span>';
+					html+='</ons-button>';
+		   		} else {
+					html+='<div class="stic-walkthrough is_rtl">';
+						html +='<h3 class="trn">'+ t('Titulo '+key) +'</h3>'; 
+						html +='<p class="small trn">'+ t('Descricao '+key)+'</p>'; 
+					html+='</div>';
+				}
 
-				html += '<ons-button modifier="large normal_large to_neutral" onclick="showPage(\'login.html\')" >';
-				html += '<span class="trn">' + t('Sign in') + '</span>';
-				html += '</ons-button>';
-				html += '</div>';
-			}
+            html+='</ons-carousel-item>';
 
-			html += '</ons-carousel-item>';
+			var newItem = ons.createElement(html);
+	        list.appendChild(newItem);
+	        html='';
+	        
+	        selected='';
+	        if(x<=0){
+	        	selected="active";
+	        }
+	        
+	        pager+='<li class="c'+x+' '+selected+'"><div class="circle2"></div></li>';
+	        x++;
 		});
-		html += '</ons-carousel>';
-
-		html += '<div class="stic-counter">';
-		html += '<ul class="dots">';
-		$.each(banner, function (key, val) {
-			is_selected = 'active';
-			if (key >= 1) {
-				is_selected = '';
-			}
-			html += '<li class="c' + key + ' ' + is_selected + '"><div class="circle"></div></li>';
-		});
-		html += '</ul>';
-		html += '</div>';
-
-		$(div).html(html);
-		imageLoaded();
+		
+		$(".startup_banner_paging .dots2").html(pager);
+		
+	    setTimeout(function(){ 	    
+	    	runStartUpBanner(false);
+	    }, 1);
+		
 	}
 };
 
@@ -4593,7 +4867,7 @@ createAccountFields = function () {
 	if (settings.registration.phone == 1) {
 		html += '<ons-list-item> ';
 		html += '<div class="center">';
-		html += '<ons-input name="contact_phone" id="contact_phone" class="contact_phone" required modifier="transparent" placeholder="' + t("Mobile") + '" float onclick="showPage(\'enter_phone.html\')"></ons-input>';
+	       		html+='<ons-input name="contact_phone" id="contact_phone" class="contact_phone" required modifier="transparent" placeholder="'+ t("Mobile") +'" float onclick="showPage(\'enter_phone.html\')" onfocus="showPage(\'enter_phone.html\')"></ons-input>';
 		html += '<img class="stic-icon" src="lib/icons/mobile.svg" onerror="this.src=\'mobile.png\'">';
 		html += '</div>';
 		html += '</ons-list-item>';
@@ -4756,6 +5030,22 @@ ageRestriction = function () {
 	}
 };
 
+rtlCarousel = function() {
+	if(isRTL(current_lang_code)){
+
+		document.querySelector('.rtlHomeCarousel').last();
+
+		document.querySelector('.rtlCuisineCarousel').last();
+
+		document.querySelector('.rtlMerchantCarousel').last();
+
+		document.querySelector('.rtlFeaturedCarousel').last();
+
+		document.querySelector('.rtlSpecialCarousel').last();
+
+		document.querySelector('.rtlFavoritesCarousel').last();
+	}
+}
 
 fillHomeBanner = function (data, div) {
 	
@@ -4766,7 +5056,7 @@ fillHomeBanner = function (data, div) {
 		item_width='';
 	}
 	
-	html = '<ons-carousel class="stic-carousel featured" swipeable auto-scroll overscrollable id="carousel" direction="horizontal" '+ item_width +' >';
+	html = '<ons-carousel class="stic-carousel featured rtlHomeCarousel" swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable id="carousel" direction="horizontal" item-width="100%" >';	
 
 	$.each(data, function (key, val) {
 		html += '<ons-carousel-item class="width" >';
@@ -4813,7 +5103,7 @@ carouselMap = function (data, div) {
 		return false;
 	}
 
-	html = '<ons-carousel class="stic-carousel" fullscreen swipeable auto-scroll overscrollable  direction="horizontal" item-width="100%"  >';
+	html='<ons-carousel class="stic-carousel" fullscreen swipeable auto-scroll auto-scroll-ratio="0.1" overscrollable  direction="horizontal" item-width="100%"  >';
 	$.each(data, function (key, val) {
 		html += '<ons-carousel-item onclick="loadMerchant(' + val.merchant_id + ')"  >';
 		html += '<ons-ripple modifier="material"></ons-ripple>';
@@ -5140,7 +5430,7 @@ addTermsCondition = function(element){
 	 html='';
 	        
 	 html+='<ons-list-item modifier="list_small nodivider">';
-	 html+='<p>'+ t("By creating an account, you agree to receive sms from vendor.") +'</p>';
+	 html+='<p class="mlat20">'+ t("Ao criar uma conta, você concorda em receber sms do fornecedor.") +'</p>';
 	 html+='</ons-list-item>';
 	 
 	 var newItem = ons.createElement(html);
@@ -5171,17 +5461,12 @@ addTermsCondition = function(element){
 
 fillContactUsForm = function(element){
 	var list = document.getElementById(element);
-	 html='';
+	 // html='';
 	 
 	if(app_settings = getAppSettings()){
 		dump(app_settings.contact_us.contact_content);
 		if(!empty(app_settings.contact_us.contact_content)){
-			 html+='<ons-list-item modifier="nodivider">';
-		         html+='<p class="small">'+ app_settings.contact_us.contact_content +'</p>';
-		      html+='</ons-list-item>';
-		      var newItem = ons.createElement(html);
-              list.appendChild(newItem);	    
-              html='';   
+			$(".contact_us_desc").html(t(app_settings.contact_us.contact_content));
 		}		
 				
 		$.each( app_settings.contact_us.contact_field  , function( key, val ) {
@@ -5193,32 +5478,37 @@ fillContactUsForm = function(element){
 			switch(val){
 				case "name":
 				  label = t("Name");
+				  icon = "user";
 				break;
 				
 				case "email":
 				  label = t("Email address");
 				  field_type ="email";
+				  icon = "mail";
 				break;
 				
 				case "phone":
 				  val = 'contact_phone';
 				  label = t("Contact Number");
-				  click_action='onclick="showPage(\'enter_phone.html\')"';
+				  click_action='onclick="showPage(\'enter_phone.html\')" onfocus="showPage(\'enter_phone.html\')"';
+				  icon = "mobile";
 				break;
 				
 				case "country":
 				  label = t("Country");
+				  icon = "pin";
 				break;
 				
 				case "message":
 				  label = t("Message");
+				  icon = "edit";
 				break;
 			}
 			
 			html+='<ons-list-item>';
 	         html+='<div class="center">';
-	           html+='<ons-input type="'+ field_type +'" name="'+val+'" id="'+val+'" class="'+ val +'" required modifier="transparent" '+ click_action +' ';
-	           html+='placeholder="'+ label +'" float ></ons-input>';
+	           html+='<ons-input type="'+ field_type +'" name="'+val+'" id="'+val+'" class="'+ val +'" required modifier="transparent" '+ click_action +' placeholder="'+ label +'" float ></ons-input>';
+    	       html+='<img class="stic-icon" src="lib/icons/'+icon+'.svg" onerror="this.src=\''+icon+'.png\'">';       			
 	          html+='</div>';
 	        html+='</ons-list-item>';
 	        
@@ -5228,8 +5518,8 @@ fillContactUsForm = function(element){
 			
 		});
 		
-		background_url = app_settings.images.image3;
-		$("#contact_us .header_contact").css('background-image', 'url('+ "'" + background_url + "'" +')');
+		// background_url = app_settings.images.image3;
+		// $("#contact_us .header_contact").css('background-image', 'url('+ "'" + background_url + "'" +')');
 		
 	}
 };

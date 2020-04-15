@@ -1,4 +1,4 @@
-/* SENJU THEME FOR KARENDERIA MOBILE APP V2 - 1.3 */
+/* SENJU THEME FOR KARENDERIA MOBILE APP V2 - 1.4 */
 /* THEME'S AUTHOR: RAMIRO GURGEL */
 /* https://sticstore.com */
 
@@ -19,8 +19,8 @@ var push_handle;
 var translator;
 var dict = {};
 
-var device_id = 'device_1231';
-var device_uiid = 'uiid_1234561';
+var device_id = 'device_web_masterhub';
+var device_uiid = 'uiid_web_masterhub';
 var device_platform = 'android';
 var code_version = 1.4;
 
@@ -228,7 +228,7 @@ function onDeviceReady() {
 		device_platform = device.platform;
 		
 		if(device.platform=="android" || device.platform=="Android" ){
-		   StatusBar.backgroundColorByHexString("#ef6625");
+		   StatusBar.backgroundColorByHexString("#770007");
 		}
 		
 		initPush(false);
@@ -415,9 +415,9 @@ document.addEventListener('init', function (event) {
 
 	translatePage();
    
-   if(page_id!="page_startup2"){
+   /* if(page_id!="page_startup2"){
    	  StopStartUpBanner();
-   }
+   } */
    
 	switch (page_id) {
 
@@ -439,7 +439,7 @@ document.addEventListener('init', function (event) {
 		case "login":
 
 			placeholder(".user_mobile", "Mobile number or Email");
-			placeholder("#password", "Password");
+			placeholder(".password", "Password");
 
 			next_step = getStorage("next_step");
 			dump("next_step=>" + next_step);
@@ -460,7 +460,6 @@ document.addEventListener('init', function (event) {
 
 		case "create_account":
 
-			$("#stic_app_name").html(krms_config.AppTitle);
 			createAccountFields();
 
 			get_customField();
@@ -490,7 +489,12 @@ document.addEventListener('init', function (event) {
 				initMapSelectLocation();
 			}
 
+   	     if (ons.platform.isIPhoneX()) {		
+   	        $('.identify_location_wrap').css('margin-top', '100px'); 	     
+   	     }
+   	     
 			placeholder(".street", t("Street"));
+			placeholder(".numero", t("Numero"));
 			placeholder(".city", t("City"));
 			placeholder(".state", t("State"));
 			placeholder(".zipcode", t("Zip Code"));
@@ -769,6 +773,8 @@ document.addEventListener('init', function (event) {
 				}, 1);
 			}
 
+   		 placeholder(".looking_for", t("Looking for something?") );
+   	     
 			break;
 
 		case "item_page":
@@ -972,6 +978,7 @@ document.addEventListener('init', function (event) {
 
 		case "address_form":
 			placeholder(".street", "Street");
+			placeholder(".numero", "Numero");
 			placeholder(".city", "City");
 			placeholder(".state", "State");
 			placeholder(".zipcode", "Zip Code");
@@ -1192,6 +1199,7 @@ document.addEventListener('init', function (event) {
 
 		case "address_book":
 			placeholder(".street", "Street");
+			placeholder(".numero", "Numero");
 			placeholder(".city", "City");
 			placeholder(".state", "State");
 			placeholder(".zipcode", "Zip Code");
@@ -1609,18 +1617,18 @@ document.addEventListener('init', function (event) {
 			break;
 
 		case "page_startup2":
-			/*   	    less = 220;
-			   	    if (ons.platform.isIPhoneX()) {
-			   	    	less = 300;
-			   	    } */
-			banner_height = $("body").height();
-			banner_height = parseInt(banner_height);
-			$(".startup_carousel").css("height", banner_height + "px");
+   	   less = 220;
+   	    if (ons.platform.isIPhoneX()) {
+   	    	less = 300;
+   	    }   	    
+   	    banner_height = $("body").height();
+   	    banner_height = parseInt(banner_height)-less;   	    
+   	    $(".startup_banner_carousel").css("height", banner_height+"px");
 
-			fillStartupBanner('.startup_carousel');
-   	    setTimeout(function() {
+			fillStartupBanner('startup_banner_carousel');
+   	    /*setTimeout(function() {
    	    	initStartUpBanner();
-   	    }, 100);
+   	    }, 100);*/
 			break;
 
 		case "page_startup_select_language":
@@ -1780,6 +1788,7 @@ document.addEventListener('init', function (event) {
 			});
 
 			placeholder("#frm_address_book_location .street", "Street");
+			placeholder("#frm_address_book_location .numero", "Numero");
 			placeholder("#frm_address_book_location .state_name", "State/Region");
 			placeholder("#frm_address_book_location .city_name", "City");
 			placeholder("#frm_address_book_location .area_name", "Distric/Area/neighborhood");
@@ -1877,6 +1886,7 @@ document.addEventListener('init', function (event) {
 			});
 
 			placeholder("#frm_address_form_location .street", "Street");
+			placeholder("#frm_address_form_location .numero", "Numero");
 			placeholder("#frm_address_form_location .state_name", "State/Region");
 			placeholder("#frm_address_form_location .city_name", "City");
 			placeholder("#frm_address_form_location .area_name", "Distric/Area/neighborhood");
@@ -2068,7 +2078,13 @@ loadHomePage = function () {
 		$(".home-user-lateral").hide();
 	}
 
+   	placeholder(".home_search", t("What are you looking for?") );
+
 	translatePage();
+
+   	setTimeout(function() {			
+    	rtlCarousel();
+	}, 500);
 
 }
 
@@ -2094,9 +2110,9 @@ document.addEventListener('postpop', function (event) {
 		case "page_startup":
 			break;
 		
-		case "page_startup2":
+	/*	case "page_startup2":
 		  initStartUpBanner();
-		break;
+		break;*/
 		
 		case "tabbar":
 			removeStorage("active_merchant_category");
@@ -2166,7 +2182,10 @@ document.addEventListener('postpop', function (event) {
 			stopTrackHistory();
 			break;
 
-
+		case "startup_banner":		  
+		  runStartUpBanner(false);
+		break;
+		
 		case "cart":
 			enabledAsap();
 			break;
@@ -2300,12 +2319,17 @@ document.addEventListener('postchange', function (event) {
 			break;
 
 		case "page_startup2":
-			if (event.carousel.id == "startup_carousel") {
+	    dump("carousel=>"+event.carousel.id);
+	    if(event.carousel.id=="startup_banner_carousel"){
 				console.log('Changed to ' + event.activeIndex);
-				$(".dots li").removeClass("active");
+				$(".dots2 li").removeClass("active");
 				$(".c" + event.activeIndex).addClass("active");
 			  	$(".startup_banner_index").val(event.activeIndex);
-			}
+
+			/*  if (event.activeIndex == 2 || event.activeIndex == '2') {
+			  	StopStartUpBanner();
+			}*/
+		  }
 			break;
 
 		case "tabbar":
@@ -2743,8 +2767,12 @@ processAjax = function (action, data, method, loader_type) {
 					case "registerUsingFb":
 					case "googleLogin":
 
-						setStorage('user_firstname', data.post.first_name);
-
+	        	if(!empty(data.get.first_name)) {
+            		setStorage('user_firstname', data.get.first_name );	
+	        	} else {
+	        	 	var user_firstname = getStorage("user_firstname_social");	
+	        	}
+	        	
 						dump("next step=>" + data.details.next_step);
 
 						if (data.details.next_step == "verification_mobile" || data.details.next_step == "verification_email") {
@@ -3141,6 +3169,7 @@ processAjax = function (action, data, method, loader_type) {
 					case "getAddressBookByID":
 						fillCountry("#address_book", data.details.data.country_list, data.details.data.country_code);
 						setValue(".street", data.details.data.street);
+						setValue(".numero", data.details.data.numero);
 						setValue(".city", data.details.data.city);
 						setValue(".state", data.details.data.state);
 						setValue(".zipcode", data.details.data.zipcode);
@@ -4206,8 +4235,16 @@ processDynamicAjax = function (action, data, target, method, single_call) {
 					else if (search_type == "allMerchant") {
 						resp = MerchantList(data.details.list);
 						$("." + target).html(resp);
-					}
-					else if (search_type == "featuredMerchant") {
+	              			} 
+		      			else if ( search_type=="special_Offers" ) {
+	                 			resp = MerchantSpecialOffers( data.details.list );                  
+	                 			$("."+ target).html( resp );  
+	              			} 
+		      			else if ( search_type=="favorites" ) {
+	                 			resp = MerchantFavorites( data.details.list );                  
+	                 			$("."+ target).html( resp );  
+	              			} 
+		      			else if ( search_type=="featuredMerchant" ) {
 						resp = MerchantFeatured(data.details.list);
 						$("." + target).html(resp);
 					}
@@ -4575,6 +4612,75 @@ processDynamicAjax = function (action, data, target, method, single_call) {
 					$(".recent_search_address").val(data.details.formatted_address);
 
 					break;
+					
+/*Atualização Master Hub (Preenchimento dos dados no Catálogo de Endereços adquiridos pelo CEP)*/
+	        	case "geoCodeMapa":
+			        	$(".street").val(  data.details.address );
+                        $(".numero").val(data.details.numero);
+                        $(".area_name").val(data.details.area_name);
+			        	$(".city_name").val(  data.details.city );
+			        	$(".state_name").val(  data.details.state );
+			        	//$(".city_name_raw").val(  data.details.city );
+			        	//$(".state_raw").val(  data.details.state );
+			        	$(".zipcode").val(  data.details.zip );
+			        	if(!empty(data.details.country)){
+			        	   $(".country_code").val(  data.details.country );
+			        	}
+					buscar_ids_por_Bairro(data.details.city, data.details.area_name);
+	        	break;
+				 
+				case "IdsDoCEP":
+					 
+					if(!empty(data.details)){
+					//$(".area_name_raw").val(data.details.bairro);
+					//$(".city_name_raw").val(data.details.cidade);
+					//$(".state_raw").val(data.details.estado);
+					$(".location_name").val('');
+					$(".delivery_instruction").val('');
+					$(".state_id").val(data.details.state_id);
+					$(".city_id").val(data.details.city_id);
+					$(".area_id").val(data.details.area_id);
+					$(".state_name").val(data.details.estado);
+					$(".city_name").val(data.details.cidade);
+					$(".area_name").val(data.details.bairro);
+		showAlert( t("Preencha o numero da sua residencia ou de onde voce esta!") );		
+					} 
+					break;
+					
+				case "IdsDoBairro":
+					if(!empty(data.details)){
+					//$(".area_name_raw").val(data.details.area_name);
+					//$(".city_name_raw").val(data.details.city);
+					//$(".state_raw").val(data.details.state);
+					$(".location_name").val('');
+					$(".delivery_instruction").val('');
+					$(".state_id").val(data.details.state_id);
+					$(".city_id").val(data.details.city_id);
+					$(".area_id").val(data.details.area_id);
+					$(".state_name").val(data.details.state);
+					$(".city_name").val(data.details.city);
+					$(".area_name").val(data.details.area_name);
+		showAlert( t("Confira o endereco se esta correto, pois foi preenchido automaticamente pela localizacao do GPS!") );		
+					}
+					break;
+					
+				case "IdsBairro":
+					if(!empty(data.details)){
+					//$(".area_name_raw").val(data.details.area_name);
+					//$(".city_name_raw").val(data.details.city);
+					//$(".state_raw").val(data.details.state);
+					$(".location_name").val('');
+					$(".delivery_instruction").val('');
+					$(".state_id").val(data.details.state_id);
+					$(".city_id").val(data.details.city_id);
+					$(".area_id").val(data.details.area_id);
+					$(".state_name").val(data.details.state);
+					$(".city_name").val(data.details.city);
+					$(".area_name").val(data.details.area_name);
+					}
+					break;
+/*Fim da atualização*/
+						
 
 				case "DriverInformation":
 					if (data.details.page_action == "pull_refresh") {
@@ -4871,6 +4977,18 @@ processDynamicAjax = function (action, data, target, method, single_call) {
 					$("#recent_location_item").find(".recent_loc_child").remove();
 					break;
 
+/*Atualização Master Hub (Preenchimento dos dados no Catálogo de Endereços adquiridos pelo CEP)*/
+				case "IdsDoCEP":
+					limpa_formulario_cep();
+					showAlert( t("Desculpa, ainda nao entregamos no bairro: ")+"<br>"+ data.get.nome_bairro +"<br>"+t("Se este nao for seu bairro selecione seu endereco manualmente!"));
+					break;
+					
+				case "IdsDoBairro":
+					limpa_formulario_gps();
+					showAlert( t("Desculpa, ainda nao entregamos no bairro: ")+"<br>"+ data.get.nome_bairro +"<br>"+t("Se este nao for seu bairro selecione seu endereco manualmente!"));
+					break;
+/*Fim da atualização*/
+						
 				case "GetRecentSearch":
 					$(".delete_recent_searches_wrap").hide();
 					$("#recent_search_item").find(".recent_search_child").remove();
@@ -6000,6 +6118,14 @@ initInfiniteScroll = function (object, action, element_id, datas) {
 };
 /*end initInfiniteScroll*/
 
+geoCodeMapa = function(){
+	//processDynamicAjax("geoCode","lat=" + $(".selected_lat").val() + "&lng=" + $(".selected_lng").val() );
+	params = "lat=" + $(".lat").val();
+	params += "&lng=" + $(".lng").val();
+		
+	processDynamicAjax("geoCodeMapa", params);
+};
+
 resetPaginate = function (element) {
 	$(element + " .paginate_total").val(0);
 	$(element + " .paginate_page").val(1);
@@ -6583,6 +6709,7 @@ clearCartDiv = function () {
 	$(".tabbar__badge").html('');
 	$(".bottom_toolbar_checkout").hide();
 	$("ons-back-button span").addClass("fill-black");
+	$("ons-back-button").addClass("background-white");
 	clearBasket();
 };
 
@@ -7336,6 +7463,75 @@ actionSheetCards = function (id) {
 	});
 };
 
+continueToApp = function(){
+	
+	if(!isLogin()){
+		if(settings = getAppSettings()){
+		   if(settings.home.startup_banner==2){
+		   	  resetToPage('startup_banner.html','none');
+		   	  return;
+		   }
+		}
+	}
+	
+	if(isLogin()){
+		setTimeout(function(){
+	 	onsenNavigator.resetToPage('page_home.html',{
+		  animation : "none",		  	
+		});	
+	   }, 100);
+	} else {
+		setTimeout(function(){
+	 	onsenNavigator.resetToPage('page_startup.html',{
+		  animation : "slide",		  	
+		});	
+	   }, 100);
+	}
+};
+
+runStartUpBanner = function(stop_interval){
+
+   interval = 4000;
+   if(settings = getAppSettings()){
+   	  if(settings.home.startup_banner_auto!=1){      	  	 
+   	  	 return;
+   	  }
+   	  interval = parseInt(settings.home.startup_banner_interval)+0;   	  
+   }   
+   
+   if(interval<=0){
+   	  interval = 4000;
+   }
+      
+   if(stop_interval){
+	  dump("STOP=>runStartUpBanner");
+	  clearInterval(startup_banner_interval);	  
+   } else {
+   	  dump("RUN=>runStartUpBanner");
+      startup_banner_interval = setInterval(function(){StartUpBannerAutoScroll()}, interval );
+   }
+};
+
+StartUpBannerAutoScroll = function(){	
+	dump("StartUpBannerAutoScroll");
+	var total_banner = 0;
+	var startup_banner_index = $(".startup_banner_index").val();
+	startup_banner_index = parseInt(startup_banner_index)+0;
+	if(settings = getAppSettings()){
+		total_banner=settings.startup_banner_images.length;
+		total_banner = parseInt(total_banner)-1;
+	}
+	dump("total_banner=>"+total_banner);
+	var scroll_banner = document.getElementById('startup_banner_carousel');
+		
+	if(startup_banner_index>=total_banner){
+	   scroll_banner.setActiveIndex(0);
+	   $(".startup_banner_index").val(0);
+	} else {	
+	   scroll_banner.next();
+	}
+};
+
 actionSheetBook = function (id) {
 	actions = [];
 	actions[1] = {
@@ -7717,7 +7913,7 @@ ReCurrentLocation = function () {
 	}, 100);
 };
 
-setRecentSearch = function(address, lat, lng, street, city,  state, zipcode, location_name){
+setRecentSearch = function(address, lat, lng, street, numero, city,  state, zipcode, location_name){
 
 	if (empty(lat)) {
 		showToast(t('invalid latitude'));
@@ -7742,6 +7938,9 @@ setRecentSearch = function(address, lat, lng, street, city,  state, zipcode, loc
 	   
 	   	if(!empty(street)){
 	   	  $(".street").val(street);
+	   	}
+	   	if(!empty(numero)){
+	   	  $(".numero").val(numero);
 	   	}
 	   	if(!empty(city)){
 	   	  $(".city").val(city);
@@ -8157,6 +8356,7 @@ fbRegister = function (userID) {
 			params += "&first_name=" + data.first_name;
 			params += "&last_name=" + data.last_name;
 			params += "&social_id=" + data.id;
+        setStorage('user_firstname_social', data.first_name );	
 
 			next_step = getStorage("next_step");
 			dump("next_step=>" + next_step);
@@ -8217,9 +8417,11 @@ GLogin = function () {
 			params += "&social_id=" + encodeURIComponent(obj.userId);
 			if (!empty(obj.givenName)) {
 				params += "&first_name=" + encodeURIComponent(obj.givenName);
+            	setStorage('user_firstname_social', encodeURIComponent(obj.givenName) );	
 			}
 			else {
 				params += "&first_name=" + encodeURIComponent(obj.displayName);
+            	setStorage('user_firstname_social', encodeURIComponent(obj.displayName) );	
 			}
 			params += "&last_name=" + encodeURIComponent(obj.familyName);
 

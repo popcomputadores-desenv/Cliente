@@ -30,7 +30,7 @@
     
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />	   
     <gap:plugin name="cordova-plugin-device" source="npm" />		
-	<gap:plugin name="cordova-plugin-inappbrowser" source="npm" />		
+	<gap:plugin spec="https://github.com/apache/cordova-plugin-wkwebview-engine.git" source="git" />	
 	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />	
 	<gap:plugin name="cordova-plugin-geolocation" source="npm" />
 	<gap:plugin name="cordova-plugin-network-information" source="npm" />
@@ -58,14 +58,15 @@
     <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="1.7.1" /> 
                        
     <gap:plugin name="cordova-plugin-googleplus" source="npm" spec="7.0.2"  >    
-	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />	  <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
+	  <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.700766185398-f1vu9pld5pb1f1hnb5eoupidoeo6aukv" />
+	  <variable name="PLAY_SERVICES_VERSION" value="11.0.1" /> 
 	</gap:plugin>
        
 	<!--ENABLED FACEBOOK ONLY IF YOU HAVE APP ID-->
 	<!--
 	<gap:plugin name="cordova-plugin-facebook4" source="npm"  spec="5.0.0" >
-	  <variable name="APP_ID" value="" />
-	  <variable name="APP_NAME" value="Karenderia" />
+	  <variable name="APP_ID" value="247951822354120" />
+	  <variable name="APP_NAME" value="Master Hub" />
 	</gap:plugin>	
 	-->
 		
@@ -80,10 +81,14 @@
 	<gap:plugin name="com-sarriaroman-photoviewer" source="npm"  /> 
 	
 	<gap:plugin name="cordova-plugin-x-socialsharing" source="npm" spec="5.4.6" > 
-	   <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Karenderia will use your photo library" /> 
-	   <variable name="PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION" value="Karenderia saves images of your photo library" /> 
+	   <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="preciso de acesso à biblioteca de fotos para obter fotos a partir daí" /> 
+	   <variable name="PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION" value="preciso acessar a biblioteca de fotos para salvar imagens lá" /> 
 	</gap:plugin>
 		
+	<!--ENABLED THIS PLUGIN ONLY FOR IOS-->
+    <!--<gap:plugin name="cordova-plugin-ionic-webview" source="npm" spec="4.1.1" />
+    <gap:plugin name="cordova-plugin-ionic-keyboard" source="npm" spec="2.2.0" />-->
+    
     <!--REMOVE cordova-plugin-statusbar WHEN COMPILING TO IOS-->    
     <gap:plugin name="cordova-plugin-statusbar" source="npm"  /> 
 		
@@ -101,52 +106,52 @@
 
     <platform name="ios">    
 	    <config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-	        <string>This allows us to use your location to provide you a nearby restaurant, and to facilitate more accurately, keeping you in the loop about Karenderia.</string>
+	        <string>preciso usar sempre a sua localização</string>
 	    </config-file>
 	    <config-file platform="ios" target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-	        <string>This allows us to use your location to provide you a nearby restaurant, and to facilitate more accurately, keeping you in the loop about Karenderia.</string>
+	        <string>preciso usar a sua localização</string>
 	    </config-file>
 	</platform>   
 	
 	<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
-    <string>Enable Karenderia to access your camera to take photos of you and to save as profile picture.</string>
+    <string>preciso de acesso à câmera para tirar fotos</string>
 	</edit-config>
 	
 	<edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
-	    <string>Enable Karenderia to access your photo library to get pictures from there.</string>
+	    <string>preciso de acesso à biblioteca de fotos para obter fotos a partir daí</string>
 	</edit-config>
 	
 	<edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-	    <string>This allows us to use your location to find restaurant nearby.</string>
+	    <string>preciso de acesso à localização para encontrar coisas próximas</string>
 	</edit-config>
 	
 	<edit-config target="NSLocationAlwaysAndWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-	    <string>This allows us to use your location to provide you a nearby restaurant, and to facilitate more accurately, keeping you in the loop about Karenderia.</string>
+	    <string>preciso de acesso à localização para encontrar comércios por perto</string>
 	</edit-config>
 	
 	<edit-config target="NSLocationAlwaysUsageDescription" file="*-Info.plist" mode="merge">
-	    <string>This allows us to use your location to find restaurant nearby.</string>
+	    <string>preciso de acesso à localização para encontrar comércios por perto</string>
 	</edit-config>
 	
 	<edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="merge">
-	    <string>Enable Karenderia to access your photo library to save pictures there.</string>
+	    <string>preciso acessar a biblioteca de fotos para salvar imagens de lá</string>
 	</edit-config>
 	
 	<edit-config target="NSMicrophoneUsageDescription" file="*-Info.plist" mode="merge">
-      <string>need microphone access to record sounds</string>
+      <string>preciso acessar o microfone para gravar algum som</string>
     </edit-config>        
     
     <edit-config target="NSBluetoothAlwaysUsageDescription" file="*-Info.plist" mode="merge">
-      <string>Improve location accuracy when finding nearby restaurant</string>
-    </edit-config>  
+      <string>Isso nos permite usar sua localização para fornecer a você alguns comércios próximo e facilitar com mais precisão, mantendo você informado</string>
+    </edit-config>        
     
     <edit-config target="NSBluetoothPeripheralUsageDescription" file="*-Info.plist" mode="merge">
-      <string>Improve location accuracy when finding nearby restaurant</string>
+      <string>Isso nos permite usar sua localização para fornecer a você alguns comércios próximo e facilitar com mais precisão, mantendo você informado</string>
     </edit-config>  
     
 	<platform name="android">
-		           
-		<edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+	
+	    <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
 		   <application android:usesCleartextTraffic="true" />
 		</edit-config>
 		
@@ -227,7 +232,6 @@
 		<splash height="2732" platform="ios" src="res/screens/ios/Default@2x~ipad~anyany.png" width="2732" />
 		<splash height="2732" platform="ios" src="res/screens/ios/Default@2x~ipad~comany.png" width="1278"  />
 		
-				
 	</platform>  
  	       
 </widget>
